@@ -111,22 +111,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const reportsPasscodeLayer = document.getElementById('reportsPasscodeLayer');
     const reportsContent = document.getElementById('reportsContent');
     
-    // Default passcode
+    // Default passcode (hardcoded for security - session-only)
     const DEFAULT_PASSCODE = 'fotober2026';
     
-    // Initialize default passcode if not set
-    if (!localStorage.getItem('reportsPasscode')) {
-        localStorage.setItem('reportsPasscode', DEFAULT_PASSCODE);
-    }
-    
-    // Get stored passcode from localStorage
-    function getStoredPasscode() {
-        return localStorage.getItem('reportsPasscode');
-    }
-    
-    // Set passcode to localStorage
-    function setStoredPasscode(passcode) {
-        localStorage.setItem('reportsPasscode', passcode);
+    // Get correct passcode (from hardcoded default)
+    function getCorrectPasscode() {
+        return DEFAULT_PASSCODE;
     }
     
     // Check if user is already authenticated for reports
@@ -158,20 +148,16 @@ document.addEventListener('DOMContentLoaded', function() {
     if (reportsPasscodeBtn) {
         reportsPasscodeBtn.addEventListener('click', function() {
             const inputPasscode = reportsPasscodeInput.value.trim();
-            const storedPasscode = getStoredPasscode();
+            const correctPasscode = getCorrectPasscode();
             
-            if (!storedPasscode) {
-                alert('Passcode chưa được thiết lập. Vui lòng liên hệ quản trị viên.');
-                return;
-            }
-            
-            if (inputPasscode === storedPasscode) {
+            if (inputPasscode === correctPasscode) {
                 setReportsAuthenticated(true);
                 updateReportsVisibility();
                 reportsPasscodeInput.value = '';
             } else {
                 alert('Passcode không chín xác. Vui lòng thử lại.');
                 reportsPasscodeInput.value = '';
+                reportsPasscodeInput.focus();
             }
         });
         
