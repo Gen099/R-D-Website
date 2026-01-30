@@ -565,6 +565,349 @@ Ví dụ:
   `)
 })
 
+// Analytics page
+app.get('/analytics', (c) => {
+  return c.html(`
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Dashboard - Fotober R&D Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #FFF5F0 0%, #FFE5D9 50%, #FFD4C4 100%);
+        }
+        
+        .gradient-orange {
+            background: linear-gradient(135deg, #FF6B35 0%, #FFA07A 50%, #FFE5D9 100%);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="gradient-orange text-white shadow-lg">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <a href="/" class="flex items-center space-x-4 hover:opacity-80 transition">
+                        <i class="fas fa-video text-3xl"></i>
+                        <div>
+                            <h1 class="text-2xl font-bold">Fotober R&D Intelligence Hub</h1>
+                            <p class="text-sm opacity-90">Analytics Dashboard</p>
+                        </div>
+                    </a>
+                </div>
+                <a href="/" class="px-4 py-2 bg-white bg-opacity-20 rounded-lg hover:bg-opacity-30 transition">
+                    <i class="fas fa-home mr-2"></i>Trang chủ
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-6 py-8">
+        <!-- Page Header -->
+        <div class="bg-white rounded-2xl shadow-2xl p-8 mb-8">
+            <h2 class="text-3xl font-bold text-orange-600 mb-2">
+                <i class="fas fa-chart-line mr-3"></i>Analytics Dashboard
+            </h2>
+            <p class="text-gray-600">Phân tích chi tiết từ 23 job codes feedback</p>
+        </div>
+
+        <!-- Charts Row 1 -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <!-- Error Distribution Pie Chart -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Phân bố Lỗi theo Nhóm</h3>
+                <canvas id="errorDistChart"></canvas>
+            </div>
+
+            <!-- Effect Type Error Rate Bar Chart -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Tỷ lệ Lỗi theo Loại Effect</h3>
+                <canvas id="effectErrorChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Charts Row 2 -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <!-- Timeline Chart -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Thời gian xử lý Trung bình</h3>
+                <canvas id="timeEstimateChart"></canvas>
+            </div>
+
+            <!-- Success Rate Comparison -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Khả năng AI theo Loại Effect</h3>
+                <canvas id="aiCapabilityChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Data Tables -->
+        <div class="bg-white rounded-xl shadow-lg p-6">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Chi tiết Thống kê</h3>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead class="bg-orange-50">
+                        <tr>
+                            <th class="px-4 py-3 text-left text-orange-700 font-semibold">Loại Effect</th>
+                            <th class="px-4 py-3 text-center text-orange-700 font-semibold">Tổng Cases</th>
+                            <th class="px-4 py-3 text-center text-orange-700 font-semibold">Cases Lỗi</th>
+                            <th class="px-4 py-3 text-center text-orange-700 font-semibold">Tỷ lệ Lỗi</th>
+                            <th class="px-4 py-3 text-center text-orange-700 font-semibold">Risk Level</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr class="hover:bg-orange-50 transition">
+                            <td class="px-4 py-3">Object Animation</td>
+                            <td class="px-4 py-3 text-center">3</td>
+                            <td class="px-4 py-3 text-center">3</td>
+                            <td class="px-4 py-3 text-center font-bold text-red-600">100%</td>
+                            <td class="px-4 py-3 text-center">
+                                <span class="px-3 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-700">
+                                    Rất Cao
+                                </span>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-orange-50 transition">
+                            <td class="px-4 py-3">Creative/Fantasy</td>
+                            <td class="px-4 py-3 text-center">2</td>
+                            <td class="px-4 py-3 text-center">2</td>
+                            <td class="px-4 py-3 text-center font-bold text-red-600">100%</td>
+                            <td class="px-4 py-3 text-center">
+                                <span class="px-3 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-700">
+                                    Rất Cao
+                                </span>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-orange-50 transition">
+                            <td class="px-4 py-3">Agent Composite</td>
+                            <td class="px-4 py-3 text-center">2</td>
+                            <td class="px-4 py-3 text-center">2</td>
+                            <td class="px-4 py-3 text-center font-bold text-red-600">100%</td>
+                            <td class="px-4 py-3 text-center">
+                                <span class="px-3 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-700">
+                                    Rất Cao
+                                </span>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-orange-50 transition">
+                            <td class="px-4 py-3">Lifestyle/Người</td>
+                            <td class="px-4 py-3 text-center">7</td>
+                            <td class="px-4 py-3 text-center">5</td>
+                            <td class="px-4 py-3 text-center font-bold text-orange-600">71%</td>
+                            <td class="px-4 py-3 text-center">
+                                <span class="px-3 py-1 rounded-full text-xs font-semibold bg-orange-100 text-orange-700">
+                                    Cao
+                                </span>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-orange-50 transition">
+                            <td class="px-4 py-3">Season/Weather</td>
+                            <td class="px-4 py-3 text-center">3</td>
+                            <td class="px-4 py-3 text-center">2</td>
+                            <td class="px-4 py-3 text-center font-bold text-orange-600">67%</td>
+                            <td class="px-4 py-3 text-center">
+                                <span class="px-3 py-1 rounded-full text-xs font-semibold bg-orange-100 text-orange-700">
+                                    Cao
+                                </span>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-orange-50 transition">
+                            <td class="px-4 py-3">Day-to-Night</td>
+                            <td class="px-4 py-3 text-center">3</td>
+                            <td class="px-4 py-3 text-center">1</td>
+                            <td class="px-4 py-3 text-center font-bold text-yellow-600">33%</td>
+                            <td class="px-4 py-3 text-center">
+                                <span class="px-3 py-1 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-700">
+                                    Trung bình
+                                </span>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-orange-50 transition">
+                            <td class="px-4 py-3">Furniture Staging</td>
+                            <td class="px-4 py-3 text-center">3</td>
+                            <td class="px-4 py-3 text-center">1</td>
+                            <td class="px-4 py-3 text-center font-bold text-yellow-600">33%</td>
+                            <td class="px-4 py-3 text-center">
+                                <span class="px-3 py-1 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-700">
+                                    Trung bình
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Error Distribution Pie Chart
+        const ctx1 = document.getElementById('errorDistChart').getContext('2d');
+        new Chart(ctx1, {
+            type: 'doughnut',
+            data: {
+                labels: ['Hiểu sai yêu cầu', 'Chất lượng AI output', 'Trễ deadline', 'Logic/Physics sai'],
+                datasets: [{
+                    data: [35, 26, 22, 17],
+                    backgroundColor: [
+                        'rgba(255, 107, 53, 0.8)',
+                        'rgba(255, 160, 122, 0.8)',
+                        'rgba(255, 140, 97, 0.8)',
+                        'rgba(255, 192, 159, 0.8)'
+                    ],
+                    borderColor: '#fff',
+                    borderWidth: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.label + ': ' + context.parsed + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Effect Error Rate Bar Chart
+        const ctx2 = document.getElementById('effectErrorChart').getContext('2d');
+        new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['Object Anim', 'Creative', 'Agent Comp', 'Lifestyle', 'Season', 'Day-Night', 'Furniture'],
+                datasets: [{
+                    label: 'Tỷ lệ Lỗi (%)',
+                    data: [100, 100, 100, 71, 67, 33, 33],
+                    backgroundColor: [
+                        'rgba(220, 38, 38, 0.7)',
+                        'rgba(220, 38, 38, 0.7)',
+                        'rgba(220, 38, 38, 0.7)',
+                        'rgba(255, 107, 53, 0.7)',
+                        'rgba(255, 107, 53, 0.7)',
+                        'rgba(234, 179, 8, 0.7)',
+                        'rgba(234, 179, 8, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgb(220, 38, 38)',
+                        'rgb(220, 38, 38)',
+                        'rgb(220, 38, 38)',
+                        'rgb(255, 107, 53)',
+                        'rgb(255, 107, 53)',
+                        'rgb(234, 179, 8)',
+                        'rgb(234, 179, 8)'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        // Time Estimate Chart
+        const ctx3 = document.getElementById('timeEstimateChart').getContext('2d');
+        new Chart(ctx3, {
+            type: 'bar',
+            data: {
+                labels: ['Day-Night', 'Sky Replace', 'Furniture', 'Season', 'Lifestyle Simple', 'Agent Comp', 'Lifestyle Complex', 'Creative'],
+                datasets: [{
+                    label: 'Thời gian (giờ)',
+                    data: [1.25, 1.25, 1.75, 2.25, 2.5, 3.5, 4.5, 5],
+                    backgroundColor: 'rgba(255, 107, 53, 0.6)',
+                    borderColor: 'rgb(255, 107, 53)',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return value + 'h';
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        // AI Capability Radar Chart
+        const ctx4 = document.getElementById('aiCapabilityChart').getContext('2d');
+        new Chart(ctx4, {
+            type: 'radar',
+            data: {
+                labels: ['Day-Night', 'Furniture', 'Sky Replace', 'Season', 'Lifestyle Simple', 'Lifestyle Complex', 'Agent Comp', 'Creative', 'Object Anim'],
+                datasets: [{
+                    label: 'Khả năng AI',
+                    data: [8, 8, 7, 6, 5, 3, 2, 1, 0],
+                    fill: true,
+                    backgroundColor: 'rgba(255, 107, 53, 0.2)',
+                    borderColor: 'rgb(255, 107, 53)',
+                    pointBackgroundColor: 'rgb(255, 107, 53)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgb(255, 107, 53)'
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 10,
+                        ticks: {
+                            stepSize: 2
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+  `)
+})
+
 // Health check
 app.get('/api/health', (c) => {
   return c.json({ status: 'ok', timestamp: new Date().toISOString() })
