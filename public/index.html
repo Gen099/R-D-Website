@@ -807,7 +807,7 @@
                             </div>
                             <div class="bg-blue-50 p-4 rounded">
                                 <h4 class="font-semibold mb-2">🛠 Thiết lập công cụ AI</h4>
-                                <p class="text-sm text-gray-600">Kling, Runway, Pika, Luma</p>
+                                <p class="text-sm text-gray-600">Google Nano Banana Pro, Veo 3.1, Kling 2.6, Seedance 1.5 Pro</p>
                                 <span class="text-xs text-blue-600 font-semibold">⏱ 1 ngày</span>
                             </div>
                             <div class="bg-green-50 p-4 rounded">
@@ -836,17 +836,17 @@
                             <div class="bg-purple-50 p-4 rounded">
                                 <h4 class="font-semibold mb-2">🎬 Bài toán 1: Thay Agent</h4>
                                 <ul class="text-sm text-gray-600 space-y-1 mb-2">
-                                    <li>• Thử Face Swap + Lip-sync</li>
-                                    <li>• Thử Roto + AI Generate</li>
-                                    <li>• Thử Full AI Regeneration</li>
+                                    <li>• Thử Kling O1 + Lip-sync</li>
+                                    <li>• Thử Kling 2.6 Motion Control</li>
+                                    <li>• Thử Veo 3.1 Full AI Regeneration</li>
                                 </ul>
                                 <span class="text-xs text-purple-600 font-semibold">⏱ ~10 ngày</span>
                             </div>
                             <div class="bg-blue-50 p-4 rounded">
                                 <h4 class="font-semibold mb-2">📸 Bài toán 2: Image-to-Video</h4>
                                 <ul class="text-sm text-gray-600 space-y-1 mb-2">
-                                    <li>• Research Image-to-Video tools</li>
-                                    <li>• Test Kling, Runway, Pika</li>
+                                    <li>• Research Google Nano Banana Pro</li>
+                                    <li>• Test Kling 2.6, Veo 3.1, Seedance 1.5 Pro</li>
                                     <li>• Optimize prompt cho Agent</li>
                                 </ul>
                                 <span class="text-xs text-blue-600 font-semibold">⏱ ~10 ngày</span>
@@ -1711,6 +1711,122 @@
                     <a href="https://www.notion.so/2f8da80a59b381f38419ed695b275ca8" target="_blank" class="inline-block px-4 py-2 bg-indigo-600 text-white rounded font-medium hover:bg-indigo-700 transition">
                         <i class="fas fa-book mr-2"></i>Xem Thư Viện Đầy Đủ Trên Notion
                     </a>
+                </div>
+                <!-- Accordion Prompt Library -->
+                <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <i class="fas fa-list mr-2 text-indigo-600"></i>Thư Viện Prompt AI Fotober - Hướng Dẫn Thực Chiến
+                    </h3>
+                    <p class="text-gray-600 mb-4 text-sm">Nhấn vào từng mục để xem Prompt tối ưu cho từng dịch vụ và công cụ AI:</p>
+                    
+                    <!-- Accordion Items -->
+                    <div class="space-y-3">
+                        <!-- Virtual Staging -->
+                        <div class="accordion-item border rounded-lg">
+                            <button class="accordion-header w-full px-4 py-3 bg-blue-50 hover:bg-blue-100 rounded-lg flex items-center justify-between font-semibold text-gray-800 transition" onclick="toggleAccordion(this)">
+                                <span><i class="fas fa-home mr-2 text-blue-600"></i>Virtual Staging - Trang Trí Nội Thất Ảo</span>
+                                <i class="fas fa-chevron-down text-blue-600"></i>
+                            </button>
+                            <div class="accordion-content hidden px-4 py-4 bg-blue-50 text-sm text-gray-700">
+                                <p class="mb-3"><strong>Công cụ chính:</strong> Google Nano Banana Pro</p>
+                                <p class="mb-3"><strong>Prompt Mẫu:</strong></p>
+                                <pre class="bg-white p-3 rounded mb-3 overflow-x-auto text-xs">Ultra-realistic interior design of an empty [ROOM_TYPE], adding [STYLE] style furniture:
+- Main furniture: [FURNITURE_LIST]
+- Flooring: [FLOOR_MATERIAL] with [LIGHTING_TYPE] lighting
+- Wall color: [WALL_COLOR]
+- Accessories: [DECORATIVE_ITEMS]
+- Lighting: Soft daylight from large windows, warm accent lighting
+- Camera angle: [ANGLE_DESCRIPTION]
+- Resolution: 8K, architectural photography, photorealistic
+- Mood: [MOOD_DESCRIPTION]</pre>
+                                <p><strong>Ví dụ cụ thể:</strong> Trang trí phòng khách theo phong cách Scandinavian với ghế sofa gỗ sáng, bàn cà phê tối giản, đèn đứng, cây cảnh, đèn đặng trắng</p>
+                            </div>
+                        </div>
+
+                        <!-- Day-to-Night -->
+                        <div class="accordion-item border rounded-lg">
+                            <button class="accordion-header w-full px-4 py-3 bg-orange-50 hover:bg-orange-100 rounded-lg flex items-center justify-between font-semibold text-gray-800 transition" onclick="toggleAccordion(this)">
+                                <span><i class="fas fa-sun mr-2 text-orange-600"></i>Day-to-Night - Chuyển Cảnh Ngày Sang Đêm</span>
+                                <i class="fas fa-chevron-down text-orange-600"></i>
+                            </button>
+                            <div class="accordion-content hidden px-4 py-4 bg-orange-50 text-sm text-gray-700">
+                                <p class="mb-3"><strong>Công cụ chính:</strong> Veo 3.1 (hoặc Kling 2.6 nếu cần kiểm soát camera)</p>
+                                <p class="mb-3"><strong>Prompt Mẫu:</strong></p>
+                                <pre class="bg-white p-3 rounded mb-3 overflow-x-auto text-xs">Cinematic transition video of [LOCATION]:
+- Start: [MORNING_DESCRIPTION] with bright sunlight
+- Middle: [AFTERNOON_DESCRIPTION] with golden hour lighting
+- End: [NIGHT_DESCRIPTION] with interior lights turning on
+- Camera movement: [CAMERA_MOVEMENT]
+- Duration: 30 seconds
+- Resolution: 4K, cinematic, realistic</pre>
+                                <p><strong>Ví dụ cụ thể:</strong> Video chuyển đổi từ ngày sang đêm của một tòa nhà cao cấp, bắt đầu với ánh nắng sáng, kết thúc với đèn nội thất và đèn ngoài</p>
+                            </div>
+                        </div>
+
+                        <!-- Real Estate Tour -->
+                        <div class="accordion-item border rounded-lg">
+                            <button class="accordion-header w-full px-4 py-3 bg-green-50 hover:bg-green-100 rounded-lg flex items-center justify-between font-semibold text-gray-800 transition" onclick="toggleAccordion(this)">
+                                <span><i class="fas fa-video mr-2 text-green-600"></i>Real Estate Tour - Tour Ảo Bất Động Sản</span>
+                                <i class="fas fa-chevron-down text-green-600"></i>
+                            </button>
+                            <div class="accordion-content hidden px-4 py-4 bg-green-50 text-sm text-gray-700">
+                                <p class="mb-3"><strong>Công cụ chính:</strong> Kling 2.6 (Motion Control)</p>
+                                <p class="mb-3"><strong>Prompt Mẫu:</strong></p>
+                                <pre class="bg-white p-3 rounded mb-3 overflow-x-auto text-xs">Smooth gimbal walkthrough of [PROPERTY_TYPE]:
+- Start position: [START_LOCATION]
+- Path: [MOVEMENT_DESCRIPTION]
+- End position: [END_LOCATION]
+- Motion control: [SPEED] speed, [DIRECTION] movement
+- Highlights: [KEY_FEATURES]
+- Duration: 45 seconds
+- Resolution: 4K, smooth motion</pre>
+                                <p><strong>Ví dụ cụ thể:</strong> Tour của căn hộ hiện đại, bắt đầu từ cửa chính, quét qua phòng khách, bếp, phòng ngủ, kết thúc tại phòng ngủ chính</p>
+                            </div>
+                        </div>
+
+                        <!-- Product Showcase -->
+                        <div class="accordion-item border rounded-lg">
+                            <button class="accordion-header w-full px-4 py-3 bg-purple-50 hover:bg-purple-100 rounded-lg flex items-center justify-between font-semibold text-gray-800 transition" onclick="toggleAccordion(this)">
+                                <span><i class="fas fa-shopping-bag mr-2 text-purple-600"></i>Product Showcase - Trình Bày Sản Phẩm</span>
+                                <i class="fas fa-chevron-down text-purple-600"></i>
+                            </button>
+                            <div class="accordion-content hidden px-4 py-4 bg-purple-50 text-sm text-gray-700">
+                                <p class="mb-3"><strong>Công cụ chính:</strong> Seedance 1.5 Pro</p>
+                                <p class="mb-3"><strong>Prompt Mẫu:</strong></p>
+                                <pre class="bg-white p-3 rounded mb-3 overflow-x-auto text-xs">Professional product showcase video of [PRODUCT]:
+- Product: [PRODUCT_DESCRIPTION]
+- Background: [BACKGROUND_STYLE]
+- Camera movement: [CAMERA_MOVEMENT]
+- Lighting: [LIGHTING_SETUP]
+- Effects: [SPECIAL_EFFECTS]
+- Duration: 30-45 seconds
+- Style: Professional, modern, cinematic</pre>
+                                <p><strong>Ví dụ cụ thể:</strong> Video trình bày bộ ghế sofa hàng hiệu, xoay 360 độ, đèn studio chuyên nghiệp, hiệu ứng hạt mây</p>
+                            </div>
+                        </div>
+
+                        <!-- System Prompt -->
+                        <div class="accordion-item border rounded-lg">
+                            <button class="accordion-header w-full px-4 py-3 bg-red-50 hover:bg-red-100 rounded-lg flex items-center justify-between font-semibold text-gray-800 transition" onclick="toggleAccordion(this)">
+                                <span><i class="fas fa-brain mr-2 text-red-600"></i>System Prompt - Dùng cho ChatGPT/Claude/Gemini</span>
+                                <i class="fas fa-chevron-down text-red-600"></i>
+                            </button>
+                            <div class="accordion-content hidden px-4 py-4 bg-red-50 text-sm text-gray-700">
+                                <p class="mb-3"><strong>Mục đích:</strong> Giúp AI tạo Prompt tối ưu dựa trên feedback từ Sale</p>
+                                <pre class="bg-white p-3 rounded overflow-x-auto text-xs">Bạn là chuyên gia R&D AI tại Fotober. Bạn có kiến thức sâu về:
+- Các công cụ AI: Google Nano Banana Pro, Veo 3.1, Kling 2.6, Seedance 1.5 Pro, CapCut, After Effect
+- Các dịch vụ: Virtual Staging, Day-to-Night, Real Estate Tour, Product Showcase
+- Kỹ thuật Prompt Engineering
+
+Nhiệm vụ của bạn:
+1. Nhận feedback từ Sale hoặc yêu cầu từ khách hàng
+2. Phân tích yêu cầu và xác định công cụ AI phù hợp nhất
+3. Viết Prompt chi tiết, tối ưu cho từng công cụ
+4. Giải thích lý do chọn công cụ đó
+5. Cung cấp các lựa chọn thay thế nếu cần</pre>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Kho Prompt Templates -->
