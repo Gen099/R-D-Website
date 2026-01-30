@@ -1,21 +1,254 @@
-```txt
+# 🎬 Fotober R&D Intelligence Hub
+
+> **Nền tảng Tri thức & Phân tích Toàn diện cho R&D AI Video**
+
+---
+
+## 📋 Tổng quan dự án
+
+**Fotober R&D Intelligence Hub** là một nền tảng web hiện đại được xây dựng để quản lý, lưu trữ và phân tích toàn bộ tri thức liên quan đến R&D AI Video tại Fotober Media Company.
+
+### ✨ Tính năng chính
+
+#### 📚 Knowledge Base - Kho Tri thức
+- **5 Tài liệu chính:**
+  1. 📊 Báo cáo Phân tích Hiện trạng (23 job codes)
+  2. 📅 Kế hoạch Công việc R&D Q1/2026
+  3. ⚙️ Tài liệu Kỹ thuật Video (25+ AI Effects)
+  4. 🔄 Tài liệu Vận hành R&D
+  5. 🏗️ Thiết kế Hệ thống Platform
+
+#### 🤖 AI Analysis Tools
+- **Multi-AI Integration:**
+  - ✅ Google Gemini (Mặc định)
+  - 🔲 Zhipu GLM
+  - 🔲 OpenAI GPT-4
+  - 🔲 Anthropic Claude
+- **Tính năng:** Phân tích Brief, Feedback, Lỗi tự động
+
+#### 📊 Analytics Dashboard
+- Thống kê tổng quan (23 job codes, 25+ effects)
+- Biểu đồ phân tích lỗi theo nhóm
+- Ma trận rủi ro theo loại effect
+- Tracking metrics theo thời gian
+
+#### 📥📤 Document Management
+- Upload tài liệu (PDF, DOCX, TXT)
+- Download tài liệu gốc
+- Embed Canva presentations
+- Link external resources
+
+---
+
+## 🎨 Thiết kế & UX
+
+### Màu sắc chủ đạo
+```css
+Gradient Orange: #FF6B35 → #FFA07A → #FFE5D9
+Background: #FFF5F0 → #FFE5D9 → #FFD4C4
+```
+
+### Đặc điểm giao diện
+- ✅ Responsive design (Mobile, Tablet, Desktop)
+- ✅ Modern gradient với tone cam ấm
+- ✅ Card-based layout với hover effects
+- ✅ Icons từ FontAwesome 6
+- ✅ Typography: Inter font family
+
+---
+
+## 🛠️ Tech Stack
+
+### Backend
+- **Hono** ^4.11.7 - Lightweight web framework
+- **Cloudflare Pages** - Edge deployment platform
+- **TypeScript** - Type safety
+
+### Frontend
+- **Tailwind CSS** - Utility-first CSS (CDN)
+- **Vanilla JavaScript** - No framework overhead
+- **FontAwesome 6** - Icon library
+
+### Deployment
+- **Vercel** (Primary) - Frontend hosting
+- **Cloudflare Pages** (Alternative) - Edge deployment
+- **GitHub** - Version control & collaboration
+
+---
+
+## 🚀 Cài đặt & Chạy
+
+### Prerequisites
+```bash
+- Node.js >= 18
+- npm >= 9
+```
+
+### Installation
+```bash
+# Clone repository
+git clone https://github.com/YOUR_USERNAME/fotober-rd-hub.git
+cd fotober-rd-hub
+
+# Install dependencies
 npm install
+
+# Development
 npm run dev
+# Mở: http://localhost:5173
+
+# Build
+npm run build
+
+# Preview production build
+npm run preview
 ```
 
-```txt
+### Deployment
+
+#### Deploy to Vercel
+```bash
+# Install Vercel CLI
+npm i -g vercel
+
+# Deploy
+vercel
+
+# Production deployment
+vercel --prod
+```
+
+#### Deploy to Cloudflare Pages
+```bash
+# Build first
+npm run build
+
+# Deploy
 npm run deploy
+
+# Or manually
+npx wrangler pages deploy dist --project-name fotober-rd-hub
 ```
 
-[For generating/synchronizing types based on your Worker configuration run](https://developers.cloudflare.com/workers/wrangler/commands/#types):
+---
 
-```txt
-npm run cf-typegen
+## 📂 Cấu trúc dự án
+
+```
+fotober-rd-hub/
+├── public/
+│   └── static/           # Static assets (CSS, images)
+├── src/
+│   ├── index.tsx         # Main application (Hono backend + HTML frontend)
+│   └── renderer.tsx      # JSX renderer
+├── dist/                 # Build output
+├── package.json          # Dependencies & scripts
+├── wrangler.jsonc        # Cloudflare Pages config
+├── vite.config.ts        # Vite build config
+├── tsconfig.json         # TypeScript config
+└── README.md             # This file
 ```
 
-Pass the `CloudflareBindings` as generics when instantiation `Hono`:
+---
 
-```ts
-// src/index.ts
-const app = new Hono<{ Bindings: CloudflareBindings }>()
-```
+## 📊 Dữ liệu Tổng hợp
+
+### Thống kê chính (từ 5 tài liệu)
+
+| Metric | Giá trị |
+|--------|---------|
+| **Tổng tài liệu** | 5 documents |
+| **Job codes phân tích** | 23 jobs |
+| **Loại AI Effects** | 25+ types |
+| **AI Models hỗ trợ** | 4 models |
+| **Thời gian xây dựng** | Q1/2026 |
+
+### Phân bố vấn đề (23 job codes)
+
+| Nhóm lỗi | Tỷ lệ | Số jobs |
+|----------|-------|---------|
+| Hiểu sai yêu cầu | 35% | 8/23 |
+| Chất lượng AI output | 26% | 6/23 |
+| Trễ deadline | 22% | 5/23 |
+| Logic/Physics sai | 17% | 4/23 |
+
+### Tỷ lệ lỗi theo loại Effect
+
+| Loại Effect | Tỷ lệ lỗi | Risk Level |
+|-------------|-----------|------------|
+| Object Animation | 100% | ⚠️ Rất cao |
+| Creative/Fantasy | 100% | ⚠️ Rất cao |
+| Agent Composite | 100% | ⚠️ Rất cao |
+| Lifestyle/Người | 71% | ⚠️ Cao |
+| Season/Weather | 67% | ⚠️ Cao |
+| Day-to-Night | 33% | ✅ Trung bình |
+| Furniture Staging | 33% | ✅ Trung bình |
+
+---
+
+## 🔮 Roadmap phát triển
+
+### ✅ Phase 1: MVP (Đã hoàn thành)
+- [x] Khởi tạo project với Hono + Cloudflare
+- [x] Thiết kế UI/UX với gradient cam
+- [x] Trang chủ với dashboard tổng quan
+- [x] Navigation system
+- [x] Document viewer (basic)
+- [x] AI Tools page (UI only)
+
+### 🚧 Phase 2: Core Features (Đang phát triển)
+- [ ] D1 Database integration
+- [ ] Real document viewer với Markdown rendering
+- [ ] Upload/Download functionality
+- [ ] AI API integration (Gemini, GLM, OpenAI, Claude)
+- [ ] Analytics dashboard với charts
+
+### 🔜 Phase 3: Advanced Features
+- [ ] Prompt Library management
+- [ ] Error Pattern tracking
+- [ ] Brief Analysis automation
+- [ ] Trends monitoring
+- [ ] Real-time collaboration
+
+---
+
+## 🤝 Đóng góp
+
+Dự án này được xây dựng cho Fotober Media Company. Mọi đóng góp cải tiến đều được chào đón!
+
+### Workflow
+1. Fork repository
+2. Create feature branch: `git checkout -b feature/amazing-feature`
+3. Commit changes: `git commit -m 'Add amazing feature'`
+4. Push to branch: `git push origin feature/amazing-feature`
+5. Open Pull Request
+
+---
+
+## 📝 License
+
+© 2026 Fotober Media Company Limited. All rights reserved.
+
+---
+
+## 📞 Contact & Support
+
+- **Company:** Fotober Media Company Limited
+- **Location:** Hà Nội, Việt Nam
+- **Email:** info@fotober.com
+- **WhatsApp:** +84 942 110 297
+- **Website:** https://fotober.com
+
+---
+
+## 🙏 Acknowledgments
+
+- **Hono Framework** - Lightweight web framework
+- **Cloudflare** - Edge platform
+- **Tailwind CSS** - Utility-first CSS
+- **FontAwesome** - Icon library
+- **Vercel** - Deployment platform
+
+---
+
+**Built with ❤️ for R&D Excellence**
