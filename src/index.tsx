@@ -2,6 +2,7 @@ import { Hono } from 'hono'
 import { serveStatic } from 'hono/cloudflare-workers'
 import { cors } from 'hono/cors'
 import { analyzeWithAI, type AIAnalysisRequest, type AIAnalysisResponse } from './services/ai'
+import { storage } from './services/storage'
 
 // Define Cloudflare Bindings type for D1 database and env vars
 type Bindings = {
@@ -56,6 +57,9 @@ app.get('/', (c) => {
                     </a>
                     <a href="/ai-tools" class="px-4 py-2 bg-white bg-opacity-20 rounded-lg hover:bg-opacity-30 transition">
                         <i class="fas fa-robot mr-2"></i>AI Tools
+                    </a>
+                    <a href="/history" class="px-4 py-2 bg-white bg-opacity-20 rounded-lg hover:bg-opacity-30 transition">
+                        <i class="fas fa-history mr-2"></i>Lịch sử
                     </a>
                 </div>
             </div>
@@ -917,6 +921,279 @@ app.get('/analytics', (c) => {
   `)
 })
 
+// Analysis History page
+app.get('/history', (c) => {
+  return c.html(`
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch sử Phân tích - Fotober R&D Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="/static/global-styles.css" rel="stylesheet">
+</head>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="gradient-orange text-white shadow-lg">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <a href="/" class="flex items-center space-x-4 hover:opacity-80 transition">
+                        <i class="fas fa-video text-3xl"></i>
+                        <div>
+                            <h1 class="text-2xl font-bold">Fotober R&D Intelligence Hub</h1>
+                            <p class="text-sm opacity-90">Lịch sử Phân tích AI</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="flex space-x-2">
+                    <a href="/ai-tools" class="px-4 py-2 bg-white bg-opacity-20 rounded-lg hover:bg-opacity-30 transition">
+                        <i class="fas fa-robot mr-2"></i>AI Tools
+                    </a>
+                    <a href="/" class="px-4 py-2 bg-white bg-opacity-20 rounded-lg hover:bg-opacity-30 transition">
+                        <i class="fas fa-home mr-2"></i>Trang chủ
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-6 py-8">
+        <!-- Page Header -->
+        <div class="bg-white rounded-2xl shadow-2xl p-8 mb-8">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2">
+                        <i class="fas fa-history text-orange-500 mr-3"></i>
+                        Lịch sử Phân tích AI
+                    </h2>
+                    <p class="text-gray-600">Theo dõi và xem lại các phân tích đã thực hiện</p>
+                </div>
+                <button onclick="loadHistory()" class="px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg hover:from-orange-600 hover:to-orange-700 transition shadow-lg">
+                    <i class="fas fa-sync-alt mr-2"></i>Làm mới
+                </button>
+            </div>
+
+            <!-- Statistics Cards -->
+            <div id="stats" class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-600 text-sm">Tổng phân tích</p>
+                            <p id="stat-total" class="text-3xl font-bold text-blue-600">0</p>
+                        </div>
+                        <i class="fas fa-chart-line text-4xl text-blue-400"></i>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-600 text-sm">Thành công</p>
+                            <p id="stat-success" class="text-3xl font-bold text-green-600">0%</p>
+                        </div>
+                        <i class="fas fa-check-circle text-4xl text-green-400"></i>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-600 text-sm">Tokens TB</p>
+                            <p id="stat-tokens" class="text-3xl font-bold text-purple-600">0</p>
+                        </div>
+                        <i class="fas fa-coins text-4xl text-purple-400"></i>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-600 text-sm">Provider phổ biến</p>
+                            <p id="stat-provider" class="text-2xl font-bold text-orange-600">-</p>
+                        </div>
+                        <i class="fas fa-robot text-4xl text-orange-400"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="flex gap-4 mb-6">
+                <select id="filter-type" onchange="loadHistory()" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                    <option value="">Tất cả loại</option>
+                    <option value="brief">Brief Analysis</option>
+                    <option value="error">Error Analysis</option>
+                    <option value="prompt">Prompt Generation</option>
+                    <option value="general">General Q&A</option>
+                </select>
+                <select id="filter-provider" onchange="loadHistory()" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                    <option value="">Tất cả provider</option>
+                    <option value="gemini">Gemini</option>
+                    <option value="glm">GLM</option>
+                    <option value="openai">OpenAI</option>
+                    <option value="claude">Claude</option>
+                </select>
+            </div>
+
+            <!-- History List -->
+            <div id="history-container" class="space-y-4">
+                <div class="text-center py-8 text-gray-500">
+                    <i class="fas fa-spinner fa-spin text-4xl mb-4"></i>
+                    <p>Đang tải...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let allHistory = [];
+
+        // Load history on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            loadStats();
+            loadHistory();
+        });
+
+        async function loadStats() {
+            try {
+                const response = await fetch('/api/analysis/statistics');
+                const data = await response.json();
+                
+                if (data.success) {
+                    const stats = data.data;
+                    document.getElementById('stat-total').textContent = stats.total;
+                    document.getElementById('stat-success').textContent = stats.successRate + '%';
+                    document.getElementById('stat-tokens').textContent = stats.avgTokens.toLocaleString();
+                    
+                    const topProvider = Object.keys(stats.byProvider).sort((a, b) => 
+                        stats.byProvider[b] - stats.byProvider[a]
+                    )[0];
+                    document.getElementById('stat-provider').textContent = topProvider ? topProvider.toUpperCase() : '-';
+                }
+            } catch (error) {
+                console.error('Error loading stats:', error);
+            }
+        }
+
+        async function loadHistory() {
+            const container = document.getElementById('history-container');
+            container.innerHTML = '<div class="text-center py-8 text-gray-500"><i class="fas fa-spinner fa-spin text-4xl mb-4"></i><p>Đang tải...</p></div>';
+
+            try {
+                const response = await fetch('/api/analysis/history?limit=50');
+                const data = await response.json();
+                
+                if (!data.success || data.data.length === 0) {
+                    container.innerHTML = '<div class="text-center py-12 text-gray-500"><i class="fas fa-inbox text-6xl mb-4 text-gray-300"></i><p class="text-lg">Chưa có lịch sử phân tích</p><p class="text-sm mt-2">Hãy thử AI Tools để tạo phân tích đầu tiên!</p></div>';
+                    return;
+                }
+
+                allHistory = data.data;
+                renderHistory(allHistory);
+            } catch (error) {
+                console.error('Error loading history:', error);
+                container.innerHTML = '<div class="text-center py-8 text-red-500"><i class="fas fa-exclamation-triangle text-4xl mb-4"></i><p>Lỗi tải dữ liệu</p></div>';
+            }
+        }
+
+        function renderHistory(history) {
+            const container = document.getElementById('history-container');
+            const filterType = document.getElementById('filter-type').value;
+            const filterProvider = document.getElementById('filter-provider').value;
+
+            let filtered = history;
+            if (filterType) {
+                filtered = filtered.filter(h => h.analysis_type === filterType);
+            }
+            if (filterProvider) {
+                filtered = filtered.filter(h => h.provider === filterProvider);
+            }
+
+            if (filtered.length === 0) {
+                container.innerHTML = '<div class="text-center py-12 text-gray-500"><i class="fas fa-filter text-6xl mb-4 text-gray-300"></i><p class="text-lg">Không tìm thấy kết quả</p></div>';
+                return;
+            }
+
+            container.innerHTML = filtered.map(item => {
+                const typeColors = {
+                    brief: 'bg-blue-100 text-blue-700',
+                    error: 'bg-red-100 text-red-700',
+                    prompt: 'bg-purple-100 text-purple-700',
+                    general: 'bg-green-100 text-green-700'
+                };
+                const providerIcons = {
+                    gemini: 'fa-google',
+                    glm: 'fa-brain',
+                    openai: 'fa-robot',
+                    claude: 'fa-user-tie'
+                };
+                
+                return \`
+                    <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all border-l-4 \${item.status === 'success' ? 'border-green-500' : 'border-red-500'}">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex-1">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <span class="px-3 py-1 rounded-full text-xs font-semibold \${typeColors[item.analysis_type] || 'bg-gray-100 text-gray-700'}">
+                                        \${getTypeLabel(item.analysis_type)}
+                                    </span>
+                                    <span class="px-3 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-700">
+                                        <i class="fas \${providerIcons[item.provider] || 'fa-robot'} mr-1"></i>
+                                        \${item.provider.toUpperCase()}
+                                    </span>
+                                    <span class="text-xs text-gray-500">
+                                        <i class="fas fa-clock mr-1"></i>
+                                        \${formatTime(item.created_at)}
+                                    </span>
+                                </div>
+                                <p class="text-gray-800 font-medium mb-2">\${item.input_text}</p>
+                                <div class="flex items-center gap-4 text-sm text-gray-600">
+                                    <span><i class="fas fa-stopwatch mr-1"></i>\${item.processing_time_ms}ms</span>
+                                    <span><i class="fas fa-coins mr-1"></i>\${item.token_usage} tokens</span>
+                                    <span class="\${item.status === 'success' ? 'text-green-600' : 'text-red-600'}">
+                                        <i class="fas fa-\${item.status === 'success' ? 'check-circle' : 'times-circle'} mr-1"></i>
+                                        \${item.status === 'success' ? 'Thành công' : 'Lỗi'}
+                                    </span>
+                                </div>
+                            </div>
+                            <button onclick="viewDetail('\${item.id}')" class="px-4 py-2 bg-orange-100 text-orange-700 rounded-lg hover:bg-orange-200 transition">
+                                <i class="fas fa-eye mr-2"></i>Chi tiết
+                            </button>
+                        </div>
+                    </div>
+                \`;
+            }).join('');
+        }
+
+        function getTypeLabel(type) {
+            const labels = {
+                brief: 'Brief Analysis',
+                error: 'Error Analysis',
+                prompt: 'Prompt Generation',
+                general: 'General Q&A'
+            };
+            return labels[type] || type;
+        }
+
+        function formatTime(timestamp) {
+            const date = new Date(timestamp);
+            const now = new Date();
+            const diff = now - date;
+            
+            if (diff < 60000) return 'Vừa xong';
+            if (diff < 3600000) return Math.floor(diff / 60000) + ' phút trước';
+            if (diff < 86400000) return Math.floor(diff / 3600000) + ' giờ trước';
+            return date.toLocaleDateString('vi-VN') + ' ' + date.toLocaleTimeString('vi-VN');
+        }
+
+        function viewDetail(id) {
+            window.location.href = \`/analysis/\${id}\`;
+        }
+    </script>
+</body>
+</html>
+  `)
+})
+
 // ============================================
 // AI ANALYSIS API ROUTES
 // ============================================
@@ -1065,6 +1342,117 @@ app.get('/api/ai/models', (c) => {
       },
     },
   })
+})
+
+// ============================================
+// ANALYSIS HISTORY & STATISTICS API
+// ============================================
+
+// Get analysis history
+app.get('/api/analysis/history', async (c) => {
+  try {
+    const limit = parseInt(c.req.query('limit') || '50');
+    const offset = parseInt(c.req.query('offset') || '0');
+    
+    const logs = await storage.getAnalysisLogs(limit, offset);
+    
+    return c.json({
+      success: true,
+      data: logs,
+      total: logs.length,
+      limit,
+      offset
+    });
+  } catch (error: any) {
+    return c.json({ success: false, error: error.message }, 500);
+  }
+})
+
+// Get analysis statistics
+app.get('/api/analysis/statistics', async (c) => {
+  try {
+    const stats = await storage.getAnalysisStatistics();
+    return c.json({ success: true, data: stats });
+  } catch (error: any) {
+    return c.json({ success: false, error: error.message }, 500);
+  }
+})
+
+// Get single analysis by ID
+app.get('/api/analysis/:id', async (c) => {
+  try {
+    const id = c.req.param('id');
+    const log = await storage.getAnalysisLogById(id);
+    
+    if (!log) {
+      return c.json({ success: false, error: 'Analysis not found' }, 404);
+    }
+    
+    return c.json({ success: true, data: log });
+  } catch (error: any) {
+    return c.json({ success: false, error: error.message }, 500);
+  }
+})
+
+// ============================================
+// DOCUMENTS API
+// ============================================
+
+// Get all documents
+app.get('/api/documents', async (c) => {
+  try {
+    const docs = await storage.getDocuments();
+    return c.json({ success: true, data: docs });
+  } catch (error: any) {
+    return c.json({ success: false, error: error.message }, 500);
+  }
+})
+
+// Get single document
+app.get('/api/documents/:id', async (c) => {
+  try {
+    const id = c.req.param('id');
+    const doc = await storage.getDocumentById(id);
+    
+    if (!doc) {
+      return c.json({ success: false, error: 'Document not found' }, 404);
+    }
+    
+    // Increment view count
+    await storage.incrementDocumentView(id);
+    
+    return c.json({ success: true, data: doc });
+  } catch (error: any) {
+    return c.json({ success: false, error: error.message }, 500);
+  }
+})
+
+// ============================================
+// PROMPT TEMPLATES API
+// ============================================
+
+// Get all prompt templates
+app.get('/api/prompts', async (c) => {
+  try {
+    const templates = await storage.getPromptTemplates();
+    return c.json({ success: true, data: templates });
+  } catch (error: any) {
+    return c.json({ success: false, error: error.message }, 500);
+  }
+})
+
+// ============================================
+// ERROR PATTERNS API
+// ============================================
+
+// Get all error patterns
+app.get('/api/errors', async (c) => {
+  try {
+    const errors = await storage.getErrorPatterns();
+    return c.json({ success: true, data: errors });
+  } catch (error: any) {
+    return c.json({ success: false, error: error.message }, 500);
+  }
 })
 
 // Health check

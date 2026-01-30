@@ -6,6 +6,7 @@
  */
 
 import OpenAI from 'openai';
+import { storage } from './storage';
 
 // ============================================
 // TYPES & INTERFACES
@@ -279,16 +280,52 @@ export async function analyzeWithAI(
         throw new Error(`Unsupported provider: ${config.provider}`);
     }
 
+    const processingTime = Date.now() - startTime;
+    const parsedResult = parseAIResult(result, request.type);
+
+    // Log to storage
+    await storage.saveAnalysisLog({
+      analysis_type: request.type,
+      provider: config.provider,
+      model: config.model || 'gpt-5',
+      input_text: request.input,
+      output_text: result,
+      effects_detected: parsedResult.effects || [],
+      errors_detected: parsedResult.errors || [],
+      suggestions: parsedResult.suggestions || [],
+      token_usage: tokens?.total || 0,
+      processing_time_ms: processingTime,
+      status: 'success',
+      created_by: 'system'
+    });
+
     return {
       success: true,
       provider: config.provider,
       model: config.model || 'gpt-5',
-      result: parseAIResult(result, request.type),
+      result: parsedResult,
       tokens,
       timestamp: new Date().toISOString(),
     };
   } catch (error: any) {
     console.error('AI Analysis Error:', error);
+    
+    const processingTime = Date.now() - startTime;
+    
+    // Log error to storage
+    await storage.saveAnalysisLog({
+      analysis_type: request.type,
+      provider: config.provider,
+      model: config.model || 'gpt-5',
+      input_text: request.input,
+      output_text: '',
+      token_usage: 0,
+      processing_time_ms: processingTime,
+      status: 'error',
+      error_message: error.message,
+      created_by: 'system'
+    });
+
     return {
       success: false,
       provider: config.provider,
