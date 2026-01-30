@@ -696,5 +696,45 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
+    // Chart toggle and sort controls
+    const toggleChartBtn = document.getElementById('toggleChartBtn');
+    const sortFeedbackBtn = document.getElementById('sortFeedbackBtn');
+    const chartContainer = document.getElementById('chartContainer');
+    const lastUpdateDate = document.getElementById('lastUpdateDate');
+    let isChartExpanded = false;
+    
+    if (toggleChartBtn) {
+        toggleChartBtn.addEventListener('click', function() {
+            isChartExpanded = !isChartExpanded;
+            if (isChartExpanded) {
+                chartContainer.style.height = '600px';
+                toggleChartBtn.innerHTML = '<i class="fas fa-compress mr-1"></i>Thu gon';
+            } else {
+                chartContainer.style.height = 'auto';
+                toggleChartBtn.innerHTML = '<i class="fas fa-expand mr-1"></i>Mo rong';
+            }
+        });
+    }
+    
+    if (sortFeedbackBtn) {
+        let sortOrder = 'desc';
+        sortFeedbackBtn.addEventListener('click', function() {
+            sortOrder = sortOrder === 'desc' ? 'asc' : 'desc';
+            if (sortOrder === 'desc') {
+                sortFeedbackBtn.innerHTML = '<i class="fas fa-sort-amount-down mr-1"></i>Moi nhat';
+            } else {
+                sortFeedbackBtn.innerHTML = '<i class="fas fa-sort-amount-up mr-1"></i>Cu nhat';
+            }
+        });
+    }
+    
+    if (lastUpdateDate) {
+        const today = new Date();
+        const day = today.getDate();
+        const month = today.getMonth() + 1;
+        const year = today.getFullYear();
+        lastUpdateDate.textContent = day + '/' + month + '/' + year;
+    }
+    
     console.log('🚀 R&D AI Video Intelligence Platform loaded successfully!');
 });
