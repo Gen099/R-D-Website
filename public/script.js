@@ -37,50 +37,55 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Smooth scroll and active navigation
+    // Tab-based navigation and active state
     const navItems = document.querySelectorAll('.nav-item');
-    const sections = document.querySelectorAll('section[id]');
+    const sections = document.querySelectorAll('.content-section');
+    
+    function showSection(targetId) {
+        // Hide all sections
+        sections.forEach(section => {
+            section.classList.remove('active-tab');
+        });
+        
+        // Show the target section
+        const targetSection = document.getElementById(targetId);
+        if (targetSection) {
+            targetSection.classList.add('active-tab');
+        }
+        
+        // Update active navigation item
+        navItems.forEach(item => {
+            item.classList.remove('active');
+            if (item.getAttribute('href') === `#${targetId}`) {
+                item.classList.add('active');
+            }
+        });
+        
+        // Update URL hash without scrolling
+        history.pushState(null, null, `#${targetId}`);
+    }
     
     navItems.forEach(item => {
         item.addEventListener('click', function(e) {
             e.preventDefault();
             const targetId = this.getAttribute('href').substring(1);
-            const targetSection = document.getElementById(targetId);
+            showSection(targetId);
             
-            if (targetSection) {
-                targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                
-                // Close mobile menu after click
-                if (window.innerWidth < 768) {
-                    sidebar.classList.remove('active');
-                    document.getElementById('sidebarOverlay').classList.add('hidden');
-                }
+            // Close mobile menu after click
+            if (window.innerWidth < 768) {
+                sidebar.classList.remove('active');
+                document.getElementById('sidebarOverlay').classList.add('hidden');
             }
         });
     });
     
-    // Update active navigation on scroll
-    function updateActiveNav() {
-        let currentSection = '';
-        
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (window.pageYOffset >= sectionTop - 100) {
-                currentSection = section.getAttribute('id');
-            }
-        });
-        
-        navItems.forEach(item => {
-            item.classList.remove('active');
-            if (item.getAttribute('href') === `#${currentSection}`) {
-                item.classList.add('active');
-            }
-        });
-    }
+    // Initial load: check URL hash or default to the first section
+    const initialHash = window.location.hash ? window.location.hash.substring(1) : sections[0].id.replace(' content-section ', '');
+    showSection(initialHash);
     
-    window.addEventListener('scroll', updateActiveNav);
-    updateActiveNav(); // Initial call
+    // Remove scroll-based active navigation (no longer needed)
+    // window.addEventListener('scroll', updateActiveNav);
+    // updateActiveNav(); // Initial call
     
     // ========== CHARTS ==========
     
