@@ -111,6 +111,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const reportsPasscodeLayer = document.getElementById('reportsPasscodeLayer');
     const reportsContent = document.getElementById('reportsContent');
     
+    // Default passcode
+    const DEFAULT_PASSCODE = 'fotober2026';
+    
+    // Initialize default passcode if not set
+    if (!localStorage.getItem('reportsPasscode')) {
+        localStorage.setItem('reportsPasscode', DEFAULT_PASSCODE);
+    }
+    
     // Get stored passcode from localStorage
     function getStoredPasscode() {
         return localStorage.getItem('reportsPasscode');
