@@ -107,22 +107,24 @@ CONTEXT BỔ SUNG:
 - Tỷ lệ lỗi ổn định: Day-to-Night (33%), Furniture Staging (33%)
 - Công cụ có sẵn: Kling AI, Veo 2/3.1, Runway Gen-3, Pika Labs, Luma, ElevenLabs
 
-TRẢ LỜI ĐỊNH DẠNG JSON:
+BẮT BUỘC TRẢ LỜI THEO FORMAT JSON SAU (không thêm markdown, không thêm text khác):
+\`\`\`json
 {
   "effects": [
     {
-      "name": "Tên hiệu ứng",
-      "confidence": 0.95,
-      "estimatedTime": "1-2 giờ",
+      "name": "Lifestyle Effect - Family Scene",
+      "confidence": 0.85,
+      "estimatedTime": "2-3 giờ",
       "difficulty": "medium"
     }
   ],
   "feasibility": "CÓ THỂ",
-  "risks": ["Rủi ro 1", "Rủi ro 2"],
-  "solutions": ["Giải pháp 1", "Giải pháp 2"],
-  "footageRequirements": ["Yêu cầu 1", "Yêu cầu 2"],
-  "analysis": "Phân tích chi tiết tổng quan..."
-}`,
+  "risks": ["Độ tự nhiên của motion người", "Lighting consistency với pool"],
+  "solutions": ["Sử dụng Kling AI cho human motion", "Veo 3.1 cho cinematic quality"],
+  "footageRequirements": ["Pool area rõ nét", "Góc quay rộng", "Lighting tốt"],
+  "analysis": "Yêu cầu thêm Lifestyle effect với cảnh gia đình bên hồ bơi..."
+}
+\`\`\``,
 
   error: `Bạn là chuyên gia phân tích lỗi cho dịch vụ AI Video.
 
