@@ -299,6 +299,12 @@
                     <li><a href="#competitive" class="nav-item block px-4 py-2 rounded">
                         <i class="fas fa-search-dollar mr-2"></i>Nghiên Cứu Đối Thủ
                     </a></li>
+                    <li><a href="#reports" class="nav-item block px-4 py-2 rounded">
+                        <i class="fas fa-file-pdf mr-2"></i>Báo Cáo Định Kỳ
+                    </a></li>
+                    <li><a href="#library" class="nav-item block px-4 py-2 rounded">
+                        <i class="fas fa-book mr-2"></i>Library
+                    </a></li>
                 </ul>
             </nav>
         </aside>
@@ -1514,6 +1520,71 @@
                                 </li>
                             </ul>
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Reports Section (Protected with Passcode) -->
+            <section id="reports" class="content-section mb-12">
+                <div id="reportsPasscodeLayer" class="bg-white rounded-lg shadow-md p-8 text-center">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">
+                        <i class="fas fa-lock text-red-600 mr-2"></i>Báo Cáo Định Kỳ
+                    </h2>
+                    <p class="text-gray-600 mb-6">Phần này được bảo vệ bằng passcode. Vui lòng nhập passcode để tiếp tục.</p>
+                    <div class="max-w-sm mx-auto">
+                        <input type="password" id="reportsPasscodeInput" placeholder="Nhập passcode..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-500 mb-4">
+                        <button id="reportsPasscodeBtn" class="w-full bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">Xác Nhận</button>
+                    </div>
+                </div>
+                <div id="reportsContent" style="display: none;">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+                        <i class="fas fa-file-pdf mr-3 text-purple-600"></i>
+                        Báo Cáo Định Kỳ
+                    </h2>
+                    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Báo Cáo Hàng Tuần</h3>
+                        <div class="bg-blue-50 p-4 rounded"><p class="font-semibold">Tuần 1 (29/01 - 04/02/2026)</p></div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Báo Cáo Hàng Tháng</h3>
+                        <div class="bg-green-50 p-4 rounded"><p class="font-semibold">Tháng 1/2026</p></div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Todo List</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-center p-2"><input type="checkbox" class="mr-2"><span>Task 1</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Library Section -->
+            <section id="library" class="content-section mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-book mr-3 text-purple-600"></i>
+                    Library - Kho Tài Nguyên
+                </h2>
+                <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Kho Prompt Templates</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-blue-50 p-4 rounded"><p class="font-semibold">Prompt: Agent Replacement</p></div>
+                        <div class="bg-blue-50 p-4 rounded"><p class="font-semibold">Prompt: Image-to-Video</p></div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Kho Video Templates</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-red-50 p-4 rounded"><p class="font-semibold">Template: Real Estate Tour</p></div>
+                        <div class="bg-red-50 p-4 rounded"><p class="font-semibold">Template: Product Showcase</p></div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Danh Sách Kênh Đối Thủ Theo Thể Loại</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-green-50 p-4 rounded"><p class="font-semibold">Website</p></div>
+                        <div class="bg-green-50 p-4 rounded"><p class="font-semibold">YouTube Channel</p></div>
+                        <div class="bg-green-50 p-4 rounded"><p class="font-semibold">Blog</p></div>
+                        <div class="bg-green-50 p-4 rounded"><p class="font-semibold">Social Media</p></div>
                     </div>
                 </div>
             </section>

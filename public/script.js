@@ -105,6 +105,79 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initial footer visibility
     updateFooterVisibility(initialHash);
     
+    // ========== PASSCODE PROTECTION FOR REPORTS ==========
+    const reportsPasscodeBtn = document.getElementById('reportsPasscodeBtn');
+    const reportsPasscodeInput = document.getElementById('reportsPasscodeInput');
+    const reportsPasscodeLayer = document.getElementById('reportsPasscodeLayer');
+    const reportsContent = document.getElementById('reportsContent');
+    
+    // Get stored passcode from localStorage
+    function getStoredPasscode() {
+        return localStorage.getItem('reportsPasscode');
+    }
+    
+    // Set passcode to localStorage
+    function setStoredPasscode(passcode) {
+        localStorage.setItem('reportsPasscode', passcode);
+    }
+    
+    // Check if user is already authenticated for reports
+    function isReportsAuthenticated() {
+        return sessionStorage.getItem('reportsAuthenticated') === 'true';
+    }
+    
+    // Set authentication status
+    function setReportsAuthenticated(value) {
+        if (value) {
+            sessionStorage.setItem('reportsAuthenticated', 'true');
+        } else {
+            sessionStorage.removeItem('reportsAuthenticated');
+        }
+    }
+    
+    // Show/hide reports content based on authentication
+    function updateReportsVisibility() {
+        if (isReportsAuthenticated()) {
+            reportsPasscodeLayer.style.display = 'none';
+            reportsContent.style.display = 'block';
+        } else {
+            reportsPasscodeLayer.style.display = 'block';
+            reportsContent.style.display = 'none';
+        }
+    }
+    
+    // Handle passcode verification
+    if (reportsPasscodeBtn) {
+        reportsPasscodeBtn.addEventListener('click', function() {
+            const inputPasscode = reportsPasscodeInput.value.trim();
+            const storedPasscode = getStoredPasscode();
+            
+            if (!storedPasscode) {
+                alert('Passcode chưa được thiết lập. Vui lòng liên hệ quản trị viên.');
+                return;
+            }
+            
+            if (inputPasscode === storedPasscode) {
+                setReportsAuthenticated(true);
+                updateReportsVisibility();
+                reportsPasscodeInput.value = '';
+            } else {
+                alert('Passcode không chín xác. Vui lòng thử lại.');
+                reportsPasscodeInput.value = '';
+            }
+        });
+        
+        // Allow Enter key to submit
+        reportsPasscodeInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                reportsPasscodeBtn.click();
+            }
+        });
+    }
+    
+    // Initial reports visibility check
+    updateReportsVisibility();
+    
     // Remove scroll-based active navigation (no longer needed)
     // window.addEventListener('scroll', updateActiveNav);
     // updateActiveNav(); // Initial call
