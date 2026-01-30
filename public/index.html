@@ -254,6 +254,12 @@
         .badge-completed { background: #d1fae5; color: #065f46; }
         .badge-progress { background: #fef3c7; color: #92400e; }
         .badge-pending { background: #e5e7eb; color: #374151; }
+        
+        #rndFeedbackEmbed iframe {
+            width: 100% !important;
+            height: 500px !important;
+            border-radius: 8px !important;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -547,7 +553,43 @@
                     Phân Tích Feedback AI Video
                 </h2>
 
-                <!-- Error Statistics -->
+                <!-- Sale Feedback Link -->
+                <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <i class="fas fa-link mr-2 text-blue-600"></i>Feedback Từ Sale
+                    </h3>
+                    <p class="text-gray-600 mb-4">Danh sách feedback từ khách hàng và sale team:</p>
+                    <div class="space-y-2">
+                        <a href="https://example.com/sale-feedback" target="_blank" class="block p-3 bg-blue-50 rounded border-l-4 border-blue-600 hover:bg-blue-100 transition">
+                            <i class="fas fa-external-link-alt mr-2 text-blue-600"></i>
+                            <span class="font-semibold text-blue-700">Xem Feedback Từ Sale (Link)</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- R&D Feedback Embed Section -->
+                <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <i class="fas fa-file-import mr-2 text-green-600"></i>Feedback Từ R&D
+                    </h3>
+                    <p class="text-gray-600 mb-4">Embed tài liệu, báo cáo lỗi từ R&D team:</p>
+                    
+                    <!-- Embed Container -->
+                    <div id="rndFeedbackEmbed" class="bg-gray-50 rounded-lg border-2 border-dashed border-gray-300 p-4" style="min-height: 500px; overflow: auto;">
+                        <!-- Default: Google Drive Embed Example -->
+                        <iframe src="https://drive.google.com/embeddedfolderview?id=FOLDER_ID#grid" style="width:100%; height:500px; border:none; border-radius:8px;"></iframe>
+                        
+                        <!-- Alt: Canva Embed Example (uncomment to use) -->
+                        <!-- <iframe loading="lazy" style="border: none; border-radius: 8px;" allowfullscreen allow="clipboard-write" src="https://www.canva.com/design/DESIGN_ID/view?embed" width="100%" height="500"></iframe> -->
+                        
+                        <!-- Alt: PDF Embed Example (uncomment to use) -->
+                        <!-- <iframe src="https://example.com/document.pdf" style="width:100%; height:500px; border:none; border-radius:8px;"></iframe> -->
+                    </div>
+                    
+                    <p class="text-xs text-gray-500 mt-3 italic">Lưu ý: Bạn có thể thay đổi link embed bẻ bất kỳ lúc nào. Liên hệ admin để cập nhật.</p>
+                </div>
+
+                <!-- Error Statistics Chart -->
                 <div class="bg-white rounded-lg shadow-md p-6 mb-6">
                     <h3 class="text-xl font-bold text-gray-800 mb-4">Phân Loại Lỗi Theo Nhóm</h3>
                     <div class="chart-container">
