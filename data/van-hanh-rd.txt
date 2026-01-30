@@ -1,0 +1,1377 @@
+# TÀI LIỆU VẬN HÀNH R&D AI VIDEO
+## QUY TRÌNH GIAO TIẾP, ĐÁNH GIÁ VÀ CHUYỂN GIAO KỸ THUẬT
+
+---
+
+**Ngày lập:** 29/01/2026
+**Phiên bản:** 1.0
+**Phạm vi áp dụng:** R&D Specialist ↔ QC ↔ Team Video
+**Mục đích:** Thiết lập quy trình làm việc, tiêu chí đánh giá và phương pháp chứng minh hiệu quả nghiên cứu
+
+---
+
+# KẾT QUẢ 1: PHÂN TÍCH VẤN ĐỀ HIỆN TẠI VÀ HƯỚNG CẢI TIẾN
+
+---
+
+## PHẦN 1: PHÂN TÍCH VẤN ĐỀ TỪ DỮ LIỆU THỰC TẾ
+
+### 1.1. Tổng quan vấn đề
+
+**Nguồn dữ liệu:** 23 job codes từ file "[Video] Feedback AI.xlsx"
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│              PHÂN BỐ VẤN ĐỀ THEO NHÓM                          │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  NHÓM A: HIỂU SAI YÊU CẦU           ████████████████  35%      │
+│          (8/23 jobs)                                            │
+│                                                                 │
+│  NHÓM B: CHẤT LƯỢNG AI OUTPUT       ████████████      26%      │
+│          (6/23 jobs)                                            │
+│                                                                 │
+│  NHÓM C: TRỄ DEADLINE               ██████████        22%      │
+│          (5/23 jobs)                                            │
+│                                                                 │
+│  NHÓM D: VẬT LÝ/LOGIC SAI           ████████          17%      │
+│          (4/23 jobs)                                            │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### 1.2. Phân tích chi tiết NHÓM A: Hiểu sai yêu cầu (35%)
+
+#### 1.2.1. Bảng phân tích nguyên nhân gốc
+
+| Job Code | Yêu cầu gốc | Kết quả thực tế | Nguyên nhân gốc | Phân loại nguyên nhân |
+|----------|-------------|-----------------|-----------------|----------------------|
+| TADEC31004 | Chuyển từ hiện trạng sang mùa xuân | Làm từ tuyết sang xuân | Không đọc context "we don't get snow here" | Thiếu thông tin context |
+| HTJAN15008Rev | "preparing dinner" | Chỉ có bàn ăn + đồ ăn, không có người | Hiểu sai ngữ pháp: động từ cần chủ ngữ thực hiện | Thiếu kiến thức ngôn ngữ |
+| DUJAN04005 | Tạo nước trong đài phun | Nước chảy từ vị trí ngẫu nhiên | Không quan sát kỹ input | Thiếu phân tích input |
+| QUJAN25001 | 2 AI: phòng khách + phòng ăn | Chỉ làm 1, còn làm sai phòng | Bỏ sót requirement | Thiếu checklist xác nhận |
+| QUJAN19003 | AI dựng nhà + timelapse đêm | Không làm phần dựng nhà | Incomplete delivery | Thiếu checklist xác nhận |
+| LIJAN07001 | Quân cờ di chuyển theo luật cờ vua | Quân cờ nhảy loạn | Không research domain knowledge | Thiếu kiến thức chuyên môn |
+| LIDEC10001 | Santa đẩy xe vào ống khói | Xe rơi xuống đất | Không hiểu physics yêu cầu | Vượt quá khả năng AI |
+| CAJAN21001rev7 | Transition theo hướng cụ thể | Flow không nhất quán | Không tuân thủ shot list chi tiết | Thiếu attention to detail |
+
+*Nguồn: File "[Video] Feedback AI.xlsx"*
+
+#### 1.2.2. Phân loại nguyên nhân gốc
+
+| Nguyên nhân gốc | Số lượng | Tỷ lệ trong nhóm | Ví dụ |
+|-----------------|----------|------------------|-------|
+| Thiếu thông tin context (địa phương, văn hóa) | 1 | 12.5% | TADEC31004 - không có tuyết |
+| Thiếu kiến thức ngôn ngữ (hiểu sai brief tiếng Anh) | 1 | 12.5% | HTJAN15008Rev - preparing = cần người |
+| Thiếu phân tích input kỹ lưỡng | 1 | 12.5% | DUJAN04005 - không thấy vị trí đài phun |
+| Thiếu checklist xác nhận đầy đủ yêu cầu | 2 | 25% | QUJAN25001, QUJAN19003 |
+| Thiếu kiến thức chuyên môn (domain knowledge) | 1 | 12.5% | LIJAN07001 - luật cờ vua |
+| Vượt quá khả năng AI hiện tại | 1 | 12.5% | LIDEC10001 - physics phức tạp |
+| Thiếu attention to detail | 1 | 12.5% | CAJAN21001rev7 - hướng transition |
+
+### 1.3. Phân tích chi tiết NHÓM B: Chất lượng AI output (26%)
+
+#### 1.3.1. Bảng phân tích lỗi chất lượng
+
+| Job Code | Lỗi cụ thể | Mức độ nghiêm trọng | Nguyên nhân kỹ thuật | Có thể phòng tránh? |
+|----------|------------|---------------------|---------------------|---------------------|
+| THJAN20030Rev | Video như ảnh tĩnh + zoom | Cao | AI không tạo được motion thực sự | Có - chọn tool khác hoặc báo trước limitation |
+| CHDEC11004 | Agent đóng băng, clip vỡ | Cao | Chất lượng generation thấp | Có - QC trước khi gửi |
+| HTJAN07002rev2 | Mặt người biến dạng | Rất cao | AI hallucination về khuôn mặt | Có - QC checklist mặt người |
+| MNJAN2001 | Người fake + logo Gemini lộ | Rất cao | Không xóa watermark, AI generation kém | Có - QC watermark + quality |
+| CHJAN24002 | Viền cắt trắng quanh agent | Trung bình | Composite không tốt (Edit làm, không phải AI) | Có - Kỹ thuật composite tốt hơn |
+| NHJAN13010 | Đàn ông mặc bikini | Trung bình | Prompt không chính xác về trang phục | Có - Prompt chi tiết hơn |
+
+*Nguồn: File "[Video] Feedback AI.xlsx"*
+
+#### 1.3.2. Phân loại lỗi chất lượng theo khả năng phòng tránh
+
+| Loại lỗi | Số lượng | Có thể phòng tránh bằng QC? | Có thể phòng tránh bằng Prompt? |
+|----------|----------|----------------------------|--------------------------------|
+| Mặt/cơ thể biến dạng | 2 | Có | Có (thêm negative prompt) |
+| Watermark/Logo lọt | 1 | Có | Không |
+| Chất lượng video thấp (tĩnh, vỡ) | 2 | Có | Có (chọn tool phù hợp) |
+| Composite kém (viền cắt) | 1 | Có | Không (lỗi kỹ thuật edit) |
+| Trang phục sai | 1 | Có | Có (mô tả chi tiết) |
+
+### 1.4. Phân tích chi tiết NHÓM C: Trễ deadline (22%)
+
+#### 1.4.1. Bảng phân tích thời gian
+
+| Job Code | Số effect | Deadline | Thực tế giao | Trễ | Nguyên nhân ghi nhận |
+|----------|-----------|----------|--------------|-----|----------------------|
+| HTJAN22005 | 15 effects | Không rõ | Chỉ làm được 9 | 9 tiếng | Capacity không đủ cho 15 effects |
+| QUJAN21008 | Không rõ | 2 tiếng | 2h14p (AI) | 5 tiếng | "trễ là do edit" - không phải AI |
+| HTJAN07002rev2 | Không rõ | Không rõ | Không rõ | 4 tiếng | Có phản hồi và xử lý khi nhận thông tin |
+| HTJAN26003 | 12 scenes | Không rõ | Không rõ | 3 tiếng | "Edit tự làm AI" |
+| QUJAN19003Rev2 | 2 effects | 5h | 10h đêm | 5+ tiếng | Làm lại làm hỏng phần đã đẹp |
+
+*Nguồn: File "[Video] Feedback AI.xlsx"*
+
+#### 1.4.2. Phân tích nguyên nhân trễ
+
+| Nguyên nhân | Số lượng | Tỷ lệ | Ghi chú |
+|-------------|----------|-------|---------|
+| Capacity không đủ (quá nhiều effects) | 1 | 20% | HTJAN22005: 15 effects, chỉ làm được 9 |
+| Trễ từ khâu Edit, không phải AI | 2 | 40% | QUJAN21008, HTJAN26003 |
+| Làm lại gây thêm lỗi mới | 1 | 20% | QUJAN19003Rev2 |
+| Quy trình phản hồi chậm | 1 | 20% | HTJAN07002rev2 |
+
+### 1.5. Phân tích chi tiết NHÓM D: Vật lý/Logic sai (17%)
+
+#### 1.5.1. Bảng phân tích lỗi logic
+
+| Job Code | Yêu cầu | Kết quả | Lỗi logic | Nguyên nhân |
+|----------|---------|---------|-----------|-------------|
+| TLNOV14022rev4 | Tuần lộc bay cùng đàn | 1 con tách ra đứng sau xe | Chuyển động không tự nhiên theo đàn | AI không hiểu group dynamics |
+| QUJAN16003 | Agent ngã xuống bể bơi nước tung tóe | "trông vô duyên" | Hành động không tự nhiên | AI không capture được motion tự nhiên |
+| MNJAN2001 | Cặp đôi sinh hoạt bình thường trong bếp | "look like going to bedroom" | Hành vi gợi ý không phù hợp | AI tạo interaction không phù hợp context |
+| LIJAN07001 | Quân cờ di chuyển theo luật | Quân cờ nhảy đánh nhau | Hoàn toàn sai logic cờ vua | AI không hiểu rules-based movement |
+
+*Nguồn: File "[Video] Feedback AI.xlsx"*
+
+#### 1.5.2. Phân loại khả năng của AI với các yêu cầu logic
+
+| Loại yêu cầu | Khả năng AI hiện tại | Ví dụ |
+|--------------|---------------------|-------|
+| Group dynamics (chuyển động nhóm) | Thấp | Tuần lộc tách đàn |
+| Natural human motion (chuyển động tự nhiên) | Trung bình | Agent ngã "vô duyên" |
+| Appropriate behavior (hành vi phù hợp) | Thấp | Cặp đôi bếp |
+| Rules-based movement (chuyển động theo quy tắc) | Rất thấp | Quân cờ |
+
+### 1.6. Phân tích theo loại AI Effect
+
+#### 1.6.1. Thống kê tỷ lệ lỗi theo loại effect
+
+| Loại Effect | Tổng cases | Cases lỗi | Tỷ lệ lỗi | Xếp hạng rủi ro |
+|-------------|------------|-----------|-----------|-----------------|
+| Object Animation (quân cờ, xe, nước) | 3 | 3 | 100% | Rất cao |
+| Creative/Fantasy (Santa, tuần lộc, hộp quà) | 2 | 2 | 100% | Rất cao |
+| Agent Composite (ghép agent vào cảnh) | 2 | 2 | 100% | Rất cao |
+| Lifestyle/Người (gia đình, nấu ăn...) | 7 | 5 | 71% | Cao |
+| Season/Weather (đổi mùa, thời tiết) | 3 | 2 | 67% | Cao |
+| Day-to-Night (ngày sang đêm) | 3 | 1 | 33% | Trung bình |
+| Furniture Staging (nội thất pop-in) | 3 | 1 | 33% | Trung bình |
+
+*Nguồn: Phân tích từ File "[Video] Feedback AI.xlsx"*
+
+#### 1.6.2. Ma trận rủi ro theo loại effect
+
+```
+                    TỶ LỆ LỖI CAO
+                         │
+    ┌────────────────────┼────────────────────┐
+    │                    │                    │
+    │  • Lifestyle (7)   │  • Object Anim (3) │
+    │  • Season (3)      │  • Creative (2)    │
+    │                    │  • Agent Comp (2)  │
+    │                    │                    │
+    │   SỐ LƯỢNG ÍT      │   SỐ LƯỢNG ÍT     │
+    │   RỦI RO CAO       │   RỦI RO RẤT CAO  │
+    │                    │                    │
+────┼────────────────────┼────────────────────┼────
+    │                    │                    │
+    │                    │                    │
+    │                    │  • Day-Night (3)   │
+    │                    │  • Furniture (3)   │
+    │                    │                    │
+    │   CHƯA CÓ DATA     │   RỦI RO THẤP     │
+    │                    │   ỔN ĐỊNH          │
+    │                    │                    │
+    └────────────────────┼────────────────────┘
+                         │
+                    TỶ LỆ LỖI THẤP
+         SỐ LƯỢNG ÍT ──────── SỐ LƯỢNG NHIỀU
+```
+
+---
+
+## PHẦN 2: XÁC ĐỊNH VẤN ĐỀ CỐT LÕI
+
+### 2.1. Sơ đồ nguyên nhân - kết quả (Fishbone)
+
+```
+                                         ┌──────────────────┐
+                                         │   OUTPUT KHÔNG   │
+                                         │   ĐẠT YÊU CẦU    │
+                                         └────────┬─────────┘
+                                                  │
+         ┌────────────────┬───────────────────────┼───────────────────┬────────────────┐
+         │                │                       │                   │                │
+    ┌────▼────┐      ┌────▼────┐           ┌──────▼──────┐      ┌─────▼─────┐    ┌─────▼─────┐
+    │  CON    │      │   QUY   │           │   CÔNG CỤ   │      │   INPUT   │    │  OUTPUT   │
+    │  NGƯỜI  │      │  TRÌNH  │           │     AI      │      │   BRIEF   │    │    QC     │
+    └────┬────┘      └────┬────┘           └──────┬──────┘      └─────┬─────┘    └─────┬─────┘
+         │                │                       │                   │                │
+    • Hiểu sai       • Không có            • AI hallucinate      • Brief           • Không có
+      tiếng Anh        confirm               (ảo giác)            không rõ          checklist
+    • Thiếu            trước khi           • Giới hạn            • Thiếu           • Bỏ qua
+      domain           làm                   physics              context            review
+      knowledge      • Không có            • Watermark          • Thiếu           • Không
+    • Thiếu            estimate              lọt                  sample             detect
+      attention        thời gian          • Chất lượng            reference          lỗi cơ bản
+                     • Handoff gap           không ổn
+                       AI ↔ Edit             định
+```
+
+### 2.2. Năm vấn đề cốt lõi
+
+| STT | Vấn đề cốt lõi | Mô tả | Tác động | Mức độ ưu tiên |
+|-----|----------------|-------|----------|----------------|
+| 1 | Thiếu quy trình xác nhận brief | Không có bước confirm lại yêu cầu với Sale/Khách trước khi làm | 35% jobs hiểu sai | Cao nhất |
+| 2 | Thiếu QC checklist chuẩn hóa | Không có checklist kiểm tra output trước khi gửi | 26% jobs lỗi chất lượng | Cao |
+| 3 | Thiếu đánh giá khả năng AI | Nhận jobs vượt quá khả năng AI hiện tại | 17% jobs logic sai | Cao |
+| 4 | Thiếu ước lượng thời gian chuẩn | Không có baseline thời gian cho từng loại effect | 22% jobs trễ deadline | Trung bình |
+| 5 | Thiếu Prompt Library chuẩn hóa | Mỗi người viết prompt khác nhau, không có best practices | Chất lượng không nhất quán | Trung bình |
+
+### 2.3. Phân tích khoảng cách (Gap Analysis)
+
+| Khía cạnh | Hiện trạng | Mong muốn | Khoảng cách |
+|-----------|------------|-----------|-------------|
+| **Tỷ lệ hiểu đúng brief** | ~65% (15/23) | 95% | -30% |
+| **Tỷ lệ output đạt QC lần 1** | ~50% (ước tính) | 85% | -35% |
+| **Tỷ lệ giao đúng deadline** | ~78% (18/23) | 95% | -17% |
+| **Prompt Library** | Không có | 20+ templates chuẩn | -100% |
+| **QC Checklist** | Không có | Có và áp dụng 100% | -100% |
+| **Brief Confirmation** | Không có | Có và áp dụng 100% | -100% |
+| **Estimate thời gian chuẩn** | Không có | Có cho từng loại effect | -100% |
+
+---
+
+## PHẦN 3: HƯỚNG CẢI TIẾN
+
+### 3.1. Cải tiến cho vấn đề 1: Thiếu quy trình xác nhận brief
+
+#### 3.1.1. Giải pháp: Brief Confirmation Process
+
+**Mô tả:** Thêm bước bắt buộc xác nhận lại yêu cầu trước khi bắt đầu làm
+
+**Quy trình đề xuất:**
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│              QUY TRÌNH XÁC NHẬN BRIEF                          │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  BƯỚC 1: NHẬN BRIEF                                            │
+│  ├── Đọc toàn bộ yêu cầu gốc                                  │
+│  └── Xem sample reference (nếu có)                            │
+│                                                                 │
+│  BƯỚC 2: VIẾT LẠI YÊU CẦU (Rewrite)                           │
+│  ├── Viết lại bằng tiếng Việt từng điểm                       │
+│  ├── Liệt kê: Số lượng effect, loại effect, đối tượng        │
+│  └── Ghi chú các điểm cần clarify                             │
+│                                                                 │
+│  BƯỚC 3: KIỂM TRA CONTEXT                                      │
+│  ├── Địa phương có tuyết không? Mùa nào?                      │
+│  ├── Động từ trong brief có cần người thực hiện không?        │
+│  └── Physics có hợp lý không?                                 │
+│                                                                 │
+│  BƯỚC 4: XÁC NHẬN                                              │
+│  ├── Nếu rõ ràng → Bắt đầu làm                               │
+│  └── Nếu không rõ → Hỏi Sale trước khi làm                   │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+#### 3.1.2. Checklist xác nhận brief
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│              BRIEF CONFIRMATION CHECKLIST                       │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  JOB CODE: ________________    NGÀY: ________________          │
+│                                                                 │
+│  □ Đã đọc toàn bộ yêu cầu gốc                                 │
+│  □ Đã xem sample reference (nếu có)                           │
+│  □ Đã viết lại yêu cầu bằng tiếng Việt                        │
+│                                                                 │
+│  KIỂM TRA SỐ LƯỢNG:                                            │
+│  □ Số effect yêu cầu: _______                                 │
+│  □ Loại effect: _______                                       │
+│  □ Đã liệt kê đầy đủ từng effect                              │
+│                                                                 │
+│  KIỂM TRA CONTEXT:                                             │
+│  □ Có yêu cầu liên quan đến thời tiết/mùa? → Check địa phương │
+│  □ Có động từ hành động? → Xác nhận cần người hay không       │
+│  □ Có yêu cầu physics phức tạp? → Đánh giá khả năng AI        │
+│                                                                 │
+│  KIỂM TRA INPUT:                                               │
+│  □ Đã download và xem kỹ input                                │
+│  □ Input có đủ chất lượng để làm effect yêu cầu?              │
+│  □ Có cần hỏi thêm thông tin từ khách?                        │
+│                                                                 │
+│  KẾT LUẬN:                                                     │
+│  □ ĐỦ THÔNG TIN → Bắt đầu làm                                │
+│  □ CẦN CLARIFY → Hỏi Sale trước (ghi rõ câu hỏi)             │
+│                                                                 │
+│  Câu hỏi cần clarify (nếu có):                                │
+│  ___________________________________________________________   │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+#### 3.1.3. Bảng từ khóa cần chú ý trong brief tiếng Anh
+
+| Từ khóa | Ý nghĩa | Lưu ý |
+|---------|---------|-------|
+| preparing, cooking, making | Đang chuẩn bị/làm | CẦN CÓ NGƯỜI thực hiện hành động |
+| watching, reading, playing | Đang xem/đọc/chơi | CẦN CÓ NGƯỜI thực hiện hành động |
+| current condition | Hiện trạng | KHÔNG thay đổi thời tiết/mùa nếu không yêu cầu |
+| we don't get snow here | Không có tuyết | KHÔNG thêm tuyết |
+| from A to B | Từ A sang B | Bắt đầu từ A, kết thúc ở B |
+| realistic, natural | Thực tế, tự nhiên | Yêu cầu chất lượng cao |
+| one at a time | Từng cái một | KHÔNG làm đồng thời |
+
+### 3.2. Cải tiến cho vấn đề 2: Thiếu QC checklist chuẩn hóa
+
+#### 3.2.1. Giải pháp: QC Checklist theo cấp độ
+
+**Cấp độ 1: QC Cơ bản (Bắt buộc cho TẤT CẢ output)**
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│              QC CHECKLIST CẤP ĐỘ 1 - CƠ BẢN                    │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  KIỂM TRA KỸ THUẬT (Technical)                                 │
+│  □ Độ phân giải đúng yêu cầu (1080p / 4K)                     │
+│  □ Không có artifacts rõ ràng (nhiễu, vỡ hình, glitch)        │
+│  □ Không có watermark/logo công cụ AI (Gemini, Kling, Runway) │
+│  □ Duration đủ dài theo yêu cầu                               │
+│  □ Không bị cắt xén bất thường                                │
+│                                                                 │
+│  KIỂM TRA ĐỐI CHIẾU BRIEF (Brief Matching)                    │
+│  □ Đúng loại effect yêu cầu                                   │
+│  □ Đủ số lượng effect yêu cầu                                 │
+│  □ Đúng đối tượng/vật thể yêu cầu                            │
+│  □ Đúng hành động/chuyển động yêu cầu                        │
+│                                                                 │
+│  KẾT QUẢ: □ ĐẠT    □ KHÔNG ĐẠT                               │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**Cấp độ 2: QC Nâng cao (Cho output có NGƯỜI)**
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│              QC CHECKLIST CẤP ĐỘ 2 - CÓ NGƯỜI                  │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  (Bao gồm tất cả mục từ Cấp độ 1)                             │
+│                                                                 │
+│  KIỂM TRA NGƯỜI/NHÂN VẬT (Human)                              │
+│  □ Mặt không bị biến dạng (méo, nhòe, thiếu chi tiết)        │
+│  □ Đủ số ngón tay (5 ngón mỗi bàn tay)                       │
+│  □ Tỷ lệ cơ thể tự nhiên (đầu, tay, chân)                    │
+│  □ Trang phục phù hợp với yêu cầu và context                 │
+│  □ Hành vi/cử chỉ phù hợp ngữ cảnh (không gợi ý không phù hợp)│
+│                                                                 │
+│  KIỂM TRA LIP-SYNC (nếu có lời nói)                           │
+│  □ Miệng chuyển động khớp với âm thanh                        │
+│  □ Biểu cảm phù hợp với nội dung nói                         │
+│                                                                 │
+│  KẾT QUẢ: □ ĐẠT    □ KHÔNG ĐẠT                               │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**Cấp độ 3: QC Đặc biệt (Cho output có CHUYỂN ĐỘNG PHỨC TẠP)**
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│              QC CHECKLIST CẤP ĐỘ 3 - CHUYỂN ĐỘNG              │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  (Bao gồm tất cả mục từ Cấp độ 1 và 2 nếu có người)          │
+│                                                                 │
+│  KIỂM TRA VẬT LÝ/LOGIC (Physics/Logic)                        │
+│  □ Chuyển động hợp lý (không bay, không xuyên tường)         │
+│  □ Hướng di chuyển đúng yêu cầu                              │
+│  □ Tốc độ chuyển động tự nhiên                               │
+│  □ Hiệu ứng đúng vị trí (nước từ vòi, lửa từ bếp...)        │
+│  □ Vật thể không biến mất/xuất hiện bất thường               │
+│                                                                 │
+│  KIỂM TRA BỐI CẢNH (Background)                               │
+│  □ Background giữ nguyên (nếu yêu cầu)                       │
+│  □ Ánh sáng nhất quán xuyên suốt video                       │
+│  □ Perspective (phối cảnh) đúng                              │
+│  □ Không có morphing (biến dạng) background                  │
+│                                                                 │
+│  KẾT QUẢ: □ ĐẠT    □ KHÔNG ĐẠT                               │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### 3.3. Cải tiến cho vấn đề 3: Thiếu đánh giá khả năng AI
+
+#### 3.3.1. Giải pháp: Bảng phân loại khả năng AI
+
+**Bảng xếp hạng khả năng AI theo loại effect:**
+
+| Loại Effect | Khả năng AI | Tỷ lệ thành công* | Nên nhận? | Lưu ý |
+|-------------|-------------|-------------------|-----------|-------|
+| Day-to-Night | Cao | 67% | Có | Cần 2 footage cùng góc |
+| Furniture Animation | Cao | 67% | Có | Pop-in, slide-in effects |
+| Sky Replacement | Cao | Ước tính >70% | Có | Cần check footage trước |
+| Season Change | Trung bình | 33% | Có, cẩn thận | Check context địa phương |
+| Lifestyle (1-2 người, đơn giản) | Trung bình | ~50% | Có, cẩn thận | QC kỹ mặt và hành vi |
+| Lifestyle (nhiều người, phức tạp) | Thấp | <30% | Cân nhắc | Báo trước limitation |
+| Agent Composite | Thấp | 0% | Cân nhắc | Cần kỹ thuật composite tốt |
+| Creative/Fantasy | Thấp | 0% | Cân nhắc | Unpredictable, nhiều lần thử |
+| Object Animation (theo quy tắc) | Rất thấp | 0% | Không nên | AI không hiểu rules |
+| Physics phức tạp | Rất thấp | 0% | Không nên | Vượt quá khả năng AI |
+
+*Tỷ lệ thành công dựa trên dữ liệu 23 job feedback*
+
+#### 3.3.2. Quy trình đánh giá trước khi nhận job AI Effect
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│              QUY TRÌNH ĐÁNH GIÁ KHẢ NĂNG AI                    │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  BƯỚC 1: XÁC ĐỊNH LOẠI EFFECT                                  │
+│  ├── Phân loại effect theo bảng xếp hạng                      │
+│  └── Xác định mức độ phức tạp                                 │
+│                                                                 │
+│  BƯỚC 2: ĐÁNH GIÁ KHẢ NĂNG                                    │
+│  ├── Khả năng CAO → Nhận và làm bình thường                   │
+│  ├── Khả năng TRUNG BÌNH → Nhận nhưng cần lưu ý              │
+│  ├── Khả năng THẤP → Cân nhắc, báo trước limitation          │
+│  └── Khả năng RẤT THẤP → Không nên nhận hoặc từ chối         │
+│                                                                 │
+│  BƯỚC 3: THÔNG BÁO (nếu cần)                                  │
+│  ├── Với khả năng TRUNG BÌNH trở xuống:                       │
+│  │   → Thông báo Sale về limitation                           │
+│  │   → Đề xuất alternative nếu có                             │
+│  └── Với khả năng RẤT THẤP:                                   │
+│      → Đề xuất từ chối hoặc disclaimer rõ ràng               │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### 3.4. Cải tiến cho vấn đề 4: Thiếu ước lượng thời gian
+
+#### 3.4.1. Giải pháp: Bảng ước lượng thời gian chuẩn
+
+| Loại Effect | Độ phức tạp | Thời gian cơ bản | Số lần generate | Thời gian tổng ước tính |
+|-------------|-------------|------------------|-----------------|------------------------|
+| Day-to-Night (1 cảnh) | Thấp | 30 phút | 2-3 lần | 1-1.5 giờ |
+| Sky Replacement | Thấp | 30 phút | 2-3 lần | 1-1.5 giờ |
+| Furniture Pop-in (1 phòng) | Trung bình | 45 phút | 3-4 lần | 1.5-2 giờ |
+| Season Change (1 cảnh) | Trung bình | 45 phút | 3-5 lần | 2-2.5 giờ |
+| Lifestyle đơn giản (1-2 người) | Trung bình-Cao | 1 giờ | 4-6 lần | 2-3 giờ |
+| Agent Composite | Cao | 1.5 giờ | 5-8 lần | 3-4 giờ |
+| Lifestyle phức tạp (3+ người) | Cao | 2 giờ | 6-10 lần | 4-5 giờ |
+| Creative/Fantasy | Rất cao | 2+ giờ | 10+ lần | 5+ giờ |
+
+**Công thức ước tính tổng thời gian:**
+```
+Thời gian tổng = (Số effect × Thời gian/effect) + Buffer 20%
+```
+
+**Ví dụ: Job HTJAN22005 với 15 effects lifestyle:**
+```
+15 effects × 2.5 giờ/effect = 37.5 giờ
++ Buffer 20% = 45 giờ
+→ Cần ít nhất 5-6 ngày làm việc (8 giờ/ngày)
+```
+
+### 3.5. Cải tiến cho vấn đề 5: Thiếu Prompt Library
+
+#### 3.5.1. Giải pháp: Cấu trúc Prompt Library
+
+**Cấu trúc Prompt chuẩn:**
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│              CẤU TRÚC PROMPT CHUẨN                             │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  [1. CHỦ THỂ - SUBJECT]                                        │
+│      Ai/Cái gì là trung tâm của video                         │
+│      Ví dụ: "A professional real estate agent"                │
+│                                                                 │
+│  [2. HÀNH ĐỘNG - ACTION]                                       │
+│      Đang làm gì, chuyển động thế nào                         │
+│      Ví dụ: "walking slowly through the room"                 │
+│                                                                 │
+│  [3. BỐI CẢNH - SETTING]                                       │
+│      Ở đâu, không gian như thế nào                            │
+│      Ví dụ: "in a modern luxury living room"                  │
+│                                                                 │
+│  [4. GÓC MÁY - CAMERA]                                         │
+│      Góc quay, chuyển động camera                             │
+│      Ví dụ: "medium shot, slight dolly forward"               │
+│                                                                 │
+│  [5. ÁNH SÁNG - LIGHTING]                                      │
+│      Ánh sáng, thời điểm trong ngày                           │
+│      Ví dụ: "warm afternoon sunlight through windows"         │
+│                                                                 │
+│  [6. PHONG CÁCH - STYLE]                                       │
+│      Phong cách, chất lượng mong muốn                         │
+│      Ví dụ: "cinematic, photorealistic, 4K quality"           │
+│                                                                 │
+│  [7. NEGATIVE PROMPT]                                          │
+│      Những gì KHÔNG muốn xuất hiện                            │
+│      Ví dụ: "distorted face, extra limbs, blurry, cartoon"   │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+#### 3.5.2. Ví dụ Prompt Template cho từng loại effect
+
+**Template: Day-to-Night Transition**
+
+```
+PROMPT:
+A [PROPERTY TYPE] house exterior transitioning from bright daylight 
+to warm evening twilight, [TIME DURATION] timelapse effect, 
+lights gradually turning on inside windows, 
+sky changing from blue to orange sunset colors,
+static camera, wide establishing shot,
+smooth natural transition, cinematic real estate video style,
+photorealistic, 4K quality
+
+NEGATIVE PROMPT:
+abrupt changes, flickering lights, unnatural colors, 
+people appearing/disappearing, cars moving
+
+VARIABLES:
+- PROPERTY TYPE: modern/traditional/luxury/suburban
+- TIME DURATION: gradual/quick
+
+TOOL PHIÊN HỢP: Veo, Runway Gen-3
+TỶ LỆ THÀNH CÔNG: 67%
+```
+
+**Template: Lifestyle - Đơn giản (1-2 người)**
+
+```
+PROMPT:
+[NUMBER] [PEOPLE DESCRIPTION] [ACTION] in [ROOM TYPE],
+natural candid moment, [LIGHTING CONDITION],
+[SHOT TYPE] with subtle [CAMERA MOVEMENT],
+warm inviting atmosphere, lifestyle advertisement aesthetic,
+photorealistic, soft natural lighting, 4K quality
+
+NEGATIVE PROMPT:
+distorted faces, extra limbs, unnatural poses, 
+awkward body proportions, inappropriate behavior,
+empty room, cartoon style
+
+VARIABLES:
+- NUMBER: one person/a couple/two friends
+- PEOPLE DESCRIPTION: young professional/middle-aged couple/family
+- ACTION: relaxing on sofa/reading by window/having coffee
+- ROOM TYPE: living room/kitchen/bedroom
+- LIGHTING CONDITION: warm afternoon light/soft morning light
+- SHOT TYPE: medium shot/wide shot
+- CAMERA MOVEMENT: static/slow pan
+
+TOOL PHÙ HỢP: Kling (nếu có lip-sync), Veo (nếu không có)
+TỶ LỆ THÀNH CÔNG: ~50%
+```
+
+**Template: Furniture Pop-in**
+
+```
+PROMPT:
+Empty [ROOM TYPE] with [STYLE] interior design,
+furniture pieces smoothly appearing/sliding into place,
+[FURNITURE LIST] materializing one by one,
+magical staging effect, clean modern aesthetic,
+static camera, wide interior shot,
+smooth animation, professional real estate video,
+photorealistic, 4K quality
+
+NEGATIVE PROMPT:
+abrupt appearance, glitchy animation, 
+furniture floating, wrong proportions,
+people, pets, movement outside furniture
+
+VARIABLES:
+- ROOM TYPE: living room/bedroom/dining room
+- STYLE: modern/traditional/luxury/minimalist
+- FURNITURE LIST: sofa and coffee table/bed and nightstands/dining set
+
+TOOL PHÙ HỢP: Runway, Pika
+TỶ LỆ THÀNH CÔNG: 67%
+```
+
+---
+
+## PHẦN 4: PHƯƠNG PHÁP CHỨNG MINH HIỆU QUẢ CẢI TIẾN
+
+### 4.1. Metrics đo lường trước và sau cải tiến
+
+| Metric | Cách đo | Baseline (Trước) | Mục tiêu (Sau) |
+|--------|---------|------------------|----------------|
+| Tỷ lệ hiểu đúng brief | Jobs không cần clarify / Tổng jobs | 65% (15/23) | 90% |
+| Tỷ lệ output đạt QC lần 1 | Jobs pass QC lần 1 / Tổng jobs | ~50% (ước tính) | 80% |
+| Tỷ lệ giao đúng deadline | Jobs đúng hạn / Tổng jobs | 78% (18/23) | 95% |
+| Tỷ lệ lỗi mặt/cơ thể | Jobs lỗi / Tổng jobs có người | 29% (2/7) | <10% |
+| Tỷ lệ lỗi watermark | Jobs lỗi / Tổng jobs | 4% (1/23) | 0% |
+| Số lần revision trung bình | Tổng revisions / Tổng jobs | Chưa có data | <1.5 lần |
+
+### 4.2. Phương pháp A/B Testing
+
+**Quy trình A/B Test cho Prompt:**
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│              QUY TRÌNH A/B TEST PROMPT                         │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  BƯỚC 1: CHUẨN BỊ                                              │
+│  ├── Chọn job có feedback lỗi                                 │
+│  ├── Thu thập prompt gốc (nếu có)                             │
+│  └── Chuẩn bị prompt cải tiến                                 │
+│                                                                 │
+│  BƯỚC 2: CHẠY TEST                                             │
+│  ├── Chạy prompt gốc (Version A) - 3 lần                      │
+│  ├── Chạy prompt cải tiến (Version B) - 3 lần                 │
+│  └── Ghi nhận thời gian và kết quả mỗi lần                    │
+│                                                                 │
+│  BƯỚC 3: ĐÁNH GIÁ                                              │
+│  ├── Chạy QC Checklist cho tất cả output                      │
+│  ├── Đếm số output ĐẠT mỗi version                            │
+│  └── So sánh thời gian trung bình                             │
+│                                                                 │
+│  BƯỚC 4: KẾT LUẬN                                              │
+│  ├── Version nào có tỷ lệ ĐẠT cao hơn?                        │
+│  ├── Version nào nhanh hơn?                                   │
+│  └── Kết luận: Prompt cải tiến tốt hơn/không tốt hơn          │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### 4.3. Bảng báo cáo kết quả A/B Test
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│              BÁO CÁO A/B TEST PROMPT                           │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  JOB THAM CHIẾU: ________________                              │
+│  LOẠI EFFECT: ________________                                 │
+│  NGÀY TEST: ________________                                   │
+│                                                                 │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │              VERSION A (GỐC)                            │   │
+│  ├─────────────────────────────────────────────────────────┤   │
+│  │  Prompt: [Copy prompt gốc]                              │   │
+│  │  Số lần chạy: 3                                         │   │
+│  │  Số output ĐẠT QC: ___/3                                │   │
+│  │  Thời gian TB: ___ phút                                 │   │
+│  │  Lỗi gặp phải: ________________                         │   │
+│  └─────────────────────────────────────────────────────────┘   │
+│                                                                 │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │              VERSION B (CẢI TIẾN)                       │   │
+│  ├─────────────────────────────────────────────────────────┤   │
+│  │  Prompt: [Copy prompt cải tiến]                         │   │
+│  │  Số lần chạy: 3                                         │   │
+│  │  Số output ĐẠT QC: ___/3                                │   │
+│  │  Thời gian TB: ___ phút                                 │   │
+│  │  Lỗi gặp phải: ________________                         │   │
+│  └─────────────────────────────────────────────────────────┘   │
+│                                                                 │
+│  KẾT LUẬN:                                                     │
+│  □ Version B tốt hơn (tỷ lệ ĐẠT cao hơn và/hoặc nhanh hơn)   │
+│  □ Version A tốt hơn hoặc tương đương                         │
+│                                                                 │
+│  ĐỀ XUẤT: □ Áp dụng Version B    □ Giữ nguyên Version A      │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### 4.4. Dashboard theo dõi cải tiến
+
+| Tuần | Jobs thực hiện | Tỷ lệ hiểu đúng brief | Tỷ lệ pass QC lần 1 | Tỷ lệ đúng deadline | Ghi chú |
+|------|----------------|----------------------|---------------------|---------------------|---------|
+| Baseline | 23 | 65% | ~50% | 78% | Từ feedback |
+| Tuần 1 | - | - | - | - | - |
+| Tuần 2 | - | - | - | - | - |
+| ... | - | - | - | - | - |
+
+---
+
+# KẾT QUẢ 2: TỔ CHỨC LẠI CÁCH LÀM VIỆC
+
+---
+
+## PHẦN 5: CẤU TRÚC TỔ CHỨC KIẾN THỨC
+
+### 5.1. Hệ thống Knowledge Base
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│              CẤU TRÚC KNOWLEDGE BASE                           │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  KNOWLEDGE_BASE/                                               │
+│  │                                                             │
+│  ├── 01_PROMPT_LIBRARY/                                        │
+│  │   ├── day_to_night/                                        │
+│  │   │   ├── template_basic.md                                │
+│  │   │   ├── template_advanced.md                             │
+│  │   │   └── examples/                                        │
+│  │   ├── lifestyle/                                           │
+│  │   │   ├── single_person.md                                 │
+│  │   │   ├── couple.md                                        │
+│  │   │   ├── family.md                                        │
+│  │   │   └── examples/                                        │
+│  │   ├── furniture_animation/                                 │
+│  │   ├── season_change/                                       │
+│  │   ├── agent_composite/                                     │
+│  │   └── GUIDELINES.md                                        │
+│  │                                                             │
+│  ├── 02_QC_CHECKLISTS/                                        │
+│  │   ├── level_1_basic.md                                     │
+│  │   ├── level_2_human.md                                     │
+│  │   ├── level_3_motion.md                                    │
+│  │   └── quick_reference.md                                   │
+│  │                                                             │
+│  ├── 03_WORKFLOWS/                                            │
+│  │   ├── brief_confirmation.md                                │
+│  │   ├── ai_generation.md                                     │
+│  │   ├── qc_process.md                                        │
+│  │   └── handoff_to_edit.md                                   │
+│  │                                                             │
+│  ├── 04_TOOL_GUIDES/                                          │
+│  │   ├── kling_ai.md                                          │
+│  │   ├── veo.md                                               │
+│  │   ├── runway_gen3.md                                       │
+│  │   └── comparison_matrix.md                                 │
+│  │                                                             │
+│  ├── 05_CASE_STUDIES/                                         │
+│  │   ├── successful/                                          │
+│  │   ├── failed_and_lessons/                                  │
+│  │   └── ab_test_results/                                     │
+│  │                                                             │
+│  └── 06_TRAINING/                                             │
+│      ├── onboarding.md                                        │
+│      ├── common_mistakes.md                                   │
+│      └── best_practices.md                                    │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### 5.2. Tiêu chuẩn tài liệu
+
+**Template cho mỗi Prompt trong Library:**
+
+```markdown
+# [TÊN PROMPT TEMPLATE]
+
+## Thông tin cơ bản
+| Thuộc tính | Giá trị |
+|------------|---------|
+| Loại Effect | [Day-to-Night / Lifestyle / ...] |
+| Công cụ phù hợp | [Kling / Veo / Runway] |
+| Độ khó | [Thấp / Trung bình / Cao] |
+| Tỷ lệ thành công | [X%] (dựa trên Y lần test) |
+| Thời gian ước tính | [X phút/effect] |
+
+## Prompt Master
+```
+[PROMPT CHÍNH - Copy và dùng được ngay]
+```
+
+## Negative Prompt
+```
+[NEGATIVE PROMPT]
+```
+
+## Hướng dẫn sử dụng
+1. [Bước 1]
+2. [Bước 2]
+3. [Bước 3]
+
+## Biến thể (Variations)
+### Variation 1: [Mô tả]
+```
+[Prompt variation]
+```
+
+## Lưu ý quan trọng
+- [Lưu ý 1]
+- [Lưu ý 2]
+
+## Ví dụ output
+- Link: [Link sample output]
+- Job tham chiếu: [Job code nếu có]
+
+## Lịch sử cập nhật
+| Ngày | Thay đổi | Người cập nhật |
+|------|----------|----------------|
+| [Date] | Tạo mới | [Name] |
+```
+
+---
+
+## PHẦN 6: QUY TRÌNH LÀM VIỆC MỚI
+
+### 6.1. Quy trình tổng thể
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│              QUY TRÌNH LÀM VIỆC MỚI - AI VIDEO                 │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  ┌─────────┐    ┌─────────┐    ┌─────────┐    ┌─────────┐     │
+│  │  NHẬN   │───▶│  XÁC    │───▶│   SẢN   │───▶│   QC    │     │
+│  │  BRIEF  │    │  NHẬN   │    │  XUẤT   │    │         │     │
+│  └─────────┘    └─────────┘    └─────────┘    └─────────┘     │
+│       │              │              │              │           │
+│       ▼              ▼              ▼              ▼           │
+│  ┌─────────┐    ┌─────────┐    ┌─────────┐    ┌─────────┐     │
+│  │ Đọc kỹ  │    │ Brief   │    │ Chọn    │    │ Chạy    │     │
+│  │ yêu cầu │    │ Confirm │    │ Prompt  │    │ QC      │     │
+│  │         │    │ Check-  │    │ từ      │    │ Check-  │     │
+│  │ Xem     │    │ list    │    │ Library │    │ list    │     │
+│  │ sample  │    │         │    │         │    │         │     │
+│  │         │    │ Đánh    │    │ Generate│    │ Nếu     │     │
+│  │ Download│    │ giá     │    │ 3-5     │    │ KHÔNG   │     │
+│  │ input   │    │ khả     │    │ takes   │    │ ĐẠT →   │     │
+│  │         │    │ năng AI │    │         │    │ quay    │     │
+│  │         │    │         │    │ Chọn    │    │ lại     │     │
+│  │         │    │ Ước     │    │ best    │    │ SẢN     │     │
+│  │         │    │ lượng   │    │ take    │    │ XUẤT    │     │
+│  │         │    │ thời    │    │         │    │         │     │
+│  │         │    │ gian    │    │         │    │ Nếu     │     │
+│  │         │    │         │    │         │    │ ĐẠT →   │     │
+│  │         │    │         │    │         │    │ tiếp    │     │
+│  └─────────┘    └─────────┘    └─────────┘    └─────────┘     │
+│                                                      │         │
+│                                                      ▼         │
+│                                               ┌─────────┐     │
+│                                               │ BÀN     │     │
+│                                               │ GIAO    │     │
+│                                               └─────────┘     │
+│                                                      │         │
+│                                                      ▼         │
+│                                               ┌─────────┐     │
+│                                               │ Export  │     │
+│                                               │ Upload  │     │
+│                                               │ Log     │     │
+│                                               └─────────┘     │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### 6.2. Chi tiết từng bước
+
+#### 6.2.1. Bước 1: Nhận Brief (15-30 phút)
+
+**Input:** Job code, yêu cầu từ Sale, link input
+
+**Hoạt động:**
+1. Đọc toàn bộ yêu cầu gốc (tiếng Anh)
+2. Xem sample reference nếu có
+3. Download input từ Dropbox/Drive
+4. Kiểm tra chất lượng input
+
+**Output:** Hiểu rõ yêu cầu, có đủ input
+
+**Checklist:**
+```
+□ Đã đọc yêu cầu gốc
+□ Đã xem sample (nếu có)
+□ Đã download input
+□ Input đủ chất lượng
+```
+
+#### 6.2.2. Bước 2: Xác nhận Brief (15-30 phút)
+
+**Input:** Yêu cầu đã đọc
+
+**Hoạt động:**
+1. Điền Brief Confirmation Checklist
+2. Viết lại yêu cầu bằng tiếng Việt
+3. Liệt kê từng effect cần làm
+4. Check context (địa phương, thời tiết, văn hóa)
+5. Đánh giá khả năng AI theo bảng xếp hạng
+6. Ước lượng thời gian theo bảng chuẩn
+7. Nếu không rõ → Hỏi Sale TRƯỚC khi làm
+
+**Output:** Brief Confirmation hoàn chỉnh
+
+**Checklist:**
+```
+□ Đã điền Brief Confirmation Checklist
+□ Đã viết lại yêu cầu bằng tiếng Việt
+□ Đã liệt kê đủ số effect
+□ Đã check context
+□ Đã đánh giá khả năng AI
+□ Đã ước lượng thời gian
+□ Đã clarify với Sale (nếu cần)
+```
+
+#### 6.2.3. Bước 3: Sản xuất (Tùy loại effect)
+
+**Input:** Brief đã xác nhận, Prompt Library
+
+**Hoạt động:**
+1. Tra cứu Prompt Library theo loại effect
+2. Chọn template phù hợp
+3. Customize prompt theo yêu cầu cụ thể
+4. Chọn công cụ AI phù hợp
+5. Generate 3-5 takes
+6. Review từng take
+7. Chọn best take
+
+**Output:** Output video (có thể nhiều takes)
+
+**Checklist:**
+```
+□ Đã chọn prompt từ Library
+□ Đã customize theo yêu cầu
+□ Đã generate ít nhất 3 takes
+□ Đã review từng take
+□ Đã chọn best take
+```
+
+#### 6.2.4. Bước 4: QC (10-20 phút)
+
+**Input:** Output video, QC Checklist
+
+**Hoạt động:**
+1. Xác định cấp độ QC cần áp dụng
+2. Chạy QC Checklist tương ứng
+3. Đánh giá: ĐẠT hoặc KHÔNG ĐẠT
+4. Nếu KHÔNG ĐẠT → Quay lại Bước 3
+5. Nếu ĐẠT → Tiếp tục
+
+**Output:** Output đã pass QC
+
+**Checklist:**
+```
+□ Đã chạy QC Checklist phù hợp
+□ Output đạt tất cả tiêu chí
+□ Không có lỗi nghiêm trọng
+```
+
+#### 6.2.5. Bước 5: Bàn giao (10 phút)
+
+**Input:** Output đã pass QC
+
+**Hoạt động:**
+1. Export đúng format và quality
+2. Đặt tên file theo convention
+3. Upload lên Dropbox
+4. Log vào tracking sheet
+5. Thông báo hoàn thành (nếu cần)
+
+**Output:** Output đã delivery
+
+**Checklist:**
+```
+□ Đã export đúng format
+□ Đã đặt tên đúng convention
+□ Đã upload lên Dropbox
+□ Đã log vào tracking sheet
+```
+
+### 6.3. Quy trình giao tiếp R&D ↔ QC ↔ Team Video
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│              QUY TRÌNH GIAO TIẾP                               │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  R&D SPECIALIST                                                │
+│  │                                                             │
+│  ├── Nghiên cứu và tạo Prompt Library                         │
+│  │   └── Chuyển giao → Team Video                             │
+│  │                                                             │
+│  ├── Phân tích jobs có feedback lỗi                           │
+│  │   └── Báo cáo nguyên nhân → QC + Team Video               │
+│  │                                                             │
+│  ├── A/B Test prompt cải tiến                                 │
+│  │   └── Nếu tốt hơn → Cập nhật Prompt Library               │
+│  │                                                             │
+│  ├── Xây dựng QC Checklist                                    │
+│  │   └── Chuyển giao → QC                                     │
+│  │                                                             │
+│  └── Training và hỗ trợ                                       │
+│      └── Hỗ trợ → Team Video khi có vấn đề mới               │
+│                                                                 │
+│  ─────────────────────────────────────────────────────────────  │
+│                                                                 │
+│  QC                                                            │
+│  │                                                             │
+│  ├── Áp dụng QC Checklist từ R&D                              │
+│  │   └── Feedback → R&D nếu checklist chưa đủ                │
+│  │                                                             │
+│  ├── Phát hiện lỗi mới                                        │
+│  │   └── Báo cáo → R&D để bổ sung checklist                  │
+│  │                                                             │
+│  └── Đánh giá output của Team Video                           │
+│      └── Feedback → Team Video                                │
+│                                                                 │
+│  ─────────────────────────────────────────────────────────────  │
+│                                                                 │
+│  TEAM VIDEO                                                    │
+│  │                                                             │
+│  ├── Sử dụng Prompt Library từ R&D                            │
+│  │   └── Feedback → R&D nếu prompt không hiệu quả            │
+│  │                                                             │
+│  ├── Tuân thủ quy trình Brief Confirmation                    │
+│  │   └── Hỏi R&D nếu gặp case khó đánh giá                   │
+│  │                                                             │
+│  └── Áp dụng QC Checklist trước khi gửi QC                    │
+│      └── Self-check trước, giảm tải cho QC                   │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### 6.4. Kênh giao tiếp và tần suất
+
+| Loại giao tiếp | Kênh | Tần suất | Nội dung |
+|----------------|------|----------|----------|
+| Cập nhật Prompt Library | Notion/Confluence | Khi có prompt mới | Link prompt, hướng dẫn |
+| Báo cáo phân tích lỗi | Email/Slack | Hàng tuần | Thống kê, nguyên nhân, đề xuất |
+| A/B Test results | Document | Khi hoàn thành | Kết quả, kết luận |
+| Cập nhật QC Checklist | Notion/Confluence | Khi có thay đổi | Phiên bản mới |
+| Hỗ trợ case khó | Slack/Chat | Realtime | Q&A |
+| Training session | Meeting | 2 tuần/lần | Kiến thức mới, best practices |
+| Review hiệu quả | Meeting | Hàng tháng | Metrics, cải tiến |
+
+---
+
+## PHẦN 7: HỆ THỐNG ĐÁNH GIÁ VÀ CHẤM ĐIỂM
+
+### 7.1. Thang điểm đánh giá Output
+
+**Thang điểm 10, chia theo tiêu chí:**
+
+| Tiêu chí | Trọng số | Điểm tối đa | Mô tả |
+|----------|----------|-------------|-------|
+| Đáp ứng yêu cầu brief | 30% | 3 điểm | Đúng loại effect, số lượng, đối tượng |
+| Chất lượng kỹ thuật | 25% | 2.5 điểm | Độ phân giải, không artifacts, không watermark |
+| Chất lượng AI (nếu có người) | 20% | 2 điểm | Mặt, cơ thể, hành vi tự nhiên |
+| Logic/Physics | 15% | 1.5 điểm | Chuyển động hợp lý, vị trí đúng |
+| Thẩm mỹ | 10% | 1 điểm | Đẹp, professional, phù hợp context |
+| **TỔNG** | **100%** | **10 điểm** | |
+
+**Phân loại theo điểm:**
+
+| Điểm | Xếp loại | Hành động |
+|------|----------|-----------|
+| 9-10 | Xuất sắc | Delivery, lưu làm sample |
+| 7-8.9 | Tốt | Delivery |
+| 5-6.9 | Đạt | Delivery, ghi nhận để cải thiện |
+| 3-4.9 | Chưa đạt | Cần revision |
+| 0-2.9 | Không đạt | Làm lại từ đầu |
+
+### 7.2. Form chấm điểm Output
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│              FORM CHẤM ĐIỂM OUTPUT                             │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  JOB CODE: ________________    NGÀY: ________________          │
+│  NGƯỜI ĐÁNH GIÁ: ________________                              │
+│                                                                 │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │  1. ĐÁP ỨNG YÊU CẦU BRIEF (Tối đa 3 điểm)              │   │
+│  ├─────────────────────────────────────────────────────────┤   │
+│  │  □ Đúng loại effect yêu cầu           (1 điểm)         │   │
+│  │  □ Đủ số lượng effect                 (1 điểm)         │   │
+│  │  □ Đúng đối tượng/hành động           (1 điểm)         │   │
+│  │  ĐIỂM: ___/3                                            │   │
+│  └─────────────────────────────────────────────────────────┘   │
+│                                                                 │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │  2. CHẤT LƯỢNG KỸ THUẬT (Tối đa 2.5 điểm)              │   │
+│  ├─────────────────────────────────────────────────────────┤   │
+│  │  □ Độ phân giải đúng yêu cầu          (0.5 điểm)       │   │
+│  │  □ Không có artifacts rõ ràng         (0.5 điểm)       │   │
+│  │  □ Không có watermark/logo AI         (0.5 điểm)       │   │
+│  │  □ Duration đủ dài                    (0.5 điểm)       │   │
+│  │  □ Không bị cắt xén bất thường        (0.5 điểm)       │   │
+│  │  ĐIỂM: ___/2.5                                          │   │
+│  └─────────────────────────────────────────────────────────┘   │
+│                                                                 │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │  3. CHẤT LƯỢNG AI - NGƯỜI (Tối đa 2 điểm)              │   │
+│  │     (Bỏ qua nếu output không có người)                  │   │
+│  ├─────────────────────────────────────────────────────────┤   │
+│  │  □ Mặt không biến dạng                (0.5 điểm)       │   │
+│  │  □ Cơ thể tỷ lệ tự nhiên              (0.5 điểm)       │   │
+│  │  □ Trang phục phù hợp                 (0.5 điểm)       │   │
+│  │  □ Hành vi phù hợp context            (0.5 điểm)       │   │
+│  │  ĐIỂM: ___/2 (hoặc N/A)                                 │   │
+│  └─────────────────────────────────────────────────────────┘   │
+│                                                                 │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │  4. LOGIC/PHYSICS (Tối đa 1.5 điểm)                    │   │
+│  ├─────────────────────────────────────────────────────────┤   │
+│  │  □ Chuyển động hợp lý                 (0.5 điểm)       │   │
+│  │  □ Vị trí/hướng đúng                  (0.5 điểm)       │   │
+│  │  □ Background nhất quán               (0.5 điểm)       │   │
+│  │  ĐIỂM: ___/1.5                                          │   │
+│  └─────────────────────────────────────────────────────────┘   │
+│                                                                 │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │  5. THẨM MỸ (Tối đa 1 điểm)                            │   │
+│  ├─────────────────────────────────────────────────────────┤   │
+│  │  □ Đẹp, professional                  (0.5 điểm)       │   │
+│  │  □ Phù hợp context bất động sản       (0.5 điểm)       │   │
+│  │  ĐIỂM: ___/1                                            │   │
+│  └─────────────────────────────────────────────────────────┘   │
+│                                                                 │
+│  ═══════════════════════════════════════════════════════════   │
+│  TỔNG ĐIỂM: ___/10                                             │
+│  XẾP LOẠI: □ Xuất sắc  □ Tốt  □ Đạt  □ Chưa đạt  □ Không đạt │
+│  QUYẾT ĐỊNH: □ Delivery  □ Revision  □ Làm lại                │
+│  ═══════════════════════════════════════════════════════════   │
+│                                                                 │
+│  GHI CHÚ/FEEDBACK:                                             │
+│  ___________________________________________________________   │
+│  ___________________________________________________________   │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### 7.3. Phân loại job theo độ phức tạp
+
+| Cấp độ | Loại effect | Đặc điểm | Thời gian chuẩn | Người làm |
+|--------|-------------|----------|-----------------|-----------|
+| Level 1 | Day-to-Night, Sky Replacement | Đơn giản, tỷ lệ thành công cao | 1-1.5 giờ | Tất cả |
+| Level 2 | Furniture Animation, Season đơn giản | Trung bình | 1.5-2 giờ | Tất cả |
+| Level 3 | Lifestyle đơn giản (1-2 người) | Cần QC kỹ hơn | 2-3 giờ | Có kinh nghiệm |
+| Level 4 | Agent Composite, Lifestyle phức tạp | Khó, cần kỹ thuật | 3-5 giờ | Senior |
+| Level 5 | Creative/Fantasy, Object Animation | Rất khó, unpredictable | 5+ giờ | Senior + R&D hỗ trợ |
+
+---
+
+## PHẦN 8: QUY TRÌNH CHUYỂN GIAO KỸ THUẬT
+
+### 8.1. Quy trình chuyển giao Prompt mới
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│              QUY TRÌNH CHUYỂN GIAO PROMPT MỚI                  │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  BƯỚC 1: R&D TẠO PROMPT MỚI                                    │
+│  ├── Nghiên cứu và viết prompt                                │
+│  ├── Test ít nhất 5 lần                                       │
+│  ├── Tính tỷ lệ thành công                                    │
+│  └── Ghi chép đầy đủ vào template                             │
+│                                                                 │
+│  BƯỚC 2: A/B TEST (nếu có prompt cũ)                          │
+│  ├── So sánh với prompt cũ                                    │
+│  ├── Ghi nhận kết quả                                         │
+│  └── Kết luận có nên thay thế không                           │
+│                                                                 │
+│  BƯỚC 3: REVIEW NỘI BỘ R&D                                    │
+│  ├── Self-review template đầy đủ                              │
+│  ├── Check format đúng chuẩn                                  │
+│  └── Có đủ ví dụ và lưu ý                                     │
+│                                                                 │
+│  BƯỚC 4: ĐĂNG LÊN PROMPT LIBRARY                              │
+│  ├── Upload vào đúng folder                                   │
+│  ├── Cập nhật index/mục lục                                   │
+│  └── Thông báo cho Team Video                                 │
+│                                                                 │
+│  BƯỚC 5: TRAINING (nếu cần)                                   │
+│  ├── Họp quick demo (15-30 phút)                              │
+│  ├── Q&A                                                       │
+│  └── Hỗ trợ lần đầu sử dụng                                   │
+│                                                                 │
+│  BƯỚC 6: THEO DÕI SAU CHUYỂN GIAO                             │
+│  ├── Thu thập feedback từ Team Video                          │
+│  ├── Theo dõi tỷ lệ thành công thực tế                        │
+│  └── Điều chỉnh nếu cần                                       │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### 8.2. Form chuyển giao kỹ thuật
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│              FORM CHUYỂN GIAO KỸ THUẬT                         │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  THÔNG TIN CHUYỂN GIAO                                         │
+│  ├── Ngày: ________________                                   │
+│  ├── Người chuyển giao (R&D): ________________                │
+│  ├── Người nhận (Team Video): ________________                │
+│  └── Loại chuyển giao: □ Prompt mới  □ Quy trình  □ Tool     │
+│                                                                 │
+│  NỘI DUNG CHUYỂN GIAO                                          │
+│  ├── Tên: ________________                                    │
+│  ├── Mô tả ngắn: ________________                             │
+│  ├── Link tài liệu: ________________                          │
+│  └── Folder lưu trữ: ________________                         │
+│                                                                 │
+│  KẾT QUẢ TEST CỦA R&D                                         │
+│  ├── Số lần test: ________________                            │
+│  ├── Tỷ lệ thành công: ________________%                      │
+│  └── Thời gian TB: ________________ phút                      │
+│                                                                 │
+│  HƯỚNG DẪN SỬ DỤNG                                            │
+│  ├── Bước 1: ________________                                 │
+│  ├── Bước 2: ________________                                 │
+│  └── Bước 3: ________________                                 │
+│                                                                 │
+│  LƯU Ý QUAN TRỌNG                                              │
+│  ├── ________________                                         │
+│  └── ________________                                         │
+│                                                                 │
+│  XÁC NHẬN NHẬN CHUYỂN GIAO                                    │
+│  ├── Người nhận đã đọc tài liệu: □ Có                        │
+│  ├── Người nhận đã hiểu cách sử dụng: □ Có                   │
+│  └── Cần training thêm: □ Có  □ Không                        │
+│                                                                 │
+│  CHỮ KÝ                                                        │
+│  ├── R&D: ________________                                    │
+│  └── Team Video: ________________                             │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### 8.3. Checklist sau chuyển giao
+
+| STT | Mục kiểm tra | Tuần 1 | Tuần 2 | Tuần 4 |
+|-----|--------------|--------|--------|--------|
+| 1 | Team Video đã sử dụng prompt mới chưa? | □ | □ | □ |
+| 2 | Có feedback nào từ Team Video? | □ | □ | □ |
+| 3 | Tỷ lệ thành công thực tế có đúng như test? | □ | □ | □ |
+| 4 | Có cần điều chỉnh prompt không? | □ | □ | □ |
+| 5 | Có case nào cần R&D hỗ trợ không? | □ | □ | □ |
+
+---
+
+## PHẦN 9: BÁO CÁO VÀ THEO DÕI
+
+### 9.1. Báo cáo hàng tuần
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│              BÁO CÁO TUẦN - R&D AI VIDEO                       │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  TUẦN: _______ (Từ _______ đến _______)                       │
+│  NGƯỜI BÁO CÁO: _______________________                        │
+│                                                                 │
+│  ═══════════════════════════════════════════════════════════   │
+│  1. HOẠT ĐỘNG NGHIÊN CỨU                                       │
+│  ═══════════════════════════════════════════════════════════   │
+│                                                                 │
+│  Prompts đã nghiên cứu/test:                                   │
+│  ├── Prompt 1: _____________ (Kết quả: _____%)                │
+│  ├── Prompt 2: _____________ (Kết quả: _____%)                │
+│  └── ...                                                       │
+│                                                                 │
+│  Jobs feedback đã phân tích:                                   │
+│  ├── Job 1: _____________ (Nguyên nhân: _____________)        │
+│  ├── Job 2: _____________ (Nguyên nhân: _____________)        │
+│  └── ...                                                       │
+│                                                                 │
+│  ═══════════════════════════════════════════════════════════   │
+│  2. CHUYỂN GIAO CHO TEAM VIDEO                                 │
+│  ═══════════════════════════════════════════════════════════   │
+│                                                                 │
+│  Prompts mới đã chuyển giao: _______                          │
+│  Quy trình mới đã chuyển giao: _______                        │
+│  Training sessions: _______                                    │
+│                                                                 │
+│  ═══════════════════════════════════════════════════════════   │
+│  3. METRICS                                                    │
+│  ═══════════════════════════════════════════════════════════   │
+│                                                                 │
+│  Tỷ lệ hiểu đúng brief tuần này: _______% (Tuần trước: ___%)  │
+│  Tỷ lệ pass QC lần 1 tuần này: _______% (Tuần trước: ___%)    │
+│  Tỷ lệ đúng deadline tuần này: _______% (Tuần trước: ___%)    │
+│                                                                 │
+│  ═══════════════════════════════════════════════════════════   │
+│  4. VẤN ĐỀ VÀ ĐỀ XUẤT                                         │
+│  ═══════════════════════════════════════════════════════════   │
+│                                                                 │
+│  Vấn đề gặp phải:                                              │
+│  ├── ________________________________________________         │
+│  └── ________________________________________________         │
+│                                                                 │
+│  Đề xuất cải tiến:                                             │
+│  ├── ________________________________________________         │
+│  └── ________________________________________________         │
+│                                                                 │
+│  ═══════════════════════════════════════════════════════════   │
+│  5. KẾ HOẠCH TUẦN TỚI                                         │
+│  ═══════════════════════════════════════════════════════════   │
+│                                                                 │
+│  ├── ________________________________________________         │
+│  ├── ________________________________________________         │
+│  └── ________________________________________________         │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### 9.2. Dashboard tổng hợp (Monthly)
+
+| Tháng | Jobs AI Effect | Tỷ lệ hiểu đúng brief | Tỷ lệ pass QC lần 1 | Tỷ lệ đúng deadline | Prompts mới | Ghi chú |
+|-------|----------------|----------------------|---------------------|---------------------|-------------|---------|
+| Baseline (23 jobs) | 23 | 65% | ~50% | 78% | 0 | Từ feedback |
+| Tháng 1 | - | - | - | - | - | - |
+| Tháng 2 | - | - | - | - | - | - |
+| Tháng 3 | - | - | - | - | - | - |
+
+### 9.3. Tracking cải tiến
+
+| Cải tiến | Ngày triển khai | Trạng thái | Kết quả đo được | So với baseline |
+|----------|-----------------|------------|-----------------|-----------------|
+| Brief Confirmation Checklist | - | Chưa | - | - |
+| QC Checklist 3 cấp độ | - | Chưa | - | - |
+| Bảng đánh giá khả năng AI | - | Chưa | - | - |
+| Bảng ước lượng thời gian | - | Chưa | - | - |
+| Prompt Library v1.0 | - | Chưa | - | - |
+
+---
+
+## PHẦN 10: TÓM TẮT VÀ ƯU TIÊN THỰC HIỆN
+
+### 10.1. Tóm tắt vấn đề và giải pháp
+
+| Vấn đề | Tỷ lệ ảnh hưởng | Giải pháp | Ưu tiên |
+|--------|-----------------|-----------|---------|
+| Hiểu sai yêu cầu | 35% | Brief Confirmation Checklist | 1 |
+| Chất lượng output kém | 26% | QC Checklist 3 cấp độ | 2 |
+| Trễ deadline | 22% | Bảng ước lượng thời gian | 4 |
+| Logic/Physics sai | 17% | Bảng đánh giá khả năng AI | 3 |
+| Prompt không chuẩn hóa | N/A | Prompt Library | 5 |
+
+### 10.2. Thứ tự triển khai
+
+| Tuần | Triển khai | Output |
+|------|------------|--------|
+| 1-2 | Brief Confirmation Checklist | Template + Training |
+| 2-3 | QC Checklist 3 cấp độ | 3 checklists + Training |
+| 3-4 | Bảng đánh giá khả năng AI | Bảng + Quy trình đánh giá |
+| 4-5 | Bảng ước lượng thời gian | Bảng + Công thức |
+| 5-8 | Prompt Library v1.0 | 10-15 templates đầu tiên |
+| 8+ | Tiếp tục mở rộng Prompt Library | Thêm templates |
+
+### 10.3. Mục tiêu cải tiến
+
+| Metric | Baseline | Mục tiêu 1 tháng | Mục tiêu 3 tháng |
+|--------|----------|------------------|------------------|
+| Tỷ lệ hiểu đúng brief | 65% | 80% | 90% |
+| Tỷ lệ pass QC lần 1 | ~50% | 65% | 80% |
+| Tỷ lệ đúng deadline | 78% | 85% | 95% |
+| Số prompts trong Library | 0 | 10 | 25 |
+
+---
+
+**Kết thúc Tài liệu Vận hành**
+
+*Tài liệu này thiết lập quy trình làm việc giữa R&D Specialist, QC và Team Video, bao gồm các tiêu chí đánh giá, phương pháp chứng minh hiệu quả và cách thức chuyển giao kỹ thuật.*

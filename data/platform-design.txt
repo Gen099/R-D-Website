@@ -1,0 +1,2197 @@
+# TÀI LIỆU THIẾT KẾ HỆ THỐNG
+## R&D AI VIDEO INTELLIGENCE PLATFORM
+### FOTOBER
+
+---
+
+**Ngày lập:** 29/01/2026
+**Phiên bản:** 1.0
+**Mục đích:** Xây dựng công cụ AI hỗ trợ toàn diện cho R&D Specialist và các team liên quan
+
+---
+
+# PHẦN 1: TỔNG QUAN HỆ THỐNG
+
+## 1.1. Tầm nhìn
+
+Xây dựng một nền tảng thông minh (AI-powered platform) hỗ trợ toàn bộ quy trình R&D AI Video, từ nghiên cứu, phân tích, đến triển khai và theo dõi hiệu quả, cho phép một người vận hành có thể quản lý hiệu quả với khả năng mở rộng trong tương lai.
+
+## 1.2. Các bên sử dụng (Users)
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    CÁC BÊN SỬ DỤNG HỆ THỐNG                    │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  ┌─────────────────┐                                           │
+│  │  R&D SPECIALIST │ ← Người vận hành chính                    │
+│  │  (Admin)        │                                           │
+│  └────────┬────────┘                                           │
+│           │                                                     │
+│           │ Tạo, quản lý, theo dõi                             │
+│           ▼                                                     │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │                    HỆ THỐNG                             │   │
+│  └─────────────────────────────────────────────────────────┘   │
+│           │                                                     │
+│     ┌─────┴─────┐                                              │
+│     ▼           ▼                                              │
+│  ┌──────┐   ┌──────┐                                          │
+│  │ TEAM │   │ TEAM │                                          │
+│  │ VIDEO│   │  QC  │                                          │
+│  └──────┘   └──────┘                                          │
+│     │           │                                              │
+│     └─────┬─────┘                                              │
+│           │ Sử dụng, feedback                                  │
+│           ▼                                                     │
+│  ┌─────────────────┐                                           │
+│  │    KHÁCH HÀNG   │ ← Feedback gián tiếp qua Sale            │
+│  └─────────────────┘                                           │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+## 1.3. Các module chính
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    KIẾN TRÚC HỆ THỐNG                          │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │                 GIAO DIỆN NGƯỜI DÙNG                    │   │
+│  │  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐       │   │
+│  │  │Dashboard│ │ Phân    │ │  Kho    │ │ Tracking│       │   │
+│  │  │ R&D     │ │ tích    │ │ tài    │ │  & QC   │       │   │
+│  │  └─────────┘ └─────────┘ └─────────┘ └─────────┘       │   │
+│  └─────────────────────────────────────────────────────────┘   │
+│                            │                                    │
+│                            ▼                                    │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │                    LỚP XỬ LÝ AI                         │   │
+│  │  ┌───────────────┐  ┌───────────────┐  ┌─────────────┐ │   │
+│  │  │ Phân tích     │  │ Đề xuất       │  │ Dự đoán     │ │   │
+│  │  │ Brief & Lỗi   │  │ Giải pháp     │  │ Trending    │ │   │
+│  │  └───────────────┘  └───────────────┘  └─────────────┘ │   │
+│  └─────────────────────────────────────────────────────────┘   │
+│                            │                                    │
+│                            ▼                                    │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │                    KHO DỮ LIỆU                          │   │
+│  │  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐       │   │
+│  │  │ Prompt  │ │ Hiệu    │ │ Feedback│ │ Trends  │       │   │
+│  │  │ Library │ │ ứng     │ │ & Logs  │ │ & Data  │       │   │
+│  │  └─────────┘ └─────────┘ └─────────┘ └─────────┘       │   │
+│  └─────────────────────────────────────────────────────────┘   │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+# PHẦN 2: CÁC MODULE CHI TIẾT
+
+## 2.1. MODULE 1: PHÂN TÍCH BRIEF & YÊU CẦU KHÁCH HÀNG
+
+### 2.1.1. Mục đích
+
+Khi nhận yêu cầu từ khách hàng (qua Sale), hệ thống AI sẽ tự động phân tích và đưa ra đánh giá tổng quan, đề xuất giải pháp.
+
+### 2.1.2. Luồng xử lý (Logic Flow)
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│              LUỒNG PHÂN TÍCH BRIEF KHÁCH HÀNG                  │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  INPUT: Brief từ khách hàng (text tiếng Anh/Việt)             │
+│         Sample reference (link nếu có)                         │
+│         Input files (link Dropbox/Drive)                       │
+│                                                                 │
+│  ═══════════════════════════════════════════════════════════   │
+│                                                                 │
+│  BƯỚC 1: TIỀN XỬ LÝ (Preprocessing)                           │
+│  ├── Nhận diện ngôn ngữ (Anh/Việt)                            │
+│  ├── Trích xuất từ khóa chính                                 │
+│  ├── Nhận diện số lượng (số effect, số cảnh)                  │
+│  └── Nhận diện động từ hành động                              │
+│                                                                 │
+│  BƯỚC 2: PHÂN LOẠI EFFECT (Effect Classification)             │
+│  ├── Đối chiếu với danh sách effect đã định nghĩa            │
+│  │   (Day-to-Night, Lifestyle, Furniture, Season,             │
+│  │    Agent Composite, Creative, Object Animation)            │
+│  ├── Gán nhãn loại effect                                     │
+│  └── Xác định độ phức tạp (Level 1-5)                        │
+│                                                                 │
+│  BƯỚC 3: ĐÁNH GIÁ KHẢ NĂNG (Feasibility Assessment)          │
+│  ├── Tra cứu tỷ lệ thành công theo loại effect               │
+│  │   (từ dữ liệu lịch sử)                                     │
+│  ├── Đánh giá: Cao / Trung bình / Thấp / Rất thấp            │
+│  └── Gắn cờ cảnh báo nếu effect khó                          │
+│                                                                 │
+│  BƯỚC 4: ĐỐI CHIẾU DỊCH VỤ (Service Matching)                │
+│  ├── Tra cứu bảng giá dịch vụ hiện có                        │
+│  ├── Xác định dịch vụ phù hợp                                 │
+│  └── Ước tính giá (nếu có)                                    │
+│                                                                 │
+│  BƯỚC 5: ĐỀ XUẤT PROMPT (Prompt Suggestion)                   │
+│  ├── Tra cứu Prompt Library theo loại effect                  │
+│  ├── Đề xuất template phù hợp                                 │
+│  └── Customize prompt theo yêu cầu cụ thể                     │
+│                                                                 │
+│  BƯỚC 6: ƯỚC TÍNH THỜI GIAN (Time Estimation)                │
+│  ├── Tra cứu bảng thời gian chuẩn                            │
+│  ├── Tính: Số effect × Thời gian/effect + Buffer 20%         │
+│  └── Đưa ra ước tính tổng                                     │
+│                                                                 │
+│  BƯỚC 7: TẠO BÁO CÁO (Report Generation)                      │
+│  ├── Tổng hợp tất cả phân tích                               │
+│  ├── Highlight các điểm cần lưu ý/cảnh báo                   │
+│  └── Đề xuất câu hỏi cần clarify (nếu có)                    │
+│                                                                 │
+│  ═══════════════════════════════════════════════════════════   │
+│                                                                 │
+│  OUTPUT: Báo cáo phân tích brief                              │
+│          Đề xuất giải pháp                                    │
+│          Prompt gợi ý                                         │
+│          Ước tính thời gian                                   │
+│          Cảnh báo (nếu có)                                    │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### 2.1.3. Dữ liệu cần thiết cho Module 1
+
+| Loại dữ liệu | Mô tả | Nguồn |
+|--------------|-------|-------|
+| Danh sách effect | Tên, mô tả, từ khóa nhận diện | File bảng giá, feedback |
+| Tỷ lệ thành công | % theo loại effect | Phân tích feedback |
+| Bảng giá dịch vụ | Tên dịch vụ, giá, điều kiện | File bảng giá |
+| Prompt Library | Templates theo loại effect | R&D tạo ra |
+| Bảng thời gian | Thời gian chuẩn/effect | R&D nghiên cứu |
+| Từ điển từ khóa | Từ khóa tiếng Anh → Loại effect | R&D tạo ra |
+
+### 2.1.4. Cấu trúc dữ liệu
+
+**Bảng: EFFECT_TYPES (Loại hiệu ứng)**
+
+```
+{
+  "effect_id": "EF001",
+  "name_en": "Day-to-Night Transition",
+  "name_vi": "Chuyển ngày sang đêm",
+  "category": "Transitions",
+  "complexity_level": 2,
+  "success_rate": 67,
+  "avg_time_minutes": 90,
+  "keywords": ["day to night", "day-to-night", "sunset", "twilight", "ngày sang đêm"],
+  "ai_capability": "high",
+  "requires_human": false,
+  "warnings": [],
+  "suggested_tools": ["Veo", "Runway Gen-3"],
+  "price_reference": "Free 1-2; $5 (3-4); $10 (5-6)"
+}
+```
+
+**Bảng: BRIEF_ANALYSIS_LOG (Log phân tích brief)**
+
+```
+{
+  "analysis_id": "BA20260129001",
+  "job_code": "XXJAN29001",
+  "timestamp": "2026-01-29T10:30:00Z",
+  "original_brief": "Please add AI lifestyle effect...",
+  "detected_language": "en",
+  "extracted_effects": [
+    {
+      "effect_type": "Lifestyle",
+      "quantity": 2,
+      "description": "family in living room",
+      "complexity": 3
+    }
+  ],
+  "feasibility_score": 50,
+  "warnings": ["Lifestyle effects have 71% failure rate"],
+  "suggested_prompts": ["lifestyle_family_001"],
+  "estimated_time_hours": 5,
+  "clarification_needed": ["How many people in family?"],
+  "assigned_to": null,
+  "status": "pending_review"
+}
+```
+
+### 2.1.5. Prompt mẫu cho AI phân tích brief
+
+```
+SYSTEM PROMPT:
+Bạn là trợ lý AI chuyên phân tích yêu cầu video bất động sản. Nhiệm vụ của bạn là:
+1. Phân tích brief từ khách hàng
+2. Xác định loại hiệu ứng được yêu cầu
+3. Đánh giá khả năng thực hiện
+4. Đề xuất giải pháp
+
+Sử dụng kiến thức sau:
+- Danh sách effect: [INJECT EFFECT_TYPES DATA]
+- Bảng giá: [INJECT PRICING DATA]
+- Tỷ lệ thành công: [INJECT SUCCESS_RATE DATA]
+
+USER INPUT:
+Brief: {brief_text}
+Sample reference: {sample_link}
+Input files: {input_link}
+
+EXPECTED OUTPUT FORMAT:
+{
+  "summary": "Tóm tắt yêu cầu bằng tiếng Việt",
+  "effects_detected": [
+    {
+      "type": "Tên loại effect",
+      "quantity": số lượng,
+      "description": "Mô tả chi tiết",
+      "complexity_level": 1-5,
+      "success_rate_estimate": "phần trăm"
+    }
+  ],
+  "feasibility": {
+    "score": "1-100",
+    "assessment": "Cao/Trung bình/Thấp/Rất thấp",
+    "reasons": ["Lý do 1", "Lý do 2"]
+  },
+  "service_match": {
+    "service_name": "Tên dịch vụ",
+    "price_estimate": "Giá ước tính"
+  },
+  "time_estimate": {
+    "hours": số giờ,
+    "breakdown": "Chi tiết tính toán"
+  },
+  "warnings": ["Cảnh báo 1", "Cảnh báo 2"],
+  "clarification_questions": ["Câu hỏi 1", "Câu hỏi 2"],
+  "suggested_prompts": ["prompt_id_1", "prompt_id_2"]
+}
+```
+
+---
+
+## 2.2. MODULE 2: PHÂN TÍCH LỖI VÀ FEEDBACK
+
+### 2.2.1. Mục đích
+
+Tự động phân tích lỗi từ feedback khách hàng và team nội bộ, phân loại, tìm nguyên nhân gốc và đề xuất cách khắc phục.
+
+### 2.2.2. Luồng xử lý (Logic Flow)
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│              LUỒNG PHÂN TÍCH LỖI VÀ FEEDBACK                   │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  INPUT: Feedback text (từ khách/Sale/QC)                       │
+│         Job code                                               │
+│         Output file (link video bị lỗi)                        │
+│         Original brief                                         │
+│                                                                 │
+│  ═══════════════════════════════════════════════════════════   │
+│                                                                 │
+│  BƯỚC 1: NHẬN DIỆN LOẠI LỖI (Error Classification)            │
+│  ├── Phân tích text feedback                                  │
+│  ├── Đối chiếu với taxonomy lỗi đã định nghĩa:               │
+│  │   ├── A: Hiểu sai yêu cầu                                 │
+│  │   ├── B: Chất lượng AI output                             │
+│  │   ├── C: Trễ deadline                                     │
+│  │   └── D: Logic/Physics sai                                │
+│  └── Gán nhãn loại lỗi                                       │
+│                                                                 │
+│  BƯỚC 2: XÁC ĐỊNH NGUYÊN NHÂN GỐC (Root Cause Analysis)      │
+│  ├── Tra cứu pattern lỗi từ lịch sử                          │
+│  ├── Đối chiếu brief gốc với output                          │
+│  ├── Xác định nguyên nhân:                                   │
+│  │   ├── Thiếu thông tin context                             │
+│  │   ├── Hiểu sai ngữ pháp tiếng Anh                        │
+│  │   ├── Bỏ sót requirement                                  │
+│  │   ├── AI hallucination                                    │
+│  │   ├── Prompt không phù hợp                                │
+│  │   ├── Tool không phù hợp                                  │
+│  │   ├── Vượt quá khả năng AI                                │
+│  │   └── Lỗi quy trình (QC, handoff)                        │
+│  └── Gán nhãn nguyên nhân                                    │
+│                                                                 │
+│  BƯỚC 3: ĐÁNH GIÁ MỨC ĐỘ (Severity Assessment)               │
+│  ├── Mức độ nghiêm trọng: Thấp / Trung bình / Cao / Rất cao │
+│  ├── Ảnh hưởng: Cần revision / Làm lại / Từ chối            │
+│  └── Khả năng phòng tránh: Có / Không                        │
+│                                                                 │
+│  BƯỚC 4: ĐỀ XUẤT KHẮC PHỤC (Solution Suggestion)             │
+│  ├── Tra cứu giải pháp đã áp dụng cho lỗi tương tự          │
+│  ├── Đề xuất prompt cải tiến (nếu lỗi do prompt)            │
+│  ├── Đề xuất tool khác (nếu lỗi do tool)                    │
+│  └── Đề xuất thêm vào checklist (nếu lỗi có thể phòng tránh)│
+│                                                                 │
+│  BƯỚC 5: CẬP NHẬT HỆ THỐNG (System Update)                   │
+│  ├── Lưu vào database lỗi                                    │
+│  ├── Cập nhật tỷ lệ thành công của effect type              │
+│  ├── Thêm vào pattern lỗi nếu là lỗi mới                    │
+│  └── Trigger alert nếu lỗi lặp lại nhiều lần                │
+│                                                                 │
+│  ═══════════════════════════════════════════════════════════   │
+│                                                                 │
+│  OUTPUT: Báo cáo phân tích lỗi                                │
+│          Nguyên nhân gốc                                      │
+│          Đề xuất khắc phục                                    │
+│          Cập nhật vào database                                │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### 2.2.3. Taxonomy lỗi (Error Taxonomy)
+
+```
+ERROR_TAXONOMY = {
+  "A": {
+    "name": "Hiểu sai yêu cầu",
+    "name_en": "Brief Misunderstanding",
+    "subcategories": {
+      "A1": "Thiếu thông tin context địa phương",
+      "A2": "Hiểu sai ngữ pháp tiếng Anh",
+      "A3": "Bỏ sót requirement",
+      "A4": "Thiếu kiến thức chuyên môn (domain)",
+      "A5": "Không phân tích kỹ input",
+      "A6": "Thiếu attention to detail"
+    },
+    "keywords": ["wrong", "not what I asked", "missing", "didn't include", 
+                 "sai yêu cầu", "thiếu", "không đúng"]
+  },
+  "B": {
+    "name": "Chất lượng AI output",
+    "name_en": "AI Output Quality",
+    "subcategories": {
+      "B1": "Mặt/cơ thể biến dạng",
+      "B2": "Watermark/Logo AI lọt",
+      "B3": "Video như ảnh tĩnh",
+      "B4": "Clip bị vỡ/artifacts",
+      "B5": "Viền cắt/composite kém",
+      "B6": "Trang phục sai",
+      "B7": "Lip-sync không chính xác"
+    },
+    "keywords": ["distorted", "deformed", "logo", "watermark", "static", 
+                 "blurry", "glitch", "biến dạng", "vỡ", "tĩnh", "logo"]
+  },
+  "C": {
+    "name": "Trễ deadline",
+    "name_en": "Deadline Miss",
+    "subcategories": {
+      "C1": "Capacity không đủ",
+      "C2": "Ước lượng sai thời gian",
+      "C3": "Làm lại nhiều lần",
+      "C4": "Handoff chậm giữa các team"
+    },
+    "keywords": ["late", "delay", "overdue", "trễ", "muộn", "chậm"]
+  },
+  "D": {
+    "name": "Logic/Physics sai",
+    "name_en": "Logic/Physics Error",
+    "subcategories": {
+      "D1": "Chuyển động không tự nhiên",
+      "D2": "Vị trí/hướng sai",
+      "D3": "Hành vi không phù hợp context",
+      "D4": "Vi phạm quy tắc vật lý",
+      "D5": "Group dynamics sai"
+    },
+    "keywords": ["unnatural", "wrong position", "doesn't make sense", 
+                 "awkward", "vô duyên", "không tự nhiên", "sai vị trí"]
+  }
+}
+```
+
+### 2.2.4. Cấu trúc dữ liệu
+
+**Bảng: ERROR_LOG (Log lỗi)**
+
+```
+{
+  "error_id": "ERR20260129001",
+  "job_code": "XXJAN29001",
+  "timestamp": "2026-01-29T14:30:00Z",
+  "feedback_source": "customer", // customer | sale | qc | team_video
+  "feedback_text": "The reindeer moved away from the sleigh...",
+  "effect_type": "Creative/Fantasy",
+  "error_category": "D",
+  "error_subcategory": "D5",
+  "root_cause": "AI không hiểu group dynamics",
+  "severity": "medium", // low | medium | high | critical
+  "action_required": "revision", // revision | redo | reject
+  "preventable": true,
+  "prevention_method": "Thêm vào checklist: kiểm tra chuyển động nhóm",
+  "solution_applied": null,
+  "prompt_used": "creative_santa_001",
+  "tool_used": "Kling",
+  "resolution_status": "pending", // pending | resolved | escalated
+  "resolved_by": null,
+  "resolved_at": null,
+  "notes": ""
+}
+```
+
+**Bảng: ERROR_PATTERNS (Pattern lỗi)**
+
+```
+{
+  "pattern_id": "PAT001",
+  "pattern_name": "AI không hiểu 'preparing' cần có người",
+  "error_category": "A",
+  "error_subcategory": "A2",
+  "trigger_keywords": ["preparing", "cooking", "making"],
+  "description": "Khi brief có động từ hành động, AI/người làm thường bỏ qua việc cần có người thực hiện hành động đó",
+  "example_jobs": ["HTJAN15008Rev"],
+  "prevention_rule": "Khi brief có động từ -ing, kiểm tra xem có cần người thực hiện không",
+  "occurrences": 1,
+  "last_occurrence": "2026-01-15",
+  "status": "active"
+}
+```
+
+### 2.2.5. Prompt mẫu cho AI phân tích lỗi
+
+```
+SYSTEM PROMPT:
+Bạn là trợ lý AI chuyên phân tích lỗi trong sản xuất video AI cho bất động sản.
+Nhiệm vụ của bạn là:
+1. Phân tích feedback từ khách hàng/nội bộ
+2. Xác định loại lỗi và nguyên nhân gốc
+3. Đề xuất cách khắc phục
+4. Đề xuất cách phòng tránh trong tương lai
+
+Sử dụng taxonomy lỗi sau:
+[INJECT ERROR_TAXONOMY]
+
+Tham khảo pattern lỗi đã biết:
+[INJECT ERROR_PATTERNS]
+
+USER INPUT:
+Job code: {job_code}
+Original brief: {original_brief}
+Feedback: {feedback_text}
+Effect type: {effect_type}
+Tool used: {tool_used}
+
+EXPECTED OUTPUT FORMAT:
+{
+  "error_summary": "Tóm tắt lỗi bằng tiếng Việt",
+  "error_classification": {
+    "category": "A/B/C/D",
+    "subcategory": "A1/A2/...",
+    "category_name": "Tên loại lỗi"
+  },
+  "root_cause_analysis": {
+    "primary_cause": "Nguyên nhân chính",
+    "contributing_factors": ["Yếu tố 1", "Yếu tố 2"],
+    "responsible_party": "AI/Team Video/QC/Brief unclear"
+  },
+  "severity_assessment": {
+    "level": "low/medium/high/critical",
+    "action_required": "revision/redo/reject",
+    "customer_impact": "Mô tả tác động đến khách hàng"
+  },
+  "solutions": {
+    "immediate_fix": "Cách sửa ngay",
+    "prompt_improvement": "Đề xuất cải tiến prompt (nếu có)",
+    "tool_recommendation": "Đề xuất tool khác (nếu có)"
+  },
+  "prevention": {
+    "preventable": true/false,
+    "checklist_addition": "Mục cần thêm vào checklist",
+    "process_improvement": "Cải tiến quy trình"
+  },
+  "similar_patterns": ["pattern_id_1", "pattern_id_2"],
+  "is_new_pattern": true/false,
+  "new_pattern_description": "Mô tả pattern mới (nếu có)"
+}
+```
+
+---
+
+## 2.3. MODULE 3: KHO TÀI NGUYÊN (KNOWLEDGE BASE)
+
+### 2.3.1. Mục đích
+
+Lưu trữ và quản lý tất cả tài nguyên nghiên cứu: Prompt Library, Hiệu ứng, Từ khóa, Trends, Tài liệu nội bộ.
+
+### 2.3.2. Cấu trúc kho tài nguyên
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    CẤU TRÚC KHO TÀI NGUYÊN                     │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  KNOWLEDGE_BASE/                                               │
+│  │                                                             │
+│  ├── PROMPTS/                                                  │
+│  │   ├── templates/         # Prompt templates                │
+│  │   ├── variations/        # Các biến thể                    │
+│  │   ├── negative_prompts/  # Negative prompts                │
+│  │   └── test_results/      # Kết quả test                    │
+│  │                                                             │
+│  ├── EFFECTS/                                                  │
+│  │   ├── definitions/       # Định nghĩa effect              │
+│  │   ├── samples/           # Video mẫu                       │
+│  │   ├── success_rates/     # Tỷ lệ thành công               │
+│  │   └── tool_mapping/      # Effect → Tool phù hợp          │
+│  │                                                             │
+│  ├── KEYWORDS/                                                 │
+│  │   ├── brief_keywords/    # Từ khóa trong brief            │
+│  │   ├── prompt_keywords/   # Từ khóa cho prompt             │
+│  │   ├── error_keywords/    # Từ khóa nhận diện lỗi          │
+│  │   └── trending_keywords/ # Từ khóa trending               │
+│  │                                                             │
+│  ├── TRENDS/                                                   │
+│  │   ├── competitor_data/   # Dữ liệu đối thủ                │
+│  │   ├── social_trends/     # Trends từ social media         │
+│  │   ├── tool_updates/      # Cập nhật công cụ AI            │
+│  │   └── market_insights/   # Insights thị trường            │
+│  │                                                             │
+│  ├── DOCUMENTS/                                                │
+│  │   ├── sops/              # Quy trình chuẩn                │
+│  │   ├── checklists/        # Các checklist                  │
+│  │   ├── training/          # Tài liệu đào tạo               │
+│  │   └── case_studies/      # Case studies                   │
+│  │                                                             │
+│  ├── SERVICES/                                                 │
+│  │   ├── pricing/           # Bảng giá                       │
+│  │   ├── requirements/      # Yêu cầu footage               │
+│  │   └── samples/           # Video mẫu dịch vụ             │
+│  │                                                             │
+│  └── ERRORS/                                                   │
+│      ├── taxonomy/          # Phân loại lỗi                  │
+│      ├── patterns/          # Pattern lỗi                    │
+│      ├── solutions/         # Giải pháp                      │
+│      └── logs/              # Log lỗi                        │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### 2.3.3. Schema dữ liệu chi tiết
+
+**PROMPTS/templates**
+
+```
+{
+  "prompt_id": "lifestyle_family_001",
+  "name": "Gia đình trong phòng khách",
+  "name_en": "Family in Living Room",
+  "category": "Lifestyle",
+  "subcategory": "Family",
+  "version": "1.2",
+  "created_at": "2026-01-20",
+  "updated_at": "2026-01-25",
+  "created_by": "R&D",
+  
+  "prompt_template": {
+    "main": "A [FAMILY_COMPOSITION] [ACTION] in a [STYLE] living room, [LIGHTING], [CAMERA], warm inviting atmosphere, lifestyle advertisement aesthetic, photorealistic, 4K quality",
+    "negative": "distorted faces, extra limbs, unnatural poses, awkward body proportions, inappropriate behavior, empty room, cartoon style",
+    "variables": {
+      "FAMILY_COMPOSITION": ["family of four", "couple with child", "parents with two kids"],
+      "ACTION": ["relaxing on sofa", "watching TV together", "having conversation"],
+      "STYLE": ["modern", "traditional", "luxury"],
+      "LIGHTING": ["warm afternoon light", "soft evening glow"],
+      "CAMERA": ["medium wide shot", "eye-level angle"]
+    }
+  },
+  
+  "metadata": {
+    "suitable_tools": ["Kling", "Veo"],
+    "complexity_level": 3,
+    "success_rate": 50,
+    "avg_generation_time_minutes": 15,
+    "avg_total_time_minutes": 150,
+    "test_count": 10,
+    "last_test_date": "2026-01-25"
+  },
+  
+  "usage_notes": [
+    "Luôn specify số người cụ thể",
+    "Tránh hành động phức tạp",
+    "Check kỹ mặt và cơ thể trước khi gửi"
+  ],
+  
+  "related_prompts": ["lifestyle_couple_001", "lifestyle_single_001"],
+  "sample_outputs": ["link1", "link2"],
+  "tags": ["lifestyle", "family", "living room", "indoor"]
+}
+```
+
+**EFFECTS/definitions**
+
+```
+{
+  "effect_id": "EF_LIFESTYLE_001",
+  "name": "Lifestyle - Gia đình",
+  "name_en": "Lifestyle - Family",
+  "category": "Lifestyle",
+  "description": "Hiệu ứng AI tạo cảnh gia đình sinh hoạt trong nhà",
+  
+  "specifications": {
+    "min_people": 2,
+    "max_people": 5,
+    "recommended_people": 3,
+    "suitable_rooms": ["living room", "kitchen", "dining room"],
+    "suitable_actions": ["relaxing", "talking", "watching TV", "eating"],
+    "avoid_actions": ["complex cooking", "running", "jumping"]
+  },
+  
+  "technical": {
+    "complexity_level": 3,
+    "ai_capability": "medium",
+    "success_rate": 50,
+    "common_issues": ["mặt biến dạng", "hành vi không tự nhiên", "trang phục sai"],
+    "qc_focus": ["mặt", "cơ thể", "hành vi"]
+  },
+  
+  "production": {
+    "avg_time_minutes": 150,
+    "recommended_tools": ["Kling"],
+    "required_inputs": ["ảnh phòng", "script hành vi (optional)"],
+    "output_duration_seconds": "5-10"
+  },
+  
+  "pricing": {
+    "base_price": "Check with team",
+    "additional_factors": ["số người", "độ phức tạp hành vi"]
+  },
+  
+  "history": {
+    "total_jobs": 7,
+    "successful_jobs": 2,
+    "failed_jobs": 5,
+    "sample_successful": ["link1"],
+    "sample_failed": ["link2", "link3"]
+  }
+}
+```
+
+**KEYWORDS/brief_keywords**
+
+```
+{
+  "keyword_id": "KW_BRIEF_001",
+  "keyword": "preparing",
+  "variations": ["prepare", "preparing", "prep"],
+  "language": "en",
+  "category": "action_verb",
+  
+  "interpretation": {
+    "meaning": "Đang chuẩn bị (hành động)",
+    "requires_subject": true,
+    "typical_subject": "person/people",
+    "common_misunderstanding": "Chỉ cần kết quả, không cần người"
+  },
+  
+  "mapping": {
+    "effect_types": ["Lifestyle"],
+    "prompt_keywords": ["person preparing", "someone cooking"],
+    "checklist_item": "Có động từ hành động → Cần có người thực hiện"
+  },
+  
+  "examples": {
+    "correct": "preparing dinner → có người đang nấu ăn",
+    "incorrect": "preparing dinner → chỉ có bàn ăn với đồ ăn"
+  },
+  
+  "related_errors": ["HTJAN15008Rev"],
+  "tags": ["action", "requires_human", "lifestyle"]
+}
+```
+
+**TRENDS/social_trends**
+
+```
+{
+  "trend_id": "TREND_202601_001",
+  "name": "AI Agent Speaking Video",
+  "source": "Instagram, TikTok",
+  "detected_at": "2026-01-15",
+  "status": "rising",
+  
+  "description": "Video bất động sản với agent AI nói và giới thiệu nhà",
+  
+  "metrics": {
+    "mention_count": 1500,
+    "engagement_rate": 4.5,
+    "growth_rate_weekly": 25
+  },
+  
+  "examples": [
+    {"platform": "Instagram", "url": "link1", "engagement": 50000},
+    {"platform": "TikTok", "url": "link2", "engagement": 100000}
+  ],
+  
+  "relevance_to_fotober": {
+    "score": 9,
+    "potential_service": "Agent Speaking Video",
+    "technical_feasibility": "medium",
+    "notes": "Đang nghiên cứu trong Bài toán 1 & 2"
+  },
+  
+  "competitor_status": {
+    "esoft": "Đã có dịch vụ tương tự",
+    "boxbrownie": "Chưa có"
+  },
+  
+  "action_items": [
+    "Hoàn thành Bài toán 1 & 2",
+    "Xây dựng prompt library cho Agent video"
+  ]
+}
+```
+
+---
+
+## 2.4. MODULE 4: TRACKING & MONITORING
+
+### 2.4.1. Mục đích
+
+Theo dõi việc sử dụng tài nguyên R&D bởi các team khác, đánh giá hiệu quả, phát hiện vấn đề.
+
+### 2.4.2. Luồng tracking
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    LUỒNG TRACKING                              │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  R&D TẠO TÀI NGUYÊN                                            │
+│  ├── Prompt mới                                                │
+│  ├── Checklist mới                                             │
+│  └── Quy trình mới                                             │
+│         │                                                       │
+│         ▼                                                       │
+│  CHUYỂN GIAO CHO TEAM VIDEO/QC                                 │
+│  ├── Log: resource_id, transfer_date, receiver                 │
+│         │                                                       │
+│         ▼                                                       │
+│  TEAM VIDEO SỬ DỤNG                                            │
+│  ├── Log: job_code, resource_id, timestamp                     │
+│  ├── Có sử dụng đúng không?                                   │
+│  ├── Kết quả: pass/fail                                       │
+│         │                                                       │
+│         ▼                                                       │
+│  QC KIỂM TRA                                                   │
+│  ├── Log: job_code, qc_result, qc_notes                       │
+│  ├── Checklist có được áp dụng?                               │
+│  ├── Lỗi phát hiện (nếu có)                                   │
+│         │                                                       │
+│         ▼                                                       │
+│  FEEDBACK TỪ KHÁCH HÀNG                                        │
+│  ├── Log: job_code, feedback_type, feedback_text              │
+│         │                                                       │
+│         ▼                                                       │
+│  R&D PHÂN TÍCH                                                 │
+│  ├── Resource nào được sử dụng nhiều/ít?                      │
+│  ├── Resource nào hiệu quả/không hiệu quả?                    │
+│  ├── Team có tuân thủ quy trình không?                        │
+│  └── Cần điều chỉnh gì?                                       │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### 2.4.3. Cấu trúc dữ liệu tracking
+
+**Bảng: RESOURCE_USAGE_LOG (Log sử dụng tài nguyên)**
+
+```
+{
+  "log_id": "USAGE_20260129_001",
+  "timestamp": "2026-01-29T10:30:00Z",
+  
+  "resource": {
+    "type": "prompt", // prompt | checklist | sop | effect_definition
+    "resource_id": "lifestyle_family_001",
+    "version": "1.2"
+  },
+  
+  "job": {
+    "job_code": "XXJAN29001",
+    "effect_type": "Lifestyle",
+    "complexity_level": 3
+  },
+  
+  "user": {
+    "user_id": "TV001",
+    "team": "Team Video",
+    "role": "Editor"
+  },
+  
+  "usage_details": {
+    "used_correctly": true,
+    "modifications_made": "Thay đổi FAMILY_COMPOSITION thành 'couple'",
+    "tool_used": "Kling",
+    "generation_attempts": 4,
+    "time_spent_minutes": 120
+  },
+  
+  "result": {
+    "internal_qc_passed": true,
+    "customer_feedback": "positive", // positive | negative | revision | none
+    "final_status": "delivered" // delivered | revision | rejected
+  },
+  
+  "notes": ""
+}
+```
+
+**Bảng: PROCESS_COMPLIANCE_LOG (Log tuân thủ quy trình)**
+
+```
+{
+  "log_id": "COMPLIANCE_20260129_001",
+  "job_code": "XXJAN29001",
+  "timestamp": "2026-01-29T10:30:00Z",
+  
+  "brief_confirmation": {
+    "completed": true,
+    "checklist_filled": true,
+    "clarification_requested": false,
+    "time_spent_minutes": 20
+  },
+  
+  "prompt_selection": {
+    "used_library": true,
+    "prompt_id": "lifestyle_family_001",
+    "customized": true
+  },
+  
+  "generation_process": {
+    "multiple_takes_generated": true,
+    "takes_count": 4,
+    "best_take_selected": true
+  },
+  
+  "qc_process": {
+    "self_qc_completed": true,
+    "checklist_level_used": 2,
+    "all_items_checked": true,
+    "issues_found": 1,
+    "issues_resolved": true
+  },
+  
+  "handoff": {
+    "proper_naming": true,
+    "uploaded_to_correct_location": true,
+    "logged_in_tracking_sheet": true
+  },
+  
+  "compliance_score": 95, // 0-100
+  "non_compliance_items": ["QC checklist item 5 skipped"],
+  "reviewer": "R&D System"
+}
+```
+
+### 2.4.4. Dashboard metrics
+
+**Metrics theo dõi chính:**
+
+| Metric | Mô tả | Công thức | Mục tiêu |
+|--------|-------|-----------|----------|
+| Prompt Library Usage Rate | % jobs sử dụng prompt từ library | Jobs dùng library / Tổng jobs | >80% |
+| Prompt Success Rate | % thành công theo prompt | Jobs pass / Jobs dùng prompt | Theo từng prompt |
+| Checklist Compliance Rate | % jobs hoàn thành đầy đủ checklist | Jobs đủ checklist / Tổng jobs | >95% |
+| Process Compliance Score | Điểm tuân thủ quy trình TB | Trung bình compliance_score | >90 |
+| First-Pass QC Rate | % pass QC lần đầu | Jobs pass lần 1 / Tổng jobs | >80% |
+| Customer Satisfaction Rate | % feedback tích cực | Positive feedback / Tổng feedback | >85% |
+| Resource Effectiveness | Hiệu quả từng resource | Success rate của jobs dùng resource | Cao hơn baseline |
+
+### 2.4.5. Alert rules
+
+```
+ALERT_RULES = [
+  {
+    "rule_id": "ALERT_001",
+    "name": "Low Prompt Success Rate",
+    "condition": "prompt.success_rate < 50% trong 5 jobs gần nhất",
+    "action": "Notify R&D để review prompt",
+    "priority": "high"
+  },
+  {
+    "rule_id": "ALERT_002",
+    "name": "Process Non-Compliance",
+    "condition": "compliance_score < 80",
+    "action": "Notify Team Lead + R&D",
+    "priority": "medium"
+  },
+  {
+    "rule_id": "ALERT_003",
+    "name": "Repeated Error Pattern",
+    "condition": "same error_subcategory xuất hiện > 3 lần trong 7 ngày",
+    "action": "Trigger root cause analysis",
+    "priority": "high"
+  },
+  {
+    "rule_id": "ALERT_004",
+    "name": "New Error Pattern",
+    "condition": "error không match với existing patterns",
+    "action": "Flag for R&D review",
+    "priority": "medium"
+  },
+  {
+    "rule_id": "ALERT_005",
+    "name": "Resource Not Used",
+    "condition": "prompt/checklist không được sử dụng > 14 ngày",
+    "action": "Review relevance hoặc training needed",
+    "priority": "low"
+  }
+]
+```
+
+---
+
+## 2.5. MODULE 5: GIAO DIỆN NGƯỜI DÙNG
+
+### 2.5.1. Giao diện cho R&D Specialist (Admin)
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    R&D DASHBOARD                               │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │  OVERVIEW                                               │   │
+│  │  ┌───────┐ ┌───────┐ ┌───────┐ ┌───────┐ ┌───────┐    │   │
+│  │  │ Jobs  │ │ Pass  │ │ Error │ │ Prompts│ │ Alerts│    │   │
+│  │  │ Today │ │ Rate  │ │ Count │ │ Used  │ │       │    │   │
+│  │  │  15   │ │  78%  │ │   3   │ │  12   │ │   2   │    │   │
+│  │  └───────┘ └───────┘ └───────┘ └───────┘ └───────┘    │   │
+│  └─────────────────────────────────────────────────────────┘   │
+│                                                                 │
+│  ┌──────────────────────┐  ┌──────────────────────┐           │
+│  │  QUICK ACTIONS       │  │  RECENT ALERTS       │           │
+│  │  ──────────────────  │  │  ──────────────────  │           │
+│  │  [Phân tích Brief]   │  │  ⚠️ Prompt xyz có    │           │
+│  │  [Phân tích Lỗi]     │  │     success rate     │           │
+│  │  [Thêm Prompt]       │  │     thấp (45%)       │           │
+│  │  [Xem Reports]       │  │  ⚠️ Job ABC không    │           │
+│  │                      │  │     tuân thủ QC      │           │
+│  └──────────────────────┘  └──────────────────────┘           │
+│                                                                 │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │  TRACKING OVERVIEW                                      │   │
+│  │  ───────────────────────────────────────────────────── │   │
+│  │                                                         │   │
+│  │  Prompt Usage     ████████████████░░░░  80%            │   │
+│  │  QC Compliance    ██████████████████░░  90%            │   │
+│  │  Process Score    █████████████████░░░  85%            │   │
+│  │  Customer Sat     ████████████████░░░░  80%            │   │
+│  │                                                         │   │
+│  └─────────────────────────────────────────────────────────┘   │
+│                                                                 │
+│  [Prompt Library] [Error Analysis] [Tracking] [Settings]       │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### 2.5.2. Giao diện cho Team Video
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    TEAM VIDEO PORTAL                           │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │  PHÂN TÍCH BRIEF MỚI                                    │   │
+│  │  ─────────────────────────────────────────────────────  │   │
+│  │                                                         │   │
+│  │  Job Code: [____________]                               │   │
+│  │                                                         │   │
+│  │  Brief từ khách hàng:                                   │   │
+│  │  ┌─────────────────────────────────────────────────┐   │   │
+│  │  │                                                 │   │   │
+│  │  │  [Paste brief here...]                          │   │   │
+│  │  │                                                 │   │   │
+│  │  └─────────────────────────────────────────────────┘   │   │
+│  │                                                         │   │
+│  │  Sample reference: [____________] (link)                │   │
+│  │  Input files: [____________] (link)                     │   │
+│  │                                                         │   │
+│  │  [🔍 PHÂN TÍCH]                                        │   │
+│  │                                                         │   │
+│  └─────────────────────────────────────────────────────────┘   │
+│                                                                 │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │  KẾT QUẢ PHÂN TÍCH                                     │   │
+│  │  ─────────────────────────────────────────────────────  │   │
+│  │                                                         │   │
+│  │  ✅ Loại effect: Lifestyle - Gia đình                  │   │
+│  │  ⚠️ Độ phức tạp: Level 3 (Trung bình-Cao)             │   │
+│  │  ⚠️ Tỷ lệ thành công: 50%                             │   │
+│  │  ⏱️ Thời gian ước tính: 2.5 giờ                        │   │
+│  │                                                         │   │
+│  │  CẢNH BÁO:                                             │   │
+│  │  • Lifestyle effects có tỷ lệ lỗi cao (71%)            │   │
+│  │  • Cần QC kỹ mặt và hành vi                            │   │
+│  │                                                         │   │
+│  │  PROMPT GỢI Ý:                                         │   │
+│  │  ┌─────────────────────────────────────────────────┐   │   │
+│  │  │  lifestyle_family_001 - Gia đình trong phòng    │   │   │
+│  │  │  [Xem chi tiết] [Sử dụng prompt này]            │   │   │
+│  │  └─────────────────────────────────────────────────┘   │   │
+│  │                                                         │   │
+│  │  CÂU HỎI CẦN CLARIFY:                                  │   │
+│  │  • Có bao nhiêu người trong gia đình?                  │   │
+│  │  • Hành động cụ thể là gì?                             │   │
+│  │                                                         │   │
+│  └─────────────────────────────────────────────────────────┘   │
+│                                                                 │
+│  [Prompt Library] [QC Checklist] [Báo cáo lỗi] [Hỗ trợ]       │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### 2.5.3. Giao diện cho QC
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    QC PORTAL                                   │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │  KIỂM TRA OUTPUT                                        │   │
+│  │  ─────────────────────────────────────────────────────  │   │
+│  │                                                         │   │
+│  │  Job Code: [XXJAN29001      ]                          │   │
+│  │  Loại effect: [Lifestyle - Gia đình] (auto-filled)     │   │
+│  │                                                         │   │
+│  │  [🔍 TẢI CHECKLIST PHÙ HỢP]                            │   │
+│  │                                                         │   │
+│  └─────────────────────────────────────────────────────────┘   │
+│                                                                 │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │  QC CHECKLIST - CẤP ĐỘ 2 (Có người)                    │   │
+│  │  ─────────────────────────────────────────────────────  │   │
+│  │                                                         │   │
+│  │  KIỂM TRA KỸ THUẬT                                     │   │
+│  │  [✓] Độ phân giải đúng yêu cầu                        │   │
+│  │  [✓] Không có artifacts                               │   │
+│  │  [✓] Không có watermark/logo AI                       │   │
+│  │  [✓] Duration đủ dài                                  │   │
+│  │                                                         │   │
+│  │  KIỂM TRA NGƯỜI                                        │   │
+│  │  [✓] Mặt không biến dạng                              │   │
+│  │  [ ] Đủ số ngón tay ← LỖI                             │   │
+│  │  [✓] Tỷ lệ cơ thể tự nhiên                            │   │
+│  │  [✓] Trang phục phù hợp                               │   │
+│  │  [✓] Hành vi phù hợp                                  │   │
+│  │                                                         │   │
+│  │  KIỂM TRA ĐỐI CHIẾU BRIEF                             │   │
+│  │  [✓] Đúng loại effect                                 │   │
+│  │  [✓] Đủ số lượng                                      │   │
+│  │  [✓] Đúng hành động                                   │   │
+│  │                                                         │   │
+│  │  ─────────────────────────────────────────────────────  │   │
+│  │  KẾT QUẢ: ⚠️ KHÔNG ĐẠT (1 lỗi)                        │   │
+│  │                                                         │   │
+│  │  Ghi chú lỗi:                                          │   │
+│  │  ┌─────────────────────────────────────────────────┐   │   │
+│  │  │ Người có 6 ngón tay ở bàn tay phải             │   │   │
+│  │  └─────────────────────────────────────────────────┘   │   │
+│  │                                                         │   │
+│  │  [GỬI VỀ TEAM VIDEO] [BÁO CÁO LỖI CHO R&D]            │   │
+│  │                                                         │   │
+│  └─────────────────────────────────────────────────────────┘   │
+│                                                                 │
+│  [Checklist Library] [Lịch sử QC] [Thống kê] [Hỗ trợ]         │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### 2.5.4. Giao diện báo cáo lỗi (cho tất cả users)
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    BÁO CÁO LỖI / FEEDBACK                      │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │  THÔNG TIN CƠ BẢN                                       │   │
+│  │  ─────────────────────────────────────────────────────  │   │
+│  │                                                         │   │
+│  │  Job Code: [XXJAN29001      ]                          │   │
+│  │                                                         │   │
+│  │  Nguồn feedback:                                        │   │
+│  │  ( ) Khách hàng (qua Sale)                             │   │
+│  │  (•) QC nội bộ                                         │   │
+│  │  ( ) Team Video tự phát hiện                           │   │
+│  │                                                         │   │
+│  │  Nội dung feedback:                                     │   │
+│  │  ┌─────────────────────────────────────────────────┐   │   │
+│  │  │ Người trong video có 6 ngón tay ở bàn tay      │   │   │
+│  │  │ phải, trông không tự nhiên                      │   │   │
+│  │  └─────────────────────────────────────────────────┘   │   │
+│  │                                                         │   │
+│  │  Link output bị lỗi: [____________]                    │   │
+│  │                                                         │   │
+│  │  [🔍 PHÂN TÍCH LỖI TỰ ĐỘNG]                            │   │
+│  │                                                         │   │
+│  └─────────────────────────────────────────────────────────┘   │
+│                                                                 │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │  KẾT QUẢ PHÂN TÍCH (AI)                                │   │
+│  │  ─────────────────────────────────────────────────────  │   │
+│  │                                                         │   │
+│  │  📌 LOẠI LỖI: B1 - Mặt/cơ thể biến dạng               │   │
+│  │                                                         │   │
+│  │  📌 NGUYÊN NHÂN GỐC:                                   │   │
+│  │     AI hallucination khi generate tay                  │   │
+│  │                                                         │   │
+│  │  📌 MỨC ĐỘ: Trung bình                                │   │
+│  │     → Cần revision                                     │   │
+│  │                                                         │   │
+│  │  📌 CÁCH KHẮC PHỤC:                                    │   │
+│  │     • Generate lại với negative prompt mạnh hơn        │   │
+│  │     • Thêm "correct number of fingers" vào prompt     │   │
+│  │                                                         │   │
+│  │  📌 PHÒNG TRÁNH:                                       │   │
+│  │     • Có thể phòng tránh bằng QC                      │   │
+│  │     • Checklist item: "Đủ số ngón tay (5 ngón/tay)"   │   │
+│  │                                                         │   │
+│  │  📌 PATTERN TƯƠNG TỰ:                                  │   │
+│  │     • PAT003: AI thường thêm/bớt ngón tay             │   │
+│  │     • Đã xảy ra 3 lần trong 30 ngày qua               │   │
+│  │                                                         │   │
+│  └─────────────────────────────────────────────────────────┘   │
+│                                                                 │
+│  [GỬI BÁO CÁO] [LƯU NHÁP] [HỦY]                               │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+# PHẦN 3: KIẾN TRÚC KỸ THUẬT
+
+## 3.1. Tổng quan kiến trúc
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    KIẾN TRÚC HỆ THỐNG                          │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │                    FRONTEND                             │   │
+│  │  ┌─────────┐ ┌─────────┐ ┌─────────┐                   │   │
+│  │  │   Web   │ │ Mobile  │ │  API    │                   │   │
+│  │  │   App   │ │  App    │ │ Client  │                   │   │
+│  │  │(React/ │ │(Optional)│ │         │                   │   │
+│  │  │ Next.js)│ │         │ │         │                   │   │
+│  │  └─────────┘ └─────────┘ └─────────┘                   │   │
+│  └─────────────────────────────────────────────────────────┘   │
+│                            │                                    │
+│                            ▼                                    │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │                    API GATEWAY                          │   │
+│  │              (Authentication, Rate Limiting)            │   │
+│  └─────────────────────────────────────────────────────────┘   │
+│                            │                                    │
+│                            ▼                                    │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │                    BACKEND SERVICES                     │   │
+│  │  ┌───────────┐ ┌───────────┐ ┌───────────┐             │   │
+│  │  │  Brief    │ │   Error   │ │  Tracking │             │   │
+│  │  │ Analysis  │ │  Analysis │ │  Service  │             │   │
+│  │  │  Service  │ │  Service  │ │           │             │   │
+│  │  └───────────┘ └───────────┘ └───────────┘             │   │
+│  │  ┌───────────┐ ┌───────────┐ ┌───────────┐             │   │
+│  │  │ Knowledge │ │   Report  │ │   Alert   │             │   │
+│  │  │   Base    │ │  Service  │ │  Service  │             │   │
+│  │  │  Service  │ │           │ │           │             │   │
+│  │  └───────────┘ └───────────┘ └───────────┘             │   │
+│  └─────────────────────────────────────────────────────────┘   │
+│                            │                                    │
+│                            ▼                                    │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │                    AI LAYER                             │   │
+│  │  ┌───────────────────────────────────────────────────┐ │   │
+│  │  │              LLM Integration                      │ │   │
+│  │  │    (Claude API / OpenAI API / Local LLM)         │ │   │
+│  │  └───────────────────────────────────────────────────┘ │   │
+│  │  ┌───────────┐ ┌───────────┐ ┌───────────┐             │   │
+│  │  │  Prompt   │ │ Embedding │ │  RAG      │             │   │
+│  │  │ Templates │ │  Search   │ │  Engine   │             │   │
+│  │  └───────────┘ └───────────┘ └───────────┘             │   │
+│  └─────────────────────────────────────────────────────────┘   │
+│                            │                                    │
+│                            ▼                                    │
+│  ┌─────────────────────────────────────────────────────────┐   │
+│  │                    DATABASE LAYER                       │   │
+│  │  ┌───────────┐ ┌───────────┐ ┌───────────┐             │   │
+│  │  │ PostgreSQL│ │  Vector   │ │   File    │             │   │
+│  │  │ (Main DB) │ │    DB     │ │  Storage  │             │   │
+│  │  │           │ │ (Pinecone/│ │(S3/Dropbox│             │   │
+│  │  │           │ │  Chroma)  │ │   API)    │             │   │
+│  │  └───────────┘ └───────────┘ └───────────┘             │   │
+│  └─────────────────────────────────────────────────────────┘   │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+## 3.2. Công nghệ đề xuất
+
+| Layer | Công nghệ | Lý do chọn |
+|-------|-----------|------------|
+| Frontend | Next.js + React | SSR, SEO, dễ phát triển |
+| Backend | Python FastAPI | Async, tích hợp AI tốt |
+| Database | PostgreSQL | Reliable, JSON support |
+| Vector DB | Chroma (local) / Pinecone (cloud) | Semantic search cho Knowledge Base |
+| AI | Claude API (Anthropic) | Chất lượng phân tích tốt |
+| File Storage | Dropbox API / S3 | Tích hợp với workflow hiện tại |
+| Authentication | NextAuth.js | Dễ setup, nhiều providers |
+| Deployment | Vercel (Frontend) + Railway/Render (Backend) | Chi phí thấp, auto-scale |
+
+## 3.3. API Endpoints chính
+
+```
+API ENDPOINTS:
+
+# Brief Analysis
+POST   /api/v1/brief/analyze           # Phân tích brief mới
+GET    /api/v1/brief/{job_code}        # Lấy kết quả phân tích
+PUT    /api/v1/brief/{job_code}        # Cập nhật phân tích
+
+# Error Analysis
+POST   /api/v1/error/analyze           # Phân tích lỗi mới
+GET    /api/v1/error/{error_id}        # Lấy chi tiết lỗi
+GET    /api/v1/error/patterns          # Lấy danh sách patterns
+POST   /api/v1/error/patterns          # Thêm pattern mới
+
+# Knowledge Base
+GET    /api/v1/kb/prompts              # Lấy danh sách prompts
+GET    /api/v1/kb/prompts/{prompt_id}  # Lấy chi tiết prompt
+POST   /api/v1/kb/prompts              # Thêm prompt mới
+PUT    /api/v1/kb/prompts/{prompt_id}  # Cập nhật prompt
+GET    /api/v1/kb/effects              # Lấy danh sách effects
+GET    /api/v1/kb/keywords             # Lấy keywords
+GET    /api/v1/kb/search               # Tìm kiếm semantic
+
+# Tracking
+POST   /api/v1/tracking/usage          # Log sử dụng resource
+POST   /api/v1/tracking/compliance     # Log tuân thủ quy trình
+GET    /api/v1/tracking/metrics        # Lấy metrics dashboard
+GET    /api/v1/tracking/alerts         # Lấy alerts
+
+# Reports
+GET    /api/v1/reports/daily           # Báo cáo ngày
+GET    /api/v1/reports/weekly          # Báo cáo tuần
+GET    /api/v1/reports/monthly         # Báo cáo tháng
+POST   /api/v1/reports/custom          # Báo cáo tùy chỉnh
+
+# Users & Auth
+POST   /api/v1/auth/login              # Đăng nhập
+POST   /api/v1/auth/logout             # Đăng xuất
+GET    /api/v1/users/me                # Thông tin user hiện tại
+```
+
+---
+
+# PHẦN 4: LOGIC XỬ LÝ CHI TIẾT
+
+## 4.1. Algorithm phân tích Brief
+
+```python
+# PSEUDOCODE: Brief Analysis Algorithm
+
+def analyze_brief(brief_text, sample_link, input_link):
+    """
+    Phân tích brief từ khách hàng và đưa ra đánh giá
+    """
+    
+    # BƯỚC 1: Tiền xử lý
+    language = detect_language(brief_text)
+    if language == "vi":
+        brief_text = translate_to_english(brief_text)
+    
+    keywords = extract_keywords(brief_text)
+    quantities = extract_quantities(brief_text)
+    action_verbs = extract_action_verbs(brief_text)
+    
+    # BƯỚC 2: Phân loại Effect
+    detected_effects = []
+    for keyword in keywords:
+        matched_effects = match_keywords_to_effects(keyword, EFFECT_DATABASE)
+        detected_effects.extend(matched_effects)
+    
+    # Xử lý action verbs
+    for verb in action_verbs:
+        if verb in VERBS_REQUIRING_HUMAN:
+            add_warning("Brief có động từ '{verb}' - cần có người thực hiện")
+    
+    # BƯỚC 3: Đánh giá khả năng
+    feasibility_scores = []
+    warnings = []
+    
+    for effect in detected_effects:
+        effect_info = get_effect_info(effect, EFFECT_DATABASE)
+        
+        # Tính điểm khả năng
+        score = effect_info.success_rate
+        
+        # Điều chỉnh theo độ phức tạp
+        if effect.complexity > 3:
+            score *= 0.8
+            warnings.append(f"Effect '{effect.name}' có độ phức tạp cao")
+        
+        # Kiểm tra AI capability
+        if effect_info.ai_capability == "low":
+            score *= 0.5
+            warnings.append(f"Effect '{effect.name}' có tỷ lệ thành công thấp ({effect_info.success_rate}%)")
+        
+        feasibility_scores.append(score)
+    
+    overall_feasibility = calculate_overall_feasibility(feasibility_scores)
+    
+    # BƯỚC 4: Đối chiếu dịch vụ
+    service_matches = []
+    for effect in detected_effects:
+        service = match_to_service(effect, SERVICE_DATABASE)
+        service_matches.append(service)
+    
+    # BƯỚC 5: Đề xuất Prompt
+    suggested_prompts = []
+    for effect in detected_effects:
+        prompts = search_prompt_library(effect.type, PROMPT_LIBRARY)
+        suggested_prompts.extend(prompts[:3])  # Top 3 prompts
+    
+    # BƯỚC 6: Ước tính thời gian
+    total_time = 0
+    for effect in detected_effects:
+        effect_info = get_effect_info(effect, EFFECT_DATABASE)
+        time_per_effect = effect_info.avg_time_minutes * effect.quantity
+        total_time += time_per_effect
+    
+    total_time *= 1.2  # Buffer 20%
+    
+    # BƯỚC 7: Xác định câu hỏi cần clarify
+    clarification_questions = []
+    
+    # Check số lượng người nếu là Lifestyle
+    if "Lifestyle" in [e.type for e in detected_effects]:
+        if not has_specific_people_count(brief_text):
+            clarification_questions.append("Có bao nhiêu người cụ thể?")
+    
+    # Check context địa phương nếu là Season
+    if "Season" in [e.type for e in detected_effects]:
+        clarification_questions.append("Địa điểm bất động sản có thời tiết như thế nào? (có tuyết không?)")
+    
+    # BƯỚC 8: Tạo báo cáo
+    result = {
+        "summary": generate_summary(detected_effects, language="vi"),
+        "effects_detected": detected_effects,
+        "feasibility": {
+            "score": overall_feasibility,
+            "assessment": categorize_feasibility(overall_feasibility),
+            "reasons": warnings
+        },
+        "service_matches": service_matches,
+        "time_estimate": {
+            "hours": total_time / 60,
+            "breakdown": generate_time_breakdown(detected_effects)
+        },
+        "suggested_prompts": suggested_prompts,
+        "warnings": warnings,
+        "clarification_questions": clarification_questions
+    }
+    
+    # Lưu vào database
+    save_analysis_log(result)
+    
+    return result
+
+
+def match_keywords_to_effects(keyword, effect_database):
+    """
+    Đối chiếu từ khóa với danh sách effect
+    """
+    matches = []
+    
+    for effect in effect_database:
+        # Exact match
+        if keyword.lower() in [k.lower() for k in effect.keywords]:
+            matches.append(effect)
+            continue
+        
+        # Semantic similarity (nếu có vector DB)
+        similarity = calculate_semantic_similarity(keyword, effect.keywords)
+        if similarity > 0.8:
+            matches.append(effect)
+    
+    return matches
+
+
+def calculate_overall_feasibility(scores):
+    """
+    Tính điểm khả năng tổng thể
+    """
+    if not scores:
+        return 0
+    
+    # Lấy điểm thấp nhất (worst case)
+    min_score = min(scores)
+    
+    # Điều chỉnh theo số lượng effects
+    if len(scores) > 5:
+        min_score *= 0.9  # Nhiều effects = khó hơn
+    
+    return min_score
+```
+
+## 4.2. Algorithm phân tích Lỗi
+
+```python
+# PSEUDOCODE: Error Analysis Algorithm
+
+def analyze_error(job_code, feedback_text, output_link, original_brief):
+    """
+    Phân tích lỗi từ feedback và đưa ra nguyên nhân + giải pháp
+    """
+    
+    # BƯỚC 1: Nhận diện loại lỗi
+    error_keywords = extract_keywords(feedback_text)
+    
+    matched_category = None
+    matched_subcategory = None
+    confidence = 0
+    
+    for category_id, category in ERROR_TAXONOMY.items():
+        for keyword in category["keywords"]:
+            if keyword.lower() in feedback_text.lower():
+                # Tính confidence dựa trên số keywords match
+                match_count = count_keyword_matches(feedback_text, category["keywords"])
+                if match_count > confidence:
+                    matched_category = category_id
+                    confidence = match_count
+    
+    # Xác định subcategory
+    if matched_category:
+        matched_subcategory = determine_subcategory(
+            matched_category, 
+            feedback_text, 
+            ERROR_TAXONOMY[matched_category]["subcategories"]
+        )
+    
+    # BƯỚC 2: Tìm nguyên nhân gốc
+    root_cause = None
+    
+    # Check existing patterns
+    similar_patterns = find_similar_patterns(
+        feedback_text, 
+        matched_category, 
+        matched_subcategory,
+        ERROR_PATTERNS_DATABASE
+    )
+    
+    if similar_patterns:
+        # Sử dụng pattern đã biết
+        root_cause = similar_patterns[0].description
+        prevention_rule = similar_patterns[0].prevention_rule
+    else:
+        # Phân tích mới bằng AI
+        root_cause = ai_analyze_root_cause(
+            feedback_text, 
+            original_brief, 
+            matched_category
+        )
+        
+        # Flag as potential new pattern
+        flag_potential_new_pattern(feedback_text, matched_category)
+    
+    # BƯỚC 3: Đánh giá mức độ
+    severity = determine_severity(matched_category, matched_subcategory, feedback_text)
+    action_required = determine_action(severity)
+    
+    # BƯỚC 4: Đề xuất giải pháp
+    solutions = generate_solutions(
+        matched_category,
+        matched_subcategory,
+        root_cause,
+        get_job_info(job_code)
+    )
+    
+    # BƯỚC 5: Xác định cách phòng tránh
+    prevention = generate_prevention(
+        matched_category,
+        matched_subcategory,
+        root_cause
+    )
+    
+    # BƯỚC 6: Cập nhật hệ thống
+    
+    # Cập nhật success rate của effect type
+    job_info = get_job_info(job_code)
+    update_effect_success_rate(job_info.effect_type, success=False)
+    
+    # Cập nhật pattern count
+    if similar_patterns:
+        increment_pattern_count(similar_patterns[0].pattern_id)
+    
+    # Check alert rules
+    check_and_trigger_alerts(matched_category, matched_subcategory)
+    
+    # BƯỚC 7: Tạo báo cáo
+    result = {
+        "error_summary": generate_error_summary(feedback_text, language="vi"),
+        "error_classification": {
+            "category": matched_category,
+            "subcategory": matched_subcategory,
+            "category_name": ERROR_TAXONOMY[matched_category]["name"],
+            "confidence": confidence
+        },
+        "root_cause_analysis": {
+            "primary_cause": root_cause,
+            "contributing_factors": identify_contributing_factors(original_brief, feedback_text),
+            "responsible_party": determine_responsible_party(matched_category)
+        },
+        "severity_assessment": {
+            "level": severity,
+            "action_required": action_required,
+            "customer_impact": describe_customer_impact(severity)
+        },
+        "solutions": solutions,
+        "prevention": prevention,
+        "similar_patterns": [p.pattern_id for p in similar_patterns],
+        "is_new_pattern": len(similar_patterns) == 0
+    }
+    
+    # Lưu vào database
+    save_error_log(job_code, result)
+    
+    return result
+
+
+def determine_severity(category, subcategory, feedback_text):
+    """
+    Xác định mức độ nghiêm trọng của lỗi
+    """
+    
+    # Critical indicators
+    critical_keywords = ["refuse to pay", "unacceptable", "terrible", "từ chối", "không chấp nhận"]
+    if any(kw in feedback_text.lower() for kw in critical_keywords):
+        return "critical"
+    
+    # High severity subcategories
+    high_severity_subcategories = ["B1", "B2", "B7"]  # Mặt biến dạng, Logo lọt, Lip-sync sai
+    if subcategory in high_severity_subcategories:
+        return "high"
+    
+    # Medium severity categories
+    medium_severity_categories = ["A", "D"]  # Hiểu sai yêu cầu, Logic sai
+    if category in medium_severity_categories:
+        return "medium"
+    
+    return "low"
+
+
+def generate_solutions(category, subcategory, root_cause, job_info):
+    """
+    Đề xuất giải pháp khắc phục
+    """
+    
+    solutions = {
+        "immediate_fix": None,
+        "prompt_improvement": None,
+        "tool_recommendation": None
+    }
+    
+    # Immediate fix
+    if category == "B":  # Chất lượng AI
+        solutions["immediate_fix"] = "Generate lại với QC kỹ hơn trước khi gửi"
+        
+        if subcategory == "B1":  # Mặt/cơ thể biến dạng
+            solutions["prompt_improvement"] = (
+                "Thêm vào negative prompt: 'distorted face, extra limbs, "
+                "wrong number of fingers, deformed body'"
+            )
+        elif subcategory == "B2":  # Watermark
+            solutions["immediate_fix"] = "Sử dụng tool xóa watermark hoặc crop"
+            
+    elif category == "A":  # Hiểu sai yêu cầu
+        solutions["immediate_fix"] = "Đọc lại brief và clarify với Sale"
+        
+    elif category == "D":  # Logic sai
+        if subcategory == "D1":  # Chuyển động không tự nhiên
+            solutions["tool_recommendation"] = "Thử tool khác (Veo thay vì Kling)"
+    
+    return solutions
+```
+
+## 4.3. Algorithm Tracking & Monitoring
+
+```python
+# PSEUDOCODE: Tracking Algorithm
+
+def log_resource_usage(job_code, resource_id, user_id, usage_details):
+    """
+    Ghi log sử dụng tài nguyên
+    """
+    
+    # Lấy thông tin resource
+    resource = get_resource(resource_id)
+    
+    # Tạo log entry
+    log_entry = {
+        "log_id": generate_log_id(),
+        "timestamp": get_current_timestamp(),
+        "resource": {
+            "type": resource.type,
+            "resource_id": resource_id,
+            "version": resource.version
+        },
+        "job": {
+            "job_code": job_code,
+            "effect_type": get_job_effect_type(job_code),
+            "complexity_level": get_job_complexity(job_code)
+        },
+        "user": {
+            "user_id": user_id,
+            "team": get_user_team(user_id),
+            "role": get_user_role(user_id)
+        },
+        "usage_details": usage_details,
+        "result": None  # Sẽ cập nhật sau
+    }
+    
+    # Lưu log
+    save_usage_log(log_entry)
+    
+    return log_entry["log_id"]
+
+
+def update_usage_result(log_id, qc_result, customer_feedback):
+    """
+    Cập nhật kết quả sử dụng
+    """
+    
+    log_entry = get_usage_log(log_id)
+    
+    # Cập nhật result
+    log_entry["result"] = {
+        "internal_qc_passed": qc_result.passed,
+        "customer_feedback": customer_feedback,
+        "final_status": determine_final_status(qc_result, customer_feedback)
+    }
+    
+    # Lưu lại
+    save_usage_log(log_entry)
+    
+    # Cập nhật metrics của resource
+    update_resource_metrics(log_entry["resource"]["resource_id"], log_entry["result"])
+
+
+def check_process_compliance(job_code):
+    """
+    Kiểm tra tuân thủ quy trình
+    """
+    
+    job_data = get_all_job_data(job_code)
+    
+    compliance = {
+        "brief_confirmation": {
+            "completed": check_brief_confirmation_exists(job_code),
+            "checklist_filled": check_checklist_filled(job_code, "brief_confirmation"),
+            "clarification_requested": check_clarification_requested(job_code)
+        },
+        "prompt_selection": {
+            "used_library": check_prompt_from_library(job_code),
+            "prompt_id": get_used_prompt_id(job_code),
+            "customized": check_prompt_customized(job_code)
+        },
+        "generation_process": {
+            "multiple_takes_generated": check_multiple_takes(job_code),
+            "takes_count": get_takes_count(job_code),
+            "best_take_selected": check_best_take_selected(job_code)
+        },
+        "qc_process": {
+            "self_qc_completed": check_self_qc_done(job_code),
+            "checklist_level_used": get_checklist_level_used(job_code),
+            "all_items_checked": check_all_checklist_items(job_code)
+        },
+        "handoff": {
+            "proper_naming": check_file_naming(job_code),
+            "uploaded_to_correct_location": check_upload_location(job_code),
+            "logged_in_tracking_sheet": check_tracking_logged(job_code)
+        }
+    }
+    
+    # Tính compliance score
+    score = calculate_compliance_score(compliance)
+    
+    # Xác định non-compliance items
+    non_compliance_items = identify_non_compliance(compliance)
+    
+    # Lưu log
+    save_compliance_log(job_code, compliance, score, non_compliance_items)
+    
+    # Check alerts
+    if score < 80:
+        trigger_alert("ALERT_002", job_code, score)
+    
+    return {
+        "compliance": compliance,
+        "score": score,
+        "non_compliance_items": non_compliance_items
+    }
+
+
+def calculate_metrics(time_range="weekly"):
+    """
+    Tính toán metrics cho dashboard
+    """
+    
+    if time_range == "weekly":
+        start_date = get_date_n_days_ago(7)
+    elif time_range == "monthly":
+        start_date = get_date_n_days_ago(30)
+    else:
+        start_date = time_range["start"]
+    
+    # Lấy dữ liệu
+    usage_logs = get_usage_logs(start_date)
+    compliance_logs = get_compliance_logs(start_date)
+    error_logs = get_error_logs(start_date)
+    
+    # Tính metrics
+    metrics = {
+        "prompt_library_usage_rate": calculate_prompt_usage_rate(usage_logs),
+        "prompt_success_rate_by_type": calculate_prompt_success_by_type(usage_logs),
+        "checklist_compliance_rate": calculate_checklist_compliance(compliance_logs),
+        "process_compliance_score_avg": calculate_avg_compliance_score(compliance_logs),
+        "first_pass_qc_rate": calculate_first_pass_rate(usage_logs),
+        "customer_satisfaction_rate": calculate_customer_satisfaction(usage_logs),
+        "error_distribution": calculate_error_distribution(error_logs),
+        "top_error_patterns": get_top_error_patterns(error_logs, limit=5),
+        "resource_effectiveness": calculate_resource_effectiveness(usage_logs)
+    }
+    
+    return metrics
+
+
+def check_and_trigger_alerts(category, subcategory):
+    """
+    Kiểm tra và trigger alerts nếu cần
+    """
+    
+    for rule in ALERT_RULES:
+        if evaluate_alert_condition(rule, category, subcategory):
+            trigger_alert(rule["rule_id"], {
+                "category": category,
+                "subcategory": subcategory
+            })
+
+
+def evaluate_alert_condition(rule, category, subcategory):
+    """
+    Đánh giá điều kiện trigger alert
+    """
+    
+    if rule["rule_id"] == "ALERT_003":  # Repeated Error Pattern
+        # Đếm số lần error xuất hiện trong 7 ngày
+        count = count_errors_in_period(category, subcategory, days=7)
+        return count > 3
+    
+    # Thêm các rules khác...
+    
+    return False
+```
+
+---
+
+# PHẦN 5: KẾ HOẠCH TRIỂN KHAI
+
+## 5.1. Roadmap phát triển
+
+### Phase 1: MVP (4-6 tuần)
+
+```
+TUẦN 1-2: Thiết lập nền tảng
+├── Setup database (PostgreSQL)
+├── Setup backend (FastAPI)
+├── Setup frontend cơ bản (Next.js)
+└── Authentication cơ bản
+
+TUẦN 3-4: Module phân tích Brief
+├── Xây dựng prompt templates cho AI
+├── Implement brief analysis API
+├── Tạo giao diện phân tích brief
+└── Test và điều chỉnh
+
+TUẦN 5-6: Module Knowledge Base cơ bản
+├── Import dữ liệu hiện có (effects, pricing)
+├── Tạo giao diện tra cứu
+├── Implement search functionality
+└── Test và điều chỉnh
+```
+
+### Phase 2: Core Features (6-8 tuần)
+
+```
+TUẦN 7-8: Module phân tích Lỗi
+├── Xây dựng error taxonomy
+├── Implement error analysis API
+├── Tạo giao diện báo cáo lỗi
+└── Import error patterns từ feedback hiện có
+
+TUẦN 9-10: Prompt Library
+├── Tạo cấu trúc Prompt Library
+├── Import prompts hiện có
+├── Implement CRUD cho prompts
+└── Tạo giao diện quản lý prompts
+
+TUẦN 11-12: Tracking cơ bản
+├── Implement usage logging
+├── Implement compliance checking
+├── Tạo dashboard cơ bản
+└── Test và điều chỉnh
+
+TUẦN 13-14: Integration & Testing
+├── Tích hợp các modules
+├── User acceptance testing
+├── Bug fixes
+└── Documentation
+```
+
+### Phase 3: Advanced Features (8-12 tuần)
+
+```
+TUẦN 15-18: Trends & Automation
+├── Crawler đối thủ (nếu cần)
+├── Crawler social media (nếu cần)
+├── Trends analysis
+└── Auto-suggestions
+
+TUẦN 19-22: Advanced Analytics
+├── Predictive analytics
+├── Advanced reporting
+├── Custom dashboards
+└── Export features
+
+TUẦN 23-26: Optimization & Scale
+├── Performance optimization
+├── Caching
+├── Rate limiting
+└── Backup & recovery
+```
+
+## 5.2. Chi phí ước tính
+
+### Chi phí phát triển (1 người)
+
+| Hạng mục | Chi phí/tháng | Ghi chú |
+|----------|---------------|---------|
+| Thời gian phát triển | 0 (tự làm) | R&D Specialist tự code |
+| Học thêm (courses, tài liệu) | ~$50-100 | Optional |
+
+### Chi phí vận hành
+
+| Hạng mục | Chi phí/tháng | Ghi chú |
+|----------|---------------|---------|
+| Vercel (Frontend) | $0-20 | Free tier đủ dùng ban đầu |
+| Railway/Render (Backend) | $5-20 | Starter plan |
+| PostgreSQL (Supabase/Neon) | $0-25 | Free tier khá rộng |
+| Claude API | $20-100 | Tùy usage |
+| Domain (optional) | $1-2 | .com domain |
+| **Tổng** | **$26-167/tháng** | |
+
+## 5.3. MVP Features Checklist
+
+```
+MVP - CẦN CÓ:
+[x] Phân tích brief cơ bản
+[x] Gợi ý loại effect
+[x] Cảnh báo độ khó
+[x] Tra cứu Prompt Library
+[x] Tra cứu bảng giá/dịch vụ
+[x] Báo cáo lỗi cơ bản
+[x] QC Checklist digital
+
+TỐT NẾU CÓ:
+[ ] Phân tích lỗi tự động chi tiết
+[ ] Tracking usage
+[ ] Dashboard metrics
+[ ] Alert system
+
+TƯƠNG LAI:
+[ ] Trends analysis
+[ ] Crawler tự động
+[ ] Predictive suggestions
+[ ] Mobile app
+```
+
+---
+
+# PHẦN 6: HƯỚNG DẪN SỬ DỤNG CHO TỪNG ROLE
+
+## 6.1. Hướng dẫn cho R&D Specialist
+
+### 6.1.1. Quản lý Prompt Library
+
+```
+1. THÊM PROMPT MỚI
+   ├── Vào "Prompt Library" > "Thêm mới"
+   ├── Điền đầy đủ thông tin theo template
+   ├── Test ít nhất 3 lần, ghi nhận kết quả
+   ├── Upload sample outputs
+   └── Publish khi sẵn sàng
+
+2. CẬP NHẬT PROMPT
+   ├── Vào prompt cần update
+   ├── Chỉnh sửa và tăng version
+   ├── Test lại và cập nhật metrics
+   └── Thông báo cho Team Video
+
+3. THEO DÕI HIỆU QUẢ PROMPT
+   ├── Xem dashboard "Prompt Effectiveness"
+   ├── Check success rate theo thời gian
+   ├── Xem feedback từ Team Video
+   └── Điều chỉnh nếu cần
+```
+
+### 6.1.2. Phân tích lỗi và cải tiến
+
+```
+1. REVIEW LỖI MỚI
+   ├── Vào "Error Analysis" > "Pending Review"
+   ├── Xem AI analysis
+   ├── Verify/điều chỉnh classification
+   ├── Thêm notes nếu cần
+   └── Approve hoặc escalate
+
+2. THÊM ERROR PATTERN MỚI
+   ├── Khi phát hiện pattern mới
+   ├── Vào "Error Patterns" > "Thêm mới"
+   ├── Mô tả pattern và prevention rule
+   └── Link với errors liên quan
+
+3. CẬP NHẬT CHECKLIST
+   ├── Dựa trên errors mới
+   ├── Vào "Checklists" > Edit
+   ├── Thêm items mới
+   └── Thông báo cho QC
+```
+
+### 6.1.3. Monitoring và Reporting
+
+```
+1. DAILY CHECK
+   ├── Xem dashboard overview
+   ├── Check alerts mới
+   ├── Review high-priority errors
+   └── Respond nếu cần
+
+2. WEEKLY REVIEW
+   ├── Xem metrics tuần
+   ├── So sánh với tuần trước
+   ├── Identify trends
+   └── Tạo weekly report
+
+3. MONTHLY ANALYSIS
+   ├── Comprehensive metrics review
+   ├── Resource effectiveness analysis
+   ├── Identify improvement areas
+   └── Plan next month priorities
+```
+
+## 6.2. Hướng dẫn cho Team Video
+
+### 6.2.1. Khi nhận job mới
+
+```
+1. PHÂN TÍCH BRIEF
+   ├── Vào "Phân tích Brief mới"
+   ├── Nhập job code và brief
+   ├── Thêm links nếu có
+   ├── Click "Phân tích"
+   └── Đọc kỹ kết quả và warnings
+
+2. CHỌN PROMPT
+   ├── Xem prompts gợi ý
+   ├── Click "Xem chi tiết" để xem full prompt
+   ├── Chọn prompt phù hợp nhất
+   └── Customize nếu cần
+
+3. GHI NHẬN SỬ DỤNG
+   ├── Khi bắt đầu làm, hệ thống tự log
+   ├── Ghi chú modifications nếu có
+   └── Update khi hoàn thành
+```
+
+### 6.2.2. Khi gặp vấn đề
+
+```
+1. TRA CỨU GIẢI PHÁP
+   ├── Vào "Knowledge Base"
+   ├── Search vấn đề đang gặp
+   ├── Xem solutions đã có
+   └── Áp dụng nếu phù hợp
+
+2. BÁO CÁO LỖI MỚI
+   ├── Nếu không tìm thấy giải pháp
+   ├── Vào "Báo cáo lỗi"
+   ├── Mô tả chi tiết vấn đề
+   └── Chờ R&D respond
+
+3. YÊU CẦU HỖ TRỢ
+   ├── Vào "Hỗ trợ"
+   ├── Mô tả case cần help
+   └── R&D sẽ được notify
+```
+
+## 6.3. Hướng dẫn cho QC
+
+### 6.3.1. Kiểm tra output
+
+```
+1. LẤY CHECKLIST PHÙ HỢP
+   ├── Nhập job code
+   ├── Hệ thống tự detect loại effect
+   ├── Hiển thị checklist phù hợp
+   └── Bắt đầu kiểm tra
+
+2. THỰC HIỆN QC
+   ├── Check từng item trong checklist
+   ├── Tick passed/failed
+   ├── Ghi notes cho items failed
+   └── Submit kết quả
+
+3. XỬ LÝ KẾT QUẢ
+   ├── Nếu PASS: Approve để delivery
+   ├── Nếu FAIL: Gửi về Team Video với notes
+   └── Nếu critical: Báo cáo cho R&D
+```
+
+### 6.3.2. Báo cáo lỗi
+
+```
+1. LỖI TỪ QC PHÁT HIỆN
+   ├── Vào "Báo cáo lỗi"
+   ├── Chọn nguồn "QC nội bộ"
+   ├── Mô tả lỗi chi tiết
+   └── Submit
+
+2. LỖI TỪ KHÁCH HÀNG
+   ├── Nhận feedback từ Sale
+   ├── Vào "Báo cáo lỗi"
+   ├── Chọn nguồn "Khách hàng"
+   ├── Copy feedback gốc
+   └── Submit
+```
+
+---
+
+# PHẦN 7: MỞ RỘNG TRONG TƯƠNG LAI
+
+## 7.1. Tính năng mở rộng
+
+### 7.1.1. AI Video Generation Integration
+
+```
+Tích hợp trực tiếp với các tool AI:
+├── Kling API (khi có)
+├── Runway API
+├── Veo API (khi có public access)
+└── Cho phép generate và review trong cùng platform
+```
+
+### 7.1.2. Automated QC
+
+```
+QC tự động bằng AI:
+├── Detect face distortion tự động
+├── Detect watermark tự động
+├── Detect artifacts tự động
+└── Pre-screen trước khi QC thủ công
+```
+
+### 7.1.3. Customer Portal
+
+```
+Portal cho khách hàng:
+├── Submit requests trực tiếp
+├── Track job status
+├── Provide feedback
+└── View samples
+```
+
+### 7.1.4. Team Collaboration
+
+```
+Mở rộng cho nhiều người dùng:
+├── Role-based access control
+├── Team assignments
+├── Collaboration features
+└── Notifications
+```
+
+## 7.2. Scalability considerations
+
+### 7.2.1. Database scaling
+
+```
+Khi data lớn:
+├── Database partitioning theo thời gian
+├── Archive old data
+├── Read replicas cho queries
+└── Caching layer (Redis)
+```
+
+### 7.2.2. AI cost optimization
+
+```
+Giảm chi phí AI:
+├── Cache responses cho queries tương tự
+├── Batch processing
+├── Use smaller models cho tasks đơn giản
+└── Local LLM cho một số tasks
+```
+
+---
+
+# PHẦN 8: TÓM TẮT
+
+## 8.1. Giá trị mang lại
+
+| Cho R&D Specialist | Cho Team Video | Cho QC | Cho Công ty |
+|-------------------|----------------|--------|-------------|
+| Tự động hóa phân tích | Hỗ trợ hiểu brief | Checklist digital | Giảm lỗi |
+| Tracking hiệu quả | Gợi ý prompt | QC nhanh hơn | Tăng tốc SX |
+| Quản lý knowledge | Giảm sai sót | Báo cáo dễ dàng | Consistent quality |
+| Data-driven decisions | Training tự động | Standards rõ ràng | Scale được |
+
+## 8.2. Success metrics
+
+| Metric | Trước | Mục tiêu sau 3 tháng |
+|--------|-------|---------------------|
+| Thời gian phân tích brief | 15-30 phút | 5-10 phút |
+| Tỷ lệ hiểu đúng brief | 65% | 90% |
+| Tỷ lệ pass QC lần 1 | ~50% | 80% |
+| Thời gian tìm prompt | 10-15 phút | 2-3 phút |
+| Tỷ lệ lỗi lặp lại | Không tracking | <10% |
+
+## 8.3. Next steps
+
+```
+NGAY BÂY GIỜ:
+1. Review và approve thiết kế
+2. Setup development environment
+3. Bắt đầu Phase 1
+
+TUẦN 1:
+1. Setup database schema
+2. Setup basic backend
+3. Import dữ liệu hiện có
+
+TUẦN 2:
+1. Implement brief analysis
+2. Basic frontend
+3. Initial testing
+```
+
+---
+
+**Kết thúc Tài liệu Thiết kế Hệ thống**
+
+*Tài liệu này mô tả chi tiết kiến trúc, logic xử lý và kế hoạch triển khai cho hệ thống R&D AI Video Intelligence Platform, hỗ trợ toàn diện công việc của R&D Specialist và các team liên quan tại Fotober.*

@@ -1,330 +1,282 @@
-# 🎬 Fotober R&D Intelligence Hub
+# 🚀 R&D AI Video Intelligence Platform - FOTOBER
 
-> **Nền tảng Tri thức & Phân tích Toàn diện cho R&D AI Video**
-
----
-
-## 📋 Tổng quan dự án
-
-**Fotober R&D Intelligence Hub** là một nền tảng web hiện đại được xây dựng để quản lý, lưu trữ và phân tích toàn bộ tri thức liên quan đến R&D AI Video tại Fotober Media Company.
-
-### ✨ Tính năng chính
-
-#### 📚 Knowledge Base - Kho Tri thức
-- **5 Tài liệu chính:**
-  1. 📊 Báo cáo Phân tích Hiện trạng (23 job codes)
-  2. 📅 Kế hoạch Công việc R&D Q1/2026
-  3. ⚙️ Tài liệu Kỹ thuật Video (25+ AI Effects)
-  4. 🔄 Tài liệu Vận hành R&D
-  5. 🏗️ Thiết kế Hệ thống Platform
-
-#### 🤖 AI Analysis Tools ⚡ LIVE!
-- **Multi-AI Integration:**
-  - ✅ **Google Gemini** (Mặc định - hoạt động)
-  - ✅ **Zhipu GLM** (Sẵn sàng)
-  - ✅ **OpenAI GPT-5** (Sẵn sàng)
-  - ✅ **Anthropic Claude** (Sẵn sàng)
-- **4 Loại Phân tích:**
-  - 📋 **Brief Analysis** - Phân tích yêu cầu khách hàng chi tiết
-  - 🔍 **Error Analysis** - Root cause analysis & solutions
-  - 🎨 **Prompt Generation** - Tạo prompt tối ưu cho AI tools
-  - 💬 **General Q&A** - Trả lời câu hỏi về Fotober & R&D
-- **Features:**
-  - Real-time AI analysis với loading states
-  - Structured responses (effects, risks, solutions, suggestions)
-  - Token usage tracking
-  - Provider switching (chọn AI model khác nhau)
-  - Error handling & user feedback
-
-#### 📊 Analytics Dashboard
-- Thống kê tổng quan (23 job codes, 25+ effects)
-- Biểu đồ phân tích lỗi theo nhóm
-- Ma trận rủi ro theo loại effect
-- Tracking metrics theo thời gian
-
-#### 📥📤 Document Management
-- Upload tài liệu (PDF, DOCX, TXT)
-- Download tài liệu gốc
-- Embed Canva presentations
-- Link external resources
+**Website hoàn chỉnh** trực quan hóa toàn bộ hệ thống phân tích, nghiên cứu và phát triển AI Video cho công ty FOTOBER.
 
 ---
 
-## 🎨 Thiết kế & UX
+## 📊 Tổng Quan
 
-### Màu sắc chủ đạo
+Trang web này tổng hợp **5 tài liệu chiến lược** thành một nền tảng thông tin tích hợp với **10 sections** chính, 3 biểu đồ tương tác và hàng chục module trực quan.
+
+### 📄 Nguồn Dữ Liệu
+1. ✅ **BÁO CÁO PHÂN TÍCH HIỆN TRẠNG** - AI Video trong BĐS
+2. ✅ **KẾ HOẠCH CÔNG VIỆC R&D** - Lộ trình Q1/2026
+3. ✅ **R&D AI VIDEO INTELLIGENCE PLATFORM** - Thiết kế hệ thống
+4. ✅ **TÀI LIỆU KỸ THUẬT VIDEO** - Danh mục hiệu ứng & giá
+5. ✅ **TÀI LIỆU VẬN HÀNH R&D** - Quy trình QC
+
+---
+
+## ✨ Tính Năng Chính
+
+### 🎯 **9 Sections Tương Tác** → **10 Sections**
+
+| # | Section | Highlights |
+|---|---------|-----------|
+| 1 | **Tổng Quan** 📊 | 4 stats cards, mục tiêu R&D, công cụ AI |
+| 2 | **Công Ty** 🏢 | Thông tin, thị trường, khách hàng VIP |
+| 3 | **Dịch Vụ** 🎬 | Photo/Video/3D với giá chi tiết |
+| 4 | **Feedback** 📉 | 2 biểu đồ phân tích 23 job codes |
+| 5 | **Bài Toán** 💡 | 2 bài toán AI Agent chi tiết |
+| 6 | **Kế Hoạch R&D** 🗓️ | 3 giai đoạn + Timeline Gantt |
+| 7 | **Platform** 🖥️ | Kiến trúc 3 tầng + 6 modules |
+| 8 | **Kỹ Thuật** ⚙️ | Hiệu ứng video & bảng giá |
+| 9 | **Vận Hành** ✅ | Quy trình QC, tiêu chí đánh giá |
+| 10 | **Nghiên Cứu Đối Thủ** 🔍 | Framework phân tích, lộ trình, công cụ 🆕 |
+
+### 📊 **3 Biểu Đồ Chart.js**
+1. **Bar Chart**: Phân loại lỗi (35%, 26%, 22%, 17%)
+2. **Doughnut Chart**: Tỷ lệ lỗi theo 7 hiệu ứng AI
+3. **Gantt Chart**: Timeline R&D 12 tuần
+
+### 🎨 **UX Features**
+- ✅ Fully Responsive (Desktop/Tablet/Mobile)
+- ✅ **Fixed Sidebar** - Không bị trôi khi scroll! 🆕
+- ✅ Auto-highlight Navigation
+- ✅ Smooth Scroll & Animations
+- ✅ Search Function (Ctrl/Cmd + K)
+- ✅ Progress Bar
+- ✅ Mobile Overlay Backdrop 🆕
+- ✅ Back to Top, Print, Share buttons
+
+---
+
+## 🚀 Cách Sử Dụng
+
+### Mở Website
+```
+Chỉ cần mở file: index.html
+```
+
+### Điều Hướng
+- **Desktop**: Sidebar **cố định** bên trái (9 sections) - Luôn hiển thị! 🆕
+- **Mobile**: Menu hamburger (☰) với overlay backdrop 🆕
+- **Keyboard**: `Ctrl/Cmd + K` mở search
+
+### Tính Năng
+- 🔍 **Search**: Nhấn `Ctrl/Cmd + K`, gõ từ khóa
+- 🖨️ **Print**: Nút printer icon hoặc `Ctrl+P`
+- 📤 **Share**: Nút share để chia sẻ link
+- ⬆️ **Back to Top**: Nút tròn tím góc dưới phải
+
+---
+
+## 📁 Cấu Trúc Files
+
+```
+project/
+├── index.html             # ⭐ Trang web chính (9 sections)
+├── script.js              # JavaScript với 3 charts
+├── index-basic.html       # Phiên bản cơ bản (5 sections)
+├── script-basic.js        # JS cơ bản (2 charts)
+├── README.md              # File này
+├── README-FULL.md         # Documentation chi tiết
+├── CHANGELOG-SIDEBAR.md   # 🆕 Chi tiết update sidebar
+└── data/                  # Tài liệu gốc (5 files .txt)
+```
+
+### 🆕 **Update Mới Nhất**
+- ✅ **Fixed Sidebar** - Sidebar giờ cố định, không bị trôi khi scroll!
+- ✅ **Mobile Overlay** - Backdrop mờ khi mở menu mobile
+- ✅ **Custom Scrollbar** - Scrollbar đẹp hơn, mượt mà hơn
+- ✅ **Section Nghiên Cứu Đối Thủ** - Framework phân tích competitors & trends 🆕
+- 📖 Xem **CHANGELOG-SIDEBAR.md** để biết chi tiết!
+
+---
+
+## 🎨 Công Nghệ
+
+**Frontend:**
+- HTML5 Semantic
+- Tailwind CSS (CDN)
+- Vanilla JavaScript ES6+
+- Chart.js 4.x
+
+**Libraries:**
+- Font Awesome Icons
+- Google Fonts (Inter)
+- Web Share API
+- Intersection Observer
+
+---
+
+## 📊 Highlights Từng Section
+
+### 1. Tổng Quan
+- 📸 20,000+ ảnh/ngày
+- 👥 10,000+ khách hàng/năm  
+- 👨‍💼 150+ nhân sự
+- 📋 23 job feedback
+
+### 4. Phân Tích Feedback
+- **35%** lỗi do hiểu sai yêu cầu
+- **100%** lỗi ở Object Animation, Creative/Fantasy
+- Chi tiết 8 cases điển hình
+
+### 6. Kế Hoạch R&D
+- **Tuần 1-2**: Thiết lập nền tảng (4 tasks)
+- **Tuần 3-6**: Giải quyết 2 bài toán (~20 ngày)
+- **Tuần 7-12**: Tối ưu & Scale (training team)
+
+### 7. Platform Design
+- **3 tầng**: UI → AI Processing → Database
+- **6 modules**: Brief Analysis, Prompt Library, Tracking, Feedback, Automation, Training
+- Flowchart trực quan kiến trúc
+
+### 9. Vận Hành & QC
+- Quy trình 3 bên: R&D → QC → Team Video
+- Tiêu chí PASS: ≥80% yêu cầu, ≤50% thời gian
+- So sánh R&D vs Manual (4 tiêu chí)
+
+### 10. Nghiên Cứu Đối Thủ & Xu Hướng 🆕
+- **3 loại đối thủ**: Direct competitors, Content creators, AI tool providers
+- **Social media analysis**: YouTube, Instagram/TikTok, LinkedIn
+- **Lộ trình 3 giai đoạn**: Thu thập → Phân tích → Chiến lược
+- **Công việc hiện tại**: Competitor database, Social monitoring, Format analysis
+- **Hướng tương lai**: AI trends 2026, Content marketing, Partnerships
+- **Công cụ**: Monitoring, Analytics, Research, Automation tools
+- **Framework so sánh**: 7 tiêu chí đánh giá vs competitors
+- **Action items**: Next steps cụ thể tuần/tháng
+
+---
+
+## 🎨 Color Palette
+
+- **Primary**: Purple `#667eea → #764ba2`
+- **Secondary**: Blue `#3b82f6 → #1e40af`
+- **Success**: Green `#10b981 → #047857`
+- **Error**: Red `#ef4444 → #b91c1c`
+
+**Badges:**
+- 🔴 High (Red) - 🟡 Medium (Yellow) - 🔵 Low (Blue)
+- ✅ Completed (Green) - 🔄 Progress (Yellow) - ⏳ Pending (Gray)
+
+---
+
+## 🔧 Tùy Chỉnh
+
+### Thay màu chủ đạo
+Chỉnh trong `<style>` của `index.html`:
 ```css
-Gradient Orange: #FF6B35 → #FFA07A → #FFE5D9
-Background: #FFF5F0 → #FFE5D9 → #FFD4C4
-```
-
-### Đặc điểm giao diện
-- ✅ Responsive design (Mobile, Tablet, Desktop)
-- ✅ Modern gradient với tone cam ấm
-- ✅ Card-based layout với hover effects
-- ✅ Icons từ FontAwesome 6
-- ✅ Typography: Inter font family
-
----
-
-## 🛠️ Tech Stack
-
-### Backend
-- **Hono** ^4.11.7 - Lightweight web framework
-- **Cloudflare Pages** - Edge deployment platform
-- **TypeScript** - Type safety
-- **OpenAI SDK** - AI integration layer
-- **Multi-AI Support** - Gemini, GLM, OpenAI, Claude
-
-### Frontend
-- **Tailwind CSS** - Utility-first CSS (CDN)
-- **Vanilla JavaScript** - No framework overhead
-- **FontAwesome 6** - Icon library
-
-### Deployment
-- **Vercel** (Primary) - Frontend hosting
-- **Cloudflare Pages** (Alternative) - Edge deployment
-- **GitHub** - Version control & collaboration
-
----
-
-## 🚀 Cài đặt & Chạy
-
-### Prerequisites
-```bash
-- Node.js >= 18
-- npm >= 9
-```
-
-### Installation
-```bash
-# Clone repository
-git clone https://github.com/YOUR_USERNAME/fotober-rd-hub.git
-cd fotober-rd-hub
-
-# Install dependencies
-npm install
-
-# Development
-npm run dev
-# Mở: http://localhost:5173
-
-# Build
-npm run build
-
-# Preview production build
-npm run preview
-```
-
-### Deployment
-
-#### Deploy to Vercel
-```bash
-# Install Vercel CLI
-npm i -g vercel
-
-# Deploy
-vercel
-
-# Production deployment
-vercel --prod
-```
-
-#### Deploy to Cloudflare Pages
-```bash
-# Build first
-npm run build
-
-# Deploy
-npm run deploy
-
-# Or manually
-npx wrangler pages deploy dist --project-name fotober-rd-hub
-```
-
----
-
-## 🔌 API Documentation
-
-### AI Analysis Endpoints
-
-#### POST `/api/ai/analyze`
-Main AI analysis endpoint với multi-model support.
-
-**Request:**
-```json
-{
-  "type": "brief" | "error" | "prompt" | "general",
-  "input": "Nội dung cần phân tích",
-  "config": {
-    "provider": "gemini" | "glm" | "openai" | "claude",
-    "model": "gpt-5",
-    "temperature": 0.7,
-    "maxTokens": 2000
-  }
+.gradient-bg {
+    background: linear-gradient(135deg, #YOUR_COLOR 0%, #YOUR_COLOR 100%);
 }
 ```
 
-**Response:**
-```json
-{
-  "success": true,
-  "provider": "gemini",
-  "model": "gpt-5",
-  "result": {
-    "analysis": "Phân tích chi tiết...",
-    "effects": [...],
-    "suggestions": [...],
-    "risks": [...]
-  },
-  "tokens": {
-    "prompt": 150,
-    "completion": 350,
-    "total": 500
-  },
-  "timestamp": "2026-01-30T07:00:00.000Z"
-}
+### Cập nhật dữ liệu biểu đồ
+Chỉnh trong `script.js`:
+```javascript
+// Error Classification
+data: [8, 6, 5, 4]
+
+// Effect Error Rate  
+data: [71, 67, 100, 33, 33, 100, 100]
 ```
 
-#### Specialized Endpoints
-- `POST /api/ai/brief` - Brief analysis only
-- `POST /api/ai/error` - Error analysis only
-- `POST /api/ai/prompt` - Prompt generation only
-- `GET /api/ai/models` - Get available models
-
-#### Other Endpoints
-- `GET /api/documents` - List all documents
-- `GET /api/health` - Health check
+### Thêm section mới
+1. Thêm link trong sidebar navigation
+2. Tạo `<section id="new">` trong main content
+3. JavaScript auto-detect và highlight
 
 ---
 
-## 📂 Cấu trúc dự án
+## 📱 Responsive
 
-```
-fotober-rd-hub/
-├── public/
-│   └── static/           # Static assets
-│       ├── app.js        # Analytics frontend logic
-│       ├── ai-tools.js   # AI Tools frontend logic
-│       └── style.css     # Custom styles
-├── src/
-│   ├── index.tsx         # Main Hono app with AI routes
-│   ├── services/
-│   │   └── ai.ts         # AI Service Layer (Multi-Model)
-│   └── renderer.tsx      # JSX renderer
-├── dist/                 # Build output
-├── .dev.vars             # Local environment variables (gitignored)
-├── ecosystem.config.cjs  # PM2 configuration
-├── package.json          # Dependencies & scripts
-├── wrangler.jsonc        # Cloudflare Pages config
-├── vite.config.ts        # Vite build config
-├── tsconfig.json         # TypeScript config
-└── README.md             # This file
-```
+- **Mobile** (<768px): Menu ẩn, layout 1 cột
+- **Tablet** (768-1024px): Sidebar visible, 2 cột
+- **Desktop** (>1024px): Full layout, 3-4 cột
 
 ---
 
-## 📊 Dữ liệu Tổng hợp
+## 💡 Gợi Ý Mở Rộng
 
-### Thống kê chính (từ 5 tài liệu)
-
-| Metric | Giá trị |
-|--------|---------|
-| **Tổng tài liệu** | 5 documents |
-| **Job codes phân tích** | 23 jobs |
-| **Loại AI Effects** | 25+ types |
-| **AI Models hỗ trợ** | 4 models |
-| **Thời gian xây dựng** | Q1/2026 |
-
-### Phân bố vấn đề (23 job codes)
-
-| Nhóm lỗi | Tỷ lệ | Số jobs |
-|----------|-------|---------|
-| Hiểu sai yêu cầu | 35% | 8/23 |
-| Chất lượng AI output | 26% | 6/23 |
-| Trễ deadline | 22% | 5/23 |
-| Logic/Physics sai | 17% | 4/23 |
-
-### Tỷ lệ lỗi theo loại Effect
-
-| Loại Effect | Tỷ lệ lỗi | Risk Level |
-|-------------|-----------|------------|
-| Object Animation | 100% | ⚠️ Rất cao |
-| Creative/Fantasy | 100% | ⚠️ Rất cao |
-| Agent Composite | 100% | ⚠️ Rất cao |
-| Lifestyle/Người | 71% | ⚠️ Cao |
-| Season/Weather | 67% | ⚠️ Cao |
-| Day-to-Night | 33% | ✅ Trung bình |
-| Furniture Staging | 33% | ✅ Trung bình |
+### Có thể thêm:
+1. 🌙 **Dark Mode** - Toggle chế độ tối
+2. 📄 **Export PDF** - Xuất báo cáo
+3. 🌐 **Multi-language** - EN/VN switch
+4. 📊 **Data Filters** - Lọc biểu đồ
+5. 💬 **Comments** - Hệ thống bình luận
+6. 📈 **Analytics** - Google Analytics
+7. 📱 **PWA** - Progressive Web App
+8. 🔐 **Auth** - Login system
+9. 🗄️ **Backend** - API + Database
+10. 🔄 **Real-time** - WebSocket updates
 
 ---
 
-## 🔮 Roadmap phát triển
+## 🐛 Troubleshooting
 
-### ✅ Phase 1: MVP (Hoàn thành ✨)
-- [x] Khởi tạo project với Hono + Cloudflare
-- [x] Thiết kế UI/UX với gradient cam
-- [x] Trang chủ với dashboard tổng quan
-- [x] Navigation system
-- [x] Document viewer (basic)
-- [x] Analytics Dashboard với Chart.js
-- [x] **🎉 AI Integration LIVE - Multi-Model support**
+**Biểu đồ không hiển thị?**
+- ✅ Kiểm tra internet (Chart.js từ CDN)
+- ✅ Mở Console (F12) xem errors
+- ✅ Đảm bảo canvas IDs đúng
 
-### 🚧 Phase 2: Core Features (Đang phát triển)
-- [x] **AI API integration** (Gemini, GLM, OpenAI, Claude) ✅
-- [x] **AI Analysis Tools** với 4 loại phân tích ✅
-- [x] **Environment variables** (.dev.vars) ✅
-- [x] **Token tracking** & usage metrics ✅
-- [ ] D1 Database integration
-- [ ] Real document viewer với Markdown rendering
-- [ ] Upload/Download functionality
+**Menu mobile không hoạt động?**
+- ✅ Kiểm tra script.js đã load
+- ✅ Test trên Chrome/Safari/Firefox
+- ✅ Clear cache (Ctrl+Shift+R)
 
-### 🔜 Phase 3: Advanced Features
-- [ ] Prompt Library management
-- [ ] Error Pattern tracking
-- [ ] Brief Analysis automation
-- [ ] Trends monitoring
-- [ ] Real-time collaboration
+**Search không hoạt động?**
+- ✅ Nhấn Ctrl/Cmd + K
+- ✅ Gõ ít nhất 2 ký tự
+- ✅ Kiểm tra Console
 
 ---
 
-## 🤝 Đóng góp
+## 📞 Liên Hệ
 
-Dự án này được xây dựng cho Fotober Media Company. Mọi đóng góp cải tiến đều được chào đón!
-
-### Workflow
-1. Fork repository
-2. Create feature branch: `git checkout -b feature/amazing-feature`
-3. Commit changes: `git commit -m 'Add amazing feature'`
-4. Push to branch: `git push origin feature/amazing-feature`
-5. Open Pull Request
+**FOTOBER MEDIA COMPANY LIMITED**
+- 📧 Email: info@fotober.com
+- 📱 WhatsApp: +84 942 110 297
+- 🌐 Website: fotober.com
+- 📍 Hà Nội, Việt Nam
 
 ---
 
-## 📝 License
+## 📖 Documentation
 
-© 2026 Fotober Media Company Limited. All rights reserved.
-
----
-
-## 📞 Contact & Support
-
-- **Company:** Fotober Media Company Limited
-- **Location:** Hà Nội, Việt Nam
-- **Email:** info@fotober.com
-- **WhatsApp:** +84 942 110 297
-- **Website:** https://fotober.com
+Xem **README-FULL.md** để có:
+- ✅ Chi tiết đầy đủ 9 sections
+- ✅ Code examples và snippets
+- ✅ Advanced customization guide
+- ✅ Best practices & optimization
+- ✅ Troubleshooting chi tiết
 
 ---
 
-## 🙏 Acknowledgments
+## 📄 License
 
-- **Hono Framework** - Lightweight web framework
-- **Cloudflare** - Edge platform
-- **Tailwind CSS** - Utility-first CSS
-- **FontAwesome** - Icon library
-- **Vercel** - Deployment platform
+**Data**: Fotober internal & public sources  
+**Code**: MIT License  
+**Libraries**: Chart.js, Tailwind CSS, Font Awesome (respective licenses)
 
 ---
 
-**Built with ❤️ for R&D Excellence**
+## 🎯 Kết Luận
+
+Website này là công cụ toàn diện cho:
+- ✅ **R&D Specialist**: Lộ trình, công cụ, quy trình
+- ✅ **QC Team**: Tiêu chí đánh giá, so sánh outputs
+- ✅ **Team Video**: Training materials, best practices
+- ✅ **Management**: Overview, metrics, progress tracking
+
+**Để deploy:** Upload files lên hosting hoặc dùng tab **Publish**! 🚀
+
+---
+
+**Version**: 2.0.0 (Full Platform)  
+**Date**: 30/01/2026  
+**Status**: ✅ Production Ready  
+**Author**: AI Agent
+
+**Happy exploring! 🎨✨**

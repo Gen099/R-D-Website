@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Báo Cáo Phân Tích Hiện Trạng - AI Video BĐS Fotober</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .section-card {
+            transition: all 0.3s ease;
+        }
+        
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .stat-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+        
+        .stat-card:hover {
+            border-left-color: #667eea;
+            transform: scale(1.05);
+        }
+        
+        .nav-item {
+            transition: all 0.2s ease;
+        }
+        
+        .nav-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-item.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-left: 4px solid white;
+        }
+        
+        #sidebar {
+            transition: transform 0.3s ease;
+        }
+        
+        @media (max-width: 768px) {
+            #sidebar {
+                transform: translateX(-100%);
+            }
+            
+            #sidebar.active {
+                transform: translateX(0);
+            }
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin: 20px 0;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #667eea;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #667eea;
+        }
+        
+        .price-table {
+            overflow-x: auto;
+        }
+        
+        .price-table table {
+            min-width: 100%;
+        }
+        
+        @media (max-width: 640px) {
+            .chart-container {
+                height: 300px;
+            }
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-bold">Báo Cáo Phân Tích Hiện Trạng</h1>
+                    <p class="text-sm md:text-base text-purple-200 mt-1">AI Video trong Lĩnh vực Bất Động Sản - FOTOBER</p>
+                </div>
+                <button id="menuToggle" class="md:hidden text-white">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+            <div class="mt-4 flex flex-wrap gap-4 text-sm">
+                <div class="flex items-center">
+                    <i class="fas fa-calendar-alt mr-2"></i>
+                    <span>29/01/2026</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-database mr-2"></i>
+                    <span>23 Job Codes</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-users mr-2"></i>
+                    <span>150+ Nhân sự</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex">
+        <!-- Sidebar Navigation -->
+        <aside id="sidebar" class="fixed md:static inset-y-0 left-0 w-64 gradient-bg text-white overflow-y-auto shadow-2xl z-40 mt-0 md:mt-0">
+            <nav class="p-4 mt-4">
+                <h3 class="text-lg font-bold mb-4 px-4">Mục Lục</h3>
+                <ul class="space-y-2">
+                    <li><a href="#overview" class="nav-item block px-4 py-2 rounded">
+                        <i class="fas fa-home mr-2"></i>Tổng Quan
+                    </a></li>
+                    <li><a href="#company" class="nav-item block px-4 py-2 rounded">
+                        <i class="fas fa-building mr-2"></i>Công Ty Fotober
+                    </a></li>
+                    <li><a href="#services" class="nav-item block px-4 py-2 rounded">
+                        <i class="fas fa-concierge-bell mr-2"></i>Dịch Vụ
+                    </a></li>
+                    <li><a href="#feedback" class="nav-item block px-4 py-2 rounded">
+                        <i class="fas fa-chart-bar mr-2"></i>Phân Tích Feedback
+                    </a></li>
+                    <li><a href="#research" class="nav-item block px-4 py-2 rounded">
+                        <i class="fas fa-flask mr-2"></i>Bài Toán Nghiên Cứu
+                    </a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-4 md:p-8">
+            <!-- Overview Section -->
+            <section id="overview" class="mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-chart-line mr-3 text-purple-600"></i>
+                    Tổng Quan Dự Án
+                </h2>
+                
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="stat-card bg-white rounded-lg shadow-md p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm">Ảnh xử lý/ngày</p>
+                                <h3 class="text-3xl font-bold text-purple-600 mt-2">20,000+</h3>
+                            </div>
+                            <i class="fas fa-images text-4xl text-purple-200"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card bg-white rounded-lg shadow-md p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm">Khách hàng/năm</p>
+                                <h3 class="text-3xl font-bold text-blue-600 mt-2">10,000+</h3>
+                            </div>
+                            <i class="fas fa-user-friends text-4xl text-blue-200"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card bg-white rounded-lg shadow-md p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm">Nhân sự</p>
+                                <h3 class="text-3xl font-bold text-green-600 mt-2">150+</h3>
+                            </div>
+                            <i class="fas fa-users text-4xl text-green-200"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card bg-white rounded-lg shadow-md p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500 text-sm">Job Codes</p>
+                                <h3 class="text-3xl font-bold text-red-600 mt-2">23</h3>
+                            </div>
+                            <i class="fas fa-tasks text-4xl text-red-200"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Sources -->
+                <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">
+                        <i class="fas fa-database mr-2 text-purple-600"></i>
+                        Nguồn Dữ Liệu
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-file-excel text-green-500 mt-1 mr-3"></i>
+                            <span><strong>[Video] Feedback AI.xlsx</strong> - 23 job codes với feedback chi tiết</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-file-word text-blue-500 mt-1 mr-3"></i>
+                            <span><strong>Bài toán AI_Fotober.docx</strong> - 2 bài toán nghiên cứu AI Agent</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-file-excel text-green-500 mt-1 mr-3"></i>
+                            <span><strong>Video-Price_Updated.xlsx</strong> - Bảng giá dịch vụ chi tiết</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-globe text-purple-500 mt-1 mr-3"></i>
+                            <span><strong>fotober.com</strong> - Website công ty và nguồn công khai</span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Company Section -->
+            <section id="company" class="mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-building mr-3 text-purple-600"></i>
+                    Công Ty Fotober
+                </h2>
+
+                <!-- Company Info -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Thông Tin Cơ Bản</h3>
+                        <table class="w-full">
+                            <tr class="border-b">
+                                <td class="py-3 font-semibold text-gray-700">Tên đầy đủ</td>
+                                <td class="py-3 text-gray-600">FOTOBER MEDIA COMPANY LIMITED</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="py-3 font-semibold text-gray-700">Trụ sở</td>
+                                <td class="py-3 text-gray-600">Hà Nội, Việt Nam</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="py-3 font-semibold text-gray-700">Năm thành lập</td>
+                                <td class="py-3 text-gray-600">2016</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="py-3 font-semibold text-gray-700">Email</td>
+                                <td class="py-3 text-gray-600">info@fotober.com</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 font-semibold text-gray-700">WhatsApp</td>
+                                <td class="py-3 text-gray-600">+84 942 110 297</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Thị Trường Chính</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <i class="fas fa-flag-usa text-3xl text-blue-600 mr-4"></i>
+                                <span class="text-lg">Hoa Kỳ</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-globe-asia text-3xl text-green-600 mr-4"></i>
+                                <span class="text-lg">Úc</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-globe-europe text-3xl text-purple-600 mr-4"></i>
+                                <span class="text-lg">Châu Âu</span>
+                            </div>
+                        </div>
+                        <div class="mt-6 pt-6 border-t">
+                            <h4 class="font-semibold text-gray-700 mb-2">Khách hàng tiêu biểu:</h4>
+                            <ul class="list-disc list-inside text-gray-600 space-y-1">
+                                <li>Compass</li>
+                                <li>Ray White</li>
+                                <li>Raine & Horne</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-6">Lịch Sử Phát Triển</h3>
+                    <div class="relative border-l-2 border-purple-300 ml-4 space-y-6">
+                        <div class="timeline-item relative pl-6">
+                            <div class="bg-purple-50 rounded-lg p-4">
+                                <div class="flex items-center mb-2">
+                                    <span class="bg-purple-600 text-white px-3 py-1 rounded-full text-sm font-bold">2016</span>
+                                </div>
+                                <p class="text-gray-700">Thành lập bởi 5 chuyên gia chỉnh sửa ảnh. Phục vụ 50 khách hàng/tháng với dịch vụ chỉnh sửa cơ bản.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item relative pl-6">
+                            <div class="bg-blue-50 rounded-lg p-4">
+                                <div class="flex items-center mb-2">
+                                    <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-bold">2018</span>
+                                </div>
+                                <p class="text-gray-700">Mở rộng đội ngũ lên 30 thành viên. Thêm dịch vụ Virtual Staging và Day-to-Dusk.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item relative pl-6">
+                            <div class="bg-green-50 rounded-lg p-4">
+                                <div class="flex items-center mb-2">
+                                    <span class="bg-green-600 text-white px-3 py-1 rounded-full text-sm font-bold">2020</span>
+                                </div>
+                                <p class="text-gray-700">Chuyển hướng tập trung vào chỉnh sửa ảnh 360 độ và biên tập video.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item relative pl-6">
+                            <div class="bg-yellow-50 rounded-lg p-4">
+                                <div class="flex items-center mb-2">
+                                    <span class="bg-yellow-600 text-white px-3 py-1 rounded-full text-sm font-bold">2022</span>
+                                </div>
+                                <p class="text-gray-700">Đạt 100+ nhân viên. Phục vụ 10,000 khách hàng toàn cầu mỗi năm.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item relative pl-6">
+                            <div class="bg-red-50 rounded-lg p-4">
+                                <div class="flex items-center mb-2">
+                                    <span class="bg-red-600 text-white px-3 py-1 rounded-full text-sm font-bold">2024-2025</span>
+                                </div>
+                                <p class="text-gray-700">Mở rộng lên 150+ nhân viên. Tích hợp công cụ AI. Mở rộng thị trường mới.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Core Values -->
+                <div class="bg-white rounded-lg shadow-md p-6 mt-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-6">Giá Trị Cốt Lõi</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="border-l-4 border-purple-500 pl-4">
+                            <h4 class="font-bold text-gray-800 mb-2">Cam kết xuất sắc</h4>
+                            <p class="text-sm text-gray-600">Cung cấp dịch vụ chỉnh sửa ảnh hàng đầu, hướng đến sự hoàn hảo trong mọi dự án</p>
+                        </div>
+                        <div class="border-l-4 border-blue-500 pl-4">
+                            <h4 class="font-bold text-gray-800 mb-2">Lấy khách hàng làm trung tâm</h4>
+                            <p class="text-sm text-gray-600">Ưu tiên sự hài lòng của khách hàng, liên tục lắng nghe phản hồi để cải thiện</p>
+                        </div>
+                        <div class="border-l-4 border-green-500 pl-4">
+                            <h4 class="font-bold text-gray-800 mb-2">Đổi mới và thích ứng</h4>
+                            <p class="text-sm text-gray-600">Áp dụng công cụ tiên tiến, thích nghi với nhu cầu thay đổi của khách hàng</p>
+                        </div>
+                        <div class="border-l-4 border-yellow-500 pl-4">
+                            <h4 class="font-bold text-gray-800 mb-2">Chất lượng và độ tin cậy</h4>
+                            <p class="text-sm text-gray-600">Cung cấp kết quả chất lượng cao nhất quán với độ chính xác cao</p>
+                        </div>
+                        <div class="border-l-4 border-red-500 pl-4">
+                            <h4 class="font-bold text-gray-800 mb-2">Hiệu quả và tốc độ</h4>
+                            <p class="text-sm text-gray-600">Đảm bảo giao hàng đúng hạn trong ngành nhiếp ảnh và bất động sản</p>
+                        </div>
+                        <div class="border-l-4 border-indigo-500 pl-4">
+                            <h4 class="font-bold text-gray-800 mb-2">Giá cả hợp lý</h4>
+                            <p class="text-sm text-gray-600">Duy trì chất lượng cao với mức giá phù hợp cho nhiều đối tượng</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Services Section -->
+            <section id="services" class="mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-concierge-bell mr-3 text-purple-600"></i>
+                    Danh Mục Dịch Vụ
+                </h2>
+
+                <!-- Photo Editing Services -->
+                <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">
+                        <i class="fas fa-camera mr-2 text-blue-600"></i>
+                        Dịch Vụ Chỉnh Sửa Ảnh Bất Động Sản
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="border-l-4 border-blue-400 pl-4 py-2">
+                            <h4 class="font-semibold text-gray-800">HDR Blending</h4>
+                            <p class="text-sm text-gray-600">Ghép nhiều ảnh với độ phơi sáng khác nhau</p>
+                        </div>
+                        <div class="border-l-4 border-purple-400 pl-4 py-2">
+                            <h4 class="font-semibold text-gray-800">Day-to-Dusk</h4>
+                            <p class="text-sm text-gray-600">Chuyển đổi ảnh chụp ban ngày thành ảnh hoàng hôn</p>
+                        </div>
+                        <div class="border-l-4 border-green-400 pl-4 py-2">
+                            <h4 class="font-semibold text-gray-800">Sky Replacement</h4>
+                            <p class="text-sm text-gray-600">Thay thế bầu trời xám xịt bằng trời đẹp</p>
+                        </div>
+                        <div class="border-l-4 border-red-400 pl-4 py-2">
+                            <h4 class="font-semibold text-gray-800">Item/Clutter Removal</h4>
+                            <p class="text-sm text-gray-600">Xóa các vật thể không mong muốn</p>
+                        </div>
+                        <div class="border-l-4 border-yellow-400 pl-4 py-2">
+                            <h4 class="font-semibold text-gray-800">Color & Exposure Correction</h4>
+                            <p class="text-sm text-gray-600">Cân bằng màu sắc, chỉnh độ sáng</p>
+                        </div>
+                        <div class="border-l-4 border-indigo-400 pl-4 py-2">
+                            <h4 class="font-semibold text-gray-800">360 Panorama Editing</h4>
+                            <p class="text-sm text-gray-600">Ghép và tăng cường ảnh panorama</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video Editing Services -->
+                <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">
+                        <i class="fas fa-video mr-2 text-red-600"></i>
+                        Dịch Vụ Biên Tập Video
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead class="bg-gray-100">
+                                <tr>
+                                    <th class="px-4 py-3 text-left font-semibold">Gói dịch vụ</th>
+                                    <th class="px-4 py-3 text-left font-semibold">Giá</th>
+                                    <th class="px-4 py-3 text-left font-semibold">Phụ phí</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y">
+                                <tr>
+                                    <td class="px-4 py-3 font-medium">Basic Editing</td>
+                                    <td class="px-4 py-3 text-green-600 font-bold">$27/video</td>
+                                    <td class="px-4 py-3">+$10/phút tiếp theo</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-3 font-medium">Standard Editing</td>
+                                    <td class="px-4 py-3 text-blue-600 font-bold">$35/video</td>
+                                    <td class="px-4 py-3">+$15/phút tiếp theo</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+                        <h4 class="font-semibold text-gray-800 mb-2">Tính năng bao gồm:</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-gray-700">
+                            <div><i class="fas fa-check text-green-600 mr-2"></i>Chọn lọc và sắp xếp footage</div>
+                            <div><i class="fas fa-check text-green-600 mr-2"></i>Cắt ghép chuyên nghiệp</div>
+                            <div><i class="fas fa-check text-green-600 mr-2"></i>Chỉnh méo ống kính</div>
+                            <div><i class="fas fa-check text-green-600 mr-2"></i>Phân màu và cân bằng màu</div>
+                            <div><i class="fas fa-check text-green-600 mr-2"></i>Chống rung video</div>
+                            <div><i class="fas fa-check text-green-600 mr-2"></i>Thêm Intro/Outro</div>
+                            <div><i class="fas fa-check text-green-600 mr-2"></i>Hiệu ứng Speed ramp</div>
+                            <div><i class="fas fa-check text-green-600 mr-2"></i>3 lần chỉnh sửa</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Effects Pricing -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">
+                        <i class="fas fa-magic mr-2 text-purple-600"></i>
+                        Hiệu Ứng & Yêu Cầu Bổ Sung
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="border rounded-lg p-4 hover:shadow-lg transition">
+                            <h4 class="font-semibold text-gray-800 mb-1">Time-lapse Effect</h4>
+                            <p class="text-2xl font-bold text-purple-600">$20-25</p>
+                            <p class="text-xs text-gray-500">per effect</p>
+                        </div>
+                        <div class="border rounded-lg p-4 hover:shadow-lg transition">
+                            <h4 class="font-semibold text-gray-800 mb-1">Animated Text</h4>
+                            <p class="text-2xl font-bold text-blue-600">$1.5</p>
+                            <p class="text-xs text-gray-500">per text (từ cái thứ 3)</p>
+                        </div>
+                        <div class="border rounded-lg p-4 hover:shadow-lg transition">
+                            <h4 class="font-semibold text-gray-800 mb-1">Sky Replacement</h4>
+                            <p class="text-2xl font-bold text-green-600">$15</p>
+                            <p class="text-xs text-gray-500">per footage</p>
+                        </div>
+                        <div class="border rounded-lg p-4 hover:shadow-lg transition">
+                            <h4 class="font-semibold text-gray-800 mb-1">Call-out/Highlights</h4>
+                            <p class="text-2xl font-bold text-red-600">$10</p>
+                            <p class="text-xs text-gray-500">per footage</p>
+                        </div>
+                        <div class="border rounded-lg p-4 hover:shadow-lg transition">
+                            <h4 class="font-semibold text-gray-800 mb-1">Voice Over</h4>
+                            <p class="text-2xl font-bold text-yellow-600">$15</p>
+                            <p class="text-xs text-gray-500">per video</p>
+                        </div>
+                        <div class="border rounded-lg p-4 hover:shadow-lg transition">
+                            <h4 class="font-semibold text-gray-800 mb-1">Advanced Stabilization</h4>
+                            <p class="text-2xl font-bold text-indigo-600">$10</p>
+                            <p class="text-xs text-gray-500">per clip (Gyroflow)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Feedback Analysis Section -->
+            <section id="feedback" class="mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-chart-bar mr-3 text-purple-600"></i>
+                    Phân Tích Feedback AI Video
+                </h2>
+
+                <!-- Error Statistics -->
+                <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Phân Loại Lỗi Theo Nhóm</h3>
+                    <div class="chart-container">
+                        <canvas id="errorChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Error Details -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">
+                            <i class="fas fa-exclamation-triangle text-red-600 mr-2"></i>
+                            Top Lỗi Phổ Biến
+                        </h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-3 bg-red-50 rounded">
+                                <span class="font-medium">Hiểu sai yêu cầu</span>
+                                <span class="bg-red-600 text-white px-3 py-1 rounded-full text-sm font-bold">35%</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-orange-50 rounded">
+                                <span class="font-medium">Chất lượng AI kém</span>
+                                <span class="bg-orange-600 text-white px-3 py-1 rounded-full text-sm font-bold">26%</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-yellow-50 rounded">
+                                <span class="font-medium">Trễ deadline</span>
+                                <span class="bg-yellow-600 text-white px-3 py-1 rounded-full text-sm font-bold">22%</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-blue-50 rounded">
+                                <span class="font-medium">Logic không hợp lý</span>
+                                <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-bold">17%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">
+                            <i class="fas fa-chart-pie text-purple-600 mr-2"></i>
+                            Tỷ Lệ Lỗi Theo Hiệu Ứng
+                        </h3>
+                        <div class="chart-container" style="height: 300px;">
+                            <canvas id="effectErrorChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Error Cases -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Chi Tiết Lỗi: Hiểu Sai Yêu Cầu Khách Hàng</h3>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-red-500 pl-4 py-2 bg-red-50">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-bold text-gray-800">TADEC31004</span>
+                                <span class="text-xs bg-red-200 text-red-800 px-2 py-1 rounded">Hiểu sai context</span>
+                            </div>
+                            <p class="text-sm text-gray-700"><strong>Yêu cầu:</strong> Hiệu ứng 4 mùa - chuyển từ hiện trạng sang mùa xuân</p>
+                            <p class="text-sm text-gray-700"><strong>Thực tế:</strong> Làm từ tuyết sang mùa xuân</p>
+                            <p class="text-sm text-red-600 italic">"we don't get snow here..."</p>
+                        </div>
+
+                        <div class="border-l-4 border-orange-500 pl-4 py-2 bg-orange-50">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-bold text-gray-800">HTJAN15008Rev</span>
+                                <span class="text-xs bg-orange-200 text-orange-800 px-2 py-1 rounded">Thiếu yếu tố</span>
+                            </div>
+                            <p class="text-sm text-gray-700"><strong>Yêu cầu:</strong> "preparing dinner" - chuẩn bị bữa tối (có người nấu)</p>
+                            <p class="text-sm text-gray-700"><strong>Thực tế:</strong> Chỉ có bàn ăn với đồ ăn, không có người</p>
+                        </div>
+
+                        <div class="border-l-4 border-yellow-500 pl-4 py-2 bg-yellow-50">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-bold text-gray-800">LIJAN07001</span>
+                                <span class="text-xs bg-yellow-200 text-yellow-800 px-2 py-1 rounded">Logic sai</span>
+                            </div>
+                            <p class="text-sm text-gray-700"><strong>Yêu cầu:</strong> Quân cờ di chuyển theo quy luật cờ vua thực tế</p>
+                            <p class="text-sm text-gray-700"><strong>Thực tế:</strong> Quân cờ nhảy lên đánh nhau</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customer Feedback Quote -->
+                <div class="bg-gradient-to-r from-red-50 to-orange-50 border-l-4 border-red-500 rounded-lg p-6 mt-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-3">
+                        <i class="fas fa-quote-left text-red-500 mr-2"></i>
+                        Feedback Từ Khách Hàng Cao Cấp
+                    </h3>
+                    <p class="text-gray-700 italic mb-2">
+                        "While there is clearly a lot of potential, I feel that the AI tool currently being used is not yet mature enough for the level of narrative control, visual coherence, and refinement that I am looking for."
+                    </p>
+                    <p class="text-sm text-gray-600">— Job CAJAN21001rev7</p>
+                </div>
+            </section>
+
+            <!-- Research Section -->
+            <section id="research" class="mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-flask mr-3 text-purple-600"></i>
+                    Bài Toán Nghiên Cứu AI Agent
+                </h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Research Problem 1 -->
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-purple-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mr-3">1</div>
+                            <h3 class="text-xl font-bold text-gray-800">Thay Agent trong Video Có Sẵn</h3>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-700 mb-2">Input:</h4>
+                            <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
+                                <li>Video done (hoàn chỉnh)</li>
+                                <li>Ảnh Agent mới</li>
+                            </ul>
+                        </div>
+
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-700 mb-2">Output:</h4>
+                            <p class="text-sm text-gray-600">Video với Agent mới thay thế</p>
+                        </div>
+
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-700 mb-2">Yêu cầu kỹ thuật:</h4>
+                            <div class="space-y-2">
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span class="text-sm text-gray-600">Giữ nguyên không gian, background, vật thể xung quanh</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span class="text-sm text-gray-600">Agent nói đúng nội dung video</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span class="text-sm text-gray-600">Biểu cảm tự nhiên, không bị AI face</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span class="text-sm text-gray-600">Giữ nguyên chất lượng video</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-purple-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-gray-700 mb-2">Ví dụ Action:</h4>
+                            <p class="text-sm text-gray-600 italic">"Hi, welcome to this beautiful home. This property features a bright open layout, modern finishes..."</p>
+                        </div>
+                    </div>
+
+                    <!-- Research Problem 2 -->
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold mr-3">2</div>
+                            <h3 class="text-xl font-bold text-gray-800">Tạo Video Footage từ Ảnh Tĩnh</h3>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-700 mb-2">Input:</h4>
+                            <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
+                                <li>Ảnh tĩnh các phòng</li>
+                                <li>Script chi tiết</li>
+                            </ul>
+                        </div>
+
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-700 mb-2">Output:</h4>
+                            <p class="text-sm text-gray-600">5-7 đoạn video footage</p>
+                        </div>
+
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-700 mb-2">Yêu cầu kỹ thuật:</h4>
+                            <div class="space-y-2">
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span class="text-sm text-gray-600">Agent đứng nói theo script</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span class="text-sm text-gray-600">Chuyển động nhẹ (bước đi 1-2 bước)</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span class="text-sm text-gray-600">Giữ nguyên bối cảnh trong ảnh</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span class="text-sm text-gray-600">Lip-sync đúng nội dung</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span class="text-sm text-gray-600">Không giảm chất lượng hình ảnh</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-blue-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-gray-700 mb-2">Ví dụ Action:</h4>
+                            <p class="text-sm text-gray-600 italic">"Hey guys, this is Steven with Superior Custom Homes. We're here in Park City, Utah..."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resource Links -->
+                <div class="bg-white rounded-lg shadow-md p-6 mt-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">
+                        <i class="fas fa-link mr-2 text-purple-600"></i>
+                        Tài Nguyên Tham Khảo
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="border rounded-lg p-4">
+                            <h4 class="font-semibold text-gray-800 mb-2">Bài Toán 1 - Input</h4>
+                            <a href="https://www.dropbox.com/scl/fo/hxrm9ggzzoiqh9a7cusdk/ALSujZioqdzdFqS5elMvJag" 
+                               class="text-blue-600 hover:underline text-sm break-all" target="_blank">
+                                <i class="fas fa-external-link-alt mr-1"></i>Xem Footage
+                            </a>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h4 class="font-semibold text-gray-800 mb-2">Bài Toán 1 - Output</h4>
+                            <a href="https://www.dropbox.com/scl/fi/hg8k7r8z09slci6avwiz2/MHOCT29005_output.mp4" 
+                               class="text-blue-600 hover:underline text-sm break-all" target="_blank">
+                                <i class="fas fa-external-link-alt mr-1"></i>Xem Video Done
+                            </a>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h4 class="font-semibold text-gray-800 mb-2">Bài Toán 2 - Input</h4>
+                            <a href="https://www.dropbox.com/scl/fo/f3btrh1him55m8f2l5nmx/AFmiDU-TBIQNJo3OwvixwZI" 
+                               class="text-blue-600 hover:underline text-sm break-all" target="_blank">
+                                <i class="fas fa-external-link-alt mr-1"></i>Xem Ảnh Tĩnh
+                            </a>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <h4 class="font-semibold text-gray-800 mb-2">Bài Toán 2 - Output</h4>
+                            <a href="https://www.dropbox.com/scl/fi/wl6w0pz3mjjj121ltl5gq/Output.mp4" 
+                               class="text-blue-600 hover:underline text-sm break-all" target="_blank">
+                                <i class="fas fa-external-link-alt mr-1"></i>Xem Output Mẫu
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="gradient-bg text-white py-6 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-2">Báo Cáo Phân Tích Hiện Trạng - AI Video BĐS Fotober</p>
+            <p class="text-sm text-purple-200">Ngày lập: 29/01/2026 | Nguồn: Dữ liệu nội bộ & công khai</p>
+            <div class="mt-4 flex justify-center space-x-4">
+                <a href="mailto:info@fotober.com" class="hover:text-purple-200">
+                    <i class="fas fa-envelope"></i> info@fotober.com
+                </a>
+                <span>|</span>
+                <span>
+                    <i class="fab fa-whatsapp"></i> +84 942 110 297
+                </span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
