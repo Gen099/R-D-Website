@@ -1,0 +1,980 @@
+# KẾ HOẠCH CÔNG VIỆC R&D AI VIDEO
+## FOTOBER - Q1/2026
+
+---
+
+**Vị trí:** R&D Specialist - AI Video & Prompt Engineering
+**Ngày bắt đầu:** 29/01/2026
+**Phạm vi:** Nghiên cứu, tối ưu quy trình AI Video, giải quyết bài toán kỹ thuật
+
+---
+
+# PHẦN 1: XÁC ĐỊNH VAI TRÒ VÀ PHẠM VI
+
+## 1.1. Vai trò cốt lõi
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    R&D SPECIALIST - AI VIDEO                    │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  NHIỆM VỤ CHÍNH:                                               │
+│  ├── Nghiên cứu & phát triển Prompt cho AI Video               │
+│  ├── Tối ưu hóa quy trình tạo video AI                        │
+│  ├── Giải quyết các bài toán kỹ thuật (Bài 1 & Bài 2)         │
+│  ├── So sánh output R&D vs Team Video → Chuyển giao quy trình │
+│  └── Xây dựng hệ thống automation thu thập thông tin          │
+│                                                                 │
+│  KHÔNG BAO GỒM:                                                │
+│  ├── Định giá dịch vụ                                         │
+│  ├── Bán hàng, tư vấn khách hàng                             │
+│  └── Quản lý nhân sự                                          │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+## 1.2. Mối quan hệ với Team Video
+
+```
+           ┌─────────────┐
+           │  R&D AI     │
+           │  Specialist │
+           └──────┬──────┘
+                  │
+    ┌─────────────┼─────────────┐
+    │             │             │
+    ▼             ▼             ▼
+┌────────┐  ┌──────────┐  ┌──────────┐
+│Nghiên  │  │So sánh   │  │Chuyển    │
+│cứu     │──│Output    │──│giao quy  │
+│Prompt  │  │R&D vs    │  │trình cho │
+│& Tool  │  │Team Video│  │Team Video│
+└────────┘  └──────────┘  └──────────┘
+```
+
+---
+
+# PHẦN 2: DANH SÁCH CÔNG VIỆC (TODO LIST)
+
+## 2.1. GIAI ĐOẠN 1: THIẾT LẬP NỀN TẢNG (Tuần 1-2)
+
+### Mục tiêu: Hiểu rõ hiện trạng, thiết lập công cụ làm việc
+
+| STT | Công việc | Chi tiết | Ưu tiên | Thời gian |
+|-----|-----------|----------|---------|-----------|
+| 1.1 | Phân tích 23 job feedback | Đọc kỹ từng case, phân loại pattern lỗi, ghi chú prompt gốc (nếu có) | Cao | 2 ngày |
+| 1.2 | Thiết lập môi trường công cụ AI | Đăng ký/cấu hình: Kling AI, Veo, Runway Gen-3, Pika Labs, Luma | Cao | 1 ngày |
+| 1.3 | Tạo Prompt Testing Sheet | Google Sheet theo dõi: prompt → output → đánh giá → cải tiến | Cao | 0.5 ngày |
+| 1.4 | Xây dựng Automation Crawler | Code tool thu thập thông tin từ đối thủ và mạng xã hội | Trung bình | 3 ngày |
+| 1.5 | Tạo thư viện tài liệu tham khảo | Tổng hợp tutorial, research paper, best practices | Trung bình | 1 ngày |
+
+### Checklist Tuần 1-2:
+
+```
+□ Hoàn thành phân tích 23 job feedback
+□ Có access đầy đủ các công cụ AI Video
+□ Prompt Testing Sheet hoạt động
+□ Automation Crawler v1.0 chạy được
+□ Thư viện tài liệu có ít nhất 20 nguồn
+```
+
+---
+
+## 2.2. GIAI ĐOẠN 2: GIẢI QUYẾT BÀI TOÁN 1 & 2 (Tuần 3-6)
+
+### Mục tiêu: Tự tạo output, so sánh với Team Video, viết quy trình tối ưu
+
+### 2.2.1. Bài toán 1: Thay Agent trong video có sẵn
+
+| STT | Công việc | Chi tiết | Ưu tiên | Thời gian |
+|-----|-----------|----------|---------|-----------|
+| 2.1.1 | Tải và phân tích input | Download footage từ Dropbox, phân tích video gốc: độ dài, chất lượng, góc quay, ánh sáng | Cao | 0.5 ngày |
+| 2.1.2 | Phân tích ảnh Agent mới | Đánh giá chất lượng ảnh, góc chụp, trang phục, khả năng tương thích | Cao | 0.5 ngày |
+| 2.1.3 | Nghiên cứu kỹ thuật thay Agent | Tìm hiểu: Face swap, body transfer, roto + composite, full AI regeneration | Cao | 2 ngày |
+| 2.1.4 | Thử nghiệm phương pháp 1: Face Swap | Dùng công cụ face swap + lip-sync riêng | Cao | 2 ngày |
+| 2.1.5 | Thử nghiệm phương pháp 2: Roto + AI Generate | Tách background, generate agent riêng, composite | Cao | 2 ngày |
+| 2.1.6 | Thử nghiệm phương pháp 3: Full AI Regeneration | Generate lại toàn bộ với reference video | Trung bình | 2 ngày |
+| 2.1.7 | Đánh giá và chọn phương pháp tối ưu | So sánh chất lượng, tốc độ, khả năng nhân rộng | Cao | 1 ngày |
+| 2.1.8 | Viết quy trình hoàn chỉnh | Document step-by-step với prompt templates | Cao | 1 ngày |
+
+### 2.2.2. Bài toán 2: Tạo video từ ảnh tĩnh (Image-to-Video Agent)
+
+| STT | Công việc | Chi tiết | Ưu tiên | Thời gian |
+|-----|-----------|----------|---------|-----------|
+| 2.2.1 | Tải và phân tích input | Download ảnh từ Dropbox, phân tích: độ phân giải, ánh sáng, bố cục | Cao | 0.5 ngày |
+| 2.2.2 | Chuẩn bị audio từ script | Dùng ElevenLabs hoặc tương tự tạo voice-over cho 6 cảnh | Cao | 0.5 ngày |
+| 2.2.3 | Thử nghiệm Kling AI | Test với từng cảnh, đánh giá lip-sync, chuyển động | Cao | 2 ngày |
+| 2.2.4 | Thử nghiệm Veo 3.1 | Test với từng cảnh, đánh giá chất lượng cinematic | Cao | 2 ngày |
+| 2.2.5 | Thử nghiệm Runway Gen-3 | Test với từng cảnh, đánh giá controllability | Trung bình | 1 ngày |
+| 2.2.6 | So sánh output các công cụ | Bảng so sánh: chất lượng, tốc độ, consistency, lip-sync accuracy | Cao | 1 ngày |
+| 2.2.7 | Tối ưu prompt cho từng cảnh | Viết prompt template cho 6 loại cảnh (Intro, Kitchen, Entertainment...) | Cao | 2 ngày |
+| 2.2.8 | Tạo 5-7 footage hoàn chỉnh | Output cuối cùng theo yêu cầu bài toán | Cao | 2 ngày |
+| 2.2.9 | Viết quy trình hoàn chỉnh | Document step-by-step với prompt templates | Cao | 1 ngày |
+
+### Checklist Tuần 3-6:
+
+```
+□ Bài 1: Có output hoàn chỉnh với Agent mới
+□ Bài 1: Đã test ít nhất 3 phương pháp khác nhau
+□ Bài 1: Có quy trình step-by-step
+□ Bài 2: Có 5-7 footage hoàn chỉnh
+□ Bài 2: Đã test ít nhất 3 công cụ AI
+□ Bài 2: Có prompt template cho 6 loại cảnh
+□ Có bảng so sánh output R&D vs Team Video (nếu có output của Team)
+```
+
+---
+
+## 2.3. GIAI ĐOẠN 3: PHÂN TÍCH VÀ CẢI THIỆN PROMPT (Tuần 7-10)
+
+### Mục tiêu: Giải quyết vấn đề prompt từ 23 job feedback, xây dựng Prompt Library
+
+### 2.3.1. Phân tích vấn đề Prompt hiện tại
+
+| STT | Công việc | Chi tiết | Ưu tiên | Thời gian |
+|-----|-----------|----------|---------|-----------|
+| 3.1.1 | Thu thập prompt gốc từ Team Video | Liên hệ Team Video lấy prompt đã dùng cho 23 job | Cao | 1 ngày |
+| 3.1.2 | Phân loại prompt theo loại effect | Nhóm theo: Lifestyle, Season, Day-Night, Object, Creative, Agent | Cao | 1 ngày |
+| 3.1.3 | Xác định pattern lỗi trong prompt | Mapping: lỗi output → nguyên nhân trong prompt | Cao | 2 ngày |
+| 3.1.4 | Tái tạo case lỗi với prompt gốc | Chạy lại prompt gốc, xác nhận reproduce được lỗi | Cao | 3 ngày |
+| 3.1.5 | Viết prompt cải tiến cho từng case | Sửa prompt, chạy lại, so sánh output | Cao | 5 ngày |
+| 3.1.6 | Document kết quả A/B test | Bảng so sánh: prompt gốc vs prompt cải tiến | Cao | 1 ngày |
+
+### 2.3.2. Xây dựng Prompt Library
+
+| STT | Công việc | Chi tiết | Ưu tiên | Thời gian |
+|-----|-----------|----------|---------|-----------|
+| 3.2.1 | Thiết kế cấu trúc Prompt Library | Notion/Confluence với taxonomy rõ ràng | Cao | 1 ngày |
+| 3.2.2 | Viết Prompt Template: Day-to-Night | 3-5 templates với variations | Cao | 1 ngày |
+| 3.2.3 | Viết Prompt Template: Season Change | 3-5 templates theo mùa | Cao | 1 ngày |
+| 3.2.4 | Viết Prompt Template: Lifestyle (ít người) | Templates cho 1-2 người, actions đơn giản | Cao | 2 ngày |
+| 3.2.5 | Viết Prompt Template: Furniture Animation | Pop-in, slide-in effects | Trung bình | 1 ngày |
+| 3.2.6 | Viết Prompt Template: Agent Composite | Agent đứng, nói, chuyển động nhẹ | Cao | 2 ngày |
+| 3.2.7 | Viết hướng dẫn sử dụng Prompt Library | Document cho Team Video | Cao | 1 ngày |
+
+### Checklist Tuần 7-10:
+
+```
+□ Thu thập được prompt gốc từ ít nhất 15/23 job
+□ Có bảng mapping: lỗi → nguyên nhân prompt
+□ Đã viết prompt cải tiến cho ít nhất 10 case
+□ Có kết quả A/B test với số liệu cụ thể
+□ Prompt Library có ít nhất 20 templates
+□ Có hướng dẫn sử dụng cho Team Video
+```
+
+---
+
+## 2.4. GIAI ĐOẠN 4: XÂY DỰNG QUY TRÌNH VÀ AUTOMATION (Tuần 11-14)
+
+### Mục tiêu: Chuẩn hóa workflow, xây dựng công cụ hỗ trợ
+
+### 2.4.1. Chuẩn hóa Workflow
+
+| STT | Công việc | Chi tiết | Ưu tiên | Thời gian |
+|-----|-----------|----------|---------|-----------|
+| 4.1.1 | Thiết kế workflow chuẩn: Brief → Output | Flowchart từ nhận brief đến delivery | Cao | 2 ngày |
+| 4.1.2 | Tạo Brief Confirmation Template | Checklist để Team Video confirm trước khi làm | Cao | 1 ngày |
+| 4.1.3 | Tạo QC Checklist cho AI Output | Checklist kiểm tra trước khi gửi khách | Cao | 1 ngày |
+| 4.1.4 | Thiết kế hệ thống phân loại Effect | Tiêu chí phân loại độ khó, tool phù hợp | Cao | 1 ngày |
+| 4.1.5 | Viết SOP cho từng loại Effect | Standard Operating Procedure chi tiết | Cao | 5 ngày |
+| 4.1.6 | Training document cho Team Video | Tài liệu đào tạo về prompt và workflow mới | Cao | 2 ngày |
+
+### 2.4.2. Xây dựng Automation Tools
+
+| STT | Công việc | Chi tiết | Ưu tiên | Thời gian |
+|-----|-----------|----------|---------|-----------|
+| 4.2.1 | Automation: Crawler đối thủ | Script thu thập samples, pricing, services từ đối thủ | Trung bình | 3 ngày |
+| 4.2.2 | Automation: Crawler mạng xã hội | Script thu thập AI video trends từ Instagram, TikTok, YouTube | Trung bình | 3 ngày |
+| 4.2.3 | Automation: Prompt Testing Pipeline | Script batch test prompts, log kết quả tự động | Cao | 3 ngày |
+| 4.2.4 | Automation: Quality Scoring Tool | Script đánh giá chất lượng output (nếu khả thi) | Thấp | 2 ngày |
+| 4.2.5 | Dashboard theo dõi research | Notion/Airtable tổng hợp thông tin thu thập | Trung bình | 1 ngày |
+
+### Checklist Tuần 11-14:
+
+```
+□ Workflow chuẩn được document hoàn chỉnh
+□ Brief Confirmation Template sẵn sàng
+□ QC Checklist sẵn sàng
+□ SOP cho ít nhất 5 loại Effect phổ biến
+□ Training document hoàn chỉnh
+□ Crawler đối thủ hoạt động
+□ Crawler mạng xã hội hoạt động
+□ Prompt Testing Pipeline hoạt động
+```
+
+---
+
+## 2.5. GIAI ĐOẠN 5: CHUYỂN GIAO VÀ THEO DÕI (Tuần 15-16)
+
+### Mục tiêu: Chuyển giao quy trình cho Team Video, theo dõi kết quả
+
+| STT | Công việc | Chi tiết | Ưu tiên | Thời gian |
+|-----|-----------|----------|---------|-----------|
+| 5.1 | Họp chuyển giao với Team Video | Present quy trình mới, demo Prompt Library | Cao | 0.5 ngày |
+| 5.2 | Training session | Hướng dẫn hands-on cho Team Video | Cao | 1 ngày |
+| 5.3 | Pilot run với 5 job mới | Team Video áp dụng quy trình mới, R&D hỗ trợ | Cao | 5 ngày |
+| 5.4 | Thu thập feedback pilot | Ghi nhận vấn đề, điều chỉnh quy trình | Cao | 1 ngày |
+| 5.5 | Điều chỉnh và finalize quy trình | Update dựa trên feedback thực tế | Cao | 2 ngày |
+| 5.6 | Báo cáo kết quả R&D | Document toàn bộ kết quả, đo lường impact | Cao | 1 ngày |
+
+### Checklist Tuần 15-16:
+
+```
+□ Hoàn thành training cho Team Video
+□ Pilot run 5 job với quy trình mới
+□ Thu thập feedback và điều chỉnh
+□ Báo cáo kết quả R&D hoàn chỉnh
+□ Quy trình mới được approve để áp dụng
+```
+
+---
+
+# PHẦN 3: NGUỒN NGHIÊN CỨU VÀ CÔNG CỤ
+
+## 3.1. Danh sách công cụ AI Video cần sử dụng
+
+| Công cụ | Mục đích | Link | Ghi chú |
+|---------|----------|------|---------|
+| Kling AI | Lip-sync, Image-to-Video | https://klingai.com | Tốt cho Agent speaking |
+| Veo 2/3.1 (Google) | Cinematic video generation | Qua Vertex AI hoặc VideoFX | Chất lượng cao |
+| Runway Gen-3 | Fast generation, controllable | https://runwayml.com | Tốc độ nhanh |
+| Pika Labs | Stylized motion | https://pika.art | Creative effects |
+| Luma Dream Machine | 3D understanding | https://lumalabs.ai | Interior walkthroughs |
+| ElevenLabs | Voice generation | https://elevenlabs.io | Tạo audio từ script |
+| HeyGen | Avatar video | https://heygen.com | Alternative lip-sync |
+| Nano Banana Pro | Image generation | Theo tool hiện tại của Fotober | Tạo ảnh staging |
+
+## 3.2. Nguồn nghiên cứu về Prompt Engineering
+
+| Nguồn | Loại | Link | Nội dung |
+|-------|------|------|----------|
+| Runway Prompt Guide | Documentation | https://docs.runwayml.com | Official prompt guidelines |
+| Kling AI Tutorials | Video | YouTube | Techniques và tips |
+| r/StableDiffusion | Community | Reddit | Community prompts |
+| Civitai | Community | https://civitai.com | Prompt examples |
+| PromptHero | Database | https://prompthero.com | Prompt library |
+| AI Video Community Discord | Community | Discord servers | Real-time discussions |
+
+## 3.3. Nguồn theo dõi đối thủ
+
+| Đối thủ | Website | Social Media | Mục đích theo dõi |
+|---------|---------|--------------|-------------------|
+| Esoft | https://esoft.com | LinkedIn, YouTube | Services, AI integration |
+| BoxBrownie | https://boxbrownie.com | Instagram, Facebook | Samples, pricing |
+| Phixer | https://phixer.net | Instagram | AI Phixer tool |
+| PhotoUp | https://photoup.net | YouTube | Tutorials |
+| Imagtor | https://imagtor.com | LinkedIn | Vietnam competitor |
+| Beatcolor | https://beatcolor.com | Facebook | Vietnam competitor |
+
+## 3.4. Nguồn theo dõi trends
+
+| Nền tảng | Hashtags/Keywords | Mục đích |
+|----------|-------------------|----------|
+| Instagram | #realestatevideo, #aivideo, #propertyvideo | Samples, trends |
+| TikTok | #aieffects, #realestate, #virtualstaging | Viral effects |
+| YouTube | "AI video real estate", "Kling tutorial" | Tutorials, techniques |
+| LinkedIn | Real estate marketing, AI video | Industry insights |
+| Twitter/X | #AIvideo, #GenAI | Tool updates, news |
+
+---
+
+# PHẦN 4: AUTOMATION CRAWLER - THIẾT KẾ
+
+## 4.1. Crawler đối thủ
+
+### 4.1.1. Mục tiêu
+
+Thu thập tự động:
+- Samples video/ảnh từ website và social media đối thủ
+- Thông tin dịch vụ, features mới
+- Blog posts về AI, techniques
+
+### 4.1.2. Thiết kế kỹ thuật
+
+```python
+# Cấu trúc Crawler đối thủ (Pseudocode)
+
+COMPETITORS = [
+    {"name": "Esoft", "website": "esoft.com", "instagram": "@esoft"},
+    {"name": "BoxBrownie", "website": "boxbrownie.com", "instagram": "@boxbrownie"},
+    # ...
+]
+
+CRAWL_TARGETS = [
+    "website/services",      # Trang dịch vụ
+    "website/blog",          # Blog posts
+    "instagram/recent_posts", # 20 posts gần nhất
+    "youtube/recent_videos"   # 10 videos gần nhất
+]
+
+def crawl_competitor(competitor):
+    results = {
+        "services": crawl_services_page(competitor["website"]),
+        "blog_posts": crawl_blog(competitor["website"]),
+        "instagram": crawl_instagram(competitor["instagram"]),
+        "youtube": crawl_youtube(competitor["name"])
+    }
+    return results
+
+def save_to_database(results):
+    # Lưu vào Notion/Airtable/Google Sheets
+    pass
+
+def run_daily():
+    for competitor in COMPETITORS:
+        results = crawl_competitor(competitor)
+        save_to_database(results)
+        notify_if_new_content(results)
+```
+
+### 4.1.3. Output mong đợi
+
+```
+COMPETITOR_INSIGHTS/
+├── esoft/
+│   ├── services_2026-01-29.json
+│   ├── blog_posts.json
+│   └── social_media/
+│       ├── instagram_posts.json
+│       └── youtube_videos.json
+├── boxbrownie/
+│   └── ...
+└── weekly_report.md
+```
+
+## 4.2. Crawler mạng xã hội (Trends)
+
+### 4.2.1. Mục tiêu
+
+Thu thập:
+- Video AI real estate viral
+- Hashtags trending
+- Techniques mới được chia sẻ
+
+### 4.2.2. Thiết kế kỹ thuật
+
+```python
+# Cấu trúc Crawler Social Media (Pseudocode)
+
+PLATFORMS = ["instagram", "tiktok", "youtube"]
+
+SEARCH_QUERIES = [
+    "AI real estate video",
+    "property video effects",
+    "virtual staging video",
+    "AI agent video",
+    "real estate transitions"
+]
+
+HASHTAGS = [
+    "#realestatevideo",
+    "#aivideo", 
+    "#propertytour",
+    "#virtualstaging",
+    "#aieffects"
+]
+
+def crawl_trends():
+    for platform in PLATFORMS:
+        for query in SEARCH_QUERIES:
+            results = search_platform(platform, query)
+            filter_by_engagement(results, min_likes=1000)
+            save_samples(results)
+        
+        for hashtag in HASHTAGS:
+            results = search_hashtag(platform, hashtag)
+            filter_recent(results, days=7)
+            save_samples(results)
+
+def analyze_trends(results):
+    # Phân tích: effects phổ biến, techniques, tools được đề cập
+    pass
+```
+
+### 4.2.3. Output mong đợi
+
+```
+TRENDS/
+├── weekly/
+│   ├── 2026-W05/
+│   │   ├── top_videos.json
+│   │   ├── trending_effects.md
+│   │   └── samples/
+│   │       ├── video_001.mp4
+│   │       └── video_002.mp4
+└── monthly_report.md
+```
+
+## 4.3. Prompt Testing Pipeline
+
+### 4.3.1. Mục tiêu
+
+Tự động hóa việc test prompt:
+- Batch run nhiều prompts
+- Log kết quả tự động
+- So sánh versions
+
+### 4.3.2. Thiết kế kỹ thuật
+
+```python
+# Cấu trúc Prompt Testing (Pseudocode)
+
+PROMPT_TESTS = [
+    {
+        "id": "lifestyle_001",
+        "category": "lifestyle",
+        "prompt_v1": "A family...",
+        "prompt_v2": "A happy family...",
+        "input_image": "living_room.jpg",
+        "tool": "kling"
+    },
+    # ...
+]
+
+def run_prompt_test(test):
+    # Chạy prompt với công cụ AI
+    output_v1 = generate_video(test["tool"], test["prompt_v1"], test["input_image"])
+    output_v2 = generate_video(test["tool"], test["prompt_v2"], test["input_image"])
+    
+    # Lưu output
+    save_output(test["id"], "v1", output_v1)
+    save_output(test["id"], "v2", output_v2)
+    
+    # Log metadata
+    log_result(test["id"], {
+        "generation_time_v1": output_v1.time,
+        "generation_time_v2": output_v2.time,
+        "status": "completed"
+    })
+
+def batch_run():
+    for test in PROMPT_TESTS:
+        run_prompt_test(test)
+    generate_comparison_report()
+```
+
+### 4.3.3. Output mong đợi
+
+```
+PROMPT_TESTS/
+├── lifestyle/
+│   ├── test_001/
+│   │   ├── input.jpg
+│   │   ├── prompt_v1.txt
+│   │   ├── prompt_v2.txt
+│   │   ├── output_v1.mp4
+│   │   ├── output_v2.mp4
+│   │   └── metadata.json
+│   └── test_002/
+│       └── ...
+├── day_to_night/
+│   └── ...
+└── comparison_report.md
+```
+
+---
+
+# PHẦN 5: QUY TRÌNH SO SÁNH OUTPUT R&D VS TEAM VIDEO
+
+## 5.1. Quy trình thực hiện
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│              QUY TRÌNH SO SÁNH OUTPUT                          │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  BƯỚC 1: LẤY INPUT ĐẦU VÀO                                     │
+│  ├── Download input từ job feedback (link Dropbox)             │
+│  ├── Ghi nhận yêu cầu gốc của khách                           │
+│  └── Lấy prompt gốc từ Team Video (nếu có)                    │
+│                                                                 │
+│  BƯỚC 2: R&D TỰ TẠO OUTPUT                                     │
+│  ├── Viết prompt cải tiến                                      │
+│  ├── Generate video với công cụ AI                            │
+│  ├── Ghi nhận thời gian xử lý                                 │
+│  └── Lưu output và metadata                                   │
+│                                                                 │
+│  BƯỚC 3: LẤY OUTPUT CỦA TEAM VIDEO                             │
+│  ├── Download output từ job (link Dropbox)                    │
+│  └── Ghi nhận thời gian xử lý (nếu có)                        │
+│                                                                 │
+│  BƯỚC 4: SO SÁNH THEO TIÊU CHÍ                                │
+│  ├── Chất lượng: độ phân giải, artifacts, tự nhiên            │
+│  ├── Tốc độ: thời gian từ input đến output                    │
+│  ├── Prompt: cấu trúc, chi tiết, hiệu quả                     │
+│  └── Đáp ứng yêu cầu: so với brief gốc                        │
+│                                                                 │
+│  BƯỚC 5: KẾT LUẬN VÀ CHUYỂN GIAO                              │
+│  ├── Nếu R&D tốt hơn → Viết quy trình mới                     │
+│  ├── Document sự khác biệt                                    │
+│  └── Chuyển giao cho Team Video                               │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+## 5.2. Bảng so sánh mẫu
+
+| Tiêu chí | Team Video | R&D | Ghi chú |
+|----------|------------|-----|---------|
+| **CHẤT LƯỢNG** | | | |
+| Độ phân giải | [Ghi nhận] | [Ghi nhận] | |
+| Artifacts/lỗi | [Ghi nhận] | [Ghi nhận] | |
+| Độ tự nhiên | [1-10] | [1-10] | |
+| Lip-sync accuracy | [1-10] | [1-10] | |
+| Đáp ứng yêu cầu brief | [%] | [%] | |
+| **TỐC ĐỘ** | | | |
+| Thời gian xử lý | [phút] | [phút] | |
+| Số lần generate | [lần] | [lần] | |
+| **PROMPT** | | | |
+| Độ dài prompt | [từ] | [từ] | |
+| Cấu trúc | [Mô tả] | [Mô tả] | |
+| Negative prompt | [Có/Không] | [Có/Không] | |
+| **KẾT LUẬN** | | | |
+| Output tốt hơn | [Team Video / R&D / Ngang nhau] | | |
+| Cần chuyển giao | [Có/Không] | | |
+
+## 5.3. Template báo cáo so sánh
+
+```markdown
+# BÁO CÁO SO SÁNH OUTPUT
+## Job Code: [XXX]
+
+### 1. THÔNG TIN JOB
+- Yêu cầu gốc: [Copy từ feedback]
+- Feedback khách: [Copy từ feedback]
+- Loại effect: [Phân loại]
+
+### 2. INPUT
+- Link: [Dropbox link]
+- Mô tả: [Ảnh/Video gì, kích thước, chất lượng]
+
+### 3. OUTPUT TEAM VIDEO
+- Link: [Dropbox link]
+- Prompt đã dùng: [Copy nếu có]
+- Thời gian xử lý: [Nếu biết]
+- Đánh giá: [Mô tả vấn đề]
+
+### 4. OUTPUT R&D
+- Link: [Link output R&D]
+- Prompt đã dùng: [Copy prompt]
+- Công cụ: [Kling/Veo/...]
+- Thời gian xử lý: [Ghi nhận]
+- Đánh giá: [Mô tả]
+
+### 5. SO SÁNH
+| Tiêu chí | Team Video | R&D |
+|----------|------------|-----|
+| Chất lượng | X/10 | X/10 |
+| Đáp ứng yêu cầu | X% | X% |
+| Tốc độ | X phút | X phút |
+
+### 6. KẾT LUẬN
+- Output tốt hơn: [Team Video / R&D]
+- Lý do: [Giải thích]
+- Prompt cải tiến (nếu R&D tốt hơn): [Copy prompt]
+
+### 7. QUY TRÌNH ĐỀ XUẤT (nếu R&D tốt hơn)
+[Step-by-step hướng dẫn]
+```
+
+---
+
+# PHẦN 6: PROMPT LIBRARY - CẤU TRÚC
+
+## 6.1. Taxonomy phân loại
+
+```
+PROMPT_LIBRARY/
+├── 01_DAY_TO_NIGHT/
+│   ├── exterior_house.md
+│   ├── interior_room.md
+│   └── transitions.md
+├── 02_SEASON_CHANGE/
+│   ├── winter_to_spring.md
+│   ├── summer_to_fall.md
+│   └── current_to_spring.md
+├── 03_LIFESTYLE/
+│   ├── single_person.md
+│   ├── couple.md
+│   ├── family_small.md
+│   └── kitchen_cooking.md
+├── 04_FURNITURE_ANIMATION/
+│   ├── pop_in.md
+│   ├── slide_in.md
+│   └── fade_in.md
+├── 05_AGENT_COMPOSITE/
+│   ├── standing_talking.md
+│   ├── walking_talking.md
+│   └── gesturing.md
+├── 06_WEATHER_EFFECTS/
+│   ├── rain.md
+│   ├── snow.md
+│   └── sunrays.md
+├── 07_SKY_REPLACEMENT/
+│   ├── cloudy_to_blue.md
+│   ├── day_to_sunset.md
+│   └── animated_clouds.md
+└── 00_GUIDELINES/
+    ├── prompt_structure.md
+    ├── negative_prompts.md
+    ├── tool_specific_tips.md
+    └── common_mistakes.md
+```
+
+## 6.2. Template cho mỗi Prompt
+
+```markdown
+# [TÊN PROMPT TEMPLATE]
+
+## Thông tin
+- **Loại**: [Day-to-Night / Lifestyle / ...]
+- **Công cụ phù hợp**: [Kling / Veo / Runway]
+- **Độ khó**: [Dễ / Trung bình / Khó]
+- **Tỷ lệ thành công**: [%] (dựa trên test)
+
+## Prompt Master
+
+```
+[PROMPT CHÍNH]
+```
+
+## Negative Prompt
+
+```
+[NEGATIVE PROMPT]
+```
+
+## Variations
+
+### Variation 1: [Mô tả]
+```
+[Prompt variation 1]
+```
+
+### Variation 2: [Mô tả]
+```
+[Prompt variation 2]
+```
+
+## Hướng dẫn sử dụng
+1. [Bước 1]
+2. [Bước 2]
+3. [Bước 3]
+
+## Lưu ý quan trọng
+- [Lưu ý 1]
+- [Lưu ý 2]
+
+## Ví dụ output
+- Link: [Link sample output]
+- Mô tả: [Mô tả output]
+
+## Lịch sử cập nhật
+| Ngày | Thay đổi | Người cập nhật |
+|------|----------|----------------|
+| [Date] | [Change] | [Name] |
+```
+
+---
+
+# PHẦN 7: QC CHECKLIST VÀ WORKFLOW TEMPLATES
+
+## 7.1. QC Checklist cho AI Output
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│              QC CHECKLIST - AI VIDEO OUTPUT                     │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  KIỂM TRA KỸ THUẬT                                             │
+│  □ Độ phân giải đúng yêu cầu (1080p / 4K)                     │
+│  □ Không có artifacts (nhiễu, vỡ hình)                        │
+│  □ Không có watermark/logo công cụ AI (Gemini, Kling,...)     │
+│  □ Không bị cắt xén bất thường                                │
+│  □ Duration đủ dài theo yêu cầu                               │
+│                                                                 │
+│  KIỂM TRA NGƯỜI/NHÂN VẬT                                       │
+│  □ Mặt không bị biến dạng                                     │
+│  □ Đủ số ngón tay (5 ngón mỗi bàn tay)                       │
+│  □ Tỷ lệ cơ thể tự nhiên                                      │
+│  □ Trang phục phù hợp (không bikini cho nam nếu không yêu cầu)│
+│  □ Lip-sync chính xác (nếu có lời nói)                        │
+│  □ Hành vi/cử chỉ phù hợp ngữ cảnh                           │
+│                                                                 │
+│  KIỂM TRA BỐI CẢNH                                             │
+│  □ Background giữ nguyên (nếu yêu cầu)                        │
+│  □ Ánh sáng nhất quán                                         │
+│  □ Perspective (phối cảnh) đúng                               │
+│  □ Vật thể không biến mất/xuất hiện bất thường               │
+│                                                                 │
+│  KIỂM TRA VẬT LÝ/LOGIC                                         │
+│  □ Chuyển động hợp lý (không bay, không xuyên tường)         │
+│  □ Hướng di chuyển đúng                                       │
+│  □ Hiệu ứng đúng vị trí (nước từ vòi, không từ không khí)    │
+│  □ Thời tiết/mùa phù hợp context địa phương                  │
+│                                                                 │
+│  KIỂM TRA ĐỐI CHIẾU BRIEF                                      │
+│  □ Đúng loại effect yêu cầu                                   │
+│  □ Đủ số lượng effect/cảnh yêu cầu                           │
+│  □ Đúng đối tượng/vật thể yêu cầu                            │
+│  □ Đúng hành động yêu cầu                                     │
+│                                                                 │
+│  KẾT QUẢ: □ ĐẠT    □ CẦN SỬA    □ KHÔNG ĐẠT                  │
+│  Ghi chú: _____________________________________________        │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+## 7.2. Brief Confirmation Template
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│              BRIEF CONFIRMATION - AI EFFECT                     │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  JOB CODE: ________________    NGÀY: ________________          │
+│                                                                 │
+│  1. LOẠI EFFECT                                                │
+│  □ Day-to-Night    □ Season Change    □ Lifestyle             │
+│  □ Furniture       □ Agent            □ Weather               │
+│  □ Sky             □ Object Animation □ Creative/Khác         │
+│                                                                 │
+│  2. YÊU CẦU CHI TIẾT (viết lại bằng tiếng Việt)               │
+│  ___________________________________________________________   │
+│  ___________________________________________________________   │
+│  ___________________________________________________________   │
+│                                                                 │
+│  3. CÂU HỎI CẦN CONFIRM VỚI SALE/KHÁCH                        │
+│  □ Context địa phương (có tuyết không, mùa nào,...)           │
+│  □ Số lượng người cụ thể                                      │
+│  □ Hành động cụ thể (preparing = có người làm)                │
+│  □ Hướng di chuyển/transition                                 │
+│  □ Duration mong muốn                                         │
+│  □ Khác: ____________________________________________         │
+│                                                                 │
+│  4. CÔNG CỤ DỰ KIẾN SỬ DỤNG                                   │
+│  □ Kling    □ Veo    □ Runway    □ Pika    □ Khác: ________  │
+│                                                                 │
+│  5. ƯỚC TÍNH THỜI GIAN                                        │
+│  Số effect: _______    Thời gian/effect: _______              │
+│  Tổng thời gian dự kiến: _______                              │
+│                                                                 │
+│  6. XÁC NHẬN                                                   │
+│  Người confirm: ________________                               │
+│  Đã confirm với Sale: □ Có    □ Chưa cần                      │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+## 7.3. Workflow chuẩn: Brief đến Output
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│              WORKFLOW: BRIEF → OUTPUT                           │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  BƯỚC 1: NHẬN VÀ PHÂN TÍCH BRIEF (15-30 phút)                 │
+│  ├── Đọc kỹ yêu cầu gốc                                       │
+│  ├── Điền Brief Confirmation Template                          │
+│  ├── Xác định loại effect và độ khó                           │
+│  ├── Confirm với Sale nếu có điểm không rõ                    │
+│  └── Ước tính thời gian                                       │
+│                                                                 │
+│  BƯỚC 2: CHUẨN BỊ INPUT (15-30 phút)                          │
+│  ├── Download và kiểm tra chất lượng input                    │
+│  ├── Phân tích ánh sáng, góc độ, bố cục                      │
+│  └── Chuẩn bị thêm assets nếu cần (audio, reference)         │
+│                                                                 │
+│  BƯỚC 3: CHỌN PROMPT TỪ LIBRARY (5-15 phút)                   │
+│  ├── Tra cứu Prompt Library theo loại effect                  │
+│  ├── Chọn template phù hợp nhất                              │
+│  └── Customize theo yêu cầu cụ thể                           │
+│                                                                 │
+│  BƯỚC 4: GENERATE (Tùy công cụ)                               │
+│  ├── Chạy prompt với công cụ đã chọn                         │
+│  ├── Generate 2-3 takes để có lựa chọn                       │
+│  └── Ghi nhận thời gian và kết quả mỗi take                  │
+│                                                                 │
+│  BƯỚC 5: QC NỘI BỘ (10-20 phút)                               │
+│  ├── Chạy QC Checklist                                        │
+│  ├── So sánh với brief                                        │
+│  ├── Nếu KHÔNG ĐẠT → Quay lại Bước 3 hoặc 4                  │
+│  └── Nếu ĐẠT → Tiếp tục                                      │
+│                                                                 │
+│  BƯỚC 6: OUTPUT VÀ LOG (10 phút)                              │
+│  ├── Export đúng format và quality                            │
+│  ├── Đặt tên file theo convention                             │
+│  ├── Upload lên Dropbox/Drive                                 │
+│  └── Log vào Prompt Testing Sheet                             │
+│                                                                 │
+│  THỜI GIAN TỔNG CỘNG ƯỚC TÍNH:                                │
+│  ├── Effect đơn giản (Day-Night, Sky): 1-2 giờ               │
+│  ├── Effect trung bình (Furniture, Season): 2-3 giờ          │
+│  └── Effect phức tạp (Lifestyle, Agent): 3-5 giờ             │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+# PHẦN 8: TIMELINE TỔNG HỢP
+
+## 8.1. Gantt Chart đơn giản
+
+```
+TUẦN:    1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16
+         |----|----|----|----|----|----|----|----|----|----|----|----|----|----|----| 
+
+GIAI ĐOẠN 1: Thiết lập nền tảng
+         [====]
+
+GIAI ĐOẠN 2: Giải quyết Bài toán 1 & 2
+              [===================]
+
+GIAI ĐOẠN 3: Phân tích và cải thiện Prompt
+                                  [===================]
+
+GIAI ĐOẠN 4: Xây dựng quy trình và Automation
+                                                      [===================]
+
+GIAI ĐOẠN 5: Chuyển giao và theo dõi
+                                                                          [====]
+```
+
+## 8.2. Milestones chính
+
+| Tuần | Milestone | Deliverable |
+|------|-----------|-------------|
+| 2 | Hoàn thành thiết lập | Automation Crawler v1.0, Prompt Testing Sheet |
+| 4 | Hoàn thành Bài toán 1 | Output video với Agent mới, Quy trình documented |
+| 6 | Hoàn thành Bài toán 2 | 5-7 footage, Prompt templates cho 6 cảnh |
+| 8 | Hoàn thành phân tích Prompt | Bảng mapping lỗi → nguyên nhân, A/B test results |
+| 10 | Hoàn thành Prompt Library | 20+ templates, Hướng dẫn sử dụng |
+| 14 | Hoàn thành Workflow & Automation | SOP, QC Checklist, Training document, Automation tools |
+| 16 | Hoàn thành chuyển giao | Team Video áp dụng quy trình mới, Báo cáo kết quả |
+
+---
+
+# PHẦN 9: METRICS ĐO LƯỜNG
+
+## 9.1. KPIs cho R&D Specialist
+
+| Metric | Cách đo | Mục tiêu sau 4 tháng |
+|--------|---------|----------------------|
+| Số prompt templates hoàn thành | Đếm trong Prompt Library | ≥ 20 templates |
+| Tỷ lệ thành công prompt | Output đạt QC / Tổng lần generate | ≥ 70% |
+| Số job được phân tích | Đếm báo cáo so sánh | ≥ 15 jobs |
+| Số quy trình chuyển giao | Đếm SOP được Team Video áp dụng | ≥ 5 SOPs |
+| Thời gian giảm cho Team Video | So sánh trước/sau quy trình mới | Giảm ≥ 20% |
+| Automation tools hoạt động | Đếm tools chạy ổn định | ≥ 3 tools |
+
+## 9.2. Tracking Sheet
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│              R&D PROGRESS TRACKER                               │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  TUẦN: _______    NGÀY CẬP NHẬT: _______                       │
+│                                                                 │
+│  PROMPT TESTING                                                 │
+│  ├── Số prompt đã test: _______                                │
+│  ├── Tỷ lệ thành công: _______%                                │
+│  └── Công cụ test nhiều nhất: _______                          │
+│                                                                 │
+│  BÀI TOÁN 1                                                    │
+│  ├── Trạng thái: □ Chưa bắt đầu  □ Đang làm  □ Hoàn thành     │
+│  ├── Phương pháp đang test: _______                            │
+│  └── Kết quả hiện tại: _______                                 │
+│                                                                 │
+│  BÀI TOÁN 2                                                    │
+│  ├── Trạng thái: □ Chưa bắt đầu  □ Đang làm  □ Hoàn thành     │
+│  ├── Số footage hoàn thành: _______/7                          │
+│  └── Kết quả hiện tại: _______                                 │
+│                                                                 │
+│  PROMPT LIBRARY                                                │
+│  ├── Số templates hoàn thành: _______/20                       │
+│  └── Loại còn thiếu: _______                                   │
+│                                                                 │
+│  AUTOMATION                                                    │
+│  ├── Crawler đối thủ: □ Chưa  □ Đang build  □ Hoạt động       │
+│  ├── Crawler social: □ Chưa  □ Đang build  □ Hoạt động        │
+│  └── Testing pipeline: □ Chưa  □ Đang build  □ Hoạt động      │
+│                                                                 │
+│  VẤN ĐỀ GẶP PHẢI TUẦN NÀY:                                    │
+│  ___________________________________________________________   │
+│                                                                 │
+│  KẾ HOẠCH TUẦN TỚI:                                           │
+│  ___________________________________________________________   │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+# PHẦN 10: TỔNG KẾT
+
+## 10.1. Tóm tắt công việc theo nhóm
+
+### Nhóm 1: Nghiên cứu & Phát triển Prompt
+
+- Phân tích prompt hiện tại từ 23 job feedback
+- Xác định pattern lỗi và nguyên nhân
+- Viết prompt cải tiến và A/B test
+- Xây dựng Prompt Library với 20+ templates
+- Document hướng dẫn sử dụng
+
+### Nhóm 2: Giải quyết Bài toán kỹ thuật
+
+- Bài toán 1: Thay Agent trong video có sẵn
+- Bài toán 2: Tạo video từ ảnh tĩnh (Image-to-Video Agent)
+- Test nhiều phương pháp và công cụ
+- So sánh output R&D vs Team Video
+- Viết quy trình tối ưu
+
+### Nhóm 3: Xây dựng Automation
+
+- Crawler theo dõi đối thủ
+- Crawler thu thập trends từ mạng xã hội
+- Prompt Testing Pipeline
+- Dashboard tổng hợp
+
+### Nhóm 4: Chuẩn hóa Quy trình
+
+- Workflow chuẩn: Brief → Output
+- Brief Confirmation Template
+- QC Checklist
+- SOP cho từng loại Effect
+- Training document cho Team Video
+
+### Nhóm 5: Chuyển giao
+
+- Training session cho Team Video
+- Pilot run với job thực tế
+- Thu thập feedback và điều chỉnh
+- Báo cáo kết quả R&D
+
+## 10.2. Ưu tiên theo thứ tự
+
+1. **Cao nhất:** Giải quyết Bài toán 1 & 2 (có output so sánh được)
+2. **Cao:** Phân tích prompt từ feedback, viết prompt cải tiến
+3. **Cao:** Xây dựng Prompt Library
+4. **Trung bình:** Automation Crawler
+5. **Trung bình:** Chuẩn hóa Workflow và SOP
+
+## 10.3. Tài nguyên cần thiết
+
+| Tài nguyên | Chi tiết |
+|------------|----------|
+| Access công cụ AI | Kling, Veo, Runway, Pika, Luma, ElevenLabs |
+| Dữ liệu nội bộ | Prompt gốc từ Team Video, input/output các job feedback |
+| Phần mềm | Python, Notion/Confluence, Google Sheets |
+| Server/Cloud | Nếu cần chạy automation liên tục |
+| Thời gian phối hợp | Với Team Video để lấy data và chuyển giao |
+
+---
+
+**Kết thúc Kế hoạch Công việc**
+
+*Tài liệu này là kế hoạch làm việc cho vị trí R&D Specialist - AI Video, tập trung vào nghiên cứu prompt, giải quyết bài toán kỹ thuật, và tối ưu quy trình cho Team Video.*

@@ -1,0 +1,913 @@
+# TÀI LIỆU KỸ THUẬT
+## DANH MỤC HIỆU ỨNG, MOTION, ADD-ON VÀ QUY TRÌNH SẢN XUẤT VIDEO
+### FOTOBER - TEAM VIDEO
+
+---
+
+**Ngày lập:** 29/01/2026
+**Phạm vi:** Tổng hợp từ dữ liệu nội bộ
+**Nguồn dữ liệu:**
+- File "Bản sao của Video-Price_Updated.xlsx"
+- File "[Video] Feedback AI.xlsx"
+- Website fotober.com
+
+---
+
+# PHẦN 1: TỔNG QUAN DỊCH VỤ VIDEO
+
+## 1.1. Phân loại dịch vụ theo cấp độ
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│              CẤU TRÚC DỊCH VỤ VIDEO - FOTOBER                  │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  CẤP 1: GÓI BIÊN TẬP CƠ BẢN                                   │
+│  ├── Basic Editing ($27/video dưới 1 phút)                    │
+│  └── Standard Editing ($35/video dưới 1 phút)                 │
+│                                                                 │
+│  CẤP 2: HIỆU ỨNG BỔ SUNG (ADD-ON)                             │
+│  ├── Motion Graphics (đồ họa chuyển động)                     │
+│  ├── Effects (hiệu ứng đặc biệt)                              │
+│  ├── Transitions (chuyển cảnh)                                │
+│  └── Audio (âm thanh)                                          │
+│                                                                 │
+│  CẤP 3: HIỆU ỨNG AI                                           │
+│  └── AI Effects (yêu cầu check với team trước khi nhận)       │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 1, 2*
+
+---
+
+# PHẦN 2: GÓI BIÊN TẬP CƠ BẢN
+
+## 2.1. Basic Editing (Biên tập cơ bản)
+
+**Giá:** $27/video (dưới 1 phút) + $10/phút tiếp theo
+
+**Điều kiện input:**
+- Dưới 50 clip nguồn, hoặc
+- 15 phút footage thô (RAW), hoặc
+- Dưới 15GB
+
+### Danh sách tính năng bao gồm:
+
+| STT | Tính năng | Tiếng Anh | Mô tả |
+|-----|-----------|-----------|-------|
+| 1 | Chọn lọc và sắp xếp footage | Culling and arrange footage | Lọc clip tốt, sắp xếp theo trình tự hợp lý |
+| 2 | Cắt ghép | Cut & trim | Cắt bỏ phần thừa, ghép các đoạn |
+| 3 | Chỉnh méo ống kính | Lens Distortion Correction | Khắc phục biến dạng do ống kính góc rộng |
+| 4 | Điều chỉnh độ sáng và tương phản | Brightness & contrast adjustment | Cân bằng sáng tối |
+| 5 | Phân màu và cân bằng màu | Color grading and balancing | Tạo tone màu nhất quán |
+| 6 | Phiên bản có/không logo, watermark | Brand & Unbranded versions, Watermark Branding | Xuất 2 phiên bản |
+| 7 | Thời lượng tối đa 1 phút | Up to 1 minute in length | Giới hạn cơ bản |
+| 8 | 3 lần chỉnh sửa | 3 times revisions | Số lần revision cho phép |
+| 9 | Chỉnh thẳng video | Straighten video | Căn chỉnh đường chân trời |
+| 10 | Điều chỉnh tốc độ | Adjust video speed | Tăng/giảm tốc độ phát |
+| 11 | Thêm địa chỉ | Address adding | Chèn text địa chỉ bất động sản |
+| 12 | Thêm Intro/Outro | Add Intro/Outro | Đoạn mở đầu và kết thúc |
+| 13 | Chống rung video | Video stabilization | Làm mượt video rung |
+| 14 | Hiệu ứng âm thanh | Sound Effect | Thêm âm thanh môi trường |
+| 15 | Khử nhiễu footage | Denoise Footage | Giảm noise trong video tối |
+| 16 | Nhạc phù hợp với video | Music matched to editing | Chọn và sync nhạc nền |
+| 17 | Hiệu ứng tăng giảm tốc độ | Speed ramp effects | Tạo nhịp điệu bằng thay đổi tốc độ |
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 1*
+
+## 2.2. Standard Editing (Biên tập tiêu chuẩn)
+
+**Giá:** $35/video (dưới 1 phút) + $15/phút tiếp theo
+
+**Điều kiện input:**
+- Tối đa 50 clip nguồn, hoặc
+- 15 phút footage thô (RAW), hoặc
+- Dưới 15GB
+
+**Tính năng:** Tương tự Basic Editing với khả năng xử lý độ phức tạp cao hơn.
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 1*
+
+## 2.3. Phụ phí theo dung lượng và chất lượng
+
+| Điều kiện | Phụ phí | Ghi chú |
+|-----------|---------|---------|
+| Từ 15GB đến 30GB | +$15 | - |
+| Từ 30GB đến 45GB | +$30 | - |
+| Từ 45GB trở lên | +$45 | - |
+| Input 4K hoặc xuất 4K | +$10 | Chỉ charge khi job dưới 15GB |
+| Trên 70 footage mà không charge được thêm gì | +$10 | Áp dụng khi chỉ có $35 base |
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 1*
+
+---
+
+# PHẦN 3: MOTION GRAPHICS (ĐỒ HỌA CHUYỂN ĐỘNG)
+
+## 3.1. Danh sách Motion Graphics
+
+| STT | Tên hiệu ứng | Tiếng Anh | Giá | Mô tả |
+|-----|--------------|-----------|-----|-------|
+| 1 | Gọi chú | Call-out | $10-15/footage | Đánh dấu và gọi tên các điểm đặc biệt trong video |
+| 2 | Thanh bên | Sidebar | $10-15/footage | Thanh thông tin hiển thị bên cạnh video |
+| 3 | Đường viền/Outline | Outline/Borderline | $10/footage hoặc $15 (4-5 cái)/footage đầu | Vẽ đường viền quanh vật thể |
+| 4 | Chữ 3D | 3D text | Tính theo combo với Roto | Chữ nổi 3 chiều |
+| 5 | Biểu tượng động | Custom animated icons | Miễn phí 3 icon cơ bản (bed/bath/sq) | Icon thông tin bất động sản |
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 1, 2*
+
+## 3.2. Chi tiết từng loại Motion Graphics
+
+### 3.2.1. Call-out (Gọi chú)
+
+**Mô tả:** Hiệu ứng đánh dấu và hiển thị thông tin về các điểm đặc biệt trong bất động sản (vị trí tiện ích xung quanh, khoảng cách đến các địa điểm quan trọng).
+
+**Yêu cầu footage:**
+- Footage drone hoặc góc rộng
+- Ảnh tham chiếu chỉ rõ vị trí vật thể cần gọi chú
+
+**Link sample:** https://www.dropbox.com/scl/fi/kitafs00jemf6ffkmoh7r/Call-out.mp4
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 2*
+
+### 3.2.2. Sidebar (Thanh bên)
+
+**Mô tả:** Thanh thông tin hiển thị ở bên cạnh video, thường chứa thông tin về bất động sản như giá, diện tích, số phòng.
+
+**Yêu cầu footage:**
+- Không yêu cầu footage cụ thể
+- Cung cấp thông tin cần đặt trên sidebar
+
+**Link sample:** https://www.dropbox.com/scl/fi/4ctyt8heiliydplruit3f/Side-Bar.mov
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 2*
+
+### 3.2.3. Outline/Borderline (Đường viền)
+
+**Mô tả:** Vẽ đường viền động quanh bất động sản hoặc các khu vực quan trọng, thường dùng trong footage drone để highlight ranh giới đất.
+
+**Yêu cầu footage:**
+- Footage drone
+- Ảnh tham chiếu chỉ rõ vị trí cần thêm đường viền
+
+**Link sample:** https://www.dropbox.com/scl/fi/lv7d7hg8albo4tbvs6ym8/Outline-Call-out.mp4
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 2*
+
+### 3.2.4. 3D Text (Chữ 3D)
+
+**Mô tả:** Chữ nổi 3 chiều xuất hiện trong không gian video, thường dùng cho địa chỉ hoặc tên bất động sản.
+
+**Yêu cầu footage:**
+- Không yêu cầu footage cụ thể
+
+**Link sample:** https://www.dropbox.com/scl/fi/b290993g8lex3z2zj2faf/3D-text.mp4
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 2*
+
+### 3.2.5. Animated Icons (Biểu tượng động)
+
+**Mô tả:** Icon động hiển thị thông tin như số phòng ngủ, phòng tắm, diện tích.
+
+**Yêu cầu footage:**
+- Không yêu cầu footage cụ thể
+
+**Giá:**
+- Miễn phí: 3 icon thông tin cơ bản từ Fotober (bed/bath/sq)
+- Phí thêm cho icon tùy chỉnh
+
+**Link sample:** https://www.dropbox.com/scl/fi/56wssl3y3r5c79efkdkgh/Animated-Icon.mp4
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 2*
+
+---
+
+# PHẦN 4: EFFECTS (HIỆU ỨNG ĐẶC BIỆT)
+
+## 4.1. Danh sách Effects
+
+| STT | Tên hiệu ứng | Tiếng Anh | Giá | Độ phức tạp |
+|-----|--------------|-----------|-----|-------------|
+| 1 | Hiệu ứng vật rơi | Drop/Falling Object Effect | $20-25/effect | Trung bình |
+| 2 | Hiệu ứng vật rơi nâng cao | Drop/Falling Object Effect (Advance) | Cao hơn cơ bản | Cao |
+| 3 | Hiệu ứng xây dựng lớp (3 lớp trở xuống) | Layer Build Effect (3 layers or fewer) | Chưa công bố | Trung bình |
+| 4 | Hiệu ứng xây dựng lớp (4-7 lớp) | Layer Build Effect (4-7 layers) | Chưa công bố | Cao |
+| 5 | Hiệu ứng Google Earth | Google Earth | Tùy chỉnh | Cao |
+| 6 | Hiệu ứng quét sáng | Glow Swipe | Chưa công bố | Thấp |
+| 7 | Tách vật thể | Roto (Isolate object) | $10/footage | Trung bình |
+| 8 | Tách vật thể + Chữ 3D | Roto + 3D text | $15 cơ bản + $5/text từ câu 3 | Trung bình-Cao |
+| 9 | Hiệu ứng tiến về phía trước | Forward Effect | Chưa xác nhận | Cao |
+| 10 | Thay trời | Sky Replacement | $15/footage | Trung bình |
+| 11 | Hiệu ứng khung hiển thị | Display Frame Effect | Tùy yêu cầu | Cao |
+| 12 | Hiệu ứng tua nhanh | Time-lapse Effect | $20-25/effect | Trung bình |
+| 13 | Hiệu ứng AI | AI Effect | Check với team | Cao |
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 1, 2*
+
+## 4.2. Chi tiết từng loại Effect
+
+### 4.2.1. Drop/Falling Object Effect (Hiệu ứng vật rơi)
+
+**Mô tả:** Ngôi nhà hoặc vật thể rơi xuống từ trên cao và đáp xuống vị trí, tạo hiệu ứng dramatic cho intro.
+
+**Yêu cầu footage:**
+- Footage góc rộng chụp toàn bộ ngôi nhà hoặc vật thể cần rơi
+- Có thể chụp background riêng để tách chính xác hoặc gần đúng nhất với background thực
+
+**Link sample:** https://www.dropbox.com/scl/fi/o3hgs72wzebusxyvbfmps/Drop-house-effect-Day-to-night-transitions.mp4
+
+**Link footage mẫu:** https://www.dropbox.com/scl/fo/18whu9vth6lovlzgq4l3q/ADyPqr9bPweOF3S2WZacxOs
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 2*
+
+### 4.2.2. Drop/Falling Object Effect - Advance (Nâng cao)
+
+**Mô tả:** Phiên bản nâng cao của hiệu ứng vật rơi với chi tiết và hiệu ứng phức tạp hơn.
+
+**Yêu cầu footage:**
+- Tương tự phiên bản cơ bản
+
+**Link sample:** https://www.dropbox.com/scl/fi/t2b61e97k5jt9s8ftzmgx/drop-house-special.mov
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 2*
+
+### 4.2.3. Layer Build Effect (Hiệu ứng xây dựng từng lớp)
+
+**Mô tả:** Ngôi nhà được "xây dựng" từng phần từ dưới lên hoặc từ trong ra ngoài, tạo hiệu ứng như đang dựng nhà.
+
+**Phân loại:**
+- 3 layers trở xuống: Độ phức tạp trung bình
+- 4-7 layers: Độ phức tạp cao
+
+**Yêu cầu footage:**
+- Footage góc rộng chụp toàn bộ ngôi nhà hoặc vật thể
+- Có thể chụp background riêng để tách chính xác
+
+**Link sample (3 layers):** https://www.dropbox.com/scl/fi/g1dlb7v8h4w3acp1fu3jx/cut-out-2.mov
+
+**Link sample (4-7 layers):** https://www.dropbox.com/scl/fi/o8micidwzbxva1ejejv3e/Layer-build-house-effect.mov
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 2*
+
+### 4.2.4. Google Earth Effect (Hiệu ứng Google Earth)
+
+**Mô tả:** Hiệu ứng zoom từ vũ trụ xuống vị trí bất động sản giống như trên Google Earth, thường dùng cho intro.
+
+**Yêu cầu:**
+- Tọa độ chính xác của địa điểm
+- Thường kết hợp với call-out hoặc outline để chỉ rõ vị trí hoặc đặc điểm của vật thể
+
+**Link sample:** https://www.dropbox.com/scl/fi/fabnc19w4p4x1em8jr73e/Google-Earth-Effect.mp4
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 2*
+
+### 4.2.5. Glow Swipe (Hiệu ứng quét sáng)
+
+**Mô tả:** Hiệu ứng ánh sáng quét qua bề mặt, tạo cảm giác sang trọng và highlight.
+
+**Yêu cầu footage:**
+- Chưa ghi rõ trong tài liệu
+
+**Link sample:** https://www.dropbox.com/scl/fi/b4miviho4442096vxwnu2/glow-swipe.mov
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 2*
+
+### 4.2.6. Roto - Isolate Object (Tách vật thể)
+
+**Mô tả:** Kỹ thuật rotoscope để tách vật thể hoặc người ra khỏi video footage, cho phép đặt vào background khác hoặc thêm hiệu ứng phía sau.
+
+**Giá:** $10/footage
+
+**Yêu cầu footage:**
+- Chưa ghi rõ trong tài liệu
+
+**Link sample:** https://www.dropbox.com/scl/fi/ch1chklqeg6yxrnzssg4z/roto.mov
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 2*
+
+### 4.2.7. Roto + 3D Text (Tách vật thể + Chữ 3D)
+
+**Mô tả:** Kết hợp kỹ thuật rotoscope với chữ 3D, chữ xuất hiện phía sau vật thể/người đã được tách.
+
+**Giá:**
+- Phí roto cố định: $10
+- Phí text: Dưới 2 câu 3D text tính $5 (tổng $15 cho cả roto và text)
+- Từ câu thứ 3 trở đi: +$5/câu
+
+**Trường hợp đặc biệt:** Cùng 1 footage mà khách yêu cầu làm nhiều text thì phí roto cố định, phí text thay đổi theo số lượng.
+
+**Link sample:** https://www.dropbox.com/scl/fo/10smld6f4x1iamyxich0l/AJIdahGUOySIzcwtFTq7zAA (file Wrentree Video.mp4)
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 2*
+
+### 4.2.8. Forward Effect (Hiệu ứng tiến về phía trước)
+
+**Mô tả:** Intro được tạo từ nhiều đoạn speed ramp liên tiếp, tạo cảm giác di chuyển nhanh về phía trước xuyên qua các không gian.
+
+**Trạng thái:** Chưa xác nhận
+
+**Link sample:** https://www.dropbox.com/scl/fi/ootijmstqygszhjxgn6gw/forward-effect.mov
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 2*
+
+### 4.2.9. Sky Replacement (Thay trời)
+
+**Mô tả:** Thay thế bầu trời trong video bằng bầu trời đẹp hơn (trời xanh, hoàng hôn, mây đẹp).
+
+**Giá:** $15/footage
+
+**Yêu cầu:** Cần kiểm tra footage trước khi nhận
+
+**Link sample:** https://www.dropbox.com/scl/fi/m9war3uig02whgfxlpbjb/e.mp4
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 2*
+
+### 4.2.10. Display Frame Effect (Hiệu ứng khung hiển thị)
+
+**Mô tả:** Khung hiển thị xuất hiện trong không gian, có thể dùng làm transition hoặc hiệu ứng teleport (dịch chuyển) giữa các cảnh.
+
+**Yêu cầu footage:**
+
+*Dùng làm transition:*
+- Cần 2 footage: 1 có agent và 1 không có agent từ cùng góc
+- Khung xuất hiện có thể hiển thị bất kỳ cảnh nào
+
+*Dùng làm teleport giữa các cảnh:*
+- Cần tổng cộng 4 footage: 1 có agent và 1 không có agent từ cùng góc tại 2 địa điểm khác nhau
+- Khung xuất hiện sẽ hiển thị cảnh từ địa điểm khác
+- Để đảm bảo chính xác nhất, có thể bao gồm ảnh của mỗi địa điểm không có người trong input
+
+**Link sample:** https://www.dropbox.com/scl/fi/35ahbah19qp9rzf67ouya/Glow-Frame-Effect.mov
+
+**Link footage mẫu:** https://www.dropbox.com/scl/fo/17iyhgnl34a830sppnu8d/ACJn3UYp4kskGsPxiBEEmnE
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 2*
+
+### 4.2.11. Time-lapse Effect (Hiệu ứng tua nhanh thời gian)
+
+**Mô tả:** Hiệu ứng tua nhanh thời gian, thường dùng cho cảnh bầu trời thay đổi, ngày sang đêm.
+
+**Giá:** $20-25/effect
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 1*
+
+---
+
+# PHẦN 5: TRANSITIONS (CHUYỂN CẢNH)
+
+## 5.1. Danh sách Transitions
+
+| STT | Tên hiệu ứng | Tiếng Anh | Giá | Độ phức tạp |
+|-----|--------------|-----------|-----|-------------|
+| 1 | Chuyển cảnh chia đôi | Split Scene Transition | Chưa công bố | Trung bình |
+| 2 | Người biến mất | Person Disappear | Chưa công bố | Trung bình |
+| 3 | Chuyển ngày sang đêm | Day to Night Transition | Miễn phí 1-2; $5 (3-4); $10 (5-6) | Trung bình |
+| 4 | Chuyển cảnh che phủ | Masking Transition | Chưa công bố | Trung bình |
+| 5 | Chuyển cảnh cắt lớp (2-3 lớp) | Cut-out Transitions (2-3 layers) | Chưa công bố | Trung bình |
+| 6 | Chuyển cảnh cắt lớp (4-6 lớp) | Cut-out Transitions (4-6 layers) | Chưa công bố | Cao |
+| 7 | Đảo ngược liên tục (4 lần trở xuống) | Continuous Revert (4 times or fewer) | Chưa xác nhận | Cao |
+| 8 | Đảo ngược liên tục (4-8 lần) | Continuous Revert (4-8 times) | Chưa xác nhận | Cao |
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 2*
+
+## 5.2. Chi tiết từng loại Transition
+
+### 5.2.1. Split Scene Transition (Chuyển cảnh chia đôi)
+
+**Mô tả:** Chuyển cảnh bằng cách chia đôi màn hình, thường sử dụng chuyển động xoay camera và bầu trời làm điểm chia.
+
+**Yêu cầu footage:**
+- Footage ngoài trời
+- Camera sử dụng chuyển động xoay để chụp bầu trời cùng với hiên hoặc vật thể
+- Để đạt được sự chia cảnh tự nhiên
+- Footage dài hơn 7 giây
+
+**Link sample:** https://www.dropbox.com/scl/fi/uhrvmvcydh18kys5vbnjr/Split-Scene-Transition.mov
+
+**Link footage mẫu:** https://www.dropbox.com/scl/fo/9cofqrw2r1aduweqcilce/AAAliTtFhL4ggD6u4yeRLcM
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 2*
+
+### 5.2.2. Person Disappear (Người biến mất)
+
+**Mô tả:** Hiệu ứng người biến mất khỏi khung hình, thường dùng khi agent "teleport" đến địa điểm khác.
+
+**Yêu cầu footage:**
+- Cần 2 footage: 1 có agent và 1 không có agent từ cùng góc
+
+**Link sample:** https://www.dropbox.com/scl/fi/ez40p4414nqtcw63eun7f/Person-Disappear.mp4
+
+**Link footage mẫu:** https://www.dropbox.com/scl/fo/u0yx4pkap9mcqfgp9dhn5/ADhfP87ssUGSZVzaMB6Fuo8
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 2*
+
+### 5.2.3. Day to Night Transition (Chuyển ngày sang đêm)
+
+**Mô tả:** Chuyển cảnh từ ban ngày sang ban đêm hoặc ngược lại, tạo hiệu ứng thời gian trôi qua.
+
+**Giá:**
+- Miễn phí: 1-2 cái
+- $5: 3-4 cái
+- $10: 5-6 cái
+- +$5 mỗi 2 cái thêm
+
+**Yêu cầu footage:**
+- Cần 2 footage: 1 ban ngày và 1 ban đêm từ cùng góc
+
+**Link sample:** https://www.dropbox.com/scl/fi/o3hgs72wzebusxyvbfmps/Drop-house-effect-Day-to-night-transitions.mp4
+
+**Link footage mẫu:** https://www.dropbox.com/scl/fo/xjytouwnuqx4fgg72yu53/AMHKFA_53Yh1NVOoj2mg39I
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 1, 2*
+
+### 5.2.4. Masking Transition (Chuyển cảnh che phủ)
+
+**Mô tả:** Chuyển cảnh sử dụng vật thể trong khung hình (gương, cửa sổ, cửa ra vào) làm "cổng" để chuyển sang cảnh tiếp theo.
+
+**Yêu cầu footage:**
+- Footage dolly zoom tập trung vào vật thể như gương, cửa sổ, hoặc cửa ra vào
+- Vật thể có hình vuông, tròn, hoặc chữ nhật
+
+**Link sample:** https://www.dropbox.com/scl/fi/o8micidwzbxva1ejejv3e/Layer-build-house-effect.mov
+
+**Link footage mẫu:** https://www.dropbox.com/scl/fo/t5p26os8rnsdoqbs599zh/AC24du2Zr9mZC2Emy8nfFOY
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 2*
+
+### 5.2.5. Cut-out Transitions (Chuyển cảnh cắt lớp)
+
+**Mô tả:** Chuyển cảnh bằng cách cắt và tách các lớp của khung hình, tạo hiệu ứng depth (chiều sâu).
+
+**Phân loại:**
+- 2-3 layers: Độ phức tạp trung bình
+- 4-6 layers: Độ phức tạp cao
+
+**Link sample (nhiều layer):** https://www.dropbox.com/scl/fi/w7c0zysv3g8jmx4pzbarb/cut-out-more-layer.mov
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 2*
+
+### 5.2.6. Continuous Revert (Đảo ngược liên tục)
+
+**Mô tả:** Hiệu ứng video chạy ngược liên tục qua nhiều cảnh, tạo cảm giác "rewind" (tua ngược) thời gian.
+
+**Phân loại:**
+- 4 lần trở xuống
+- 4-8 lần
+
+**Trạng thái:** Chưa xác nhận
+
+**Link sample (tối đa 4 cảnh):** https://www.dropbox.com/scl/fi/hnca2l9ypw5lq2nxiv97j/continuous-revrse-toi-da-4-c-nh-o-ng-c.mov
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 2*
+
+---
+
+# PHẦN 6: AUDIO VÀ TEXT
+
+## 6.1. Dịch vụ Audio
+
+| STT | Dịch vụ | Tiếng Anh | Giá | Ghi chú |
+|-----|---------|-----------|-----|---------|
+| 1 | Lồng tiếng tiêu chuẩn | Standard Voice-over | Thông báo khi có yêu cầu | - |
+| 2 | Lồng tiếng Intro & Outro | Voice-over at Intro & Outro | Chưa công bố | - |
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 1, 2*
+
+## 6.2. Dịch vụ Text
+
+| STT | Dịch vụ | Tiếng Anh | Giá | Ghi chú |
+|-----|---------|-----------|-----|---------|
+| 1 | Chữ động | Animated text | Miễn phí 1-2; $1.5/chữ từ cái thứ 3 | Chỉ tính phí cho animated text, không phải text thường |
+| 2 | Phụ đề động | Subtext (animated text) | Chưa công bố | - |
+| 3 | Chú thích thường | Caption (normal text) | Miễn phí nếu ngắn | - |
+
+**Link sample (Animated text/Subtext):** https://www.instagram.com/reel/Cx82nXAgybH/
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 1, 2*
+
+---
+
+# PHẦN 7: DỊCH VỤ KỸ THUẬT BỔ SUNG
+
+## 7.1. Danh sách dịch vụ kỹ thuật
+
+| STT | Dịch vụ | Tiếng Anh | Giá | Ghi chú |
+|-----|---------|-----------|-----|---------|
+| 1 | Chống rung nâng cao (cho FPV) | Advanced video stabilization - Gyroflow | $10/clip | Áp dụng cho footage FPV; Offer tùy chọn khi footage không thể chống rung thông thường |
+| 2 | Làm mờ | Blur | $5/item | Làm mờ biển số, đồ vật, tranh...; Không track được nếu footage quá rung; Chỉ làm mờ, không xóa được vật thể; Vật thể lớn cần check lại với edit và giá |
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 2*
+
+---
+
+# PHẦN 8: AI EFFECTS (HIỆU ỨNG AI)
+
+## 8.1. Thông tin chung
+
+**Trạng thái:** Dịch vụ yêu cầu check với team video trước khi nhận làm
+
+**Quy trình:**
+1. Khách cần gửi sample AI effect muốn tạo
+2. Team video review và xác nhận khả năng thực hiện
+3. Nếu đồng ý → Tiến hành sản xuất
+
+**Lưu ý quan trọng:** "Các footage từ AI generate sẽ không giống nhau 100% được"
+
+**Link sample:**
+- https://www.dropbox.com/scl/fi/lls65nx4z3u5weu9z7n1n/sample_4_thf4.mp4
+- https://www.dropbox.com/scl/fi/o5xf4s8e6hhh69cyxsvrg/sample-_1_thf4.mp4
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 2*
+
+## 8.2. Các loại AI Effects đã thực hiện (từ Feedback)
+
+Dựa trên dữ liệu từ 23 job feedback, các loại AI Effects đã được yêu cầu và thực hiện:
+
+| STT | Loại AI Effect | Tiếng Anh | Ví dụ job |
+|-----|----------------|-----------|-----------|
+| 1 | Chuyển đổi 4 mùa | Season Change (4 seasons) | TADEC31004 |
+| 2 | Chuyển ngày sang hoàng hôn (AI) | Day to Sunset Transition | TADEC04003Rev2 |
+| 3 | Thay trời xanh đẹp (AI động) | AI Sky Replacement (animated) | THJAN20030Rev |
+| 4 | Tạo nước/đài phun | Water/Fountain Animation | DUJAN04005 |
+| 5 | Người chuẩn bị bữa tối | Lifestyle - Preparing Dinner | HTJAN15008Rev |
+| 6 | Người đọc sách trên giường | Lifestyle - Reading in Bed | NHJAN13010 |
+| 7 | Trẻ em chơi trên giường | Lifestyle - Kids Playing | NHJAN13010 |
+| 8 | Người tập gym | Lifestyle - Exercise | NHJAN13010 |
+| 9 | Xe chạy vào driveway | Vehicle Animation | NHJAN13010 |
+| 10 | Người vẫy tay | Lifestyle - Waving | NHJAN13010 |
+| 11 | Người chơi bóng rổ | Lifestyle - Basketball | NHJAN13010 |
+| 12 | Agent ngã xuống bể bơi | Agent Action - Pool | QUJAN16003 |
+| 13 | Tuần lộc ông già Noel bay | Creative - Santa Reindeer | TLNOV14022rev4 |
+| 14 | Ông già Noel đẩy xe | Creative - Santa with Car | LIDEC10001 |
+| 15 | Hộp quà mở ra ngôi nhà | Creative - Gift Box Reveal | HTDEC18019 |
+| 16 | Quân cờ di chuyển | Object Animation - Chess | LIJAN07001 |
+| 17 | Gia đình xem phim | Lifestyle - Family Watching | HTJAN22005 |
+| 18 | Nhóm bạn nấu ăn | Lifestyle - Cooking Group | HTJAN22005 |
+| 19 | Bubble bath + hơi nước | Bathroom Animation | HTJAN22005, HTJAN26003 |
+| 20 | Fire pit ngày sang đêm | Day-Night with Fire | HTJAN22005 |
+| 21 | BBQ nướng đồ ăn | Lifestyle - BBQ | HTJAN22005 |
+| 22 | Agent nhảy/búng tay chuyển cảnh | Agent Teleport | CHJAN24002 |
+| 23 | Nội thất pop-in/slide-in | Furniture Animation | QUJAN25001 |
+| 24 | AI dựng nhà trên đất trống | Construction Animation | QUJAN19003 |
+| 25 | Timelapse đêm với sao | Night Sky Timelapse | QUJAN19003 |
+
+*Nguồn: File "[Video] Feedback AI.xlsx"*
+
+## 8.3. Samples tham khảo từ khách hàng (trong Feedback)
+
+Các link Instagram được khách hàng gửi làm reference:
+
+| Link | Mô tả |
+|------|-------|
+| https://www.instagram.com/reel/DSwK_ZNCETu/ | Sample AI effect |
+| https://www.instagram.com/reel/DSAbatijSMP/ | Sample AI effect |
+| https://www.instagram.com/reel/DTvLS4NjO-S/ | Sample AI effect |
+| https://www.instagram.com/reel/DTfMBpyCJgJ/ | Sample AI effect |
+| https://www.instagram.com/reel/DRwGrcwDF25/ | Santa với xe (LIDEC10001) |
+| https://www.instagram.com/p/DSH7k9tCpnd/ | Hộp quà mở ra nhà (HTDEC18019) |
+| https://www.instagram.com/p/DSdGo4Tjwff/ | AI dựng nhà + timelapse (QUJAN19003) |
+| https://www.linkedin.com/posts/barnessuisse_barnes-barnessuisse-immobilier-activity-7419015870661689344-TKdE/ | AI transition example (CAJAN21001rev7) |
+| https://www.youtube.com/watch?v=xBL66Trekxg | Furniture style reference (CAJAN21001rev7) |
+
+*Nguồn: File "[Video] Feedback AI.xlsx"*
+
+---
+
+# PHẦN 9: QUY TRÌNH SẢN XUẤT HIỆN TẠI
+
+## 9.1. Quy trình chung (dựa trên dữ liệu có sẵn)
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│              QUY TRÌNH SẢN XUẤT VIDEO - HIỆN TẠI               │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  BƯỚC 1: NHẬN ORDER                                            │
+│  ├── Nhận job code và brief từ Sale                           │
+│  ├── Download input từ Dropbox/Google Drive                   │
+│  └── Xác định loại dịch vụ (Basic/Standard/Add-on/AI)         │
+│                                                                 │
+│  BƯỚC 2: PHÂN TÍCH YÊU CẦU                                     │
+│  ├── Đọc mô tả yêu cầu                                        │
+│  ├── Xem sample nếu có                                        │
+│  └── Xác định các effect cần làm                              │
+│                                                                 │
+│  BƯỚC 3: SẢN XUẤT                                              │
+│  ├── Biên tập cơ bản (cắt ghép, color grade, music)          │
+│  ├── Thực hiện các effect/transition theo yêu cầu            │
+│  ├── Với AI Effect: Tạo prompt → Generate → Review            │
+│  └── QC nội bộ                                                │
+│                                                                 │
+│  BƯỚC 4: DELIVERY                                              │
+│  ├── Export video đúng format                                 │
+│  ├── Upload lên Dropbox                                       │
+│  └── Thông báo hoàn thành                                     │
+│                                                                 │
+│  BƯỚC 5: REVISION (nếu có)                                     │
+│  ├── Nhận feedback từ Sale/Khách                              │
+│  ├── Chỉnh sửa theo yêu cầu                                   │
+│  └── Gửi lại (tối đa 3 lần cho Basic/Standard)               │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+*Nguồn: Tổng hợp từ thông tin trong bảng giá và feedback*
+
+## 9.2. Quy trình cho AI Effects (dựa trên dữ liệu)
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│              QUY TRÌNH AI EFFECTS - HIỆN TẠI                   │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  BƯỚC 1: NHẬN VÀ ĐÁNH GIÁ                                      │
+│  ├── Khách gửi sample AI effect muốn tạo                      │
+│  ├── Team video review khả năng thực hiện                     │
+│  └── Xác nhận hoặc từ chối                                    │
+│                                                                 │
+│  BƯỚC 2: CHUẨN BỊ                                              │
+│  ├── Download input (ảnh/video gốc)                           │
+│  ├── Phân tích yêu cầu chi tiết                               │
+│  └── Chuẩn bị prompt                                          │
+│                                                                 │
+│  BƯỚC 3: GENERATE                                              │
+│  ├── Chạy prompt với công cụ AI                               │
+│  ├── Review output                                            │
+│  └── Generate lại nếu cần                                     │
+│                                                                 │
+│  BƯỚC 4: POST-PROCESSING                                       │
+│  ├── Composite (nếu cần ghép với footage khác)               │
+│  ├── Color match                                              │
+│  └── Export                                                    │
+│                                                                 │
+│  GHI CHÚ TỪ TÀI LIỆU:                                         │
+│  "Các footage từ AI generate sẽ không giống nhau 100%"        │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 2*
+
+## 9.3. Thông tin về phân công công việc (từ Feedback)
+
+Dựa trên dữ liệu feedback, có sự phân chia giữa:
+
+- **Team AI:** Thực hiện generate AI effects
+- **Team Edit:** Thực hiện biên tập video, composite
+
+**Các trường hợp ghi nhận:**
+
+| Job Code | Ghi chú về phân công |
+|----------|----------------------|
+| HTJAN26003 | "GN bảo edit tự làm AI. Trễ hơn 3 tiếng" - Edit tự làm AI |
+| QUJAN21008 | "trễ 5 tiếng là do edit" - Trễ từ phía Edit |
+| CHJAN24002 | "agent là do edit roto vào chứ không phải AI ren" - Edit làm roto, không phải AI |
+| HTJAN22005 | "e vừa hỏi AI bảo bên đấy mới làm dc 9ef" - AI làm effect, capacity 9/15 |
+
+*Nguồn: File "[Video] Feedback AI.xlsx"*
+
+---
+
+# PHẦN 10: BẢNG TỔNG HỢP HIỆU ỨNG THEO ĐỘ KHÓ
+
+## 10.1. Phân loại theo độ phức tạp
+
+### Độ phức tạp THẤP
+
+| Hiệu ứng | Yêu cầu footage | Kỹ thuật chính |
+|----------|-----------------|----------------|
+| Glow Swipe | Không đặc biệt | Overlay effect |
+| Animated Icons | Không đặc biệt | Motion graphics |
+| Caption/Text thường | Không đặc biệt | Text overlay |
+| Animated Text (1-2 cái) | Không đặc biệt | Text animation |
+
+### Độ phức tạp TRUNG BÌNH
+
+| Hiệu ứng | Yêu cầu footage | Kỹ thuật chính |
+|----------|-----------------|----------------|
+| Call-out | Drone/góc rộng + reference | Motion tracking + graphics |
+| Sidebar | Thông tin content | Motion graphics |
+| Outline/Borderline | Drone + reference | Masking + animation |
+| 3D Text | Không đặc biệt | 3D rendering |
+| Drop/Falling Object | Góc rộng, có thể tách background | Compositing + animation |
+| Layer Build (3 layers) | Góc rộng, có thể tách background | Masking + animation |
+| Roto | Tùy footage | Rotoscoping |
+| Sky Replacement | Check trước | Masking + replacement |
+| Day-to-Night Transition | 2 footage cùng góc | Blending + transition |
+| Person Disappear | 2 footage cùng góc | Masking + blending |
+| Split Scene Transition | Outdoor, xoay camera, >7s | Masking + transition |
+| Masking Transition | Dolly zoom vào vật thể | Masking + transition |
+| Cut-out (2-3 layers) | Tùy footage | Masking + depth |
+| Time-lapse | Footage phù hợp | Speed manipulation |
+| Gyroflow Stabilization | FPV footage | Software processing |
+| Blur | Check trước | Motion tracking + blur |
+
+### Độ phức tạp CAO
+
+| Hiệu ứng | Yêu cầu footage | Kỹ thuật chính |
+|----------|-----------------|----------------|
+| Drop/Falling (Advance) | Góc rộng + background riêng | Advanced compositing |
+| Layer Build (4-7 layers) | Góc rộng + background riêng | Complex masking |
+| Google Earth | Tọa độ chính xác | 3D + compositing |
+| Roto + 3D Text (nhiều text) | Tùy footage | Rotoscoping + 3D |
+| Forward Effect | Nhiều footage | Complex editing |
+| Display Frame | 2-4 footage cùng góc | Advanced compositing |
+| Cut-out (4-6 layers) | Tùy footage | Complex masking |
+| Continuous Revert | Nhiều footage | Complex editing |
+| AI Effects | Sample + check trước | AI generation + compositing |
+
+*Nguồn: Tổng hợp từ File "Bản sao của Video-Price_Updated.xlsx"*
+
+## 10.2. Phân loại AI Effects theo tỷ lệ thành công (từ Feedback)
+
+### Tỷ lệ lỗi THẤP (33%)
+
+| Loại AI Effect | Số case | Số lỗi | Ghi chú |
+|----------------|---------|--------|---------|
+| Day-to-Night (AI) | 3 | 1 | Lỗi: transition quá ngắn |
+| Furniture Staging/Animation | 3 | 1 | Lỗi: làm sai phòng |
+
+### Tỷ lệ lỗi CAO (67-71%)
+
+| Loại AI Effect | Số case | Số lỗi | Ghi chú |
+|----------------|---------|--------|---------|
+| Season/Weather Change | 3 | 2 | Lỗi: sai context, video tĩnh |
+| Lifestyle/Người | 7 | 5 | Lỗi: mặt biến dạng, fake, bikini, thiếu người, hành vi không phù hợp |
+
+### Tỷ lệ lỗi RẤT CAO (100%)
+
+| Loại AI Effect | Số case | Số lỗi | Ghi chú |
+|----------------|---------|--------|---------|
+| Object Animation | 3 | 3 | Lỗi: vật lý sai (quân cờ, nước, xe) |
+| Creative/Fantasy | 2 | 2 | Lỗi: không đúng yêu cầu (tuần lộc, Santa) |
+| Agent Composite | 2 | 2 | Lỗi: đóng băng, viền cắt, bay lơ lửng |
+
+*Nguồn: Phân tích từ File "[Video] Feedback AI.xlsx"*
+
+---
+
+# PHẦN 11: YÊU CẦU FOOTAGE CHO TỪNG LOẠI HIỆU ỨNG
+
+## 11.1. Bảng tổng hợp yêu cầu footage
+
+| Hiệu ứng | Yêu cầu footage | Số lượng footage | Yêu cầu đặc biệt |
+|----------|-----------------|------------------|------------------|
+| Call-out | Drone/góc rộng | 1 | + Ảnh reference chỉ vị trí |
+| Sidebar | Bất kỳ | 1 | + Thông tin content |
+| Outline/Borderline | Drone | 1 | + Ảnh reference chỉ vị trí |
+| 3D Text | Bất kỳ | 1 | - |
+| Drop/Falling Object | Góc rộng toàn bộ nhà | 1 | Có thể cần ảnh background riêng |
+| Layer Build | Góc rộng toàn bộ nhà | 1 | Có thể cần ảnh background riêng |
+| Google Earth | Không cần footage | 0 | Cần tọa độ chính xác |
+| Roto | Tùy yêu cầu | 1 | - |
+| Sky Replacement | Cần check trước | 1 | - |
+| Display Frame (transition) | Cùng góc có/không agent | 2 | - |
+| Display Frame (teleport) | Cùng góc có/không agent x 2 địa điểm | 4 | + Có thể thêm ảnh không người |
+| Split Scene | Outdoor, xoay camera | 1 | >7 giây |
+| Person Disappear | Cùng góc có/không agent | 2 | - |
+| Day-to-Night | Cùng góc ngày/đêm | 2 | - |
+| Masking Transition | Dolly zoom vào vật thể hình học | 1 | Vật thể vuông/tròn/chữ nhật |
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 2*
+
+## 11.2. Link Footage mẫu từ Fotober
+
+| Hiệu ứng | Link Footage mẫu |
+|----------|------------------|
+| Drop/Falling Object | https://www.dropbox.com/scl/fo/18whu9vth6lovlzgq4l3q/ADyPqr9bPweOF3S2WZacxOs |
+| Layer Build | https://www.dropbox.com/scl/fo/18whu9vth6lovlzgq4l3q/ADyPqr9bPweOF3S2WZacxOs |
+| Display Frame | https://www.dropbox.com/scl/fo/17iyhgnl34a830sppnu8d/ACJn3UYp4kskGsPxiBEEmnE |
+| Split Scene | https://www.dropbox.com/scl/fo/9cofqrw2r1aduweqcilce/AAAliTtFhL4ggD6u4yeRLcM |
+| Person Disappear | https://www.dropbox.com/scl/fo/u0yx4pkap9mcqfgp9dhn5/ADhfP87ssUGSZVzaMB6Fuo8 |
+| Day-to-Night | https://www.dropbox.com/scl/fo/xjytouwnuqx4fgg72yu53/AMHKFA_53Yh1NVOoj2mg39I |
+| Masking Transition | https://www.dropbox.com/scl/fo/t5p26os8rnsdoqbs599zh/AC24du2Zr9mZC2Emy8nfFOY |
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 2*
+
+---
+
+# PHẦN 12: BẢNG GIÁ TỔNG HỢP
+
+## 12.1. Gói dịch vụ cơ bản
+
+| Gói | Giá cơ bản | Phí thêm/phút |
+|-----|------------|---------------|
+| Basic Editing | $27/video (≤1 phút) | +$10/phút |
+| Standard Editing | $35/video (≤1 phút) | +$15/phút |
+
+## 12.2. Add-on có giá cụ thể
+
+| Add-on | Giá |
+|--------|-----|
+| Time-lapse Effect | $20-25/effect |
+| Animated Text | Miễn phí 1-2; $1.5/text từ cái thứ 3 |
+| Sidebar | $10-15/footage |
+| Call-out/Highlights/Overlays/Border | $10/footage; $15 (4-5 cái)/footage đầu, $10 từ footage 2 |
+| Logo | $10/footage (4-5 cái) |
+| Day-to-Night Transition | Miễn phí 1-2; $5 (3-4); $10 (5-6); +$5/2 cái thêm |
+| Sky Replacement | $15/footage |
+| Voice Over | $15/video |
+| Roto | $10/footage |
+| Roto + 3D Text | $15 cơ bản (roto $10 + text $5); +$5/text từ câu 3 |
+| Gyroflow Stabilization | $10/clip |
+| Blur | $5/item |
+
+## 12.3. Phụ phí
+
+| Điều kiện | Phụ phí |
+|-----------|---------|
+| 15-30GB | +$15 |
+| 30-45GB | +$30 |
+| 45GB+ | +$45 |
+| 4K (input hoặc output) | +$10 (chỉ khi <15GB) |
+| >70 footage không charge được gì khác | +$10 |
+
+## 12.4. Add-on chưa có giá công bố
+
+| Add-on | Trạng thái |
+|--------|------------|
+| Drop/Falling Object Effect | Chưa công bố ($20-25 estimate) |
+| Layer Build Effect | Chưa công bố |
+| Google Earth Effect | Tùy chỉnh |
+| Glow Swipe | Chưa công bố |
+| Forward Effect | Chưa xác nhận |
+| Display Frame Effect | Tùy yêu cầu |
+| Split Scene Transition | Chưa công bố |
+| Person Disappear | Chưa công bố |
+| Masking Transition | Chưa công bố |
+| Cut-out Transitions | Chưa công bố |
+| Continuous Revert | Chưa xác nhận |
+| AI Effects | Check với team |
+| Voice-over Intro/Outro | Chưa công bố |
+| Subtext (animated) | Chưa công bố |
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx"*
+
+---
+
+# PHẦN 13: THÔNG TIN BỔ SUNG TỪ FEEDBACK
+
+## 13.1. Các lỗi thường gặp theo loại hiệu ứng
+
+### Lỗi với AI Lifestyle/Người
+
+| Lỗi | Job Code | Mô tả |
+|-----|----------|-------|
+| Mặt biến dạng | HTJAN07002rev2 | "deformed faces of the very first family" |
+| Người trông fake | MNJAN2001 | "They look like they are fixing to go to the bedroom next" |
+| Thiếu người trong action | HTJAN15008Rev | "preparing dinner" nhưng không có người chuẩn bị |
+| Trang phục sai | NHJAN13010 | "đàn ông mặc bikini" thay vì quần bơi |
+| Hành vi không phù hợp | MNJAN2001 | Cặp đôi trong bếp có vẻ "going to bedroom" |
+
+### Lỗi với AI Object Animation
+
+| Lỗi | Job Code | Mô tả |
+|-----|----------|-------|
+| Vật lý sai | LIJAN07001 | Quân cờ "nhảy lên đánh nhau" thay vì di chuyển đúng luật |
+| Vị trí sai | DUJAN04005 | Nước chảy "randomly out of nowhere" không từ đài phun |
+| Không thực hiện được | LIDEC10001 | Xe rơi xuống đất thay vì vào ống khói |
+
+### Lỗi với AI Season/Weather
+
+| Lỗi | Job Code | Mô tả |
+|-----|----------|-------|
+| Sai context địa phương | TADEC31004 | Làm tuyết ở nơi "we don't get snow" |
+| Video tĩnh | THJAN20030Rev | "như ảnh tĩnh rồi zoom vào" |
+
+### Lỗi với AI Agent Composite
+
+| Lỗi | Job Code | Mô tả |
+|-----|----------|-------|
+| Viền cắt trắng | CHJAN24002 | "quanh agent hiện rõ vết cắt trắng xóa" |
+| Agent đóng băng | CHDEC11004 | "agent đóng băng trong khung hình" |
+| Clip vỡ | CHDEC11004 | "Chất lượng clip AI thấp, bị vỡ" |
+
+### Lỗi kỹ thuật chung
+
+| Lỗi | Job Code | Mô tả |
+|-----|----------|-------|
+| Logo AI lọt | MNJAN2001 | "1:39 logo gemini" |
+| Transition quá ngắn | TADEC04003Rev2 | "The transition was very short.. it didn't get to the sunset part" |
+| Thiếu requirement | QUJAN25001 | "Order 2 AI living và dining room. nhưng chỉ làm 1 và làm sai" |
+
+*Nguồn: File "[Video] Feedback AI.xlsx"*
+
+## 13.2. Thời gian xử lý (từ Feedback)
+
+| Job Code | Số effect | Deadline | Thực tế | Trễ |
+|----------|-----------|----------|---------|-----|
+| HTJAN22005 | 15 effects | Không rõ | Chỉ làm được 9 | 9 tiếng |
+| QUJAN21008 | Không rõ | 2 tiếng | 2h14p | 5 tiếng (do edit) |
+| HTJAN07002rev2 | Không rõ | Không rõ | Không rõ | 4 tiếng |
+| HTJAN26003 | 12 scenes | Không rõ | Không rõ | 3 tiếng |
+| QUJAN19003Rev2 | 2 effects | 5h | 10h đêm | 5+ tiếng |
+
+*Nguồn: File "[Video] Feedback AI.xlsx"*
+
+---
+
+**Kết thúc Tài liệu Kỹ thuật**
+
+*Tài liệu này tổng hợp toàn bộ thông tin về hiệu ứng, motion, add-on và quy trình sản xuất video hiện tại của Team Video Fotober, dựa trên dữ liệu từ bảng giá nội bộ và feedback thực tế.*

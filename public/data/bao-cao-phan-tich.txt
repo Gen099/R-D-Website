@@ -1,0 +1,866 @@
+# BÁO CÁO PHÂN TÍCH HIỆN TRẠNG
+## AI VIDEO TRONG LĨNH VỰC BẤT ĐỘNG SẢN - FOTOBER
+
+---
+
+**Ngày lập:** 29/01/2026
+**Phạm vi:** Phân tích dữ liệu nội bộ và thông tin công khai
+**Nguồn dữ liệu:**
+- File "[Video] Feedback AI.xlsx" - 23 job codes
+- File "Bài toán AI_Fotober.docx" - 2 bài toán nghiên cứu
+- File "Bản sao của Video-Price_Updated.xlsx" - Bảng giá dịch vụ
+- Website fotober.com và các nguồn công khai
+
+---
+
+# PHẦN 1: TỔNG QUAN CÔNG TY FOTOBER
+
+## 1.1. Thông tin cơ bản
+
+| Tiêu chí | Thông tin |
+|----------|-----------|
+| Tên đầy đủ | FOTOBER MEDIA COMPANY LIMITED |
+| Trụ sở | Hà Nội, Việt Nam |
+| Năm thành lập | 2016 |
+| Số nhân sự | 150+ nhân viên (2024-2025) |
+| Email | info@fotober.com |
+| WhatsApp | +84 942 110 297 |
+
+*Nguồn: Trang About Us - fotober.com*
+
+## 1.2. Năng lực sản xuất
+
+| Chỉ số | Số liệu |
+|--------|---------|
+| Số ảnh xử lý mỗi ngày | 20.000+ ảnh |
+| Số khách hàng mỗi năm | 10.000+ khách hàng toàn cầu |
+| Thị trường chính | Hoa Kỳ, Úc, Châu Âu |
+
+*Nguồn: Trang About Us - fotober.com; Bài viết Picsmatic "Top 10 Real Estate Photo Editing Companies in 2026"*
+
+## 1.3. Khách hàng tiêu biểu
+
+- Compass
+- Ray White
+- Raine & Horne
+
+*Nguồn: Bài viết Picsmatic "Top 10 Real Estate Photo Editing Companies in 2026"*
+
+## 1.4. Lịch sử phát triển
+
+| Năm | Sự kiện |
+|-----|---------|
+| 2016 | Thành lập bởi 5 chuyên gia chỉnh sửa ảnh; phục vụ 50 khách hàng/tháng; cung cấp dịch vụ chỉnh sửa cơ bản |
+| 2018 | Mở rộng đội ngũ lên 30 thành viên; thêm dịch vụ Virtual Staging (dàn dựng nội thất ảo) và Day-to-Dusk (chuyển đổi ngày sang hoàng hôn) |
+| 2020 | Chuyển hướng tập trung vào chỉnh sửa ảnh 360 độ và biên tập video |
+| 2022 | Đạt 100+ nhân viên; phục vụ 10.000 khách hàng toàn cầu mỗi năm |
+| 2024-2025 | Mở rộng lên 150+ nhân viên; tích hợp công cụ AI; mở rộng thị trường mới |
+
+*Nguồn: Trang About Us - fotober.com*
+
+## 1.5. Giá trị cốt lõi
+
+| Giá trị | Mô tả |
+|---------|-------|
+| Cam kết xuất sắc | Cung cấp dịch vụ chỉnh sửa ảnh hàng đầu, hướng đến sự hoàn hảo trong mọi dự án |
+| Lấy khách hàng làm trung tâm | Ưu tiên sự hài lòng của khách hàng, liên tục lắng nghe phản hồi để cải thiện dịch vụ |
+| Đổi mới và thích ứng | Áp dụng công cụ tiên tiến, thích nghi với nhu cầu thay đổi của khách hàng và thị trường |
+| Chất lượng và độ tin cậy | Cung cấp kết quả chất lượng cao nhất quán với độ chính xác cao |
+| Hiệu quả và tốc độ | Đảm bảo giao hàng đúng hạn trong ngành nhiếp ảnh và bất động sản |
+| Giá cả hợp lý | Duy trì chất lượng cao với mức giá phù hợp cho nhiều đối tượng khách hàng |
+
+*Nguồn: Trang About Us - fotober.com*
+
+---
+
+# PHẦN 2: DANH MỤC DỊCH VỤ HIỆN TẠI
+
+## 2.1. Dịch vụ chỉnh sửa ảnh bất động sản
+
+| Dịch vụ | Mô tả |
+|---------|-------|
+| HDR Blending (ghép ảnh phơi sáng) | Ghép nhiều ảnh với độ phơi sáng khác nhau |
+| Day-to-Dusk (chuyển ngày sang hoàng hôn) | Chuyển đổi ảnh chụp ban ngày thành ảnh hoàng hôn |
+| Sky Replacement (thay trời) | Thay thế bầu trời xám xịt bằng trời đẹp |
+| Item/Clutter Removal (xóa vật thể) | Xóa các vật thể không mong muốn |
+| Color & Exposure Correction (chỉnh màu và phơi sáng) | Cân bằng màu sắc, chỉnh độ sáng |
+| Lens Distortion Correction (chỉnh méo ống kính) | Khắc phục méo hình do ống kính góc rộng |
+| 360 Panorama Editing (chỉnh sửa ảnh toàn cảnh 360) | Ghép và tăng cường ảnh panorama |
+| Window/View Replacement (thay cửa sổ/view) | Khắc phục cửa sổ bị cháy sáng |
+
+*Nguồn: Website fotober.com/real-estate-photo-editing*
+
+**Quy trình 20 bước** (theo đánh giá từ Picsmatic): Cân bằng trắng → Làm nét → Chỉnh thẳng dọc/ngang → Xóa khuyết điểm → Xóa bụi → Chỉnh méo ống kính → Điều chỉnh độ sáng → Điều chỉnh độ tương phản → Thay trời → Tăng cường bãi cỏ → Tăng cường mặt nước → Xóa dây cáp → Xóa vật thể → Ghép HDR → Thay cửa sổ → và các bước khác.
+
+*Nguồn: Bài viết Picsmatic "Top 10 Real Estate Photo Editing Companies in 2026"*
+
+## 2.2. Dịch vụ biên tập video
+
+### 2.2.1. Gói dịch vụ cơ bản
+
+| Gói | Giá | Tính năng bao gồm |
+|-----|-----|-------------------|
+| Basic Editing (biên tập cơ bản) | $27/video (dưới 1 phút) | Chọn lọc và sắp xếp footage (đoạn video thô); Cắt ghép; Chỉnh méo ống kính; Điều chỉnh độ sáng và tương phản; Phân màu và cân bằng màu; Phiên bản có/không logo; Video dưới 50 clip nguồn hoặc 15 phút footage thô hoặc dưới 15GB; 3 lần chỉnh sửa; Chỉnh thẳng video; Điều chỉnh tốc độ; Thêm địa chỉ; Thêm Intro/Outro; Chống rung video; Hiệu ứng âm thanh; Khử nhiễu footage; Nhạc phù hợp với video; Hiệu ứng Speed ramp (tăng giảm tốc độ) |
+| Standard Editing (biên tập tiêu chuẩn) | $35/video (dưới 1 phút) | Tương tự Basic với khả năng xử lý độ phức tạp cao hơn |
+
+**Phụ phí theo thời lượng:**
+- Basic: +$10 cho mỗi phút tiếp theo
+- Standard: +$15 cho mỗi phút tiếp theo
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 1*
+
+### 2.2.2. Hiệu ứng và yêu cầu bổ sung
+
+| STT | Hiệu ứng | Giá |
+|-----|----------|-----|
+| 1 | Time-lapse effect (hiệu ứng tua nhanh thời gian) | $20-25/hiệu ứng |
+| 2 | Animated text (chữ động) | Miễn phí 1-2 chữ; $1.5/chữ từ cái thứ 3 |
+| 3 | Sidebar (thanh bên) | $10-15/footage |
+| 4 | Call-out, Highlights, Overlays, Border line (gọi chú, điểm nhấn, lớp phủ, đường viền) | $10/footage; $15 (4-5 cái cùng loại)/footage đầu; $10 từ footage thứ 2 |
+| 5 | Logo | $10/footage (4-5 cái) |
+| 6 | Day to Night Transition (chuyển cảnh ngày sang đêm) | Miễn phí 1-2 cái; $5 cho 3-4 cái; $10 cho 5-6 cái; +$5 mỗi 2 cái thêm |
+| 7 | Sky Replacement (thay trời) | $15/footage |
+| 8 | Voice Over (lồng tiếng) | $15/video |
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 1*
+
+### 2.2.3. Hiệu ứng Motion Graphics (đồ họa chuyển động)
+
+| Hiệu ứng | Yêu cầu footage |
+|----------|-----------------|
+| Call-out (gọi chú) | Footage drone hoặc góc rộng; Ảnh tham chiếu chỉ rõ vị trí vật thể cần gọi chú |
+| Sidebar (thanh bên) | Không yêu cầu footage cụ thể; Cung cấp thông tin cần đặt trên sidebar |
+| Outline/Borderline (đường viền) | Footage drone; Ảnh tham chiếu chỉ rõ vị trí cần thêm đường viền |
+| 3D text (chữ 3D) | Không yêu cầu footage cụ thể |
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 2*
+
+### 2.2.4. Hiệu ứng Effects (hiệu ứng đặc biệt)
+
+| Hiệu ứng | Yêu cầu footage |
+|----------|-----------------|
+| Drop/Falling Object Effect (hiệu ứng vật rơi) | Footage góc rộng chụp toàn bộ ngôi nhà hoặc vật thể cần rơi; Có thể chụp nền riêng để tách chính xác |
+| Drop/Falling Object Effect - Advance (nâng cao) | Tương tự trên |
+| Layer Build Effect - 3 layer trở xuống (hiệu ứng xây dựng từng lớp) | Footage góc rộng chụp toàn bộ ngôi nhà hoặc vật thể |
+| Layer Build Effect - 4 đến 7 layers | Tương tự trên |
+| Google Earth (hiệu ứng Google Earth) | Tọa độ chính xác của địa điểm; Thường kết hợp với call-out hoặc outline |
+| Glow swipe (hiệu ứng quét sáng) | Không ghi rõ |
+| Roto - Isolate object (tách vật thể khỏi video) | Không ghi rõ |
+| Roto + 3D text | Phí roto cố định $10; Phí text thay đổi theo số lượng; Dưới 2 câu: $15 tổng; Từ câu thứ 3: +$5/câu |
+| Forward effect (hiệu ứng tiến về phía trước) | Chưa xác nhận |
+| Sky replacement (thay trời) | Cần kiểm tra footage trước |
+| Display Frame Effect (hiệu ứng khung hiển thị) | Dùng làm transition: Cần 2 footage (có agent và không có agent) từ cùng góc; Dùng làm teleport: Cần 4 footage (có/không agent từ 2 địa điểm khác nhau) |
+| AI EFFECT (hiệu ứng AI) | Khách cần gửi sample AI effect muốn tạo và check với team video trước khi nhận làm; Lưu ý: các footage từ AI generate sẽ không giống nhau 100% |
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 2*
+
+### 2.2.5. Hiệu ứng Transitions (chuyển cảnh)
+
+| Hiệu ứng | Yêu cầu footage |
+|----------|-----------------|
+| Split Scene Transition (chuyển cảnh chia đôi) | Footage ngoài trời, camera xoay để bắt bầu trời cùng hiên hoặc vật thể; Footage dài hơn 7 giây |
+| Person Disappear (người biến mất) | Cần 2 footage: có agent và không có agent từ cùng góc |
+| Day to Night Transition (chuyển ngày sang đêm) | Cần 2 footage: ban ngày và ban đêm từ cùng góc |
+| Masking transition (chuyển cảnh che phủ) | Footage dolly zoom tập trung vào vật thể như gương, cửa sổ, cửa ra vào có hình vuông, tròn hoặc chữ nhật |
+| Cut-out transitions - 2-3 layers (chuyển cảnh cắt lớp) | Không ghi rõ |
+| Cut-out transitions - 4-6 layers | Không ghi rõ |
+| Continuous revert - 4 lần trở xuống (đảo ngược liên tục) | Chưa xác nhận |
+| Continuous revert - 4 đến 8 lần | Chưa xác nhận |
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 2*
+
+### 2.2.6. Dịch vụ bổ sung khác
+
+| Dịch vụ | Giá |
+|---------|-----|
+| Custom animated icons (biểu tượng động tùy chỉnh) | Miễn phí 3 icon cơ bản (bed/bath/sq) |
+| Standard voice-over (lồng tiếng tiêu chuẩn) | Thông báo khi có yêu cầu |
+| Voice-over at Intro & Outro | Không ghi rõ |
+| Advanced video stabilization - Gyroflow (chống rung nâng cao cho FPV) | $10/clip |
+| Blur - Làm mờ (biển số, đồ vật, tranh...) | $5/item |
+| Subtext - animated text (phụ đề động) | Không ghi rõ |
+| Caption - normal text (chú thích thường) | Miễn phí nếu ngắn |
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 2*
+
+### 2.2.7. Phụ phí theo dung lượng và chất lượng
+
+| Điều kiện | Phụ phí |
+|-----------|---------|
+| Từ 15GB đến 30GB | +$15 |
+| Từ 30GB đến 45GB | +$30 |
+| Từ 45GB trở lên | +$45 |
+| Input 4K hoặc xuất 4K | +$10 (chỉ charge khi job dưới 15GB) |
+| Trên 70 footage mà không charge thêm được gì | +$10 |
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 1*
+
+## 2.3. Dịch vụ Virtual Staging và 3D
+
+| Dịch vụ | Giá |
+|---------|-----|
+| Virtual Staging (dàn dựng nội thất ảo) | $20/ảnh |
+| Virtual Renovation (cải tạo ảo) | $35/ảnh |
+| 2D Floor Plan - Black and White (bản vẽ mặt bằng 2D đen trắng) | $20/tầng |
+| 2D Floor Plan - Color (màu) | $25/tầng |
+| 2D Floor Plan - Color with Furniture (màu có nội thất) | $30/tầng |
+| 3D Floor Plan (bản vẽ mặt bằng 3D) | $35/tầng |
+| 3D Floor Plan High-end (cao cấp) | $45/tầng |
+| Exterior Render (hình ảnh render ngoại thất) | $180-200/ảnh |
+| Interior Render (hình ảnh render nội thất) | $120/ảnh |
+| Video Render | Phí làm ảnh + $12/giây dựng video |
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 4*
+
+## 2.4. Dịch vụ Virtual Tour (tham quan ảo)
+
+**Điều kiện áp dụng:** Bảng giá áp dụng cho làm virtual tour từ ảnh render, không phải ảnh chụp Panorama 360.
+
+| Thành phần | Giá |
+|------------|-----|
+| Interior View (view nội thất) | $160/view |
+| Exterior View - đầu tiên | $250/view (bao gồm phí model) |
+| Exterior View - từ view thứ 2 | $180/view |
+| Floor Plan | $100 |
+| Tạo tour | $100 |
+
+**Ví dụ tính giá - Interior (5 phòng, 7 views):**
+- 7 views × $160 = $1,120
+- Floor plan = $100
+- Tạo tour = $100
+- **Tổng = $1,320**
+
+**Ví dụ tính giá - Exterior (3 views):**
+- View đầu = $250
+- 2 views tiếp theo = $360
+- Floor plan = $100 (nếu cần)
+- Tạo tour = $100
+- **Tổng = $810**
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 4*
+
+## 2.5. Dịch vụ khác
+
+### Panorama
+
+| Dịch vụ | Giá |
+|---------|-----|
+| Stick (ghép ảnh) | $2.5 |
+| Edit (xóa chân máy, thêm lửa, TV, lò sưởi, thay trời...) | $2.5 |
+| Edit + Stick (1 Expose) | $4 |
+| Edit + Merge (nhiều Expose) | $3.5 |
+| Edit + Merge + Stick | $5 |
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 6*
+
+### Headshot (ảnh chân dung)
+
+| Dịch vụ | Giá |
+|---------|-----|
+| Edit + Remove Wrinkle (chỉnh sửa + xóa nếp nhăn) - 1-2 mặt | $2.5 |
+| Edit + Remove Wrinkle - 3-5 mặt | $4 |
+| Edit + Remove Wrinkle - 6-10 mặt | $5.5 |
+| Edit + Remove Wrinkle - từ mặt 11 trở lên | +$0.4/mặt |
+| Edit only - 1-2 mặt | $1.5 |
+| Edit only - trên 2 mặt | $2.5 |
+| Background Remove (xóa nền) - 1 màu hoặc combo trắng + trong | $1 |
+| Background Remove - thêm màu nền khác | +$0.5 |
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 5*
+
+### Dịch vụ khác
+
+| Dịch vụ | Giá |
+|---------|-----|
+| High-end (chỉnh sửa cao cấp) | $2.5/ảnh |
+| Day to Dusk (chuyển ngày sang hoàng hôn) | $5/ảnh |
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 7, 8*
+
+---
+
+# PHẦN 3: PHÂN TÍCH DỮ LIỆU FEEDBACK AI VIDEO
+
+## 3.1. Tổng quan dữ liệu
+
+**Nguồn dữ liệu:** File "[Video] Feedback AI.xlsx"
+**Tổng số job codes:** 23 jobs
+**Loại dữ liệu:** Feedback từ khách hàng và Sales về các hiệu ứng AI Video
+
+## 3.2. Phân loại lỗi theo nhóm
+
+### 3.2.1. Thống kê tổng quan
+
+| Nhóm lỗi | Số lượng cases | Tỷ lệ |
+|----------|----------------|-------|
+| Hiểu sai yêu cầu khách hàng | 8 cases | 35% |
+| Chất lượng AI output kém | 6 cases | 26% |
+| Trễ deadline | 5 cases | 22% |
+| Vật lý/Logic không hợp lý | 4 cases | 17% |
+
+### 3.2.2. Chi tiết nhóm lỗi: Hiểu sai yêu cầu khách hàng (8 cases)
+
+| Job Code | Yêu cầu của khách | Thực tế làm | Feedback |
+|----------|-------------------|-------------|----------|
+| TADEC31004 | Hiệu ứng AI 4 mùa - chuyển từ hiện trạng sang mùa xuân | Làm từ tuyết sang mùa xuân | "we don't get snow here so as stated we were wanting it to go from its current condition into the spring look.. Not the snow into spring" |
+| HTJAN15008Rev | "preparing dinner" - chuẩn bị bữa tối (có người nấu) | Chỉ có bàn ăn với đồ ăn, không có người | "Khách ghi là preparing dinner mà. Chuẩn bị thì phải có người chứ, nó là động từ rồi còn đâu" |
+| DUJAN04005 | Tạo nước trong đài phun | Nước chảy ra từ vị trí ngẫu nhiên | "where exactly is the water coming from now? just randomly out of nowhere?" |
+| QUJAN25001 | Order 2 AI: phòng khách và phòng ăn | Chỉ làm 1 và làm sai phòng (dining nhưng làm living) | "Order 2 AI living và dining room. nhưng chỉ làm 1 và làm sai" |
+| QUJAN19003 | AI dựng nhà + timelapse đêm với bầu trời đầy sao | Không làm phần AI dựng nhà | "Không làm AI dựng nhà" |
+| LIJAN07001 | Quân cờ di chuyển theo quy luật cờ vua thực tế | Quân cờ nhảy lên đánh nhau | "please move the pieces like a real game of chess, one piece at a time" |
+| LIDEC10001 | Santa đẩy xe vào ống khói (theo sample) | Xe rơi xuống đất, không vào được ống khói | "ông già Noel đẩy rơi ô tô xuống đất, không vào được mái nhà như yêu cầu; xe ô tô sai yêu cầu, kích cỡ và chính tả" |
+| CAJAN21001rev7 | Transition di chuyển theo hướng cụ thể (trái/phải) | Flow không nhất quán | "inconsistencies in the visual storytelling, particularly in the flow of movements and transitions" |
+
+*Nguồn: File "[Video] Feedback AI.xlsx"*
+
+### 3.2.3. Chi tiết nhóm lỗi: Chất lượng AI output kém (6 cases)
+
+| Job Code | Vấn đề | Feedback |
+|----------|--------|----------|
+| THJAN20030Rev | Video như ảnh tĩnh rồi zoom vào | "AI thay trời xanh đẹp (mấy ai trời đang ở dạng tĩnh, khách muốn kiểu thực tế hơn); Không đạt chất lượng, như ảnh tĩnh rồi zoom vào" |
+| CHDEC11004 | Agent đóng băng trong khung hình, clip bị vỡ | "agent đóng băng trong khung hình, AI không thể hoạt hình hơn, cả cảnh đầu trước nhà và cuối ở bể bơi. Chất lượng clip AI thấp, bị vỡ" |
+| HTJAN07002rev2 | Mặt người bị biến dạng | "I am just now seeing the deformed faces of the very first family in the living room enhancement" |
+| MNJAN2001 | Người trông fake + lộ logo Gemini | "They look like they are fixing to go to the bedroom next. người fake; 1:39 logo gemini" |
+| CHJAN24002 | Agent bay lơ lửng, viền cắt trắng xóa | "Agent bay lơ lửng trong phòng, quanh agent hiện rõ vết cắt trắng xóa; agent là do edit roto vào chứ không phải AI ren" |
+| NHJAN13010 | Đàn ông mặc bikini (thay vì quần bơi) | "out A17 đàn ông mặc bikini; quần bơi, không phải bikini" |
+
+*Nguồn: File "[Video] Feedback AI.xlsx"*
+
+### 3.2.4. Chi tiết nhóm lỗi: Trễ deadline (5 cases)
+
+| Job Code | Thời gian trễ | Ghi chú |
+|----------|---------------|---------|
+| HTJAN22005 | 9 tiếng | "15 effect, e vừa hỏi AI bảo bên đấy mới làm dc 9ef" |
+| QUJAN21008 | 5 tiếng | "13h17 order DL 2 tiếng, 15h31 trả là khá đúng DL rồi, trễ 5 tiếng là do edit" |
+| HTJAN07002rev2 | 4 tiếng | "AI trễ DL đã phản hồi và qchi xử lý luôn khi nhận được thông tin của sale" |
+| HTJAN26003 | 3 tiếng | "GN bảo edit tự làm AI. Trễ hơn 3 tiếng" |
+| QUJAN19003Rev2 | 5 tiếng (DL 5h nhưng 10h đêm mới trả) | "Làm AI effect dựng nhà rồi thì lại làm lỗi AI day to night" |
+
+*Nguồn: File "[Video] Feedback AI.xlsx"*
+
+### 3.2.5. Chi tiết nhóm lỗi: Vật lý/Logic không hợp lý (4 cases)
+
+| Job Code | Vấn đề |
+|----------|--------|
+| TLNOV14022rev4 | Tuần lộc tách khỏi đàn, đứng sau xe: "why does one of the reindeer move away from the others so that it's behind the sleigh?" |
+| QUJAN16003 | Agent ngã bể bơi trông vô duyên: "sale bảo trông nó hơi vô duyên" |
+| MNJAN2001 | Cặp đôi trong bếp có hành vi không phù hợp: "They look like they are fixing to go to the bedroom next" |
+| LIJAN07001 | Quân cờ không tuân theo luật cờ vua: "bàn cờ nhảy lên đánh nhau" |
+
+*Nguồn: File "[Video] Feedback AI.xlsx"*
+
+## 3.3. Phân tích theo loại hiệu ứng AI
+
+### 3.3.1. Thống kê hiệu ứng và tỷ lệ lỗi
+
+| Loại hiệu ứng | Số cases | Số lỗi | Tỷ lệ lỗi |
+|---------------|----------|--------|-----------|
+| Người/Lifestyle (lối sống) | 7 | 5 | 71% |
+| Season/Weather (mùa/thời tiết) | 3 | 2 | 67% |
+| Day-to-Night (ngày sang đêm) | 3 | 1 | 33% |
+| Object Animation (hoạt hình vật thể) | 3 | 3 | 100% |
+| Furniture Staging (dàn dựng nội thất) | 3 | 1 | 33% |
+| Creative/Fantasy (sáng tạo/giả tưởng) | 2 | 2 | 100% |
+| Agent Composite (ghép agent) | 2 | 2 | 100% |
+
+*Nguồn: Tổng hợp từ File "[Video] Feedback AI.xlsx"*
+
+### 3.3.2. Chi tiết từng loại hiệu ứng
+
+**Hiệu ứng Người/Lifestyle:**
+- HTJAN15008Rev: "preparing dinner" - thiếu người
+- NHJAN13010: Đàn ông mặc bikini
+- MNJAN2001: Người trông fake, hành vi không phù hợp
+- HTJAN07002rev2: Mặt người biến dạng
+- HTJAN22005: 15 effect lifestyle, trễ deadline
+
+**Hiệu ứng Season/Weather:**
+- TADEC31004: Làm sai context địa phương (không có tuyết)
+- THJAN20030Rev: Trời đẹp nhưng như ảnh tĩnh
+
+**Hiệu ứng Day-to-Night:**
+- TADEC04003Rev2: Transition quá ngắn: "The transition was very short.. it didn't get to the sunset part"
+
+**Hiệu ứng Object Animation:**
+- LIJAN07001: Quân cờ không đúng luật
+- DUJAN04005: Nước chảy sai vị trí
+- LIDEC10001: Xe không vào được ống khói
+
+**Hiệu ứng Creative/Fantasy:**
+- TLNOV14022rev4: Tuần lộc di chuyển sai
+- LIDEC10001: Santa và xe không theo yêu cầu
+
+**Hiệu ứng Agent Composite:**
+- CHJAN24002: Agent bay lơ lửng, viền cắt trắng
+- CHDEC11004: Agent đóng băng, clip vỡ
+
+*Nguồn: File "[Video] Feedback AI.xlsx"*
+
+## 3.4. Các jobs được đánh giá "Từ chối" hoặc "Ghi nhận"
+
+| Job Code | Đánh giá | Lý do |
+|----------|----------|-------|
+| QUJAN16003 | Từ chối | "Out 1 thì trông hơi vô duyên nhưng Output 2 ok" |
+| NHJAN13010 | Từ chối | "quần bơi, không phải bikini" |
+| CHJAN24002 | Từ chối | "agent là do edit roto vào chứ không phải AI ren" |
+| QUJAN21008 | Từ chối | "trễ 5 tiếng là do edit" |
+| HTJAN26003 | Từ chối | "Edit tự làm AI" |
+| THJAN20030Rev | Ghi nhận | "Không đạt chất lượng, như ảnh tĩnh rồi zoom vào" |
+| MNJAN2001 | Ghi nhận | "Người bị fake + logo gem" |
+| HTJAN07002rev2 | Ghi nhận | "AI trễ DL đã phản hồi và qchi xử lý luôn khi nhận được thông tin của sale" |
+
+*Nguồn: File "[Video] Feedback AI.xlsx" - Cột "AI check lại"*
+
+## 3.5. Feedback tổng thể từ khách hàng cao cấp
+
+**Job CAJAN21001rev7** - Feedback đầy đủ từ khách hàng:
+
+> "I want to be transparent and share my overall feedback. Unfortunately, the experience has been quite frustrating. I paid for this test primarily to evaluate the potential of the solution, but I must say that I am not satisfied with the result.
+>
+> While there is clearly a lot of potential, I feel that the AI tool currently being used is not yet mature enough for the level of narrative control, visual coherence, and refinement that I am looking for. In addition, I noticed inconsistencies in the visual storytelling, particularly in the flow of movements and transitions, despite multiple detailed explanations and references.
+>
+> I fully understand the technical constraints of AI-generated content, but given the number of iterations and clarifications required, the final outcome does not meet my expectations nor the standards I need for client delivery."
+
+*Nguồn: File "[Video] Feedback AI.xlsx" - Job CAJAN21001rev7*
+
+---
+
+# PHẦN 4: BÀI TOÁN NGHIÊN CỨU AI AGENT
+
+## 4.1. Tổng quan 2 bài toán
+
+**Nguồn:** File "Bài toán AI_Fotober.docx"
+
+| Tiêu chí | Bài 1 | Bài 2 |
+|----------|-------|-------|
+| Tên bài toán | Thay Agent trong video có sẵn | Tạo video footage từ ảnh tĩnh |
+| Input | Video done + Ảnh Agent mới | Ảnh tĩnh các phòng + Script |
+| Output | Video với Agent mới | 5-7 đoạn video footage |
+
+## 4.2. Bài 1: Thay Agent trong video có sẵn
+
+### 4.2.1. Link tài nguyên
+
+- Input footage: https://www.dropbox.com/scl/fo/hxrm9ggzzoiqh9a7cusdk/ALSujZioqdzdFqS5elMvJag
+- Video done: https://www.dropbox.com/scl/fi/hg8k7r8z09slci6avwiz2/MHOCT29005_output.mp4
+
+### 4.2.2. Yêu cầu chi tiết
+
+| STT | Yêu cầu |
+|-----|---------|
+| 1 | Thay Agent từ hình ảnh trong link input vào video done |
+| 2 | Giữ nguyên hoàn toàn: Không gian, background, vật thể xung quanh, góc quay và ánh sáng |
+| 3 | Agent: Nói đúng nội dung video, biểu cảm tự nhiên, không bị AI face |
+| 4 | Chất lượng video đầu ra không được giảm so với video gốc |
+
+### 4.2.3. Script và Action chi tiết
+
+| Action | Vị trí | Hành động | Nội dung nói |
+|--------|--------|-----------|--------------|
+| Action 1 | Đứng trước nhà, hướng về camera | Cử chỉ tay nhẹ | "Hi, welcome to this beautiful home. This property features a bright open layout, modern finishes, and a comfortable living space. Let me show you why this could be the perfect place for you." |
+| Action 2 | Di chuyển 2-3 bước chậm | Xoay nhẹ về phía nhà | "As you can see, this home offers a clean design and plenty of natural light. It's designed for both everyday living and entertaining guests." |
+| Action 3 | Dừng lại, xoay người nhẹ | Cử chỉ chỉ tay tinh tế | "One of the highlights is the spacious layout and functional flow between rooms. Everything here is designed to feel open, warm, and welcoming." |
+| Action 4 | Hướng về camera | Tư thế thoải mái | "If you're looking for a home that combines comfort and style, this one is worth a closer look. Feel free to reach out to schedule a private showing." |
+
+*Nguồn: File "Bài toán AI_Fotober.docx" - Bài 1*
+
+## 4.3. Bài 2: Tạo video footage từ ảnh tĩnh
+
+### 4.3.1. Link tài nguyên
+
+- Input: https://www.dropbox.com/scl/fo/f3btrh1him55m8f2l5nmx/AFmiDU-TBIQNJo3OwvixwZI
+- Output mẫu: https://www.dropbox.com/scl/fi/wl6w0pz3mjjj121ltl5gq/Output.mp4
+
+### 4.3.2. Yêu cầu chi tiết
+
+| STT | Yêu cầu |
+|-----|---------|
+| 1 | Render thành 05-07 đoạn video footage tương ứng với các hình ảnh được gửi |
+| 2 | Trong mỗi đoạn: Agent đứng nói theo script, có chuyển động nhẹ (bước đi 1-2 bước hoặc xoay người tự nhiên) |
+| 3 | Giữ nguyên hoàn toàn: Bối cảnh, không gian, vật thể trong ảnh |
+| 4 | Agent: Biểu cảm tự nhiên, Lip-sync (đồng bộ môi) đúng nội dung |
+| 5 | Không giảm chất lượng hình ảnh so với ảnh gốc |
+
+### 4.3.3. Script và Action chi tiết
+
+| Cảnh | Vị trí | Hành động | Nội dung nói |
+|------|--------|-----------|--------------|
+| Intro | Đứng trước nhà, hướng về camera | Cử chỉ tay nhẹ | "Hey guys, this is Steven with Superior Custom Homes. We're here in Park City, Utah. Let me show you around." |
+| Entryway/Living Area | Đứng bên trong, xoay nhẹ về phía tường đặc điểm hoặc lò sưởi | Xoay nhẹ | "As you enter, you'll notice this custom white oak lattice wall. The fireplace detail really brings the space together." |
+| Kitchen | Đứng gần đảo bếp | Cử chỉ chỉ tay tinh tế | "This kitchen features custom Taj Mahal stone and hidden, paint-matched outlets. Every detail feels clean and seamless." |
+| Entertainment Room | Đi 1-2 bước chậm, xoay về phía bar hoặc TV | Di chuyển chậm + xoay | "This is the entertainment space with a bar, pool table, and TV. It's where friends and family come together." |
+| Wellness Room | Đứng thoải mái | Xoay đầu nhẹ, tư thế bình tĩnh | "This wellness space includes a sauna, cold plunge, and wet room. It's designed for relaxation with mountain views." |
+| Ski/Gear Room | Bước nhẹ về phía khu vực lưu trữ | Cử chỉ giới thiệu nhẹ | "After a day on the slopes, this room has storage and drying space for your gear. Everything here is built for convenience." |
+
+*Nguồn: File "Bài toán AI_Fotober.docx" - Bài 2*
+
+## 4.4. So sánh độ phức tạp 2 bài toán
+
+| Tiêu chí | Bài 1 | Bài 2 |
+|----------|-------|-------|
+| Loại bài toán | Thay thế Agent trong video có sẵn | Image-to-Video (ảnh sang video) với Agent |
+| Thách thức chính | Giữ nguyên 100% background, ánh sáng, góc quay | Tạo chuyển động từ ảnh tĩnh |
+| Yêu cầu lip-sync | Có - nói đúng nội dung video | Có - lip-sync đúng nội dung |
+| Yêu cầu chất lượng | Không giảm so với video gốc | Không giảm so với ảnh gốc |
+| Số lượng cảnh | 4 actions liên tục | 5-7 đoạn footage riêng biệt |
+| Yêu cầu chuyển động | Cử chỉ tay, di chuyển 2-3 bước, xoay người | Bước 1-2 bước hoặc xoay người |
+
+*Nguồn: File "Bài toán AI_Fotober.docx"*
+
+---
+
+# PHẦN 5: VỊ THẾ CẠNH TRANH TRONG NGÀNH
+
+## 5.1. Các đối thủ cạnh tranh tại Việt Nam
+
+| Công ty | Năm thành lập | Số nhân viên | Đặc điểm nổi bật |
+|---------|---------------|--------------|------------------|
+| Esoft | 2004 | 1000+ toàn cầu | Trụ sở tại Đan Mạch, có operations tại Việt Nam; Dịch vụ enterprise; ISO certified; AI+Human hybrid |
+| Imagtor | 2016 | Không công bố | 40% nhân viên là người khuyết tật; 60% là phụ nữ; Hệ thống QC đa tầng |
+| Fotober | 2016 | 150+ | Chuyên về video editing; Đa dạng style và hiệu ứng đặc biệt |
+| Beatcolor | 2016 | 100+ | Nền tảng quản lý tài sản số; Dịch vụ 24/7 |
+| Beepec | 2017 | 100+ | Giá cạnh tranh; Phù hợp khách hàng mới outsource |
+
+*Nguồn: Bài viết Imagtor "Top 5 Real Estate Photo Editing Outsource Partners in Vietnam" (17/11/2025)*
+
+## 5.2. Các đối thủ cạnh tranh toàn cầu
+
+| Công ty | Trụ sở | Đặc điểm nổi bật | Turnaround |
+|---------|--------|------------------|------------|
+| Esoft | Đan Mạch | Full ecosystem; AI+Human hybrid; ISO certified; API integration | 24-36 giờ |
+| BoxBrownie | Úc | Transparent pricing; Volume-friendly | 24 giờ |
+| PhotoUp | Hoa Kỳ | Credit-based system; User-friendly | 24 giờ |
+| Phixer | Hoa Kỳ | Tốc độ nhanh; Khách hàng enterprise (Compass, Opendoor) | 12 giờ |
+| Pixlmob | Hoa Kỳ | Mô hình marketplace; Kết nối photographer với editor | Tùy editor |
+
+*Nguồn: Bài viết Esoft "Top 5 Real Estate Photo Editing Outsourcing for 2026" (08/01/2026)*
+
+## 5.3. So sánh tính năng dịch vụ
+
+| Tính năng | Fotober | Esoft | BoxBrownie | PhotoUp | Phixer |
+|-----------|---------|-------|------------|---------|--------|
+| Photo Editing | Có | Có | Có | Có | Có |
+| Video Editing | Có | Có | Không | Không | Có |
+| Virtual Staging | Có | Có | Có | Có | Có |
+| Floor Plans | Có | Có | Có | Không | Không |
+| 3D Rendering | Có | Có | Có | Không | Không |
+| Virtual Tour | Có | Có | Không | Có | Không |
+| AI Effects | Có | Có | Không | Không | Có (AI Phixer) |
+| API Integration | Không rõ | Có | Không | Không | Không rõ |
+| ISO Certified | Không | Có | Không | Không | Không |
+| Dedicated PM | Có | Có | Không | Không | Không |
+| Free Trial | Có | Có | Có | Có | Có |
+
+*Nguồn: Tổng hợp từ các website công ty và bài viết Esoft, Imagtor, Picsmatic*
+
+## 5.4. Thông tin turnaround time theo ngành
+
+| Công ty | Turnaround Time |
+|---------|-----------------|
+| Fotober | 12-24 giờ |
+| Esoft | 24-36 giờ |
+| BoxBrownie | 24 giờ |
+| PhotoUp | 24 giờ |
+| Phixer | 12 giờ |
+| Beepec | 12 giờ |
+| Beatcolor | 18-24 giờ |
+| Imagtor | 12-24 giờ |
+
+*Nguồn: Bài viết Imagtor "Top 5 Real Estate Photo Editing Outsource Partners in Vietnam"; Bài viết Picsmatic "Top 10 Real Estate Photo Editing Companies in 2026"*
+
+## 5.5. Đánh giá về Fotober từ các nguồn bên ngoài
+
+**Từ bài viết Imagtor:**
+> "Fotober's simplicity and efficiency appeal to photographers seeking essential edits. Their specialty in real estate video editing skill gained their place as one of the leading editing companies in Vietnam."
+
+**Từ bài viết Picsmatic:**
+> "Fotober processes more than 20,000 photos per day. The company's core real estate photo editing services follow a structured 20-step workflow..."
+> "Notable Clients: Compass, Ray White, Raine & Horne"
+
+**Từ bài viết Pedra.ai:**
+> "If you have more lead time, a service with a 24-48 hour turnaround like Fotober or HitechDigital might offer more detailed, manual adjustments."
+
+*Nguồn: Các bài viết đã trích dẫn*
+
+---
+
+# PHẦN 6: NỘI DUNG VÀ MARKETING CỦA FOTOBER
+
+## 6.1. Các bài viết về AI Video trên website
+
+| Tiêu đề bài viết | Chủ đề |
+|------------------|--------|
+| "How to Master AI Video Generation for Real Estate 2025" | Hướng dẫn tạo video AI cho bất động sản |
+| "How to Use AI Video Marketing for Real Estate Success" | Sử dụng AI video marketing |
+| "Top 10 AI Effects That Make Real Estate Property Videos Stand Out" | 10 hiệu ứng AI nổi bật |
+| "AI Virtual Staging: Transform Real Estate Listings" | Virtual staging bằng AI |
+| "AI Photo Editing for Real Estate: Enhance Property Photos" | Chỉnh sửa ảnh AI |
+
+*Nguồn: Kết quả tìm kiếm Google về Fotober*
+
+## 6.2. Kênh mạng xã hội
+
+| Nền tảng | Địa chỉ |
+|----------|---------|
+| Facebook | fotober247 |
+| Instagram | @fotober |
+| TikTok | @fotober |
+| LinkedIn | fotober-com |
+| YouTube | Fotober channel |
+
+*Nguồn: Trang About Us - fotober.com và kết quả tìm kiếm*
+
+## 6.3. Nội dung về AI Effects được Fotober đề cập
+
+Theo bài viết "Top 10 AI Effects That Make Real Estate Property Videos Stand Out":
+1. AI Sky Replacement (thay trời bằng AI)
+2. Day-to-Night Transition (chuyển cảnh ngày sang đêm)
+3. Season Change (thay đổi mùa)
+4. Lifestyle Scenes (cảnh sinh hoạt)
+5. Furniture Animation (hoạt hình nội thất)
+6. Weather Effects (hiệu ứng thời tiết)
+7. Virtual Staging Video (video dàn dựng ảo)
+8. Agent Composite (ghép agent)
+9. Cinematic Transitions (chuyển cảnh điện ảnh)
+10. Property Reveal (tiết lộ bất động sản)
+
+*Nguồn: Kết quả tìm kiếm Google - fotober.com/top-10-ai-effects-that-make-real-estate-property-videos-stand-out*
+
+---
+
+# PHẦN 7: ĐÁNH GIÁ TỔNG HỢP CHO TEAM AI VIDEO
+
+## 7.1. Tình trạng hiện tại của AI Video tại Fotober
+
+### 7.1.1. Dữ liệu từ Feedback
+
+**Tổng số jobs có feedback:** 23 jobs
+
+**Phân bố kết quả:**
+- Số jobs có vấn đề được ghi nhận: 23/23 (100% - do đây là file tập hợp feedback có vấn đề)
+- Số jobs đánh giá "Từ chối": 5 jobs (QUJAN16003, NHJAN13010, CHJAN24002, QUJAN21008, HTJAN26003)
+- Số jobs đánh giá "Ghi nhận": 3 jobs (THJAN20030Rev, MNJAN2001, HTJAN07002rev2)
+
+### 7.1.2. Phân tích theo loại lỗi
+
+| Loại lỗi | Số lượng | Tỷ lệ | Mô tả |
+|----------|----------|-------|-------|
+| Hiểu sai yêu cầu | 8 | 35% | Không đọc kỹ brief, không hiểu context địa phương, bỏ sót yêu cầu |
+| Chất lượng output | 6 | 26% | Mặt biến dạng, người fake, logo lọt, video như ảnh tĩnh |
+| Trễ deadline | 5 | 22% | Trễ từ 3-9 tiếng |
+| Logic/Vật lý sai | 4 | 17% | Chuyển động không hợp lý, hành vi không phù hợp |
+
+### 7.1.3. Phân tích theo loại hiệu ứng
+
+| Loại hiệu ứng | Tỷ lệ lỗi | Nhận xét |
+|---------------|-----------|----------|
+| Object Animation (quân cờ, xe, nước) | 100% (3/3) | Tất cả jobs đều có vấn đề |
+| Creative/Fantasy (Santa, tuần lộc) | 100% (2/2) | Tất cả jobs đều có vấn đề |
+| Agent Composite | 100% (2/2) | Tất cả jobs đều có vấn đề |
+| Người/Lifestyle | 71% (5/7) | Tỷ lệ lỗi cao |
+| Season/Weather | 67% (2/3) | Tỷ lệ lỗi cao |
+| Day-to-Night | 33% (1/3) | Tỷ lệ lỗi trung bình |
+| Furniture Staging | 33% (1/3) | Tỷ lệ lỗi trung bình |
+
+### 7.1.4. Các vấn đề cụ thể được ghi nhận
+
+**Vấn đề về chất lượng AI:**
+- Mặt người bị biến dạng (HTJAN07002rev2)
+- Người trông fake, hành vi không tự nhiên (MNJAN2001)
+- Agent đóng băng, không chuyển động (CHDEC11004)
+- Video như ảnh tĩnh zoom vào (THJAN20030Rev)
+- Viền cắt trắng xung quanh agent (CHJAN24002)
+- Lộ logo công cụ AI - Gemini (MNJAN2001)
+
+**Vấn đề về hiểu yêu cầu:**
+- Không hiểu context địa phương - làm tuyết ở nơi không có tuyết (TADEC31004)
+- Hiểu sai động từ - "preparing dinner" cần có người (HTJAN15008Rev)
+- Không quan sát kỹ input - nước chảy sai vị trí (DUJAN04005)
+- Bỏ sót requirement - order 2 AI chỉ làm 1 (QUJAN25001)
+- Không research domain - quân cờ không đúng luật (LIJAN07001)
+
+**Vấn đề về quy trình:**
+- Trễ deadline do capacity không đủ (HTJAN22005 - 15 effects)
+- Edit tự làm AI không qua team AI (HTJAN26003)
+- Làm lại code cũ nhưng làm hỏng phần đã đẹp (QUJAN19003Rev2)
+
+## 7.2. Thông tin về bài toán nghiên cứu
+
+### 7.2.1. Bài 1: Thay Agent trong video
+
+**Ràng buộc kỹ thuật:**
+- Giữ nguyên 100%: background, không gian, vật thể, góc quay, ánh sáng
+- Chất lượng không được giảm so với video gốc
+- Agent phải nói đúng nội dung, biểu cảm tự nhiên, không bị AI face
+
+**Yêu cầu output:**
+- 4 actions với script và chuyển động cụ thể
+- Lip-sync với audio tiếng Anh
+- Cử chỉ tay, di chuyển 2-3 bước, xoay người
+
+### 7.2.2. Bài 2: Tạo video từ ảnh tĩnh
+
+**Ràng buộc kỹ thuật:**
+- Giữ nguyên hoàn toàn bối cảnh, không gian, vật thể trong ảnh
+- Chất lượng không giảm so với ảnh gốc
+- Lip-sync đúng nội dung
+
+**Yêu cầu output:**
+- 5-7 đoạn footage riêng biệt
+- Agent đứng nói theo script, chuyển động nhẹ (1-2 bước hoặc xoay)
+- Biểu cảm tự nhiên
+
+## 7.3. Định giá AI Effects hiện tại
+
+**Theo bảng giá hiện có:** AI EFFECT được ghi là "Khách cần gửi sample AI effect muốn tạo và check với team video trước khi nhận làm"
+
+**Lưu ý trong bảng giá:** "các footage từ AI generate sẽ không giống nhau 100% được"
+
+**Chưa có:** Bảng giá cụ thể cho từng loại AI effect
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx" - Trang 2*
+
+## 7.4. So sánh với tiêu chuẩn ngành
+
+**Turnaround time:**
+- Fotober hiện tại: 12-24 giờ
+- Tiêu chuẩn ngành: 12-24 giờ
+- Đối thủ nhanh nhất (Phixer, Beepec): 12 giờ
+
+**Về AI capabilities theo thông tin công khai:**
+- Esoft: Có AI+Human hybrid workflow, ISO certified
+- Phixer: Có AI Phixer tool
+- Fotober: Đang phát triển AI effects, có content marketing về AI video
+
+## 7.5. Dữ liệu về năng lực sản xuất
+
+**Từ feedback job HTJAN22005:**
+- Order: 15 AI effects
+- Tình trạng: "2h sáng GN báo: edit order AI muộn mà 15ef, e vừa hỏi AI bảo bên đấy mới làm dc 9ef"
+- Kết quả: Trễ 9 tiếng
+
+**Nhận xét từ dữ liệu:** Khi có order lớn (15 effects), team chỉ hoàn thành được 9 effects trước deadline, cho thấy capacity constraint với orders nhiều effects.
+
+---
+
+# PHẦN 8: BẢNG TỔNG HỢP DỮ LIỆU
+
+## 8.1. Tổng hợp 23 Job Codes với đầy đủ thông tin
+
+| STT | Job Code | Loại hiệu ứng | Feedback chính | Đánh giá nội bộ |
+|-----|----------|---------------|----------------|-----------------|
+| 1 | TLNOV14022rev4 | Creative (tuần lộc) | Tuần lộc di chuyển sai vị trí | Đã check |
+| 2 | TADEC31004 | Season Change | Làm tuyết ở nơi không có tuyết | - |
+| 3 | DUJAN04005 | Object Animation | Nước chảy sai vị trí | - |
+| 4 | HTJAN15008Rev | Lifestyle | Thiếu người trong cảnh "preparing dinner" | - |
+| 5 | THJAN20030Rev | Sky/Weather | Video như ảnh tĩnh zoom | Ghi nhận |
+| 6 | QUJAN16003 | Agent Action | Trông vô duyên | Từ chối (Output 2 ok) |
+| 7 | TADEC04003Rev2 | Day-to-Night | Transition quá ngắn | Đã check |
+| 8 | NHJAN13010 | Lifestyle | Đàn ông mặc bikini | Từ chối |
+| 9 | LIDEC10001 | Creative (Santa) | Xe rơi xuống đất, sai yêu cầu | Đã check |
+| 10 | LIJAN07001 | Object Animation | Quân cờ không đúng luật | - |
+| 11 | HTDEC18019 | Creative (hộp quà) | - | Đã check |
+| 12 | HTJAN22005 | Lifestyle (15 effects) | Trễ 9 tiếng | - |
+| 13 | CHJAN24002 | Agent Composite | Agent bay lơ lửng, viền cắt trắng | Từ chối |
+| 14 | CHDEC11004 | Season Change | Agent đóng băng, clip vỡ | - |
+| 15 | MNJAN2001 | Lifestyle | Người fake, logo Gemini | Ghi nhận |
+| 16 | QUJAN21008 | Virtual Staging | Trễ 5 tiếng | Từ chối (do edit) |
+| 17 | QUJAN19003 | Construction + Day-Night | Không làm AI dựng nhà | Đã check |
+| 18 | QUJAN19003Rev2 | Day-to-Night | Làm hỏng phần đã đẹp | Đã check |
+| 19 | HTJAN07002rev2 | Lifestyle | Mặt người biến dạng | Ghi nhận |
+| 20 | HTJAN26003 | Lifestyle (12 scenes) | Trễ 3 tiếng, edit tự làm AI | Từ chối |
+| 21 | QUJAN25001 | Furniture Animation | Order 2 chỉ làm 1, làm sai phòng | - |
+| 22 | CAJAN21001rev7 | Multiple (5 staging + transitions) | Khách không hài lòng tổng thể | - |
+
+*Nguồn: File "[Video] Feedback AI.xlsx"*
+
+## 8.2. Tổng hợp yêu cầu kỹ thuật từ 2 bài toán
+
+| Yêu cầu | Bài 1 | Bài 2 |
+|---------|-------|-------|
+| Giữ nguyên background | Bắt buộc | Bắt buộc |
+| Giữ nguyên ánh sáng | Bắt buộc | Theo ảnh gốc |
+| Lip-sync | Có | Có |
+| Không bị AI face | Bắt buộc | Biểu cảm tự nhiên |
+| Chất lượng video | Không giảm so với gốc | Không giảm so với ảnh gốc |
+| Số cảnh | 4 actions liên tục | 5-7 đoạn riêng biệt |
+| Chuyển động | Cử chỉ tay, 2-3 bước, xoay | 1-2 bước hoặc xoay |
+
+*Nguồn: File "Bài toán AI_Fotober.docx"*
+
+## 8.3. Tổng hợp giá dịch vụ liên quan đến AI/Effects
+
+| Dịch vụ | Giá | Ghi chú |
+|---------|-----|---------|
+| AI EFFECT | Chưa định giá | Cần check với team, gửi sample trước |
+| Roto (tách vật thể) | $10/footage | Cố định |
+| Roto + 3D text | $15 cơ bản + $5/text từ câu 3 | - |
+| Day-to-Night Transition | Miễn phí 1-2; $5 (3-4); $10 (5-6) | - |
+| Sky Replacement | $15/footage | - |
+| Voice Over | $15/video | - |
+| Display Frame Effect | Tùy yêu cầu | Cần 2-4 footage |
+
+*Nguồn: File "Bản sao của Video-Price_Updated.xlsx"*
+
+---
+
+# PHẦN 9: KẾT LUẬN VÀ ĐÁNH GIÁ
+
+## 9.1. Tóm tắt hiện trạng
+
+### 9.1.1. Về dịch vụ AI Video
+
+Fotober đang cung cấp dịch vụ AI Effects cho video bất động sản nhưng chưa có bảng giá cụ thể. Quy trình hiện tại yêu cầu khách hàng gửi sample trước và check với team video trước khi nhận làm.
+
+### 9.1.2. Về chất lượng output
+
+Dựa trên 23 job codes có feedback, các vấn đề chính được ghi nhận bao gồm:
+- 35% liên quan đến hiểu sai yêu cầu khách hàng
+- 26% liên quan đến chất lượng AI output
+- 22% liên quan đến trễ deadline
+- 17% liên quan đến logic/vật lý không hợp lý
+
+### 9.1.3. Về loại hiệu ứng
+
+Các loại hiệu ứng có tỷ lệ lỗi cao (trên 66%):
+- Object Animation: 100%
+- Creative/Fantasy: 100%
+- Agent Composite: 100%
+- Người/Lifestyle: 71%
+- Season/Weather: 67%
+
+Các loại hiệu ứng có tỷ lệ lỗi thấp hơn (33%):
+- Day-to-Night
+- Furniture Staging
+
+### 9.1.4. Về năng lực sản xuất
+
+Từ dữ liệu job HTJAN22005, khi có order 15 effects với deadline tiêu chuẩn, team chỉ hoàn thành được 9 effects, dẫn đến trễ 9 tiếng.
+
+### 9.1.5. Về bài toán nghiên cứu
+
+Hai bài toán được đặt ra đều yêu cầu:
+- Lip-sync chính xác
+- Giữ nguyên bối cảnh 100%
+- Chất lượng không giảm so với input
+- Agent với biểu cảm tự nhiên, không bị AI face
+
+Đây là các yêu cầu có độ phức tạp cao, đặc biệt Bài 1 (thay Agent trong video có sẵn) yêu cầu giữ nguyên hoàn toàn background, góc quay và ánh sáng gốc.
+
+## 9.2. Các số liệu quan trọng
+
+| Chỉ số | Giá trị | Nguồn |
+|--------|---------|-------|
+| Số ảnh xử lý mỗi ngày | 20.000+ | Website Fotober, Picsmatic |
+| Số nhân viên | 150+ | Website Fotober |
+| Số khách hàng/năm | 10.000+ | Website Fotober |
+| Turnaround time | 12-24 giờ | Website Fotober, Imagtor |
+| Số job có feedback trong data | 23 | File Feedback AI.xlsx |
+| Tỷ lệ lỗi do hiểu sai yêu cầu | 35% | Phân tích từ Feedback |
+| Tỷ lệ lỗi AI effects phức tạp | 71-100% | Phân tích từ Feedback |
+
+---
+
+**Kết thúc báo cáo**
+
+*Báo cáo này được tổng hợp từ các nguồn dữ liệu nội bộ và công khai, không bao gồm phỏng đoán hoặc khuyến nghị. Mọi số liệu đều có trích dẫn nguồn cụ thể.*
