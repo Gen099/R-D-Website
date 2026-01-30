@@ -96,6 +96,7 @@
         @media (min-width: 769px) {
             .main-content {
                 margin-left: 288px; /* 18rem = 288px (w-72) */
+                margin-top: 0; /* No sticky header */
             }
         }
         
@@ -256,38 +257,15 @@
     </style>
 </head>
 <body class="bg-gray-50">
-    <!-- Header -->
-    <header class="gradient-bg text-white shadow-lg sticky top-0 z-50 main-content">
-        <div class="container mx-auto px-4 py-6">
-            <div class="flex items-center justify-between">
-                <div>
-                    <h1 class="text-2xl md:text-3xl font-bold">🚀 R&D AI Video Intelligence Platform</h1>
-                    <p class="text-sm md:text-base text-purple-200 mt-1">Hệ Thống Phân Tích & Nghiên Cứu AI Video - FOTOBER</p>
-                </div>
-                <button id="menuToggle" class="md:hidden text-white">
-                    <i class="fas fa-bars text-2xl"></i>
-                </button>
-            </div>
-            <div class="mt-4 flex flex-wrap gap-4 text-sm">
-                <div class="flex items-center">
-                    <i class="fas fa-calendar-alt mr-2"></i>
-                    <span>29/01/2026</span>
-                </div>
-                <div class="flex items-center">
-                    <i class="fas fa-users mr-2"></i>
-                    <span>150+ Nhân sự</span>
-                </div>
-                <div class="flex items-center">
-                    <i class="fas fa-flask mr-2"></i>
-                    <span>R&D Specialist</span>
-                </div>
-            </div>
-        </div>
-    </header>
+    <!-- Header moved to Overview section -->
 
     <div class="flex">
         <!-- Sidebar Navigation -->
         <aside id="sidebar" class="w-72 gradient-bg text-white overflow-y-auto shadow-2xl">
+            <!-- Mobile Menu Toggle -->
+            <button id="menuToggle" class="md:hidden text-white w-full text-left p-4">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
             <nav class="p-4 mt-4">
                 <h3 class="text-lg font-bold mb-4 px-4">📋 Mục Lục</h3>
                 <ul class="space-y-2">
@@ -329,6 +307,30 @@
         <main class="flex-1 p-4 md:p-8 main-content">
             <!-- Overview Section -->
             <section id="overview" class="content-section mb-12">
+                <!-- Header (Only in Overview) -->
+                <div class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-lg shadow-lg p-8 mb-8">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <h1 class="text-2xl md:text-3xl font-bold">🚀 R&D AI Video Intelligence Platform</h1>
+                            <p class="text-sm md:text-base text-purple-100 mt-1">Hệ Thống Phân Tích & Nghiên Cứu AI Video - FOTOBER</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-6 text-sm">
+                        <div class="flex items-center">
+                            <i class="fas fa-calendar-alt mr-2"></i>
+                            <span>29/01/2026</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-users mr-2"></i>
+                            <span>150+ Nhân sự</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-flask mr-2"></i>
+                            <span>R&D Specialist</span>
+                        </div>
+                    </div>
+                </div>
+                
                 <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
                     <i class="fas fa-chart-line mr-3 text-purple-600"></i>
                     Tổng Quan Dự Án
