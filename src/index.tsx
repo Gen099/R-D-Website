@@ -1,10 +1,13 @@
 import { Hono } from 'hono'
 import { serveStatic } from 'hono/cloudflare-workers'
 import { cors } from 'hono/cors'
+import { analyzeWithAI, type AIAnalysisRequest, type AIAnalysisResponse } from './services/ai'
 
-// Define Cloudflare Bindings type for D1 database
+// Define Cloudflare Bindings type for D1 database and env vars
 type Bindings = {
   DB: D1Database;
+  OPENAI_API_KEY: string;
+  OPENAI_BASE_URL: string;
 }
 
 const app = new Hono<{ Bindings: Bindings }>()
@@ -491,75 +494,108 @@ app.get('/ai-tools', (c) => {
                 <p class="text-gray-600">Phân tích thông minh với nhiều AI models</p>
             </div>
 
+            <!-- Analysis Type Selection -->
+            <div class="mb-6">
+                <label class="block text-gray-700 font-semibold mb-2">Loại phân tích:</label>
+                <select id="analysisType" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none">
+                    <option value="general">Chung - Trả lời câu hỏi hoặc tư vấn</option>
+                    <option value="brief">Brief Analysis - Phân tích yêu cầu khách hàng</option>
+                    <option value="error">Error Analysis - Phân tích lỗi & feedback</option>
+                    <option value="prompt">Prompt Generation - Tạo prompt tối ưu</option>
+                </select>
+            </div>
+
             <!-- AI Model Selection -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                <div class="p-4 border-2 border-orange-500 rounded-lg bg-orange-50 cursor-pointer hover:shadow-lg transition">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="font-semibold text-orange-700">Gemini</span>
-                        <i class="fas fa-check-circle text-orange-600"></i>
+            <div class="mb-6">
+                <label class="block text-gray-700 font-semibold mb-2">Chọn AI Model:</label>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div data-provider="gemini" class="provider-card p-4 border-2 border-orange-500 rounded-lg bg-orange-50 cursor-pointer hover:shadow-lg transition">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-semibold text-orange-700">Gemini</span>
+                            <i class="fas fa-check-circle text-orange-600"></i>
+                            <i class="fas fa-circle text-gray-400 hidden"></i>
+                        </div>
+                        <p class="text-xs text-gray-600">Google AI - Mặc định</p>
                     </div>
-                    <p class="text-xs text-gray-600">Google AI - Mặc định</p>
-                </div>
-                
-                <div class="p-4 border-2 border-gray-300 rounded-lg cursor-pointer hover:shadow-lg transition hover:border-orange-300">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="font-semibold text-gray-700">GLM</span>
-                        <i class="fas fa-circle text-gray-400"></i>
+                    
+                    <div data-provider="glm" class="provider-card p-4 border-2 border-gray-300 rounded-lg cursor-pointer hover:shadow-lg transition hover:border-orange-300">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-semibold text-gray-700">GLM</span>
+                            <i class="fas fa-check-circle text-orange-600 hidden"></i>
+                            <i class="fas fa-circle text-gray-400"></i>
+                        </div>
+                        <p class="text-xs text-gray-600">Zhipu AI</p>
                     </div>
-                    <p class="text-xs text-gray-600">Zhipu AI</p>
-                </div>
-                
-                <div class="p-4 border-2 border-gray-300 rounded-lg cursor-pointer hover:shadow-lg transition hover:border-orange-300">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="font-semibold text-gray-700">OpenAI</span>
-                        <i class="fas fa-circle text-gray-400"></i>
+                    
+                    <div data-provider="openai" class="provider-card p-4 border-2 border-gray-300 rounded-lg cursor-pointer hover:shadow-lg transition hover:border-orange-300">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-semibold text-gray-700">OpenAI</span>
+                            <i class="fas fa-check-circle text-orange-600 hidden"></i>
+                            <i class="fas fa-circle text-gray-400"></i>
+                        </div>
+                        <p class="text-xs text-gray-600">GPT-5</p>
                     </div>
-                    <p class="text-xs text-gray-600">GPT-4</p>
-                </div>
-                
-                <div class="p-4 border-2 border-gray-300 rounded-lg cursor-pointer hover:shadow-lg transition hover:border-orange-300">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="font-semibold text-gray-700">Claude</span>
-                        <i class="fas fa-circle text-gray-400"></i>
+                    
+                    <div data-provider="claude" class="provider-card p-4 border-2 border-gray-300 rounded-lg cursor-pointer hover:shadow-lg transition hover:border-orange-300">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-semibold text-gray-700">Claude</span>
+                            <i class="fas fa-check-circle text-orange-600 hidden"></i>
+                            <i class="fas fa-circle text-gray-400"></i>
+                        </div>
+                        <p class="text-xs text-gray-600">Anthropic</p>
                     </div>
-                    <p class="text-xs text-gray-600">Anthropic</p>
                 </div>
             </div>
 
             <!-- Input Area -->
             <div class="mb-6">
                 <label class="block text-gray-700 font-semibold mb-2">Nhập nội dung cần phân tích:</label>
-                <textarea class="w-full h-48 p-4 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none resize-none" placeholder="Paste nội dung tài liệu, brief, hoặc câu hỏi của bạn vào đây...
+                <textarea id="inputContent" class="w-full h-64 p-4 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none resize-none" placeholder="Paste nội dung tài liệu, brief, hoặc câu hỏi của bạn vào đây...
 
 Ví dụ:
-- Phân tích brief: 'Please add AI lifestyle effect with family...'
-- Phân tích lỗi: 'The reindeer moved away from the sleigh...'
-- Câu hỏi: 'Tỷ lệ lỗi của Lifestyle effect là bao nhiêu?'"></textarea>
+📋 Brief Analysis:
+'Please add AI lifestyle effect with family at the pool area...'
+
+🔍 Error Analysis:
+'TADEC31004: The reindeer moved away from the sleigh instead of following it...'
+
+🎨 Prompt Generation:
+'Tạo prompt cho hiệu ứng Day-to-Night chuyển từ ban ngày sang hoàng hôn'
+
+❓ General Question:
+'Tỷ lệ lỗi của Object Animation effect là bao nhiêu? Làm sao để giảm thiểu?'"></textarea>
+            </div>
+
+            <!-- Loading Indicator -->
+            <div id="loadingIndicator" class="hidden mb-4 p-4 bg-blue-50 border-2 border-blue-200 rounded-lg flex items-center">
+                <i class="fas fa-spinner fa-spin text-blue-600 text-2xl mr-3"></i>
+                <span class="text-blue-800 font-semibold">AI đang phân tích... Vui lòng đợi trong giây lát.</span>
             </div>
 
             <!-- Action Buttons -->
-            <div class="flex space-x-4">
-                <button class="flex-1 px-6 py-3 gradient-orange text-white rounded-lg font-semibold hover:opacity-90 transition">
+            <div class="flex space-x-4 mb-8">
+                <button id="analyzeBtn" class="flex-1 px-6 py-3 gradient-orange text-white rounded-lg font-semibold hover:opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed">
                     <i class="fas fa-brain mr-2"></i>Phân tích với AI
                 </button>
-                <button class="px-6 py-3 border-2 border-orange-500 text-orange-600 rounded-lg font-semibold hover:bg-orange-50 transition">
+                <button id="clearBtn" class="px-6 py-3 border-2 border-orange-500 text-orange-600 rounded-lg font-semibold hover:bg-orange-50 transition">
                     <i class="fas fa-eraser mr-2"></i>Xóa
                 </button>
             </div>
 
-            <!-- Results Area (Initially Hidden) -->
-            <div class="mt-8 p-6 bg-gray-50 rounded-lg border-2 border-gray-200">
+            <!-- Results Area -->
+            <div id="resultsContainer" class="p-6 bg-gray-50 rounded-lg border-2 border-gray-200">
                 <div class="flex items-center mb-4">
                     <i class="fas fa-lightbulb text-yellow-500 text-2xl mr-3"></i>
                     <h3 class="text-xl font-bold text-gray-800">Kết quả phân tích</h3>
                 </div>
                 <p class="text-gray-600 italic">
-                    Kết quả phân tích sẽ hiển thị ở đây sau khi bạn nhấn nút "Phân tích với AI".<br>
-                    Tính năng AI API đang được tích hợp và sẽ sẵn sàng trong phiên bản tiếp theo.
+                    Kết quả phân tích sẽ hiển thị ở đây sau khi bạn nhấn nút "Phân tích với AI".
                 </p>
             </div>
         </div>
     </div>
+
+    <script src="/static/ai-tools.js"></script>
 </body>
 </html>
   `)
@@ -906,6 +942,156 @@ app.get('/analytics', (c) => {
 </body>
 </html>
   `)
+})
+
+// ============================================
+// AI ANALYSIS API ROUTES
+// ============================================
+
+/**
+ * POST /api/ai/analyze - Main AI analysis endpoint
+ * Request body: {
+ *   type: 'brief' | 'error' | 'prompt' | 'general',
+ *   input: string,
+ *   context?: object,
+ *   config?: { provider: 'gemini' | 'glm' | 'openai' | 'claude', model?: string, temperature?: number }
+ * }
+ */
+app.post('/api/ai/analyze', async (c) => {
+  try {
+    const request: AIAnalysisRequest = await c.req.json()
+
+    // Validate request
+    if (!request.input || !request.input.trim()) {
+      return c.json({
+        success: false,
+        error: 'Input không được để trống',
+      }, 400)
+    }
+
+    // Default to general analysis if type not specified
+    if (!request.type) {
+      request.type = 'general'
+    }
+
+    // Pass env bindings to AI service
+    request.env = c.env
+
+    // Call AI service
+    const result = await analyzeWithAI(request)
+
+    return c.json(result)
+  } catch (error: any) {
+    console.error('AI Analysis Error:', error)
+    return c.json({
+      success: false,
+      error: error.message || 'Lỗi khi phân tích',
+    }, 500)
+  }
+})
+
+/**
+ * POST /api/ai/brief - Specialized brief analysis
+ */
+app.post('/api/ai/brief', async (c) => {
+  try {
+    const { input, config } = await c.req.json()
+
+    const result = await analyzeWithAI({
+      type: 'brief',
+      input,
+      config,
+      env: c.env,
+    })
+
+    return c.json(result)
+  } catch (error: any) {
+    return c.json({
+      success: false,
+      error: error.message,
+    }, 500)
+  }
+})
+
+/**
+ * POST /api/ai/error - Specialized error analysis
+ */
+app.post('/api/ai/error', async (c) => {
+  try {
+    const { input, config } = await c.req.json()
+
+    const result = await analyzeWithAI({
+      type: 'error',
+      input,
+      config,
+      env: c.env,
+    })
+
+    return c.json(result)
+  } catch (error: any) {
+    return c.json({
+      success: false,
+      error: error.message,
+    }, 500)
+  }
+})
+
+/**
+ * POST /api/ai/prompt - Specialized prompt generation
+ */
+app.post('/api/ai/prompt', async (c) => {
+  try {
+    const { input, config } = await c.req.json()
+
+    const result = await analyzeWithAI({
+      type: 'prompt',
+      input,
+      config,
+      env: c.env,
+    })
+
+    return c.json(result)
+  } catch (error: any) {
+    return c.json({
+      success: false,
+      error: error.message,
+    }, 500)
+  }
+})
+
+/**
+ * GET /api/ai/models - Get available AI models
+ */
+app.get('/api/ai/models', (c) => {
+  return c.json({
+    success: true,
+    providers: {
+      gemini: {
+        name: 'Gemini',
+        description: 'Google AI - Mặc định, miễn phí, mạnh mẽ',
+        models: ['gpt-5', 'gpt-5.1', 'gpt-5.2', 'gpt-5-mini', 'gpt-5-nano'],
+        default: 'gpt-5',
+      },
+      glm: {
+        name: 'GLM',
+        description: 'Zhipu AI - AI Trung Quốc',
+        models: ['gpt-5', 'gpt-5.1', 'gpt-5.2'],
+        default: 'gpt-5',
+      },
+      openai: {
+        name: 'OpenAI',
+        description: 'GPT-4 Turbo - Mạnh nhất',
+        models: ['gpt-5', 'gpt-5.1', 'gpt-5.2'],
+        default: 'gpt-5',
+      },
+      claude: {
+        name: 'Claude',
+        description: 'Anthropic - Tốt nhất cho phân tích',
+        models: ['gpt-5', 'gpt-5.1'],
+        default: 'gpt-5',
+      },
+    },
+  })
 })
 
 // Health check
