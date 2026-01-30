@@ -18,13 +18,23 @@
   4. 🔄 Tài liệu Vận hành R&D
   5. 🏗️ Thiết kế Hệ thống Platform
 
-#### 🤖 AI Analysis Tools
+#### 🤖 AI Analysis Tools ⚡ LIVE!
 - **Multi-AI Integration:**
-  - ✅ Google Gemini (Mặc định)
-  - 🔲 Zhipu GLM
-  - 🔲 OpenAI GPT-4
-  - 🔲 Anthropic Claude
-- **Tính năng:** Phân tích Brief, Feedback, Lỗi tự động
+  - ✅ **Google Gemini** (Mặc định - hoạt động)
+  - ✅ **Zhipu GLM** (Sẵn sàng)
+  - ✅ **OpenAI GPT-5** (Sẵn sàng)
+  - ✅ **Anthropic Claude** (Sẵn sàng)
+- **4 Loại Phân tích:**
+  - 📋 **Brief Analysis** - Phân tích yêu cầu khách hàng chi tiết
+  - 🔍 **Error Analysis** - Root cause analysis & solutions
+  - 🎨 **Prompt Generation** - Tạo prompt tối ưu cho AI tools
+  - 💬 **General Q&A** - Trả lời câu hỏi về Fotober & R&D
+- **Features:**
+  - Real-time AI analysis với loading states
+  - Structured responses (effects, risks, solutions, suggestions)
+  - Token usage tracking
+  - Provider switching (chọn AI model khác nhau)
+  - Error handling & user feedback
 
 #### 📊 Analytics Dashboard
 - Thống kê tổng quan (23 job codes, 25+ effects)
@@ -63,6 +73,8 @@ Background: #FFF5F0 → #FFE5D9 → #FFD4C4
 - **Hono** ^4.11.7 - Lightweight web framework
 - **Cloudflare Pages** - Edge deployment platform
 - **TypeScript** - Type safety
+- **OpenAI SDK** - AI integration layer
+- **Multi-AI Support** - Gemini, GLM, OpenAI, Claude
 
 ### Frontend
 - **Tailwind CSS** - Utility-first CSS (CDN)
@@ -132,16 +144,77 @@ npx wrangler pages deploy dist --project-name fotober-rd-hub
 
 ---
 
+## 🔌 API Documentation
+
+### AI Analysis Endpoints
+
+#### POST `/api/ai/analyze`
+Main AI analysis endpoint với multi-model support.
+
+**Request:**
+```json
+{
+  "type": "brief" | "error" | "prompt" | "general",
+  "input": "Nội dung cần phân tích",
+  "config": {
+    "provider": "gemini" | "glm" | "openai" | "claude",
+    "model": "gpt-5",
+    "temperature": 0.7,
+    "maxTokens": 2000
+  }
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "provider": "gemini",
+  "model": "gpt-5",
+  "result": {
+    "analysis": "Phân tích chi tiết...",
+    "effects": [...],
+    "suggestions": [...],
+    "risks": [...]
+  },
+  "tokens": {
+    "prompt": 150,
+    "completion": 350,
+    "total": 500
+  },
+  "timestamp": "2026-01-30T07:00:00.000Z"
+}
+```
+
+#### Specialized Endpoints
+- `POST /api/ai/brief` - Brief analysis only
+- `POST /api/ai/error` - Error analysis only
+- `POST /api/ai/prompt` - Prompt generation only
+- `GET /api/ai/models` - Get available models
+
+#### Other Endpoints
+- `GET /api/documents` - List all documents
+- `GET /api/health` - Health check
+
+---
+
 ## 📂 Cấu trúc dự án
 
 ```
 fotober-rd-hub/
 ├── public/
-│   └── static/           # Static assets (CSS, images)
+│   └── static/           # Static assets
+│       ├── app.js        # Analytics frontend logic
+│       ├── ai-tools.js   # AI Tools frontend logic
+│       └── style.css     # Custom styles
 ├── src/
-│   ├── index.tsx         # Main application (Hono backend + HTML frontend)
+│   ├── index.tsx         # Main Hono app with AI routes
+│   ├── services/
+│   │   └── ai.ts         # AI Service Layer (Multi-Model)
 │   └── renderer.tsx      # JSX renderer
 ├── dist/                 # Build output
+├── .dev.vars             # Local environment variables (gitignored)
+├── ecosystem.config.cjs  # PM2 configuration
 ├── package.json          # Dependencies & scripts
 ├── wrangler.jsonc        # Cloudflare Pages config
 ├── vite.config.ts        # Vite build config
@@ -188,20 +261,23 @@ fotober-rd-hub/
 
 ## 🔮 Roadmap phát triển
 
-### ✅ Phase 1: MVP (Đã hoàn thành)
+### ✅ Phase 1: MVP (Hoàn thành ✨)
 - [x] Khởi tạo project với Hono + Cloudflare
 - [x] Thiết kế UI/UX với gradient cam
 - [x] Trang chủ với dashboard tổng quan
 - [x] Navigation system
 - [x] Document viewer (basic)
-- [x] AI Tools page (UI only)
+- [x] Analytics Dashboard với Chart.js
+- [x] **🎉 AI Integration LIVE - Multi-Model support**
 
 ### 🚧 Phase 2: Core Features (Đang phát triển)
+- [x] **AI API integration** (Gemini, GLM, OpenAI, Claude) ✅
+- [x] **AI Analysis Tools** với 4 loại phân tích ✅
+- [x] **Environment variables** (.dev.vars) ✅
+- [x] **Token tracking** & usage metrics ✅
 - [ ] D1 Database integration
 - [ ] Real document viewer với Markdown rendering
 - [ ] Upload/Download functionality
-- [ ] AI API integration (Gemini, GLM, OpenAI, Claude)
-- [ ] Analytics dashboard với charts
 
 ### 🔜 Phase 3: Advanced Features
 - [ ] Prompt Library management
