@@ -83,6 +83,28 @@ document.addEventListener('DOMContentLoaded', function() {
     const initialHash = window.location.hash ? window.location.hash.substring(1) : sections[0].id.replace(' content-section ', '');
     showSection(initialHash);
     
+    // Control dynamic footer visibility
+    function updateFooterVisibility(tabId) {
+        const dynamicFooter = document.getElementById('dynamicFooter');
+        const hiddenTabs = ['overview', 'company', 'services'];
+        
+        if (hiddenTabs.includes(tabId)) {
+            dynamicFooter.style.display = 'none';
+        } else {
+            dynamicFooter.style.display = 'block';
+        }
+    }
+    
+    // Update footer when showing a section
+    const originalShowSection = showSection;
+    showSection = function(targetId) {
+        originalShowSection(targetId);
+        updateFooterVisibility(targetId);
+    };
+    
+    // Initial footer visibility
+    updateFooterVisibility(initialHash);
+    
     // Remove scroll-based active navigation (no longer needed)
     // window.addEventListener('scroll', updateActiveNav);
     // updateActiveNav(); // Initial call
