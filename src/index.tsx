@@ -33,34 +33,7 @@ app.get('/', (c) => {
     <title>Fotober R&D Intelligence Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #FFF5F0 0%, #FFE5D9 50%, #FFD4C4 100%);
-        }
-        
-        .gradient-orange {
-            background: linear-gradient(135deg, #FF6B35 0%, #FFA07A 50%, #FFE5D9 100%);
-        }
-        
-        .card-hover {
-            transition: all 0.3s ease;
-        }
-        
-        .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
-        }
-        
-        .section-title {
-            background: linear-gradient(135deg, #FF6B35, #FFA07A);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-    </style>
+    <link href="/static/global-styles.css" rel="stylesheet">
 </head>
 <body class="min-h-screen">
     <!-- Navigation -->
@@ -105,43 +78,43 @@ app.get('/', (c) => {
 
         <!-- Quick Stats -->
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-            <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
+            <div class="stat-card">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-gray-500 text-sm">Tổng tài liệu</p>
-                        <p class="text-3xl font-bold text-orange-600">5</p>
+                        <p class="stat-label">Tổng tài liệu</p>
+                        <p class="stat-value">5</p>
                     </div>
-                    <i class="fas fa-file-alt text-4xl text-orange-300"></i>
+                    <i class="fas fa-file-alt text-4xl" style="color: #FB923C;"></i>
                 </div>
             </div>
             
-            <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
+            <div class="stat-card">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-gray-500 text-sm">Job Codes phân tích</p>
-                        <p class="text-3xl font-bold text-orange-600">23</p>
+                        <p class="stat-label">Job Codes phân tích</p>
+                        <p class="stat-value">23</p>
                     </div>
-                    <i class="fas fa-tasks text-4xl text-orange-300"></i>
+                    <i class="fas fa-tasks text-4xl" style="color: #F97316;"></i>
                 </div>
             </div>
             
-            <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
+            <div class="stat-card">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-gray-500 text-sm">Loại AI Effects</p>
-                        <p class="text-3xl font-bold text-orange-600">25+</p>
+                        <p class="stat-label">Loại AI Effects</p>
+                        <p class="stat-value">25+</p>
                     </div>
-                    <i class="fas fa-magic text-4xl text-orange-300"></i>
+                    <i class="fas fa-magic text-4xl" style="color: #EA580C;"></i>
                 </div>
             </div>
             
-            <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
+            <div class="stat-card">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-gray-500 text-sm">AI Models</p>
-                        <p class="text-3xl font-bold text-orange-600">4</p>
+                        <p class="stat-label">AI Models</p>
+                        <p class="stat-value">4</p>
                     </div>
-                    <i class="fas fa-brain text-4xl text-orange-300"></i>
+                    <i class="fas fa-brain text-4xl" style="color: #C2410C;"></i>
                 </div>
             </div>
         </div>
@@ -241,7 +214,7 @@ app.get('/', (c) => {
     </div>
 
     <!-- Footer -->
-    <footer class="mt-16 py-8 bg-gradient-to-r from-orange-600 to-orange-400 text-white">
+    <footer class="mt-16 py-8 footer-gradient text-white">
         <div class="container mx-auto px-6 text-center">
             <p class="text-lg font-semibold mb-2">Fotober R&D Intelligence Hub</p>
             <p class="text-sm opacity-90">© 2026 Fotober Media Company Limited. All rights reserved.</p>
