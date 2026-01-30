@@ -232,50 +232,80 @@ app.get('/', (c) => {
 
 // API endpoint to get all documents
 app.get('/api/documents', async (c) => {
-  const documents = [
-    {
-      id: 1,
-      title: 'Báo cáo Phân tích Hiện trạng',
-      description: 'Phân tích toàn diện về AI Video trong lĩnh vực bất động sản',
-      category: 'Báo cáo',
-      date: '29/01/2026',
-      path: '/document/analysis-report'
-    },
-    {
-      id: 2,
-      title: 'Kế hoạch Công việc R&D AI Video',
-      description: 'Lộ trình chi tiết cho R&D Specialist Q1/2026',
-      category: 'Kế hoạch',
-      date: '29/01/2026',
-      path: '/document/work-plan'
-    },
-    {
-      id: 3,
-      title: 'Tài liệu Kỹ thuật Video',
-      description: 'Danh mục hiệu ứng, motion, add-on và quy trình sản xuất',
-      category: 'Kỹ thuật',
-      date: '29/01/2026',
-      path: '/document/technical-doc'
-    },
-    {
-      id: 4,
-      title: 'Tài liệu Vận hành R&D',
-      description: 'Quy trình giao tiếp, đánh giá và chuyển giao kỹ thuật',
-      category: 'Vận hành',
-      date: '29/01/2026',
-      path: '/document/operation-doc'
-    },
-    {
-      id: 5,
-      title: 'Thiết kế Hệ thống Platform',
-      description: 'Kiến trúc R&D AI Video Intelligence Platform',
-      category: 'Thiết kế',
-      date: '29/01/2026',
-      path: '/document/platform-design'
-    }
-  ]
+  const documents = await storage.getDocuments();
+  return c.json({ success: true, data: documents });
+})
+
+// API endpoint to get document by ID
+app.get('/api/documents/:id', async (c) => {
+  const id = c.req.param('id');
+  const doc = await storage.getDocumentById(id);
   
-  return c.json({ success: true, documents })
+  if (!doc) {
+    return c.json({ success: false, error: 'Document not found' }, 404);
+  }
+  
+  // Increment view count
+  await storage.incrementDocumentView(id);
+  
+  return c.json({ success: true, data: doc });
+})
+
+// API endpoint to add new document
+app.post('/api/documents', async (c) => {
+  try {
+    const body = await c.req.json();
+    const { title, category, summary, embed_url } = body;
+    
+    // Validate required fields
+    if (!title || !category || !embed_url) {
+      return c.json({ 
+        success: false, 
+        error: 'Missing required fields: title, category, embed_url' 
+      }, 400);
+    }
+    
+    // Auto-detect embed type from URL
+    let embed_type: 'gdrive' | 'canva' | 'dropbox' | 'local' = 'local';
+    if (embed_url.includes('drive.google.com') || embed_url.includes('docs.google.com')) {
+      embed_type = 'gdrive';
+    } else if (embed_url.includes('canva.com')) {
+      embed_type = 'canva';
+    } else if (embed_url.includes('dropbox.com')) {
+      embed_type = 'dropbox';
+    }
+    
+    // Create document
+    const newDoc = await storage.addDocument({
+      title,
+      category,
+      file_path: embed_url,
+      file_type: 'embed',
+      file_size: 0,
+      summary: summary || '',
+      embed_url,
+      embed_type
+    });
+    
+    return c.json({ success: true, data: newDoc });
+  } catch (error) {
+    return c.json({ 
+      success: false, 
+      error: error instanceof Error ? error.message : 'Unknown error' 
+    }, 500);
+  }
+})
+
+// API endpoint to delete document
+app.delete('/api/documents/:id', async (c) => {
+  const id = c.req.param('id');
+  const success = await storage.deleteDocument(id);
+  
+  if (!success) {
+    return c.json({ success: false, error: 'Document not found' }, 404);
+  }
+  
+  return c.json({ success: true });
 })
 
 // Document viewer page
@@ -1192,6 +1222,659 @@ app.get('/history', (c) => {
 </body>
 </html>
   `)
+})
+
+// Documents Library page
+app.get('/documents', (c) => {
+  return c.html(`
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thư viện Tài liệu - Fotober R&D Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="/static/global-styles.css" rel="stylesheet">
+</head>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="gradient-orange text-white shadow-lg">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <a href="/" class="flex items-center space-x-4 hover:opacity-80 transition">
+                        <i class="fas fa-video text-3xl"></i>
+                        <div>
+                            <h1 class="text-2xl font-bold">Fotober R&D Intelligence Hub</h1>
+                            <p class="text-sm opacity-90">Thư viện Tài liệu</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="flex space-x-2">
+                    <a href="/ai-tools" class="px-4 py-2 bg-white bg-opacity-20 rounded-lg hover:bg-opacity-30 transition">
+                        <i class="fas fa-robot mr-2"></i>AI Tools
+                    </a>
+                    <a href="/" class="px-4 py-2 bg-white bg-opacity-20 rounded-lg hover:bg-opacity-30 transition">
+                        <i class="fas fa-home mr-2"></i>Trang chủ
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-6 py-8">
+        <!-- Page Header -->
+        <div class="bg-white rounded-2xl shadow-2xl p-8 mb-8">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2">
+                        <i class="fas fa-folder-open text-orange-500 mr-3"></i>
+                        Thư viện Tài liệu
+                    </h2>
+                    <p class="text-gray-600">Quản lý và truy cập tài liệu R&D từ Google Drive, Canva, Dropbox</p>
+                </div>
+                <div class="flex gap-3">
+                    <button onclick="showAddForm()" class="px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg hover:from-green-600 hover:to-green-700 transition shadow-lg">
+                        <i class="fas fa-plus mr-2"></i>Thêm Tài liệu
+                    </button>
+                    <button onclick="loadDocuments()" class="px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg hover:from-orange-600 hover:to-orange-700 transition shadow-lg">
+                        <i class="fas fa-sync-alt mr-2"></i>Làm mới
+                    </button>
+                </div>
+            </div>
+
+            <!-- Add Document Form (Hidden by default) -->
+            <div id="addForm" class="hidden bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6 mb-8 border-2 border-blue-200">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-xl font-bold text-gray-800">
+                        <i class="fas fa-file-plus text-blue-600 mr-2"></i>
+                        Thêm Tài liệu Mới
+                    </h3>
+                    <button onclick="hideAddForm()" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <form id="docForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-heading mr-2 text-blue-500"></i>Tiêu đề *
+                        </label>
+                        <input type="text" id="doc-title" required 
+                               class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition"
+                               placeholder="VD: Báo cáo Phân tích AI Video Q1/2026">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-tag mr-2 text-green-500"></i>Danh mục *
+                        </label>
+                        <select id="doc-category" required 
+                                class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition">
+                            <option value="">Chọn danh mục</option>
+                            <option value="analysis">📊 Phân tích</option>
+                            <option value="plan">📋 Kế hoạch</option>
+                            <option value="technical">⚙️ Kỹ thuật</option>
+                            <option value="operation">🔧 Vận hành</option>
+                            <option value="design">🎨 Thiết kế</option>
+                            <option value="demo">🎬 Demo</option>
+                            <option value="tool">🛠️ Tool</option>
+                        </select>
+                    </div>
+                    
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-link mr-2 text-purple-500"></i>Embed URL (Google Drive / Canva) *
+                        </label>
+                        <input type="url" id="doc-url" required 
+                               class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition"
+                               placeholder="https://drive.google.com/file/d/... hoặc https://www.canva.com/design/...">
+                        <p class="text-xs text-gray-500 mt-1">
+                            💡 Hỗ trợ: Google Docs/Drive, Canva, Dropbox. File cần được share public.
+                        </p>
+                    </div>
+                    
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-align-left mr-2 text-orange-500"></i>Mô tả
+                        </label>
+                        <textarea id="doc-summary" rows="3" 
+                                  class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none transition"
+                                  placeholder="Mô tả ngắn gọn nội dung tài liệu..."></textarea>
+                    </div>
+                    
+                    <div class="md:col-span-2 flex gap-3">
+                        <button type="submit" class="flex-1 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 transition shadow-lg font-semibold">
+                            <i class="fas fa-save mr-2"></i>Lưu Tài liệu
+                        </button>
+                        <button type="button" onclick="hideAddForm()" class="px-6 py-3 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition">
+                            <i class="fas fa-ban mr-2"></i>Hủy
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Statistics -->
+            <div id="stats" class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-600 text-sm">Tổng tài liệu</p>
+                            <p id="stat-total" class="text-3xl font-bold text-blue-600">0</p>
+                        </div>
+                        <i class="fas fa-file-alt text-4xl text-blue-400"></i>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-600 text-sm">Lượt xem</p>
+                            <p id="stat-views" class="text-3xl font-bold text-green-600">0</p>
+                        </div>
+                        <i class="fas fa-eye text-4xl text-green-400"></i>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-600 text-sm">Lượt tải</p>
+                            <p id="stat-downloads" class="text-3xl font-bold text-purple-600">0</p>
+                        </div>
+                        <i class="fas fa-download text-4xl text-purple-400"></i>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-600 text-sm">Dung lượng</p>
+                            <p id="stat-size" class="text-2xl font-bold text-orange-600">0 MB</p>
+                        </div>
+                        <i class="fas fa-database text-4xl text-orange-400"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category Filter -->
+            <div class="flex gap-2 mb-6 overflow-x-auto pb-2">
+                <button onclick="filterCategory('')" class="filter-btn active px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition whitespace-nowrap">
+                    <i class="fas fa-th mr-2"></i>Tất cả
+                </button>
+                <button onclick="filterCategory('analysis')" class="filter-btn px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition whitespace-nowrap">
+                    <i class="fas fa-chart-bar mr-2"></i>Phân tích
+                </button>
+                <button onclick="filterCategory('plan')" class="filter-btn px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition whitespace-nowrap">
+                    <i class="fas fa-calendar-alt mr-2"></i>Kế hoạch
+                </button>
+                <button onclick="filterCategory('technical')" class="filter-btn px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition whitespace-nowrap">
+                    <i class="fas fa-cogs mr-2"></i>Kỹ thuật
+                </button>
+                <button onclick="filterCategory('operation')" class="filter-btn px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition whitespace-nowrap">
+                    <i class="fas fa-tasks mr-2"></i>Vận hành
+                </button>
+                <button onclick="filterCategory('design')" class="filter-btn px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition whitespace-nowrap">
+                    <i class="fas fa-paint-brush mr-2"></i>Thiết kế
+                </button>
+                <button onclick="filterCategory('demo')" class="filter-btn px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition whitespace-nowrap">
+                    <i class="fas fa-video mr-2"></i>Demo
+                </button>
+                <button onclick="filterCategory('tool')" class="filter-btn px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition whitespace-nowrap">
+                    <i class="fas fa-toolbox mr-2"></i>Công cụ
+                </button>
+            </div>
+
+            <!-- Documents Grid -->
+            <div id="documents-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="text-center py-8 text-gray-500 col-span-full">
+                    <i class="fas fa-spinner fa-spin text-4xl mb-4"></i>
+                    <p>Đang tải...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Document Viewer Modal -->
+    <div id="viewer-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-6xl max-h-[90vh] flex flex-col">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between p-6 border-b">
+                <div class="flex-1">
+                    <h3 id="modal-title" class="text-2xl font-bold text-gray-800"></h3>
+                    <p id="modal-category" class="text-sm text-gray-600 mt-1"></p>
+                </div>
+                <button onclick="closeViewer()" class="text-gray-500 hover:text-gray-700 text-2xl">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <!-- Modal Body -->
+            <div class="flex-1 overflow-auto p-6">
+                <div id="embed-container" class="w-full h-full min-h-[600px]">
+                    <!-- Embed content will be loaded here -->
+                </div>
+            </div>
+            
+            <!-- Modal Footer -->
+            <div class="p-6 border-t bg-gray-50 flex items-center justify-between">
+                <div id="modal-meta" class="text-sm text-gray-600"></div>
+                <div class="flex gap-2">
+                    <button onclick="incrementDownload()" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
+                        <i class="fas fa-download mr-2"></i>Tải xuống
+                    </button>
+                    <button onclick="closeViewer()" class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition">
+                        Đóng
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let allDocuments = [];
+        let currentDocument = null;
+
+        // Load documents on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            loadDocuments();
+        });
+
+        async function loadDocuments() {
+            const container = document.getElementById('documents-container');
+            container.innerHTML = '<div class="text-center py-8 text-gray-500 col-span-full"><i class="fas fa-spinner fa-spin text-4xl mb-4"></i><p>Đang tải...</p></div>';
+
+            try {
+                const response = await fetch('/api/documents');
+                const data = await response.json();
+                
+                if (!data.success || data.data.length === 0) {
+                    container.innerHTML = '<div class="text-center py-12 text-gray-500 col-span-full"><i class="fas fa-inbox text-6xl mb-4 text-gray-300"></i><p class="text-lg">Chưa có tài liệu</p></div>';
+                    return;
+                }
+
+                allDocuments = data.data;
+                updateStats(allDocuments);
+                renderDocuments(allDocuments);
+            } catch (error) {
+                console.error('Error loading documents:', error);
+                container.innerHTML = '<div class="text-center py-8 text-red-500 col-span-full"><i class="fas fa-exclamation-triangle text-4xl mb-4"></i><p>Lỗi tải dữ liệu</p></div>';
+            }
+        }
+
+        function updateStats(documents) {
+            const total = documents.length;
+            const views = documents.reduce((sum, doc) => sum + doc.view_count, 0);
+            const downloads = documents.reduce((sum, doc) => sum + doc.download_count, 0);
+            const size = documents.reduce((sum, doc) => sum + doc.file_size, 0) / 1024 / 1024;
+
+            document.getElementById('stat-total').textContent = total;
+            document.getElementById('stat-views').textContent = views;
+            document.getElementById('stat-downloads').textContent = downloads;
+            document.getElementById('stat-size').textContent = size.toFixed(1) + ' MB';
+        }
+
+        function renderDocuments(documents) {
+            const container = document.getElementById('documents-container');
+
+            if (documents.length === 0) {
+                container.innerHTML = '<div class="text-center py-12 text-gray-500 col-span-full"><i class="fas fa-filter text-6xl mb-4 text-gray-300"></i><p class="text-lg">Không tìm thấy tài liệu</p></div>';
+                return;
+            }
+
+            const categoryIcons = {
+                analysis: 'fa-chart-bar',
+                plan: 'fa-calendar-alt',
+                technical: 'fa-cogs',
+                operation: 'fa-tasks',
+                design: 'fa-paint-brush',
+                demo: 'fa-video',
+                tool: 'fa-toolbox'
+            };
+
+            const embedBadges = {
+                gdrive: '<span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full"><i class="fab fa-google-drive mr-1"></i>Google Drive</span>',
+                canva: '<span class="px-2 py-1 bg-purple-100 text-purple-700 text-xs rounded-full"><i class="fas fa-palette mr-1"></i>Canva</span>',
+                dropbox: '<span class="px-2 py-1 bg-cyan-100 text-cyan-700 text-xs rounded-full"><i class="fab fa-dropbox mr-1"></i>Dropbox</span>',
+                local: '<span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-full"><i class="fas fa-file mr-1"></i>Local</span>'
+            };
+
+            container.innerHTML = documents.map(doc => {
+                const icon = categoryIcons[doc.category] || 'fa-file';
+                const badge = embedBadges[doc.embed_type] || '';
+                
+                return \`
+                    <div class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all p-6 border border-gray-200 hover:border-orange-300 cursor-pointer" onclick="viewDocument('\${doc.id}')">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg flex items-center justify-center text-white text-xl">
+                                <i class="fas \${icon}"></i>
+                            </div>
+                            \${badge}
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-2 line-clamp-2">\${doc.title}</h3>
+                        <p class="text-sm text-gray-600 mb-4 line-clamp-3">\${doc.summary || 'Không có mô tả'}</p>
+                        <div class="flex items-center justify-between text-xs text-gray-500">
+                            <span><i class="fas fa-eye mr-1"></i>\${doc.view_count} lượt xem</span>
+                            <span><i class="fas fa-download mr-1"></i>\${doc.download_count} lượt tải</span>
+                        </div>
+                    </div>
+                \`;
+            }).join('');
+        }
+
+        function filterCategory(category) {
+            // Update button styles
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-orange-500', 'text-white');
+                btn.classList.add('bg-gray-200', 'text-gray-700');
+            });
+            event.target.classList.add('active', 'bg-orange-500', 'text-white');
+            event.target.classList.remove('bg-gray-200', 'text-gray-700');
+
+            // Filter documents
+            const filtered = category ? allDocuments.filter(doc => doc.category === category) : allDocuments;
+            renderDocuments(filtered);
+        }
+
+        async function viewDocument(id) {
+            currentDocument = allDocuments.find(doc => doc.id === id);
+            if (!currentDocument) return;
+
+            // Update modal
+            document.getElementById('modal-title').textContent = currentDocument.title;
+            document.getElementById('modal-category').textContent = getCategoryLabel(currentDocument.category);
+            document.getElementById('modal-meta').innerHTML = \`
+                <span class="mr-4"><i class="fas fa-eye mr-1"></i>\${currentDocument.view_count} lượt xem</span>
+                <span><i class="fas fa-hdd mr-1"></i>\${(currentDocument.file_size / 1024).toFixed(0)} KB</span>
+            \`;
+
+            // Load embed
+            const embedContainer = document.getElementById('embed-container');
+            if (currentDocument.embed_url) {
+                embedContainer.innerHTML = \`
+                    <iframe 
+                        src="\${currentDocument.embed_url}" 
+                        class="w-full h-full min-h-[600px] border-0 rounded-lg"
+                        allowfullscreen
+                        loading="lazy"
+                    ></iframe>
+                \`;
+            } else {
+                embedContainer.innerHTML = \`
+                    <div class="flex items-center justify-center h-full text-gray-500">
+                        <div class="text-center">
+                            <i class="fas fa-file-alt text-6xl mb-4"></i>
+                            <p class="text-lg">Tài liệu chưa có embed URL</p>
+                            <p class="text-sm mt-2">Vui lòng thêm Google Drive hoặc Canva link</p>
+                        </div>
+                    </div>
+                \`;
+            }
+
+            // Increment view count
+            await fetch(\`/api/documents/\${id}\`);
+
+            // Show modal
+            document.getElementById('viewer-modal').classList.remove('hidden');
+            document.getElementById('viewer-modal').classList.add('flex');
+        }
+
+        function closeViewer() {
+            document.getElementById('viewer-modal').classList.add('hidden');
+            document.getElementById('viewer-modal').classList.remove('flex');
+            loadDocuments(); // Reload to get updated view counts
+        }
+
+        async function incrementDownload() {
+            if (!currentDocument) return;
+            
+            // In real app, this would trigger actual download
+            alert('Download sẽ được thực hiện sau khi tích hợp Cloudflare R2');
+            
+            // Increment download count in storage
+            await fetch(\`/api/documents/\${currentDocument.id}/download\`, { method: 'POST' });
+        }
+
+        function getCategoryLabel(category) {
+            const labels = {
+                analysis: 'Phân tích',
+                plan: 'Kế hoạch',
+                technical: 'Kỹ thuật',
+                operation: 'Vận hành',
+                design: 'Thiết kế',
+                demo: 'Demo',
+                tool: 'Công cụ'
+            };
+            return labels[category] || category;
+        }
+
+        // Form handlers
+        function showAddForm() {
+            document.getElementById('addForm').classList.remove('hidden');
+            document.getElementById('doc-title').focus();
+        }
+
+        function hideAddForm() {
+            document.getElementById('addForm').classList.add('hidden');
+            document.getElementById('docForm').reset();
+        }
+
+        // Handle form submission
+        document.getElementById('docForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Đang lưu...';
+
+            try {
+                const formData = {
+                    title: document.getElementById('doc-title').value.trim(),
+                    category: document.getElementById('doc-category').value,
+                    embed_url: document.getElementById('doc-url').value.trim(),
+                    summary: document.getElementById('doc-summary').value.trim()
+                };
+
+                const response = await fetch('/api/documents', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // Success notification
+                    alert('✅ Tài liệu đã được thêm thành công!');
+                    hideAddForm();
+                    loadDocuments(); // Reload list
+                } else {
+                    alert('❌ Lỗi: ' + (result.error || 'Không thể thêm tài liệu'));
+                }
+            } catch (error) {
+                console.error('Error adding document:', error);
+                alert('❌ Lỗi kết nối. Vui lòng thử lại.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+        });
+    </script>
+</body>
+</html>
+  `)
+})
+
+// Document Embed Viewer page (new route with dual mode)
+app.get('/doc/:id', async (c) => {
+  const id = c.req.param('id');
+  const doc = await storage.getDocumentById(id);
+  
+  if (!doc) {
+    return c.html(`<h1>Document not found</h1>`, 404);
+  }
+  
+  // Increment view count
+  await storage.incrementDocumentView(id);
+  
+  const embedTypeIcons = {
+    gdrive: '<i class="fab fa-google-drive text-blue-500"></i>',
+    canva: '<i class="fas fa-palette text-purple-500"></i>',
+    dropbox: '<i class="fab fa-dropbox text-cyan-500"></i>',
+    local: '<i class="fas fa-file text-gray-500"></i>'
+  };
+  
+  const icon = embedTypeIcons[doc.embed_type || 'local'];
+  
+  return c.html(`
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${doc.title} - Fotober R&D Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="/static/global-styles.css" rel="stylesheet">
+</head>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="gradient-orange text-white shadow-lg">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="/documents" class="flex items-center space-x-4 hover:opacity-80 transition">
+                    <i class="fas fa-arrow-left text-2xl"></i>
+                    <div>
+                        <h1 class="text-2xl font-bold">Fotober R&D Intelligence Hub</h1>
+                        <p class="text-sm opacity-90">Quay lại Thư viện</p>
+                    </div>
+                </a>
+                <div class="flex space-x-2">
+                    <button onclick="toggleViewMode()" id="viewModeBtn" class="px-4 py-2 bg-white bg-opacity-20 rounded-lg hover:bg-opacity-30 transition">
+                        <i class="fas fa-expand mr-2"></i>Xem bên ngoài
+                    </button>
+                    <a href="/" class="px-4 py-2 bg-white bg-opacity-20 rounded-lg hover:bg-opacity-30 transition">
+                        <i class="fas fa-home mr-2"></i>Trang chủ
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-6 py-8">
+        <!-- Document Header -->
+        <div class="bg-white rounded-2xl shadow-2xl p-8 mb-6">
+            <div class="flex items-start justify-between mb-4">
+                <div class="flex-1">
+                    <div class="flex items-center gap-3 mb-3">
+                        ${icon}
+                        <span class="px-3 py-1 bg-orange-100 text-orange-700 text-sm font-semibold rounded-full">
+                            ${doc.category}
+                        </span>
+                    </div>
+                    <h1 class="text-3xl font-bold text-gray-800 mb-2">${doc.title}</h1>
+                    <p class="text-gray-600 mb-4">${doc.summary || 'Không có mô tả'}</p>
+                    <div class="flex items-center gap-6 text-sm text-gray-500">
+                        <span><i class="fas fa-eye mr-2"></i>${doc.view_count} lượt xem</span>
+                        <span><i class="fas fa-download mr-2"></i>${doc.download_count} lượt tải</span>
+                        <span><i class="fas fa-hdd mr-2"></i>${(doc.file_size / 1024).toFixed(1)} KB</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Embed Viewer -->
+        <div id="embedViewer" class="bg-white rounded-2xl shadow-2xl p-8">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-bold text-gray-800">
+                    <i class="fas fa-eye mr-2 text-orange-500"></i>Xem Tài liệu
+                </h2>
+                <div class="flex gap-2">
+                    <button onclick="openExternal()" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
+                        <i class="fas fa-external-link-alt mr-2"></i>Mở Tab Mới
+                    </button>
+                </div>
+            </div>
+            
+            <div id="embedContainer" class="w-full min-h-[600px] bg-gray-50 rounded-xl overflow-hidden">
+                ${doc.embed_url ? `
+                    <iframe 
+                        src="${doc.embed_url}" 
+                        class="w-full h-full min-h-[700px] border-0"
+                        allowfullscreen
+                        loading="lazy"
+                        sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+                    ></iframe>
+                ` : `
+                    <div class="flex items-center justify-center h-full min-h-[400px] text-gray-500">
+                        <div class="text-center">
+                            <i class="fas fa-file-alt text-6xl mb-4"></i>
+                            <p class="text-lg font-semibold">Tài liệu chưa có Embed URL</p>
+                            <p class="text-sm mt-2">Vui lòng thêm Google Drive hoặc Canva link</p>
+                        </div>
+                    </div>
+                `}
+            </div>
+        </div>
+
+        <!-- External View Notice -->
+        <div id="externalNotice" class="hidden bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl shadow-lg p-8 text-center">
+            <i class="fas fa-external-link-alt text-6xl text-blue-500 mb-4"></i>
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">Đang mở tài liệu ở tab mới</h2>
+            <p class="text-gray-600 mb-6">Vui lòng kiểm tra tab mới hoặc cho phép popup trên trình duyệt</p>
+            <button onclick="toggleViewMode()" class="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 transition shadow-lg">
+                <i class="fas fa-arrow-left mr-2"></i>Quay lại Xem Embed
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const docUrl = '${doc.embed_url || ''}';
+        let isExternalMode = false;
+
+        function toggleViewMode() {
+            isExternalMode = !isExternalMode;
+            const embedViewer = document.getElementById('embedViewer');
+            const externalNotice = document.getElementById('externalNotice');
+            const viewModeBtn = document.getElementById('viewModeBtn');
+
+            if (isExternalMode) {
+                embedViewer.classList.add('hidden');
+                externalNotice.classList.remove('hidden');
+                viewModeBtn.innerHTML = '<i class="fas fa-compress mr-2"></i>Xem Embed';
+                if (docUrl) {
+                    window.open(docUrl, '_blank');
+                }
+            } else {
+                embedViewer.classList.remove('hidden');
+                externalNotice.classList.add('hidden');
+                viewModeBtn.innerHTML = '<i class="fas fa-expand mr-2"></i>Xem bên ngoài';
+            }
+        }
+
+        function openExternal() {
+            if (docUrl) {
+                window.open(docUrl, '_blank');
+            } else {
+                alert('Tài liệu chưa có Embed URL');
+            }
+        }
+    </script>
+</body>
+</html>
+  `)
+})
+
+// Document download endpoint
+app.post('/api/documents/:id/download', async (c) => {
+  try {
+    const id = c.req.param('id');
+    await storage.incrementDocumentDownload(id);
+    return c.json({ success: true });
+  } catch (error: any) {
+    return c.json({ success: false, error: error.message }, 500);
+  }
 })
 
 // ============================================

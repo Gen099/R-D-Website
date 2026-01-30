@@ -28,6 +28,8 @@ export interface DocumentRecord {
   file_type: string;
   file_size: number;
   summary?: string;
+  embed_url?: string; // Google Drive, Canva, etc.
+  embed_type?: 'gdrive' | 'canva' | 'dropbox' | 'local'; // Type of embed
   view_count: number;
   download_count: number;
   created_at: string;
@@ -74,12 +76,14 @@ class InMemoryStorage {
     this.documents = [
       {
         id: '1',
-        title: 'Báo cáo Phân tích Hiện trạng',
+        title: 'Báo cáo Phân tích Hiện trạng R&D AI Video',
         category: 'analysis',
         file_path: '/data/analysis-report.md',
         file_type: 'md',
         file_size: 125000,
-        summary: 'Phân tích 23 job codes, 25+ AI Effects, error patterns từ feedback thực tế',
+        summary: 'Phân tích 23 job codes, 25+ AI Effects, error patterns từ feedback thực tế. Bao gồm: phân bố lỗi, nguyên nhân, giải pháp.',
+        embed_url: 'https://docs.google.com/document/d/1234567890/preview',
+        embed_type: 'gdrive',
         view_count: 0,
         download_count: 0,
         created_at: new Date().toISOString(),
@@ -92,7 +96,9 @@ class InMemoryStorage {
         file_path: '/data/work-plan.md',
         file_type: 'md',
         file_size: 85000,
-        summary: 'Roadmap 16 tuần, 5 giai đoạn từ Platform setup đến Production deployment',
+        summary: 'Roadmap 16 tuần, 5 giai đoạn từ Platform setup đến Production deployment. Timeline chi tiết, milestones, deliverables.',
+        embed_url: 'https://docs.google.com/spreadsheets/d/abcdefgh/preview',
+        embed_type: 'gdrive',
         view_count: 0,
         download_count: 0,
         created_at: new Date().toISOString(),
@@ -100,12 +106,14 @@ class InMemoryStorage {
       },
       {
         id: '3',
-        title: 'Tài liệu Kỹ thuật Video',
+        title: 'Tài liệu Kỹ thuật Video - Tools & Pricing',
         category: 'technical',
         file_path: '/data/technical-doc.md',
         file_type: 'md',
         file_size: 95000,
-        summary: 'Tech stack: Kling AI, Veo 2/3.1, Runway Gen-3, Pika Labs, Luma, pricing models',
+        summary: 'Tech stack: Kling AI, Veo 2/3.1, Runway Gen-3, Pika Labs, Luma. Pricing models, comparison matrix, best practices.',
+        embed_url: 'https://www.canva.com/design/DABCDeFGHIJ/view',
+        embed_type: 'canva',
         view_count: 0,
         download_count: 0,
         created_at: new Date().toISOString(),
@@ -118,7 +126,9 @@ class InMemoryStorage {
         file_path: '/data/operation-doc.md',
         file_type: 'md',
         file_size: 78000,
-        summary: 'Quy trình vận hành, SLA, turnaround time 12-24h, quality control',
+        summary: 'Quy trình vận hành, SLA, turnaround time 12-24h, quality control. Workflow, checklists, escalation procedures.',
+        embed_url: 'https://docs.google.com/presentation/d/xyz123/preview',
+        embed_type: 'gdrive',
         view_count: 0,
         download_count: 0,
         created_at: new Date().toISOString(),
@@ -131,7 +141,54 @@ class InMemoryStorage {
         file_path: '/data/platform-design.md',
         file_type: 'md',
         file_size: 102000,
-        summary: 'System architecture, database schema, AI integration, deployment strategy',
+        summary: 'System architecture, database schema, AI integration, deployment strategy. Technical diagrams, API specs.',
+        embed_url: 'https://www.canva.com/design/XYZ789ABC/view',
+        embed_type: 'canva',
+        view_count: 0,
+        download_count: 0,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      },
+      {
+        id: '6',
+        title: 'Video Demo - AI Effects Showcase',
+        category: 'demo',
+        file_path: '/data/demo-video.mp4',
+        file_type: 'video',
+        file_size: 15000000,
+        summary: 'Demo video các AI Effects: Day-to-Night, Season Change, Lifestyle, Agent Composite. Before/After comparison.',
+        embed_url: 'https://drive.google.com/file/d/1a2b3c4d5e6f/preview',
+        embed_type: 'gdrive',
+        view_count: 0,
+        download_count: 0,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      },
+      {
+        id: '7',
+        title: 'Pricing Calculator - Interactive Tool',
+        category: 'tool',
+        file_path: '/data/pricing-calculator.html',
+        file_type: 'html',
+        file_size: 25000,
+        summary: 'Interactive pricing calculator cho AI Video services. Tính toán dựa trên số lượng effects, duration, complexity.',
+        embed_url: 'https://www.canva.com/design/CALCULATOR123/view',
+        embed_type: 'canva',
+        view_count: 0,
+        download_count: 0,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      },
+      {
+        id: '8',
+        title: 'Competitor Analysis Matrix',
+        category: 'analysis',
+        file_path: '/data/competitor-analysis.xlsx',
+        file_type: 'xlsx',
+        file_size: 52000,
+        summary: 'So sánh Fotober vs Esoft, BoxBrownie, Phixer, PhotoUp. Features, pricing, turnaround time, quality metrics.',
+        embed_url: 'https://docs.google.com/spreadsheets/d/comp123/preview',
+        embed_type: 'gdrive',
         view_count: 0,
         download_count: 0,
         created_at: new Date().toISOString(),
@@ -303,6 +360,28 @@ class InMemoryStorage {
       doc.download_count++;
       doc.updated_at = new Date().toISOString();
     }
+  }
+
+  async addDocument(doc: Omit<DocumentRecord, 'id' | 'created_at' | 'updated_at' | 'view_count' | 'download_count'>): Promise<DocumentRecord> {
+    const newDoc: DocumentRecord = {
+      ...doc,
+      id: Date.now().toString(),
+      view_count: 0,
+      download_count: 0,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
+    };
+    this.documents.unshift(newDoc);
+    return newDoc;
+  }
+
+  async deleteDocument(id: string): Promise<boolean> {
+    const index = this.documents.findIndex(d => d.id === id);
+    if (index !== -1) {
+      this.documents.splice(index, 1);
+      return true;
+    }
+    return false;
   }
 
   // Prompt Templates Methods
