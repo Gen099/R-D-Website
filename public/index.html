@@ -351,6 +351,9 @@
                     <li><a href="#library" class="nav-item block px-4 py-2 rounded">
                         <i class="fas fa-book mr-2"></i>Library
                     </a></li>
+                    <li><a href="#telebot" class="nav-item block px-4 py-2 rounded">
+                        <i class="fas fa-robot mr-2"></i>TeleBot Data
+                    </a></li>
                 </ul>
             </nav>
         </aside>
@@ -607,26 +610,52 @@
                     </div>
                 </div>
 
-                <!-- R&D Feedback Embed Section -->
+                <!-- R&D Feedback Accordion Section -->
                 <div class="bg-white rounded-lg shadow-md p-6 mb-6">
                     <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
-                        <i class="fas fa-file-import mr-2 text-green-600"></i>Feedback Từ R&D
+                        <i class="fas fa-file-import mr-2 text-green-600"></i>Feedback Từ R&D (Danh Sách)
                     </h3>
-                    <p class="text-gray-600 mb-4">Embed tài liệu, báo cáo lỗi từ R&D team:</p>
+                    <p class="text-gray-600 mb-4">Nhấn vào từng mục để xem chi tiết feedback, biểu đồ, hoặc tài liệu:</p>
                     
-                    <!-- Embed Container -->
-                    <div id="rndFeedbackEmbed" class="bg-gray-50 rounded-lg border-2 border-dashed border-gray-300 p-4" style="min-height: 500px; overflow: auto;">
-                        <!-- Default: Google Drive Embed Example -->
-                        <iframe src="https://drive.google.com/embeddedfolderview?id=FOLDER_ID#grid" style="width:100%; height:500px; border:none; border-radius:8px;"></iframe>
-                        
-                        <!-- Alt: Canva Embed Example (uncomment to use) -->
-                        <!-- <iframe loading="lazy" style="border: none; border-radius: 8px;" allowfullscreen allow="clipboard-write" src="https://www.canva.com/design/DESIGN_ID/view?embed" width="100%" height="500"></iframe> -->
-                        
-                        <!-- Alt: PDF Embed Example (uncomment to use) -->
-                        <!-- <iframe src="https://example.com/document.pdf" style="width:100%; height:500px; border:none; border-radius:8px;"></iframe> -->
+                    <!-- Accordion List -->
+                    <div id="rndFeedbackAccordion" class="space-y-2">
+                        <!-- Feedback Item 1 -->
+                        <div class="accordion-item border rounded-lg overflow-hidden">
+                            <button class="accordion-header w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 transition flex items-center justify-between font-medium text-gray-800">
+                                <span class="flex items-center">
+                                    <i class="fas fa-chevron-right mr-3 text-gray-600 accordion-icon"></i>
+                                    <span class="text-sm">30/01/2026 - Lỗi hiển thị video trên mobile</span>
+                                </span>
+                            </button>
+                            <div class="accordion-content hidden bg-white p-4">
+                                <div class="space-y-3">
+                                    <p class="text-sm text-gray-700"><strong>Mô tả:</strong> Video không load được trên thiết bị iOS, cần kiểm tra codec.</p>
+                                    <a href="https://www.notion.so/feedback-video-mobile" target="_blank" class="inline-block px-3 py-2 bg-green-100 text-green-700 rounded text-sm font-medium hover:bg-green-200 transition">
+                                        <i class="fas fa-external-link-alt mr-1"></i>Xem Chi Tiết Trên Notion
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Feedback Item 2 -->
+                        <div class="accordion-item border rounded-lg overflow-hidden">
+                            <button class="accordion-header w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 transition flex items-center justify-between font-medium text-gray-800">
+                                <span class="flex items-center">
+                                    <i class="fas fa-chevron-right mr-3 text-gray-600 accordion-icon"></i>
+                                    <span class="text-sm">29/01/2026 - Tối ưu tốc độ render AI</span>
+                                </span>
+                            </button>
+                            <div class="accordion-content hidden bg-white p-4">
+                                <div class="space-y-3">
+                                    <p class="text-sm text-gray-700"><strong>Mô tả:</strong> Thời gian render giảm từ 45s xuống 30s sau tối ưu GPU.</p>
+                                    <img src="https://via.placeholder.com/500x300?text=Performance+Chart" alt="Performance" class="w-full rounded-lg">
+                                    <a href="https://www.notion.so/feedback-performance" target="_blank" class="inline-block px-3 py-2 bg-green-100 text-green-700 rounded text-sm font-medium hover:bg-green-200 transition">
+                                        <i class="fas fa-external-link-alt mr-1"></i>Xem Chi Tiết Trên Notion
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    
-                    <p class="text-xs text-gray-500 mt-3 italic">Lưu ý: Bạn có thể thay đổi link embed bẻ bất kỳ lúc nào. Liên hệ admin để cập nhật.</p>
                 </div>
 
                 <!-- Error Statistics Chart -->
@@ -1801,6 +1830,58 @@
                             <i class="fas fa-book mr-2"></i>Xem Toàn Bộ Danh Sách Đối Thủ Trên Notion
                             <i class="fas fa-external-link-alt ml-2 text-sm"></i>
                         </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TeleBot Data Section -->
+            <section id="telebot" class="content-section mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-robot mr-3 text-blue-600"></i>
+                    TeleBot Data - Dữ Liệu Từ Bot Telegram
+                </h2>
+
+                <!-- Google Sheet Link -->
+                <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <i class="fas fa-table mr-2 text-blue-600"></i>Dữ Liệu Gốc
+                    </h3>
+                    <p class="text-gray-600 mb-4">Dữ liệu được Bot Telegram thu thập và lưu trữ trong Google Sheet:</p>
+                    <a href="https://docs.google.com/spreadsheets/d/SHEET_ID/edit?usp=sharing" target="_blank" class="block p-4 bg-blue-50 rounded border-l-4 border-blue-600 hover:bg-blue-100 transition">
+                        <i class="fas fa-external-link-alt mr-2 text-blue-600"></i>
+                        <span class="font-semibold text-blue-700">Xem Google Sheet (Dữ Liệu Gốc)</span>
+                    </a>
+                </div>
+
+                <!-- Data Timeline by Date -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <i class="fas fa-calendar-alt mr-2 text-green-600"></i>Dữ Liệu Theo Ngày
+                    </h3>
+                    <p class="text-gray-600 mb-4">Danh sách dữ liệu được sắp xếp theo ngày (mới nhất trước):</p>
+                    
+                    <!-- Data Timeline -->
+                    <div id="telebotTimeline" class="space-y-3">
+                        <!-- Data Item 1 -->
+                        <div class="border-l-4 border-blue-500 pl-4 py-2">
+                            <p class="font-semibold text-gray-800">30/01/2026</p>
+                            <p class="text-sm text-gray-600 mt-1">Cập nhật 5 bài đăng mới từ đối thủ</p>
+                            <p class="text-xs text-gray-500 mt-1">Nguồn: Telegram Bot | Lúc: 14:30</p>
+                        </div>
+
+                        <!-- Data Item 2 -->
+                        <div class="border-l-4 border-blue-500 pl-4 py-2">
+                            <p class="font-semibold text-gray-800">29/01/2026</p>
+                            <p class="text-sm text-gray-600 mt-1">Cập nhật 3 bài đăng mới từ đối thủ</p>
+                            <p class="text-xs text-gray-500 mt-1">Nguồn: Telegram Bot | Lúc: 10:15</p>
+                        </div>
+
+                        <!-- Data Item 3 -->
+                        <div class="border-l-4 border-blue-500 pl-4 py-2">
+                            <p class="font-semibold text-gray-800">28/01/2026</p>
+                            <p class="text-sm text-gray-600 mt-1">Cập nhật 7 bài đăng mới từ đối thủ</p>
+                            <p class="text-xs text-gray-500 mt-1">Nguồn: Telegram Bot | Lúc: 09:45</p>
+                        </div>
                     </div>
                 </div>
             </section>

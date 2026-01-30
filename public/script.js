@@ -738,3 +738,23 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log('🚀 R&D AI Video Intelligence Platform loaded successfully!');
 });
+
+    // Accordion logic for feedback section
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    accordionHeaders.forEach(header => {
+        header.addEventListener('click', function() {
+            const content = this.nextElementSibling;
+            const icon = this.querySelector('.accordion-icon');
+            const isOpen = !content.classList.contains('hidden');
+            
+            if (isOpen) {
+                content.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+                icon.style.transition = 'transform 0.3s ease';
+            } else {
+                content.classList.remove('hidden');
+                icon.style.transform = 'rotate(90deg)';
+                icon.style.transition = 'transform 0.3s ease';
+            }
+        });
+    });
