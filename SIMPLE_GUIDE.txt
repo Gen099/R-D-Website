@@ -1,0 +1,179 @@
+╔══════════════════════════════════════════════════════════════╗
+║                                                              ║
+║  📦 FOTOBER R&D HUB - DẪN GẦN, KHÔNG CẦN DEPLOY             ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝
+
+🎯 3 CÁCH DÙNG ĐƠN GIẢN (Không cần Cloudflare)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ CÁCH 1: DÙNG SANDBOX HIỆN TẠI (Đơn giản nhất) ⭐
+
+🌐 URL:
+https://3000-i61seqfzu0jxf414p7hph-de59bda9.sandbox.novita.ai
+
+📋 Làm gì?
+  ├─ Mở URL trên
+  ├─ Click "AI Tools" → Test phân tích
+  ├─ Click "Analytics" → Xem biểu đồ
+  └─ Done! ✅
+
+⏰ Thời gian: 0 phút (đã chạy sẵn)
+💰 Chi phí: Free
+🔧 Setup: Không cần
+
+⚠️ Lưu ý:
+  • Sandbox chạy ~1 giờ (tự extend khi dùng)
+  • URL sẽ khác khi restart sandbox
+  • Data không lưu vĩnh viễn
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ CÁCH 2: CHẠY LOCAL TRÊN MÁY TÍNH 💻
+
+📋 Yêu cầu:
+  • Node.js >= 18
+  • npm >= 9
+
+🚀 5 Bước Setup (5 phút):
+
+1. Clone repo:
+   git clone https://github.com/Gen099/FotoberRnD.git
+   cd FotoberRnD
+
+2. Install:
+   npm install
+
+3. Tạo .dev.vars:
+   cat > .dev.vars << 'ENVEOF'
+   OPENAI_API_KEY=gsk-eyJjb2dlbl9pZCI6IjQzMGZjZDM5LTgxNTEtNDY1NC04M2FhLTI5OTgxZGVhMTAwNCIsImtleV9pZCI6IjY1MjJjMTI2LWRiYTYtNDk1YS1iYTdkLTAyNTc5MTI3YjdhNCIsImN0aW1lIjoxNzY5NzU1Nzg4LCJjbGF1ZGVfYmlnX21vZGVsIjpudWxsLCJjbGF1ZGVfbWlkZGxlX21vZGVsIjpudWxsLCJjbGF1ZGVfc21hbGxfbW9kZWwiOm51bGx9fJusH9qYRzpBSHJPNYEpaknoWDjq4R3jNbESXJ6pkdA6
+   OPENAI_BASE_URL=https://www.genspark.ai/api/llm_proxy/v1
+   ENVEOF
+
+4. Build:
+   npm run build
+
+5. Start:
+   npx wrangler pages dev dist --ip 0.0.0.0 --port 3000
+
+6. Truy cập:
+   🌐 http://localhost:3000
+
+⏰ Thời gian: 5 phút setup
+💰 Chi phí: Free
+🔧 Ưu điểm:
+  • Chạy trên máy anh
+  • Không phụ thuộc sandbox
+  • Data không bị mất
+  • Customize được
+
+📖 Chi tiết: Xem file LOCAL_SETUP.md
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ CÁCH 3: SHARE SANDBOX URL 🌐
+
+📤 Muốn share với người khác?
+   Copy URL sandbox và gửi:
+   https://3000-i61seqfzu0jxf414p7hph-de59bda9.sandbox.novita.ai
+
+📱 Direct Links:
+   • Homepage:
+     https://3000-i61seqfzu0jxf414p7hph-de59bda9.sandbox.novita.ai/
+
+   • AI Tools:
+     https://3000-i61seqfzu0jxf414p7hph-de59bda9.sandbox.novita.ai/ai-tools
+
+   • Analytics:
+     https://3000-i61seqfzu0jxf414p7hph-de59bda9.sandbox.novita.ai/analytics
+
+⏰ Thời gian: 0 phút
+💰 Chi phí: Free
+🔧 Use case:
+  • Demo cho team
+  • Show client
+  • Quick test
+
+📖 Chi tiết: Xem file SANDBOX_ACCESS.md
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🧪 TEST NHANH
+
+Vào AI Tools và thử:
+
+📝 Input Example 1:
+   "Fotober là công ty gì?"
+   
+   ✅ Kết quả: Thông tin về Fotober (150+ nhân viên, 
+                20k+ ảnh/ngày...)
+
+📝 Input Example 2:
+   "Cần video 5s hiệu ứng Day-to-Night"
+   
+   ✅ Kết quả: Phân tích chi tiết, effect suggestions,
+                thời gian ~3-5 giờ
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📦 NHỮNG GÌ ANH CÓ
+
+✅ Code Repository:
+   https://github.com/Gen099/FotoberRnD
+
+✅ Sandbox Running:
+   https://3000-i61seqfzu0jxf414p7hph-de59bda9.sandbox.novita.ai
+
+✅ Features:
+   🤖 4 AI Providers (Gemini, GLM, OpenAI, Claude)
+   🧠 4 Analysis Types (Brief, Error, Prompt, Q&A)
+   📊 Analytics Dashboard (4 charts)
+   📚 Document Management (5 docs)
+   ⚡ Real-time AI (< 5s)
+
+✅ Documentation:
+   📄 SIMPLE_GUIDE.txt - File này
+   📄 LOCAL_SETUP.md - Setup local chi tiết
+   📄 SANDBOX_ACCESS.md - Sandbox access guide
+   📄 README.md - Project overview
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎯 KHUYẾN NGHỊ
+
+Nếu chỉ muốn dùng ngay:
+  👉 CÁCH 1: Dùng Sandbox URL (0 phút)
+
+Nếu muốn customize hoặc dùng lâu dài:
+  👉 CÁCH 2: Chạy Local (5 phút setup)
+
+Nếu muốn share với team:
+  👉 CÁCH 3: Share Sandbox URL
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🆘 CẦN TRỢ GIÚP?
+
+📖 Xem chi tiết:
+  • LOCAL_SETUP.md - Hướng dẫn chạy local
+  • SANDBOX_ACCESS.md - Thông tin sandbox
+  • README.md - Tổng quan dự án
+
+💬 Câu hỏi:
+  • Sandbox URL không hoạt động? → Restart sandbox
+  • Local không chạy? → Check Node.js version
+  • AI không trả lời? → Check .dev.vars file
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎉 DONE!
+
+Không cần Cloudflare deployment phức tạp!
+Chỉ cần chọn 1 trong 3 cách trên và dùng ngay! 🚀
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Created: 2026-01-30
+Status: ✅ Ready to Use
+Next: Chọn cách 1, 2, hoặc 3 và bắt đầu!
