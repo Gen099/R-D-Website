@@ -286,6 +286,20 @@
             display: flex;
             flex-direction: column;
         }
+        
+        /* Footer alignment - centered excluding sidebar width */
+        #dynamicFooter {
+            margin-left: 0;
+            width: 100%;
+        }
+        
+        @media (min-width: 768px) {
+            #dynamicFooter {
+                margin-left: 0;
+                padding-left: 280px;
+                box-sizing: border-box;
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-50">
