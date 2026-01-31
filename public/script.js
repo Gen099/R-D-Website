@@ -379,4 +379,15 @@ Tổng feedback lỗi: 82% →     < 30%
             }
         });
     }
+
+    const toggleSaleEmbedBtn = document.getElementById('toggleSaleEmbedBtn');
+    if (toggleSaleEmbedBtn) {
+        toggleSaleEmbedBtn.addEventListener('click', function() {
+            const container = document.getElementById('saleEmbedContainer');
+            if (container) {
+                container.classList.toggle('hidden');
+                this.innerHTML = container.classList.contains('hidden') ? '<i class="fas fa-table mr-2"></i>Xem Excel' : '<i class="fas fa-table mr-2"></i>An Excel';
+            }
+        });
+    }
 });
