@@ -582,69 +582,182 @@
             </section>
 
             <!-- Feedback Analysis Section -->
+            <!-- Feedback Analysis Section -->
             <section id="feedback" class="content-section mb-12">
                 <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
                     <i class="fas fa-chart-bar mr-3 text-purple-600"></i>
                     Phân Tích Feedback AI Video
                 </h2>
 
-                <!-- Sale Feedback Link -->
+                <!-- Sale Feedback Link with Embedded Viewer -->
                 <div class="bg-white rounded-lg shadow-md p-6 mb-6">
                     <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
                         <i class="fas fa-link mr-2 text-blue-600"></i>Feedback Từ Sale
                     </h3>
-                    <p class="text-gray-600 mb-4">Danh sách feedback từ khách hàng và sale team:</p>
-                    <div class="space-y-2">
-                        <a href="https://docs.google.com/spreadsheets/d/1ulrICF3uoc0p8fsJFYqMMNZ-yraZF-z6w303uYaCmmo/edit?usp=sharing" target="_blank" class="block p-3 bg-blue-50 rounded border-l-4 border-blue-600 hover:bg-blue-100 transition">
-                            <i class="fas fa-external-link-alt mr-2 text-blue-600"></i>
-                            <span class="font-semibold text-blue-700">Xem Feedback Từ Sale (Link)</span>
+                    <p class="text-gray-600 mb-4">Danh sách feedback từ khách hàng và sale team - Xem trực tiếp trên web:</p>
+                    
+                    <!-- Toggle View Buttons -->
+                    <div class="flex gap-2 mb-4">
+                        <button id="toggleSaleEmbedBtn" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition text-sm font-medium">
+                            <i class="fas fa-table mr-2"></i>Xem Excel Trực Tiếp
+                        </button>
+                        <a href="https://docs.google.com/spreadsheets/d/1ulrICF3uoc0p8fsJFYqMMNZ-yraZF-z6w303uYaCmmo/edit?usp=sharing" target="_blank" class="px-4 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition text-sm font-medium">
+                            <i class="fas fa-external-link-alt mr-2"></i>Mở Trong Google Sheets
                         </a>
+                    </div>
+                    
+                    <!-- Embedded Google Sheet -->
+                    <div id="saleEmbedContainer" class="hidden">
+                        <iframe src="https://docs.google.com/spreadsheets/d/1ulrICF3uoc0p8fsJFYqMMNZ-yraZF-z6w303uYaCmmo/edit?usp=sharing&rm=minimal&widget=true&headers=false" 
+                                class="w-full border rounded-lg" 
+                                style="height: 600px;"
+                                frameborder="0">
+                        </iframe>
                     </div>
                 </div>
 
-                <!-- R&D Feedback Accordion Section -->
+                <!-- R&D Feedback Grid Section -->
                 <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
-                        <i class="fas fa-file-import mr-2 text-green-600"></i>Feedback Từ R&D (Danh Sách)
-                    </h3>
-                    <p class="text-gray-600 mb-4">Nhấn vào từng mục để xem chi tiết feedback, biểu đồ, hoặc tài liệu:</p>
-                    
-                    <!-- Accordion List -->
-                    <div id="rndFeedbackAccordion" class="space-y-2">
-                        <!-- Feedback Item 1 -->
-                        <div class="accordion-item border rounded-lg overflow-hidden">
-                            <button class="accordion-header w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 transition flex items-center justify-between font-medium text-gray-800">
-                                <span class="flex items-center">
-                                    <i class="fas fa-chevron-right mr-3 text-gray-600 accordion-icon"></i>
-                                    <span class="text-sm">30/01/2026 - Lỗi hiển thị video trên mobile</span>
-                                </span>
+                    <div class="flex items-center justify-between mb-4 flex-wrap gap-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 flex items-center">
+                                <i class="fas fa-file-import mr-2 text-green-600"></i>Phân Tích Feedback Từ R&D
+                            </h3>
+                            <p class="text-gray-600 text-sm mt-1">Nhấn vào từng bài phân tích để xem chi tiết</p>
+                        </div>
+                        <div class="flex gap-2">
+                            <button id="sortByDateBtn" class="px-3 py-2 bg-green-100 text-green-700 rounded hover:bg-green-200 transition text-sm font-medium">
+                                <i class="fas fa-calendar-alt mr-1"></i>Sắp xếp theo ngày
                             </button>
-                            <div class="accordion-content hidden bg-white p-4">
-                                <div class="space-y-3">
-                                    <p class="text-sm text-gray-700"><strong>Mô tả:</strong> Video không load được trên thiết bị iOS, cần kiểm tra codec.</p>
-                                    <a href="https://www.notion.so/2f8da80a59b381f38419ed695b275ca8" target="_blank" class="inline-block px-3 py-2 bg-green-100 text-green-700 rounded text-sm font-medium hover:bg-green-200 transition">
-                                        <i class="fas fa-external-link-alt mr-1"></i>Xem Chi Tiết Trên Notion Hub
-                                    </a>
+                            <button id="toggleGridViewBtn" class="px-3 py-2 bg-purple-100 text-purple-700 rounded hover:bg-purple-200 transition text-sm font-medium">
+                                <i class="fas fa-th mr-1"></i>Chế độ lưới
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Grid View -->
+                    <div id="feedbackGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Feedback Card 1 -->
+                        <div class="feedback-card border rounded-lg overflow-hidden hover:shadow-xl transition cursor-pointer" data-feedback-id="1" data-date="2026-01-30">
+                            <div class="relative bg-gradient-to-br from-blue-50 to-indigo-100 p-6 h-48 flex flex-col justify-between">
+                                <div>
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="text-xs font-semibold text-blue-700 bg-blue-200 px-2 py-1 rounded">30/01/2026</span>
+                                        <i class="fas fa-chart-line text-2xl text-blue-600"></i>
+                                    </div>
+                                    <h4 class="font-bold text-gray-800 text-lg mb-2">Phân Tích 23 Job Feedback</h4>
+                                    <p class="text-sm text-gray-700">Tổng hợp và phân loại lỗi từ 23 jobs, xác định pattern chính</p>
+                                </div>
+                                <div class="flex items-center justify-between text-xs text-gray-600">
+                                    <span><i class="fas fa-file-alt mr-1"></i>Excel + Biểu đồ</span>
+                                    <span><i class="fas fa-arrow-right"></i></span>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Feedback Item 2 -->
-                        <div class="accordion-item border rounded-lg overflow-hidden">
-                            <button class="accordion-header w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 transition flex items-center justify-between font-medium text-gray-800">
-                                <span class="flex items-center">
-                                    <i class="fas fa-chevron-right mr-3 text-gray-600 accordion-icon"></i>
-                                    <span class="text-sm">29/01/2026 - Tối ưu tốc độ render AI</span>
-                                </span>
-                            </button>
-                            <div class="accordion-content hidden bg-white p-4">
-                                <div class="space-y-3">
-                                    <p class="text-sm text-gray-700"><strong>Mô tả:</strong> Thời gian render giảm từ 45s xuống 30s sau tối ưu GPU.</p>
-                                    <img src="https://via.placeholder.com/500x300?text=Performance+Chart" alt="Performance" class="w-full rounded-lg">                                    <a href="https://www.notion.so/2f8da80a59b381f38419ed695b275ca8" target="_blank" class="inline-block px-3 py-2 bg-green-100 text-green-700 rounded text-sm font-medium hover:bg-green-200 transition">
-                                        <i class="fas fa-external-link-alt mr-1"></i>Xem Chi Tiết Trên Notion Hub
-                                    </a>
+                        <!-- Feedback Card 2 -->
+                        <div class="feedback-card border rounded-lg overflow-hidden hover:shadow-xl transition cursor-pointer" data-feedback-id="2" data-date="2026-01-29">
+                            <div class="relative bg-gradient-to-br from-green-50 to-emerald-100 p-6 h-48 flex flex-col justify-between">
+                                <div>
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="text-xs font-semibold text-green-700 bg-green-200 px-2 py-1 rounded">29/01/2026</span>
+                                        <i class="fas fa-video text-2xl text-green-600"></i>
+                                    </div>
+                                    <h4 class="font-bold text-gray-800 text-lg mb-2">Lỗi Video Mobile iOS</h4>
+                                    <p class="text-sm text-gray-700">Phân tích lỗi codec và đề xuất giải pháp tối ưu</p>
+                                </div>
+                                <div class="flex items-center justify-between text-xs text-gray-600">
+                                    <span><i class="fas fa-file-alt mr-1"></i>Báo cáo chi tiết</span>
+                                    <span><i class="fas fa-arrow-right"></i></span>
                                 </div>
                             </div>
+                        </div>
+
+                        <!-- Feedback Card 3 -->
+                        <div class="feedback-card border rounded-lg overflow-hidden hover:shadow-xl transition cursor-pointer" data-feedback-id="3" data-date="2026-01-28">
+                            <div class="relative bg-gradient-to-br from-purple-50 to-violet-100 p-6 h-48 flex flex-col justify-between">
+                                <div>
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="text-xs font-semibold text-purple-700 bg-purple-200 px-2 py-1 rounded">28/01/2026</span>
+                                        <i class="fas fa-tachometer-alt text-2xl text-purple-600"></i>
+                                    </div>
+                                    <h4 class="font-bold text-gray-800 text-lg mb-2">Tối Ưu Render AI</h4>
+                                    <p class="text-sm text-gray-700">Giảm thời gian render từ 45s xuống 30s với GPU optimization</p>
+                                </div>
+                                <div class="flex items-center justify-between text-xs text-gray-600">
+                                    <span><i class="fas fa-file-alt mr-1"></i>Performance Report</span>
+                                    <span><i class="fas fa-arrow-right"></i></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Feedback Card 4 -->
+                        <div class="feedback-card border rounded-lg overflow-hidden hover:shadow-xl transition cursor-pointer" data-feedback-id="4" data-date="2026-01-27">
+                            <div class="relative bg-gradient-to-br from-orange-50 to-amber-100 p-6 h-48 flex flex-col justify-between">
+                                <div>
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="text-xs font-semibold text-orange-700 bg-orange-200 px-2 py-1 rounded">27/01/2026</span>
+                                        <i class="fas fa-bug text-2xl text-orange-600"></i>
+                                    </div>
+                                    <h4 class="font-bold text-gray-800 text-lg mb-2">Lỗi Vật Lý Trong Video</h4>
+                                    <p class="text-sm text-gray-700">Phân tích các lỗi vật lý phổ biến và cách khắc phục</p>
+                                </div>
+                                <div class="flex items-center justify-between text-xs text-gray-600">
+                                    <span><i class="fas fa-file-alt mr-1"></i>Technical Analysis</span>
+                                    <span><i class="fas fa-arrow-right"></i></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Feedback Card 5 -->
+                        <div class="feedback-card border rounded-lg overflow-hidden hover:shadow-xl transition cursor-pointer" data-feedback-id="5" data-date="2026-01-26">
+                            <div class="relative bg-gradient-to-br from-pink-50 to-rose-100 p-6 h-48 flex flex-col justify-between">
+                                <div>
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="text-xs font-semibold text-pink-700 bg-pink-200 px-2 py-1 rounded">26/01/2026</span>
+                                        <i class="fas fa-palette text-2xl text-pink-600"></i>
+                                    </div>
+                                    <h4 class="font-bold text-gray-800 text-lg mb-2">Chất Lượng AI Output</h4>
+                                    <p class="text-sm text-gray-700">Đánh giá chất lượng output từ các công cụ AI khác nhau</p>
+                                </div>
+                                <div class="flex items-center justify-between text-xs text-gray-600">
+                                    <span><i class="fas fa-file-alt mr-1"></i>Quality Report</span>
+                                    <span><i class="fas fa-arrow-right"></i></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Feedback Card 6 -->
+                        <div class="feedback-card border rounded-lg overflow-hidden hover:shadow-xl transition cursor-pointer" data-feedback-id="6" data-date="2026-01-25">
+                            <div class="relative bg-gradient-to-br from-teal-50 to-cyan-100 p-6 h-48 flex flex-col justify-between">
+                                <div>
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="text-xs font-semibold text-teal-700 bg-teal-200 px-2 py-1 rounded">25/01/2026</span>
+                                        <i class="fas fa-clock text-2xl text-teal-600"></i>
+                                    </div>
+                                    <h4 class="font-bold text-gray-800 text-lg mb-2">Phân Tích Deadline</h4>
+                                    <p class="text-sm text-gray-700">Nghiên cứu nguyên nhân trễ deadline và đề xuất cải thiện</p>
+                                </div>
+                                <div class="flex items-center justify-between text-xs text-gray-600">
+                                    <span><i class="fas fa-file-alt mr-1"></i>Timeline Analysis</span>
+                                    <span><i class="fas fa-arrow-right"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feedback Detail Modal -->
+                <div id="feedbackModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+                    <div class="bg-white rounded-lg shadow-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden">
+                        <div class="flex items-center justify-between p-6 border-b">
+                            <h3 id="modalTitle" class="text-2xl font-bold text-gray-800">Chi Tiết Phân Tích</h3>
+                            <button id="closeModalBtn" class="text-gray-500 hover:text-gray-700 text-2xl">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div id="modalContent" class="p-6 overflow-y-auto" style="max-height: calc(90vh - 140px);">
+                            <!-- Content will be loaded dynamically -->
                         </div>
                     </div>
                 </div>
@@ -657,7 +770,7 @@
                                 <i class="fas fa-chart-bar mr-2 text-purple-600"></i>Phân Loại Lỗi Theo Nhóm
                             </h3>
                             <p class="text-xs text-gray-500 mt-2">Dữ liệu từ: Google Sheet Feedback</p>
-                            <p class="text-xs text-gray-500">Cập nhật lần cuối: <span id="lastUpdateDate" class="font-semibold text-gray-700">29/01/2026</span></p>
+                            <p class="text-xs text-gray-500">Cập nhật lần cuối: <span id="lastUpdateDate" class="font-semibold text-gray-700">30/01/2026</span></p>
                         </div>
                         <div class="flex gap-2">
                             <button id="toggleChartBtn" class="px-3 py-2 bg-purple-100 text-purple-700 rounded hover:bg-purple-200 transition text-sm font-medium">
@@ -1665,13 +1778,12 @@
                     Library - Kho Tài Nguyên
                 </h2>
 
-                <!-- Prompt Templates with Notion & Video -->
-                <!-- AI Prompt Library Section -->
+                <!-- AI Prompt Library Overview -->
                 <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg shadow-md p-6 mb-6 border-l-4 border-blue-600">
                     <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
                         <i class="fas fa-lightbulb mr-2 text-indigo-600"></i>📚 Thư Viện Prompt AI Fotober
                     </h3>
-                    <p class="text-gray-700 mb-4 font-semibold">Hướng dẫn sử dụng các công cụ AI mới và các Prompt tối ưu cho từng dịch vụ:</p>
+                    <p class="text-gray-700 mb-4 font-semibold">Hướng dẫn chi tiết cách sử dụng các công cụ AI mới với các Prompt tối ưu cho từng dịch vụ của Fotober.</p>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                         <div class="bg-white p-4 rounded-lg border-l-4 border-purple-500">
@@ -1712,7 +1824,8 @@
                         <i class="fas fa-book mr-2"></i>Xem Thư Viện Đầy Đủ Trên Notion
                     </a>
                 </div>
-                <!-- Accordion Prompt Library -->
+
+                <!-- Accordion Prompt Library - Hướng Dẫn Thực Chiến -->
                 <div class="bg-white rounded-lg shadow-md p-6 mb-6">
                     <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
                         <i class="fas fa-list mr-2 text-indigo-600"></i>Thư Viện Prompt AI Fotober - Hướng Dẫn Thực Chiến
@@ -1721,16 +1834,135 @@
                     
                     <!-- Accordion Items -->
                     <div class="space-y-3">
+                        <!-- Danh Sách Công Cụ AI -->
+                        <div class="accordion-item border rounded-lg">
+                            <button class="accordion-header w-full px-4 py-3 bg-gradient-to-r from-purple-50 to-indigo-50 hover:from-purple-100 hover:to-indigo-100 rounded-lg flex items-center justify-between font-semibold text-gray-800 transition">
+                                <span><i class="fas fa-tools mr-2 text-purple-600"></i>📋 Danh Sách Công Cụ AI Hiện Tại</span>
+                                <i class="fas fa-chevron-right accordion-icon text-purple-600"></i>
+                            </button>
+                            <div class="accordion-content hidden px-4 py-4 bg-purple-50 text-sm text-gray-700">
+                                <div class="space-y-4">
+                                    <div>
+                                        <h5 class="font-bold text-purple-800 mb-2">🖼️ TẠO ẢNH (Image Generation)</h5>
+                                        <div class="overflow-x-auto">
+                                            <table class="w-full text-xs border-collapse">
+                                                <thead>
+                                                    <tr class="bg-purple-100">
+                                                        <th class="border border-purple-300 px-2 py-1 text-left">Công Cụ</th>
+                                                        <th class="border border-purple-300 px-2 py-1 text-left">Thế Mạnh</th>
+                                                        <th class="border border-purple-300 px-2 py-1 text-left">Tốc Độ</th>
+                                                        <th class="border border-purple-300 px-2 py-1 text-left">Giá</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="bg-white">
+                                                        <td class="border border-purple-300 px-2 py-1"><strong>Google Nano Banana Pro</strong></td>
+                                                        <td class="border border-purple-300 px-2 py-1">Độ phân giải 4K+, chi tiết vật liệu</td>
+                                                        <td class="border border-purple-300 px-2 py-1">Nhanh</td>
+                                                        <td class="border border-purple-300 px-2 py-1">Rẻ</td>
+                                                    </tr>
+                                                    <tr class="bg-purple-50">
+                                                        <td class="border border-purple-300 px-2 py-1"><strong>Zimage</strong></td>
+                                                        <td class="border border-purple-300 px-2 py-1">Tối ưu cho bất động sản</td>
+                                                        <td class="border border-purple-300 px-2 py-1">Trung bình</td>
+                                                        <td class="border border-purple-300 px-2 py-1">Trung bình</td>
+                                                    </tr>
+                                                    <tr class="bg-white">
+                                                        <td class="border border-purple-300 px-2 py-1"><strong>Flux</strong></td>
+                                                        <td class="border border-purple-300 px-2 py-1">Sáng tạo, nghệ thuật</td>
+                                                        <td class="border border-purple-300 px-2 py-1">Nhanh</td>
+                                                        <td class="border border-purple-300 px-2 py-1">Rẻ</td>
+                                                    </tr>
+                                                    <tr class="bg-purple-50">
+                                                        <td class="border border-purple-300 px-2 py-1"><strong>Seedream</strong></td>
+                                                        <td class="border border-purple-300 px-2 py-1">Chuyên biệt cho nội thất</td>
+                                                        <td class="border border-purple-300 px-2 py-1">Chậm</td>
+                                                        <td class="border border-purple-300 px-2 py-1">Đắt</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-bold text-red-800 mb-2">🎬 TẠO VIDEO (Video Generation)</h5>
+                                        <div class="overflow-x-auto">
+                                            <table class="w-full text-xs border-collapse">
+                                                <thead>
+                                                    <tr class="bg-red-100">
+                                                        <th class="border border-red-300 px-2 py-1 text-left">Công Cụ</th>
+                                                        <th class="border border-red-300 px-2 py-1 text-left">Thế Mạnh</th>
+                                                        <th class="border border-red-300 px-2 py-1 text-left">Độ Dài</th>
+                                                        <th class="border border-red-300 px-2 py-1 text-left">Giá</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="bg-white">
+                                                        <td class="border border-red-300 px-2 py-1"><strong>Veo 3.1 (Google)</strong></td>
+                                                        <td class="border border-red-300 px-2 py-1">Chân thực, chuyển động mượt</td>
+                                                        <td class="border border-red-300 px-2 py-1">1-2 phút</td>
+                                                        <td class="border border-red-300 px-2 py-1">Rẻ</td>
+                                                    </tr>
+                                                    <tr class="bg-red-50">
+                                                        <td class="border border-red-300 px-2 py-1"><strong>Seedance 1.5 Pro</strong></td>
+                                                        <td class="border border-red-300 px-2 py-1">Hiệu ứng đặc biệt</td>
+                                                        <td class="border border-red-300 px-2 py-1">30-60s</td>
+                                                        <td class="border border-red-300 px-2 py-1">Trung bình</td>
+                                                    </tr>
+                                                    <tr class="bg-white">
+                                                        <td class="border border-red-300 px-2 py-1"><strong>Kling 2.6</strong></td>
+                                                        <td class="border border-red-300 px-2 py-1">Motion Control tuyệt vời</td>
+                                                        <td class="border border-red-300 px-2 py-1">1-2 phút</td>
+                                                        <td class="border border-red-300 px-2 py-1">Trung bình</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-bold text-green-800 mb-2">✂️ CHỈNH SỬA VIDEO (Video Editing)</h5>
+                                        <div class="overflow-x-auto">
+                                            <table class="w-full text-xs border-collapse">
+                                                <thead>
+                                                    <tr class="bg-green-100">
+                                                        <th class="border border-green-300 px-2 py-1 text-left">Công Cụ</th>
+                                                        <th class="border border-green-300 px-2 py-1 text-left">Mục Đích</th>
+                                                        <th class="border border-green-300 px-2 py-1 text-left">Tốc Độ</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="bg-white">
+                                                        <td class="border border-green-300 px-2 py-1"><strong>Kling O1</strong></td>
+                                                        <td class="border border-green-300 px-2 py-1">Sửa lỗi vật lý, thêm chi tiết</td>
+                                                        <td class="border border-green-300 px-2 py-1">Nhanh</td>
+                                                    </tr>
+                                                    <tr class="bg-green-50">
+                                                        <td class="border border-green-300 px-2 py-1"><strong>CapCut</strong></td>
+                                                        <td class="border border-green-300 px-2 py-1">Hiệu ứng, chuyển cảnh</td>
+                                                        <td class="border border-green-300 px-2 py-1">Rất nhanh</td>
+                                                    </tr>
+                                                    <tr class="bg-white">
+                                                        <td class="border border-green-300 px-2 py-1"><strong>After Effect</strong></td>
+                                                        <td class="border border-green-300 px-2 py-1">Compositing chuyên nghiệp</td>
+                                                        <td class="border border-green-300 px-2 py-1">Chậm</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Virtual Staging -->
                         <div class="accordion-item border rounded-lg">
-                            <button class="accordion-header w-full px-4 py-3 bg-blue-50 hover:bg-blue-100 rounded-lg flex items-center justify-between font-semibold text-gray-800 transition" onclick="toggleAccordion(this)">
-                                <span><i class="fas fa-home mr-2 text-blue-600"></i>Virtual Staging - Trang Trí Nội Thất Ảo</span>
-                                <i class="fas fa-chevron-down text-blue-600"></i>
+                            <button class="accordion-header w-full px-4 py-3 bg-blue-50 hover:bg-blue-100 rounded-lg flex items-center justify-between font-semibold text-gray-800 transition">
+                                <span><i class="fas fa-home mr-2 text-blue-600"></i>🏠 Virtual Staging - Trang Trí Nội Thất Ảo</span>
+                                <i class="fas fa-chevron-right accordion-icon text-blue-600"></i>
                             </button>
                             <div class="accordion-content hidden px-4 py-4 bg-blue-50 text-sm text-gray-700">
                                 <p class="mb-3"><strong>Công cụ chính:</strong> Google Nano Banana Pro</p>
-                                <p class="mb-3"><strong>Prompt Mẫu:</strong></p>
-                                <pre class="bg-white p-3 rounded mb-3 overflow-x-auto text-xs">Ultra-realistic interior design of an empty [ROOM_TYPE], adding [STYLE] style furniture:
+                                <p class="mb-3"><strong>Prompt Tối Ưu:</strong></p>
+                                <pre class="bg-white p-3 rounded mb-3 overflow-x-auto text-xs font-mono border border-blue-200">Ultra-realistic interior design of an empty living room, adding [STYLE] style furniture:
 - Main furniture: [FURNITURE_LIST]
 - Flooring: [FLOOR_MATERIAL] with [LIGHTING_TYPE] lighting
 - Wall color: [WALL_COLOR]
@@ -1739,61 +1971,108 @@
 - Camera angle: [ANGLE_DESCRIPTION]
 - Resolution: 8K, architectural photography, photorealistic
 - Mood: [MOOD_DESCRIPTION]</pre>
-                                <p><strong>Ví dụ cụ thể:</strong> Trang trí phòng khách theo phong cách Scandinavian với ghế sofa gỗ sáng, bàn cà phê tối giản, đèn đứng, cây cảnh, đèn đặng trắng</p>
+                                <p class="mb-3"><strong>Ví dụ cụ thể:</strong></p>
+                                <pre class="bg-white p-3 rounded mb-3 overflow-x-auto text-xs font-mono border border-blue-200">Ultra-realistic interior design of an empty living room, adding Scandinavian style furniture:
+- Main furniture: Light oak wood sofa, minimalist coffee table, floor lamp
+- Flooring: Light oak wood with soft warm lighting
+- Wall color: Soft white with one accent wall in sage green
+- Accessories: Potted plants, white throw pillows, geometric wall art
+- Lighting: Soft daylight from large windows, warm accent lighting
+- Camera angle: Wide-angle from living room entrance
+- Resolution: 8K, architectural photography, photorealistic
+- Mood: Cozy, modern, minimalist</pre>
+                                <p class="mb-3"><strong>System Prompt cho ChatGPT/Claude/Gemini:</strong></p>
+                                <pre class="bg-gray-100 p-3 rounded overflow-x-auto text-xs font-mono border border-blue-200">Bạn là chuyên gia Virtual Staging tại Fotober. Nhiệm vụ của bạn:
+1. Nhận feedback từ Sale về yêu cầu khách hàng
+2. Chuyển đổi thành Prompt chi tiết cho Google Nano Banana Pro
+3. Tập trung vào: Phong cách, Vật liệu, Ánh sáng, Góc máy
+4. Đảm bảo Prompt có cấu trúc rõ ràng, dễ hiểu cho AI
+5. Thêm các chi tiết nhỏ để tăng tính chân thực
+
+Format output:
+[PROMPT_OPTIMIZED]</pre>
                             </div>
                         </div>
 
                         <!-- Day-to-Night -->
                         <div class="accordion-item border rounded-lg">
-                            <button class="accordion-header w-full px-4 py-3 bg-orange-50 hover:bg-orange-100 rounded-lg flex items-center justify-between font-semibold text-gray-800 transition" onclick="toggleAccordion(this)">
-                                <span><i class="fas fa-sun mr-2 text-orange-600"></i>Day-to-Night - Chuyển Cảnh Ngày Sang Đêm</span>
-                                <i class="fas fa-chevron-down text-orange-600"></i>
+                            <button class="accordion-header w-full px-4 py-3 bg-orange-50 hover:bg-orange-100 rounded-lg flex items-center justify-between font-semibold text-gray-800 transition">
+                                <span><i class="fas fa-sun mr-2 text-orange-600"></i>🌅 Day-to-Night - Chuyển Cảnh Ngày Sang Đêm</span>
+                                <i class="fas fa-chevron-right accordion-icon text-orange-600"></i>
                             </button>
                             <div class="accordion-content hidden px-4 py-4 bg-orange-50 text-sm text-gray-700">
                                 <p class="mb-3"><strong>Công cụ chính:</strong> Veo 3.1 (hoặc Kling 2.6 nếu cần kiểm soát camera)</p>
-                                <p class="mb-3"><strong>Prompt Mẫu:</strong></p>
-                                <pre class="bg-white p-3 rounded mb-3 overflow-x-auto text-xs">Cinematic transition video of [LOCATION]:
+                                <p class="mb-3"><strong>Prompt Tối Ưu cho Veo 3.1:</strong></p>
+                                <pre class="bg-white p-3 rounded mb-3 overflow-x-auto text-xs font-mono border border-orange-200">Cinematic transition video of [LOCATION]:
 - Start: [MORNING_DESCRIPTION] with bright sunlight
 - Middle: [AFTERNOON_DESCRIPTION] with golden hour lighting
 - End: [NIGHT_DESCRIPTION] with interior lights turning on
 - Camera movement: [CAMERA_MOVEMENT]
 - Duration: 30 seconds
-- Resolution: 4K, cinematic, realistic</pre>
-                                <p><strong>Ví dụ cụ thể:</strong> Video chuyển đổi từ ngày sang đêm của một tòa nhà cao cấp, bắt đầu với ánh nắng sáng, kết thúc với đèn nội thất và đèn ngoài</p>
+- Resolution: 4K, cinematic, realistic
+- Lighting: Natural transition from daylight to artificial lighting
+- Focus: [FOCUS_AREA]</pre>
+                                <p class="mb-3"><strong>Ví dụ cụ thể:</strong></p>
+                                <pre class="bg-white p-3 rounded mb-3 overflow-x-auto text-xs font-mono border border-orange-200">Cinematic transition video of a luxury villa exterior:
+- Start: Bright sunny afternoon with clear blue sky
+- Middle: Golden hour with warm orange sunlight hitting the facade
+- End: Night time with interior lights illuminating the windows, exterior accent lighting
+- Camera movement: Slow dolly shot moving around the building
+- Duration: 30 seconds
+- Resolution: 4K, cinematic, realistic
+- Lighting: Natural transition from daylight to artificial lighting
+- Focus: Building architecture and lighting transformation</pre>
+                                <div class="bg-orange-100 p-3 rounded mt-3">
+                                    <p class="font-semibold mb-2">💡 Khi nào dùng Kling 2.6 thay vì Veo 3.1?</p>
+                                    <ul class="space-y-1 text-xs">
+                                        <li>• <strong>Dùng Kling 2.6:</strong> Khi cần kiểm soát chuyển động camera chính xác (Motion Control)</li>
+                                        <li>• <strong>Dùng Veo 3.1:</strong> Khi cần chân thực tự nhiên và chuyển động mượt mà</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
 
                         <!-- Real Estate Tour -->
                         <div class="accordion-item border rounded-lg">
-                            <button class="accordion-header w-full px-4 py-3 bg-green-50 hover:bg-green-100 rounded-lg flex items-center justify-between font-semibold text-gray-800 transition" onclick="toggleAccordion(this)">
-                                <span><i class="fas fa-video mr-2 text-green-600"></i>Real Estate Tour - Tour Ảo Bất Động Sản</span>
-                                <i class="fas fa-chevron-down text-green-600"></i>
+                            <button class="accordion-header w-full px-4 py-3 bg-green-50 hover:bg-green-100 rounded-lg flex items-center justify-between font-semibold text-gray-800 transition">
+                                <span><i class="fas fa-video mr-2 text-green-600"></i>🏢 Real Estate Tour - Tour Ảo Bất Động Sản</span>
+                                <i class="fas fa-chevron-right accordion-icon text-green-600"></i>
                             </button>
                             <div class="accordion-content hidden px-4 py-4 bg-green-50 text-sm text-gray-700">
                                 <p class="mb-3"><strong>Công cụ chính:</strong> Kling 2.6 (Motion Control)</p>
-                                <p class="mb-3"><strong>Prompt Mẫu:</strong></p>
-                                <pre class="bg-white p-3 rounded mb-3 overflow-x-auto text-xs">Smooth gimbal walkthrough of [PROPERTY_TYPE]:
+                                <p class="mb-3"><strong>Prompt Tối Ưu cho Kling 2.6:</strong></p>
+                                <pre class="bg-white p-3 rounded mb-3 overflow-x-auto text-xs font-mono border border-green-200">Smooth gimbal walkthrough of [PROPERTY_TYPE]:
 - Start position: [START_LOCATION]
 - Path: [MOVEMENT_DESCRIPTION]
 - End position: [END_LOCATION]
 - Motion control: [SPEED] speed, [DIRECTION] movement
 - Highlights: [KEY_FEATURES]
+- Lighting: [LIGHTING_CONDITIONS]
 - Duration: 45 seconds
 - Resolution: 4K, smooth motion</pre>
-                                <p><strong>Ví dụ cụ thể:</strong> Tour của căn hộ hiện đại, bắt đầu từ cửa chính, quét qua phòng khách, bếp, phòng ngủ, kết thúc tại phòng ngủ chính</p>
+                                <p class="mb-3"><strong>Ví dụ cụ thể:</strong></p>
+                                <pre class="bg-white p-3 rounded mb-3 overflow-x-auto text-xs font-mono border border-green-200">Smooth gimbal walkthrough of a modern apartment:
+- Start position: Main entrance
+- Path: Move forward into living room, pan left to show kitchen, then right to show bedroom
+- End position: Master bedroom with city view
+- Motion control: 0.6 speed, smooth forward and lateral movements
+- Highlights: Floor-to-ceiling windows, marble countertops, modern fixtures
+- Lighting: Natural daylight from windows, warm accent lighting
+- Duration: 45 seconds
+- Resolution: 4K, smooth motion</pre>
                             </div>
                         </div>
 
                         <!-- Product Showcase -->
                         <div class="accordion-item border rounded-lg">
-                            <button class="accordion-header w-full px-4 py-3 bg-purple-50 hover:bg-purple-100 rounded-lg flex items-center justify-between font-semibold text-gray-800 transition" onclick="toggleAccordion(this)">
-                                <span><i class="fas fa-shopping-bag mr-2 text-purple-600"></i>Product Showcase - Trình Bày Sản Phẩm</span>
-                                <i class="fas fa-chevron-down text-purple-600"></i>
+                            <button class="accordion-header w-full px-4 py-3 bg-purple-50 hover:bg-purple-100 rounded-lg flex items-center justify-between font-semibold text-gray-800 transition">
+                                <span><i class="fas fa-shopping-bag mr-2 text-purple-600"></i>🎨 Product Showcase - Trình Bày Sản Phẩm</span>
+                                <i class="fas fa-chevron-right accordion-icon text-purple-600"></i>
                             </button>
                             <div class="accordion-content hidden px-4 py-4 bg-purple-50 text-sm text-gray-700">
                                 <p class="mb-3"><strong>Công cụ chính:</strong> Seedance 1.5 Pro</p>
-                                <p class="mb-3"><strong>Prompt Mẫu:</strong></p>
-                                <pre class="bg-white p-3 rounded mb-3 overflow-x-auto text-xs">Professional product showcase video of [PRODUCT]:
+                                <p class="mb-3"><strong>Prompt Tối Ưu cho Seedance 1.5 Pro:</strong></p>
+                                <pre class="bg-white p-3 rounded mb-3 overflow-x-auto text-xs font-mono border border-purple-200">Professional product showcase video of [PRODUCT]:
 - Product: [PRODUCT_DESCRIPTION]
 - Background: [BACKGROUND_STYLE]
 - Camera movement: [CAMERA_MOVEMENT]
@@ -1801,20 +2080,162 @@
 - Effects: [SPECIAL_EFFECTS]
 - Duration: 30-45 seconds
 - Style: Professional, modern, cinematic</pre>
-                                <p><strong>Ví dụ cụ thể:</strong> Video trình bày bộ ghế sofa hàng hiệu, xoay 360 độ, đèn studio chuyên nghiệp, hiệu ứng hạt mây</p>
+                                <p class="mb-3"><strong>Ví dụ cụ thể:</strong></p>
+                                <pre class="bg-white p-3 rounded mb-3 overflow-x-auto text-xs font-mono border border-purple-200">Professional product showcase video of a luxury furniture set:
+- Product: Modern minimalist sofa with geometric design
+- Background: Clean white studio with subtle shadow
+- Camera movement: 360-degree rotation with zoom-in on details
+- Lighting: Professional studio lighting with highlights on materials
+- Effects: Subtle particle effects, smooth transitions
+- Duration: 45 seconds
+- Style: Professional, modern, cinematic</pre>
                             </div>
                         </div>
 
-                        <!-- System Prompt -->
+                        <!-- Kling O1 Video Editing -->
                         <div class="accordion-item border rounded-lg">
-                            <button class="accordion-header w-full px-4 py-3 bg-red-50 hover:bg-red-100 rounded-lg flex items-center justify-between font-semibold text-gray-800 transition" onclick="toggleAccordion(this)">
-                                <span><i class="fas fa-brain mr-2 text-red-600"></i>System Prompt - Dùng cho ChatGPT/Claude/Gemini</span>
-                                <i class="fas fa-chevron-down text-red-600"></i>
+                            <button class="accordion-header w-full px-4 py-3 bg-teal-50 hover:bg-teal-100 rounded-lg flex items-center justify-between font-semibold text-gray-800 transition">
+                                <span><i class="fas fa-cut mr-2 text-teal-600"></i>🔧 Kling O1 - Chỉnh Sửa Video</span>
+                                <i class="fas fa-chevron-right accordion-icon text-teal-600"></i>
+                            </button>
+                            <div class="accordion-content hidden px-4 py-4 bg-teal-50 text-sm text-gray-700">
+                                <p class="mb-3"><strong>Khi nào dùng Kling O1?</strong></p>
+                                <ul class="space-y-1 mb-3 text-xs">
+                                    <li>1. <strong>Sửa lỗi vật lý:</strong> Vật thể biến mất, xuất hiện lỗi</li>
+                                    <li>2. <strong>Thêm chi tiết:</strong> Thêm ánh sáng, bóng đổ, phản xạ</li>
+                                    <li>3. <strong>Tối ưu chuyển động:</strong> Làm mượt các chuyển động không tự nhiên</li>
+                                    <li>4. <strong>Xóa/Thêm đối tượng:</strong> Loại bỏ hoặc thêm vật thể vào video</li>
+                                </ul>
+                                <p class="mb-3"><strong>Prompt cho Kling O1:</strong></p>
+                                <pre class="bg-white p-3 rounded overflow-x-auto text-xs font-mono border border-teal-200">Edit this video to:
+1. [PROBLEM_TO_FIX]
+2. [ENHANCEMENT_NEEDED]
+3. [STYLE_ADJUSTMENT]
+
+Focus on: [FOCUS_AREA]
+Maintain: [WHAT_TO_KEEP]</pre>
+                            </div>
+                        </div>
+
+                        <!-- Bảng So Sánh Công Cụ -->
+                        <div class="accordion-item border rounded-lg">
+                            <button class="accordion-header w-full px-4 py-3 bg-yellow-50 hover:bg-yellow-100 rounded-lg flex items-center justify-between font-semibold text-gray-800 transition">
+                                <span><i class="fas fa-balance-scale mr-2 text-yellow-600"></i>📊 Bảng So Sánh Công Cụ - Khi Nào Dùng Cái Nào?</span>
+                                <i class="fas fa-chevron-right accordion-icon text-yellow-600"></i>
+                            </button>
+                            <div class="accordion-content hidden px-4 py-4 bg-yellow-50 text-sm text-gray-700">
+                                <div class="overflow-x-auto">
+                                    <table class="w-full text-xs border-collapse">
+                                        <thead>
+                                            <tr class="bg-yellow-100">
+                                                <th class="border border-yellow-300 px-2 py-2 text-left">Tình Huống</th>
+                                                <th class="border border-yellow-300 px-2 py-2 text-left">Công Cụ</th>
+                                                <th class="border border-yellow-300 px-2 py-2 text-left">Lý Do</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="bg-white">
+                                                <td class="border border-yellow-300 px-2 py-2">Cần ảnh chân thực 4K+</td>
+                                                <td class="border border-yellow-300 px-2 py-2"><strong>Google Nano Banana Pro</strong></td>
+                                                <td class="border border-yellow-300 px-2 py-2">Độ phân giải cao nhất</td>
+                                            </tr>
+                                            <tr class="bg-yellow-50">
+                                                <td class="border border-yellow-300 px-2 py-2">Cần video chân thực, mượt</td>
+                                                <td class="border border-yellow-300 px-2 py-2"><strong>Veo 3.1</strong></td>
+                                                <td class="border border-yellow-300 px-2 py-2">Chuyển động tự nhiên</td>
+                                            </tr>
+                                            <tr class="bg-white">
+                                                <td class="border border-yellow-300 px-2 py-2">Cần kiểm soát camera chính xác</td>
+                                                <td class="border border-yellow-300 px-2 py-2"><strong>Kling 2.6</strong></td>
+                                                <td class="border border-yellow-300 px-2 py-2">Motion Control tuyệt vời</td>
+                                            </tr>
+                                            <tr class="bg-yellow-50">
+                                                <td class="border border-yellow-300 px-2 py-2">Cần hiệu ứng đặc biệt</td>
+                                                <td class="border border-yellow-300 px-2 py-2"><strong>Seedance 1.5 Pro</strong></td>
+                                                <td class="border border-yellow-300 px-2 py-2">Chuyên biệt cho FX</td>
+                                            </tr>
+                                            <tr class="bg-white">
+                                                <td class="border border-yellow-300 px-2 py-2">Cần sửa lỗi video</td>
+                                                <td class="border border-yellow-300 px-2 py-2"><strong>Kling O1</strong></td>
+                                                <td class="border border-yellow-300 px-2 py-2">Chỉnh sửa tự động</td>
+                                            </tr>
+                                            <tr class="bg-yellow-50">
+                                                <td class="border border-yellow-300 px-2 py-2">Cần tốc độ nhanh</td>
+                                                <td class="border border-yellow-300 px-2 py-2"><strong>Flux / CapCut</strong></td>
+                                                <td class="border border-yellow-300 px-2 py-2">Xử lý nhanh</td>
+                                            </tr>
+                                            <tr class="bg-white">
+                                                <td class="border border-yellow-300 px-2 py-2">Cần chất lượng cao nhất</td>
+                                                <td class="border border-yellow-300 px-2 py-2"><strong>After Effect</strong></td>
+                                                <td class="border border-yellow-300 px-2 py-2">Compositing chuyên nghiệp</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quy Trình Thực Hiện -->
+                        <div class="accordion-item border rounded-lg">
+                            <button class="accordion-header w-full px-4 py-3 bg-pink-50 hover:bg-pink-100 rounded-lg flex items-center justify-between font-semibold text-gray-800 transition">
+                                <span><i class="fas fa-project-diagram mr-2 text-pink-600"></i>🚀 Quy Trình Thực Hiện</span>
+                                <i class="fas fa-chevron-right accordion-icon text-pink-600"></i>
+                            </button>
+                            <div class="accordion-content hidden px-4 py-4 bg-pink-50 text-sm text-gray-700">
+                                <div class="space-y-4">
+                                    <div class="bg-white p-3 rounded border-l-4 border-pink-500">
+                                        <p class="font-bold mb-2">Bước 1: Nhận Feedback từ Sale</p>
+                                        <pre class="bg-gray-50 p-2 rounded text-xs">"Khách hàng muốn trang trí căn hộ 2 phòng ngủ theo phong cách hiện đại, 
+có ánh sáng tự nhiên từ cửa sổ lớn."</pre>
+                                    </div>
+                                    <div class="bg-white p-3 rounded border-l-4 border-pink-500">
+                                        <p class="font-bold mb-2">Bước 2: Gửi cho ChatGPT/Claude/Gemini</p>
+                                        <pre class="bg-gray-50 p-2 rounded text-xs">[Sử dụng System Prompt ở trên]
+Feedback từ Sale: [FEEDBACK]
+Dịch vụ: Virtual Staging
+Yêu cầu: Viết Prompt cho Google Nano Banana Pro</pre>
+                                    </div>
+                                    <div class="bg-white p-3 rounded border-l-4 border-pink-500">
+                                        <p class="font-bold mb-2">Bước 3: Nhận Prompt Tối Ưu</p>
+                                        <pre class="bg-gray-50 p-2 rounded text-xs">Ultra-realistic interior design of a 2-bedroom apartment, adding modern style furniture:
+- Main furniture: Modern sectional sofa, minimalist dining table, contemporary bed frame
+- Flooring: Light gray concrete-look tile with warm lighting
+- Wall color: Soft white with one accent wall in charcoal gray
+- Accessories: Modern art pieces, potted plants, geometric throw pillows
+- Lighting: Large windows with soft natural daylight, warm accent lighting
+- Camera angle: Wide-angle from living room entrance
+- Resolution: 8K, architectural photography, photorealistic
+- Mood: Modern, bright, spacious</pre>
+                                    </div>
+                                    <div class="bg-white p-3 rounded border-l-4 border-pink-500">
+                                        <p class="font-bold mb-2">Bước 4: Chạy trên Google Nano Banana Pro</p>
+                                        <ul class="text-xs space-y-1">
+                                            <li>• Copy Prompt vào công cụ</li>
+                                            <li>• Chỉnh sửa nếu cần</li>
+                                            <li>• Lưu kết quả</li>
+                                        </ul>
+                                    </div>
+                                    <div class="bg-white p-3 rounded border-l-4 border-pink-500">
+                                        <p class="font-bold mb-2">Bước 5: Lưu vào Notion Hub</p>
+                                        <ul class="text-xs space-y-1">
+                                            <li>• Tạo trang mới trong Notion</li>
+                                            <li>• Lưu Prompt, ảnh kết quả, feedback</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- System Prompt Chung -->
+                        <div class="accordion-item border rounded-lg">
+                            <button class="accordion-header w-full px-4 py-3 bg-red-50 hover:bg-red-100 rounded-lg flex items-center justify-between font-semibold text-gray-800 transition">
+                                <span><i class="fas fa-brain mr-2 text-red-600"></i>💡 System Prompt Chung - Dùng cho ChatGPT/Claude/Gemini</span>
+                                <i class="fas fa-chevron-right accordion-icon text-red-600"></i>
                             </button>
                             <div class="accordion-content hidden px-4 py-4 bg-red-50 text-sm text-gray-700">
                                 <p class="mb-3"><strong>Mục đích:</strong> Giúp AI tạo Prompt tối ưu dựa trên feedback từ Sale</p>
-                                <pre class="bg-white p-3 rounded overflow-x-auto text-xs">Bạn là chuyên gia R&D AI tại Fotober. Bạn có kiến thức sâu về:
-- Các công cụ AI: Google Nano Banana Pro, Veo 3.1, Kling 2.6, Seedance 1.5 Pro, CapCut, After Effect
+                                <pre class="bg-white p-3 rounded overflow-x-auto text-xs font-mono border border-red-200">Bạn là chuyên gia R&D AI tại Fotober. Bạn có kiến thức sâu về:
+- Các công cụ AI: Google Nano Banana Pro, Veo 3.1, Kling 2.6, Seedance 1.5 Pro, v.v.
 - Các dịch vụ: Virtual Staging, Day-to-Night, Real Estate Tour, Product Showcase
 - Kỹ thuật Prompt Engineering
 
@@ -1823,13 +2244,47 @@ Nhiệm vụ của bạn:
 2. Phân tích yêu cầu và xác định công cụ AI phù hợp nhất
 3. Viết Prompt chi tiết, tối ưu cho từng công cụ
 4. Giải thích lý do chọn công cụ đó
-5. Cung cấp các lựa chọn thay thế nếu cần</pre>
+5. Cung cấp các lựa chọn thay thế nếu cần
+
+Format output:
+---
+**Công cụ đề xuất:** [TOOL_NAME]
+**Lý do:** [REASONING]
+**Prompt tối ưu:**
+[OPTIMIZED_PROMPT]
+**Lựa chọn thay thế:** [ALTERNATIVE_TOOLS]
+---</pre>
+                            </div>
+                        </div>
+
+                        <!-- Ghi Chú Quan Trọng -->
+                        <div class="accordion-item border rounded-lg">
+                            <button class="accordion-header w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 rounded-lg flex items-center justify-between font-semibold text-gray-800 transition">
+                                <span><i class="fas fa-sticky-note mr-2 text-gray-600"></i>📝 Ghi Chú Quan Trọng</span>
+                                <i class="fas fa-chevron-right accordion-icon text-gray-600"></i>
+                            </button>
+                            <div class="accordion-content hidden px-4 py-4 bg-gray-50 text-sm text-gray-700">
+                                <ol class="space-y-2 text-xs">
+                                    <li><strong>1. Luôn kiểm tra kết quả:</strong> Không phải lần đầu tiên nào cũng hoàn hảo</li>
+                                    <li><strong>2. Điều chỉnh Prompt:</strong> Nếu kết quả không như mong muốn, hãy sửa Prompt</li>
+                                    <li><strong>3. Lưu trữ:</strong> Lưu tất cả Prompt thành công vào Notion Hub để tái sử dụng</li>
+                                    <li><strong>4. Thử nghiệm:</strong> Thử các công cụ khác nhau để tìm ra cái tốt nhất</li>
+                                    <li><strong>5. Feedback:</strong> Ghi lại feedback từ khách hàng để cải thiện Prompt</li>
+                                </ol>
+                                <div class="mt-4 p-3 bg-blue-100 rounded">
+                                    <p class="font-bold mb-2">🔗 Liên Kết Hữu Ích:</p>
+                                    <ul class="space-y-1 text-xs">
+                                        <li>• <a href="https://www.notion.so/2f8da80a59b381f38419ed695b275ca8" target="_blank" class="text-blue-700 hover:underline">Notion Hub</a></li>
+                                        <li>• <a href="https://docs.google.com/spreadsheets/d/1ulrICF3uoc0p8fsJFYqMMNZ-yraZF-z6w303uYaCmmo/edit" target="_blank" class="text-blue-700 hover:underline">Google Sheet Feedback</a></li>
+                                    </ul>
+                                </div>
+                                <p class="text-xs text-gray-500 mt-3"><strong>Cập nhật lần cuối:</strong> 30/01/2026</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Kho Prompt Templates -->
+                <!-- Kho Prompt Templates (giữ nguyên phần này) -->
                 <div class="bg-white rounded-lg shadow-md p-6 mb-6">
                     <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
                         <i class="fas fa-file-alt mr-2 text-blue-600"></i>Kho Prompt Templates
@@ -1848,49 +2303,13 @@ Nhiệm vụ của bạn:
                             </div>
                             <div class="p-4">
                                 <h4 class="font-semibold text-gray-800 mb-2">Prompt: Agent Replacement</h4>
-                                <p class="text-sm text-gray-600 mb-3">Tạo agent AI thay thế cho nhân vật trong video</p>
-                                <a href="https://www.notion.so/prompt-agent-replacement" target="_blank" class="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded text-sm font-medium hover:bg-blue-200 transition">
+                                <p class="text-sm text-gray-600 mb-3">Thay thế Agent trong video bất động sản</p>
+                                <a href="https://www.notion.so/prompt-agent" target="_blank" class="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded text-sm font-medium hover:bg-blue-200 transition">
                                     <i class="fas fa-external-link-alt mr-1"></i>Xem Chi Tiết
                                 </a>
                             </div>
                         </div>
 
-                        <!-- Prompt Item Template -->
-                        <div class="prompt-item border rounded-lg overflow-hidden hover:shadow-lg transition">
-                            <div class="relative bg-gray-900 aspect-video">
-                                <video class="w-full h-full object-cover" controls>
-                                    <source src="https://example.com/prompt-sample-2.mp4" type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video>
-                            </div>
-                            <div class="p-4">
-                                <h4 class="font-semibold text-gray-800 mb-2">Prompt: Image-to-Video</h4>
-                                <p class="text-sm text-gray-600 mb-3">Chuyển đổi ảnh tĩnh thành video động</p>
-                                <a href="https://www.notion.so/prompt-image-to-video" target="_blank" class="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded text-sm font-medium hover:bg-blue-200 transition">
-                                    <i class="fas fa-external-link-alt mr-1"></i>Xem Chi Tiết
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Link to Full Notion Documentation -->
-                    <div class="mt-4 p-4 bg-blue-50 rounded border-l-4 border-blue-600">
-                        <a href="https://www.notion.so/2f8da80a59b381f38419ed695b275ca8" target="_blank" class="font-semibold text-blue-700 hover:text-blue-900 flex items-center">
-                            <i class="fas fa-book mr-2"></i>Xem Toàn Bộ Prompt Templates Trên Notion Hub
-                            <i class="fas fa-external-link-alt ml-2 text-sm"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Video Effects/Templates with Notion & Video -->
-                <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
-                        <i class="fas fa-video mr-2 text-red-600"></i>Kho Video Templates & Hiệu Ứng
-                    </h3>
-                    <p class="text-gray-600 mb-4">Các hiệu Ứng video và template với video demo:</p>
-                    
-                    <!-- Video Effects Grid -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <!-- Effect Item Template -->
                         <div class="effect-item border rounded-lg overflow-hidden hover:shadow-lg transition">
                             <div class="relative bg-gray-900 aspect-video">

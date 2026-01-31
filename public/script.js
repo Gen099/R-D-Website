@@ -758,3 +758,320 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+// Feedback Grid and Modal Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Toggle Sale Embed
+    const toggleSaleEmbedBtn = document.getElementById('toggleSaleEmbedBtn');
+    const saleEmbedContainer = document.getElementById('saleEmbedContainer');
+    
+    if (toggleSaleEmbedBtn && saleEmbedContainer) {
+        toggleSaleEmbedBtn.addEventListener('click', function() {
+            if (saleEmbedContainer.classList.contains('hidden')) {
+                saleEmbedContainer.classList.remove('hidden');
+                toggleSaleEmbedBtn.innerHTML = '<i class="fas fa-eye-slash mr-2"></i>Ẩn Excel';
+            } else {
+                saleEmbedContainer.classList.add('hidden');
+                toggleSaleEmbedBtn.innerHTML = '<i class="fas fa-table mr-2"></i>Xem Excel Trực Tiếp';
+            }
+        });
+    }
+
+    // Feedback Modal
+    const feedbackCards = document.querySelectorAll('.feedback-card');
+    const feedbackModal = document.getElementById('feedbackModal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalContent = document.getElementById('modalContent');
+
+    // Feedback data (in real scenario, this would come from API or database)
+    const feedbackData = {
+        '1': {
+            title: 'Phân Tích 23 Job Feedback',
+            date: '30/01/2026',
+            content: `
+                <div class="space-y-4">
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-blue-900 mb-2">📊 Tổng Quan</h4>
+                        <p class="text-sm text-gray-700">Phân tích toàn bộ 23 jobs feedback từ khách hàng và sale team, xác định các pattern lỗi chính và đề xuất giải pháp.</p>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-lg border">
+                        <h4 class="font-bold text-gray-800 mb-3">Phân Loại Lỗi</h4>
+                        <ul class="space-y-2 text-sm">
+                            <li class="flex items-center"><span class="w-32 font-semibold">Hiểu sai yêu cầu:</span> <span class="text-red-600 font-bold">35% (8 cases)</span></li>
+                            <li class="flex items-center"><span class="w-32 font-semibold">Chất lượng AI:</span> <span class="text-orange-600 font-bold">26% (6 cases)</span></li>
+                            <li class="flex items-center"><span class="w-32 font-semibold">Trễ deadline:</span> <span class="text-yellow-600 font-bold">22% (5 cases)</span></li>
+                            <li class="flex items-center"><span class="w-32 font-semibold">Logic sai:</span> <span class="text-blue-600 font-bold">17% (4 cases)</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-green-900 mb-2">✅ Đề Xuất Giải Pháp</h4>
+                        <ol class="list-decimal list-inside space-y-1 text-sm text-gray-700">
+                            <li>Cải thiện quy trình briefing với Sale</li>
+                            <li>Tăng cường training về công cụ AI mới</li>
+                            <li>Thiết lập timeline rõ ràng hơn</li>
+                            <li>Review kỹ output trước khi gửi khách</li>
+                        </ol>
+                    </div>
+
+                    <div class="mt-4">
+                        <iframe src="https://docs.google.com/spreadsheets/d/1ulrICF3uoc0p8fsJFYqMMNZ-yraZF-z6w303uYaCmmo/edit?usp=sharing&rm=minimal&widget=true&headers=false" 
+                                class="w-full border rounded-lg" 
+                                style="height: 400px;"
+                                frameborder="0">
+                        </iframe>
+                    </div>
+
+                    <a href="https://www.notion.so/2f8da80a59b381f38419ed695b275ca8" target="_blank" class="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+                        <i class="fas fa-external-link-alt mr-2"></i>Xem Chi Tiết Trên Notion
+                    </a>
+                </div>
+            `
+        },
+        '2': {
+            title: 'Lỗi Video Mobile iOS',
+            date: '29/01/2026',
+            content: `
+                <div class="space-y-4">
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-green-900 mb-2">🎬 Mô Tả Vấn Đề</h4>
+                        <p class="text-sm text-gray-700">Video không load được trên thiết bị iOS (iPhone, iPad), cần kiểm tra codec và format.</p>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-lg border">
+                        <h4 class="font-bold text-gray-800 mb-3">Nguyên Nhân</h4>
+                        <ul class="list-disc list-inside space-y-1 text-sm text-gray-700">
+                            <li>Codec VP9 không được iOS hỗ trợ đầy đủ</li>
+                            <li>Bitrate quá cao cho mobile</li>
+                            <li>Container format không tương thích</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-blue-900 mb-2">✅ Giải Pháp</h4>
+                        <ol class="list-decimal list-inside space-y-1 text-sm text-gray-700">
+                            <li>Chuyển sang codec H.264 (tương thích tốt với iOS)</li>
+                            <li>Giảm bitrate xuống 2-4 Mbps cho mobile</li>
+                            <li>Sử dụng MP4 container</li>
+                            <li>Test trên nhiều thiết bị iOS trước khi delivery</li>
+                        </ol>
+                    </div>
+
+                    <a href="https://www.notion.so/2f8da80a59b381f38419ed695b275ca8" target="_blank" class="inline-block px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition">
+                        <i class="fas fa-external-link-alt mr-2"></i>Xem Chi Tiết Trên Notion
+                    </a>
+                </div>
+            `
+        },
+        '3': {
+            title: 'Tối Ưu Render AI',
+            date: '28/01/2026',
+            content: `
+                <div class="space-y-4">
+                    <div class="bg-purple-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-purple-900 mb-2">⚡ Kết Quả Tối Ưu</h4>
+                        <p class="text-sm text-gray-700">Giảm thời gian render từ 45 giây xuống 30 giây (giảm 33%) sau khi tối ưu GPU và pipeline.</p>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-lg border">
+                        <h4 class="font-bold text-gray-800 mb-3">Các Cải Tiến</h4>
+                        <ul class="list-disc list-inside space-y-1 text-sm text-gray-700">
+                            <li>Nâng cấp GPU driver lên phiên bản mới nhất</li>
+                            <li>Tối ưu batch processing</li>
+                            <li>Sử dụng mixed precision (FP16/FP32)</li>
+                            <li>Cache intermediate results</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-green-900 mb-2">📈 Impact</h4>
+                        <ul class="space-y-1 text-sm text-gray-700">
+                            <li><strong>Tốc độ:</strong> Tăng 33%</li>
+                            <li><strong>Throughput:</strong> Từ 80 videos/ngày lên 120 videos/ngày</li>
+                            <li><strong>Chi phí:</strong> Giảm 25% chi phí GPU</li>
+                        </ul>
+                    </div>
+
+                    <a href="https://www.notion.so/2f8da80a59b381f38419ed695b275ca8" target="_blank" class="inline-block px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 transition">
+                        <i class="fas fa-external-link-alt mr-2"></i>Xem Chi Tiết Trên Notion
+                    </a>
+                </div>
+            `
+        },
+        '4': {
+            title: 'Lỗi Vật Lý Trong Video',
+            date: '27/01/2026',
+            content: `
+                <div class="space-y-4">
+                    <div class="bg-orange-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-orange-900 mb-2">🐛 Các Lỗi Phổ Biến</h4>
+                        <p class="text-sm text-gray-700">Phân tích các lỗi vật lý thường gặp trong video AI và cách khắc phục.</p>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-lg border">
+                        <h4 class="font-bold text-gray-800 mb-3">Danh Sách Lỗi</h4>
+                        <ul class="list-disc list-inside space-y-1 text-sm text-gray-700">
+                            <li>Vật thể biến mất giữa chừng</li>
+                            <li>Chuyển động không tự nhiên</li>
+                            <li>Bóng đổ không đúng</li>
+                            <li>Perspective sai</li>
+                            <li>Texture flickering</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-blue-900 mb-2">🔧 Công Cụ Khắc Phục</h4>
+                        <ul class="space-y-1 text-sm text-gray-700">
+                            <li><strong>Kling O1:</strong> Sửa lỗi vật lý tự động</li>
+                            <li><strong>After Effect:</strong> Chỉnh sửa thủ công chi tiết</li>
+                            <li><strong>Veo 3.1:</strong> Re-generate với prompt tốt hơn</li>
+                        </ul>
+                    </div>
+
+                    <a href="https://www.notion.so/2f8da80a59b381f38419ed695b275ca8" target="_blank" class="inline-block px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700 transition">
+                        <i class="fas fa-external-link-alt mr-2"></i>Xem Chi Tiết Trên Notion
+                    </a>
+                </div>
+            `
+        },
+        '5': {
+            title: 'Chất Lượng AI Output',
+            date: '26/01/2026',
+            content: `
+                <div class="space-y-4">
+                    <div class="bg-pink-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-pink-900 mb-2">🎨 Đánh Giá Chất Lượng</h4>
+                        <p class="text-sm text-gray-700">So sánh chất lượng output từ các công cụ AI khác nhau: Google Nano Banana Pro, Veo 3.1, Kling 2.6, Seedance 1.5 Pro.</p>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-lg border">
+                        <h4 class="font-bold text-gray-800 mb-3">Bảng So Sánh</h4>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-xs border-collapse">
+                                <thead>
+                                    <tr class="bg-gray-100">
+                                        <th class="border px-2 py-1 text-left">Công Cụ</th>
+                                        <th class="border px-2 py-1 text-left">Chất Lượng</th>
+                                        <th class="border px-2 py-1 text-left">Tốc Độ</th>
+                                        <th class="border px-2 py-1 text-left">Điểm</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="border px-2 py-1">Google Nano Banana Pro</td><td class="border px-2 py-1">Xuất sắc</td><td class="border px-2 py-1">Nhanh</td><td class="border px-2 py-1 font-bold text-green-600">9.5/10</td></tr>
+                                    <tr><td class="border px-2 py-1">Veo 3.1</td><td class="border px-2 py-1">Tốt</td><td class="border px-2 py-1">Trung bình</td><td class="border px-2 py-1 font-bold text-blue-600">8.5/10</td></tr>
+                                    <tr><td class="border px-2 py-1">Kling 2.6</td><td class="border px-2 py-1">Tốt</td><td class="border px-2 py-1">Nhanh</td><td class="border px-2 py-1 font-bold text-blue-600">8.8/10</td></tr>
+                                    <tr><td class="border px-2 py-1">Seedance 1.5 Pro</td><td class="border px-2 py-1">Xuất sắc</td><td class="border px-2 py-1">Chậm</td><td class="border px-2 py-1 font-bold text-green-600">9.0/10</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <a href="https://www.notion.so/2f8da80a59b381f38419ed695b275ca8" target="_blank" class="inline-block px-4 py-2 bg-pink-600 text-white rounded hover:bg-pink-700 transition">
+                        <i class="fas fa-external-link-alt mr-2"></i>Xem Chi Tiết Trên Notion
+                    </a>
+                </div>
+            `
+        },
+        '6': {
+            title: 'Phân Tích Deadline',
+            date: '25/01/2026',
+            content: `
+                <div class="space-y-4">
+                    <div class="bg-teal-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-teal-900 mb-2">⏰ Phân Tích Timeline</h4>
+                        <p class="text-sm text-gray-700">Nghiên cứu nguyên nhân trễ deadline và đề xuất cải thiện quy trình.</p>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-lg border">
+                        <h4 class="font-bold text-gray-800 mb-3">Nguyên Nhân Chính</h4>
+                        <ul class="list-disc list-inside space-y-1 text-sm text-gray-700">
+                            <li>Underestimate thời gian render (40%)</li>
+                            <li>Feedback từ khách muộn (30%)</li>
+                            <li>Revision nhiều lần (20%)</li>
+                            <li>Technical issues (10%)</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-green-900 mb-2">✅ Giải Pháp</h4>
+                        <ol class="list-decimal list-inside space-y-1 text-sm text-gray-700">
+                            <li>Buffer thêm 20% thời gian cho mỗi task</li>
+                            <li>Set deadline rõ ràng cho feedback từ khách</li>
+                            <li>Limit số lần revision (tối đa 2 lần)</li>
+                            <li>Có backup plan cho technical issues</li>
+                        </ol>
+                    </div>
+
+                    <a href="https://www.notion.so/2f8da80a59b381f38419ed695b275ca8" target="_blank" class="inline-block px-4 py-2 bg-teal-600 text-white rounded hover:bg-teal-700 transition">
+                        <i class="fas fa-external-link-alt mr-2"></i>Xem Chi Tiết Trên Notion
+                    </a>
+                </div>
+            `
+        }
+    };
+
+    // Open modal when clicking on feedback card
+    feedbackCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const feedbackId = this.getAttribute('data-feedback-id');
+            const data = feedbackData[feedbackId];
+            
+            if (data) {
+                modalTitle.textContent = data.title;
+                modalContent.innerHTML = data.content;
+                feedbackModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            }
+        });
+    });
+
+    // Close modal
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', function() {
+            feedbackModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        });
+    }
+
+    // Close modal when clicking outside
+    feedbackModal.addEventListener('click', function(e) {
+        if (e.target === feedbackModal) {
+            feedbackModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+    });
+
+    // Sort by date
+    const sortByDateBtn = document.getElementById('sortByDateBtn');
+    const feedbackGrid = document.getElementById('feedbackGrid');
+    
+    if (sortByDateBtn && feedbackGrid) {
+        let sortAscending = false;
+        sortByDateBtn.addEventListener('click', function() {
+            const cards = Array.from(feedbackGrid.children);
+            cards.sort((a, b) => {
+                const dateA = new Date(a.getAttribute('data-date'));
+                const dateB = new Date(b.getAttribute('data-date'));
+                return sortAscending ? dateA - dateB : dateB - dateA;
+            });
+            
+            feedbackGrid.innerHTML = '';
+            cards.forEach(card => feedbackGrid.appendChild(card));
+            
+            sortAscending = !sortAscending;
+            sortByDateBtn.innerHTML = sortAscending 
+                ? '<i class="fas fa-calendar-alt mr-1"></i>Cũ nhất trước'
+                : '<i class="fas fa-calendar-alt mr-1"></i>Mới nhất trước';
+        });
+    }
+
+    // Toggle grid view (placeholder for future list view)
+    const toggleGridViewBtn = document.getElementById('toggleGridViewBtn');
+    if (toggleGridViewBtn) {
+        toggleGridViewBtn.addEventListener('click', function() {
+            // This can be extended to toggle between grid and list view
+            alert('Tính năng chế độ xem khác đang được phát triển!');
+        });
+    }
+});
