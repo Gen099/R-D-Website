@@ -1,6 +1,6 @@
-// R&D AI Video Intelligence Platform - Raw Content Integration
+// R&D AI Video Intelligence Platform - Dashboard Integration
 document.addEventListener('DOMContentLoaded', function() {
-    console.log("Raw Content Script initialized");
+    console.log("Dashboard Script initialized");
 
     // ========== NAVIGATION & UI ==========
     const menuToggle = document.getElementById('menuToggle');
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
         feedbackFullPageView.innerHTML = `
             <div class="max-w-7xl mx-auto">
                 <div class="sticky top-0 bg-white border-b shadow-sm p-4 flex items-center justify-between">
-                    <h2 id="feedbackFullPageTitle" class="text-2xl font-bold text-gray-800"></h2>
+                    <h2 id="feedbackFullPageTitle" class="text-2xl font-bold text-gray-800">Phân Tích 23 Job Feedback & Tối Ưu Quy Trình AI</h2>
                     <button id="closeFeedbackFullPageBtn" class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition">
                         <i class="fas fa-times mr-1"></i>Đóng
                     </button>
@@ -92,129 +92,511 @@ document.addEventListener('DOMContentLoaded', function() {
         btn.addEventListener('click', closeAllModals);
     });
 
-    // ========== RAW CONTENT DATA ==========
-    const rawContent = `# PHÂN TÍCH LỖI AI VIDEO
+    // ========== DASHBOARD HTML CONTENT ==========
+    const dashboardHTML = `<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
----
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #fafafa;
+            color: #1a1a1a;
+            line-height: 1.4;
+        }
 
-## 📊 TỔNG QUAN THỐNG KÊ
+        .tab-container {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-\`\`\`
-┌─────────────────────────────────────────────────────────────┐
-│                    TỔNG SỐ DỰ ÁN: 22                        │
-├─────────────────────────────────────────────────────────────┤
-│  ❌ Có feedback lỗi:     18 (82%)                           │
-│  ✅ Không ghi nhận lỗi:   4 (18%)                           │
-│  🔄 Từ chối xử lý:        6 (27%)                           │
-│  ⏰ Trễ deadline:         6 (27%)                           │
-└─────────────────────────────────────────────────────────────┘
-\`\`\`
+        .tab-nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 2px;
+            padding: 8px 20px 0;
+        }
 
----
+        .tab-button {
+            padding: 10px 20px;
+            background: #f5f5f5;
+            border: 1px solid #e0e0e0;
+            border-bottom: none;
+            border-radius: 8px 8px 0 0;
+            cursor: pointer;
+            font-size: 0.85em;
+            font-weight: 500;
+            color: #666;
+            transition: all 0.2s;
+        }
 
-## 📈 PHÂN BỐ LOẠI LỖI
+        .tab-button:hover {
+            background: #eee;
+            color: #333;
+        }
 
-\`\`\`
-Lỗi hiểu sai yêu cầu     ████████████████████  35%
-Lỗi kỹ thuật AI          ███████████████       27%
-Lỗi tiến độ/deadline     ████████████          22%
-Lỗi thẩm mỹ/chất lượng   █████████             16%
-\`\`\`
+        .tab-button.active {
+            background: white;
+            color: #1a1a1a;
+            border-bottom: 2px solid white;
+            font-weight: 600;
+        }
 
----
+        .tab-content {
+            display: none;
+            padding: 20px;
+        }
 
-## 🔴 NHÓM 1: LỖI HIỂU SAI YÊU CẦU
+        .tab-content.active {
+            display: block;
+        }
 
-| Mã Job | Yêu cầu | Thực tế làm | Vấn đề |
-|--------|---------|-------------|--------|
-| TADEC31004 | Hiện trạng → mùa xuân | Tuyết → mùa xuân | Không đọc context "we don't get snow" |
-| HTJAN15008Rev | "Preparing dinner" có người | Chỉ có bàn + đồ ăn | Bỏ qua động từ hành động |
-| DUJAN04005 | Nước chảy từ vòi phun | Nước xuất hiện ngẫu nhiên | Không quan sát cấu trúc fountain |
-| QUJAN25001 | 2 AI: living + dining | Chỉ làm 1, làm sai phòng | Thiếu checklist deliverables |
-| QUJAN19003 | AI dựng nhà + timelapse | Không làm phần dựng nhà | Bỏ sót yêu cầu chính |
-| LIDEC10001 | Ông già Noel đẩy xe vào ống khói | Xe rơi xuống đất | Sai luồng hành động |
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-**→ NGUYÊN NHÂN GỐC:**
-- Không đọc kỹ brief
-- Thiếu xác nhận lại với sale/khách
-- Không có checklist số lượng output
+        .header {
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
 
----
+        .header h1 {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
 
-## 🟠 NHÓM 2: LỖI KỸ THUẬT AI
+        .header p {
+            font-size: 0.85em;
+            color: #666;
+        }
 
-| Mã Job | Lỗi cụ thể | Mức độ |
-|--------|------------|--------|
-| TLNOV14022rev4 | Tuần lộc tách đàn, đứng sai vị trí | Trung bình |
-| NHJAN13010 | Đàn ông mặc bikini thay vì quần bơi | Nghiêm trọng |
-| LIJAN07001 | Quân cờ nhảy đánh nhau, không theo luật | Nghiêm trọng |
-| HTJAN07002rev2 | Mặt người biến dạng | Nghiêm trọng |
-| CHDEC11004 | Agent đóng băng, clip vỡ | Nghiêm trọng |
-| CHJAN24002 | Viền trắng quanh agent bay | Trung bình |
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-bottom: 30px;
+        }
 
-**→ NGUYÊN NHÂN GỐC:**
-- Prompt thiếu constraint cụ thể
-- Không có negative prompt
-- Giới hạn công cụ AI chưa được mapping
+        .stat-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            padding: 16px;
+            border-radius: 6px;
+        }
 
----
+        .stat-label {
+            font-size: 0.75em;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
 
-## 🟡 NHÓM 3: LỖI THẨM MỸ & CHẤT LƯỢNG
+        .stat-number {
+            font-size: 1.8em;
+            font-weight: 600;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
 
-| Mã Job | Vấn đề | Feedback |
-|--------|--------|----------|
-| THJAN20030Rev | Trời xanh tĩnh, zoom đơn giản | "Như ảnh tĩnh rồi zoom vào" |
-| QUJAN16003 | Output trông không tự nhiên | "Trông hơi vô duyên" |
-| MNJAN2001 | Người fake, cử chỉ gợi cảm | "Look like fixing to go to bedroom" |
-| MNJAN2001 | Logo Gemini xuất hiện | Lỗi cơ bản không xóa watermark |
-| CAJAN21001rev7 | Thiếu narrative control | Khách không hài lòng, từ chối thanh toán |
+        .stat-percentage {
+            font-size: 0.85em;
+            color: #888;
+        }
 
-**→ NGUYÊN NHÂN GỐC:**
-- Thiếu QC trước gửi khách
-- Không xóa watermark
-- Không review thẩm mỹ tổng thể
+        .chart-container {
+            background: white;
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
 
----
+        .chart-title {
+            font-size: 1em;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+        }
 
-## 🟣 NHÓM 4: LỖI TIẾN ĐỘ
+        .error-table {
+            background: white;
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+        }
 
-\`\`\`
-┌────────────────┬──────────┬─────────────┬───────────┐
-│ Mã Job         │ Hẹn      │ Thực tế     │ Trễ       │
-├────────────────┼──────────┼─────────────┼───────────┤
-│ HTJAN22005     │ Trong DL │ 2h sáng     │ ~9 tiếng  │
-│ QUJAN19003Rev2 │ 5h chiều │ 10h đêm     │ ~5 tiếng  │
-│ QUJAN21008     │ 2 tiếng  │ Trễ nhiều   │ ~5 tiếng  │
-│ HTJAN07002rev2 │ Theo DL  │ Trễ         │ ~4 tiếng  │
-│ HTJAN26003     │ Theo DL  │ Trễ         │ ~3 tiếng  │
-└────────────────┴──────────┴─────────────┴───────────┘
-\`\`\`
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85em;
+        }
 
-**→ NGUYÊN NHÂN GỐC:**
-- Ước lượng thời gian sai
-- Không báo sớm khi gặp khó khăn
-- Workload không cân đối
+        th {
+            background: #f5f5f5;
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #666;
+            border-bottom: 1px solid #e0e0e0;
+        }
 
----
+        td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
 
-## 🛠️ CẢI TIẾN
+        tbody tr:hover {
+            background: #fafafa;
+        }
 
-☐ Double-check số lượng deliverables với brief
-☐ Tạo checklist QC trước gửi output
-☐ Xây dựng thư viện prompt chuẩn
-☐ Mapping công cụ phù hợp từng loại effect
-☐ Template xác nhận yêu cầu với sale
-☐ Training prompt engineering cho team
-☐ Hệ thống feedback loop học từ lỗi
-☐ Tài liệu giải thích giới hạn AI 
-☐ KPI tracking chất lượng từng người
+        td:first-child {
+            font-weight: 500;
+            color: #333;
+        }
 
----
+        .severity-high {
+            color: #d32f2f;
+            font-weight: 600;
+        }
 
-## 📝 TEMPLATE PROMPT CHUẨN
+        .severity-medium {
+            color: #f57c00;
+            font-weight: 600;
+        }
 
-\`\`\`
-═══════════════════════════════════════════════════
+        .goal-comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .goal-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            padding: 16px;
+            border-radius: 6px;
+        }
+
+        .goal-title {
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .goal-bars {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .goal-bar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .bar-label {
+            width: 60px;
+            font-size: 0.75em;
+            color: #666;
+        }
+
+        .bar-fill {
+            flex: 1;
+            height: 20px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .bar-progress {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 0.7em;
+        }
+
+        .guide-section {
+            background: white;
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .guide-section h2 {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #1a1a1a;
+        }
+
+        .code-block {
+            background: #f5f5f5;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            padding: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8em;
+            line-height: 1.5;
+            margin: 10px 0;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+
+        .tool-table {
+            width: 100%;
+            margin: 15px 0;
+        }
+
+        .tool-table th {
+            background: #f5f5f5;
+            padding: 8px;
+            font-size: 0.75em;
+        }
+
+        .tool-table td {
+            padding: 8px;
+            font-size: 0.8em;
+        }
+
+        ul {
+            margin: 10px 0 10px 20px;
+            font-size: 0.85em;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .goal-comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <!-- Tab Navigation -->
+    <div class="tab-container">
+        <div class="tab-nav">
+            <button class="tab-button active" onclick="switchTab(0)">Phân Tích Lỗi</button>
+            <button class="tab-button" onclick="switchTab(1)">Hướng Dẫn Prompt</button>
+        </div>
+    </div>
+
+    <!-- Tab 1: Error Analysis Dashboard -->
+    <div class="tab-content active">
+        <div class="container">
+            <div class="header">
+                <h1>Phân Tích Lỗi AI Video</h1>
+                <p>Dashboard tổng hợp chất lượng dự án</p>
+            </div>
+
+            <!-- Stats Overview -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Tổng dự án</div>
+                    <div class="stat-number" style="color: #333;">22</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Có lỗi</div>
+                    <div class="stat-number" style="color: #d32f2f;">18</div>
+                    <div class="stat-percentage">82%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Không lỗi</div>
+                    <div class="stat-number" style="color: #388e3c;">4</div>
+                    <div class="stat-percentage">18%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Trễ deadline</div>
+                    <div class="stat-number" style="color: #f57c00;">6</div>
+                    <div class="stat-percentage">27%</div>
+                </div>
+            </div>
+
+            <!-- Error Details Table -->
+            <div class="error-table">
+                <h2 class="chart-title">Lỗi hiểu sai yêu cầu - Top cases</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Mã Job</th>
+                            <th>Yêu cầu</th>
+                            <th>Thực tế làm</th>
+                            <th>Vấn đề</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>TADEC31004</strong></td>
+                            <td>Hiện trạng → mùa xuân</td>
+                            <td>Tuyết → mùa xuân</td>
+                            <td>Không đọc context "we don't get snow"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>HTJAN15008Rev</strong></td>
+                            <td>"Preparing dinner" có người</td>
+                            <td>Chỉ có bàn + đồ ăn</td>
+                            <td>Bỏ qua động từ hành động</td>
+                        </tr>
+                        <tr>
+                            <td><strong>DUJAN04005</strong></td>
+                            <td>Nước chảy từ vòi phun</td>
+                            <td>Nước xuất hiện ngẫu nhiên</td>
+                            <td>Không quan sát cấu trúc fountain</td>
+                        </tr>
+                        <tr>
+                            <td><strong>QUJAN25001</strong></td>
+                            <td>2 AI: living + dining</td>
+                            <td>Chỉ làm 1, làm sai phòng</td>
+                            <td>Thiếu checklist deliverables</td>
+                        </tr>
+                        <tr>
+                            <td><strong>QUJAN19003</strong></td>
+                            <td>AI dựng nhà + timelapse</td>
+                            <td>Không làm phần dựng nhà</td>
+                            <td>Bỏ sót yêu cầu chính</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Technical Errors -->
+            <div class="error-table">
+                <h2 class="chart-title">Lỗi kỹ thuật AI</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Mã Job</th>
+                            <th>Lỗi cụ thể</th>
+                            <th>Mức độ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>NHJAN13010</strong></td>
+                            <td>Đàn ông mặc bikini thay vì quần bơi</td>
+                            <td class="severity-high">Nghiêm trọng</td>
+                        </tr>
+                        <tr>
+                            <td><strong>LIJAN07001</strong></td>
+                            <td>Quân cờ nhảy đánh nhau, không theo luật</td>
+                            <td class="severity-high">Nghiêm trọng</td>
+                        </tr>
+                        <tr>
+                            <td><strong>HTJAN07002rev2</strong></td>
+                            <td>Mặt người biến dạng</td>
+                            <td class="severity-high">Nghiêm trọng</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CHDEC11004</strong></td>
+                            <td>Agent đóng băng, clip vỡ</td>
+                            <td class="severity-high">Nghiêm trọng</td>
+                        </tr>
+                        <tr>
+                            <td><strong>TLNOV14022rev4</strong></td>
+                            <td>Tuần lộc tách đàn, đứng sai vị trí</td>
+                            <td class="severity-medium">Trung bình</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CHJAN24002</strong></td>
+                            <td>Viền trắng quanh agent bay</td>
+                            <td class="severity-medium">Trung bình</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Goals Comparison -->
+            <div class="chart-container">
+                <h2 class="chart-title">Mục tiêu cải thiện (30 ngày)</h2>
+                <div class="goal-comparison">
+                    <div class="goal-card">
+                        <div class="goal-title">Lỗi hiểu sai yêu cầu</div>
+                        <div class="goal-bars">
+                            <div class="goal-bar">
+                                <span class="bar-label">Hiện tại</span>
+                                <div class="bar-fill">
+                                    <div class="bar-progress" style="width: 35%; background: #d32f2f;">35%</div>
+                                </div>
+                            </div>
+                            <div class="goal-bar">
+                                <span class="bar-label">Mục tiêu</span>
+                                <div class="bar-fill">
+                                    <div class="bar-progress" style="width: 10%; background: #388e3c;">10%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="goal-card">
+                        <div class="goal-title">Lỗi kỹ thuật AI</div>
+                        <div class="goal-bars">
+                            <div class="goal-bar">
+                                <span class="bar-label">Hiện tại</span>
+                                <div class="bar-fill">
+                                    <div class="bar-progress" style="width: 27%; background: #d32f2f;">27%</div>
+                                </div>
+                            </div>
+                            <div class="goal-bar">
+                                <span class="bar-label">Mục tiêu</span>
+                                <div class="bar-fill">
+                                    <div class="bar-progress" style="width: 15%; background: #388e3c;">15%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="goal-card">
+                        <div class="goal-title">Trễ deadline</div>
+                        <div class="goal-bars">
+                            <div class="goal-bar">
+                                <span class="bar-label">Hiện tại</span>
+                                <div class="bar-fill">
+                                    <div class="bar-progress" style="width: 27%; background: #d32f2f;">27%</div>
+                                </div>
+                            </div>
+                            <div class="goal-bar">
+                                <span class="bar-label">Mục tiêu</span>
+                                <div class="bar-fill">
+                                    <div class="bar-progress" style="width: 10%; background: #388e3c;">10%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab 2: Prompt Guide -->
+    <div class="tab-content">
+        <div class="container">
+            <div class="header">
+                <h1>Hướng Dẫn Prompt Chuẩn</h1>
+                <p>Template và best practices cho AI Video Generation</p>
+            </div>
+
+            <div class="guide-section">
+                <h2>📝 Template Prompt Chuẩn</h2>
+                <div class="code-block">═══════════════════════════════════════════════════
                   PROMPT TEMPLATE
 ═══════════════════════════════════════════════════
 
@@ -241,15 +623,12 @@ Lỗi thẩm mỹ/chất lượng   █████████             16%
 → Ánh sáng ấm / lạnh
 → Tone màu mong muốn
 
-═══════════════════════════════════════════════════
-\`\`\`
+═══════════════════════════════════════════════════</div>
+            </div>
 
----
-
-## ✅ CHECKLIST QC TRƯỚC GỬI KHÁCH
-
-\`\`\`
-┌─────────────────────────────────────────────────┐
+            <div class="guide-section">
+                <h2>✅ Checklist QC Trước Gửi Khách</h2>
+                <div class="code-block">┌─────────────────────────────────────────────────┐
 │              QUALITY CONTROL                    │
 ├─────────────────────────────────────────────────┤
 │ ☐ Đủ số lượng output theo yêu cầu?             │
@@ -260,134 +639,150 @@ Lỗi thẩm mỹ/chất lượng   █████████             16%
 │ ☐ Không có viền trắng/artifacts?               │
 │ ☐ Độ phân giải đúng yêu cầu?                   │
 │ ☐ Xem lại toàn bộ video từ đầu đến cuối?       │
-│ └─────────────────────────────────────────────────┘
-\`\`\`
+│ └─────────────────────────────────────────────────┘</div>
+            </div>
 
----
+            <div class="guide-section">
+                <h2>📊 Bảng Mapping Công Cụ - Loại Effect</h2>
+                <table class="tool-table">
+                    <thead>
+                        <tr>
+                            <th>Loại Effect</th>
+                            <th>Công cụ</th>
+                            <th>Lưu ý</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Chuyển mùa</td>
+                            <td>Envato</td>
+                            <td>Cần 2 ảnh đầu-cuối</td>
+                        </tr>
+                        <tr>
+                            <td>Thêm người</td>
+                            <td>Higgsfield</td>
+                            <td>Prompt chi tiết</td>
+                        </tr>
+                        <tr>
+                            <td>Nội thất xuất hiện</td>
+                            <td>Higgsfield</td>
+                            <td>General effect</td>
+                        </tr>
+                        <tr>
+                            <td>Day-to-night</td>
+                            <td>Envato</td>
+                            <td>Timelapse setting</td>
+                        </tr>
+                        <tr>
+                            <td>Nước/Lửa/Khói</td>
+                            <td>Envato</td>
+                            <td>Physics-based</td>
+                        </tr>
+                        <tr>
+                            <td>Tạo ảnh staging</td>
+                            <td>Gemini</td>
+                            <td>Xóa watermark!</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-## 📊 BẢNG MAPPING CÔNG CỤ - LOẠI EFFECT
+            <div class="guide-section">
+                <h2>🛠️ Cải Tiến Quy Trình</h2>
+                <ul>
+                    <li>☐ Double-check số lượng deliverables với brief</li>
+                    <li>☐ Tạo checklist QC trước gửi output</li>
+                    <li>☐ Xây dựng thư viện prompt chuẩn</li>
+                    <li>☐ Mapping công cụ phù hợp từng loại effect</li>
+                    <li>☐ Template xác nhận yêu cầu với sale</li>
+                    <li>☐ Training prompt engineering cho team</li>
+                    <li>☐ Hệ thống feedback loop học từ lỗi</li>
+                    <li>☐ Tài liệu giải thích giới hạn AI</li>
+                    <li>☐ KPI tracking chất lượng từng người</li>
+                </ul>
+            </div>
+        </div>
+    </div>`;
 
-\`\`\`
-┌─────────────────────┬─────────────┬───────────────────┐
-│ Loại Effect         │ Công cụ     │ Lưu ý             │
-├─────────────────────┼─────────────┼───────────────────┤
-│ Chuyển mùa          │ Envato      │ Cần 2 ảnh đầu-cuối│
-│ Thêm người          │ Higgsfield  │ Prompt chi tiết   │
-│ Nội thất xuất hiện  │ Higgsfield  │ General effect    │
-│ Day-to-night        │ Envato      │ Timelapse setting │
-│ Nước/Lửa/Khói       │ Envato      │ Physics-based     │
-│ Tạo ảnh staging     │ Gemini      │ Xóa watermark!    │
-└─────────────────────┴─────────────┴───────────────────┘
-\`\`\`
-
----
-
-## 🎯 MỤC TIÊU CẢI THIỆN
-
-\`\`\`
-Hiện tại                      Mục tiêu (30 ngày)
-────────────────────────────────────────────────
-Lỗi yêu cầu:  35%     →      < 10%
-Lỗi kỹ thuật: 27%     →      < 15%
-Trễ deadline: 27%     →      < 10%
-Lỗi thẩm mỹ:  16%     →      < 5%
-────────────────────────────────────────────────
-Tổng feedback lỗi: 82% →     < 30%
-\`\`\`
-
----
-
-## 👥 PHÂN CÔNG THEO DÕI
-
-| Người làm | Số job có lỗi | Loại lỗi chính |
-|-----------|---------------|----------------|
-| Trang | 4 | Kỹ thuật AI, hiểu sai yêu cầu |
-| Hoài | 2 | Hiểu sai yêu cầu |
-| Mai Anh | 2 | Kỹ thuật, tiến độ |
-| Chưa ghi nhận | 14 | Đa dạng |`;
-
-    const feedbackData = {
-        '1': {
-            title: 'Phân Tích 23 Job Feedback & Tối Ưu Quy Trình AI',
-            content: `<div class="bg-white p-6 rounded-lg font-mono text-sm whitespace-pre-wrap border shadow-inner overflow-x-auto">${rawContent.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</div>`
-        }
-    };
-
-    const libraryData = {
-        '1': { title: 'Danh Sách Công Cụ AI', content: `<div class="p-4 bg-blue-50 rounded-xl"><p class="font-bold mb-2">Công cụ tạo ảnh:</p><ul class="list-disc ml-5 text-sm"><li>Google Nano Banana Pro</li><li>Flux</li><li>Zimage</li></ul></div>` },
-        '2': { title: 'Virtual Staging', content: `<div class="p-4 bg-orange-50 rounded-xl"><p class="font-bold mb-2">Prompt Mẫu:</p><code class="text-xs">Realistic interior staging, scandinavian style...</code></div>` },
-        '3': { title: 'Day-to-Night', content: `<div class="p-4 bg-green-50 rounded-xl"><p class="font-bold mb-2">Veo 3.1 Prompt:</p><code class="text-xs">Cinematic day to night transition, sunset lighting...</code></div>` }
-    };
-
-    let currentFeedbackId = null;
-
-    document.querySelectorAll('.feedback-card').forEach(card => {
+    // ========== FEEDBACK CARD HANDLER ==========
+    const feedbackCards = document.querySelectorAll('[data-feedback-id]');
+    feedbackCards.forEach(card => {
         card.addEventListener('click', function() {
-            const id = this.getAttribute('data-feedback-id');
-            if (feedbackData[id]) {
-                currentFeedbackId = id;
-                document.getElementById('modalTitle').textContent = feedbackData[id].title;
-                document.getElementById('modalContent').innerHTML = feedbackData[id].content;
+            if (feedbackModal) {
                 feedbackModal.classList.remove('hidden');
                 document.body.style.overflow = 'hidden';
+                
+                const modalContent = feedbackModal.querySelector('.modal-content');
+                if (modalContent) {
+                    modalContent.innerHTML = `
+                        <div class="mb-4 flex justify-between items-center">
+                            <h2 class="text-2xl font-bold text-gray-800">Phân Tích 23 Job Feedback & Tối Ưu Quy Trình AI</h2>
+                            <button onclick="document.getElementById('feedbackModal').classList.add('hidden'); document.body.style.overflow = 'auto';" class="text-gray-500 hover:text-gray-700">
+                                <i class="fas fa-times text-2xl"></i>
+                            </button>
+                        </div>
+                        <div class="overflow-y-auto max-h-[70vh]">
+                            ${dashboardHTML}
+                        </div>
+                        <div class="mt-4 flex gap-2">
+                            <button onclick="document.getElementById('feedbackFullPageView').classList.remove('hidden');" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+                                <i class="fas fa-expand mr-1"></i>Mở Full Page
+                            </button>
+                            <button onclick="document.getElementById('feedbackModal').classList.add('hidden'); document.body.style.overflow = 'auto';" class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition">
+                                Đóng
+                            </button>
+                        </div>
+                    `;
+                }
             }
         });
     });
 
-    const openFullPageBtn = document.getElementById('openFullPageBtn');
+    // ========== FULL PAGE VIEW HANDLER ==========
+    const openFullPageBtn = document.getElementById('openFeedbackFullPageBtn');
     if (openFullPageBtn) {
         openFullPageBtn.addEventListener('click', function() {
-            if (currentFeedbackId && feedbackData[currentFeedbackId]) {
-                document.getElementById('feedbackFullPageTitle').textContent = feedbackData[currentFeedbackId].title;
-                document.getElementById('feedbackFullPageContent').innerHTML = feedbackData[currentFeedbackId].content;
-                feedbackModal.classList.add('hidden');
-                feedbackFullPageView.classList.remove('hidden');
+            feedbackFullPageView.classList.remove('hidden');
+            const fullPageContent = document.getElementById('feedbackFullPageContent');
+            if (fullPageContent) {
+                fullPageContent.innerHTML = dashboardHTML;
             }
         });
     }
 
-    const closeFeedbackFullPageBtn = document.getElementById('closeFeedbackFullPageBtn');
-    if (closeFeedbackFullPageBtn) {
-        closeFeedbackFullPageBtn.addEventListener('click', function() {
+    // ========== CLOSE FULL PAGE HANDLER ==========
+    const closeFullPageBtn = document.getElementById('closeFeedbackFullPageBtn');
+    if (closeFullPageBtn) {
+        closeFullPageBtn.addEventListener('click', function() {
             feedbackFullPageView.classList.add('hidden');
-            document.body.style.overflow = 'auto';
         });
     }
 
-    document.querySelectorAll('.library-card').forEach(card => {
-        card.addEventListener('click', function() {
-            const id = this.getAttribute('data-library-id');
-            if (libraryData[id] && libraryModal) {
-                document.getElementById('libraryModalTitle').textContent = libraryData[id].title;
-                document.getElementById('libraryModalContent').innerHTML = libraryData[id].content;
-                libraryModal.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-            }
-        });
-    });
-
-    const submitPasscodeBtn = document.getElementById('submitPasscodeBtn');
-    if (submitPasscodeBtn) {
-        submitPasscodeBtn.addEventListener('click', function() {
-            const input = document.getElementById('passcodeInput');
-            if (input.value === '2026') {
-                document.getElementById('reportsPasscodeLayer').style.display = 'none';
-                document.getElementById('reportContent').style.display = 'block';
+    // ========== TAB SWITCHING FUNCTION ==========
+    window.switchTab = function(index) {
+        const buttons = document.querySelectorAll('.tab-button');
+        const contents = document.querySelectorAll('.tab-content');
+        buttons.forEach((btn, i) => {
+            if (i === index) {
+                btn.classList.add('active');
+                contents[i].classList.add('active');
             } else {
-                const err = document.getElementById('passcodeError');
-                if (err) { err.textContent = 'Sai passcode!'; err.classList.remove('hidden'); }
+                btn.classList.remove('active');
+                contents[i].classList.remove('active');
             }
         });
-    }
+    };
 
+    // ========== EXCEL BUTTON HANDLER ==========
     const toggleSaleEmbedBtn = document.getElementById('toggleSaleEmbedBtn');
     if (toggleSaleEmbedBtn) {
         toggleSaleEmbedBtn.addEventListener('click', function() {
-            const container = document.getElementById('saleEmbedContainer');
-            if (container) {
-                container.classList.toggle('hidden');
-                this.innerHTML = container.classList.contains('hidden') ? '<i class="fas fa-table mr-2"></i>Xem Excel' : '<i class="fas fa-table mr-2"></i>An Excel';
+            const saleEmbed = document.getElementById('saleEmbed');
+            if (saleEmbed) {
+                saleEmbed.classList.toggle('hidden');
             }
         });
     }
+
+    console.log("Dashboard Script fully loaded");
 });
