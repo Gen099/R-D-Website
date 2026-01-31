@@ -1,6 +1,6 @@
-// R&D AI Video Intelligence Platform - Complete Script with Full Page Support
+// R&D AI Video Intelligence Platform - Raw Content Integration
 document.addEventListener('DOMContentLoaded', function() {
-    console.log("Complete Script initialized");
+    console.log("Raw Content Script initialized");
 
     // ========== NAVIGATION & UI ==========
     const menuToggle = document.getElementById('menuToggle');
@@ -61,9 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ========== MODAL & FULL PAGE SYSTEM ==========
     const feedbackModal = document.getElementById('feedbackModal');
     const libraryModal = document.getElementById('libraryModal');
-    const roadmapModal = document.getElementById('roadmapModal');
     
-    // Full Page elements
     let feedbackFullPageView = document.getElementById('feedbackFullPageView');
     if (!feedbackFullPageView) {
         feedbackFullPageView = document.createElement('div');
@@ -83,157 +81,235 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.appendChild(feedbackFullPageView);
     }
 
-    const libraryFullPageView = document.getElementById('libraryFullPageView');
-
     function closeAllModals() {
-        [feedbackModal, libraryModal, roadmapModal, feedbackFullPageView, libraryFullPageView].forEach(m => {
+        [feedbackModal, libraryModal, feedbackFullPageView].forEach(m => {
             if (m) m.classList.add('hidden');
         });
         document.body.style.overflow = 'auto';
     }
 
-    // Close buttons
     document.querySelectorAll('[id$="CloseBtn"], [id^="close"]').forEach(btn => {
         btn.addEventListener('click', closeAllModals);
     });
 
-    // ========== FEEDBACK DATA (INFOGRAPHICS) ==========
+    // ========== RAW CONTENT DATA ==========
+    const rawContent = `# PHÂN TÍCH LỖI AI VIDEO
+
+---
+
+## 📊 TỔNG QUAN THỐNG KÊ
+
+\`\`\`
+┌─────────────────────────────────────────────────────────────┐
+│                    TỔNG SỐ DỰ ÁN: 22                        │
+├─────────────────────────────────────────────────────────────┤
+│  ❌ Có feedback lỗi:     18 (82%)                           │
+│  ✅ Không ghi nhận lỗi:   4 (18%)                           │
+│  🔄 Từ chối xử lý:        6 (27%)                           │
+│  ⏰ Trễ deadline:         6 (27%)                           │
+└─────────────────────────────────────────────────────────────┘
+\`\`\`
+
+---
+
+## 📈 PHÂN BỐ LOẠI LỖI
+
+\`\`\`
+Lỗi hiểu sai yêu cầu     ████████████████████  35%
+Lỗi kỹ thuật AI          ███████████████       27%
+Lỗi tiến độ/deadline     ████████████          22%
+Lỗi thẩm mỹ/chất lượng   █████████             16%
+\`\`\`
+
+---
+
+## 🔴 NHÓM 1: LỖI HIỂU SAI YÊU CẦU
+
+| Mã Job | Yêu cầu | Thực tế làm | Vấn đề |
+|--------|---------|-------------|--------|
+| TADEC31004 | Hiện trạng → mùa xuân | Tuyết → mùa xuân | Không đọc context "we don't get snow" |
+| HTJAN15008Rev | "Preparing dinner" có người | Chỉ có bàn + đồ ăn | Bỏ qua động từ hành động |
+| DUJAN04005 | Nước chảy từ vòi phun | Nước xuất hiện ngẫu nhiên | Không quan sát cấu trúc fountain |
+| QUJAN25001 | 2 AI: living + dining | Chỉ làm 1, làm sai phòng | Thiếu checklist deliverables |
+| QUJAN19003 | AI dựng nhà + timelapse | Không làm phần dựng nhà | Bỏ sót yêu cầu chính |
+| LIDEC10001 | Ông già Noel đẩy xe vào ống khói | Xe rơi xuống đất | Sai luồng hành động |
+
+**→ NGUYÊN NHÂN GỐC:**
+- Không đọc kỹ brief
+- Thiếu xác nhận lại với sale/khách
+- Không có checklist số lượng output
+
+---
+
+## 🟠 NHÓM 2: LỖI KỸ THUẬT AI
+
+| Mã Job | Lỗi cụ thể | Mức độ |
+|--------|------------|--------|
+| TLNOV14022rev4 | Tuần lộc tách đàn, đứng sai vị trí | Trung bình |
+| NHJAN13010 | Đàn ông mặc bikini thay vì quần bơi | Nghiêm trọng |
+| LIJAN07001 | Quân cờ nhảy đánh nhau, không theo luật | Nghiêm trọng |
+| HTJAN07002rev2 | Mặt người biến dạng | Nghiêm trọng |
+| CHDEC11004 | Agent đóng băng, clip vỡ | Nghiêm trọng |
+| CHJAN24002 | Viền trắng quanh agent bay | Trung bình |
+
+**→ NGUYÊN NHÂN GỐC:**
+- Prompt thiếu constraint cụ thể
+- Không có negative prompt
+- Giới hạn công cụ AI chưa được mapping
+
+---
+
+## 🟡 NHÓM 3: LỖI THẨM MỸ & CHẤT LƯỢNG
+
+| Mã Job | Vấn đề | Feedback |
+|--------|--------|----------|
+| THJAN20030Rev | Trời xanh tĩnh, zoom đơn giản | "Như ảnh tĩnh rồi zoom vào" |
+| QUJAN16003 | Output trông không tự nhiên | "Trông hơi vô duyên" |
+| MNJAN2001 | Người fake, cử chỉ gợi cảm | "Look like fixing to go to bedroom" |
+| MNJAN2001 | Logo Gemini xuất hiện | Lỗi cơ bản không xóa watermark |
+| CAJAN21001rev7 | Thiếu narrative control | Khách không hài lòng, từ chối thanh toán |
+
+**→ NGUYÊN NHÂN GỐC:**
+- Thiếu QC trước gửi khách
+- Không xóa watermark
+- Không review thẩm mỹ tổng thể
+
+---
+
+## 🟣 NHÓM 4: LỖI TIẾN ĐỘ
+
+\`\`\`
+┌────────────────┬──────────┬─────────────┬───────────┐
+│ Mã Job         │ Hẹn      │ Thực tế     │ Trễ       │
+├────────────────┼──────────┼─────────────┼───────────┤
+│ HTJAN22005     │ Trong DL │ 2h sáng     │ ~9 tiếng  │
+│ QUJAN19003Rev2 │ 5h chiều │ 10h đêm     │ ~5 tiếng  │
+│ QUJAN21008     │ 2 tiếng  │ Trễ nhiều   │ ~5 tiếng  │
+│ HTJAN07002rev2 │ Theo DL  │ Trễ         │ ~4 tiếng  │
+│ HTJAN26003     │ Theo DL  │ Trễ         │ ~3 tiếng  │
+└────────────────┴──────────┴─────────────┴───────────┘
+\`\`\`
+
+**→ NGUYÊN NHÂN GỐC:**
+- Ước lượng thời gian sai
+- Không báo sớm khi gặp khó khăn
+- Workload không cân đối
+
+---
+
+## 🛠️ CẢI TIẾN
+
+☐ Double-check số lượng deliverables với brief
+☐ Tạo checklist QC trước gửi output
+☐ Xây dựng thư viện prompt chuẩn
+☐ Mapping công cụ phù hợp từng loại effect
+☐ Template xác nhận yêu cầu với sale
+☐ Training prompt engineering cho team
+☐ Hệ thống feedback loop học từ lỗi
+☐ Tài liệu giải thích giới hạn AI 
+☐ KPI tracking chất lượng từng người
+
+---
+
+## 📝 TEMPLATE PROMPT CHUẨN
+
+\`\`\`
+═══════════════════════════════════════════════════
+                  PROMPT TEMPLATE
+═══════════════════════════════════════════════════
+
+[MÔ TẢ CẢNH]
+→ Chi tiết cảnh muốn tạo...
+
+[BẮT BUỘC CÓ]
+→ Yếu tố phải xuất hiện
+→ Chuyển động cụ thể
+→ Số lượng người/vật
+
+[KHÔNG ĐƯỢC CÓ]
+→ Không thêm đối tượng lạ
+→ Không thay đổi cấu trúc gốc
+→ Không watermark/logo
+
+[CAMERA]
+→ Cố định / Di chuyển
+→ Góc quay cụ thể
+→ Không rung, không chớp
+
+[PHONG CÁCH]
+→ Realistic / Cinematic
+→ Ánh sáng ấm / lạnh
+→ Tone màu mong muốn
+
+═══════════════════════════════════════════════════
+\`\`\`
+
+---
+
+## ✅ CHECKLIST QC TRƯỚC GỬI KHÁCH
+
+\`\`\`
+┌─────────────────────────────────────────────────┐
+│              QUALITY CONTROL                    │
+├─────────────────────────────────────────────────┤
+│ ☐ Đủ số lượng output theo yêu cầu?             │
+│ ☐ Đúng nội dung yêu cầu?                       │
+│ ☐ Không có watermark/logo công cụ?             │
+│ ☐ Mặt người không bị biến dạng?                │
+│ ☐ Chuyển động tự nhiên, không giật?            │
+│ ☐ Không có viền trắng/artifacts?               │
+│ ☐ Độ phân giải đúng yêu cầu?                   │
+│ ☐ Xem lại toàn bộ video từ đầu đến cuối?       │
+│ └─────────────────────────────────────────────────┘
+\`\`\`
+
+---
+
+## 📊 BẢNG MAPPING CÔNG CỤ - LOẠI EFFECT
+
+\`\`\`
+┌─────────────────────┬─────────────┬───────────────────┐
+│ Loại Effect         │ Công cụ     │ Lưu ý             │
+├─────────────────────┼─────────────┼───────────────────┤
+│ Chuyển mùa          │ Envato      │ Cần 2 ảnh đầu-cuối│
+│ Thêm người          │ Higgsfield  │ Prompt chi tiết   │
+│ Nội thất xuất hiện  │ Higgsfield  │ General effect    │
+│ Day-to-night        │ Envato      │ Timelapse setting │
+│ Nước/Lửa/Khói       │ Envato      │ Physics-based     │
+│ Tạo ảnh staging     │ Gemini      │ Xóa watermark!    │
+└─────────────────────┴─────────────┴───────────────────┘
+\`\`\`
+
+---
+
+## 🎯 MỤC TIÊU CẢI THIỆN
+
+\`\`\`
+Hiện tại                      Mục tiêu (30 ngày)
+────────────────────────────────────────────────
+Lỗi yêu cầu:  35%     →      < 10%
+Lỗi kỹ thuật: 27%     →      < 15%
+Trễ deadline: 27%     →      < 10%
+Lỗi thẩm mỹ:  16%     →      < 5%
+────────────────────────────────────────────────
+Tổng feedback lỗi: 82% →     < 30%
+\`\`\`
+
+---
+
+## 👥 PHÂN CÔNG THEO DÕI
+
+| Người làm | Số job có lỗi | Loại lỗi chính |
+|-----------|---------------|----------------|
+| Trang | 4 | Kỹ thuật AI, hiểu sai yêu cầu |
+| Hoài | 2 | Hiểu sai yêu cầu |
+| Mai Anh | 2 | Kỹ thuật, tiến độ |
+| Chưa ghi nhận | 14 | Đa dạng |`;
+
     const feedbackData = {
         '1': {
             title: 'Phân Tích 23 Job Feedback & Tối Ưu Quy Trình AI',
-            content: `
-<div class="space-y-12 text-gray-800 pb-10">
-    <!-- Header Summary -->
-    <div class="bg-gradient-to-r from-indigo-700 to-purple-800 p-10 rounded-2xl text-white shadow-xl">
-        <h4 class="text-3xl font-bold mb-4 flex items-center">
-            <i class="fas fa-chart-line mr-4"></i>PHÂN TÍCH LỖI AI VIDEO
-        </h4>
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-8">
-            <div class="bg-white/10 p-6 rounded-xl backdrop-blur-md border border-white/20 text-center">
-                <div class="text-4xl font-bold mb-1">22</div>
-                <div class="text-xs uppercase tracking-widest opacity-70">Tổng số dự án</div>
-            </div>
-            <div class="bg-white/10 p-6 rounded-xl backdrop-blur-md border border-white/20 text-center">
-                <div class="text-4xl font-bold mb-1 text-red-300">82%</div>
-                <div class="text-xs uppercase tracking-widest opacity-70">Có feedback lỗi</div>
-            </div>
-            <div class="bg-white/10 p-6 rounded-xl backdrop-blur-md border border-white/20 text-center">
-                <div class="text-4xl font-bold mb-1 text-yellow-300">27%</div>
-                <div class="text-xs uppercase tracking-widest opacity-70">Trễ deadline</div>
-            </div>
-            <div class="bg-white/10 p-6 rounded-xl backdrop-blur-md border border-white/20 text-center">
-                <div class="text-4xl font-bold mb-1 text-blue-300">75%</div>
-                <div class="text-xs uppercase tracking-widest opacity-70">Có thể kiểm soát</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Error Distribution -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-        <div class="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm">
-            <h5 class="font-bold text-xl mb-8 flex items-center text-gray-800">
-                <i class="fas fa-chart-bar mr-3 text-purple-600"></i>Phân Bố Loại Lỗi
-            </h5>
-            <div class="space-y-6">
-                <div>
-                    <div class="flex justify-between text-sm mb-2 font-medium"><span>Hiểu sai yêu cầu</span><span class="text-purple-600">35%</span></div>
-                    <div class="w-full bg-gray-100 h-4 rounded-full overflow-hidden"><div class="bg-purple-600 h-full" style="width: 35%"></div></div>
-                </div>
-                <div>
-                    <div class="flex justify-between text-sm mb-2 font-medium"><span>Kỹ thuật AI</span><span class="text-indigo-600">27%</span></div>
-                    <div class="w-full bg-gray-100 h-4 rounded-full overflow-hidden"><div class="bg-indigo-600 h-full" style="width: 27%"></div></div>
-                </div>
-                <div>
-                    <div class="flex justify-between text-sm mb-2 font-medium"><span>Tiến độ/Deadline</span><span class="text-blue-600">22%</span></div>
-                    <div class="w-full bg-gray-100 h-4 rounded-full overflow-hidden"><div class="bg-blue-600 h-full" style="width: 22%"></div></div>
-                </div>
-                <div>
-                    <div class="flex justify-between text-sm mb-2 font-medium"><span>Thẩm mỹ/Chất lượng</span><span class="text-pink-600">16%</span></div>
-                    <div class="w-full bg-gray-100 h-4 rounded-full overflow-hidden"><div class="bg-pink-600 h-full" style="width: 16%"></div></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm">
-            <h5 class="font-bold text-xl mb-6 flex items-center text-gray-800">
-                <i class="fas fa-bullseye mr-3 text-red-600"></i>Mục Tiêu Cải Thiện (30 Ngày)
-            </h5>
-            <div class="overflow-hidden rounded-xl border border-gray-50">
-                <table class="w-full text-sm">
-                    <thead class="bg-gray-50 text-gray-500 uppercase text-[10px] font-bold tracking-wider">
-                        <tr><th class="p-4 text-left">Chỉ số</th><th class="p-4 text-center">Hiện tại</th><th class="p-4 text-center">Mục tiêu</th></tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-50">
-                        <tr><td class="p-4 font-medium">Lỗi yêu cầu</td><td class="p-4 text-center text-red-500 font-bold">35%</td><td class="p-4 text-center text-green-600 font-bold">< 10%</td></tr>
-                        <tr><td class="p-4 font-medium">Lỗi kỹ thuật</td><td class="p-4 text-center text-red-500 font-bold">27%</td><td class="p-4 text-center text-green-600 font-bold">< 15%</td></tr>
-                        <tr><td class="p-4 font-medium">Trễ deadline</td><td class="p-4 text-center text-red-500 font-bold">27%</td><td class="p-4 text-center text-green-600 font-bold">< 10%</td></tr>
-                        <tr><td class="p-4 font-medium">Tổng feedback lỗi</td><td class="p-4 text-center text-red-500 font-bold">82%</td><td class="p-4 text-center text-green-600 font-bold">< 30%</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <!-- Detailed Analysis Tables -->
-    <div class="space-y-10">
-        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-            <div class="p-6 bg-red-50 border-b border-red-100 flex items-center">
-                <span class="w-10 h-10 rounded-full bg-red-600 text-white flex items-center justify-center mr-4"><i class="fas fa-times-circle"></i></span>
-                <h5 class="font-bold text-lg text-red-900 uppercase">Nhóm 1: Lỗi Hiểu Sai Yêu Cầu</h5>
-            </div>
-            <div class="overflow-x-auto">
-                <table class="w-full text-sm">
-                    <thead class="bg-gray-50 text-gray-400 uppercase text-[10px] font-bold">
-                        <tr><th class="p-4 text-left">Mã Job</th><th class="p-4 text-left">Yêu cầu</th><th class="p-4 text-left">Vấn đề</th></tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-50">
-                        <tr><td class="p-4 font-bold">TADEC31004</td><td class="p-4">Hiện trạng → mùa xuân</td><td class="p-4 text-red-600">Làm Tuyết → mùa xuân. Không đọc context.</td></tr>
-                        <tr><td class="p-4 font-bold">HTJAN15008Rev</td><td class="p-4">"Preparing dinner" có người</td><td class="p-4 text-red-600">Chỉ có bàn + đồ ăn. Bỏ qua động từ hành động.</td></tr>
-                        <tr><td class="p-4 font-bold">QUJAN25001</td><td class="p-4">2 AI: living + dining</td><td class="p-4 text-red-600">Chỉ làm 1, làm sai phòng. Thiếu checklist.</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-            <div class="p-6 bg-blue-50 border-b border-blue-100 flex items-center">
-                <span class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center mr-4"><i class="fas fa-microchip"></i></span>
-                <h5 class="font-bold text-lg text-blue-900 uppercase">Nhóm 2: Lỗi Kỹ Thuật AI</h5>
-            </div>
-            <div class="overflow-x-auto">
-                <table class="w-full text-sm">
-                    <tbody class="divide-y divide-gray-50">
-                        <tr><td class="p-4 font-bold w-32">NHJAN13010</td><td class="p-4">Đàn ông mặc bikini thay vì quần bơi</td><td class="p-4"><span class="px-2 py-1 bg-red-100 text-red-700 rounded text-[10px] font-bold">NGHIÊM TRỌNG</span></td></tr>
-                        <tr><td class="p-4 font-bold">LIJAN07001</td><td class="p-4">Quân cờ nhảy đánh nhau, không theo luật</td><td class="p-4"><span class="px-2 py-1 bg-red-100 text-red-700 rounded text-[10px] font-bold">NGHIÊM TRỌNG</span></td></tr>
-                        <tr><td class="p-4 font-bold">HTJAN07002rev2</td><td class="p-4">Mặt người biến dạng</td><td class="p-4"><span class="px-2 py-1 bg-red-100 text-red-700 rounded text-[10px] font-bold">NGHIÊM TRỌNG</span></td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <!-- Implementation & Checklist -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-        <div class="bg-indigo-900 p-8 rounded-2xl text-white shadow-lg">
-            <h5 class="font-bold text-xl mb-6 flex items-center"><i class="fas fa-tasks mr-3"></i>CẢI TIẾN QUY TRÌNH</h5>
-            <ul class="space-y-4 text-sm opacity-90">
-                <li class="flex items-start gap-3"><i class="fas fa-check-square mt-1 text-green-400"></i><span>Double-check deliverables với brief</span></li>
-                <li class="flex items-start gap-3"><i class="fas fa-check-square mt-1 text-green-400"></i><span>Tạo checklist QC trước gửi output</span></li>
-                <li class="flex items-start gap-3"><i class="fas fa-check-square mt-1 text-green-400"></i><span>Xây dựng thư viện prompt chuẩn</span></li>
-                <li class="flex items-start gap-3"><i class="fas fa-check-square mt-1 text-green-400"></i><span>Training prompt engineering cho team</span></li>
-            </ul>
-        </div>
-        <div class="bg-white p-8 rounded-2xl border-4 border-indigo-100 shadow-sm">
-            <h5 class="font-bold text-xl mb-6 flex items-center text-indigo-900"><i class="fas fa-clipboard-check mr-3"></i>CHECKLIST QC</h5>
-            <div class="space-y-3">
-                <div class="flex items-center gap-3 p-2 bg-gray-50 rounded-lg"><i class="far fa-square text-gray-400"></i><span class="text-sm font-medium">Đủ số lượng output?</span></div>
-                <div class="flex items-center gap-3 p-2 bg-gray-50 rounded-lg"><i class="far fa-square text-gray-400"></i><span class="text-sm font-medium">Không có watermark/logo?</span></div>
-                <div class="flex items-center gap-3 p-2 bg-gray-50 rounded-lg"><i class="far fa-square text-gray-400"></i><span class="text-sm font-medium">Mặt người không biến dạng?</span></div>
-                <div class="flex items-center gap-3 p-2 bg-gray-50 rounded-lg"><i class="far fa-square text-gray-400"></i><span class="text-sm font-medium">Chuyển động tự nhiên?</span></div>
-            </div>
-        </div>
-    </div>
-</div>`
+            content: `<div class="bg-white p-6 rounded-lg font-mono text-sm whitespace-pre-wrap border shadow-inner overflow-x-auto">${rawContent.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</div>`
         }
     };
 
@@ -243,41 +319,29 @@ document.addEventListener('DOMContentLoaded', function() {
         '3': { title: 'Day-to-Night', content: `<div class="p-4 bg-green-50 rounded-xl"><p class="font-bold mb-2">Veo 3.1 Prompt:</p><code class="text-xs">Cinematic day to night transition, sunset lighting...</code></div>` }
     };
 
-    // ========== MODAL INTERACTION ==========
-    function openFeedbackModal(id) {
-        if (feedbackData[id]) {
-            currentFeedbackId = id;
-            const modalTitle = document.getElementById('modalTitle');
-            const modalContent = document.getElementById('modalContent');
-            if (modalTitle && modalContent && feedbackModal) {
-                modalTitle.textContent = feedbackData[id].title;
-                modalContent.innerHTML = feedbackData[id].content;
-                feedbackModal.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-            }
-        }
-    }
+    let currentFeedbackId = null;
 
     document.querySelectorAll('.feedback-card').forEach(card => {
         card.addEventListener('click', function() {
             const id = this.getAttribute('data-feedback-id');
-            openFeedbackModal(id);
+            if (feedbackData[id]) {
+                currentFeedbackId = id;
+                document.getElementById('modalTitle').textContent = feedbackData[id].title;
+                document.getElementById('modalContent').innerHTML = feedbackData[id].content;
+                feedbackModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
         });
     });
 
-    // Full Page Button
     const openFullPageBtn = document.getElementById('openFullPageBtn');
     if (openFullPageBtn) {
         openFullPageBtn.addEventListener('click', function() {
             if (currentFeedbackId && feedbackData[currentFeedbackId]) {
-                const fpTitle = document.getElementById('feedbackFullPageTitle');
-                const fpContent = document.getElementById('feedbackFullPageContent');
-                if (fpTitle && fpContent && feedbackFullPageView) {
-                    fpTitle.textContent = feedbackData[currentFeedbackId].title;
-                    fpContent.innerHTML = feedbackData[currentFeedbackId].content;
-                    feedbackModal.classList.add('hidden');
-                    feedbackFullPageView.classList.remove('hidden');
-                }
+                document.getElementById('feedbackFullPageTitle').textContent = feedbackData[currentFeedbackId].title;
+                document.getElementById('feedbackFullPageContent').innerHTML = feedbackData[currentFeedbackId].content;
+                feedbackModal.classList.add('hidden');
+                feedbackFullPageView.classList.remove('hidden');
             }
         });
     }
@@ -290,7 +354,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Library Click
     document.querySelectorAll('.library-card').forEach(card => {
         card.addEventListener('click', function() {
             const id = this.getAttribute('data-library-id');
@@ -303,7 +366,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Passcode & Excel (Existing logic)
     const submitPasscodeBtn = document.getElementById('submitPasscodeBtn');
     if (submitPasscodeBtn) {
         submitPasscodeBtn.addEventListener('click', function() {
@@ -314,17 +376,6 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 const err = document.getElementById('passcodeError');
                 if (err) { err.textContent = 'Sai passcode!'; err.classList.remove('hidden'); }
-            }
-        });
-    }
-
-    const toggleSaleEmbedBtn = document.getElementById('toggleSaleEmbedBtn');
-    if (toggleSaleEmbedBtn) {
-        toggleSaleEmbedBtn.addEventListener('click', function() {
-            const container = document.getElementById('saleEmbedContainer');
-            if (container) {
-                container.classList.toggle('hidden');
-                this.innerHTML = container.classList.contains('hidden') ? '<i class="fas fa-table mr-2"></i>Xem Excel' : '<i class="fas fa-table mr-2"></i>Ẩn Excel';
             }
         });
     }
