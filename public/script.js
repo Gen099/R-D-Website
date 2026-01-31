@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const navItems = document.querySelectorAll('.nav-item');
     const sections = document.querySelectorAll('.content-section');
     
-    function showSection(targetId) {
+    window.showSection = function(targetId) {
         // Hide all sections
         sections.forEach(section => {
             section.classList.remove('active-tab');
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
         item.addEventListener('click', function(e) {
             e.preventDefault();
             const targetId = this.getAttribute('href').substring(1);
-            showSection(targetId);
+            window.showSection(targetId);
             
             // Close mobile menu after click
             if (window.innerWidth < 768) {
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initial load: check URL hash or default to the first section
     const initialHash = window.location.hash ? window.location.hash.substring(1) : sections[0].id.replace(' content-section ', '');
-    showSection(initialHash);
+    window.showSection(initialHash);
     
     // Control dynamic footer visibility
     function updateFooterVisibility(tabId) {
@@ -96,8 +96,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Update footer when showing a section
-    const originalShowSection = showSection;
-    showSection = function(targetId) {
+    const originalShowSection = window.showSection;
+    window.showSection = function(targetId) {
         originalShowSection(targetId);
         updateFooterVisibility(targetId);
     };
@@ -999,10 +999,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // ESC key to close modals
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
-            if (!                            } else if (!fullPageView.classList.contains('hidden')) {
+            const fullPageView = document.getElementById('fullPageView');
+            const feedbackModal = document.getElementById('feedbackModal');
+            if (fullPageView && !fullPageView.classList.contains('hidden')) {
                 fullPageView.classList.add('hidden');
                 document.body.style.overflow = 'auto';
-            } else if (!feedbackModal.classList.contains('hidden')) {
+            } else if (feedbackModal && !feedbackModal.classList.contains('hidden')) {
                 feedbackModal.classList.add('hidden');
                 document.body.style.overflow = 'auto';
             }
@@ -2248,7 +2250,7 @@ const roadmapData = {
 };
 
 // Roadmap Grid Event Handlers
-document.addEventListener('DOMContentLoaded', function() {
+function initRoadmapHandlers() {
     if (!document.getElementById('roadmapGrid')) return;
 
     const roadmapCards = document.querySelectorAll('.roadmap-card');
@@ -2341,13 +2343,21 @@ document.addEventListener('DOMContentLoaded', function() {
     // ESC key to close
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
-            if (!roadmapFullPageView.classList.contains('hidden')) {
+            if (roadmapFullPageView && !roadmapFullPageView.classList.contains('hidden')) {
                 roadmapFullPageView.classList.add('hidden');
                 document.body.style.overflow = 'auto';
-            } else if (!roadmapModal.classList.contains('hidden')) {
+            } else if (roadmapModal && !roadmapModal.classList.contains('hidden')) {
                 roadmapModal.classList.add('hidden');
                 document.body.style.overflow = 'auto';
             }
         }
     });
+}
+
+// Initialize all handlers when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    // Other initializations might be here
+    if (typeof initRoadmapHandlers === 'function') {
+        initRoadmapHandlers();
+    }
 });
