@@ -53,11 +53,22 @@ document.addEventListener('DOMContentLoaded', function() {
     if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
     if (closeFullPageBtn) closeFullPageBtn.addEventListener('click', closeFullPage);
 
-    // ========== DASHBOARD CONTENT ==========
-    const dashboardContent = `
-<style>
+    // ========== EXCEL BUTTON HANDLER ==========
+    const toggleSaleEmbedBtn = document.getElementById('toggleSaleEmbedBtn');
+    const saleEmbedContainer = document.getElementById('saleEmbedContainer');
+    if (toggleSaleEmbedBtn && saleEmbedContainer) {
+        toggleSaleEmbedBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            saleEmbedContainer.classList.toggle('hidden');
+            console.log("Excel toggled:", !saleEmbedContainer.classList.contains('hidden'));
+        });
+    }
+
+    // ========== DASHBOARD CONTENT (FULL HTML) ==========
+    const dashboardHTML = `<style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #fafafa; color: #1a1a1a; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #fafafa; color: #1a1a1a; line-height: 1.4; }
 .tab-container { background: white; border-bottom: 1px solid #e0e0e0; position: sticky; top: 0; z-index: 100; }
 .tab-nav { max-width: 1200px; margin: 0 auto; display: flex; gap: 2px; padding: 8px 20px 0; }
 .tab-button { padding: 10px 20px; background: #f5f5f5; border: 1px solid #e0e0e0; border-bottom: none; border-radius: 8px 8px 0 0; cursor: pointer; font-size: 0.85em; font-weight: 500; color: #666; transition: all 0.2s; }
@@ -79,7 +90,6 @@ table { width: 100%; border-collapse: collapse; font-size: 0.85em; }
 th { background: #f5f5f5; padding: 10px 12px; text-align: left; font-weight: 600; font-size: 0.8em; text-transform: uppercase; letter-spacing: 0.5px; color: #666; border-bottom: 1px solid #e0e0e0; }
 td { padding: 10px 12px; border-bottom: 1px solid #f0f0f0; }
 tbody tr:hover { background: #fafafa; }
-td:first-child { font-weight: 500; color: #333; }
 .severity-high { color: #d32f2f; font-weight: 600; }
 .severity-medium { color: #f57c00; font-weight: 600; }
 .goal-comparison { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
@@ -90,13 +100,18 @@ td:first-child { font-weight: 500; color: #333; }
 .bar-label { width: 60px; font-size: 0.75em; color: #666; }
 .bar-fill { flex: 1; height: 20px; background: #f0f0f0; border-radius: 4px; overflow: hidden; }
 .bar-progress { height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 0.7em; }
+.checklist { background: white; border: 1px solid #e0e0e0; padding: 20px; border-radius: 6px; margin-bottom: 20px; }
+.checklist-item { padding: 8px 0; font-size: 0.85em; border-bottom: 1px solid #f0f0f0; }
+.checklist-item:last-child { border-bottom: none; }
 .guide-section { background: white; border: 1px solid #e0e0e0; padding: 20px; border-radius: 6px; margin-bottom: 20px; }
 .guide-section h2 { font-size: 1.2em; font-weight: 600; margin-bottom: 12px; color: #1a1a1a; }
-.code-block { background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 12px; font-family: monospace; font-size: 0.8em; line-height: 1.5; margin: 10px 0; overflow-x: auto; white-space: pre-wrap; }
+.code-block { background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 12px; font-family: monospace; font-size: 0.75em; line-height: 1.5; margin: 10px 0; overflow-x: auto; white-space: pre-wrap; }
 .tool-table { width: 100%; margin: 15px 0; }
 .tool-table th { background: #f5f5f5; padding: 8px; font-size: 0.75em; }
 .tool-table td { padding: 8px; font-size: 0.8em; }
-ul { margin: 10px 0 10px 20px; font-size: 0.85em; line-height: 1.6; }
+.chart-container { background: white; border: 1px solid #e0e0e0; padding: 20px; border-radius: 6px; margin-bottom: 20px; }
+.chart-title { font-size: 1em; font-weight: 600; margin-bottom: 16px; color: #1a1a1a; }
+.footer { text-align: center; padding: 20px; font-size: 0.75em; color: #999; border-top: 1px solid #e0e0e0; margin-top: 30px; }
 </style>
 
 <div class="tab-container">
@@ -136,7 +151,7 @@ ul { margin: 10px 0 10px 20px; font-size: 0.85em; line-height: 1.6; }
         </div>
 
         <div class="error-table">
-            <h2 style="font-size: 1em; font-weight: 600; margin-bottom: 16px;">Lỗi hiểu sai yêu cầu - Top cases</h2>
+            <h2 class="chart-title">Lỗi hiểu sai yêu cầu - Top cases</h2>
             <table>
                 <thead>
                     <tr>
@@ -182,7 +197,7 @@ ul { margin: 10px 0 10px 20px; font-size: 0.85em; line-height: 1.6; }
         </div>
 
         <div class="error-table">
-            <h2 style="font-size: 1em; font-weight: 600; margin-bottom: 16px;">Lỗi kỹ thuật AI</h2>
+            <h2 class="chart-title">Lỗi kỹ thuật AI</h2>
             <table>
                 <thead>
                     <tr>
@@ -226,8 +241,8 @@ ul { margin: 10px 0 10px 20px; font-size: 0.85em; line-height: 1.6; }
             </table>
         </div>
 
-        <div style="background: white; border: 1px solid #e0e0e0; padding: 20px; border-radius: 6px; margin-bottom: 20px;">
-            <h2 style="font-size: 1em; font-weight: 600; margin-bottom: 16px;">Mục tiêu cải thiện (30 ngày)</h2>
+        <div class="chart-container">
+            <h2 class="chart-title">Mục tiêu cải thiện (30 ngày)</h2>
             <div class="goal-comparison">
                 <div class="goal-card">
                     <div class="goal-title">Lỗi hiểu sai yêu cầu</div>
@@ -280,7 +295,36 @@ ul { margin: 10px 0 10px 20px; font-size: 0.85em; line-height: 1.6; }
                         </div>
                     </div>
                 </div>
+                <div class="goal-card">
+                    <div class="goal-title">Lỗi thẩm mỹ</div>
+                    <div class="goal-bars">
+                        <div class="goal-bar">
+                            <span class="bar-label">Hiện tại</span>
+                            <div class="bar-fill">
+                                <div class="bar-progress" style="width: 16%; background: #f57c00;">16%</div>
+                            </div>
+                        </div>
+                        <div class="goal-bar">
+                            <span class="bar-label">Mục tiêu</span>
+                            <div class="bar-fill">
+                                <div class="bar-progress" style="width: 5%; background: #388e3c;">5%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
+
+        <div class="checklist">
+            <h2 class="chart-title">Checklist QC trước gửi khách</h2>
+            <div class="checklist-item">☐ Đủ số lượng output theo yêu cầu?</div>
+            <div class="checklist-item">☐ Đúng nội dung yêu cầu?</div>
+            <div class="checklist-item">☐ Không có watermark/logo công cụ?</div>
+            <div class="checklist-item">☐ Mặt người không bị biến dạng?</div>
+            <div class="checklist-item">☐ Chuyển động tự nhiên, không giật?</div>
+            <div class="checklist-item">☐ Không có viền trắng/artifacts?</div>
+            <div class="checklist-item">☐ Độ phân giải đúng yêu cầu?</div>
+            <div class="checklist-item">☐ Xem lại toàn bộ video từ đầu đến cuối?</div>
         </div>
     </div>
 </div>
@@ -293,64 +337,116 @@ ul { margin: 10px 0 10px 20px; font-size: 0.85em; line-height: 1.6; }
         </div>
 
         <div class="guide-section">
-            <h2>📝 Template Prompt Chuẩn</h2>
-            <div class="code-block">[MÔ TẢ CẢNH]
-[BẮT BUỘC CÓ]
-[KHÔNG ĐƯỢC CÓ]
+            <h2>Master Prompt Template</h2>
+            <div class="code-block">[SCENE DESCRIPTION]
+Bối cảnh, thời gian, ánh sáng
+
+[SUBJECTS]
+Người/vật, đặc điểm cụ thể, vị trí
+
+[ACTIONS/MOTION]
+Hành động CHI TIẾT, timing, sequence
+
+[CONSTRAINTS]
+Giới hạn vật lý, logic, phải tuân thủ
+
 [CAMERA]
-[PHONG CÁCH]</div>
+Góc quay, movement, stability
+
+[NEGATIVE PROMPT]
+Những gì KHÔNG ĐƯỢC xuất hiện</div>
         </div>
 
         <div class="guide-section">
-            <h2>✅ Checklist QC</h2>
-            <ul>
-                <li>☐ Đủ số lượng output theo yêu cầu?</li>
-                <li>☐ Đúng nội dung yêu cầu?</li>
-                <li>☐ Không có watermark/logo công cụ?</li>
-                <li>☐ Mặt người không bị biến dạng?</li>
-                <li>☐ Chuyển động tự nhiên, không giật?</li>
-            </ul>
-        </div>
-
-        <div class="guide-section">
-            <h2>📊 Bảng Mapping Công Cụ</h2>
+            <h2>Chọn công cụ theo loại lỗi</h2>
             <table class="tool-table">
                 <thead>
                     <tr>
-                        <th>Loại Effect</th>
-                        <th>Công cụ</th>
-                        <th>Lưu ý</th>
+                        <th>Loại lỗi</th>
+                        <th>Công cụ chính</th>
+                        <th>Công cụ hỗ trợ</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Chuyển mùa</td>
-                        <td>Envato</td>
-                        <td>Cần 2 ảnh</td>
+                        <td>Chuyển động nhóm sai</td>
+                        <td>Kling 2.6 Pro</td>
+                        <td>KlingO1 Edit</td>
                     </tr>
                     <tr>
-                        <td>Thêm người</td>
-                        <td>Higgsfield</td>
-                        <td>Prompt chi tiết</td>
+                        <td>Mặt người biến dạng</td>
+                        <td>Kling 2.6 Pro</td>
+                        <td>KlingO1 Edit</td>
                     </tr>
                     <tr>
-                        <td>Day-to-night</td>
-                        <td>Envato</td>
-                        <td>Timelapse</td>
+                        <td>Trang phục sai</td>
+                        <td>Kling 2.6 Pro</td>
+                        <td>Veo 3.1</td>
+                    </tr>
+                    <tr>
+                        <td>Logic vật lý sai</td>
+                        <td>Veo 3.1</td>
+                        <td>KlingO1 Edit</td>
+                    </tr>
+                    <tr>
+                        <td>Nước/lửa/khói</td>
+                        <td>Veo 3.1</td>
+                        <td>Nano Banana Pro</td>
+                    </tr>
+                    <tr>
+                        <td>Object movement</td>
+                        <td>Nano Banana Pro</td>
+                        <td>KlingO1 Edit</td>
+                    </tr>
+                    <tr>
+                        <td>Chuyển cảnh/transition</td>
+                        <td>Nano Banana Pro</td>
+                        <td>Veo 3.1</td>
+                    </tr>
+                    <tr>
+                        <td>Thêm người realistic</td>
+                        <td>Kling 2.6 Pro</td>
+                        <td>Veo 3.1</td>
                     </tr>
                 </tbody>
             </table>
         </div>
+
+        <div class="checklist">
+            <h2 class="chart-title">Checklist trước khi generate</h2>
+            <div class="checklist-item">☐ Đọc brief 2 lần, highlight từ khóa hành động</div>
+            <div class="checklist-item">☐ Xác định context địa lý/thời tiết</div>
+            <div class="checklist-item">☐ Liệt kê TẤT CẢ deliverables cần làm</div>
+            <div class="checklist-item">☐ Chọn công cụ phù hợp loại effect</div>
+            <div class="checklist-item">☐ Viết prompt theo template chuẩn</div>
+            <div class="checklist-item">☐ Thêm negative prompt đầy đủ</div>
+            <div class="checklist-item">☐ Mô tả hành động ĐỘNG TỪ cụ thể</div>
+            <div class="checklist-item">☐ Chỉ định giới hạn vật lý/logic</div>
+        </div>
+
+        <div class="checklist">
+            <h2 class="chart-title">Checklist sau khi generate</h2>
+            <div class="checklist-item">☐ Xem video từ đầu đến cuối (không skip)</div>
+            <div class="checklist-item">☐ Kiểm tra mặt người từng segment</div>
+            <div class="checklist-item">☐ Kiểm tra logic chuyển động</div>
+            <div class="checklist-item">☐ Xác nhận không có watermark/logo</div>
+            <div class="checklist-item">☐ Đếm lại số lượng output</div>
+            <div class="checklist-item">☐ So sánh với brief gốc lần cuối</div>
+            <div class="checklist-item">☐ Test playback trên device khác</div>
+        </div>
+
+        <div class="footer">
+            <p>Template version 1.0 • Cập nhật: 31/01/2026</p>
+        </div>
     </div>
-</div>
-`;
+</div>`;
 
     // ========== FEEDBACK CARD CLICK HANDLER ==========
     const feedbackCards = document.querySelectorAll('[data-feedback-id]');
     feedbackCards.forEach(card => {
         card.addEventListener('click', function() {
             if (feedbackModal && modalContent) {
-                modalContent.innerHTML = dashboardContent;
+                modalContent.innerHTML = dashboardHTML;
                 feedbackModal.classList.remove('hidden');
                 document.body.style.overflow = 'hidden';
             }
@@ -361,19 +457,8 @@ ul { margin: 10px 0 10px 20px; font-size: 0.85em; line-height: 1.6; }
     if (openFullPageBtn) {
         openFullPageBtn.addEventListener('click', function() {
             if (fullPageView && fullPageContent) {
-                fullPageContent.innerHTML = dashboardContent;
+                fullPageContent.innerHTML = dashboardHTML;
                 fullPageView.classList.remove('hidden');
-            }
-        });
-    }
-
-    // ========== EXCEL BUTTON HANDLER ==========
-    const toggleSaleEmbedBtn = document.getElementById('toggleSaleEmbedBtn');
-    if (toggleSaleEmbedBtn) {
-        toggleSaleEmbedBtn.addEventListener('click', function() {
-            const saleEmbed = document.getElementById('saleEmbed');
-            if (saleEmbed) {
-                saleEmbed.classList.toggle('hidden');
             }
         });
     }
