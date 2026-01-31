@@ -64,21 +64,24 @@ document.addEventListener('DOMContentLoaded', function() {
     const roadmapModal = document.getElementById('roadmapModal');
     
     // Full Page elements
-    const feedbackFullPageView = document.createElement('div');
-    feedbackFullPageView.id = 'feedbackFullPageView';
-    feedbackFullPageView.className = 'hidden fixed inset-0 bg-white z-[60] overflow-y-auto';
-    feedbackFullPageView.innerHTML = `
-        <div class="max-w-7xl mx-auto">
-            <div class="sticky top-0 bg-white border-b shadow-sm p-4 flex items-center justify-between">
-                <h2 id="feedbackFullPageTitle" class="text-2xl font-bold text-gray-800"></h2>
-                <button id="closeFeedbackFullPageBtn" class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition">
-                    <i class="fas fa-times mr-1"></i>Đóng
-                </button>
+    let feedbackFullPageView = document.getElementById('feedbackFullPageView');
+    if (!feedbackFullPageView) {
+        feedbackFullPageView = document.createElement('div');
+        feedbackFullPageView.id = 'feedbackFullPageView';
+        feedbackFullPageView.className = 'hidden fixed inset-0 bg-white z-[60] overflow-y-auto';
+        feedbackFullPageView.innerHTML = `
+            <div class="max-w-7xl mx-auto">
+                <div class="sticky top-0 bg-white border-b shadow-sm p-4 flex items-center justify-between">
+                    <h2 id="feedbackFullPageTitle" class="text-2xl font-bold text-gray-800"></h2>
+                    <button id="closeFeedbackFullPageBtn" class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition">
+                        <i class="fas fa-times mr-1"></i>Đóng
+                    </button>
+                </div>
+                <div id="feedbackFullPageContent" class="p-8"></div>
             </div>
-            <div id="feedbackFullPageContent" class="p-8"></div>
-        </div>
-    `;
-    document.body.appendChild(feedbackFullPageView);
+        `;
+        document.body.appendChild(feedbackFullPageView);
+    }
 
     const libraryFullPageView = document.getElementById('libraryFullPageView');
 
@@ -99,211 +102,199 @@ document.addEventListener('DOMContentLoaded', function() {
         '1': {
             title: 'Phân Tích 23 Job Feedback & Tối Ưu Quy Trình AI',
             content: `
-<div class="space-y-8 text-gray-800 pb-10">
+<div class="space-y-12 text-gray-800 pb-10">
     <!-- Header Summary -->
-    <div class="bg-gradient-to-r from-indigo-600 to-purple-600 p-8 rounded-xl text-white shadow-lg">
-        <h4 class="text-2xl font-bold mb-2 flex items-center">
-            <i class="fas fa-chart-line mr-3"></i>Báo Cáo Tóm Tắt Phân Tích & Tối Ưu
+    <div class="bg-gradient-to-r from-indigo-700 to-purple-800 p-10 rounded-2xl text-white shadow-xl">
+        <h4 class="text-3xl font-bold mb-4 flex items-center">
+            <i class="fas fa-chart-line mr-4"></i>PHÂN TÍCH LỖI AI VIDEO
         </h4>
-        <p class="opacity-90">Phân tích 22-23 job sản xuất media từ tệp [Video]FeedbackAIupdated.xlsx</p>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-            <div class="bg-white/10 p-4 rounded-lg backdrop-blur-sm border border-white/20">
-                <div class="text-3xl font-bold">36.4%</div>
-                <div class="text-sm opacity-80">Tần suất lỗi chính</div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-8">
+            <div class="bg-white/10 p-6 rounded-xl backdrop-blur-md border border-white/20 text-center">
+                <div class="text-4xl font-bold mb-1">22</div>
+                <div class="text-xs uppercase tracking-widest opacity-70">Tổng số dự án</div>
             </div>
-            <div class="bg-white/10 p-4 rounded-lg backdrop-blur-sm border border-white/20">
-                <div class="text-3xl font-bold">42.9%</div>
-                <div class="text-sm opacity-80">Lỗi giới hạn công nghệ</div>
+            <div class="bg-white/10 p-6 rounded-xl backdrop-blur-md border border-white/20 text-center">
+                <div class="text-4xl font-bold mb-1 text-red-300">82%</div>
+                <div class="text-xs uppercase tracking-widest opacity-70">Có feedback lỗi</div>
             </div>
-            <div class="bg-white/10 p-4 rounded-lg backdrop-blur-sm border border-white/20">
-                <div class="text-3xl font-bold">31.0%</div>
-                <div class="text-sm opacity-80">Lỗi do Prompt chưa tối ưu</div>
+            <div class="bg-white/10 p-6 rounded-xl backdrop-blur-md border border-white/20 text-center">
+                <div class="text-4xl font-bold mb-1 text-yellow-300">27%</div>
+                <div class="text-xs uppercase tracking-widest opacity-70">Trễ deadline</div>
+            </div>
+            <div class="bg-white/10 p-6 rounded-xl backdrop-blur-md border border-white/20 text-center">
+                <div class="text-4xl font-bold mb-1 text-blue-300">75%</div>
+                <div class="text-xs uppercase tracking-widest opacity-70">Có thể kiểm soát</div>
             </div>
         </div>
     </div>
 
-    <!-- Error Frequency Infographic -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-            <h5 class="font-bold text-lg mb-4 flex items-center text-red-600">
-                <i class="fas fa-exclamation-triangle mr-2"></i>Tần Suất Lỗi Phổ Biến
+    <!-- Error Distribution -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+        <div class="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm">
+            <h5 class="font-bold text-xl mb-8 flex items-center text-gray-800">
+                <i class="fas fa-chart-bar mr-3 text-purple-600"></i>Phân Bố Loại Lỗi
             </h5>
-            <div class="space-y-4">
+            <div class="space-y-6">
                 <div>
-                    <div class="flex justify-between text-sm mb-1"><span>Chuyển động không tự nhiên</span><span class="font-bold">12.1%</span></div>
-                    <div class="w-full bg-gray-100 h-3 rounded-full overflow-hidden"><div class="bg-red-500 h-full" style="width: 12.1%"></div></div>
+                    <div class="flex justify-between text-sm mb-2 font-medium"><span>Hiểu sai yêu cầu</span><span class="text-purple-600">35%</span></div>
+                    <div class="w-full bg-gray-100 h-4 rounded-full overflow-hidden"><div class="bg-purple-600 h-full" style="width: 35%"></div></div>
                 </div>
                 <div>
-                    <div class="flex justify-between text-sm mb-1"><span>Chi tiết vật lý/logic sai</span><span class="font-bold">12.1%</span></div>
-                    <div class="w-full bg-gray-100 h-3 rounded-full overflow-hidden"><div class="bg-red-500 h-full" style="width: 12.1%"></div></div>
+                    <div class="flex justify-between text-sm mb-2 font-medium"><span>Kỹ thuật AI</span><span class="text-indigo-600">27%</span></div>
+                    <div class="w-full bg-gray-100 h-4 rounded-full overflow-hidden"><div class="bg-indigo-600 h-full" style="width: 27%"></div></div>
                 </div>
                 <div>
-                    <div class="flex justify-between text-sm mb-1"><span>Nhân vật AI thiếu chân thực</span><span class="font-bold">12.1%</span></div>
-                    <div class="w-full bg-gray-100 h-3 rounded-full overflow-hidden"><div class="bg-red-500 h-full" style="width: 12.1%"></div></div>
+                    <div class="flex justify-between text-sm mb-2 font-medium"><span>Tiến độ/Deadline</span><span class="text-blue-600">22%</span></div>
+                    <div class="w-full bg-gray-100 h-4 rounded-full overflow-hidden"><div class="bg-blue-600 h-full" style="width: 22%"></div></div>
+                </div>
+                <div>
+                    <div class="flex justify-between text-sm mb-2 font-medium"><span>Thẩm mỹ/Chất lượng</span><span class="text-pink-600">16%</span></div>
+                    <div class="w-full bg-gray-100 h-4 rounded-full overflow-hidden"><div class="bg-pink-600 h-full" style="width: 16%"></div></div>
                 </div>
             </div>
-            <p class="mt-4 text-xs text-gray-500 italic">* Ba nhóm này chiếm tổng cộng 36.4% tần suất lỗi ghi nhận.</p>
         </div>
 
-        <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-            <h5 class="font-bold text-lg mb-4 flex items-center text-blue-600">
-                <i class="fas fa-search-nodes mr-2"></i>Nguyên Nhân Gốc Rễ
+        <div class="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm">
+            <h5 class="font-bold text-xl mb-6 flex items-center text-gray-800">
+                <i class="fas fa-bullseye mr-3 text-red-600"></i>Mục Tiêu Cải Thiện (30 Ngày)
             </h5>
-            <div class="flex items-center justify-center py-4">
-                <div class="relative w-40 h-40">
-                    <svg viewBox="0 0 36 36" class="w-full h-full transform -rotate-90">
-                        <circle cx="18" cy="18" r="15.9" fill="transparent" stroke="#e5e7eb" stroke-width="3.8"></circle>
-                        <circle cx="18" cy="18" r="15.9" fill="transparent" stroke="#3b82f6" stroke-width="3.8" stroke-dasharray="42.9 100"></circle>
-                        <circle cx="18" cy="18" r="15.9" fill="transparent" stroke="#10b981" stroke-width="3.8" stroke-dasharray="31 100" stroke-dashoffset="-42.9"></circle>
-                    </svg>
-                    <div class="absolute inset-0 flex flex-col items-center justify-center">
-                        <span class="text-2xl font-bold">75%</span>
-                        <span class="text-[10px] uppercase text-gray-500">Có thể kiểm soát</span>
-                    </div>
-                </div>
-                <div class="ml-8 space-y-2 text-xs">
-                    <div class="flex items-center"><span class="w-3 h-3 bg-blue-500 rounded-full mr-2"></span><span>Giới hạn công nghệ (42.9%)</span></div>
-                    <div class="flex items-center"><span class="w-3 h-3 bg-green-500 rounded-full mr-2"></span><span>Prompt chưa tối ưu (31.0%)</span></div>
-                    <div class="flex items-center"><span class="w-3 h-3 bg-gray-300 rounded-full mr-2"></span><span>Khác (26.1%)</span></div>
-                </div>
+            <div class="overflow-hidden rounded-xl border border-gray-50">
+                <table class="w-full text-sm">
+                    <thead class="bg-gray-50 text-gray-500 uppercase text-[10px] font-bold tracking-wider">
+                        <tr><th class="p-4 text-left">Chỉ số</th><th class="p-4 text-center">Hiện tại</th><th class="p-4 text-center">Mục tiêu</th></tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-50">
+                        <tr><td class="p-4 font-medium">Lỗi yêu cầu</td><td class="p-4 text-center text-red-500 font-bold">35%</td><td class="p-4 text-center text-green-600 font-bold">< 10%</td></tr>
+                        <tr><td class="p-4 font-medium">Lỗi kỹ thuật</td><td class="p-4 text-center text-red-500 font-bold">27%</td><td class="p-4 text-center text-green-600 font-bold">< 15%</td></tr>
+                        <tr><td class="p-4 font-medium">Trễ deadline</td><td class="p-4 text-center text-red-500 font-bold">27%</td><td class="p-4 text-center text-green-600 font-bold">< 10%</td></tr>
+                        <tr><td class="p-4 font-medium">Tổng feedback lỗi</td><td class="p-4 text-center text-red-500 font-bold">82%</td><td class="p-4 text-center text-green-600 font-bold">< 30%</td></tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 
-    <!-- P-S-C-A-M Framework -->
-    <div class="bg-indigo-50 p-8 rounded-xl border border-indigo-100">
-        <h5 class="font-bold text-xl mb-6 text-indigo-900 text-center">Khung Cấu Trúc P-S-C-A-M (Lộ Trình Cải Tiến)</h5>
-        <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
-            <div class="bg-white p-4 rounded-lg shadow-sm border-t-4 border-indigo-500">
-                <div class="text-2xl font-black text-indigo-600 mb-2 text-center">P</div>
-                <div class="font-bold text-xs mb-1 text-center">Premise</div>
-                <p class="text-[10px] text-gray-600 text-center">Bối cảnh/Chủ thể: Xác định cái gì và ở đâu.</p>
+    <!-- Detailed Analysis Tables -->
+    <div class="space-y-10">
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+            <div class="p-6 bg-red-50 border-b border-red-100 flex items-center">
+                <span class="w-10 h-10 rounded-full bg-red-600 text-white flex items-center justify-center mr-4"><i class="fas fa-times-circle"></i></span>
+                <h5 class="font-bold text-lg text-red-900 uppercase">Nhóm 1: Lỗi Hiểu Sai Yêu Cầu</h5>
             </div>
-            <div class="bg-white p-4 rounded-lg shadow-sm border-t-4 border-purple-500">
-                <div class="text-2xl font-black text-purple-600 mb-2 text-center">S</div>
-                <div class="font-bold text-xs mb-1 text-center">Style & Mood</div>
-                <p class="text-[10px] text-gray-600 text-center">Quyết định "cảm giác" của sản phẩm.</p>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead class="bg-gray-50 text-gray-400 uppercase text-[10px] font-bold">
+                        <tr><th class="p-4 text-left">Mã Job</th><th class="p-4 text-left">Yêu cầu</th><th class="p-4 text-left">Vấn đề</th></tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-50">
+                        <tr><td class="p-4 font-bold">TADEC31004</td><td class="p-4">Hiện trạng → mùa xuân</td><td class="p-4 text-red-600">Làm Tuyết → mùa xuân. Không đọc context.</td></tr>
+                        <tr><td class="p-4 font-bold">HTJAN15008Rev</td><td class="p-4">"Preparing dinner" có người</td><td class="p-4 text-red-600">Chỉ có bàn + đồ ăn. Bỏ qua động từ hành động.</td></tr>
+                        <tr><td class="p-4 font-bold">QUJAN25001</td><td class="p-4">2 AI: living + dining</td><td class="p-4 text-red-600">Chỉ làm 1, làm sai phòng. Thiếu checklist.</td></tr>
+                    </tbody>
+                </table>
             </div>
-            <div class="bg-white p-4 rounded-lg shadow-sm border-t-4 border-blue-500">
-                <div class="text-2xl font-black text-blue-600 mb-2 text-center">C</div>
-                <div class="font-bold text-xs mb-1 text-center">Composition</div>
-                <p class="text-[10px] text-gray-600 text-center">Kiểm soát góc nhìn và tính điện ảnh.</p>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+            <div class="p-6 bg-blue-50 border-b border-blue-100 flex items-center">
+                <span class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center mr-4"><i class="fas fa-microchip"></i></span>
+                <h5 class="font-bold text-lg text-blue-900 uppercase">Nhóm 2: Lỗi Kỹ Thuật AI</h5>
             </div>
-            <div class="bg-white p-4 rounded-lg shadow-sm border-t-4 border-green-500">
-                <div class="text-2xl font-black text-green-600 mb-2 text-center">A</div>
-                <div class="font-bold text-xs mb-1 text-center">Action</div>
-                <p class="text-[10px] text-gray-600 text-center">Mô tả chi tiết các chuyển động.</p>
-            </div>
-            <div class="bg-white p-4 rounded-lg shadow-sm border-t-4 border-red-500">
-                <div class="text-2xl font-black text-red-600 mb-2 text-center">M</div>
-                <div class="font-bold text-xs mb-1 text-center">Modifiers</div>
-                <p class="text-[10px] text-gray-600 text-center">Nâng cao chất lượng & đặt giới hạn.</p>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <tbody class="divide-y divide-gray-50">
+                        <tr><td class="p-4 font-bold w-32">NHJAN13010</td><td class="p-4">Đàn ông mặc bikini thay vì quần bơi</td><td class="p-4"><span class="px-2 py-1 bg-red-100 text-red-700 rounded text-[10px] font-bold">NGHIÊM TRỌNG</span></td></tr>
+                        <tr><td class="p-4 font-bold">LIJAN07001</td><td class="p-4">Quân cờ nhảy đánh nhau, không theo luật</td><td class="p-4"><span class="px-2 py-1 bg-red-100 text-red-700 rounded text-[10px] font-bold">NGHIÊM TRỌNG</span></td></tr>
+                        <tr><td class="p-4 font-bold">HTJAN07002rev2</td><td class="p-4">Mặt người biến dạng</td><td class="p-4"><span class="px-2 py-1 bg-red-100 text-red-700 rounded text-[10px] font-bold">NGHIÊM TRỌNG</span></td></tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 
-    <!-- Common Errors Table -->
-    <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm overflow-hidden">
-        <h5 class="font-bold text-lg mb-4 flex items-center text-gray-800">
-            <i class="fas fa-list-check mr-2 text-orange-500"></i>5 Lỗi Prompt Phổ Biến & Giải Pháp
-        </h5>
-        <div class="overflow-x-auto">
-            <table class="w-full text-sm border-collapse">
-                <thead>
-                    <tr class="bg-gray-50 text-gray-600 uppercase text-xs">
-                        <th class="p-3 text-left border-b">Lỗi Phổ Biến</th>
-                        <th class="p-3 text-left border-b">Biểu Hiện</th>
-                        <th class="p-3 text-left border-b">Giải Pháp (P-S-C-A-M)</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-gray-100">
-                    <tr>
-                        <td class="p-3 font-bold text-indigo-700">1. Thiếu chi tiết Action</td>
-                        <td class="p-3 text-gray-600">Chuyển động ngẫu nhiên, phi logic.</td>
-                        <td class="p-3 text-xs"><strong>(A) Action:</strong> Mô tả hành động chi tiết, tuần tự.</td>
-                    </tr>
-                    <tr>
-                        <td class="p-3 font-bold text-indigo-700">2. Thiếu Constraints Nhân vật</td>
-                        <td class="p-3 text-gray-600">Người AI biến dạng, hành vi sai.</td>
-                        <td class="p-3 text-xs"><strong>(M) Modifiers:</strong> Đặt ra "luật chơi" rõ ràng (anatomically correct).</td>
-                    </tr>
-                    <tr>
-                        <td class="p-3 font-bold text-indigo-700">3. Thiếu chỉ định Camera</td>
-                        <td class="p-3 text-gray-600">Máy quay rung lắc, không như ý.</td>
-                        <td class="p-3 text-xs"><strong>(C) Composition:</strong> Kiểm soát chặt chẽ máy quay (locked camera).</td>
-                    </tr>
-                    <tr>
-                        <td class="p-3 font-bold text-indigo-700">4. Thiếu Modifiers Chất lượng</td>
-                        <td class="p-3 text-gray-600">Video vỡ, có logo, vết cắt.</td>
-                        <td class="p-3 text-xs"><strong>(M) Modifiers:</strong> Kết thúc bằng từ khóa 4K, photorealistic.</td>
-                    </tr>
-                    <tr>
-                        <td class="p-3 font-bold text-indigo-700">5. Premise quá phức tạp</td>
-                        <td class="p-3 text-gray-600">AI không thực hiện được yêu cầu.</td>
-                        <td class="p-3 text-xs"><strong>(P) Premise:</strong> Chia nhỏ yêu cầu thành các prompt riêng biệt.</td>
-                    </tr>
-                </tbody>
-            </table>
+    <!-- Implementation & Checklist -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div class="bg-indigo-900 p-8 rounded-2xl text-white shadow-lg">
+            <h5 class="font-bold text-xl mb-6 flex items-center"><i class="fas fa-tasks mr-3"></i>CẢI TIẾN QUY TRÌNH</h5>
+            <ul class="space-y-4 text-sm opacity-90">
+                <li class="flex items-start gap-3"><i class="fas fa-check-square mt-1 text-green-400"></i><span>Double-check deliverables với brief</span></li>
+                <li class="flex items-start gap-3"><i class="fas fa-check-square mt-1 text-green-400"></i><span>Tạo checklist QC trước gửi output</span></li>
+                <li class="flex items-start gap-3"><i class="fas fa-check-square mt-1 text-green-400"></i><span>Xây dựng thư viện prompt chuẩn</span></li>
+                <li class="flex items-start gap-3"><i class="fas fa-check-square mt-1 text-green-400"></i><span>Training prompt engineering cho team</span></li>
+            </ul>
+        </div>
+        <div class="bg-white p-8 rounded-2xl border-4 border-indigo-100 shadow-sm">
+            <h5 class="font-bold text-xl mb-6 flex items-center text-indigo-900"><i class="fas fa-clipboard-check mr-3"></i>CHECKLIST QC</h5>
+            <div class="space-y-3">
+                <div class="flex items-center gap-3 p-2 bg-gray-50 rounded-lg"><i class="far fa-square text-gray-400"></i><span class="text-sm font-medium">Đủ số lượng output?</span></div>
+                <div class="flex items-center gap-3 p-2 bg-gray-50 rounded-lg"><i class="far fa-square text-gray-400"></i><span class="text-sm font-medium">Không có watermark/logo?</span></div>
+                <div class="flex items-center gap-3 p-2 bg-gray-50 rounded-lg"><i class="far fa-square text-gray-400"></i><span class="text-sm font-medium">Mặt người không biến dạng?</span></div>
+                <div class="flex items-center gap-3 p-2 bg-gray-50 rounded-lg"><i class="far fa-square text-gray-400"></i><span class="text-sm font-medium">Chuyển động tự nhiên?</span></div>
+            </div>
         </div>
     </div>
 </div>`
         }
     };
 
-    // ========== LIBRARY DATA ==========
     const libraryData = {
-        '1': { title: 'Danh Sách Công Cụ AI', content: `<div class="space-y-4"><p>Nội dung công cụ AI từ tài liệu...</p></div>` },
-        '2': { title: 'Virtual Staging', content: `<div class="space-y-4"><p>Nội dung Virtual Staging...</p></div>` },
-        '3': { title: 'Day-to-Night', content: `<div class="space-y-4"><p>Nội dung Day-to-Night...</p></div>` },
-        '4': { title: 'Real Estate Tour', content: `<div class="space-y-4"><p>Nội dung Real Estate Tour...</p></div>` },
-        '5': { title: 'Product Showcase', content: `<div class="space-y-4"><p>Nội dung Product Showcase...</p></div>` },
-        '6': { title: 'Kling O1 Video Editing', content: `<div class="space-y-4"><p>Nội dung Kling O1...</p></div>` }
+        '1': { title: 'Danh Sách Công Cụ AI', content: `<div class="p-4 bg-blue-50 rounded-xl"><p class="font-bold mb-2">Công cụ tạo ảnh:</p><ul class="list-disc ml-5 text-sm"><li>Google Nano Banana Pro</li><li>Flux</li><li>Zimage</li></ul></div>` },
+        '2': { title: 'Virtual Staging', content: `<div class="p-4 bg-orange-50 rounded-xl"><p class="font-bold mb-2">Prompt Mẫu:</p><code class="text-xs">Realistic interior staging, scandinavian style...</code></div>` },
+        '3': { title: 'Day-to-Night', content: `<div class="p-4 bg-green-50 rounded-xl"><p class="font-bold mb-2">Veo 3.1 Prompt:</p><code class="text-xs">Cinematic day to night transition, sunset lighting...</code></div>` }
     };
 
-    let currentFeedbackId = null;
-    let currentLibraryId = null;
-
-    // ========== FEEDBACK EVENT LISTENERS ==========
-    document.querySelectorAll('.feedback-card').forEach(card => {
-        card.addEventListener('click', function() {
-            const id = this.getAttribute('data-feedback-id');
-            if (feedbackData[id]) {
-                currentFeedbackId = id;
-                document.getElementById('modalTitle').textContent = feedbackData[id].title;
-                document.getElementById('modalContent').innerHTML = feedbackData[id].content;
+    // ========== MODAL INTERACTION ==========
+    function openFeedbackModal(id) {
+        if (feedbackData[id]) {
+            currentFeedbackId = id;
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContent = document.getElementById('modalContent');
+            if (modalTitle && modalContent && feedbackModal) {
+                modalTitle.textContent = feedbackData[id].title;
+                modalContent.innerHTML = feedbackData[id].content;
                 feedbackModal.classList.remove('hidden');
                 document.body.style.overflow = 'hidden';
             }
+        }
+    }
+
+    document.querySelectorAll('.feedback-card').forEach(card => {
+        card.addEventListener('click', function() {
+            const id = this.getAttribute('data-feedback-id');
+            openFeedbackModal(id);
         });
     });
 
-    // Open Feedback Full Page
+    // Full Page Button
     const openFullPageBtn = document.getElementById('openFullPageBtn');
     if (openFullPageBtn) {
         openFullPageBtn.addEventListener('click', function() {
             if (currentFeedbackId && feedbackData[currentFeedbackId]) {
-                const data = feedbackData[currentFeedbackId];
-                document.getElementById('feedbackFullPageTitle').textContent = data.title;
-                document.getElementById('feedbackFullPageContent').innerHTML = data.content;
-                feedbackModal.classList.add('hidden');
-                feedbackFullPageView.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
+                const fpTitle = document.getElementById('feedbackFullPageTitle');
+                const fpContent = document.getElementById('feedbackFullPageContent');
+                if (fpTitle && fpContent && feedbackFullPageView) {
+                    fpTitle.textContent = feedbackData[currentFeedbackId].title;
+                    fpContent.innerHTML = feedbackData[currentFeedbackId].content;
+                    feedbackModal.classList.add('hidden');
+                    feedbackFullPageView.classList.remove('hidden');
+                }
             }
         });
     }
 
-    // Close Feedback Full Page
     const closeFeedbackFullPageBtn = document.getElementById('closeFeedbackFullPageBtn');
     if (closeFeedbackFullPageBtn) {
-        closeFeedbackFullPageBtn.addEventListener('click', closeAllModals);
+        closeFeedbackFullPageBtn.addEventListener('click', function() {
+            feedbackFullPageView.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        });
     }
 
-    // ========== LIBRARY EVENT LISTENERS ==========
+    // Library Click
     document.querySelectorAll('.library-card').forEach(card => {
         card.addEventListener('click', function() {
             const id = this.getAttribute('data-library-id');
-            if (libraryData[id]) {
-                currentLibraryId = id;
+            if (libraryData[id] && libraryModal) {
                 document.getElementById('libraryModalTitle').textContent = libraryData[id].title;
                 document.getElementById('libraryModalContent').innerHTML = libraryData[id].content;
                 libraryModal.classList.remove('hidden');
@@ -312,48 +303,29 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Open Library Full Page
-    const openLibraryFullPageBtn = document.getElementById('openLibraryFullPageBtn');
-    if (openLibraryFullPageBtn) {
-        openLibraryFullPageBtn.addEventListener('click', function() {
-            if (currentLibraryId && libraryData[currentLibraryId]) {
-                const data = libraryData[currentLibraryId];
-                document.getElementById('libraryFullPageTitle').textContent = data.title;
-                document.getElementById('libraryFullPageContent').innerHTML = data.content;
-                libraryModal.classList.add('hidden');
-                libraryFullPageView.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-            }
-        });
-    }
-
-    // ========== PASSCODE HANDLER ==========
-    const submitBtn = document.getElementById('submitPasscodeBtn');
-    const input = document.getElementById('passcodeInput');
-    if (submitBtn && input) {
-        submitBtn.addEventListener('click', function() {
+    // Passcode & Excel (Existing logic)
+    const submitPasscodeBtn = document.getElementById('submitPasscodeBtn');
+    if (submitPasscodeBtn) {
+        submitPasscodeBtn.addEventListener('click', function() {
+            const input = document.getElementById('passcodeInput');
             if (input.value === '2026') {
                 document.getElementById('reportsPasscodeLayer').style.display = 'none';
                 document.getElementById('reportContent').style.display = 'block';
             } else {
                 const err = document.getElementById('passcodeError');
-                if (err) {
-                    err.textContent = 'Sai passcode!';
-                    err.classList.remove('hidden');
-                }
+                if (err) { err.textContent = 'Sai passcode!'; err.classList.remove('hidden'); }
             }
         });
     }
 
-    // ========== EXCEL TOGGLE ==========
-    const excelBtn = document.getElementById('toggleSaleEmbedBtn');
-    if (excelBtn) {
-        excelBtn.addEventListener('click', function() {
+    const toggleSaleEmbedBtn = document.getElementById('toggleSaleEmbedBtn');
+    if (toggleSaleEmbedBtn) {
+        toggleSaleEmbedBtn.addEventListener('click', function() {
             const container = document.getElementById('saleEmbedContainer');
-            container.classList.toggle('hidden');
-            this.innerHTML = container.classList.contains('hidden') ? 
-                '<i class="fas fa-table mr-2"></i>Xem Excel Trực Tiếp' : 
-                '<i class="fas fa-table mr-2"></i>Ẩn Excel';
+            if (container) {
+                container.classList.toggle('hidden');
+                this.innerHTML = container.classList.contains('hidden') ? '<i class="fas fa-table mr-2"></i>Xem Excel' : '<i class="fas fa-table mr-2"></i>Ẩn Excel';
+            }
         });
     }
 });
