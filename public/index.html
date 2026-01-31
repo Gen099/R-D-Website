@@ -629,17 +629,14 @@
                             <button id="sortByDateBtn" class="px-3 py-2 bg-green-100 text-green-700 rounded hover:bg-green-200 transition text-sm font-medium">
                                 <i class="fas fa-calendar-alt mr-1"></i>Sắp xếp theo ngày
                             </button>
-                            <button id="toggleGridViewBtn" class="px-3 py-2 bg-purple-100 text-purple-700 rounded hover:bg-purple-200 transition text-sm font-medium">
-                                <i class="fas fa-th mr-1"></i>Chế độ lưới
-                            </button>
                         </div>
                     </div>
                     
                     <!-- Grid View -->
-                    <div id="feedbackGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <!-- Feedback Card 1 -->
-                        <div class="feedback-card border rounded-lg overflow-hidden hover:shadow-xl transition cursor-pointer" data-feedback-id="1" data-date="2026-01-30">
-                            <div class="relative bg-gradient-to-br from-blue-50 to-indigo-100 p-6 h-48 flex flex-col justify-between">
+                    <div id="feedbackGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        <!-- Feedback Card 1 - Real Data -->
+                        <div class="feedback-card border rounded-lg overflow-hidden hover:shadow-xl transition cursor-pointer" data-feedback-id="1" data-date="2026-01-30" data-has-content="true">
+                            <div class="relative bg-gradient-to-br from-blue-50 to-indigo-100 p-6 h-56 flex flex-col justify-between">
                                 <div>
                                     <div class="flex items-center justify-between mb-2">
                                         <span class="text-xs font-semibold text-blue-700 bg-blue-200 px-2 py-1 rounded">30/01/2026</span>
@@ -650,98 +647,54 @@
                                 </div>
                                 <div class="flex items-center justify-between text-xs text-gray-600">
                                     <span><i class="fas fa-file-alt mr-1"></i>Excel + Biểu đồ</span>
-                                    <span><i class="fas fa-arrow-right"></i></span>
+                                    <div class="flex gap-2">
+                                        <button class="expand-btn hover:text-blue-600" title="Mở rộng full page">
+                                            <i class="fas fa-expand-alt"></i>
+                                        </button>
+                                        <span><i class="fas fa-arrow-right"></i></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Feedback Card 2 -->
-                        <div class="feedback-card border rounded-lg overflow-hidden hover:shadow-xl transition cursor-pointer" data-feedback-id="2" data-date="2026-01-29">
-                            <div class="relative bg-gradient-to-br from-green-50 to-emerald-100 p-6 h-48 flex flex-col justify-between">
-                                <div>
-                                    <div class="flex items-center justify-between mb-2">
-                                        <span class="text-xs font-semibold text-green-700 bg-green-200 px-2 py-1 rounded">29/01/2026</span>
-                                        <i class="fas fa-video text-2xl text-green-600"></i>
-                                    </div>
-                                    <h4 class="font-bold text-gray-800 text-lg mb-2">Lỗi Video Mobile iOS</h4>
-                                    <p class="text-sm text-gray-700">Phân tích lỗi codec và đề xuất giải pháp tối ưu</p>
-                                </div>
-                                <div class="flex items-center justify-between text-xs text-gray-600">
-                                    <span><i class="fas fa-file-alt mr-1"></i>Báo cáo chi tiết</span>
-                                    <span><i class="fas fa-arrow-right"></i></span>
-                                </div>
+                        <!-- Feedback Card 2-6 - Chưa có -->
+                        <div class="feedback-card-empty border-2 border-dashed rounded-lg overflow-hidden hover:shadow-lg transition" data-feedback-id="empty-2">
+                            <div class="relative bg-gradient-to-br from-gray-50 to-gray-100 p-6 h-56 flex flex-col items-center justify-center">
+                                <i class="fas fa-file-plus text-5xl text-gray-300 mb-4"></i>
+                                <h4 class="font-bold text-gray-400 text-lg mb-2">Chưa có</h4>
+                                <p class="text-sm text-gray-400 text-center">Bài phân tích sẽ được cập nhật sau</p>
                             </div>
                         </div>
 
-                        <!-- Feedback Card 3 -->
-                        <div class="feedback-card border rounded-lg overflow-hidden hover:shadow-xl transition cursor-pointer" data-feedback-id="3" data-date="2026-01-28">
-                            <div class="relative bg-gradient-to-br from-purple-50 to-violet-100 p-6 h-48 flex flex-col justify-between">
-                                <div>
-                                    <div class="flex items-center justify-between mb-2">
-                                        <span class="text-xs font-semibold text-purple-700 bg-purple-200 px-2 py-1 rounded">28/01/2026</span>
-                                        <i class="fas fa-tachometer-alt text-2xl text-purple-600"></i>
-                                    </div>
-                                    <h4 class="font-bold text-gray-800 text-lg mb-2">Tối Ưu Render AI</h4>
-                                    <p class="text-sm text-gray-700">Giảm thời gian render từ 45s xuống 30s với GPU optimization</p>
-                                </div>
-                                <div class="flex items-center justify-between text-xs text-gray-600">
-                                    <span><i class="fas fa-file-alt mr-1"></i>Performance Report</span>
-                                    <span><i class="fas fa-arrow-right"></i></span>
-                                </div>
+                        <div class="feedback-card-empty border-2 border-dashed rounded-lg overflow-hidden hover:shadow-lg transition" data-feedback-id="empty-3">
+                            <div class="relative bg-gradient-to-br from-gray-50 to-gray-100 p-6 h-56 flex flex-col items-center justify-center">
+                                <i class="fas fa-file-plus text-5xl text-gray-300 mb-4"></i>
+                                <h4 class="font-bold text-gray-400 text-lg mb-2">Chưa có</h4>
+                                <p class="text-sm text-gray-400 text-center">Bài phân tích sẽ được cập nhật sau</p>
                             </div>
                         </div>
 
-                        <!-- Feedback Card 4 -->
-                        <div class="feedback-card border rounded-lg overflow-hidden hover:shadow-xl transition cursor-pointer" data-feedback-id="4" data-date="2026-01-27">
-                            <div class="relative bg-gradient-to-br from-orange-50 to-amber-100 p-6 h-48 flex flex-col justify-between">
-                                <div>
-                                    <div class="flex items-center justify-between mb-2">
-                                        <span class="text-xs font-semibold text-orange-700 bg-orange-200 px-2 py-1 rounded">27/01/2026</span>
-                                        <i class="fas fa-bug text-2xl text-orange-600"></i>
-                                    </div>
-                                    <h4 class="font-bold text-gray-800 text-lg mb-2">Lỗi Vật Lý Trong Video</h4>
-                                    <p class="text-sm text-gray-700">Phân tích các lỗi vật lý phổ biến và cách khắc phục</p>
-                                </div>
-                                <div class="flex items-center justify-between text-xs text-gray-600">
-                                    <span><i class="fas fa-file-alt mr-1"></i>Technical Analysis</span>
-                                    <span><i class="fas fa-arrow-right"></i></span>
-                                </div>
+                        <div class="feedback-card-empty border-2 border-dashed rounded-lg overflow-hidden hover:shadow-lg transition" data-feedback-id="empty-4">
+                            <div class="relative bg-gradient-to-br from-gray-50 to-gray-100 p-6 h-56 flex flex-col items-center justify-center">
+                                <i class="fas fa-file-plus text-5xl text-gray-300 mb-4"></i>
+                                <h4 class="font-bold text-gray-400 text-lg mb-2">Chưa có</h4>
+                                <p class="text-sm text-gray-400 text-center">Bài phân tích sẽ được cập nhật sau</p>
                             </div>
                         </div>
 
-                        <!-- Feedback Card 5 -->
-                        <div class="feedback-card border rounded-lg overflow-hidden hover:shadow-xl transition cursor-pointer" data-feedback-id="5" data-date="2026-01-26">
-                            <div class="relative bg-gradient-to-br from-pink-50 to-rose-100 p-6 h-48 flex flex-col justify-between">
-                                <div>
-                                    <div class="flex items-center justify-between mb-2">
-                                        <span class="text-xs font-semibold text-pink-700 bg-pink-200 px-2 py-1 rounded">26/01/2026</span>
-                                        <i class="fas fa-palette text-2xl text-pink-600"></i>
-                                    </div>
-                                    <h4 class="font-bold text-gray-800 text-lg mb-2">Chất Lượng AI Output</h4>
-                                    <p class="text-sm text-gray-700">Đánh giá chất lượng output từ các công cụ AI khác nhau</p>
-                                </div>
-                                <div class="flex items-center justify-between text-xs text-gray-600">
-                                    <span><i class="fas fa-file-alt mr-1"></i>Quality Report</span>
-                                    <span><i class="fas fa-arrow-right"></i></span>
-                                </div>
+                        <div class="feedback-card-empty border-2 border-dashed rounded-lg overflow-hidden hover:shadow-lg transition" data-feedback-id="empty-5">
+                            <div class="relative bg-gradient-to-br from-gray-50 to-gray-100 p-6 h-56 flex flex-col items-center justify-center">
+                                <i class="fas fa-file-plus text-5xl text-gray-300 mb-4"></i>
+                                <h4 class="font-bold text-gray-400 text-lg mb-2">Chưa có</h4>
+                                <p class="text-sm text-gray-400 text-center">Bài phân tích sẽ được cập nhật sau</p>
                             </div>
                         </div>
 
-                        <!-- Feedback Card 6 -->
-                        <div class="feedback-card border rounded-lg overflow-hidden hover:shadow-xl transition cursor-pointer" data-feedback-id="6" data-date="2026-01-25">
-                            <div class="relative bg-gradient-to-br from-teal-50 to-cyan-100 p-6 h-48 flex flex-col justify-between">
-                                <div>
-                                    <div class="flex items-center justify-between mb-2">
-                                        <span class="text-xs font-semibold text-teal-700 bg-teal-200 px-2 py-1 rounded">25/01/2026</span>
-                                        <i class="fas fa-clock text-2xl text-teal-600"></i>
-                                    </div>
-                                    <h4 class="font-bold text-gray-800 text-lg mb-2">Phân Tích Deadline</h4>
-                                    <p class="text-sm text-gray-700">Nghiên cứu nguyên nhân trễ deadline và đề xuất cải thiện</p>
-                                </div>
-                                <div class="flex items-center justify-between text-xs text-gray-600">
-                                    <span><i class="fas fa-file-alt mr-1"></i>Timeline Analysis</span>
-                                    <span><i class="fas fa-arrow-right"></i></span>
-                                </div>
+                        <div class="feedback-card-empty border-2 border-dashed rounded-lg overflow-hidden hover:shadow-lg transition" data-feedback-id="empty-6">
+                            <div class="relative bg-gradient-to-br from-gray-50 to-gray-100 p-6 h-56 flex flex-col items-center justify-center">
+                                <i class="fas fa-file-plus text-5xl text-gray-300 mb-4"></i>
+                                <h4 class="font-bold text-gray-400 text-lg mb-2">Chưa có</h4>
+                                <p class="text-sm text-gray-400 text-center">Bài phân tích sẽ được cập nhật sau</p>
                             </div>
                         </div>
                     </div>
@@ -750,11 +703,19 @@
                 <!-- Feedback Detail Modal -->
                 <div id="feedbackModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
                     <div class="bg-white rounded-lg shadow-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden">
-                        <div class="flex items-center justify-between p-6 border-b">
+                        <div class="flex items-center justify-between p-6 border-b bg-gradient-to-r from-blue-50 to-indigo-50">
                             <h3 id="modalTitle" class="text-2xl font-bold text-gray-800">Chi Tiết Phân Tích</h3>
-                            <button id="closeModalBtn" class="text-gray-500 hover:text-gray-700 text-2xl">
-                                <i class="fas fa-times"></i>
-                            </button>
+                            <div class="flex gap-2">
+                                <button id="openFullPageBtn" class="px-3 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition text-sm font-medium" title="Mở full page">
+                                    <i class="fas fa-external-link-alt mr-1"></i>Mở Full Page
+                                </button>
+                                <button id="openWhiteboardBtn" class="px-3 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 transition text-sm font-medium" title="Mở Whiteboard">
+                                    <i class="fas fa-pen-fancy mr-1"></i>Whiteboard
+                                </button>
+                                <button id="closeModalBtn" class="text-gray-500 hover:text-gray-700 text-2xl px-2">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
                         </div>
                         <div id="modalContent" class="p-6 overflow-y-auto" style="max-height: calc(90vh - 140px);">
                             <!-- Content will be loaded dynamically -->
@@ -762,6 +723,56 @@
                     </div>
                 </div>
 
+                <!-- Full Page View -->
+                <div id="fullPageView" class="hidden fixed inset-0 bg-white z-[60]">
+                    <div class="h-full flex flex-col">
+                        <!-- Header -->
+                        <div class="flex items-center justify-between p-4 border-b bg-gradient-to-r from-blue-50 to-indigo-50">
+                            <h3 id="fullPageTitle" class="text-2xl font-bold text-gray-800">Chi Tiết Phân Tích</h3>
+                            <div class="flex gap-2">
+                                <button id="fullPageWhiteboardBtn" class="px-3 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 transition text-sm font-medium">
+                                    <i class="fas fa-pen-fancy mr-1"></i>Whiteboard
+                                </button>
+                                <button id="closeFullPageBtn" class="px-3 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition text-sm font-medium">
+                                    <i class="fas fa-times mr-1"></i>Đóng
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Content -->
+                        <div id="fullPageContent" class="flex-1 overflow-y-auto p-8">
+                            <!-- Content will be loaded dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Whiteboard Modal -->
+                <div id="whiteboardModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-[70] flex items-center justify-center p-4">
+                    <div class="bg-white rounded-lg shadow-2xl w-full h-full max-w-[95vw] max-h-[95vh] overflow-hidden flex flex-col">
+                        <div class="flex items-center justify-between p-4 border-b bg-gradient-to-r from-purple-50 to-pink-50">
+                            <h3 class="text-xl font-bold text-gray-800">
+                                <i class="fas fa-pen-fancy mr-2 text-purple-600"></i>Whiteboard & Notes
+                            </h3>
+                            <div class="flex gap-2">
+                                <button id="saveWhiteboardBtn" class="px-3 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition text-sm font-medium">
+                                    <i class="fas fa-save mr-1"></i>Lưu
+                                </button>
+                                <button id="clearWhiteboardBtn" class="px-3 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition text-sm font-medium">
+                                    <i class="fas fa-trash mr-1"></i>Xóa
+                                </button>
+                                <button id="closeWhiteboardBtn" class="text-gray-500 hover:text-gray-700 text-2xl px-2">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex-1 overflow-hidden">
+                            <iframe id="whiteboardFrame" 
+                                    src="https://excalidraw.com/" 
+                                    class="w-full h-full border-0"
+                                    allow="clipboard-read; clipboard-write">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
                 <!-- Error Statistics Chart -->
                 <div class="bg-white rounded-lg shadow-md p-6 mb-6">
                     <div class="flex items-center justify-between mb-4 flex-wrap gap-4">
