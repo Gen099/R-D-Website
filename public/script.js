@@ -71,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
         iframe.src = '/dashboard.html';
         iframe.style.width = '100%';
         iframe.style.height = '100%';
+        iframe.style.minHeight = '600px';
         iframe.style.border = 'none';
         iframe.style.borderRadius = '6px';
         iframe.setAttribute('sandbox', 'allow-same-origin allow-scripts');
