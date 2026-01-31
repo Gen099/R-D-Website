@@ -92,6 +92,227 @@ document.addEventListener('DOMContentLoaded', function() {
     const initialHash = window.location.hash ? window.location.hash.substring(1) : (sections[0] ? sections[0].id : 'overview');
     window.showSection(initialHash);
 
+    // ========== FEEDBACK CARD HANDLERS ==========
+    const feedbackGrid = document.getElementById('feedbackGrid');
+    if (feedbackGrid) {
+        const feedbackCards = document.querySelectorAll('.feedback-card');
+        const feedbackModal = document.getElementById('feedbackModal');
+        const feedbackModalTitle = document.getElementById('modalTitle');
+        const feedbackModalContent = document.getElementById('modalContent');
+        const closeFeedbackModalBtn = document.getElementById('closeModalBtn');
+        const openFeedbackFullPageBtn = document.getElementById('openFullPageBtn');
+        
+        const feedbackFullPageView = document.getElementById('fullPageView');
+        const feedbackFullPageTitle = document.getElementById('fullPageTitle');
+        const feedbackFullPageContent = document.getElementById('fullPageContent');
+        const closeFeedbackFullPageBtn = document.getElementById('closeFullPageBtn');
+
+        let currentFeedbackId = null;
+
+        // Feedback data - Phân Tích 23 Job Feedback
+        const feedbackData = {
+            '1': {
+                title: 'Phân Tích 23 Job Feedback',
+                content: `
+<div class="space-y-6">
+    <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-600">
+        <h4 class="font-bold text-blue-900 mb-3 text-xl flex items-center">
+            <i class="fas fa-info-circle mr-2"></i>Tổng Quan
+        </h4>
+        <p class="text-gray-700 mb-3">
+            <strong>Phân Tích 23 Job Feedback</strong> là báo cáo chuyên sâu về lỗi và hiệu quả vận hành của hệ thống AI Video.
+            Báo cáo xác định các điểm nghẽn hệ thống, nguyên nhân gốc rễ và lộ trình cải thiện chất lượng dịch vụ.
+        </p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
+            <div class="bg-white p-3 rounded text-center shadow-sm">
+                <div class="text-2xl font-bold text-red-600">23</div>
+                <div class="text-xs text-gray-600">Job Codes</div>
+            </div>
+            <div class="bg-white p-3 rounded text-center shadow-sm">
+                <div class="text-2xl font-bold text-orange-600">35%</div>
+                <div class="text-xs text-gray-600">Hiểu sai yêu cầu</div>
+            </div>
+            <div class="bg-white p-3 rounded text-center shadow-sm">
+                <div class="text-2xl font-bold text-yellow-600">100%</div>
+                <div class="text-xs text-gray-600">Object Animation</div>
+            </div>
+            <div class="bg-white p-3 rounded text-center shadow-sm">
+                <div class="text-2xl font-bold text-purple-600">4</div>
+                <div class="text-xs text-gray-600">Nhóm lỗi</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-red-50 p-6 rounded-lg border-l-4 border-red-600">
+        <h4 class="font-bold text-red-900 mb-3 text-xl flex items-center">
+            <i class="fas fa-exclamation-triangle mr-2"></i>4 Nhóm Lỗi Chính
+        </h4>
+        <div class="space-y-3">
+            <div class="flex items-start bg-white p-3 rounded">
+                <div class="bg-red-100 text-red-700 font-bold px-3 py-1 rounded mr-3 min-w-fit">35%</div>
+                <div>
+                    <p class="font-semibold text-gray-800">Hiểu sai yêu cầu (8 jobs)</p>
+                    <p class="text-sm text-gray-600">Không nắm vững brief, bỏ sót yêu cầu, không hiểu context địa phương</p>
+                </div>
+            </div>
+            <div class="flex items-start bg-white p-3 rounded">
+                <div class="bg-orange-100 text-orange-700 font-bold px-3 py-1 rounded mr-3 min-w-fit">26%</div>
+                <div>
+                    <p class="font-semibold text-gray-800">Chất lượng AI kém (6 jobs)</p>
+                    <p class="text-sm text-gray-600">Mặt biến dạng, người fake, lộ logo công cụ, viền cắt trắng</p>
+                </div>
+            </div>
+            <div class="flex items-start bg-white p-3 rounded">
+                <div class="bg-yellow-100 text-yellow-700 font-bold px-3 py-1 rounded mr-3 min-w-fit">22%</div>
+                <div>
+                    <p class="font-semibold text-gray-800">Trễ deadline (5 jobs)</p>
+                    <p class="text-sm text-gray-600">Trễ từ 3-9 tiếng do quá tải hoặc phối hợp kém</p>
+                </div>
+            </div>
+            <div class="flex items-start bg-white p-3 rounded">
+                <div class="bg-blue-100 text-blue-700 font-bold px-3 py-1 rounded mr-3 min-w-fit">17%</div>
+                <div>
+                    <p class="font-semibold text-gray-800">Lỗi Logic & Vật lý (4 jobs)</p>
+                    <p class="text-sm text-gray-600">Chuyển động phi lý, hành vi không tự nhiên</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-purple-50 p-6 rounded-lg border-l-4 border-purple-600">
+        <h4 class="font-bold text-purple-900 mb-3 text-xl flex items-center">
+            <i class="fas fa-chart-bar mr-2"></i>Tỷ Lệ Lỗi Theo Loại Hiệu Ứng
+        </h4>
+        <div class="space-y-2">
+            <div class="flex items-center justify-between p-2 bg-white rounded">
+                <span class="text-sm font-medium">Object Animation</span>
+                <div class="flex items-center gap-2">
+                    <div class="w-32 bg-gray-200 rounded-full h-2">
+                        <div class="bg-red-600 h-2 rounded-full" style="width: 100%"></div>
+                    </div>
+                    <span class="text-sm font-bold text-red-600">100%</span>
+                </div>
+            </div>
+            <div class="flex items-center justify-between p-2 bg-white rounded">
+                <span class="text-sm font-medium">Creative/Fantasy</span>
+                <div class="flex items-center gap-2">
+                    <div class="w-32 bg-gray-200 rounded-full h-2">
+                        <div class="bg-red-600 h-2 rounded-full" style="width: 100%"></div>
+                    </div>
+                    <span class="text-sm font-bold text-red-600">100%</span>
+                </div>
+            </div>
+            <div class="flex items-center justify-between p-2 bg-white rounded">
+                <span class="text-sm font-medium">Agent Composite</span>
+                <div class="flex items-center gap-2">
+                    <div class="w-32 bg-gray-200 rounded-full h-2">
+                        <div class="bg-red-600 h-2 rounded-full" style="width: 100%"></div>
+                    </div>
+                    <span class="text-sm font-bold text-red-600">100%</span>
+                </div>
+            </div>
+            <div class="flex items-center justify-between p-2 bg-white rounded">
+                <span class="text-sm font-medium">Người/Lifestyle</span>
+                <div class="flex items-center gap-2">
+                    <div class="w-32 bg-gray-200 rounded-full h-2">
+                        <div class="bg-orange-500 h-2 rounded-full" style="width: 71%"></div>
+                    </div>
+                    <span class="text-sm font-bold text-orange-600">71%</span>
+                </div>
+            </div>
+            <div class="flex items-center justify-between p-2 bg-white rounded">
+                <span class="text-sm font-medium">Season/Weather</span>
+                <div class="flex items-center gap-2">
+                    <div class="w-32 bg-gray-200 rounded-full h-2">
+                        <div class="bg-orange-500 h-2 rounded-full" style="width: 67%"></div>
+                    </div>
+                    <span class="text-sm font-bold text-orange-600">67%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-600">
+        <h4 class="font-bold text-green-900 mb-3 text-xl flex items-center">
+            <i class="fas fa-lightbulb mr-2"></i>Giải Pháp Đề Xuất
+        </h4>
+        <ul class="space-y-2">
+            <li class="flex items-start">
+                <i class="fas fa-check-circle text-green-600 mt-1 mr-3"></i>
+                <span class="text-gray-700"><strong>Xây dựng QC Checklist:</strong> Thiết lập bộ tiêu chuẩn kiểm tra cho từng loại Effect</span>
+            </li>
+            <li class="flex items-start">
+                <i class="fas fa-check-circle text-green-600 mt-1 mr-3"></i>
+                <span class="text-gray-700"><strong>Chuẩn hóa Prompt:</strong> Tạo thư viện mẫu cho các yêu cầu phổ biến</span>
+            </li>
+            <li class="flex items-start">
+                <i class="fas fa-check-circle text-green-600 mt-1 mr-3"></i>
+                <span class="text-gray-700"><strong>Nâng cấp quy trình Brief:</strong> Bắt buộc clarify các điểm chưa rõ</span>
+            </li>
+            <li class="flex items-start">
+                <i class="fas fa-check-circle text-green-600 mt-1 mr-3"></i>
+                <span class="text-gray-700"><strong>Đào tạo Context:</strong> Cập nhật kiến thức về văn hóa và bối cảnh địa phương</span>
+            </li>
+        </ul>
+    </div>
+</div>`
+            }
+        };
+
+        feedbackCards.forEach(card => {
+            card.addEventListener('click', function(e) {
+                const feedbackId = this.getAttribute('data-feedback-id');
+                if (e.target.closest('.expand-btn')) {
+                    openFeedbackFullPage(feedbackId);
+                    return;
+                }
+                openFeedbackModal(feedbackId);
+            });
+        });
+
+        function openFeedbackModal(feedbackId) {
+            if (feedbackData[feedbackId]) {
+                currentFeedbackId = feedbackId;
+                const data = feedbackData[feedbackId];
+                if (feedbackModalTitle) feedbackModalTitle.textContent = data.title;
+                if (feedbackModalContent) feedbackModalContent.innerHTML = data.content;
+                if (feedbackModal) feedbackModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function openFeedbackFullPage(feedbackId) {
+            if (feedbackData[feedbackId]) {
+                const data = feedbackData[feedbackId];
+                if (feedbackFullPageTitle) feedbackFullPageTitle.textContent = data.title;
+                if (feedbackFullPageContent) feedbackFullPageContent.innerHTML = data.content;
+                if (feedbackFullPageView) feedbackFullPageView.classList.remove('hidden');
+                if (feedbackModal) feedbackModal.classList.add('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        if (closeFeedbackModalBtn) {
+            closeFeedbackModalBtn.addEventListener('click', () => {
+                feedbackModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            });
+        }
+
+        if (openFeedbackFullPageBtn) {
+            openFeedbackFullPageBtn.addEventListener('click', () => {
+                if (currentFeedbackId) openFeedbackFullPage(currentFeedbackId);
+            });
+        }
+
+        if (closeFeedbackFullPageBtn) {
+            closeFeedbackFullPageBtn.addEventListener('click', () => {
+                feedbackFullPageView.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            });
+        }
+    }
+
     // ========== ROADMAP HANDLERS ==========
     const roadmapGrid = document.getElementById('roadmapGrid');
     if (roadmapGrid) {
