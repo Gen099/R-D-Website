@@ -65,25 +65,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ========== LOAD DASHBOARD CONTENT FROM EXTERNAL FILE ==========
-    function loadDashboardContent(targetElement) {
-        fetch('/dashboard.html')
-            .then(response => response.text())
-            .then(html => {
-                // Extract body content from the fetched HTML
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                const bodyContent = doc.body.innerHTML;
-                targetElement.innerHTML = bodyContent;
-                
-                // Re-initialize dashboard tabs after content is loaded
-                initializeDashboardTabs();
-                console.log("Dashboard content loaded successfully");
-            })
-            .catch(error => {
-                console.error("Error loading dashboard:", error);
-                targetElement.innerHTML = '<p>Lỗi khi tải nội dung. Vui lòng tải lại trang.</p>';
-            });
+    // ========== LOAD DASHBOARD USING IFRAME ==========
+    function loadDashboardInIframe(targetElement) {
+        const iframe = document.createElement('iframe');
+        iframe.src = '/dashboard.html';
+        iframe.style.width = '100%';
+        iframe.style.height = '100%';
+        iframe.style.border = 'none';
+        iframe.style.borderRadius = '6px';
+        iframe.setAttribute('sandbox', 'allow-same-origin allow-scripts');
+        
+        targetElement.innerHTML = '';
+        targetElement.appendChild(iframe);
+        console.log("Dashboard iframe loaded");
     }
 
     // ========== FEEDBACK CARD CLICK HANDLER ==========
@@ -93,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (feedbackModal && modalContent) {
                 feedbackModal.classList.remove('hidden');
                 document.body.style.overflow = 'hidden';
-                loadDashboardContent(modalContent);
+                loadDashboardInIframe(modalContent);
             }
         });
     });
@@ -103,50 +97,10 @@ document.addEventListener('DOMContentLoaded', function() {
         openFullPageBtn.addEventListener('click', function() {
             if (fullPageView && fullPageContent) {
                 fullPageView.classList.remove('hidden');
-                loadDashboardContent(fullPageContent);
+                loadDashboardInIframe(fullPageContent);
             }
         });
     }
-
-    // ========== INITIALIZE DASHBOARD TABS ==========
-    function initializeDashboardTabs() {
-        const tabButtons = document.querySelectorAll('.tab-button');
-        const tabContents = document.querySelectorAll('.tab-content');
-        
-        tabButtons.forEach((button, index) => {
-            button.addEventListener('click', function() {
-                // Remove active class from all buttons and contents
-                tabButtons.forEach(btn => btn.classList.remove('active'));
-                tabContents.forEach(content => content.classList.remove('active'));
-                
-                // Add active class to clicked button and corresponding content
-                button.classList.add('active');
-                if (tabContents[index]) {
-                    tabContents[index].classList.add('active');
-                }
-            });
-        });
-        
-        // Activate first tab by default
-        if (tabButtons.length > 0) {
-            tabButtons[0].classList.add('active');
-        }
-        if (tabContents.length > 0) {
-            tabContents[0].classList.add('active');
-        }
-    }
-
-    // ========== GLOBAL FUNCTION FOR TAB SWITCHING ==========
-    window.switchDashboardTab = function(index) {
-        const buttons = document.querySelectorAll('.tab-button');
-        const contents = document.querySelectorAll('.tab-content');
-        buttons.forEach((btn, i) => {
-            btn.classList.toggle('active', i === index);
-        });
-        contents.forEach((content, i) => {
-            content.classList.toggle('active', i === index);
-        });
-    };
 
     console.log("All scripts loaded successfully");
 });
