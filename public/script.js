@@ -179,59 +179,6 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
     </div>
 
-    <div class="bg-purple-50 p-6 rounded-lg border-l-4 border-purple-600">
-        <h4 class="font-bold text-purple-900 mb-3 text-xl flex items-center">
-            <i class="fas fa-chart-bar mr-2"></i>Tỷ Lệ Lỗi Theo Loại Hiệu Ứng
-        </h4>
-        <div class="space-y-2">
-            <div class="flex items-center justify-between p-2 bg-white rounded">
-                <span class="text-sm font-medium">Object Animation</span>
-                <div class="flex items-center gap-2">
-                    <div class="w-32 bg-gray-200 rounded-full h-2">
-                        <div class="bg-red-600 h-2 rounded-full" style="width: 100%"></div>
-                    </div>
-                    <span class="text-sm font-bold text-red-600">100%</span>
-                </div>
-            </div>
-            <div class="flex items-center justify-between p-2 bg-white rounded">
-                <span class="text-sm font-medium">Creative/Fantasy</span>
-                <div class="flex items-center gap-2">
-                    <div class="w-32 bg-gray-200 rounded-full h-2">
-                        <div class="bg-red-600 h-2 rounded-full" style="width: 100%"></div>
-                    </div>
-                    <span class="text-sm font-bold text-red-600">100%</span>
-                </div>
-            </div>
-            <div class="flex items-center justify-between p-2 bg-white rounded">
-                <span class="text-sm font-medium">Agent Composite</span>
-                <div class="flex items-center gap-2">
-                    <div class="w-32 bg-gray-200 rounded-full h-2">
-                        <div class="bg-red-600 h-2 rounded-full" style="width: 100%"></div>
-                    </div>
-                    <span class="text-sm font-bold text-red-600">100%</span>
-                </div>
-            </div>
-            <div class="flex items-center justify-between p-2 bg-white rounded">
-                <span class="text-sm font-medium">Người/Lifestyle</span>
-                <div class="flex items-center gap-2">
-                    <div class="w-32 bg-gray-200 rounded-full h-2">
-                        <div class="bg-orange-500 h-2 rounded-full" style="width: 71%"></div>
-                    </div>
-                    <span class="text-sm font-bold text-orange-600">71%</span>
-                </div>
-            </div>
-            <div class="flex items-center justify-between p-2 bg-white rounded">
-                <span class="text-sm font-medium">Season/Weather</span>
-                <div class="flex items-center gap-2">
-                    <div class="w-32 bg-gray-200 rounded-full h-2">
-                        <div class="bg-orange-500 h-2 rounded-full" style="width: 67%"></div>
-                    </div>
-                    <span class="text-sm font-bold text-orange-600">67%</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-600">
         <h4 class="font-bold text-green-900 mb-3 text-xl flex items-center">
             <i class="fas fa-lightbulb mr-2"></i>Giải Pháp Đề Xuất
@@ -399,6 +346,150 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    // ========== LIBRARY CARD HANDLERS ==========
+    const libraryGrid = document.getElementById('libraryGrid');
+    if (libraryGrid) {
+        const libraryCards = document.querySelectorAll('.library-card');
+        const libraryModal = document.getElementById('libraryModal');
+        const libraryModalTitle = document.getElementById('libraryModalTitle');
+        const libraryModalContent = document.getElementById('libraryModalContent');
+        const closeLibraryModalBtn = document.getElementById('closeLibraryModalBtn');
+        const openLibraryFullPageBtn = document.getElementById('openLibraryFullPageBtn');
+        
+        const libraryFullPageView = document.getElementById('libraryFullPageView');
+        const libraryFullPageTitle = document.getElementById('libraryFullPageTitle');
+        const libraryFullPageContent = document.getElementById('libraryFullPageContent');
+        const closeLibraryFullPageBtn = document.getElementById('closeLibraryFullPageBtn');
+
+        let currentLibraryId = null;
+
+        // Library data - Thư Viện Prompt AI Fotober
+        const libraryData = {
+            '1': {
+                title: 'Danh Sách Công Cụ AI',
+                content: `<div class="space-y-6"><div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-600"><h4 class="font-bold text-blue-900 mb-4 text-lg flex items-center"><i class="fas fa-tools mr-2"></i>Tạo Ảnh (Image Generation)</h4><div class="overflow-x-auto"><table class="w-full text-sm"><thead><tr class="bg-blue-100"><th class="p-2 text-left">Công Cụ</th><th class="p-2 text-left">Thế Mạnh</th><th class="p-2 text-left">Tốc Độ</th><th class="p-2 text-left">Giá</th></tr></thead><tbody><tr class="border-b"><td class="p-2 font-semibold">Google Nano Banana Pro</td><td class="p-2">Độ phân giải 4K+, chi tiết vật liệu</td><td class="p-2">Nhanh</td><td class="p-2">Rẻ</td></tr><tr class="border-b"><td class="p-2 font-semibold">Zimage</td><td class="p-2">Tối ưu cho bất động sản</td><td class="p-2">Trung bình</td><td class="p-2">Trung bình</td></tr><tr class="border-b"><td class="p-2 font-semibold">Flux</td><td class="p-2">Sáng tạo, nghệ thuật</td><td class="p-2">Nhanh</td><td class="p-2">Rẻ</td></tr><tr><td class="p-2 font-semibold">Seedream</td><td class="p-2">Chuyên biệt cho nội thất</td><td class="p-2">Chậm</td><td class="p-2">Đắt</td></tr></tbody></table></div></div><div class="bg-orange-50 p-6 rounded-lg border-l-4 border-orange-600"><h4 class="font-bold text-orange-900 mb-4 text-lg flex items-center"><i class="fas fa-video mr-2"></i>Tạo Video (Video Generation)</h4><div class="overflow-x-auto"><table class="w-full text-sm"><thead><tr class="bg-orange-100"><th class="p-2 text-left">Công Cụ</th><th class="p-2 text-left">Thế Mạnh</th><th class="p-2 text-left">Độ Dài</th><th class="p-2 text-left">Giá</th></tr></thead><tbody><tr class="border-b"><td class="p-2 font-semibold">Veo 3.1</td><td class="p-2">Chân thực, chuyển động mượt</td><td class="p-2">1-2 phút</td><td class="p-2">Rẻ</td></tr><tr class="border-b"><td class="p-2 font-semibold">Seedance 1.5 Pro</td><td class="p-2">Hiệu ứng đặc biệt</td><td class="p-2">30-60s</td><td class="p-2">Trung bình</td></tr><tr><td class="p-2 font-semibold">Kling 2.6</td><td class="p-2">Motion Control tuyệt vời</td><td class="p-2">1-2 phút</td><td class="p-2">Trung bình</td></tr></tbody></table></div></div></div>`
+            },
+            '2': {
+                title: 'Virtual Staging',
+                content: `<div class="space-y-6"><div class="bg-orange-50 p-6 rounded-lg border-l-4 border-orange-600"><h4 class="font-bold text-orange-900 mb-3 text-lg">Prompt Tối Ưu cho Google Nano Banana Pro</h4><div class="bg-white p-4 rounded mb-4 border-l-4 border-orange-400 font-mono text-xs leading-relaxed"><p>Ultra-realistic interior design of an empty living room, adding [STYLE] style furniture:</p><p>- Main furniture: [FURNITURE_LIST]</p><p>- Flooring: [FLOOR_MATERIAL] with [LIGHTING_TYPE] lighting</p><p>- Wall color: [WALL_COLOR]</p><p>- Accessories: [DECORATIVE_ITEMS]</p><p>- Lighting: Soft daylight from large windows, warm accent lighting</p><p>- Camera angle: [ANGLE_DESCRIPTION]</p><p>- Resolution: 8K, architectural photography, photorealistic</p><p>- Mood: [MOOD_DESCRIPTION]</p></div><h5 class="font-semibold text-orange-900 mb-2">Ví dụ cụ thể:</h5><div class="bg-white p-4 rounded border-l-4 border-orange-400 font-mono text-xs leading-relaxed"><p>Ultra-realistic interior design of an empty living room, adding Scandinavian style furniture:</p><p>- Main furniture: Light oak wood sofa, minimalist coffee table, floor lamp</p><p>- Flooring: Light oak wood with soft warm lighting</p><p>- Wall color: Soft white with one accent wall in sage green</p><p>- Accessories: Potted plants, white throw pillows, geometric wall art</p><p>- Lighting: Soft daylight from large windows, warm accent lighting</p><p>- Camera angle: Wide-angle from living room entrance</p><p>- Resolution: 8K, architectural photography, photorealistic</p><p>- Mood: Cozy, modern, minimalist</p></div></div></div>`
+            },
+            '3': {
+                title: 'Day-to-Night',
+                content: `<div class="space-y-6"><div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-600"><h4 class="font-bold text-green-900 mb-3 text-lg">Prompt Tối Ưu cho Veo 3.1</h4><div class="bg-white p-4 rounded mb-4 border-l-4 border-green-400 font-mono text-xs leading-relaxed"><p>Cinematic transition video of [LOCATION]:</p><p>- Start: [MORNING_DESCRIPTION] with bright sunlight</p><p>- Middle: [AFTERNOON_DESCRIPTION] with golden hour lighting</p><p>- End: [NIGHT_DESCRIPTION] with interior lights turning on</p><p>- Camera movement: [CAMERA_MOVEMENT]</p><p>- Duration: 30 seconds</p><p>- Resolution: 4K, cinematic, realistic</p><p>- Lighting: Natural transition from daylight to artificial lighting</p><p>- Focus: [FOCUS_AREA]</p></div><h5 class="font-semibold text-green-900 mb-2">Ví dụ cụ thể:</h5><div class="bg-white p-4 rounded border-l-4 border-green-400 font-mono text-xs leading-relaxed"><p>Cinematic transition video of a luxury villa exterior:</p><p>- Start: Bright sunny afternoon with clear blue sky</p><p>- Middle: Golden hour with warm orange sunlight hitting the facade</p><p>- End: Night time with interior lights illuminating the windows</p><p>- Camera movement: Slow dolly shot moving around the building</p><p>- Duration: 30 seconds</p><p>- Resolution: 4K, cinematic, realistic</p></div><div class="bg-yellow-50 p-3 rounded mt-3 text-sm text-yellow-900"><strong>💡 Tip:</strong> Dùng Kling 2.6 khi cần kiểm soát camera chính xác, Veo 3.1 khi cần chân thực tự nhiên</div></div></div>`
+            },
+            '4': {
+                title: 'Real Estate Tour',
+                content: `<div class="space-y-6"><div class="bg-purple-50 p-6 rounded-lg border-l-4 border-purple-600"><h4 class="font-bold text-purple-900 mb-3 text-lg">Prompt cho Kling 2.6 (Motion Control)</h4><div class="bg-white p-4 rounded mb-4 border-l-4 border-purple-400 font-mono text-xs leading-relaxed"><p>Smooth gimbal walkthrough of [PROPERTY_TYPE]:</p><p>- Start position: [START_LOCATION]</p><p>- Path: [MOVEMENT_DESCRIPTION]</p><p>- End position: [END_LOCATION]</p><p>- Motion control: [SPEED] speed, [DIRECTION] movement</p><p>- Highlights: [KEY_FEATURES]</p><p>- Lighting: [LIGHTING_CONDITIONS]</p><p>- Duration: 45 seconds</p><p>- Resolution: 4K, smooth motion</p></div><h5 class="font-semibold text-purple-900 mb-2">Ví dụ cụ thể:</h5><div class="bg-white p-4 rounded border-l-4 border-purple-400 font-mono text-xs leading-relaxed"><p>Smooth gimbal walkthrough of a modern apartment:</p><p>- Start position: Main entrance</p><p>- Path: Move forward into living room, pan left to show kitchen</p><p>- End position: Master bedroom with city view</p><p>- Motion control: 0.6 speed, smooth forward and lateral movements</p><p>- Highlights: Floor-to-ceiling windows, marble countertops</p><p>- Lighting: Natural daylight from windows, warm accent lighting</p><p>- Duration: 45 seconds</p></div></div></div>`
+            },
+            '5': {
+                title: 'Product Showcase',
+                content: `<div class="space-y-6"><div class="bg-pink-50 p-6 rounded-lg border-l-4 border-pink-600"><h4 class="font-bold text-pink-900 mb-3 text-lg">Prompt cho Seedance 1.5 Pro</h4><div class="bg-white p-4 rounded mb-4 border-l-4 border-pink-400 font-mono text-xs leading-relaxed"><p>Professional product showcase video of [PRODUCT]:</p><p>- Product: [PRODUCT_DESCRIPTION]</p><p>- Background: [BACKGROUND_STYLE]</p><p>- Camera movement: [CAMERA_MOVEMENT]</p><p>- Lighting: [LIGHTING_SETUP]</p><p>- Effects: [SPECIAL_EFFECTS]</p><p>- Duration: 30-45 seconds</p><p>- Style: Professional, modern, cinematic</p></div><h5 class="font-semibold text-pink-900 mb-2">Ví dụ cụ thể:</h5><div class="bg-white p-4 rounded border-l-4 border-pink-400 font-mono text-xs leading-relaxed"><p>Professional product showcase video of a luxury furniture set:</p><p>- Product: Modern minimalist sofa with geometric design</p><p>- Background: Clean white studio with subtle shadow</p><p>- Camera movement: 360-degree rotation with zoom-in on details</p><p>- Lighting: Professional studio lighting with highlights on materials</p><p>- Effects: Subtle particle effects, smooth transitions</p><p>- Duration: 45 seconds</p><p>- Style: Professional, modern, cinematic</p></div></div></div>`
+            },
+            '6': {
+                title: 'Kling O1 Video Editing',
+                content: `<div class="space-y-6"><div class="bg-red-50 p-6 rounded-lg border-l-4 border-red-600"><h4 class="font-bold text-red-900 mb-4 text-lg">Khi nào dùng Kling O1?</h4><ul class="space-y-2 mb-4"><li class="flex items-start"><span class="text-red-600 font-bold mr-3">1.</span><span><strong>Sửa lỗi vật lý:</strong> Vật thể biến mất, xuất hiện lỗi</span></li><li class="flex items-start"><span class="text-red-600 font-bold mr-3">2.</span><span><strong>Thêm chi tiết:</strong> Thêm ánh sáng, bóng đổ, phản xạ</span></li><li class="flex items-start"><span class="text-red-600 font-bold mr-3">3.</span><span><strong>Tối ưu chuyển động:</strong> Làm mượt các chuyển động không tự nhiên</span></li><li class="flex items-start"><span class="text-red-600 font-bold mr-3">4.</span><span><strong>Xóa/Thêm đối tượng:</strong> Loại bỏ hoặc thêm vật thể vào video</span></li></ul><h5 class="font-semibold text-red-900 mb-2">Prompt Template:</h5><div class="bg-white p-4 rounded border-l-4 border-red-400 font-mono text-xs leading-relaxed"><p>Edit this video to:</p><p>1. [PROBLEM_TO_FIX]</p><p>2. [ENHANCEMENT_NEEDED]</p><p>3. [STYLE_ADJUSTMENT]</p><p>Focus on: [FOCUS_AREA]</p><p>Maintain: [WHAT_TO_KEEP]</p></div></div></div>`
+            }
+        };
+
+        libraryCards.forEach(card => {
+            card.addEventListener('click', function(e) {
+                const libraryId = this.getAttribute('data-library-id');
+                if (e.target.closest('.expand-btn')) {
+                    openLibraryFullPage(libraryId);
+                    return;
+                }
+                openLibraryModal(libraryId);
+            });
+        });
+
+        function openLibraryModal(libraryId) {
+            if (libraryData[libraryId]) {
+                currentLibraryId = libraryId;
+                const data = libraryData[libraryId];
+                if (libraryModalTitle) libraryModalTitle.textContent = data.title;
+                if (libraryModalContent) libraryModalContent.innerHTML = data.content;
+                if (libraryModal) libraryModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function openLibraryFullPage(libraryId) {
+            if (libraryData[libraryId]) {
+                const data = libraryData[libraryId];
+                if (libraryFullPageTitle) libraryFullPageTitle.textContent = data.title;
+                if (libraryFullPageContent) libraryFullPageContent.innerHTML = data.content;
+                if (libraryFullPageView) libraryFullPageView.classList.remove('hidden');
+                if (libraryModal) libraryModal.classList.add('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        if (closeLibraryModalBtn) {
+            closeLibraryModalBtn.addEventListener('click', () => {
+                libraryModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            });
+        }
+
+        if (openLibraryFullPageBtn) {
+            openLibraryFullPageBtn.addEventListener('click', () => {
+                if (currentLibraryId) openLibraryFullPage(currentLibraryId);
+            });
+        }
+
+        if (closeLibraryFullPageBtn) {
+            closeLibraryFullPageBtn.addEventListener('click', () => {
+                libraryFullPageView.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            });
+        }
+    }
+
+    // ========== PASSCODE HANDLER ==========
+    const passcodeInput = document.getElementById('passcodeInput');
+    const submitPasscodeBtn = document.getElementById('submitPasscodeBtn');
+    const passcodeError = document.getElementById('passcodeError');
+    const reportContent = document.getElementById('reportContent');
+    
+    if (submitPasscodeBtn && passcodeInput) {
+        submitPasscodeBtn.addEventListener('click', function() {
+            const passcode = passcodeInput.value.trim();
+            const correctPasscode = '2026';
+            
+            if (passcode === correctPasscode) {
+                if (passcodeError) passcodeError.classList.add('hidden');
+                if (reportContent) reportContent.classList.remove('hidden');
+                passcodeInput.value = '';
+            } else {
+                if (passcodeError) {
+                    passcodeError.textContent = 'Passcode không chính xác. Vui lòng thử lại.';
+                    passcodeError.classList.remove('hidden');
+                }
+            }
+        });
+        
+        passcodeInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                submitPasscodeBtn.click();
+            }
+        });
+    }
+
+    // ========== EXCEL EMBED TOGGLE ==========
+    const toggleSaleEmbedBtn = document.getElementById('toggleSaleEmbedBtn');
+    const saleEmbedContainer = document.getElementById('saleEmbedContainer');
+
+    if (toggleSaleEmbedBtn && saleEmbedContainer) {
+        toggleSaleEmbedBtn.addEventListener('click', function() {
+            saleEmbedContainer.classList.toggle('hidden');
+            if (saleEmbedContainer.classList.contains('hidden')) {
+                toggleSaleEmbedBtn.innerHTML = '<i class="fas fa-table mr-2"></i>Xem Excel Trực Tiếp';
+            } else {
+                toggleSaleEmbedBtn.innerHTML = '<i class="fas fa-table mr-2"></i>Ẩn Excel';
+            }
+        });
+    }
 });
 
 // Roadmap Data
@@ -490,16 +581,16 @@ const roadmapData = {
                 <div class="text-xs text-gray-600">Resolution</div>
             </div>
             <div class="bg-white p-3 rounded text-center shadow-sm">
-                <div class="text-2xl font-bold text-green-600">95%</div>
-                <div class="text-xs text-gray-600">Motion Acc</div>
+                <div class="text-2xl font-bold text-green-600">88%</div>
+                <div class="text-xs text-gray-600">Motion Control</div>
             </div>
             <div class="bg-white p-3 rounded text-center shadow-sm">
-                <div class="text-2xl font-bold text-purple-600">45s</div>
+                <div class="text-2xl font-bold text-purple-600">60s</div>
                 <div class="text-xs text-gray-600">Max Length</div>
             </div>
             <div class="bg-white p-3 rounded text-center shadow-sm">
                 <div class="text-2xl font-bold text-green-600">$1.5</div>
-                <div class="text-xs text-gray-600">Per 45s</div>
+                <div class="text-xs text-gray-600">Per 30s</div>
             </div>
         </div>
     </div>
@@ -540,198 +631,3 @@ const roadmapData = {
 </div>`
     }
 };
-
-
-// ========== LIBRARY CARD HANDLERS ==========
-document.addEventListener('DOMContentLoaded', function() {
-    const libraryGrid = document.getElementById('libraryGrid');
-    if (libraryGrid) {
-        const libraryCards = document.querySelectorAll('.library-card');
-        const libraryModal = document.getElementById('libraryModal');
-        const libraryModalTitle = document.getElementById('libraryModalTitle');
-        const libraryModalContent = document.getElementById('libraryModalContent');
-        const closeLibraryModalBtn = document.getElementById('closeLibraryModalBtn');
-        const openLibraryFullPageBtn = document.getElementById('openLibraryFullPageBtn');
-        
-        const libraryFullPageView = document.getElementById('libraryFullPageView');
-        const libraryFullPageTitle = document.getElementById('libraryFullPageTitle');
-        const libraryFullPageContent = document.getElementById('libraryFullPageContent');
-        const closeLibraryFullPageBtn = document.getElementById('closeLibraryFullPageBtn');
-
-        let currentLibraryId = null;
-
-        // Library data
-        const libraryData = {
-            '1': {
-                title: 'Danh Sách Công Cụ AI',
-                content: `
-<div class="space-y-4">
-    <p class="text-gray-700">So sánh chi tiết các công cụ AI tạo ảnh, video và chỉnh sửa được sử dụng tại Fotober.</p>
-    <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-600">
-        <h4 class="font-bold text-blue-900 mb-2">Công cụ chính:</h4>
-        <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
-            <li>Google Nano Banana Pro - Image Generation</li>
-            <li>Veo 3.1 - Video Generation</li>
-            <li>Kling 2.6 - Motion Control</li>
-            <li>Seedance 1.5 Pro - Special Effects</li>
-        </ul>
-    </div>
-</div>`
-            },
-            '2': {
-                title: 'Virtual Staging',
-                content: `
-<div class="space-y-4">
-    <p class="text-gray-700">Hướng dẫn tối ưu prompt cho Virtual Staging bằng Google Nano Banana Pro.</p>
-    <div class="bg-orange-50 p-4 rounded-lg border-l-4 border-orange-600">
-        <h4 class="font-bold text-orange-900 mb-2">Prompt tối ưu:</h4>
-        <p class="text-sm text-gray-700">Tạo nội thất ảo với chi tiết cao, ánh sáng tự nhiên, phù hợp với phong cách bất động sản.</p>
-    </div>
-</div>`
-            },
-            '3': {
-                title: 'Day-to-Night',
-                content: `
-<div class="space-y-4">
-    <p class="text-gray-700">Chuyển đổi ánh sáng từ ban ngày sang ban đêm với Veo 3.1 và Kling 2.6.</p>
-    <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-600">
-        <h4 class="font-bold text-green-900 mb-2">Kỹ thuật:</h4>
-        <p class="text-sm text-gray-700">Giữ nguyên background, thay đổi ánh sáng, bầu trời và bóng đổ một cách tự nhiên.</p>
-    </div>
-</div>`
-            },
-            '4': {
-                title: 'Real Estate Tour',
-                content: `
-<div class="space-y-4">
-    <p class="text-gray-700">Tạo video tour bất động sản với Motion Control của Kling 2.6.</p>
-    <div class="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-600">
-        <h4 class="font-bold text-purple-900 mb-2">Tính năng:</h4>
-        <p class="text-sm text-gray-700">Camera movement mịn, transition tự nhiên giữa các phòng, tốc độ phù hợp.</p>
-    </div>
-</div>`
-            },
-            '5': {
-                title: 'Product Showcase',
-                content: `
-<div class="space-y-4">
-    <p class="text-gray-700">Hiệu ứng đặc biệt cho sản phẩm với Seedance 1.5 Pro.</p>
-    <div class="bg-pink-50 p-4 rounded-lg border-l-4 border-pink-600">
-        <h4 class="font-bold text-pink-900 mb-2">Hiệu ứng:</h4>
-        <p class="text-sm text-gray-700">Particle effects, lighting, rotation, zoom động để làm nổi bật sản phẩm.</p>
-    </div>
-</div>`
-            },
-            '6': {
-                title: 'Kling O1 Video Editing',
-                content: `
-<div class="space-y-4">
-    <p class="text-gray-700">Chỉnh sửa video nâng cao với Kling O1.</p>
-    <div class="bg-red-50 p-4 rounded-lg border-l-4 border-red-600">
-        <h4 class="font-bold text-red-900 mb-2">Tính năng:</h4>
-        <p class="text-sm text-gray-700">Sửa lỗi vật lý, thêm chi tiết, cải thiện chất lượng video tự động.</p>
-    </div>
-</div>`
-            }
-        };
-
-        libraryCards.forEach(card => {
-            card.addEventListener('click', function(e) {
-                const libraryId = this.getAttribute('data-library-id');
-                if (e.target.closest('.expand-btn')) {
-                    openLibraryFullPage(libraryId);
-                    return;
-                }
-                openLibraryModal(libraryId);
-            });
-        });
-
-        function openLibraryModal(libraryId) {
-            if (libraryData[libraryId]) {
-                currentLibraryId = libraryId;
-                const data = libraryData[libraryId];
-                if (libraryModalTitle) libraryModalTitle.textContent = data.title;
-                if (libraryModalContent) libraryModalContent.innerHTML = data.content;
-                if (libraryModal) libraryModal.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-            }
-        }
-
-        function openLibraryFullPage(libraryId) {
-            if (libraryData[libraryId]) {
-                const data = libraryData[libraryId];
-                if (libraryFullPageTitle) libraryFullPageTitle.textContent = data.title;
-                if (libraryFullPageContent) libraryFullPageContent.innerHTML = data.content;
-                if (libraryFullPageView) libraryFullPageView.classList.remove('hidden');
-                if (libraryModal) libraryModal.classList.add('hidden');
-                document.body.style.overflow = 'hidden';
-            }
-        }
-
-        if (closeLibraryModalBtn) {
-            closeLibraryModalBtn.addEventListener('click', () => {
-                libraryModal.classList.add('hidden');
-                document.body.style.overflow = 'auto';
-            });
-        }
-
-        if (openLibraryFullPageBtn) {
-            openLibraryFullPageBtn.addEventListener('click', () => {
-                if (currentLibraryId) openLibraryFullPage(currentLibraryId);
-            });
-        }
-
-        if (closeLibraryFullPageBtn) {
-            closeLibraryFullPageBtn.addEventListener('click', () => {
-                libraryFullPageView.classList.add('hidden');
-                document.body.style.overflow = 'auto';
-            });
-        }
-    }
-
-    // ========== PASSCODE HANDLER ==========
-    const passcodeInput = document.getElementById('passcodeInput');
-    const submitPasscodeBtn = document.getElementById('submitPasscodeBtn');
-    const passcodeError = document.getElementById('passcodeError');
-    const reportContent = document.getElementById('reportContent');
-    
-    if (submitPasscodeBtn && passcodeInput) {
-        submitPasscodeBtn.addEventListener('click', function() {
-            const passcode = passcodeInput.value.trim();
-            const correctPasscode = '2026';
-            
-            if (passcode === correctPasscode) {
-                if (passcodeError) passcodeError.classList.add('hidden');
-                if (reportContent) reportContent.classList.remove('hidden');
-                passcodeInput.value = '';
-            } else {
-                if (passcodeError) {
-                    passcodeError.textContent = 'Passcode không chính xác. Vui lòng thử lại.';
-                    passcodeError.classList.remove('hidden');
-                }
-            }
-        });
-        
-        passcodeInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                submitPasscodeBtn.click();
-            }
-        });
-    }
-});
-
-
-// ========== EXCEL EMBED TOGGLE ==========
-const toggleSaleEmbedBtn = document.getElementById('toggleSaleEmbedBtn');
-const saleEmbedContainer = document.getElementById('saleEmbedContainer');
-
-if (toggleSaleEmbedBtn && saleEmbedContainer) {
-    toggleSaleEmbedBtn.addEventListener('click', function() {
-        saleEmbedContainer.classList.toggle('hidden');
-        if (saleEmbedContainer.classList.contains('hidden')) {
-            toggleSaleEmbedBtn.innerHTML = '<i class="fas fa-table mr-2"></i>Xem Excel Trực Tiếp';
-        } else {
-            toggleSaleEmbedBtn.innerHTML = '<i class="fas fa-table mr-2"></i>Ẩn Excel';
-        }
-    });
-}

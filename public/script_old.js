@@ -1,17 +1,19 @@
-// R&D AI Video Intelligence Platform - Full Interactive Script
+// R&D AI Video Intelligence Platform - Fixed Interactive Script
 document.addEventListener('DOMContentLoaded', function() {
     // ========== NAVIGATION & UI ==========
-    
-    // Mobile menu toggle
     const menuToggle = document.getElementById('menuToggle');
     const sidebar = document.getElementById('sidebar');
-    
+    const navItems = document.querySelectorAll('.nav-item');
+    const sections = document.querySelectorAll('.content-section');
+    const dynamicFooter = document.getElementById('dynamicFooter');
+
     // Create overlay backdrop for mobile
     const overlay = document.createElement('div');
     overlay.className = 'fixed inset-0 bg-black bg-opacity-50 z-30 hidden transition-opacity duration-300';
     overlay.id = 'sidebarOverlay';
     document.body.appendChild(overlay);
-    
+
+    // Sidebar Toggle
     if (menuToggle && sidebar) {
         menuToggle.addEventListener('click', function() {
             sidebar.classList.toggle('active');
@@ -20,2334 +22,716 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Close sidebar when clicking overlay
         overlay.addEventListener('click', function() {
             sidebar.classList.remove('active');
             overlay.classList.add('hidden');
         });
-        
-        // Close sidebar when clicking outside on mobile
-        document.addEventListener('click', function(event) {
-            if (window.innerWidth < 768) {
-                if (!sidebar.contains(event.target) && !menuToggle.contains(event.target) && !overlay.contains(event.target)) {
-                    sidebar.classList.remove('active');
-                    overlay.classList.add('hidden');
-                }
-            }
-        });
     }
-    
-    // Tab-based navigation and active state
-    const navItems = document.querySelectorAll('.nav-item');
-    const sections = document.querySelectorAll('.content-section');
-    
-    function showSection(targetId) {
-        // Hide all sections
-        sections.forEach(section => {
-            section.classList.remove('active-tab');
-        });
-        
-        // Show the target section
-        const targetSection = document.getElementById(targetId);
-        if (targetSection) {
-            targetSection.classList.add('active-tab');
-        }
-        
-        // Update active navigation item
-        navItems.forEach(item => {
-            item.classList.remove('active');
-            if (item.getAttribute('href') === `#${targetId}`) {
-                item.classList.add('active');
-            }
-        });
-        
-        // Update URL hash without scrolling
-        history.pushState(null, null, `#${targetId}`);
-    }
-    
-    navItems.forEach(item => {
-        item.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            showSection(targetId);
-            
-            // Close mobile menu after click
-            if (window.innerWidth < 768) {
-                sidebar.classList.remove('active');
-                document.getElementById('sidebarOverlay').classList.add('hidden');
-            }
-        });
-    });
-    
-    // Initial load: check URL hash or default to the first section
-    const initialHash = window.location.hash ? window.location.hash.substring(1) : sections[0].id.replace(' content-section ', '');
-    showSection(initialHash);
-    
-    // Control dynamic footer visibility
+
+    // Function to update footer visibility
     function updateFooterVisibility(tabId) {
-        const dynamicFooter = document.getElementById('dynamicFooter');
-        const hiddenTabs = ['overview', 'company', 'services'];
-        
+        if (!dynamicFooter) return;
+        const hiddenTabs = ['overview'];
         if (hiddenTabs.includes(tabId)) {
             dynamicFooter.style.display = 'none';
         } else {
             dynamicFooter.style.display = 'block';
         }
     }
-    
-    // Update footer when showing a section
-    const originalShowSection = showSection;
-    showSection = function(targetId) {
-        originalShowSection(targetId);
+
+    // Main Show Section Function
+    window.showSection = function(targetId) {
+        console.log("Showing section:", targetId);
+        let found = false;
+        sections.forEach(section => {
+            if (section.id === targetId) {
+                section.classList.add('active-tab');
+                section.style.display = 'block';
+                found = true;
+            } else {
+                section.classList.remove('active-tab');
+                section.style.display = 'none';
+            }
+        });
+
+        if (!found && sections.length > 0) {
+            sections[0].classList.add('active-tab');
+            sections[0].style.display = 'block';
+            targetId = sections[0].id;
+        }
+
+        navItems.forEach(item => {
+            item.classList.remove('active');
+            const href = item.getAttribute('href');
+            if (href === '#' + targetId || href === targetId) {
+                item.classList.add('active');
+            }
+        });
+
         updateFooterVisibility(targetId);
+        if (window.location.hash !== '#' + targetId) {
+            history.pushState(null, null, '#' + targetId);
+        }
     };
-    
-    // Initial footer visibility
-    updateFooterVisibility(initialHash);
-    
-    // ========== PASSCODE PROTECTION FOR REPORTS ==========
-    const reportsPasscodeBtn = document.getElementById('reportsPasscodeBtn');
-    const reportsPasscodeInput = document.getElementById('reportsPasscodeInput');
-    const reportsPasscodeLayer = document.getElementById('reportsPasscodeLayer');
-    const reportsContent = document.getElementById('reportsContent');
-    
-    // Default passcode (hardcoded for security - session-only)
-    const DEFAULT_PASSCODE = 'fotober2026';
-    
-    // Get correct passcode (from hardcoded default)
-    function getCorrectPasscode() {
-        return DEFAULT_PASSCODE;
-    }
-    
-    // Check if user is already authenticated for reports
-    function isReportsAuthenticated() {
-        return sessionStorage.getItem('reportsAuthenticated') === 'true';
-    }
-    
-    // Set authentication status
-    function setReportsAuthenticated(value) {
-        if (value) {
-            sessionStorage.setItem('reportsAuthenticated', 'true');
-        } else {
-            sessionStorage.removeItem('reportsAuthenticated');
-        }
-    }
-    
-    // Show/hide reports content based on authentication
-    function updateReportsVisibility() {
-        if (isReportsAuthenticated()) {
-            reportsPasscodeLayer.style.display = 'none';
-            reportsContent.style.display = 'block';
-        } else {
-            reportsPasscodeLayer.style.display = 'block';
-            reportsContent.style.display = 'none';
-        }
-    }
-    
-    // Handle passcode verification
-    if (reportsPasscodeBtn) {
-        reportsPasscodeBtn.addEventListener('click', function() {
-            const inputPasscode = reportsPasscodeInput.value.trim();
-            const correctPasscode = getCorrectPasscode();
-            
-            if (inputPasscode === correctPasscode) {
-                setReportsAuthenticated(true);
-                updateReportsVisibility();
-                reportsPasscodeInput.value = '';
-            } else {
-                alert('Passcode không chín xác. Vui lòng thử lại.');
-                reportsPasscodeInput.value = '';
-                reportsPasscodeInput.focus();
-            }
-        });
-        
-        // Allow Enter key to submit
-        reportsPasscodeInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                reportsPasscodeBtn.click();
-            }
-        });
-    }
-    
-    // Initial reports visibility check
-    updateReportsVisibility();
-    
-    // Remove scroll-based active navigation (no longer needed)
-    // window.addEventListener('scroll', updateActiveNav);
-    // updateActiveNav(); // Initial call
-    
-    // ========== CHARTS ==========
-    
-    // Chart 1: Error Classification
-    const errorCtx = document.getElementById('errorChart');
-    if (errorCtx) {
-        new Chart(errorCtx, {
-            type: 'bar',
-            data: {
-                labels: ['Hiểu sai yêu cầu', 'Chất lượng AI kém', 'Trễ deadline', 'Vật lý/Logic không hợp lý'],
-                datasets: [{
-                    label: 'Số lượng cases',
-                    data: [8, 6, 5, 4],
-                    backgroundColor: [
-                        'rgba(239, 68, 68, 0.8)',
-                        'rgba(249, 115, 22, 0.8)',
-                        'rgba(234, 179, 8, 0.8)',
-                        'rgba(59, 130, 246, 0.8)'
-                    ],
-                    borderColor: [
-                        'rgb(239, 68, 68)',
-                        'rgb(249, 115, 22)',
-                        'rgb(234, 179, 8)',
-                        'rgb(59, 130, 246)'
-                    ],
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    title: {
-                        display: true,
-                        text: 'Phân bố lỗi theo nhóm (Tổng 23 jobs)',
-                        font: {
-                            size: 16,
-                            weight: 'bold'
-                        }
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                const total = 23;
-                                const value = context.parsed.y;
-                                const percentage = ((value / total) * 100).toFixed(0);
-                                return `${value} cases (${percentage}%)`;
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            stepSize: 1
-                        },
-                        title: {
-                            display: true,
-                            text: 'Số lượng cases'
-                        }
-                    },
-                    x: {
-                        ticks: {
-                            font: {
-                                size: 11
-                            }
-                        }
-                    }
-                }
-            }
-        });
-    }
-    
-    // Chart 2: Effect Error Rate
-    const effectErrorCtx = document.getElementById('effectErrorChart');
-    if (effectErrorCtx) {
-        new Chart(effectErrorCtx, {
-            type: 'doughnut',
-            data: {
-                labels: [
-                    'Người/Lifestyle (71%)',
-                    'Season/Weather (67%)',
-                    'Object Animation (100%)',
-                    'Day-to-Night (33%)',
-                    'Furniture Staging (33%)',
-                    'Creative/Fantasy (100%)',
-                    'Agent Composite (100%)'
-                ],
-                datasets: [{
-                    data: [71, 67, 100, 33, 33, 100, 100],
-                    backgroundColor: [
-                        'rgba(239, 68, 68, 0.8)',
-                        'rgba(249, 115, 22, 0.8)',
-                        'rgba(234, 179, 8, 0.8)',
-                        'rgba(34, 197, 94, 0.8)',
-                        'rgba(59, 130, 246, 0.8)',
-                        'rgba(168, 85, 247, 0.8)',
-                        'rgba(236, 72, 153, 0.8)'
-                    ],
-                    borderColor: '#fff',
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'right',
-                        labels: {
-                            font: {
-                                size: 10
-                            },
-                            padding: 10,
-                            boxWidth: 15
-                        }
-                    },
-                    title: {
-                        display: true,
-                        text: 'Tỷ lệ lỗi theo loại hiệu ứng AI',
-                        font: {
-                            size: 14,
-                            weight: 'bold'
-                        }
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                return context.label + ': ' + context.parsed + '% lỗi';
-                            }
-                        }
-                    }
-                }
-            }
-        });
-    }
-    
-    // Chart 3: Timeline Chart (Gantt-style)
-    const timelineCtx = document.getElementById('timelineChart');
-    if (timelineCtx) {
-        new Chart(timelineCtx, {
-            type: 'bar',
-            data: {
-                labels: ['Tuần 1-2', 'Tuần 3-4', 'Tuần 5-6', 'Tuần 7-8', 'Tuần 9-10', 'Tuần 11-12'],
-                datasets: [
-                    {
-                        label: 'Thiết lập Nền tảng',
-                        data: [100, 0, 0, 0, 0, 0],
-                        backgroundColor: 'rgba(168, 85, 247, 0.8)',
-                        borderColor: 'rgb(168, 85, 247)',
-                        borderWidth: 2
-                    },
-                    {
-                        label: 'Bài toán 1: Thay Agent',
-                        data: [0, 50, 50, 0, 0, 0],
-                        backgroundColor: 'rgba(59, 130, 246, 0.8)',
-                        borderColor: 'rgb(59, 130, 246)',
-                        borderWidth: 2
-                    },
-                    {
-                        label: 'Bài toán 2: Image-to-Video',
-                        data: [0, 50, 50, 0, 0, 0],
-                        backgroundColor: 'rgba(34, 197, 94, 0.8)',
-                        borderColor: 'rgb(34, 197, 94)',
-                        borderWidth: 2
-                    },
-                    {
-                        label: 'Tối ưu & Scale',
-                        data: [0, 0, 0, 100, 100, 100],
-                        backgroundColor: 'rgba(249, 115, 22, 0.8)',
-                        borderColor: 'rgb(249, 115, 22)',
-                        borderWidth: 2
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                indexAxis: 'y',
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'top'
-                    },
-                    title: {
-                        display: true,
-                        text: 'Lộ trình R&D Q1/2026 - Phân bổ công việc theo tuần',
-                        font: {
-                            size: 16,
-                            weight: 'bold'
-                        }
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                if (context.parsed.x > 0) {
-                                    return context.dataset.label + ': Đang thực hiện';
-                                }
-                                return null;
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    x: {
-                        stacked: true,
-                        max: 100,
-                        ticks: {
-                            callback: function(value) {
-                                return value + '%';
-                            }
-                        },
-                        title: {
-                            display: true,
-                            text: 'Mức độ hoàn thành'
-                        }
-                    },
-                    y: {
-                        stacked: true
-                    }
-                }
-            }
-        });
-    }
-    
-    // ========== ANIMATIONS ==========
-    
-    // Animate stats on scroll
-    const statsCards = document.querySelectorAll('.stat-card');
-    const observerOptions = {
-        threshold: 0.5,
-        rootMargin: '0px 0px -100px 0px'
-    };
-    
-    const statsObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '0';
-                entry.target.style.transform = 'translateY(20px)';
-                setTimeout(() => {
-                    entry.target.style.transition = 'all 0.6s ease';
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }, 100);
-                statsObserver.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-    
-    statsCards.forEach(card => {
-        statsObserver.observe(card);
-    });
-    
-    // Animate module cards
-    const moduleCards = document.querySelectorAll('.module-card');
-    const moduleObserver = new IntersectionObserver(function(entries) {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.style.opacity = '0';
-                    entry.target.style.transform = 'translateY(20px)';
-                    setTimeout(() => {
-                        entry.target.style.transition = 'all 0.5s ease';
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }, 100);
-                }, index * 100);
-                moduleObserver.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-    
-    moduleCards.forEach(card => {
-        moduleObserver.observe(card);
-    });
-    
-    // Animate flowchart boxes
-    const flowchartBoxes = document.querySelectorAll('.flowchart-box');
-    const flowchartObserver = new IntersectionObserver(function(entries) {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.style.opacity = '0';
-                    entry.target.style.transform = 'scale(0.8)';
-                    setTimeout(() => {
-                        entry.target.style.transition = 'all 0.5s ease';
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'scale(1)';
-                    }, 100);
-                }, index * 200);
-                flowchartObserver.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-    
-    flowchartBoxes.forEach(box => {
-        flowchartObserver.observe(box);
-    });
-    
-    // Animate phase cards
-    const phaseCards = document.querySelectorAll('.phase-card');
-    const phaseObserver = new IntersectionObserver(function(entries) {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.style.opacity = '0';
-                    entry.target.style.transform = 'translateX(-30px)';
-                    setTimeout(() => {
-                        entry.target.style.transition = 'all 0.6s ease';
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateX(0)';
-                    }, 100);
-                }, index * 150);
-                phaseObserver.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-    
-    phaseCards.forEach(card => {
-        phaseObserver.observe(card);
-    });
-    
-    // ========== UTILITY BUTTONS ==========
-    
-    // Back to top button
-    const backToTopBtn = document.createElement('button');
-    backToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
-    backToTopBtn.className = 'fixed bottom-8 right-8 bg-purple-600 text-white w-12 h-12 rounded-full shadow-lg hover:bg-purple-700 transition-all duration-300 opacity-0 pointer-events-none z-50';
-    backToTopBtn.style.transition = 'opacity 0.3s, transform 0.3s';
-    backToTopBtn.title = 'Lên đầu trang';
-    document.body.appendChild(backToTopBtn);
-    
-    window.addEventListener('scroll', function() {
-        if (window.pageYOffset > 300) {
-            backToTopBtn.style.opacity = '1';
-            backToTopBtn.style.pointerEvents = 'auto';
-        } else {
-            backToTopBtn.style.opacity = '0';
-            backToTopBtn.style.pointerEvents = 'none';
-        }
-    });
-    
-    backToTopBtn.addEventListener('click', function() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-    
-    // Print button
-    const printBtn = document.createElement('button');
-    printBtn.innerHTML = '<i class="fas fa-print"></i>';
-    printBtn.className = 'fixed bottom-24 right-8 bg-blue-600 text-white w-12 h-12 rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 z-50';
-    printBtn.title = 'In báo cáo';
-    document.body.appendChild(printBtn);
-    
-    printBtn.addEventListener('click', function() {
-        window.print();
-    });
-    
-    // Share button
-    const shareBtn = document.createElement('button');
-    shareBtn.innerHTML = '<i class="fas fa-share-alt"></i>';
-    shareBtn.className = 'fixed bottom-40 right-8 bg-green-600 text-white w-12 h-12 rounded-full shadow-lg hover:bg-green-700 transition-all duration-300 z-50';
-    shareBtn.title = 'Chia sẻ';
-    document.body.appendChild(shareBtn);
-    
-    shareBtn.addEventListener('click', function() {
-        if (navigator.share) {
-            navigator.share({
-                title: 'R&D AI Video Intelligence Platform - Fotober',
-                text: 'Hệ thống phân tích và nghiên cứu AI Video',
-                url: window.location.href
-            }).catch(err => console.log('Share error:', err));
-        } else {
-            // Fallback: Copy to clipboard
-            navigator.clipboard.writeText(window.location.href).then(() => {
-                alert('Đã sao chép link vào clipboard!');
-            });
-        }
-    });
-    
-    // ========== INTERACTIVE FEATURES ==========
-    
-    // Hover effects on section cards
-    const sectionCards = document.querySelectorAll('.section-card');
-    sectionCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-5px)';
-        });
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-        });
-    });
-    
-    // Badge hover effects
-    const badges = document.querySelectorAll('.badge');
-    badges.forEach(badge => {
-        badge.addEventListener('mouseenter', function() {
-            this.style.transform = 'scale(1.1)';
-            this.style.transition = 'transform 0.2s ease';
-        });
-        badge.addEventListener('mouseleave', function() {
-            this.style.transform = 'scale(1)';
-        });
-    });
-    
-    // Progress indicator on scroll
-    const progressBar = document.createElement('div');
-    progressBar.className = 'fixed top-0 left-0 h-1 bg-gradient-to-r from-purple-500 to-blue-500 z-50 transition-all duration-300';
-    progressBar.style.width = '0%';
-    document.body.appendChild(progressBar);
-    
-    window.addEventListener('scroll', function() {
-        const windowHeight = window.innerHeight;
-        const documentHeight = document.documentElement.scrollHeight - windowHeight;
-        const scrolled = window.pageYOffset;
-        const progress = (scrolled / documentHeight) * 100;
-        progressBar.style.width = progress + '%';
-    });
-    
-    // ========== TAB FUNCTIONALITY (if needed) ==========
-    
-    const tabButtons = document.querySelectorAll('.tab-button');
-    const tabContents = document.querySelectorAll('.tab-content');
-    
-    tabButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const targetTab = this.getAttribute('data-tab');
-            
-            // Remove active class from all tabs
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            tabContents.forEach(content => content.classList.remove('active'));
-            
-            // Add active class to clicked tab
-            this.classList.add('active');
-            document.getElementById(targetTab).classList.add('active');
-        });
-    });
-    
-    // ========== SEARCH FUNCTIONALITY ==========
-    
-    // Add search box (optional)
-    const searchBox = document.createElement('div');
-    searchBox.className = 'fixed top-20 right-8 bg-white rounded-lg shadow-lg p-4 opacity-0 pointer-events-none transition-all duration-300 z-40';
-    searchBox.style.width = '300px';
-    searchBox.innerHTML = `
-        <input type="text" id="searchInput" placeholder="Tìm kiếm..." 
-               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-500">
-        <div id="searchResults" class="mt-2 max-h-60 overflow-y-auto"></div>
-    `;
-    document.body.appendChild(searchBox);
-    
-    // Search toggle button
-    const searchToggle = document.createElement('button');
-    searchToggle.innerHTML = '<i class="fas fa-search"></i>';
-    searchToggle.className = 'fixed top-24 right-8 bg-indigo-600 text-white w-10 h-10 rounded-full shadow-lg hover:bg-indigo-700 transition-all duration-300 z-50 hidden md:flex items-center justify-center';
-    searchToggle.title = 'Tìm kiếm';
-    document.body.appendChild(searchToggle);
-    
-    searchToggle.addEventListener('click', function() {
-        if (searchBox.style.opacity === '0') {
-            searchBox.style.opacity = '1';
-            searchBox.style.pointerEvents = 'auto';
-            document.getElementById('searchInput').focus();
-        } else {
-            searchBox.style.opacity = '0';
-            searchBox.style.pointerEvents = 'none';
-        }
-    });
-    
-    // Simple search implementation
-    const searchInput = document.getElementById('searchInput');
-    const searchResults = document.getElementById('searchResults');
-    
-    if (searchInput) {
-        searchInput.addEventListener('input', function() {
-            const query = this.value.toLowerCase();
-            searchResults.innerHTML = '';
-            
-            if (query.length < 2) return;
-            
-            sections.forEach(section => {
-                const text = section.textContent.toLowerCase();
-                if (text.includes(query)) {
-                    const result = document.createElement('div');
-                    result.className = 'p-2 hover:bg-gray-100 cursor-pointer rounded text-sm';
-                    result.textContent = section.querySelector('h2, h3')?.textContent || 'Kết quả';
-                    result.addEventListener('click', function() {
-                        section.scrollIntoView({ behavior: 'smooth' });
-                        searchBox.style.opacity = '0';
-                        searchBox.style.pointerEvents = 'none';
-                    });
-                    searchResults.appendChild(result);
-                }
-            });
-            
-            if (searchResults.children.length === 0) {
-                searchResults.innerHTML = '<p class="text-sm text-gray-500 p-2">Không tìm thấy kết quả</p>';
-            }
-        });
-    }
-    
-    // ========== ACCESSIBILITY ==========
-    
-    // Keyboard navigation
-    document.addEventListener('keydown', function(e) {
-        // Ctrl/Cmd + K: Open search
-        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+
+    // Nav Item Click Handlers
+    navItems.forEach(item => {
+        item.addEventListener('click', function(e) {
             e.preventDefault();
-            searchToggle.click();
-        }
+            const targetId = this.getAttribute('href').replace('#', '');
+            window.showSection(targetId);
+            
+            if (window.innerWidth < 768 && sidebar) {
+                sidebar.classList.remove('active');
+                overlay.classList.add('hidden');
+            }
+        });
+    });
+
+    // Initial Load
+    const initialHash = window.location.hash ? window.location.hash.substring(1) : (sections[0] ? sections[0].id : 'overview');
+    window.showSection(initialHash);
+
+    // ========== FEEDBACK CARD HANDLERS ==========
+    const feedbackGrid = document.getElementById('feedbackGrid');
+    if (feedbackGrid) {
+        const feedbackCards = document.querySelectorAll('.feedback-card');
+        const feedbackModal = document.getElementById('feedbackModal');
+        const feedbackModalTitle = document.getElementById('modalTitle');
+        const feedbackModalContent = document.getElementById('modalContent');
+        const closeFeedbackModalBtn = document.getElementById('closeModalBtn');
+        const openFeedbackFullPageBtn = document.getElementById('openFullPageBtn');
         
-        // ESC: Close search
-        if (e.key === 'Escape') {
-            searchBox.style.opacity = '0';
-            searchBox.style.pointerEvents = 'none';
-        }
-    });
-    
-    // Chart toggle and sort controls
-    const toggleChartBtn = document.getElementById('toggleChartBtn');
-    const sortFeedbackBtn = document.getElementById('sortFeedbackBtn');
-    const chartContainer = document.getElementById('chartContainer');
-    const lastUpdateDate = document.getElementById('lastUpdateDate');
-    let isChartExpanded = false;
-    
-    if (toggleChartBtn) {
-        toggleChartBtn.addEventListener('click', function() {
-            isChartExpanded = !isChartExpanded;
-            if (isChartExpanded) {
-                chartContainer.style.height = '600px';
-                toggleChartBtn.innerHTML = '<i class="fas fa-compress mr-1"></i>Thu gon';
-            } else {
-                chartContainer.style.height = 'auto';
-                toggleChartBtn.innerHTML = '<i class="fas fa-expand mr-1"></i>Mo rong';
-            }
-        });
-    }
-    
-    if (sortFeedbackBtn) {
-        let sortOrder = 'desc';
-        sortFeedbackBtn.addEventListener('click', function() {
-            sortOrder = sortOrder === 'desc' ? 'asc' : 'desc';
-            if (sortOrder === 'desc') {
-                sortFeedbackBtn.innerHTML = '<i class="fas fa-sort-amount-down mr-1"></i>Moi nhat';
-            } else {
-                sortFeedbackBtn.innerHTML = '<i class="fas fa-sort-amount-up mr-1"></i>Cu nhat';
-            }
-        });
-    }
-    
-    if (lastUpdateDate) {
-        const today = new Date();
-        const day = today.getDate();
-        const month = today.getMonth() + 1;
-        const year = today.getFullYear();
-        lastUpdateDate.textContent = day + '/' + month + '/' + year;
-    }
-    
-    console.log('🚀 R&D AI Video Intelligence Platform loaded successfully!');
-});
+        const feedbackFullPageView = document.getElementById('fullPageView');
+        const feedbackFullPageTitle = document.getElementById('fullPageTitle');
+        const feedbackFullPageContent = document.getElementById('fullPageContent');
+        const closeFeedbackFullPageBtn = document.getElementById('closeFullPageBtn');
 
-    // Accordion logic for feedback section
-    const accordionHeaders = document.querySelectorAll('.accordion-header');
-    accordionHeaders.forEach(header => {
-        header.addEventListener('click', function() {
-            const content = this.nextElementSibling;
-            const icon = this.querySelector('.accordion-icon');
-            const isOpen = !content.classList.contains('hidden');
-            
-            if (isOpen) {
-                content.classList.add('hidden');
-                icon.style.transform = 'rotate(0deg)';
-                icon.style.transition = 'transform 0.3s ease';
-            } else {
-                content.classList.remove('hidden');
-                icon.style.transform = 'rotate(90deg)';
-                icon.style.transition = 'transform 0.3s ease';
-            }
-        });
-    });
-// Enhanced Feedback Grid with Full Page and Whiteboard
-document.addEventListener('DOMContentLoaded', function() {
-    // Toggle Sale Embed
-    const toggleSaleEmbedBtn = document.getElementById('toggleSaleEmbedBtn');
-    const saleEmbedContainer = document.getElementById('saleEmbedContainer');
-    
-    if (toggleSaleEmbedBtn && saleEmbedContainer) {
-        toggleSaleEmbedBtn.addEventListener('click', function() {
-            if (saleEmbedContainer.classList.contains('hidden')) {
-                saleEmbedContainer.classList.remove('hidden');
-                toggleSaleEmbedBtn.innerHTML = '<i class="fas fa-eye-slash mr-2"></i>Ẩn Excel';
-            } else {
-                saleEmbedContainer.classList.add('hidden');
-                toggleSaleEmbedBtn.innerHTML = '<i class="fas fa-table mr-2"></i>Xem Excel Trực Tiếp';
-            }
-        });
-    }
+        let currentFeedbackId = null;
 
-    // Elements
-    const feedbackCards = document.querySelectorAll('.feedback-card');
-    const feedbackModal = document.getElementById('feedbackModal');
-    const closeModalBtn = document.getElementById('closeModalBtn');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalContent = document.getElementById('modalContent');
-    const openFullPageBtn = document.getElementById('openFullPageBtn');
-    const     
-    const fullPageView = document.getElementById('fullPageView');
-    const fullPageTitle = document.getElementById('fullPageTitle');
-    const fullPageContent = document.getElementById('fullPageContent');
-    const closeFullPageBtn = document.getElementById('closeFullPageBtn');
-    const     
-    const     const     const     const 
-    // Current feedback ID
-    let currentFeedbackId = null;
+        // Feedback data - Phân Tích 23 Job Feedback
+        const feedbackData = {
+            '1': {
+                title: 'Phân Tích 23 Job Feedback',
+                content: `
+<div class="space-y-6">
+    <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-600">
+        <h4 class="font-bold text-blue-900 mb-3 text-xl flex items-center">
+            <i class="fas fa-info-circle mr-2"></i>Tổng Quan
+        </h4>
+        <p class="text-gray-700 mb-3">
+            <strong>Phân Tích 23 Job Feedback</strong> là báo cáo chuyên sâu về lỗi và hiệu quả vận hành của hệ thống AI Video.
+            Báo cáo xác định các điểm nghẽn hệ thống, nguyên nhân gốc rễ và lộ trình cải thiện chất lượng dịch vụ.
+        </p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
+            <div class="bg-white p-3 rounded text-center shadow-sm">
+                <div class="text-2xl font-bold text-red-600">23</div>
+                <div class="text-xs text-gray-600">Job Codes</div>
+            </div>
+            <div class="bg-white p-3 rounded text-center shadow-sm">
+                <div class="text-2xl font-bold text-orange-600">35%</div>
+                <div class="text-xs text-gray-600">Hiểu sai yêu cầu</div>
+            </div>
+            <div class="bg-white p-3 rounded text-center shadow-sm">
+                <div class="text-2xl font-bold text-yellow-600">100%</div>
+                <div class="text-xs text-gray-600">Object Animation</div>
+            </div>
+            <div class="bg-white p-3 rounded text-center shadow-sm">
+                <div class="text-2xl font-bold text-purple-600">4</div>
+                <div class="text-xs text-gray-600">Nhóm lỗi</div>
+            </div>
+        </div>
+    </div>
 
-    // Feedback data
-    const feedbackData = {
-        '1': {
-            title: 'Phân Tích 23 Job Feedback',
-            date: '30/01/2026',
-            content: `
-                <div class="space-y-6">
-                    <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-600">
-                        <h4 class="font-bold text-blue-900 mb-3 text-xl">📊 Tổng Quan</h4>
-                        <p class="text-gray-700 leading-relaxed">Phân tích toàn bộ 23 jobs feedback từ khách hàng và sale team, xác định các pattern lỗi chính và đề xuất giải pháp cải thiện quy trình làm việc.</p>
-                    </div>
-                    
-                    <div class="bg-white p-6 rounded-lg border shadow-sm">
-                        <h4 class="font-bold text-gray-800 mb-4 text-lg">📈 Phân Loại Lỗi</h4>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="flex items-center justify-between p-4 bg-red-50 rounded-lg border-l-4 border-red-500">
-                                <span class="font-semibold text-gray-800">Hiểu sai yêu cầu</span>
-                                <span class="text-red-600 font-bold text-lg">35% (8 cases)</span>
-                            </div>
-                            <div class="flex items-center justify-between p-4 bg-orange-50 rounded-lg border-l-4 border-orange-500">
-                                <span class="font-semibold text-gray-800">Chất lượng AI kém</span>
-                                <span class="text-orange-600 font-bold text-lg">26% (6 cases)</span>
-                            </div>
-                            <div class="flex items-center justify-between p-4 bg-yellow-50 rounded-lg border-l-4 border-yellow-500">
-                                <span class="font-semibold text-gray-800">Trễ deadline</span>
-                                <span class="text-yellow-600 font-bold text-lg">22% (5 cases)</span>
-                            </div>
-                            <div class="flex items-center justify-between p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
-                                <span class="font-semibold text-gray-800">Logic không hợp lý</span>
-                                <span class="text-blue-600 font-bold text-lg">17% (4 cases)</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-600">
-                        <h4 class="font-bold text-green-900 mb-4 text-lg">✅ Đề Xuất Giải Pháp</h4>
-                        <div class="space-y-3">
-                            <div class="flex items-start bg-white p-3 rounded-lg">
-                                <span class="bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">1</span>
-                                <span class="text-gray-700">Cải thiện quy trình briefing với Sale, đảm bảo thông tin đầy đủ và rõ ràng</span>
-                            </div>
-                            <div class="flex items-start bg-white p-3 rounded-lg">
-                                <span class="bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">2</span>
-                                <span class="text-gray-700">Tăng cường training về công cụ AI mới (Google Nano Banana Pro, Veo 3.1, Kling 2.6)</span>
-                            </div>
-                            <div class="flex items-start bg-white p-3 rounded-lg">
-                                <span class="bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">3</span>
-                                <span class="text-gray-700">Thiết lập timeline rõ ràng hơn với buffer 20% cho mỗi task</span>
-                            </div>
-                            <div class="flex items-start bg-white p-3 rounded-lg">
-                                <span class="bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">4</span>
-                                <span class="text-gray-700">Review kỹ output trước khi gửi khách, có checklist quality control</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="bg-white p-6 rounded-lg border shadow-sm">
-                        <h4 class="font-bold text-gray-800 mb-4 text-lg">📊 Dữ Liệu Chi Tiết</h4>
-                        <iframe src="https://docs.google.com/spreadsheets/d/1ulrICF3uoc0p8fsJFYqMMNZ-yraZF-z6w303uYaCmmo/edit?usp=sharing&rm=minimal&widget=true&headers=false" 
-                                class="w-full border rounded-lg" 
-                                style="height: 500px;"
-                                frameborder="0">
-                        </iframe>
-                    </div>
-
-                    <div class="flex gap-3">
-                        <a href="https://www.notion.so/2f8da80a59b381f38419ed695b275ca8" target="_blank" class="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium">
-                            <i class="fas fa-external-link-alt mr-2"></i>Xem Chi Tiết Trên Notion
-                        </a>
-                        <a href="https://docs.google.com/spreadsheets/d/1ulrICF3uoc0p8fsJFYqMMNZ-yraZF-z6w303uYaCmmo/edit?usp=sharing" target="_blank" class="inline-block px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition font-medium">
-                            <i class="fas fa-table mr-2"></i>Mở Google Sheets
-                        </a>
-                    </div>
+    <div class="bg-red-50 p-6 rounded-lg border-l-4 border-red-600">
+        <h4 class="font-bold text-red-900 mb-3 text-xl flex items-center">
+            <i class="fas fa-exclamation-triangle mr-2"></i>4 Nhóm Lỗi Chính
+        </h4>
+        <div class="space-y-3">
+            <div class="flex items-start bg-white p-3 rounded">
+                <div class="bg-red-100 text-red-700 font-bold px-3 py-1 rounded mr-3 min-w-fit">35%</div>
+                <div>
+                    <p class="font-semibold text-gray-800">Hiểu sai yêu cầu (8 jobs)</p>
+                    <p class="text-sm text-gray-600">Không nắm vững brief, bỏ sót yêu cầu, không hiểu context địa phương</p>
                 </div>
-            `
-        }
-    };
+            </div>
+            <div class="flex items-start bg-white p-3 rounded">
+                <div class="bg-orange-100 text-orange-700 font-bold px-3 py-1 rounded mr-3 min-w-fit">26%</div>
+                <div>
+                    <p class="font-semibold text-gray-800">Chất lượng AI kém (6 jobs)</p>
+                    <p class="text-sm text-gray-600">Mặt biến dạng, người fake, lộ logo công cụ, viền cắt trắng</p>
+                </div>
+            </div>
+            <div class="flex items-start bg-white p-3 rounded">
+                <div class="bg-yellow-100 text-yellow-700 font-bold px-3 py-1 rounded mr-3 min-w-fit">22%</div>
+                <div>
+                    <p class="font-semibold text-gray-800">Trễ deadline (5 jobs)</p>
+                    <p class="text-sm text-gray-600">Trễ từ 3-9 tiếng do quá tải hoặc phối hợp kém</p>
+                </div>
+            </div>
+            <div class="flex items-start bg-white p-3 rounded">
+                <div class="bg-blue-100 text-blue-700 font-bold px-3 py-1 rounded mr-3 min-w-fit">17%</div>
+                <div>
+                    <p class="font-semibold text-gray-800">Lỗi Logic & Vật lý (4 jobs)</p>
+                    <p class="text-sm text-gray-600">Chuyển động phi lý, hành vi không tự nhiên</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    // Open modal when clicking on feedback card
-    feedbackCards.forEach(card => {
-        card.addEventListener('click', function(e) {
-            // Check if click is on expand button
-            if (e.target.closest('.expand-btn')) {
-                const feedbackId = this.getAttribute('data-feedback-id');
-                openFullPage(feedbackId);
-                return;
+    <div class="bg-purple-50 p-6 rounded-lg border-l-4 border-purple-600">
+        <h4 class="font-bold text-purple-900 mb-3 text-xl flex items-center">
+            <i class="fas fa-chart-bar mr-2"></i>Tỷ Lệ Lỗi Theo Loại Hiệu Ứng
+        </h4>
+        <div class="space-y-2">
+            <div class="flex items-center justify-between p-2 bg-white rounded">
+                <span class="text-sm font-medium">Object Animation</span>
+                <div class="flex items-center gap-2">
+                    <div class="w-32 bg-gray-200 rounded-full h-2">
+                        <div class="bg-red-600 h-2 rounded-full" style="width: 100%"></div>
+                    </div>
+                    <span class="text-sm font-bold text-red-600">100%</span>
+                </div>
+            </div>
+            <div class="flex items-center justify-between p-2 bg-white rounded">
+                <span class="text-sm font-medium">Creative/Fantasy</span>
+                <div class="flex items-center gap-2">
+                    <div class="w-32 bg-gray-200 rounded-full h-2">
+                        <div class="bg-red-600 h-2 rounded-full" style="width: 100%"></div>
+                    </div>
+                    <span class="text-sm font-bold text-red-600">100%</span>
+                </div>
+            </div>
+            <div class="flex items-center justify-between p-2 bg-white rounded">
+                <span class="text-sm font-medium">Agent Composite</span>
+                <div class="flex items-center gap-2">
+                    <div class="w-32 bg-gray-200 rounded-full h-2">
+                        <div class="bg-red-600 h-2 rounded-full" style="width: 100%"></div>
+                    </div>
+                    <span class="text-sm font-bold text-red-600">100%</span>
+                </div>
+            </div>
+            <div class="flex items-center justify-between p-2 bg-white rounded">
+                <span class="text-sm font-medium">Người/Lifestyle</span>
+                <div class="flex items-center gap-2">
+                    <div class="w-32 bg-gray-200 rounded-full h-2">
+                        <div class="bg-orange-500 h-2 rounded-full" style="width: 71%"></div>
+                    </div>
+                    <span class="text-sm font-bold text-orange-600">71%</span>
+                </div>
+            </div>
+            <div class="flex items-center justify-between p-2 bg-white rounded">
+                <span class="text-sm font-medium">Season/Weather</span>
+                <div class="flex items-center gap-2">
+                    <div class="w-32 bg-gray-200 rounded-full h-2">
+                        <div class="bg-orange-500 h-2 rounded-full" style="width: 67%"></div>
+                    </div>
+                    <span class="text-sm font-bold text-orange-600">67%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-600">
+        <h4 class="font-bold text-green-900 mb-3 text-xl flex items-center">
+            <i class="fas fa-lightbulb mr-2"></i>Giải Pháp Đề Xuất
+        </h4>
+        <ul class="space-y-2">
+            <li class="flex items-start">
+                <i class="fas fa-check-circle text-green-600 mt-1 mr-3"></i>
+                <span class="text-gray-700"><strong>Xây dựng QC Checklist:</strong> Thiết lập bộ tiêu chuẩn kiểm tra cho từng loại Effect</span>
+            </li>
+            <li class="flex items-start">
+                <i class="fas fa-check-circle text-green-600 mt-1 mr-3"></i>
+                <span class="text-gray-700"><strong>Chuẩn hóa Prompt:</strong> Tạo thư viện mẫu cho các yêu cầu phổ biến</span>
+            </li>
+            <li class="flex items-start">
+                <i class="fas fa-check-circle text-green-600 mt-1 mr-3"></i>
+                <span class="text-gray-700"><strong>Nâng cấp quy trình Brief:</strong> Bắt buộc clarify các điểm chưa rõ</span>
+            </li>
+            <li class="flex items-start">
+                <i class="fas fa-check-circle text-green-600 mt-1 mr-3"></i>
+                <span class="text-gray-700"><strong>Đào tạo Context:</strong> Cập nhật kiến thức về văn hóa và bối cảnh địa phương</span>
+            </li>
+        </ul>
+    </div>
+</div>`
             }
+        };
 
-            const feedbackId = this.getAttribute('data-feedback-id');
-            const hasContent = this.getAttribute('data-has-content') === 'true';
-            
-            if (hasContent && feedbackData[feedbackId]) {
+        feedbackCards.forEach(card => {
+            card.addEventListener('click', function(e) {
+                const feedbackId = this.getAttribute('data-feedback-id');
+                if (e.target.closest('.expand-btn')) {
+                    openFeedbackFullPage(feedbackId);
+                    return;
+                }
+                openFeedbackModal(feedbackId);
+            });
+        });
+
+        function openFeedbackModal(feedbackId) {
+            if (feedbackData[feedbackId]) {
                 currentFeedbackId = feedbackId;
                 const data = feedbackData[feedbackId];
-                modalTitle.textContent = data.title;
-                modalContent.innerHTML = data.content;
-                feedbackModal.classList.remove('hidden');
+                if (feedbackModalTitle) feedbackModalTitle.textContent = data.title;
+                if (feedbackModalContent) feedbackModalContent.innerHTML = data.content;
+                if (feedbackModal) feedbackModal.classList.remove('hidden');
                 document.body.style.overflow = 'hidden';
             }
-        });
-    });
-
-    // Close modal
-    if (closeModalBtn) {
-        closeModalBtn.addEventListener('click', function() {
-            feedbackModal.classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        });
-    }
-
-    // Close modal when clicking outside
-    if (feedbackModal) {
-        feedbackModal.addEventListener('click', function(e) {
-            if (e.target === feedbackModal) {
-                feedbackModal.classList.add('hidden');
-                document.body.style.overflow = 'auto';
-            }
-        });
-    }
-
-    // Open Full Page
-    function openFullPage(feedbackId) {
-        if (feedbackData[feedbackId]) {
-            currentFeedbackId = feedbackId;
-            const data = feedbackData[feedbackId];
-            fullPageTitle.textContent = data.title;
-            fullPageContent.innerHTML = data.content;
-            fullPageView.classList.remove('hidden');
-            feedbackModal.classList.add('hidden');
-            document.body.style.overflow = 'hidden';
         }
-    }
 
-    // Open Full Page from modal
-    if (openFullPageBtn) {
-        openFullPageBtn.addEventListener('click', function() {
-            if (currentFeedbackId) {
-                openFullPage(currentFeedbackId);
-            }
-        });
-    }
-
-    // Close Full Page
-    if (closeFullPageBtn) {
-        closeFullPageBtn.addEventListener('click', function() {
-            fullPageView.classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        });
-    }
-
-    
-    }
-
-    
-    }
-
-    // Close Whiteboard
-    if (                            });
-    }
-
-    // Save Whiteboard
-    if (                    alert('Tính năng lưu whiteboard đang được phát triển. Bạn có thể sử dụng Export trong Excalidraw để lưu file.');
-        });
-    }
-
-    // Clear Whiteboard
-    if (                    if (confirm('Bạn có chắc muốn xóa toàn bộ nội dung whiteboard?')) {
-                // Reload iframe to clear
-                const whiteboardFrame = document.getElementById('whiteboardFrame');
-                whiteboardFrame.src = whiteboardFrame.src;
-            }
-        });
-    }
-
-    // Close whiteboard when clicking outside
-    if (                    if (e.target ===                             }
-        });
-    }
-
-    // Sort by date
-    const sortByDateBtn = document.getElementById('sortByDateBtn');
-    const feedbackGrid = document.getElementById('feedbackGrid');
-    
-    if (sortByDateBtn && feedbackGrid) {
-        let sortAscending = false;
-        sortByDateBtn.addEventListener('click', function() {
-            const cards = Array.from(feedbackGrid.children);
-            cards.sort((a, b) => {
-                const dateA = a.getAttribute('data-date') ? new Date(a.getAttribute('data-date')) : new Date(0);
-                const dateB = b.getAttribute('data-date') ? new Date(b.getAttribute('data-date')) : new Date(0);
-                return sortAscending ? dateA - dateB : dateB - dateA;
-            });
-            
-            feedbackGrid.innerHTML = '';
-            cards.forEach(card => feedbackGrid.appendChild(card));
-            
-            sortAscending = !sortAscending;
-            sortByDateBtn.innerHTML = sortAscending 
-                ? '<i class="fas fa-calendar-alt mr-1"></i>Cũ nhất trước'
-                : '<i class="fas fa-calendar-alt mr-1"></i>Mới nhất trước';
-        });
-    }
-
-    // ESC key to close modals
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            if (!                            } else if (!fullPageView.classList.contains('hidden')) {
-                fullPageView.classList.add('hidden');
-                document.body.style.overflow = 'auto';
-            } else if (!feedbackModal.classList.contains('hidden')) {
-                feedbackModal.classList.add('hidden');
-                document.body.style.overflow = 'auto';
-            }
-        }
-    });
-});
-
-// Library Grid - Complete Data for All 10 Cards
-const libraryData = {
-    '1': {
-        title: 'Danh Sách Công Cụ AI Hiện Tại',
-        content: `
-<div class="space-y-6">
-    <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-600">
-        <h4 class="font-bold text-blue-900 mb-4 text-xl">🖼️ Công Cụ Tạo Ảnh</h4>
-        <ul class="space-y-2 text-gray-700">
-            <li class="flex items-start">
-                <span class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 text-sm">1</span>
-                <div><strong>Google Nano Banana Pro</strong> - 4K+, chi tiết vật liệu cao, phù hợp Virtual Staging</div>
-            </li>
-            <li class="flex items-start">
-                <span class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 text-sm">2</span>
-                <div><strong>Zimage</strong> - Tối ưu bất động sản, nhanh, đa dạng style</div>
-            </li>
-            <li class="flex items-start">
-                <span class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 text-sm">3</span>
-                <div><strong>Flux</strong> - Sáng tạo, nghệ thuật, kiểm soát tốt</div>
-            </li>
-            <li class="flex items-start">
-                <span class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 text-sm">4</span>
-                <div><strong>Seedream</strong> - Chuyên nội thất, artistic style</div>
-            </li>
-        </ul>
-    </div>
-    
-    <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-600">
-        <h4 class="font-bold text-green-900 mb-4 text-xl">🎬 Công Cụ Tạo Video</h4>
-        <ul class="space-y-2 text-gray-700">
-            <li class="flex items-start">
-                <span class="bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 text-sm">1</span>
-                <div><strong>Veo 3.1</strong> - Chân thực, mượt mà, tốt cho Day-to-Night</div>
-            </li>
-            <li class="flex items-start">
-                <span class="bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 text-sm">2</span>
-                <div><strong>Seedance 1.5 Pro</strong> - Hiệu ứng đặc biệt, creative effects</div>
-            </li>
-            <li class="flex items-start">
-                <span class="bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 text-sm">3</span>
-                <div><strong>Kling 2.6</strong> - Motion Control tuyệt vời, Real Estate Tour</div>
-            </li>
-            <li class="flex items-start">
-                <span class="bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 text-sm">4</span>
-                <div><strong>Kling O1</strong> - Chỉnh sửa video, fix lỗi vật lý</div>
-            </li>
-        </ul>
-    </div>
-</div>
-`
-    },
-    '2': {
-        title: '🏠 Virtual Staging - Google Nano Banana Pro',
-        content: `
-<div class="space-y-6">
-    <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-600">
-        <h4 class="font-bold text-blue-900 mb-3 text-xl">🛠️ Công Cụ Chính</h4>
-        <p class="text-gray-700 text-lg"><strong>Google Nano Banana Pro</strong></p>
-        <p class="text-gray-600 text-sm mt-2">Chất lượng cao, chi tiết tốt, phù hợp cho Virtual Staging và Interior Design</p>
-    </div>
-
-    <div class="bg-white p-6 rounded-lg border shadow-sm">
-        <h4 class="font-bold text-gray-800 mb-3 text-lg">📝 Prompt Tối Ưu</h4>
-        <pre class="bg-gray-100 p-4 rounded overflow-x-auto text-sm font-mono border border-blue-200">Ultra-realistic interior design of an empty [ROOM_TYPE], adding [STYLE] style furniture:
-- Main furniture: [FURNITURE_LIST]
-- Flooring: [FLOOR_MATERIAL] with [LIGHTING_TYPE] lighting
-- Wall color: [WALL_COLOR]
-- Accessories: [DECORATIVE_ITEMS]
-- Lighting: Soft daylight from large windows, warm accent lighting
-- Camera angle: [ANGLE_DESCRIPTION]
-- Resolution: 8K, architectural photography, photorealistic
-- Mood: [MOOD_DESCRIPTION]</pre>
-    </div>
-
-    <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-600">
-        <h4 class="font-bold text-green-900 mb-3 text-lg">✅ Ví Dụ Cụ Thể</h4>
-        <p class="text-gray-700 mb-3">Trang trí phòng khách theo phong cách Scandinavian:</p>
-        <pre class="bg-white p-4 rounded overflow-x-auto text-sm font-mono border border-green-200">Ultra-realistic interior design of an empty living room, adding Scandinavian style furniture:
-- Main furniture: Light oak wood sofa, minimalist coffee table, floor lamp
-- Flooring: Light oak wood with soft warm lighting
-- Wall color: Soft white with one accent wall in sage green
-- Accessories: Potted plants, white throw pillows, geometric wall art
-- Lighting: Soft daylight from large windows, warm accent lighting
-- Camera angle: Wide-angle from living room entrance
-- Resolution: 8K, architectural photography, photorealistic
-- Mood: Cozy, modern, minimalist</pre>
-    </div>
-</div>
-`
-    },
-    '3': {
-        title: '🌅 Day-to-Night - Veo 3.1 & Kling 2.6',
-        content: `
-<div class="space-y-6">
-    <div class="bg-orange-50 p-6 rounded-lg border-l-4 border-orange-600">
-        <h4 class="font-bold text-orange-900 mb-3 text-xl">🛠️ Công Cụ</h4>
-        <p class="text-gray-700 mb-2"><strong>Veo 3.1:</strong> Chuyển đổi ánh sáng tự nhiên, smooth transition</p>
-        <p class="text-gray-700"><strong>Kling 2.6:</strong> Motion control tốt, camera movement (nếu cần)</p>
-    </div>
-
-    <div class="bg-white p-6 rounded-lg border shadow-sm">
-        <h4 class="font-bold text-gray-800 mb-3 text-lg">📝 Prompt Tối Ưu</h4>
-        <pre class="bg-gray-100 p-4 rounded overflow-x-auto text-sm font-mono border border-orange-200">Cinematic transition video of [LOCATION]:
-- Start: [MORNING_DESCRIPTION] with bright sunlight
-- Middle: [AFTERNOON_DESCRIPTION] with golden hour lighting
-- End: [NIGHT_DESCRIPTION] with interior lights turning on
-- Camera movement: [CAMERA_MOVEMENT]
-- Duration: 30 seconds
-- Resolution: 4K, cinematic, realistic</pre>
-    </div>
-
-    <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-600">
-        <h4 class="font-bold text-green-900 mb-3 text-lg">✅ Ví Dụ Cụ Thể</h4>
-        <p class="text-gray-700 mb-3">Video chuyển đổi từ ngày sang đêm của tòa nhà cao cấp:</p>
-        <pre class="bg-white p-4 rounded overflow-x-auto text-sm font-mono border border-green-200">Cinematic transition video of modern luxury building:
-- Start: Bright morning with blue sky, natural sunlight
-- Middle: Golden hour afternoon, warm orange glow
-- End: Evening twilight with interior lights glowing warmly
-- Camera movement: Static, smooth time-lapse effect
-- Duration: 30 seconds
-- Resolution: 4K, cinematic, realistic</pre>
-    </div>
-</div>
-`
-    },
-    '4': {
-        title: '🎬 Real Estate Tour - Kling 2.6',
-        content: `
-<div class="space-y-6">
-    <div class="bg-purple-50 p-6 rounded-lg border-l-4 border-purple-600">
-        <h4 class="font-bold text-purple-900 mb-3 text-xl">🛠️ Công Cụ Chính</h4>
-        <p class="text-gray-700 text-lg"><strong>Kling 2.6 Motion Control</strong></p>
-        <p class="text-gray-600 text-sm mt-2">Tuyệt vời cho camera movement, smooth motion, cinematic shots</p>
-    </div>
-
-    <div class="bg-white p-6 rounded-lg border shadow-sm">
-        <h4 class="font-bold text-gray-800 mb-3 text-lg">📝 Prompt Tối Ưu</h4>
-        <pre class="bg-gray-100 p-4 rounded overflow-x-auto text-sm font-mono border border-purple-200">Smooth gimbal walkthrough of [PROPERTY_TYPE]:
-- Start position: [START_LOCATION]
-- Path: [MOVEMENT_DESCRIPTION]
-- End position: [END_LOCATION]
-- Motion control: [SPEED] speed, [DIRECTION] movement
-- Highlights: [KEY_FEATURES]
-- Duration: 45 seconds
-- Resolution: 4K, smooth motion</pre>
-    </div>
-
-    <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-600">
-        <h4 class="font-bold text-green-900 mb-3 text-lg">✅ Ví Dụ Cụ Thể</h4>
-        <p class="text-gray-700 mb-3">Tour căn hộ hiện đại:</p>
-        <pre class="bg-white p-4 rounded overflow-x-auto text-sm font-mono border border-green-200">Smooth gimbal walkthrough of modern apartment:
-- Start position: Main entrance door
-- Path: Through living room, kitchen area, bedroom hallway
-- End position: Master bedroom with city view
-- Motion control: Slow speed, forward and pan right movement
-- Highlights: Open floor plan, modern kitchen, floor-to-ceiling windows
-- Duration: 45 seconds
-- Resolution: 4K, smooth motion</pre>
-    </div>
-</div>
-`
-    },
-    '5': {
-        title: '🛍️ Product Showcase - Seedance 1.5 Pro',
-        content: `
-<div class="space-y-6">
-    <div class="bg-pink-50 p-6 rounded-lg border-l-4 border-pink-600">
-        <h4 class="font-bold text-pink-900 mb-3 text-xl">🛠️ Công Cụ Chính</h4>
-        <p class="text-gray-700 text-lg"><strong>Seedance 1.5 Pro</strong></p>
-        <p class="text-gray-600 text-sm mt-2">Hiệu ứng đặc biệt, creative effects, product animation</p>
-    </div>
-
-    <div class="bg-white p-6 rounded-lg border shadow-sm">
-        <h4 class="font-bold text-gray-800 mb-3 text-lg">📝 Prompt Tối Ưu</h4>
-        <pre class="bg-gray-100 p-4 rounded overflow-x-auto text-sm font-mono border border-pink-200">Professional product showcase video of [PRODUCT]:
-- Product: [PRODUCT_DESCRIPTION]
-- Background: [BACKGROUND_STYLE]
-- Camera movement: [CAMERA_MOVEMENT]
-- Lighting: [LIGHTING_SETUP]
-- Effects: [SPECIAL_EFFECTS]
-- Duration: 30-45 seconds
-- Style: Professional, modern, cinematic</pre>
-    </div>
-
-    <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-600">
-        <h4 class="font-bold text-green-900 mb-3 text-lg">✅ Ví Dụ Cụ Thể</h4>
-        <p class="text-gray-700 mb-3">Video trình bày ghế sofa hàng hiệu:</p>
-        <pre class="bg-white p-4 rounded overflow-x-auto text-sm font-mono border border-green-200">Professional product showcase video of luxury sofa:
-- Product: Modern grey velvet sofa with gold legs
-- Background: Minimalist white studio with soft shadows
-- Camera movement: 360-degree rotation, slow zoom in
-- Lighting: Studio lighting, dramatic highlights, soft fill light
-- Effects: Particle clouds, lens flare, depth of field
-- Duration: 30 seconds
-- Style: Professional, modern, cinematic</pre>
-    </div>
-</div>
-`
-    },
-    '6': {
-        title: '🔧 Kling O1 - Video Editing',
-        content: `
-<div class="space-y-6">
-    <div class="bg-teal-50 p-6 rounded-lg border-l-4 border-teal-600">
-        <h4 class="font-bold text-teal-900 mb-3 text-xl">🛠️ Khi Nào Dùng Kling O1?</h4>
-        <ul class="space-y-3 text-gray-700">
-            <li class="flex items-start">
-                <span class="bg-teal-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 text-sm">1</span>
-                <div><strong>Sửa lỗi vật lý:</strong> Vật thể biến mất, xuất hiện lỗi, chuyển động không tự nhiên</div>
-            </li>
-            <li class="flex items-start">
-                <span class="bg-teal-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 text-sm">2</span>
-                <div><strong>Thêm chi tiết:</strong> Tăng độ sắc nét, thêm texture, enhance quality</div>
-            </li>
-            <li class="flex items-start">
-                <span class="bg-teal-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 text-sm">3</span>
-                <div><strong>Điều chỉnh ánh sáng:</strong> Fix exposure, color grading, lighting adjustment</div>
-            </li>
-            <li class="flex items-start">
-                <span class="bg-teal-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 text-sm">4</span>
-                <div><strong>Xóa/Thêm đối tượng:</strong> Remove unwanted elements, add new objects</div>
-            </li>
-        </ul>
-    </div>
-
-    <div class="bg-white p-6 rounded-lg border shadow-sm">
-        <h4 class="font-bold text-gray-800 mb-3 text-lg">📝 Prompt cho Kling O1</h4>
-        <pre class="bg-gray-100 p-4 rounded overflow-x-auto text-sm font-mono border border-teal-200">Edit this video to:
-1. [PROBLEM_TO_FIX] - Describe the issue
-2. [ENHANCEMENT_NEEDED] - What to improve
-3. [ADDITIONAL_CHANGES] - Other modifications
-
-Maintain: Original style, lighting, camera angle
-Quality: 4K, preserve original resolution</pre>
-    </div>
-</div>
-`
-    },
-    '7': {
-        title: '⚖️ Bảng So Sánh Công Cụ',
-        content: `
-<div class="space-y-6">
-    <div class="bg-yellow-50 p-6 rounded-lg border-l-4 border-yellow-600">
-        <h4 class="font-bold text-yellow-900 mb-4 text-xl">🎯 Khi Nào Dùng Công Cụ Nào?</h4>
-        <div class="overflow-x-auto">
-            <table class="w-full text-sm border-collapse">
-                <thead>
-                    <tr class="bg-yellow-100">
-                        <th class="border border-yellow-300 px-4 py-3 text-left">Tình Huống</th>
-                        <th class="border border-yellow-300 px-4 py-3 text-left">Công Cụ Nên Dùng</th>
-                        <th class="border border-yellow-300 px-4 py-3 text-left">Lý Do</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="bg-white">
-                        <td class="border border-yellow-300 px-4 py-3">Trang trí nội thất ảo</td>
-                        <td class="border border-yellow-300 px-4 py-3"><strong class="text-blue-700">Google Nano Banana Pro</strong></td>
-                        <td class="border border-yellow-300 px-4 py-3">Chất lượng cao nhất, chi tiết vật liệu tốt</td>
-                    </tr>
-                    <tr class="bg-yellow-50">
-                        <td class="border border-yellow-300 px-4 py-3">Chuyển ngày sang đêm</td>
-                        <td class="border border-yellow-300 px-4 py-3"><strong class="text-orange-700">Veo 3.1</strong></td>
-                        <td class="border border-yellow-300 px-4 py-3">Ánh sáng tự nhiên, transition mượt</td>
-                    </tr>
-                    <tr class="bg-white">
-                        <td class="border border-yellow-300 px-4 py-3">Video tour bất động sản</td>
-                        <td class="border border-yellow-300 px-4 py-3"><strong class="text-purple-700">Kling 2.6</strong></td>
-                        <td class="border border-yellow-300 px-4 py-3">Motion Control tuyệt vời</td>
-                    </tr>
-                    <tr class="bg-yellow-50">
-                        <td class="border border-yellow-300 px-4 py-3">Product showcase</td>
-                        <td class="border border-yellow-300 px-4 py-3"><strong class="text-pink-700">Seedance 1.5 Pro</strong></td>
-                        <td class="border border-yellow-300 px-4 py-3">Hiệu ứng đặc biệt, creative</td>
-                    </tr>
-                    <tr class="bg-white">
-                        <td class="border border-yellow-300 px-4 py-3">Sửa lỗi video</td>
-                        <td class="border border-yellow-300 px-4 py-3"><strong class="text-teal-700">Kling O1</strong></td>
-                        <td class="border border-yellow-300 px-4 py-3">Chỉnh sửa tự động, fix lỗi</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-`
-    },
-    '8': {
-        title: '📋 Quy Trình 5 Bước',
-        content: `
-<div class="space-y-6">
-    <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-600">
-        <h4 class="font-bold text-blue-900 mb-4 text-xl">📝 Quy Trình Thực Hiện</h4>
-        <div class="space-y-4">
-            <div class="flex items-start bg-white p-4 rounded-lg shadow-sm">
-                <span class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0 font-bold text-lg">1</span>
-                <div>
-                    <h5 class="font-bold text-gray-800 mb-2">Nhận Feedback từ Sale</h5>
-                    <p class="text-sm text-gray-600">Đọc kỹ yêu cầu, xác định dịch vụ cần làm (Virtual Staging, Day-to-Night, Tour, Product Showcase)</p>
-                </div>
-            </div>
-            
-            <div class="flex items-start bg-white p-4 rounded-lg shadow-sm">
-                <span class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0 font-bold text-lg">2</span>
-                <div>
-                    <h5 class="font-bold text-gray-800 mb-2">Chọn Công Cụ Phù Hợp</h5>
-                    <p class="text-sm text-gray-600">Dựa vào bảng so sánh, chọn tool tối ưu cho tình huống cụ thể</p>
-                </div>
-            </div>
-            
-            <div class="flex items-start bg-white p-4 rounded-lg shadow-sm">
-                <span class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0 font-bold text-lg">3</span>
-                <div>
-                    <h5 class="font-bold text-gray-800 mb-2">Tạo Prompt Chi Tiết</h5>
-                    <p class="text-sm text-gray-600">Dùng template có sẵn, điền thông tin cụ thể từ feedback</p>
-                </div>
-            </div>
-            
-            <div class="flex items-start bg-white p-4 rounded-lg shadow-sm">
-                <span class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0 font-bold text-lg">4</span>
-                <div>
-                    <h5 class="font-bold text-gray-800 mb-2">Generate & Review</h5>
-                    <p class="text-sm text-gray-600">Chạy AI, kiểm tra kết quả, adjust prompt nếu cần thiết</p>
-                </div>
-            </div>
-            
-            <div class="flex items-start bg-white p-4 rounded-lg shadow-sm">
-                <span class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0 font-bold text-lg">5</span>
-                <div>
-                    <h5 class="font-bold text-gray-800 mb-2">Lưu Kết Quả</h5>
-                    <p class="text-sm text-gray-600">Save file, update Google Sheet, gửi cho Sale/khách hàng</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-`
-    },
-    '9': {
-        title: '🧠 System Prompt cho AI Assistant',
-        content: `
-<div class="space-y-6">
-    <div class="bg-purple-50 p-6 rounded-lg border-l-4 border-purple-600">
-        <h4 class="font-bold text-purple-900 mb-3 text-xl">🤖 System Prompt Chung</h4>
-        <p class="text-gray-700 mb-4"><strong>Mục đích:</strong> Giúp AI tạo Prompt tối ưu dựa trên feedback từ Sale</p>
-        <p class="text-gray-700 mb-3">Dùng cho ChatGPT/Claude/Gemini:</p>
-        <pre class="bg-white p-4 rounded overflow-x-auto text-sm font-mono border border-purple-200">Bạn là chuyên gia R&D AI tại Fotober. Bạn có kiến thức sâu về:
-- Các công cụ AI: Google Nano Banana Pro, Veo 3.1, Kling 2.6, Seedance 1.5 Pro, CapCut, After Effect
-- Các dịch vụ: Virtual Staging, Day-to-Night, Real Estate Tour, Product Showcase
-- Kỹ thuật Prompt Engineering
-
-Nhiệm vụ của bạn:
-1. Nhận feedback từ Sale hoặc yêu cầu từ khách hàng
-2. Phân tích yêu cầu và xác định công cụ AI phù hợp nhất
-3. Viết Prompt chi tiết, tối ưu cho từng công cụ
-4. Giải thích lý do chọn công cụ đó
-5. Cung cấp các lựa chọn thay thế nếu cần
-
-Format output:
-Dịch vụ: [SERVICE_NAME]
-Công cụ: [TOOL_NAME]
-Lý do: [REASONING]
-Prompt:
-[OPTIMIZED_PROMPT]</pre>
-    </div>
-</div>
-`
-    },
-    '10': {
-        title: '📝 Ghi Chú Quan Trọng',
-        content: `
-<div class="space-y-6">
-    <div class="bg-red-50 p-6 rounded-lg border-l-4 border-red-600">
-        <h4 class="font-bold text-red-900 mb-4 text-xl">⚠️ 5 Điểm Cần Lưu Ý</h4>
-        <div class="space-y-3">
-            <div class="bg-white p-4 rounded-lg shadow-sm">
-                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
-                    <span class="bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">1</span>
-                    Luôn Test Prompt Trước
-                </h5>
-                <p class="text-sm text-gray-600 ml-8">Chạy thử với sample nhỏ trước khi làm full project để tránh lãng phí credit</p>
-            </div>
-            
-            <div class="bg-white p-4 rounded-lg shadow-sm">
-                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
-                    <span class="bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">2</span>
-                    Lưu Prompt Tốt
-                </h5>
-                <p class="text-sm text-gray-600 ml-8">Save các prompt hiệu quả vào Google Sheet để reuse cho các job tương tự</p>
-            </div>
-            
-            <div class="bg-white p-4 rounded-lg shadow-sm">
-                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
-                    <span class="bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">3</span>
-                    Kiểm Tra Chất Lượng
-                </h5>
-                <p class="text-sm text-gray-600 ml-8">Review kỹ output trước khi gửi khách, có checklist quality control</p>
-            </div>
-            
-            <div class="bg-white p-4 rounded-lg shadow-sm">
-                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
-                    <span class="bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">4</span>
-                    Cập Nhật Thường Xuyên
-                </h5>
-                <p class="text-sm text-gray-600 ml-8">Công cụ AI update liên tục, theo dõi changelog và test tính năng mới</p>
-            </div>
-            
-            <div class="bg-white p-4 rounded-lg shadow-sm">
-                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
-                    <span class="bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">5</span>
-                    Feedback Loop
-                </h5>
-                <p class="text-sm text-gray-600 ml-8">Học từ lỗi, cải thiện prompt dựa trên feedback từ khách hàng và Sale</p>
-            </div>
-        </div>
-    </div>
-    
-    <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-600">
-        <h4 class="font-bold text-blue-900 mb-3 text-lg">🔗 Liên Kết Hữu Ích</h4>
-        <div class="space-y-2">
-            <a href="https://www.notion.so/2f8da80a59b381f38419ed695b275ca8" target="_blank" class="block text-blue-600 hover:underline text-sm">
-                <i class="fas fa-external-link-alt mr-2"></i>Notion Hub - Tài liệu đầy đủ
-            </a>
-            <a href="https://docs.google.com/spreadsheets/d/1ulrICF3uoc0p8fsJFYqMMNZ-yraZF-z6w303uYaCmmo" target="_blank" class="block text-green-600 hover:underline text-sm">
-                <i class="fas fa-table mr-2"></i>Google Sheet - Prompt Library
-            </a>
-        </div>
-    </div>
-</div>
-`
-    }
-};
-
-// Library Grid Event Handlers
-document.addEventListener('DOMContentLoaded', function() {
-    if (!document.getElementById('libraryGrid')) return;
-
-    const libraryCards = document.querySelectorAll('.library-card');
-    const libraryModal = document.getElementById('libraryModal');
-    const closeLibraryModalBtn = document.getElementById('closeLibraryModalBtn');
-    const libraryModalTitle = document.getElementById('libraryModalTitle');
-    const libraryModalContent = document.getElementById('libraryModalContent');
-    const openLibraryFullPageBtn = document.getElementById('openLibraryFullPageBtn');
-    
-    const libraryFullPageView = document.getElementById('libraryFullPageView');
-    const libraryFullPageTitle = document.getElementById('libraryFullPageTitle');
-    const libraryFullPageContent = document.getElementById('libraryFullPageContent');
-    const closeLibraryFullPageBtn = document.getElementById('closeLibraryFullPageBtn');
-
-    let currentLibraryId = null;
-
-    // Open modal when clicking on library card
-    libraryCards.forEach(card => {
-        card.addEventListener('click', function(e) {
-            if (e.target.closest('.expand-btn')) {
-                const libraryId = this.getAttribute('data-library-id');
-                openLibraryFullPage(libraryId);
-                return;
-            }
-
-            const libraryId = this.getAttribute('data-library-id');
-            if (libraryData[libraryId]) {
-                currentLibraryId = libraryId;
-                const data = libraryData[libraryId];
-                libraryModalTitle.textContent = data.title;
-                libraryModalContent.innerHTML = data.content;
-                libraryModal.classList.remove('hidden');
+        function openFeedbackFullPage(feedbackId) {
+            if (feedbackData[feedbackId]) {
+                const data = feedbackData[feedbackId];
+                if (feedbackFullPageTitle) feedbackFullPageTitle.textContent = data.title;
+                if (feedbackFullPageContent) feedbackFullPageContent.innerHTML = data.content;
+                if (feedbackFullPageView) feedbackFullPageView.classList.remove('hidden');
+                if (feedbackModal) feedbackModal.classList.add('hidden');
                 document.body.style.overflow = 'hidden';
             }
-        });
-    });
-
-    // Close modal
-    if (closeLibraryModalBtn) {
-        closeLibraryModalBtn.addEventListener('click', function() {
-            libraryModal.classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        });
-    }
-
-    // Close modal when clicking outside
-    if (libraryModal) {
-        libraryModal.addEventListener('click', function(e) {
-            if (e.target === libraryModal) {
-                libraryModal.classList.add('hidden');
-                document.body.style.overflow = 'auto';
-            }
-        });
-    }
-
-    // Open Full Page
-    function openLibraryFullPage(libraryId) {
-        if (libraryData[libraryId]) {
-            currentLibraryId = libraryId;
-            const data = libraryData[libraryId];
-            libraryFullPageTitle.textContent = data.title;
-            libraryFullPageContent.innerHTML = data.content;
-            libraryFullPageView.classList.remove('hidden');
-            libraryModal.classList.add('hidden');
-            document.body.style.overflow = 'hidden';
         }
-    }
 
-    // Open Full Page from modal
-    if (openLibraryFullPageBtn) {
-        openLibraryFullPageBtn.addEventListener('click', function() {
-            if (currentLibraryId) {
-                openLibraryFullPage(currentLibraryId);
-            }
-        });
-    }
-
-    // Close Full Page
-    if (closeLibraryFullPageBtn) {
-        closeLibraryFullPageBtn.addEventListener('click', function() {
-            libraryFullPageView.classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        });
-    }
-
-    // Sort library
-    const sortLibraryBtn = document.getElementById('sortLibraryBtn');
-    const libraryGrid = document.getElementById('libraryGrid');
-    
-    if (sortLibraryBtn && libraryGrid) {
-        let sortAscending = true;
-        sortLibraryBtn.addEventListener('click', function() {
-            const cards = Array.from(libraryGrid.children);
-            cards.sort((a, b) => {
-                const orderA = parseInt(a.getAttribute('data-order') || 0);
-                const orderB = parseInt(b.getAttribute('data-order') || 0);
-                return sortAscending ? orderA - orderB : orderB - orderA;
+        if (closeFeedbackModalBtn) {
+            closeFeedbackModalBtn.addEventListener('click', () => {
+                feedbackModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
             });
-            
-            libraryGrid.innerHTML = '';
-            cards.forEach(card => libraryGrid.appendChild(card));
-            
-            sortAscending = !sortAscending;
-            sortLibraryBtn.innerHTML = sortAscending 
-                ? '<i class="fas fa-sort mr-1"></i>Sắp xếp Z-A'
-                : '<i class="fas fa-sort mr-1"></i>Sắp xếp A-Z';
-        });
+        }
+
+        if (openFeedbackFullPageBtn) {
+            openFeedbackFullPageBtn.addEventListener('click', () => {
+                if (currentFeedbackId) openFeedbackFullPage(currentFeedbackId);
+            });
+        }
+
+        if (closeFeedbackFullPageBtn) {
+            closeFeedbackFullPageBtn.addEventListener('click', () => {
+                feedbackFullPageView.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            });
+        }
     }
 
-    // ESC key to close
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            if (!libraryFullPageView.classList.contains('hidden')) {
-                libraryFullPageView.classList.add('hidden');
-                document.body.style.overflow = 'auto';
-            } else if (!libraryModal.classList.contains('hidden')) {
-                libraryModal.classList.add('hidden');
-                document.body.style.overflow = 'auto';
+    // ========== ROADMAP HANDLERS ==========
+    const roadmapGrid = document.getElementById('roadmapGrid');
+    if (roadmapGrid) {
+        const roadmapCards = document.querySelectorAll('.roadmap-card');
+        const roadmapModal = document.getElementById('roadmapModal');
+        const roadmapModalTitle = document.getElementById('roadmapModalTitle');
+        const roadmapModalSubtitle = document.getElementById('roadmapModalSubtitle');
+        const roadmapModalContent = document.getElementById('roadmapModalContent');
+        const closeRoadmapModalBtn = document.getElementById('closeRoadmapModalBtn');
+        const openRoadmapFullPageBtn = document.getElementById('openRoadmapFullPageBtn');
+        
+        const roadmapFullPageView = document.getElementById('roadmapFullPageView');
+        const roadmapFullPageTitle = document.getElementById('roadmapFullPageTitle');
+        const roadmapFullPageSubtitle = document.getElementById('roadmapFullPageSubtitle');
+        const roadmapFullPageContent = document.getElementById('roadmapFullPageContent');
+        const closeRoadmapFullPageBtn = document.getElementById('closeRoadmapFullPageBtn');
+
+        let currentToolId = null;
+
+        roadmapCards.forEach(card => {
+            card.addEventListener('click', function(e) {
+                const toolId = this.getAttribute('data-tool-id');
+                if (e.target.closest('.expand-btn')) {
+                    openFullPage(toolId);
+                    return;
+                }
+                openModal(toolId);
+            });
+        });
+
+        function openModal(toolId) {
+            if (typeof roadmapData !== 'undefined' && roadmapData[toolId]) {
+                currentToolId = toolId;
+                const data = roadmapData[toolId];
+                if (roadmapModalTitle) roadmapModalTitle.textContent = data.title;
+                if (roadmapModalSubtitle) roadmapModalSubtitle.textContent = data.subtitle;
+                if (roadmapModalContent) roadmapModalContent.innerHTML = data.content;
+                if (roadmapModal) roadmapModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
             }
         }
-    });
+
+        function openFullPage(toolId) {
+            if (typeof roadmapData !== 'undefined' && roadmapData[toolId]) {
+                const data = roadmapData[toolId];
+                if (roadmapFullPageTitle) roadmapFullPageTitle.textContent = data.title;
+                if (roadmapFullPageSubtitle) roadmapFullPageSubtitle.textContent = data.subtitle;
+                if (roadmapFullPageContent) roadmapFullPageContent.innerHTML = data.content;
+                if (roadmapFullPageView) roadmapFullPageView.classList.remove('hidden');
+                if (roadmapModal) roadmapModal.classList.add('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        if (closeRoadmapModalBtn) {
+            closeRoadmapModalBtn.addEventListener('click', () => {
+                roadmapModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            });
+        }
+
+        if (openRoadmapFullPageBtn) {
+            openRoadmapFullPageBtn.addEventListener('click', () => {
+                if (currentToolId) openFullPage(currentToolId);
+            });
+        }
+
+        if (closeRoadmapFullPageBtn) {
+            closeRoadmapFullPageBtn.addEventListener('click', () => {
+                roadmapFullPageView.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            });
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (roadmapFullPageView && !roadmapFullPageView.classList.contains('hidden')) {
+                    roadmapFullPageView.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                } else if (roadmapModal && !roadmapModal.classList.contains('hidden')) {
+                    roadmapModal.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                }
+            }
+        });
+    }
 });
-// Roadmap Data - Chi tiết lộ trình R&D cho 4 công cụ AI
+
+// Roadmap Data
 const roadmapData = {
     '1': {
         title: 'Google Nano Banana Pro',
         subtitle: 'Image Generation • 4K+ Quality • Virtual Staging',
         content: `
 <div class="space-y-6">
-    <!-- Overview -->
     <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-600">
         <h4 class="font-bold text-blue-900 mb-3 text-xl flex items-center">
             <i class="fas fa-info-circle mr-2"></i>Tổng Quan
         </h4>
         <p class="text-gray-700 mb-3">
             <strong>Google Nano Banana Pro</strong> là công cụ tạo ảnh AI hàng đầu với chất lượng 4K+, 
-            chuyên về Virtual Staging và Interior Design. Độ chi tiết vật liệu và ánh sáng tuyệt vời, 
-            phù hợp cho dự án bất động sản cao cấp.
+            chuyên về Virtual Staging và Interior Design. Độ chi tiết vật liệu và ánh sáng tuyệt vời.
         </p>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
-            <div class="bg-white p-3 rounded text-center">
+            <div class="bg-white p-3 rounded text-center shadow-sm">
                 <div class="text-2xl font-bold text-blue-600">4K+</div>
                 <div class="text-xs text-gray-600">Resolution</div>
             </div>
-            <div class="bg-white p-3 rounded text-center">
+            <div class="bg-white p-3 rounded text-center shadow-sm">
                 <div class="text-2xl font-bold text-green-600">95%</div>
                 <div class="text-xs text-gray-600">Accuracy</div>
             </div>
-            <div class="bg-white p-3 rounded text-center">
+            <div class="bg-white p-3 rounded text-center shadow-sm">
                 <div class="text-2xl font-bold text-purple-600">30s</div>
                 <div class="text-xs text-gray-600">Avg Time</div>
             </div>
-            <div class="bg-white p-3 rounded text-center">
+            <div class="bg-white p-3 rounded text-center shadow-sm">
                 <div class="text-2xl font-bold text-orange-600">$0.5</div>
                 <div class="text-xs text-gray-600">Per Image</div>
             </div>
         </div>
     </div>
-
-    <!-- Timeline -->
-    <div class="bg-white p-6 rounded-lg border shadow-sm">
-        <h4 class="font-bold text-gray-800 mb-4 text-lg flex items-center">
-            <i class="fas fa-calendar-alt mr-2 text-blue-600"></i>Lộ Trình Triển Khai (Tuần 1-4)
-        </h4>
-        <div class="space-y-4">
-            <div class="flex items-start">
-                <div class="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">✓</div>
-                <div class="flex-1">
-                    <div class="flex items-center justify-between mb-1">
-                        <h5 class="font-bold text-gray-800">Tuần 1: Setup & Testing</h5>
-                        <span class="text-xs text-green-600 font-semibold">Hoàn thành</span>
-                    </div>
-                    <p class="text-sm text-gray-600 mb-2">Thiết lập API, test 50 prompts mẫu, đánh giá chất lượng</p>
-                    <div class="bg-green-50 p-2 rounded text-xs">
-                        <strong>Kết quả:</strong> API stable, quality score 9.2/10, cost $25
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex items-start">
-                <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">2</div>
-                <div class="flex-1">
-                    <div class="flex items-center justify-between mb-1">
-                        <h5 class="font-bold text-gray-800">Tuần 2: Prompt Engineering</h5>
-                        <span class="text-xs text-blue-600 font-semibold">Đang làm (70%)</span>
-                    </div>
-                    <p class="text-sm text-gray-600 mb-2">Tối ưu prompt cho Virtual Staging, Interior Design, Furniture Placement</p>
-                    <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
-                        <div class="bg-blue-600 h-2 rounded-full" style="width: 70%"></div>
-                    </div>
-                    <div class="bg-blue-50 p-2 rounded text-xs">
-                        <strong>Tasks:</strong> 5/8 completed - Virtual Staging (✓), Day scenes (✓), Night scenes (✓), Furniture (✓), Lighting (✓)
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex items-start">
-                <div class="bg-gray-300 text-gray-600 rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">3</div>
-                <div class="flex-1">
-                    <div class="flex items-center justify-between mb-1">
-                        <h5 class="font-bold text-gray-800">Tuần 3: Real Project Testing</h5>
-                        <span class="text-xs text-gray-500 font-semibold">Chưa bắt đầu</span>
-                    </div>
-                    <p class="text-sm text-gray-600">Test trên 10 dự án thực tế, thu thập feedback từ Sale và khách hàng</p>
-                </div>
-            </div>
-
-            <div class="flex items-start">
-                <div class="bg-gray-300 text-gray-600 rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">4</div>
-                <div class="flex-1">
-                    <div class="flex items-center justify-between mb-1">
-                        <h5 class="font-bold text-gray-800">Tuần 4: Optimization & Scale</h5>
-                        <span class="text-xs text-gray-500 font-semibold">Chưa bắt đầu</span>
-                    </div>
-                    <p class="text-sm text-gray-600">Tối ưu cost, tốc độ, chất lượng. Xây dựng workflow tự động</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Use Cases -->
-    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border-l-4 border-blue-600">
-        <h4 class="font-bold text-blue-900 mb-4 text-lg flex items-center">
-            <i class="fas fa-lightbulb mr-2"></i>Use Cases Chính
-        </h4>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="bg-white p-4 rounded-lg shadow-sm">
-                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
-                    <span class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">1</span>
-                    Virtual Staging
-                </h5>
-                <p class="text-sm text-gray-600 mb-2">Trang trí nội thất ảo cho phòng trống, thêm furniture và decorations</p>
-                <span class="text-xs text-blue-600 font-semibold">Success Rate: 92%</span>
-            </div>
-
-            <div class="bg-white p-4 rounded-lg shadow-sm">
-                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
-                    <span class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">2</span>
-                    Interior Design
-                </h5>
-                <p class="text-sm text-gray-600 mb-2">Thiết kế nội thất theo style khác nhau (Scandinavian, Modern, etc.)</p>
-                <span class="text-xs text-green-600 font-semibold">Success Rate: 88%</span>
-            </div>
-
-            <div class="bg-white p-4 rounded-lg shadow-sm">
-                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
-                    <span class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">3</span>
-                    Furniture Replacement
-                </h5>
-                <p class="text-sm text-gray-600 mb-2">Thay đổi furniture trong ảnh, swap styles, colors</p>
-                <span class="text-xs text-purple-600 font-semibold">Success Rate: 85%</span>
-            </div>
-
-            <div class="bg-white p-4 rounded-lg shadow-sm">
-                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
-                    <span class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">4</span>
-                    Lighting Enhancement
-                </h5>
-                <p class="text-sm text-gray-600 mb-2">Cải thiện ánh sáng, thêm natural light, warm/cool tones</p>
-                <span class="text-xs text-orange-600 font-semibold">Success Rate: 90%</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Challenges & Solutions -->
-    <div class="bg-yellow-50 p-6 rounded-lg border-l-4 border-yellow-600">
-        <h4 class="font-bold text-yellow-900 mb-4 text-lg flex items-center">
-            <i class="fas fa-exclamation-triangle mr-2"></i>Thách Thức & Giải Pháp
-        </h4>
-        <div class="space-y-3">
-            <div class="bg-white p-4 rounded-lg">
-                <h5 class="font-bold text-gray-800 mb-2">⚠️ Thách thức: Chi tiết vật liệu không chính xác</h5>
-                <p class="text-sm text-gray-600 mb-2"><strong>Giải pháp:</strong> Thêm reference images, specify material types trong prompt</p>
-                <span class="text-xs text-green-600 font-semibold">Status: Đã giải quyết</span>
-            </div>
-
-            <div class="bg-white p-4 rounded-lg">
-                <h5 class="font-bold text-gray-800 mb-2">⚠️ Thách thức: Cost cao ($0.5/image)</h5>
-                <p class="text-sm text-gray-600 mb-2"><strong>Giải pháp:</strong> Batch processing, optimize prompt để giảm re-generation</p>
-                <span class="text-xs text-blue-600 font-semibold">Status: Đang tối ưu</span>
-            </div>
-
-            <div class="bg-white p-4 rounded-lg">
-                <h5 class="font-bold text-gray-800 mb-2">⚠️ Thách thức: Thời gian xử lý 30-45s</h5>
-                <p class="text-sm text-gray-600 mb-2"><strong>Giải pháp:</strong> Queue system, parallel processing cho nhiều images</p>
-                <span class="text-xs text-purple-600 font-semibold">Status: Lên kế hoạch</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Next Steps -->
-    <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-600">
-        <h4 class="font-bold text-green-900 mb-4 text-lg flex items-center">
-            <i class="fas fa-forward mr-2"></i>Bước Tiếp Theo
-        </h4>
-        <ul class="space-y-2">
-            <li class="flex items-start">
-                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
-                <span class="text-gray-700">Hoàn thành 3 tasks còn lại trong Tuần 2 (Accessories, Styles, Quality Control)</span>
-            </li>
-            <li class="flex items-start">
-                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
-                <span class="text-gray-700">Bắt đầu Real Project Testing với 10 dự án thực tế</span>
-            </li>
-            <li class="flex items-start">
-                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
-                <span class="text-gray-700">Thu thập feedback từ Sale và khách hàng</span>
-            </li>
-            <li class="flex items-start">
-                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
-                <span class="text-gray-700">Xây dựng Prompt Library với 50+ templates</span>
-            </li>
-        </ul>
-    </div>
-</div>
-`
+</div>`
     },
     '2': {
         title: 'Veo 3.1',
         subtitle: 'Video Generation • Cinematic • Day-to-Night',
         content: `
 <div class="space-y-6">
-    <!-- Overview -->
     <div class="bg-orange-50 p-6 rounded-lg border-l-4 border-orange-600">
         <h4 class="font-bold text-orange-900 mb-3 text-xl flex items-center">
             <i class="fas fa-info-circle mr-2"></i>Tổng Quan
         </h4>
         <p class="text-gray-700 mb-3">
             <strong>Veo 3.1</strong> là công cụ tạo video AI chân thực nhất hiện nay, chuyên về 
-            Day-to-Night transitions và cinematic shots. Ánh sáng tự nhiên, chuyển động mượt mà, 
-            phù hợp cho video bất động sản cao cấp.
+            Day-to-Night transitions và cinematic shots.
         </p>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
-            <div class="bg-white p-3 rounded text-center">
+            <div class="bg-white p-3 rounded text-center shadow-sm">
                 <div class="text-2xl font-bold text-orange-600">4K</div>
                 <div class="text-xs text-gray-600">Resolution</div>
             </div>
-            <div class="bg-white p-3 rounded text-center">
+            <div class="bg-white p-3 rounded text-center shadow-sm">
                 <div class="text-2xl font-bold text-green-600">90%</div>
                 <div class="text-xs text-gray-600">Realism</div>
             </div>
-            <div class="bg-white p-3 rounded text-center">
+            <div class="bg-white p-3 rounded text-center shadow-sm">
                 <div class="text-2xl font-bold text-purple-600">30s</div>
                 <div class="text-xs text-gray-600">Max Length</div>
             </div>
-            <div class="bg-white p-3 rounded text-center">
+            <div class="bg-white p-3 rounded text-center shadow-sm">
                 <div class="text-2xl font-bold text-orange-600">$2</div>
                 <div class="text-xs text-gray-600">Per 30s</div>
             </div>
         </div>
     </div>
-
-    <!-- Timeline -->
-    <div class="bg-white p-6 rounded-lg border shadow-sm">
-        <h4 class="font-bold text-gray-800 mb-4 text-lg flex items-center">
-            <i class="fas fa-calendar-alt mr-2 text-orange-600"></i>Lộ Trình Triển Khai (Tuần 2-5)
-        </h4>
-        <div class="space-y-4">
-            <div class="flex items-start">
-                <div class="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">✓</div>
-                <div class="flex-1">
-                    <div class="flex items-center justify-between mb-1">
-                        <h5 class="font-bold text-gray-800">Tuần 2: API Integration</h5>
-                        <span class="text-xs text-green-600 font-semibold">Hoàn thành</span>
-                    </div>
-                    <p class="text-sm text-gray-600 mb-2">Setup Veo 3.1 API, test basic video generation</p>
-                    <div class="bg-green-50 p-2 rounded text-xs">
-                        <strong>Kết quả:</strong> API working, generated 20 test videos, quality excellent
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex items-start">
-                <div class="bg-orange-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">2</div>
-                <div class="flex-1">
-                    <div class="flex items-center justify-between mb-1">
-                        <h5 class="font-bold text-gray-800">Tuần 3: Day-to-Night Testing</h5>
-                        <span class="text-xs text-orange-600 font-semibold">Đang làm (50%)</span>
-                    </div>
-                    <p class="text-sm text-gray-600 mb-2">Test Day-to-Night transitions, lighting changes, time-lapse effects</p>
-                    <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
-                        <div class="bg-orange-600 h-2 rounded-full" style="width: 50%"></div>
-                    </div>
-                    <div class="bg-orange-50 p-2 rounded text-xs">
-                        <strong>Tasks:</strong> 4/7 completed - Morning (✓), Afternoon (✓), Evening (✓), Night (✓)
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex items-start">
-                <div class="bg-gray-300 text-gray-600 rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">3</div>
-                <div class="flex-1">
-                    <div class="flex items-center justify-between mb-1">
-                        <h5 class="font-bold text-gray-800">Tuần 4: Cinematic Shots</h5>
-                        <span class="text-xs text-gray-500 font-semibold">Chưa bắt đầu</span>
-                    </div>
-                    <p class="text-sm text-gray-600">Test camera movements, cinematic effects, color grading</p>
-                </div>
-            </div>
-
-            <div class="flex items-start">
-                <div class="bg-gray-300 text-gray-600 rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">4</div>
-                <div class="flex-1">
-                    <div class="flex items-center justify-between mb-1">
-                        <h5 class="font-bold text-gray-800">Tuần 5: Production Ready</h5>
-                        <span class="text-xs text-gray-500 font-semibold">Chưa bắt đầu</span>
-                    </div>
-                    <p class="text-sm text-gray-600">Final optimization, workflow automation, team training</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Use Cases -->
-    <div class="bg-gradient-to-r from-orange-50 to-red-50 p-6 rounded-lg border-l-4 border-orange-600">
-        <h4 class="font-bold text-orange-900 mb-4 text-lg flex items-center">
-            <i class="fas fa-lightbulb mr-2"></i>Use Cases Chính
-        </h4>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="bg-white p-4 rounded-lg shadow-sm">
-                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
-                    <span class="bg-orange-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">1</span>
-                    Day-to-Night Transition
-                </h5>
-                <p class="text-sm text-gray-600 mb-2">Video chuyển từ ngày sang đêm, ánh sáng tự nhiên</p>
-                <span class="text-xs text-orange-600 font-semibold">Success Rate: 88%</span>
-            </div>
-
-            <div class="bg-white p-4 rounded-lg shadow-sm">
-                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
-                    <span class="bg-orange-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">2</span>
-                    Property Showcase
-                </h5>
-                <p class="text-sm text-gray-600 mb-2">Video giới thiệu bất động sản, exterior và interior</p>
-                <span class="text-xs text-green-600 font-semibold">Success Rate: 85%</span>
-            </div>
-
-            <div class="bg-white p-4 rounded-lg shadow-sm">
-                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
-                    <span class="bg-orange-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">3</span>
-                    Weather Effects
-                </h5>
-                <p class="text-sm text-gray-600 mb-2">Thêm hiệu ứng thời tiết (rain, snow, fog, clouds)</p>
-                <span class="text-xs text-purple-600 font-semibold">Success Rate: 75%</span>
-            </div>
-
-            <div class="bg-white p-4 rounded-lg shadow-sm">
-                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
-                    <span class="bg-orange-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">4</span>
-                    Time-lapse
-                </h5>
-                <p class="text-sm text-gray-600 mb-2">Video time-lapse, fast-forward effects</p>
-                <span class="text-xs text-blue-600 font-semibold">Success Rate: 82%</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Next Steps -->
-    <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-600">
-        <h4 class="font-bold text-green-900 mb-4 text-lg flex items-center">
-            <i class="fas fa-forward mr-2"></i>Bước Tiếp Theo
-        </h4>
-        <ul class="space-y-2">
-            <li class="flex items-start">
-                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
-                <span class="text-gray-700">Hoàn thành 3 tasks còn lại trong Tuần 3 (Twilight, Golden Hour, Interior Lights)</span>
-            </li>
-            <li class="flex items-start">
-                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
-                <span class="text-gray-700">Bắt đầu test Cinematic Shots với camera movements</span>
-            </li>
-            <li class="flex items-start">
-                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
-                <span class="text-gray-700">So sánh với Kling 2.6 để chọn tool phù hợp cho từng use case</span>
-            </li>
-        </ul>
-    </div>
-</div>
-`
+</div>`
     },
     '3': {
         title: 'Kling 2.6',
-        subtitle: 'Motion Control • Real Estate Tour • Camera Movements',
+        subtitle: 'Motion Control • Real Estate Tour',
         content: `
 <div class="space-y-6">
-    <!-- Overview -->
     <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-600">
         <h4 class="font-bold text-green-900 mb-3 text-xl flex items-center">
             <i class="fas fa-info-circle mr-2"></i>Tổng Quan
         </h4>
         <p class="text-gray-700 mb-3">
             <strong>Kling 2.6</strong> nổi bật với Motion Control tuyệt vời, cho phép kiểm soát 
-            chính xác camera movements và object motions. Lý tưởng cho Real Estate Tour và 
-            các video cần camera movements phức tạp.
+            chính xác camera movements và object motions.
         </p>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
-            <div class="bg-white p-3 rounded text-center">
+            <div class="bg-white p-3 rounded text-center shadow-sm">
                 <div class="text-2xl font-bold text-green-600">4K</div>
                 <div class="text-xs text-gray-600">Resolution</div>
             </div>
-            <div class="bg-white p-3 rounded text-center">
+            <div class="bg-white p-3 rounded text-center shadow-sm">
                 <div class="text-2xl font-bold text-green-600">95%</div>
                 <div class="text-xs text-gray-600">Motion Acc</div>
             </div>
-            <div class="bg-white p-3 rounded text-center">
+            <div class="bg-white p-3 rounded text-center shadow-sm">
                 <div class="text-2xl font-bold text-purple-600">45s</div>
                 <div class="text-xs text-gray-600">Max Length</div>
             </div>
-            <div class="bg-white p-3 rounded text-center">
+            <div class="bg-white p-3 rounded text-center shadow-sm">
                 <div class="text-2xl font-bold text-green-600">$1.5</div>
                 <div class="text-xs text-gray-600">Per 45s</div>
             </div>
         </div>
     </div>
-
-    <!-- Timeline -->
-    <div class="bg-white p-6 rounded-lg border shadow-sm">
-        <h4 class="font-bold text-gray-800 mb-4 text-lg flex items-center">
-            <i class="fas fa-calendar-alt mr-2 text-green-600"></i>Lộ Trình Triển Khai (Tuần 3-6)
-        </h4>
-        <div class="space-y-4">
-            <div class="flex items-start">
-                <div class="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">1</div>
-                <div class="flex-1">
-                    <div class="flex items-center justify-between mb-1">
-                        <h5 class="font-bold text-gray-800">Tuần 3: Research & Setup</h5>
-                        <span class="text-xs text-green-600 font-semibold">Đang làm (30%)</span>
-                    </div>
-                    <p class="text-sm text-gray-600 mb-2">Research Motion Control features, setup API, test basic movements</p>
-                    <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
-                        <div class="bg-green-600 h-2 rounded-full" style="width: 30%"></div>
-                    </div>
-                    <div class="bg-green-50 p-2 rounded text-xs">
-                        <strong>Tasks:</strong> 3/9 completed - API Setup (✓), Basic Test (✓), Documentation (✓)
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex items-start">
-                <div class="bg-gray-300 text-gray-600 rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">2</div>
-                <div class="flex-1">
-                    <div class="flex items-center justify-between mb-1">
-                        <h5 class="font-bold text-gray-800">Tuần 4: Motion Control Testing</h5>
-                        <span class="text-xs text-gray-500 font-semibold">Chưa bắt đầu</span>
-                    </div>
-                    <p class="text-sm text-gray-600">Test camera movements: pan, tilt, zoom, dolly, tracking</p>
-                </div>
-            </div>
-
-            <div class="flex items-start">
-                <div class="bg-gray-300 text-gray-600 rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">3</div>
-                <div class="flex-1">
-                    <div class="flex items-center justify-between mb-1">
-                        <h5 class="font-bold text-gray-800">Tuần 5: Real Estate Tour</h5>
-                        <span class="text-xs text-gray-500 font-semibold">Chưa bắt đầu</span>
-                    </div>
-                    <p class="text-sm text-gray-600">Create Real Estate Tour templates, test on real properties</p>
-                </div>
-            </div>
-
-            <div class="flex items-start">
-                <div class="bg-gray-300 text-gray-600 rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">4</div>
-                <div class="flex-1">
-                    <div class="flex items-center justify-between mb-1">
-                        <h5 class="font-bold text-gray-800">Tuần 6: Production & Training</h5>
-                        <span class="text-xs text-gray-500 font-semibold">Chưa bắt đầu</span>
-                    </div>
-                    <p class="text-sm text-gray-600">Finalize workflows, create templates, train team</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Use Cases -->
-    <div class="bg-gradient-to-r from-green-50 to-emerald-50 p-6 rounded-lg border-l-4 border-green-600">
-        <h4 class="font-bold text-green-900 mb-4 text-lg flex items-center">
-            <i class="fas fa-lightbulb mr-2"></i>Use Cases Chính
-        </h4>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="bg-white p-4 rounded-lg shadow-sm">
-                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
-                    <span class="bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">1</span>
-                    Real Estate Tour
-                </h5>
-                <p class="text-sm text-gray-600 mb-2">Walkthrough video với smooth camera movements</p>
-                <span class="text-xs text-green-600 font-semibold">Priority: High</span>
-            </div>
-
-            <div class="bg-white p-4 rounded-lg shadow-sm">
-                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
-                    <span class="bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">2</span>
-                    Gimbal Shots
-                </h5>
-                <p class="text-sm text-gray-600 mb-2">Smooth gimbal-like camera movements</p>
-                <span class="text-xs text-blue-600 font-semibold">Priority: High</span>
-            </div>
-
-            <div class="bg-white p-4 rounded-lg shadow-sm">
-                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
-                    <span class="bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">3</span>
-                    Product 360°
-                </h5>
-                <p class="text-sm text-gray-600 mb-2">360° rotation cho product showcase</p>
-                <span class="text-xs text-purple-600 font-semibold">Priority: Medium</span>
-            </div>
-
-            <div class="bg-white p-4 rounded-lg shadow-sm">
-                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
-                    <span class="bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">4</span>
-                    Drone Shots
-                </h5>
-                <p class="text-sm text-gray-600 mb-2">Aerial views, drone-like movements</p>
-                <span class="text-xs text-orange-600 font-semibold">Priority: Medium</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Next Steps -->
-    <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-600">
-        <h4 class="font-bold text-green-900 mb-4 text-lg flex items-center">
-            <i class="fas fa-forward mr-2"></i>Bước Tiếp Theo
-        </h4>
-        <ul class="space-y-2">
-            <li class="flex items-start">
-                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
-                <span class="text-gray-700">Hoàn thành research Motion Control features</span>
-            </li>
-            <li class="flex items-start">
-                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
-                <span class="text-gray-700">Test 5 loại camera movements cơ bản</span>
-            </li>
-            <li class="flex items-start">
-                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
-                <span class="text-gray-700">So sánh với Veo 3.1 để xác định use cases phù hợp</span>
-            </li>
-        </ul>
-    </div>
-</div>
-`
+</div>`
     },
     '4': {
         title: 'Seedance 1.5 Pro',
-        subtitle: 'Special Effects • Product Showcase • Creative',
+        subtitle: 'Special Effects • Product Showcase',
         content: `
 <div class="space-y-6">
-    <!-- Overview -->
     <div class="bg-pink-50 p-6 rounded-lg border-l-4 border-pink-600">
         <h4 class="font-bold text-pink-900 mb-3 text-xl flex items-center">
             <i class="fas fa-info-circle mr-2"></i>Tổng Quan
         </h4>
         <p class="text-gray-700 mb-3">
             <strong>Seedance 1.5 Pro</strong> chuyên về hiệu ứng đặc biệt và creative effects. 
-            Lý tưởng cho Product Showcase với particle effects, 360° rotation, và các hiệu ứng 
-            sáng tạo khác.
+            Lý tưởng cho Product Showcase với particle effects.
         </p>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
-            <div class="bg-white p-3 rounded text-center">
+            <div class="bg-white p-3 rounded text-center shadow-sm">
                 <div class="text-2xl font-bold text-pink-600">4K</div>
                 <div class="text-xs text-gray-600">Resolution</div>
             </div>
-            <div class="bg-white p-3 rounded text-center">
+            <div class="bg-white p-3 rounded text-center shadow-sm">
                 <div class="text-2xl font-bold text-pink-600">85%</div>
                 <div class="text-xs text-gray-600">Creative</div>
             </div>
-            <div class="bg-white p-3 rounded text-center">
+            <div class="bg-white p-3 rounded text-center shadow-sm">
                 <div class="text-2xl font-bold text-purple-600">30s</div>
                 <div class="text-xs text-gray-600">Max Length</div>
             </div>
-            <div class="bg-white p-3 rounded text-center">
+            <div class="bg-white p-3 rounded text-center shadow-sm">
                 <div class="text-2xl font-bold text-pink-600">$1.8</div>
                 <div class="text-xs text-gray-600">Per 30s</div>
             </div>
         </div>
     </div>
-
-    <!-- Timeline -->
-    <div class="bg-white p-6 rounded-lg border shadow-sm">
-        <h4 class="font-bold text-gray-800 mb-4 text-lg flex items-center">
-            <i class="fas fa-calendar-alt mr-2 text-pink-600"></i>Lộ Trình Triển Khai (Tuần 4-7)
-        </h4>
-        <div class="space-y-4">
-            <div class="flex items-start">
-                <div class="bg-pink-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">1</div>
-                <div class="flex-1">
-                    <div class="flex items-center justify-between mb-1">
-                        <h5 class="font-bold text-gray-800">Tuần 4: Initial Research</h5>
-                        <span class="text-xs text-pink-600 font-semibold">Đang làm (20%)</span>
-                    </div>
-                    <p class="text-sm text-gray-600 mb-2">Research capabilities, setup API, test basic effects</p>
-                    <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
-                        <div class="bg-pink-600 h-2 rounded-full" style="width: 20%"></div>
-                    </div>
-                    <div class="bg-pink-50 p-2 rounded text-xs">
-                        <strong>Tasks:</strong> 2/8 completed - API Setup (✓), Documentation (✓)
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex items-start">
-                <div class="bg-gray-300 text-gray-600 rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">2</div>
-                <div class="flex-1">
-                    <div class="flex items-center justify-between mb-1">
-                        <h5 class="font-bold text-gray-800">Tuần 5: Effects Testing</h5>
-                        <span class="text-xs text-gray-500 font-semibold">Chưa bắt đầu</span>
-                    </div>
-                    <p class="text-sm text-gray-600">Test particle effects, lighting, 360° rotation, special effects</p>
-                </div>
-            </div>
-
-            <div class="flex items-start">
-                <div class="bg-gray-300 text-gray-600 rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">3</div>
-                <div class="flex-1">
-                    <div class="flex items-center justify-between mb-1">
-                        <h5 class="font-bold text-gray-800">Tuần 6: Product Showcase</h5>
-                        <span class="text-xs text-gray-500 font-semibold">Chưa bắt đầu</span>
-                    </div>
-                    <p class="text-sm text-gray-600">Create Product Showcase templates, test on real products</p>
-                </div>
-            </div>
-
-            <div class="flex items-start">
-                <div class="bg-gray-300 text-gray-600 rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">4</div>
-                <div class="flex-1">
-                    <div class="flex items-center justify-between mb-1">
-                        <h5 class="font-bold text-gray-800">Tuần 7: Production Ready</h5>
-                        <span class="text-xs text-gray-500 font-semibold">Chưa bắt đầu</span>
-                    </div>
-                    <p class="text-sm text-gray-600">Finalize workflows, optimize cost, train team</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Use Cases -->
-    <div class="bg-gradient-to-r from-pink-50 to-purple-50 p-6 rounded-lg border-l-4 border-pink-600">
-        <h4 class="font-bold text-pink-900 mb-4 text-lg flex items-center">
-            <i class="fas fa-lightbulb mr-2"></i>Use Cases Chính
-        </h4>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="bg-white p-4 rounded-lg shadow-sm">
-                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
-                    <span class="bg-pink-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">1</span>
-                    Product Showcase
-                </h5>
-                <p class="text-sm text-gray-600 mb-2">Video trình bày sản phẩm với effects đẹp mắt</p>
-                <span class="text-xs text-pink-600 font-semibold">Priority: High</span>
-            </div>
-
-            <div class="bg-white p-4 rounded-lg shadow-sm">
-                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
-                    <span class="bg-pink-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">2</span>
-                    Particle Effects
-                </h5>
-                <p class="text-sm text-gray-600 mb-2">Hiệu ứng hạt, smoke, clouds, sparkles</p>
-                <span class="text-xs text-purple-600 font-semibold">Priority: Medium</span>
-            </div>
-
-            <div class="bg-white p-4 rounded-lg shadow-sm">
-                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
-                    <span class="bg-pink-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">3</span>
-                    360° Rotation
-                </h5>
-                <p class="text-sm text-gray-600 mb-2">Xoay 360° cho furniture, products</p>
-                <span class="text-xs text-blue-600 font-semibold">Priority: High</span>
-            </div>
-
-            <div class="bg-white p-4 rounded-lg shadow-sm">
-                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
-                    <span class="bg-pink-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">4</span>
-                    Creative Effects
-                </h5>
-                <p class="text-sm text-gray-600 mb-2">Các hiệu ứng sáng tạo, artistic styles</p>
-                <span class="text-xs text-orange-600 font-semibold">Priority: Medium</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Next Steps -->
-    <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-600">
-        <h4 class="font-bold text-green-900 mb-4 text-lg flex items-center">
-            <i class="fas fa-forward mr-2"></i>Bước Tiếp Theo
-        </h4>
-        <ul class="space-y-2">
-            <li class="flex items-start">
-                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
-                <span class="text-gray-700">Hoàn thành setup và test basic effects</span>
-            </li>
-            <li class="flex items-start">
-                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
-                <span class="text-gray-700">Research particle effects và 360° rotation capabilities</span>
-            </li>
-            <li class="flex items-start">
-                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
-                <span class="text-gray-700">Xác định use cases phù hợp với Fotober services</span>
-            </li>
-        </ul>
-    </div>
-</div>
-`
+</div>`
     }
 };
 
-// Roadmap Grid Event Handlers
+
+// ========== LIBRARY CARD HANDLERS ==========
 document.addEventListener('DOMContentLoaded', function() {
-    if (!document.getElementById('roadmapGrid')) return;
+    const libraryGrid = document.getElementById('libraryGrid');
+    if (libraryGrid) {
+        const libraryCards = document.querySelectorAll('.library-card');
+        const libraryModal = document.getElementById('libraryModal');
+        const libraryModalTitle = document.getElementById('libraryModalTitle');
+        const libraryModalContent = document.getElementById('libraryModalContent');
+        const closeLibraryModalBtn = document.getElementById('closeLibraryModalBtn');
+        const openLibraryFullPageBtn = document.getElementById('openLibraryFullPageBtn');
+        
+        const libraryFullPageView = document.getElementById('libraryFullPageView');
+        const libraryFullPageTitle = document.getElementById('libraryFullPageTitle');
+        const libraryFullPageContent = document.getElementById('libraryFullPageContent');
+        const closeLibraryFullPageBtn = document.getElementById('closeLibraryFullPageBtn');
 
-    const roadmapCards = document.querySelectorAll('.roadmap-card');
-    const roadmapModal = document.getElementById('roadmapModal');
-    const closeRoadmapModalBtn = document.getElementById('closeRoadmapModalBtn');
-    const roadmapModalTitle = document.getElementById('roadmapModalTitle');
-    const roadmapModalSubtitle = document.getElementById('roadmapModalSubtitle');
-    const roadmapModalContent = document.getElementById('roadmapModalContent');
-    const openRoadmapFullPageBtn = document.getElementById('openRoadmapFullPageBtn');
-    
-    const roadmapFullPageView = document.getElementById('roadmapFullPageView');
-    const roadmapFullPageTitle = document.getElementById('roadmapFullPageTitle');
-    const roadmapFullPageSubtitle = document.getElementById('roadmapFullPageSubtitle');
-    const roadmapFullPageContent = document.getElementById('roadmapFullPageContent');
-    const closeRoadmapFullPageBtn = document.getElementById('closeRoadmapFullPageBtn');
+        let currentLibraryId = null;
 
-    let currentToolId = null;
-
-    // Open modal when clicking on roadmap card
-    roadmapCards.forEach(card => {
-        card.addEventListener('click', function(e) {
-            if (e.target.closest('.expand-btn')) {
-                const toolId = this.getAttribute('data-tool-id');
-                openRoadmapFullPage(toolId);
-                return;
+        // Library data
+        const libraryData = {
+            '1': {
+                title: 'Danh Sách Công Cụ AI',
+                content: `
+<div class="space-y-4">
+    <p class="text-gray-700">So sánh chi tiết các công cụ AI tạo ảnh, video và chỉnh sửa được sử dụng tại Fotober.</p>
+    <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-600">
+        <h4 class="font-bold text-blue-900 mb-2">Công cụ chính:</h4>
+        <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+            <li>Google Nano Banana Pro - Image Generation</li>
+            <li>Veo 3.1 - Video Generation</li>
+            <li>Kling 2.6 - Motion Control</li>
+            <li>Seedance 1.5 Pro - Special Effects</li>
+        </ul>
+    </div>
+</div>`
+            },
+            '2': {
+                title: 'Virtual Staging',
+                content: `
+<div class="space-y-4">
+    <p class="text-gray-700">Hướng dẫn tối ưu prompt cho Virtual Staging bằng Google Nano Banana Pro.</p>
+    <div class="bg-orange-50 p-4 rounded-lg border-l-4 border-orange-600">
+        <h4 class="font-bold text-orange-900 mb-2">Prompt tối ưu:</h4>
+        <p class="text-sm text-gray-700">Tạo nội thất ảo với chi tiết cao, ánh sáng tự nhiên, phù hợp với phong cách bất động sản.</p>
+    </div>
+</div>`
+            },
+            '3': {
+                title: 'Day-to-Night',
+                content: `
+<div class="space-y-4">
+    <p class="text-gray-700">Chuyển đổi ánh sáng từ ban ngày sang ban đêm với Veo 3.1 và Kling 2.6.</p>
+    <div class="bg-green-50 p-4 rounded-lg border-l-4 border-green-600">
+        <h4 class="font-bold text-green-900 mb-2">Kỹ thuật:</h4>
+        <p class="text-sm text-gray-700">Giữ nguyên background, thay đổi ánh sáng, bầu trời và bóng đổ một cách tự nhiên.</p>
+    </div>
+</div>`
+            },
+            '4': {
+                title: 'Real Estate Tour',
+                content: `
+<div class="space-y-4">
+    <p class="text-gray-700">Tạo video tour bất động sản với Motion Control của Kling 2.6.</p>
+    <div class="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-600">
+        <h4 class="font-bold text-purple-900 mb-2">Tính năng:</h4>
+        <p class="text-sm text-gray-700">Camera movement mịn, transition tự nhiên giữa các phòng, tốc độ phù hợp.</p>
+    </div>
+</div>`
+            },
+            '5': {
+                title: 'Product Showcase',
+                content: `
+<div class="space-y-4">
+    <p class="text-gray-700">Hiệu ứng đặc biệt cho sản phẩm với Seedance 1.5 Pro.</p>
+    <div class="bg-pink-50 p-4 rounded-lg border-l-4 border-pink-600">
+        <h4 class="font-bold text-pink-900 mb-2">Hiệu ứng:</h4>
+        <p class="text-sm text-gray-700">Particle effects, lighting, rotation, zoom động để làm nổi bật sản phẩm.</p>
+    </div>
+</div>`
+            },
+            '6': {
+                title: 'Kling O1 Video Editing',
+                content: `
+<div class="space-y-4">
+    <p class="text-gray-700">Chỉnh sửa video nâng cao với Kling O1.</p>
+    <div class="bg-red-50 p-4 rounded-lg border-l-4 border-red-600">
+        <h4 class="font-bold text-red-900 mb-2">Tính năng:</h4>
+        <p class="text-sm text-gray-700">Sửa lỗi vật lý, thêm chi tiết, cải thiện chất lượng video tự động.</p>
+    </div>
+</div>`
             }
+        };
 
-            const toolId = this.getAttribute('data-tool-id');
-            if (roadmapData[toolId]) {
-                currentToolId = toolId;
-                const data = roadmapData[toolId];
-                roadmapModalTitle.textContent = data.title;
-                roadmapModalSubtitle.textContent = data.subtitle;
-                roadmapModalContent.innerHTML = data.content;
-                roadmapModal.classList.remove('hidden');
+        libraryCards.forEach(card => {
+            card.addEventListener('click', function(e) {
+                const libraryId = this.getAttribute('data-library-id');
+                if (e.target.closest('.expand-btn')) {
+                    openLibraryFullPage(libraryId);
+                    return;
+                }
+                openLibraryModal(libraryId);
+            });
+        });
+
+        function openLibraryModal(libraryId) {
+            if (libraryData[libraryId]) {
+                currentLibraryId = libraryId;
+                const data = libraryData[libraryId];
+                if (libraryModalTitle) libraryModalTitle.textContent = data.title;
+                if (libraryModalContent) libraryModalContent.innerHTML = data.content;
+                if (libraryModal) libraryModal.classList.remove('hidden');
                 document.body.style.overflow = 'hidden';
             }
-        });
-    });
+        }
 
-    // Close modal
-    if (closeRoadmapModalBtn) {
-        closeRoadmapModalBtn.addEventListener('click', function() {
-            roadmapModal.classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        });
-    }
-
-    // Close modal when clicking outside
-    if (roadmapModal) {
-        roadmapModal.addEventListener('click', function(e) {
-            if (e.target === roadmapModal) {
-                roadmapModal.classList.add('hidden');
-                document.body.style.overflow = 'auto';
+        function openLibraryFullPage(libraryId) {
+            if (libraryData[libraryId]) {
+                const data = libraryData[libraryId];
+                if (libraryFullPageTitle) libraryFullPageTitle.textContent = data.title;
+                if (libraryFullPageContent) libraryFullPageContent.innerHTML = data.content;
+                if (libraryFullPageView) libraryFullPageView.classList.remove('hidden');
+                if (libraryModal) libraryModal.classList.add('hidden');
+                document.body.style.overflow = 'hidden';
             }
-        });
-    }
+        }
 
-    // Open Full Page
-    function openRoadmapFullPage(toolId) {
-        if (roadmapData[toolId]) {
-            currentToolId = toolId;
-            const data = roadmapData[toolId];
-            roadmapFullPageTitle.textContent = data.title;
-            roadmapFullPageSubtitle.textContent = data.subtitle;
-            roadmapFullPageContent.innerHTML = data.content;
-            roadmapFullPageView.classList.remove('hidden');
-            roadmapModal.classList.add('hidden');
-            document.body.style.overflow = 'hidden';
+        if (closeLibraryModalBtn) {
+            closeLibraryModalBtn.addEventListener('click', () => {
+                libraryModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            });
+        }
+
+        if (openLibraryFullPageBtn) {
+            openLibraryFullPageBtn.addEventListener('click', () => {
+                if (currentLibraryId) openLibraryFullPage(currentLibraryId);
+            });
+        }
+
+        if (closeLibraryFullPageBtn) {
+            closeLibraryFullPageBtn.addEventListener('click', () => {
+                libraryFullPageView.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            });
         }
     }
 
-    // Open Full Page from modal
-    if (openRoadmapFullPageBtn) {
-        openRoadmapFullPageBtn.addEventListener('click', function() {
-            if (currentToolId) {
-                openRoadmapFullPage(currentToolId);
+    // ========== PASSCODE HANDLER ==========
+    const passcodeInput = document.getElementById('passcodeInput');
+    const submitPasscodeBtn = document.getElementById('submitPasscodeBtn');
+    const passcodeError = document.getElementById('passcodeError');
+    const reportContent = document.getElementById('reportContent');
+    
+    if (submitPasscodeBtn && passcodeInput) {
+        submitPasscodeBtn.addEventListener('click', function() {
+            const passcode = passcodeInput.value.trim();
+            const correctPasscode = '2026';
+            
+            if (passcode === correctPasscode) {
+                if (passcodeError) passcodeError.classList.add('hidden');
+                if (reportContent) reportContent.classList.remove('hidden');
+                passcodeInput.value = '';
+            } else {
+                if (passcodeError) {
+                    passcodeError.textContent = 'Passcode không chính xác. Vui lòng thử lại.';
+                    passcodeError.classList.remove('hidden');
+                }
+            }
+        });
+        
+        passcodeInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                submitPasscodeBtn.click();
             }
         });
     }
-
-    // Close Full Page
-    if (closeRoadmapFullPageBtn) {
-        closeRoadmapFullPageBtn.addEventListener('click', function() {
-            roadmapFullPageView.classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        });
-    }
-
-    // ESC key to close
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            if (!roadmapFullPageView.classList.contains('hidden')) {
-                roadmapFullPageView.classList.add('hidden');
-                document.body.style.overflow = 'auto';
-            } else if (!roadmapModal.classList.contains('hidden')) {
-                roadmapModal.classList.add('hidden');
-                document.body.style.overflow = 'auto';
-            }
-        }
-    });
 });
+
+
+// ========== EXCEL EMBED TOGGLE ==========
+const toggleSaleEmbedBtn = document.getElementById('toggleSaleEmbedBtn');
+const saleEmbedContainer = document.getElementById('saleEmbedContainer');
+
+if (toggleSaleEmbedBtn && saleEmbedContainer) {
+    toggleSaleEmbedBtn.addEventListener('click', function() {
+        saleEmbedContainer.classList.toggle('hidden');
+        if (saleEmbedContainer.classList.contains('hidden')) {
+            toggleSaleEmbedBtn.innerHTML = '<i class="fas fa-table mr-2"></i>Xem Excel Trực Tiếp';
+        } else {
+            toggleSaleEmbedBtn.innerHTML = '<i class="fas fa-table mr-2"></i>Ẩn Excel';
+        }
+    });
+}
