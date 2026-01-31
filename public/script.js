@@ -1567,3 +1567,787 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+// Roadmap Data - Chi tiết lộ trình R&D cho 4 công cụ AI
+const roadmapData = {
+    '1': {
+        title: 'Google Nano Banana Pro',
+        subtitle: 'Image Generation • 4K+ Quality • Virtual Staging',
+        content: `
+<div class="space-y-6">
+    <!-- Overview -->
+    <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-600">
+        <h4 class="font-bold text-blue-900 mb-3 text-xl flex items-center">
+            <i class="fas fa-info-circle mr-2"></i>Tổng Quan
+        </h4>
+        <p class="text-gray-700 mb-3">
+            <strong>Google Nano Banana Pro</strong> là công cụ tạo ảnh AI hàng đầu với chất lượng 4K+, 
+            chuyên về Virtual Staging và Interior Design. Độ chi tiết vật liệu và ánh sáng tuyệt vời, 
+            phù hợp cho dự án bất động sản cao cấp.
+        </p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
+            <div class="bg-white p-3 rounded text-center">
+                <div class="text-2xl font-bold text-blue-600">4K+</div>
+                <div class="text-xs text-gray-600">Resolution</div>
+            </div>
+            <div class="bg-white p-3 rounded text-center">
+                <div class="text-2xl font-bold text-green-600">95%</div>
+                <div class="text-xs text-gray-600">Accuracy</div>
+            </div>
+            <div class="bg-white p-3 rounded text-center">
+                <div class="text-2xl font-bold text-purple-600">30s</div>
+                <div class="text-xs text-gray-600">Avg Time</div>
+            </div>
+            <div class="bg-white p-3 rounded text-center">
+                <div class="text-2xl font-bold text-orange-600">$0.5</div>
+                <div class="text-xs text-gray-600">Per Image</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="bg-white p-6 rounded-lg border shadow-sm">
+        <h4 class="font-bold text-gray-800 mb-4 text-lg flex items-center">
+            <i class="fas fa-calendar-alt mr-2 text-blue-600"></i>Lộ Trình Triển Khai (Tuần 1-4)
+        </h4>
+        <div class="space-y-4">
+            <div class="flex items-start">
+                <div class="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">✓</div>
+                <div class="flex-1">
+                    <div class="flex items-center justify-between mb-1">
+                        <h5 class="font-bold text-gray-800">Tuần 1: Setup & Testing</h5>
+                        <span class="text-xs text-green-600 font-semibold">Hoàn thành</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-2">Thiết lập API, test 50 prompts mẫu, đánh giá chất lượng</p>
+                    <div class="bg-green-50 p-2 rounded text-xs">
+                        <strong>Kết quả:</strong> API stable, quality score 9.2/10, cost $25
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-start">
+                <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">2</div>
+                <div class="flex-1">
+                    <div class="flex items-center justify-between mb-1">
+                        <h5 class="font-bold text-gray-800">Tuần 2: Prompt Engineering</h5>
+                        <span class="text-xs text-blue-600 font-semibold">Đang làm (70%)</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-2">Tối ưu prompt cho Virtual Staging, Interior Design, Furniture Placement</p>
+                    <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
+                        <div class="bg-blue-600 h-2 rounded-full" style="width: 70%"></div>
+                    </div>
+                    <div class="bg-blue-50 p-2 rounded text-xs">
+                        <strong>Tasks:</strong> 5/8 completed - Virtual Staging (✓), Day scenes (✓), Night scenes (✓), Furniture (✓), Lighting (✓)
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-start">
+                <div class="bg-gray-300 text-gray-600 rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">3</div>
+                <div class="flex-1">
+                    <div class="flex items-center justify-between mb-1">
+                        <h5 class="font-bold text-gray-800">Tuần 3: Real Project Testing</h5>
+                        <span class="text-xs text-gray-500 font-semibold">Chưa bắt đầu</span>
+                    </div>
+                    <p class="text-sm text-gray-600">Test trên 10 dự án thực tế, thu thập feedback từ Sale và khách hàng</p>
+                </div>
+            </div>
+
+            <div class="flex items-start">
+                <div class="bg-gray-300 text-gray-600 rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">4</div>
+                <div class="flex-1">
+                    <div class="flex items-center justify-between mb-1">
+                        <h5 class="font-bold text-gray-800">Tuần 4: Optimization & Scale</h5>
+                        <span class="text-xs text-gray-500 font-semibold">Chưa bắt đầu</span>
+                    </div>
+                    <p class="text-sm text-gray-600">Tối ưu cost, tốc độ, chất lượng. Xây dựng workflow tự động</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Use Cases -->
+    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border-l-4 border-blue-600">
+        <h4 class="font-bold text-blue-900 mb-4 text-lg flex items-center">
+            <i class="fas fa-lightbulb mr-2"></i>Use Cases Chính
+        </h4>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
+                    <span class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">1</span>
+                    Virtual Staging
+                </h5>
+                <p class="text-sm text-gray-600 mb-2">Trang trí nội thất ảo cho phòng trống, thêm furniture và decorations</p>
+                <span class="text-xs text-blue-600 font-semibold">Success Rate: 92%</span>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
+                    <span class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">2</span>
+                    Interior Design
+                </h5>
+                <p class="text-sm text-gray-600 mb-2">Thiết kế nội thất theo style khác nhau (Scandinavian, Modern, etc.)</p>
+                <span class="text-xs text-green-600 font-semibold">Success Rate: 88%</span>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
+                    <span class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">3</span>
+                    Furniture Replacement
+                </h5>
+                <p class="text-sm text-gray-600 mb-2">Thay đổi furniture trong ảnh, swap styles, colors</p>
+                <span class="text-xs text-purple-600 font-semibold">Success Rate: 85%</span>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
+                    <span class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">4</span>
+                    Lighting Enhancement
+                </h5>
+                <p class="text-sm text-gray-600 mb-2">Cải thiện ánh sáng, thêm natural light, warm/cool tones</p>
+                <span class="text-xs text-orange-600 font-semibold">Success Rate: 90%</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Challenges & Solutions -->
+    <div class="bg-yellow-50 p-6 rounded-lg border-l-4 border-yellow-600">
+        <h4 class="font-bold text-yellow-900 mb-4 text-lg flex items-center">
+            <i class="fas fa-exclamation-triangle mr-2"></i>Thách Thức & Giải Pháp
+        </h4>
+        <div class="space-y-3">
+            <div class="bg-white p-4 rounded-lg">
+                <h5 class="font-bold text-gray-800 mb-2">⚠️ Thách thức: Chi tiết vật liệu không chính xác</h5>
+                <p class="text-sm text-gray-600 mb-2"><strong>Giải pháp:</strong> Thêm reference images, specify material types trong prompt</p>
+                <span class="text-xs text-green-600 font-semibold">Status: Đã giải quyết</span>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg">
+                <h5 class="font-bold text-gray-800 mb-2">⚠️ Thách thức: Cost cao ($0.5/image)</h5>
+                <p class="text-sm text-gray-600 mb-2"><strong>Giải pháp:</strong> Batch processing, optimize prompt để giảm re-generation</p>
+                <span class="text-xs text-blue-600 font-semibold">Status: Đang tối ưu</span>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg">
+                <h5 class="font-bold text-gray-800 mb-2">⚠️ Thách thức: Thời gian xử lý 30-45s</h5>
+                <p class="text-sm text-gray-600 mb-2"><strong>Giải pháp:</strong> Queue system, parallel processing cho nhiều images</p>
+                <span class="text-xs text-purple-600 font-semibold">Status: Lên kế hoạch</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Next Steps -->
+    <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-600">
+        <h4 class="font-bold text-green-900 mb-4 text-lg flex items-center">
+            <i class="fas fa-forward mr-2"></i>Bước Tiếp Theo
+        </h4>
+        <ul class="space-y-2">
+            <li class="flex items-start">
+                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
+                <span class="text-gray-700">Hoàn thành 3 tasks còn lại trong Tuần 2 (Accessories, Styles, Quality Control)</span>
+            </li>
+            <li class="flex items-start">
+                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
+                <span class="text-gray-700">Bắt đầu Real Project Testing với 10 dự án thực tế</span>
+            </li>
+            <li class="flex items-start">
+                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
+                <span class="text-gray-700">Thu thập feedback từ Sale và khách hàng</span>
+            </li>
+            <li class="flex items-start">
+                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
+                <span class="text-gray-700">Xây dựng Prompt Library với 50+ templates</span>
+            </li>
+        </ul>
+    </div>
+</div>
+`
+    },
+    '2': {
+        title: 'Veo 3.1',
+        subtitle: 'Video Generation • Cinematic • Day-to-Night',
+        content: `
+<div class="space-y-6">
+    <!-- Overview -->
+    <div class="bg-orange-50 p-6 rounded-lg border-l-4 border-orange-600">
+        <h4 class="font-bold text-orange-900 mb-3 text-xl flex items-center">
+            <i class="fas fa-info-circle mr-2"></i>Tổng Quan
+        </h4>
+        <p class="text-gray-700 mb-3">
+            <strong>Veo 3.1</strong> là công cụ tạo video AI chân thực nhất hiện nay, chuyên về 
+            Day-to-Night transitions và cinematic shots. Ánh sáng tự nhiên, chuyển động mượt mà, 
+            phù hợp cho video bất động sản cao cấp.
+        </p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
+            <div class="bg-white p-3 rounded text-center">
+                <div class="text-2xl font-bold text-orange-600">4K</div>
+                <div class="text-xs text-gray-600">Resolution</div>
+            </div>
+            <div class="bg-white p-3 rounded text-center">
+                <div class="text-2xl font-bold text-green-600">90%</div>
+                <div class="text-xs text-gray-600">Realism</div>
+            </div>
+            <div class="bg-white p-3 rounded text-center">
+                <div class="text-2xl font-bold text-purple-600">30s</div>
+                <div class="text-xs text-gray-600">Max Length</div>
+            </div>
+            <div class="bg-white p-3 rounded text-center">
+                <div class="text-2xl font-bold text-orange-600">$2</div>
+                <div class="text-xs text-gray-600">Per 30s</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="bg-white p-6 rounded-lg border shadow-sm">
+        <h4 class="font-bold text-gray-800 mb-4 text-lg flex items-center">
+            <i class="fas fa-calendar-alt mr-2 text-orange-600"></i>Lộ Trình Triển Khai (Tuần 2-5)
+        </h4>
+        <div class="space-y-4">
+            <div class="flex items-start">
+                <div class="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">✓</div>
+                <div class="flex-1">
+                    <div class="flex items-center justify-between mb-1">
+                        <h5 class="font-bold text-gray-800">Tuần 2: API Integration</h5>
+                        <span class="text-xs text-green-600 font-semibold">Hoàn thành</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-2">Setup Veo 3.1 API, test basic video generation</p>
+                    <div class="bg-green-50 p-2 rounded text-xs">
+                        <strong>Kết quả:</strong> API working, generated 20 test videos, quality excellent
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-start">
+                <div class="bg-orange-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">2</div>
+                <div class="flex-1">
+                    <div class="flex items-center justify-between mb-1">
+                        <h5 class="font-bold text-gray-800">Tuần 3: Day-to-Night Testing</h5>
+                        <span class="text-xs text-orange-600 font-semibold">Đang làm (50%)</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-2">Test Day-to-Night transitions, lighting changes, time-lapse effects</p>
+                    <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
+                        <div class="bg-orange-600 h-2 rounded-full" style="width: 50%"></div>
+                    </div>
+                    <div class="bg-orange-50 p-2 rounded text-xs">
+                        <strong>Tasks:</strong> 4/7 completed - Morning (✓), Afternoon (✓), Evening (✓), Night (✓)
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-start">
+                <div class="bg-gray-300 text-gray-600 rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">3</div>
+                <div class="flex-1">
+                    <div class="flex items-center justify-between mb-1">
+                        <h5 class="font-bold text-gray-800">Tuần 4: Cinematic Shots</h5>
+                        <span class="text-xs text-gray-500 font-semibold">Chưa bắt đầu</span>
+                    </div>
+                    <p class="text-sm text-gray-600">Test camera movements, cinematic effects, color grading</p>
+                </div>
+            </div>
+
+            <div class="flex items-start">
+                <div class="bg-gray-300 text-gray-600 rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">4</div>
+                <div class="flex-1">
+                    <div class="flex items-center justify-between mb-1">
+                        <h5 class="font-bold text-gray-800">Tuần 5: Production Ready</h5>
+                        <span class="text-xs text-gray-500 font-semibold">Chưa bắt đầu</span>
+                    </div>
+                    <p class="text-sm text-gray-600">Final optimization, workflow automation, team training</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Use Cases -->
+    <div class="bg-gradient-to-r from-orange-50 to-red-50 p-6 rounded-lg border-l-4 border-orange-600">
+        <h4 class="font-bold text-orange-900 mb-4 text-lg flex items-center">
+            <i class="fas fa-lightbulb mr-2"></i>Use Cases Chính
+        </h4>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
+                    <span class="bg-orange-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">1</span>
+                    Day-to-Night Transition
+                </h5>
+                <p class="text-sm text-gray-600 mb-2">Video chuyển từ ngày sang đêm, ánh sáng tự nhiên</p>
+                <span class="text-xs text-orange-600 font-semibold">Success Rate: 88%</span>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
+                    <span class="bg-orange-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">2</span>
+                    Property Showcase
+                </h5>
+                <p class="text-sm text-gray-600 mb-2">Video giới thiệu bất động sản, exterior và interior</p>
+                <span class="text-xs text-green-600 font-semibold">Success Rate: 85%</span>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
+                    <span class="bg-orange-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">3</span>
+                    Weather Effects
+                </h5>
+                <p class="text-sm text-gray-600 mb-2">Thêm hiệu ứng thời tiết (rain, snow, fog, clouds)</p>
+                <span class="text-xs text-purple-600 font-semibold">Success Rate: 75%</span>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
+                    <span class="bg-orange-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">4</span>
+                    Time-lapse
+                </h5>
+                <p class="text-sm text-gray-600 mb-2">Video time-lapse, fast-forward effects</p>
+                <span class="text-xs text-blue-600 font-semibold">Success Rate: 82%</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Next Steps -->
+    <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-600">
+        <h4 class="font-bold text-green-900 mb-4 text-lg flex items-center">
+            <i class="fas fa-forward mr-2"></i>Bước Tiếp Theo
+        </h4>
+        <ul class="space-y-2">
+            <li class="flex items-start">
+                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
+                <span class="text-gray-700">Hoàn thành 3 tasks còn lại trong Tuần 3 (Twilight, Golden Hour, Interior Lights)</span>
+            </li>
+            <li class="flex items-start">
+                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
+                <span class="text-gray-700">Bắt đầu test Cinematic Shots với camera movements</span>
+            </li>
+            <li class="flex items-start">
+                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
+                <span class="text-gray-700">So sánh với Kling 2.6 để chọn tool phù hợp cho từng use case</span>
+            </li>
+        </ul>
+    </div>
+</div>
+`
+    },
+    '3': {
+        title: 'Kling 2.6',
+        subtitle: 'Motion Control • Real Estate Tour • Camera Movements',
+        content: `
+<div class="space-y-6">
+    <!-- Overview -->
+    <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-600">
+        <h4 class="font-bold text-green-900 mb-3 text-xl flex items-center">
+            <i class="fas fa-info-circle mr-2"></i>Tổng Quan
+        </h4>
+        <p class="text-gray-700 mb-3">
+            <strong>Kling 2.6</strong> nổi bật với Motion Control tuyệt vời, cho phép kiểm soát 
+            chính xác camera movements và object motions. Lý tưởng cho Real Estate Tour và 
+            các video cần camera movements phức tạp.
+        </p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
+            <div class="bg-white p-3 rounded text-center">
+                <div class="text-2xl font-bold text-green-600">4K</div>
+                <div class="text-xs text-gray-600">Resolution</div>
+            </div>
+            <div class="bg-white p-3 rounded text-center">
+                <div class="text-2xl font-bold text-green-600">95%</div>
+                <div class="text-xs text-gray-600">Motion Acc</div>
+            </div>
+            <div class="bg-white p-3 rounded text-center">
+                <div class="text-2xl font-bold text-purple-600">45s</div>
+                <div class="text-xs text-gray-600">Max Length</div>
+            </div>
+            <div class="bg-white p-3 rounded text-center">
+                <div class="text-2xl font-bold text-green-600">$1.5</div>
+                <div class="text-xs text-gray-600">Per 45s</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="bg-white p-6 rounded-lg border shadow-sm">
+        <h4 class="font-bold text-gray-800 mb-4 text-lg flex items-center">
+            <i class="fas fa-calendar-alt mr-2 text-green-600"></i>Lộ Trình Triển Khai (Tuần 3-6)
+        </h4>
+        <div class="space-y-4">
+            <div class="flex items-start">
+                <div class="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">1</div>
+                <div class="flex-1">
+                    <div class="flex items-center justify-between mb-1">
+                        <h5 class="font-bold text-gray-800">Tuần 3: Research & Setup</h5>
+                        <span class="text-xs text-green-600 font-semibold">Đang làm (30%)</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-2">Research Motion Control features, setup API, test basic movements</p>
+                    <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
+                        <div class="bg-green-600 h-2 rounded-full" style="width: 30%"></div>
+                    </div>
+                    <div class="bg-green-50 p-2 rounded text-xs">
+                        <strong>Tasks:</strong> 3/9 completed - API Setup (✓), Basic Test (✓), Documentation (✓)
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-start">
+                <div class="bg-gray-300 text-gray-600 rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">2</div>
+                <div class="flex-1">
+                    <div class="flex items-center justify-between mb-1">
+                        <h5 class="font-bold text-gray-800">Tuần 4: Motion Control Testing</h5>
+                        <span class="text-xs text-gray-500 font-semibold">Chưa bắt đầu</span>
+                    </div>
+                    <p class="text-sm text-gray-600">Test camera movements: pan, tilt, zoom, dolly, tracking</p>
+                </div>
+            </div>
+
+            <div class="flex items-start">
+                <div class="bg-gray-300 text-gray-600 rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">3</div>
+                <div class="flex-1">
+                    <div class="flex items-center justify-between mb-1">
+                        <h5 class="font-bold text-gray-800">Tuần 5: Real Estate Tour</h5>
+                        <span class="text-xs text-gray-500 font-semibold">Chưa bắt đầu</span>
+                    </div>
+                    <p class="text-sm text-gray-600">Create Real Estate Tour templates, test on real properties</p>
+                </div>
+            </div>
+
+            <div class="flex items-start">
+                <div class="bg-gray-300 text-gray-600 rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">4</div>
+                <div class="flex-1">
+                    <div class="flex items-center justify-between mb-1">
+                        <h5 class="font-bold text-gray-800">Tuần 6: Production & Training</h5>
+                        <span class="text-xs text-gray-500 font-semibold">Chưa bắt đầu</span>
+                    </div>
+                    <p class="text-sm text-gray-600">Finalize workflows, create templates, train team</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Use Cases -->
+    <div class="bg-gradient-to-r from-green-50 to-emerald-50 p-6 rounded-lg border-l-4 border-green-600">
+        <h4 class="font-bold text-green-900 mb-4 text-lg flex items-center">
+            <i class="fas fa-lightbulb mr-2"></i>Use Cases Chính
+        </h4>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
+                    <span class="bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">1</span>
+                    Real Estate Tour
+                </h5>
+                <p class="text-sm text-gray-600 mb-2">Walkthrough video với smooth camera movements</p>
+                <span class="text-xs text-green-600 font-semibold">Priority: High</span>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
+                    <span class="bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">2</span>
+                    Gimbal Shots
+                </h5>
+                <p class="text-sm text-gray-600 mb-2">Smooth gimbal-like camera movements</p>
+                <span class="text-xs text-blue-600 font-semibold">Priority: High</span>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
+                    <span class="bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">3</span>
+                    Product 360°
+                </h5>
+                <p class="text-sm text-gray-600 mb-2">360° rotation cho product showcase</p>
+                <span class="text-xs text-purple-600 font-semibold">Priority: Medium</span>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
+                    <span class="bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">4</span>
+                    Drone Shots
+                </h5>
+                <p class="text-sm text-gray-600 mb-2">Aerial views, drone-like movements</p>
+                <span class="text-xs text-orange-600 font-semibold">Priority: Medium</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Next Steps -->
+    <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-600">
+        <h4 class="font-bold text-green-900 mb-4 text-lg flex items-center">
+            <i class="fas fa-forward mr-2"></i>Bước Tiếp Theo
+        </h4>
+        <ul class="space-y-2">
+            <li class="flex items-start">
+                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
+                <span class="text-gray-700">Hoàn thành research Motion Control features</span>
+            </li>
+            <li class="flex items-start">
+                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
+                <span class="text-gray-700">Test 5 loại camera movements cơ bản</span>
+            </li>
+            <li class="flex items-start">
+                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
+                <span class="text-gray-700">So sánh với Veo 3.1 để xác định use cases phù hợp</span>
+            </li>
+        </ul>
+    </div>
+</div>
+`
+    },
+    '4': {
+        title: 'Seedance 1.5 Pro',
+        subtitle: 'Special Effects • Product Showcase • Creative',
+        content: `
+<div class="space-y-6">
+    <!-- Overview -->
+    <div class="bg-pink-50 p-6 rounded-lg border-l-4 border-pink-600">
+        <h4 class="font-bold text-pink-900 mb-3 text-xl flex items-center">
+            <i class="fas fa-info-circle mr-2"></i>Tổng Quan
+        </h4>
+        <p class="text-gray-700 mb-3">
+            <strong>Seedance 1.5 Pro</strong> chuyên về hiệu ứng đặc biệt và creative effects. 
+            Lý tưởng cho Product Showcase với particle effects, 360° rotation, và các hiệu ứng 
+            sáng tạo khác.
+        </p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
+            <div class="bg-white p-3 rounded text-center">
+                <div class="text-2xl font-bold text-pink-600">4K</div>
+                <div class="text-xs text-gray-600">Resolution</div>
+            </div>
+            <div class="bg-white p-3 rounded text-center">
+                <div class="text-2xl font-bold text-pink-600">85%</div>
+                <div class="text-xs text-gray-600">Creative</div>
+            </div>
+            <div class="bg-white p-3 rounded text-center">
+                <div class="text-2xl font-bold text-purple-600">30s</div>
+                <div class="text-xs text-gray-600">Max Length</div>
+            </div>
+            <div class="bg-white p-3 rounded text-center">
+                <div class="text-2xl font-bold text-pink-600">$1.8</div>
+                <div class="text-xs text-gray-600">Per 30s</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="bg-white p-6 rounded-lg border shadow-sm">
+        <h4 class="font-bold text-gray-800 mb-4 text-lg flex items-center">
+            <i class="fas fa-calendar-alt mr-2 text-pink-600"></i>Lộ Trình Triển Khai (Tuần 4-7)
+        </h4>
+        <div class="space-y-4">
+            <div class="flex items-start">
+                <div class="bg-pink-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">1</div>
+                <div class="flex-1">
+                    <div class="flex items-center justify-between mb-1">
+                        <h5 class="font-bold text-gray-800">Tuần 4: Initial Research</h5>
+                        <span class="text-xs text-pink-600 font-semibold">Đang làm (20%)</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-2">Research capabilities, setup API, test basic effects</p>
+                    <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
+                        <div class="bg-pink-600 h-2 rounded-full" style="width: 20%"></div>
+                    </div>
+                    <div class="bg-pink-50 p-2 rounded text-xs">
+                        <strong>Tasks:</strong> 2/8 completed - API Setup (✓), Documentation (✓)
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-start">
+                <div class="bg-gray-300 text-gray-600 rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">2</div>
+                <div class="flex-1">
+                    <div class="flex items-center justify-between mb-1">
+                        <h5 class="font-bold text-gray-800">Tuần 5: Effects Testing</h5>
+                        <span class="text-xs text-gray-500 font-semibold">Chưa bắt đầu</span>
+                    </div>
+                    <p class="text-sm text-gray-600">Test particle effects, lighting, 360° rotation, special effects</p>
+                </div>
+            </div>
+
+            <div class="flex items-start">
+                <div class="bg-gray-300 text-gray-600 rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">3</div>
+                <div class="flex-1">
+                    <div class="flex items-center justify-between mb-1">
+                        <h5 class="font-bold text-gray-800">Tuần 6: Product Showcase</h5>
+                        <span class="text-xs text-gray-500 font-semibold">Chưa bắt đầu</span>
+                    </div>
+                    <p class="text-sm text-gray-600">Create Product Showcase templates, test on real products</p>
+                </div>
+            </div>
+
+            <div class="flex items-start">
+                <div class="bg-gray-300 text-gray-600 rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">4</div>
+                <div class="flex-1">
+                    <div class="flex items-center justify-between mb-1">
+                        <h5 class="font-bold text-gray-800">Tuần 7: Production Ready</h5>
+                        <span class="text-xs text-gray-500 font-semibold">Chưa bắt đầu</span>
+                    </div>
+                    <p class="text-sm text-gray-600">Finalize workflows, optimize cost, train team</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Use Cases -->
+    <div class="bg-gradient-to-r from-pink-50 to-purple-50 p-6 rounded-lg border-l-4 border-pink-600">
+        <h4 class="font-bold text-pink-900 mb-4 text-lg flex items-center">
+            <i class="fas fa-lightbulb mr-2"></i>Use Cases Chính
+        </h4>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
+                    <span class="bg-pink-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">1</span>
+                    Product Showcase
+                </h5>
+                <p class="text-sm text-gray-600 mb-2">Video trình bày sản phẩm với effects đẹp mắt</p>
+                <span class="text-xs text-pink-600 font-semibold">Priority: High</span>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
+                    <span class="bg-pink-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">2</span>
+                    Particle Effects
+                </h5>
+                <p class="text-sm text-gray-600 mb-2">Hiệu ứng hạt, smoke, clouds, sparkles</p>
+                <span class="text-xs text-purple-600 font-semibold">Priority: Medium</span>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
+                    <span class="bg-pink-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">3</span>
+                    360° Rotation
+                </h5>
+                <p class="text-sm text-gray-600 mb-2">Xoay 360° cho furniture, products</p>
+                <span class="text-xs text-blue-600 font-semibold">Priority: High</span>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
+                    <span class="bg-pink-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">4</span>
+                    Creative Effects
+                </h5>
+                <p class="text-sm text-gray-600 mb-2">Các hiệu ứng sáng tạo, artistic styles</p>
+                <span class="text-xs text-orange-600 font-semibold">Priority: Medium</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Next Steps -->
+    <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-600">
+        <h4 class="font-bold text-green-900 mb-4 text-lg flex items-center">
+            <i class="fas fa-forward mr-2"></i>Bước Tiếp Theo
+        </h4>
+        <ul class="space-y-2">
+            <li class="flex items-start">
+                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
+                <span class="text-gray-700">Hoàn thành setup và test basic effects</span>
+            </li>
+            <li class="flex items-start">
+                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
+                <span class="text-gray-700">Research particle effects và 360° rotation capabilities</span>
+            </li>
+            <li class="flex items-start">
+                <i class="fas fa-check-circle text-green-600 mr-2 mt-1"></i>
+                <span class="text-gray-700">Xác định use cases phù hợp với Fotober services</span>
+            </li>
+        </ul>
+    </div>
+</div>
+`
+    }
+};
+
+// Roadmap Grid Event Handlers
+document.addEventListener('DOMContentLoaded', function() {
+    if (!document.getElementById('roadmapGrid')) return;
+
+    const roadmapCards = document.querySelectorAll('.roadmap-card');
+    const roadmapModal = document.getElementById('roadmapModal');
+    const closeRoadmapModalBtn = document.getElementById('closeRoadmapModalBtn');
+    const roadmapModalTitle = document.getElementById('roadmapModalTitle');
+    const roadmapModalSubtitle = document.getElementById('roadmapModalSubtitle');
+    const roadmapModalContent = document.getElementById('roadmapModalContent');
+    const openRoadmapFullPageBtn = document.getElementById('openRoadmapFullPageBtn');
+    
+    const roadmapFullPageView = document.getElementById('roadmapFullPageView');
+    const roadmapFullPageTitle = document.getElementById('roadmapFullPageTitle');
+    const roadmapFullPageSubtitle = document.getElementById('roadmapFullPageSubtitle');
+    const roadmapFullPageContent = document.getElementById('roadmapFullPageContent');
+    const closeRoadmapFullPageBtn = document.getElementById('closeRoadmapFullPageBtn');
+
+    let currentToolId = null;
+
+    // Open modal when clicking on roadmap card
+    roadmapCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            if (e.target.closest('.expand-btn')) {
+                const toolId = this.getAttribute('data-tool-id');
+                openRoadmapFullPage(toolId);
+                return;
+            }
+
+            const toolId = this.getAttribute('data-tool-id');
+            if (roadmapData[toolId]) {
+                currentToolId = toolId;
+                const data = roadmapData[toolId];
+                roadmapModalTitle.textContent = data.title;
+                roadmapModalSubtitle.textContent = data.subtitle;
+                roadmapModalContent.innerHTML = data.content;
+                roadmapModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    });
+
+    // Close modal
+    if (closeRoadmapModalBtn) {
+        closeRoadmapModalBtn.addEventListener('click', function() {
+            roadmapModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        });
+    }
+
+    // Close modal when clicking outside
+    if (roadmapModal) {
+        roadmapModal.addEventListener('click', function(e) {
+            if (e.target === roadmapModal) {
+                roadmapModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        });
+    }
+
+    // Open Full Page
+    function openRoadmapFullPage(toolId) {
+        if (roadmapData[toolId]) {
+            currentToolId = toolId;
+            const data = roadmapData[toolId];
+            roadmapFullPageTitle.textContent = data.title;
+            roadmapFullPageSubtitle.textContent = data.subtitle;
+            roadmapFullPageContent.innerHTML = data.content;
+            roadmapFullPageView.classList.remove('hidden');
+            roadmapModal.classList.add('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    // Open Full Page from modal
+    if (openRoadmapFullPageBtn) {
+        openRoadmapFullPageBtn.addEventListener('click', function() {
+            if (currentToolId) {
+                openRoadmapFullPage(currentToolId);
+            }
+        });
+    }
+
+    // Close Full Page
+    if (closeRoadmapFullPageBtn) {
+        closeRoadmapFullPageBtn.addEventListener('click', function() {
+            roadmapFullPageView.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        });
+    }
+
+    // ESC key to close
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            if (!roadmapFullPageView.classList.contains('hidden')) {
+                roadmapFullPageView.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            } else if (!roadmapModal.classList.contains('hidden')) {
+                roadmapModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        }
+    });
+});

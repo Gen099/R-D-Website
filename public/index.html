@@ -872,114 +872,190 @@
             </section>
 
             <!-- R&D Roadmap Section -->
+            <!-- R&D Roadmap Section - NEW DESIGN -->
             <section id="roadmap" class="content-section mb-12">
                 <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
                     <i class="fas fa-route mr-3 text-purple-600"></i>
-                    Kế Hoạch R&D - Q1/2026
+                    Kế Hoạch R&D - Công Cụ AI Mới
                 </h2>
 
-                <!-- Phase Cards -->
-                <div class="space-y-6">
-                    <!-- Phase 1 -->
-                    <div class="phase-card bg-white rounded-lg shadow-md p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-xl font-bold text-gray-800">
-                                <i class="fas fa-rocket text-purple-600 mr-2"></i>
-                                Giai Đoạn 1: Thiết Lập Nền Tảng
-                            </h3>
-                            <span class="badge badge-progress">Tuần 1-2</span>
+                <!-- Intro -->
+                <div class="bg-gradient-to-r from-purple-50 to-indigo-50 rounded-lg shadow-md p-6 mb-8 border-l-4 border-purple-600">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 flex items-center">
+                        <i class="fas fa-lightbulb mr-2 text-purple-600"></i>
+                        🎯 4 Công Cụ AI Mới - Lộ Trình R&D Q1/2026
+                    </h3>
+                    <p class="text-gray-700 mb-3">
+                        Fotober đang nghiên cứu và triển khai 4 công cụ AI tiên tiến nhất để nâng cao chất lượng dịch vụ. 
+                        Nhấn vào từng card để xem chi tiết lộ trình R&D, timeline, milestones và kết quả dự kiến.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">Google Nano Banana Pro</span>
+                        <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm font-medium">Veo 3.1</span>
+                        <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">Kling 2.6</span>
+                        <span class="px-3 py-1 bg-pink-100 text-pink-700 rounded-full text-sm font-medium">Seedance 1.5 Pro</span>
+                    </div>
+                </div>
+
+                <!-- Tools Grid -->
+                <div id="roadmapGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
+                    <!-- Card 1: Google Nano Banana Pro -->
+                    <div class="roadmap-card group cursor-pointer bg-white rounded-lg shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-t-4 border-blue-600" data-tool-id="1" data-order="1">
+                        <div class="relative h-48 overflow-hidden bg-gradient-to-br from-blue-500 to-indigo-600">
+                            <img src="images/roadmap/ai-tools-grid.jpg" alt="Google Nano Banana Pro" class="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-300">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                            <div class="absolute bottom-3 left-3 right-3">
+                                <h4 class="text-white font-bold text-lg">Google Nano Banana Pro</h4>
+                                <p class="text-blue-100 text-xs">Image Generation • 4K+ Quality</p>
+                            </div>
+                            <button class="expand-btn absolute top-3 right-3 bg-white/20 backdrop-blur-sm text-white p-2 rounded-full hover:bg-white/30 transition">
+                                <i class="fas fa-expand-alt"></i>
+                            </button>
                         </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="bg-purple-50 p-4 rounded">
-                                <h4 class="font-semibold mb-2">📊 Phân tích 23 job feedback</h4>
-                                <p class="text-sm text-gray-600">Đọc kỹ cases, phân loại pattern lỗi</p>
-                                <span class="text-xs text-purple-600 font-semibold">⏱ 2 ngày</span>
+                        <div class="p-4">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs font-semibold">Đang Triển Khai</span>
+                                <span class="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs">Tuần 1-4</span>
                             </div>
-                            <div class="bg-blue-50 p-4 rounded">
-                                <h4 class="font-semibold mb-2">🛠 Thiết lập công cụ AI</h4>
-                                <p class="text-sm text-gray-600">Google Nano Banana Pro, Veo 3.1, Kling 2.6, Seedance 1.5 Pro</p>
-                                <span class="text-xs text-blue-600 font-semibold">⏱ 1 ngày</span>
-                            </div>
-                            <div class="bg-green-50 p-4 rounded">
-                                <h4 class="font-semibold mb-2">📝 Prompt Testing Sheet</h4>
-                                <p class="text-sm text-gray-600">Google Sheet theo dõi tests</p>
-                                <span class="text-xs text-green-600 font-semibold">⏱ 0.5 ngày</span>
-                            </div>
-                            <div class="bg-yellow-50 p-4 rounded">
-                                <h4 class="font-semibold mb-2">🤖 Automation Crawler</h4>
-                                <p class="text-sm text-gray-600">Thu thập info đối thủ</p>
-                                <span class="text-xs text-yellow-600 font-semibold">⏱ 3 ngày</span>
+                            <p class="text-sm text-gray-600 mb-3">Công cụ tạo ảnh chất lượng cao nhất, chuyên về Virtual Staging và Interior Design với độ chi tiết vật liệu tuyệt vời.</p>
+                            <div class="flex items-center justify-between text-xs text-gray-500">
+                                <span><i class="fas fa-tasks mr-1"></i>5/8 Tasks</span>
+                                <span><i class="fas fa-clock mr-1"></i>62% Complete</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Phase 2 -->
-                    <div class="phase-card bg-white rounded-lg shadow-md p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-xl font-bold text-gray-800">
-                                <i class="fas fa-flask text-blue-600 mr-2"></i>
-                                Giai Đoạn 2: Giải Quyết Bài Toán
-                            </h3>
-                            <span class="badge badge-pending">Tuần 3-6</span>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="bg-purple-50 p-4 rounded">
-                                <h4 class="font-semibold mb-2">🎬 Bài toán 1: Thay Agent</h4>
-                                <ul class="text-sm text-gray-600 space-y-1 mb-2">
-                                    <li>• Thử Kling O1 + Lip-sync</li>
-                                    <li>• Thử Kling 2.6 Motion Control</li>
-                                    <li>• Thử Veo 3.1 Full AI Regeneration</li>
-                                </ul>
-                                <span class="text-xs text-purple-600 font-semibold">⏱ ~10 ngày</span>
+                    <!-- Card 2: Veo 3.1 -->
+                    <div class="roadmap-card group cursor-pointer bg-white rounded-lg shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-t-4 border-orange-600" data-tool-id="2" data-order="2">
+                        <div class="relative h-48 overflow-hidden bg-gradient-to-br from-orange-500 to-red-600">
+                            <img src="images/roadmap/video-generation.jpg" alt="Veo 3.1" class="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-300">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                            <div class="absolute bottom-3 left-3 right-3">
+                                <h4 class="text-white font-bold text-lg">Veo 3.1</h4>
+                                <p class="text-orange-100 text-xs">Video Generation • Cinematic</p>
                             </div>
-                            <div class="bg-blue-50 p-4 rounded">
-                                <h4 class="font-semibold mb-2">📸 Bài toán 2: Image-to-Video</h4>
-                                <ul class="text-sm text-gray-600 space-y-1 mb-2">
-                                    <li>• Research Google Nano Banana Pro</li>
-                                    <li>• Test Kling 2.6, Veo 3.1, Seedance 1.5 Pro</li>
-                                    <li>• Optimize prompt cho Agent</li>
-                                </ul>
-                                <span class="text-xs text-blue-600 font-semibold">⏱ ~10 ngày</span>
+                            <button class="expand-btn absolute top-3 right-3 bg-white/20 backdrop-blur-sm text-white p-2 rounded-full hover:bg-white/30 transition">
+                                <i class="fas fa-expand-alt"></i>
+                            </button>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs font-semibold">Đang Triển Khai</span>
+                                <span class="px-2 py-1 bg-orange-100 text-orange-700 rounded text-xs">Tuần 2-5</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-3">Video AI chân thực nhất, tuyệt vời cho Day-to-Night transitions và cinematic shots với ánh sáng tự nhiên.</p>
+                            <div class="flex items-center justify-between text-xs text-gray-500">
+                                <span><i class="fas fa-tasks mr-1"></i>4/7 Tasks</span>
+                                <span><i class="fas fa-clock mr-1"></i>57% Complete</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Phase 3 -->
-                    <div class="phase-card bg-white rounded-lg shadow-md p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-xl font-bold text-gray-800">
-                                <i class="fas fa-chart-line text-green-600 mr-2"></i>
-                                Giai Đoạn 3: Tối Ưu & Scale
-                            </h3>
-                            <span class="badge badge-pending">Tuần 7-12</span>
+                    <!-- Card 3: Kling 2.6 -->
+                    <div class="roadmap-card group cursor-pointer bg-white rounded-lg shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-t-4 border-green-600" data-tool-id="3" data-order="3">
+                        <div class="relative h-48 overflow-hidden bg-gradient-to-br from-green-500 to-emerald-600">
+                            <img src="images/roadmap/ai-comparison.png" alt="Kling 2.6" class="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-300">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                            <div class="absolute bottom-3 left-3 right-3">
+                                <h4 class="text-white font-bold text-lg">Kling 2.6</h4>
+                                <p class="text-green-100 text-xs">Motion Control • Real Estate Tour</p>
+                            </div>
+                            <button class="expand-btn absolute top-3 right-3 bg-white/20 backdrop-blur-sm text-white p-2 rounded-full hover:bg-white/30 transition">
+                                <i class="fas fa-expand-alt"></i>
+                            </button>
                         </div>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div class="bg-green-50 p-4 rounded">
-                                <h4 class="font-semibold mb-2">⚡ Tối ưu Prompt</h4>
-                                <p class="text-sm text-gray-600">A/B testing, so sánh outputs</p>
+                        <div class="p-4">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded text-xs font-semibold">Đang Nghiên Cứu</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs">Tuần 3-6</span>
                             </div>
-                            <div class="bg-blue-50 p-4 rounded">
-                                <h4 class="font-semibold mb-2">📚 Xây Prompt Library</h4>
-                                <p class="text-sm text-gray-600">Templates cho mọi hiệu ứng</p>
+                            <p class="text-sm text-gray-600 mb-3">Motion Control tuyệt vời cho Real Estate Tour và camera movements phức tạp, smooth gimbal effects.</p>
+                            <div class="flex items-center justify-between text-xs text-gray-500">
+                                <span><i class="fas fa-tasks mr-1"></i>3/9 Tasks</span>
+                                <span><i class="fas fa-clock mr-1"></i>33% Complete</span>
                             </div>
-                            <div class="bg-purple-50 p-4 rounded">
-                                <h4 class="font-semibold mb-2">🎓 Training Team</h4>
-                                <p class="text-sm text-gray-600">Chuyển giao quy trình</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Seedance 1.5 Pro -->
+                    <div class="roadmap-card group cursor-pointer bg-white rounded-lg shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border-t-4 border-pink-600" data-tool-id="4" data-order="4">
+                        <div class="relative h-48 overflow-hidden bg-gradient-to-br from-pink-500 to-purple-600">
+                            <img src="images/roadmap/ai-video-tools.jpg" alt="Seedance 1.5 Pro" class="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-300">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                            <div class="absolute bottom-3 left-3 right-3">
+                                <h4 class="text-white font-bold text-lg">Seedance 1.5 Pro</h4>
+                                <p class="text-pink-100 text-xs">Special Effects • Product Showcase</p>
+                            </div>
+                            <button class="expand-btn absolute top-3 right-3 bg-white/20 backdrop-blur-sm text-white p-2 rounded-full hover:bg-white/30 transition">
+                                <i class="fas fa-expand-alt"></i>
+                            </button>
+                        </div>
+                        <div class="p-4">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded text-xs font-semibold">Đang Nghiên Cứu</span>
+                                <span class="px-2 py-1 bg-pink-100 text-pink-700 rounded text-xs">Tuần 4-7</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-3">Hiệu ứng đặc biệt và creative effects cho Product Showcase, 360° rotation, particle effects.</p>
+                            <div class="flex items-center justify-between text-xs text-gray-500">
+                                <span><i class="fas fa-tasks mr-1"></i>2/8 Tasks</span>
+                                <span class="fas fa-clock mr-1"></i>25% Complete</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Timeline Visualization -->
-                <div class="bg-white rounded-lg shadow-md p-6 mt-6">
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">Timeline Q1/2026</h3>
+                <!-- Timeline Overview -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <i class="fas fa-calendar-alt mr-2 text-purple-600"></i>
+                        Timeline Q1/2026
+                    </h3>
                     <div class="chart-container">
                         <canvas id="timelineChart"></canvas>
                     </div>
                 </div>
             </section>
 
-            <!-- Platform Design Section -->
+            <!-- Roadmap Modal -->
+            <div id="roadmapModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+                <div class="bg-white rounded-lg shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col">
+                    <div class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-6 flex items-center justify-between">
+                        <div class="flex-1">
+                            <h3 id="roadmapModalTitle" class="text-2xl font-bold mb-1">Tool Name</h3>
+                            <p id="roadmapModalSubtitle" class="text-purple-100 text-sm">Subtitle</p>
+                        </div>
+                        <div class="flex gap-2">
+                            <button id="openRoadmapFullPageBtn" class="px-3 py-2 bg-white/20 backdrop-blur-sm text-white rounded hover:bg-white/30 transition text-sm font-medium">
+                                <i class="fas fa-expand mr-1"></i>Mở Full Page
+                            </button>
+                            <button id="closeRoadmapModalBtn" class="text-white hover:text-gray-200 text-2xl px-2">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="roadmapModalContent" class="flex-1 overflow-y-auto p-6">
+                        <!-- Content will be injected here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Roadmap Full Page View -->
+            <div id="roadmapFullPageView" class="hidden fixed inset-0 bg-white z-[60] overflow-y-auto">
+                <div class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-6 sticky top-0 z-10 shadow-lg">
+                    <div class="max-w-7xl mx-auto flex items-center justify-between">
+                        <div>
+                            <h3 id="roadmapFullPageTitle" class="text-3xl font-bold mb-1">Tool Name</h3>
+                            <p id="roadmapFullPageSubtitle" class="text-purple-100">Subtitle</p>
+                        </div>
+                        <button id="closeRoadmapFullPageBtn" class="text-white hover:text-gray-200 text-3xl px-3">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="roadmapFullPageContent" class="max-w-7xl mx-auto p-8">
+                    <!-- Content will be injected here -->
+                </div>
+            </div>
             <section id="platform" class="content-section mb-12">
                 <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
                     <i class="fas fa-server mr-3 text-purple-600"></i>
