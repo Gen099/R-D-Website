@@ -102,5 +102,39 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // ========== PASSCODE HANDLER ==========
+    const passcodeInput = document.getElementById('passcodeInput');
+    const submitPasscodeBtn = document.getElementById('submitPasscodeBtn');
+    const passcodeError = document.getElementById('passcodeError');
+    const reportsPasscodeLayer = document.getElementById('reportsPasscodeLayer');
+    const reportContent = document.getElementById('reportContent');
+    const CORRECT_PASSCODE = '2026';
+
+    if (submitPasscodeBtn) {
+        submitPasscodeBtn.addEventListener('click', function() {
+            const enteredPasscode = passcodeInput.value.trim();
+            if (enteredPasscode === CORRECT_PASSCODE) {
+                reportsPasscodeLayer.style.display = 'none';
+                reportContent.style.display = 'block';
+                passcodeInput.value = '';
+                console.log("Passcode correct");
+            } else {
+                if (passcodeError) {
+                    passcodeError.textContent = 'Passcode không chính xác. Vui lòng thử lại.';
+                    passcodeError.classList.remove('hidden');
+                }
+                console.log("Passcode incorrect");
+            }
+        });
+    }
+
+    if (passcodeInput) {
+        passcodeInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                submitPasscodeBtn.click();
+            }
+        });
+    }
+
     console.log("All scripts loaded successfully");
 });
