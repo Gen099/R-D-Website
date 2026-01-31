@@ -783,19 +783,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const modalTitle = document.getElementById('modalTitle');
     const modalContent = document.getElementById('modalContent');
     const openFullPageBtn = document.getElementById('openFullPageBtn');
-    const openWhiteboardBtn = document.getElementById('openWhiteboardBtn');
-    
+    const     
     const fullPageView = document.getElementById('fullPageView');
     const fullPageTitle = document.getElementById('fullPageTitle');
     const fullPageContent = document.getElementById('fullPageContent');
     const closeFullPageBtn = document.getElementById('closeFullPageBtn');
-    const fullPageWhiteboardBtn = document.getElementById('fullPageWhiteboardBtn');
-    
-    const whiteboardModal = document.getElementById('whiteboardModal');
-    const closeWhiteboardBtn = document.getElementById('closeWhiteboardBtn');
-    const saveWhiteboardBtn = document.getElementById('saveWhiteboardBtn');
-    const clearWhiteboardBtn = document.getElementById('clearWhiteboardBtn');
-
+    const     
+    const     const     const     const 
     // Current feedback ID
     let currentFeedbackId = null;
 
@@ -949,38 +943,23 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Open Whiteboard from modal
-    if (openWhiteboardBtn) {
-        openWhiteboardBtn.addEventListener('click', function() {
-            whiteboardModal.classList.remove('hidden');
-        });
+    
     }
 
-    // Open Whiteboard from full page
-    if (fullPageWhiteboardBtn) {
-        fullPageWhiteboardBtn.addEventListener('click', function() {
-            whiteboardModal.classList.remove('hidden');
-        });
+    
     }
 
     // Close Whiteboard
-    if (closeWhiteboardBtn) {
-        closeWhiteboardBtn.addEventListener('click', function() {
-            whiteboardModal.classList.add('hidden');
-        });
+    if (                            });
     }
 
     // Save Whiteboard
-    if (saveWhiteboardBtn) {
-        saveWhiteboardBtn.addEventListener('click', function() {
-            alert('Tính năng lưu whiteboard đang được phát triển. Bạn có thể sử dụng Export trong Excalidraw để lưu file.');
+    if (                    alert('Tính năng lưu whiteboard đang được phát triển. Bạn có thể sử dụng Export trong Excalidraw để lưu file.');
         });
     }
 
     // Clear Whiteboard
-    if (clearWhiteboardBtn) {
-        clearWhiteboardBtn.addEventListener('click', function() {
-            if (confirm('Bạn có chắc muốn xóa toàn bộ nội dung whiteboard?')) {
+    if (                    if (confirm('Bạn có chắc muốn xóa toàn bộ nội dung whiteboard?')) {
                 // Reload iframe to clear
                 const whiteboardFrame = document.getElementById('whiteboardFrame');
                 whiteboardFrame.src = whiteboardFrame.src;
@@ -989,11 +968,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Close whiteboard when clicking outside
-    if (whiteboardModal) {
-        whiteboardModal.addEventListener('click', function(e) {
-            if (e.target === whiteboardModal) {
-                whiteboardModal.classList.add('hidden');
-            }
+    if (                    if (e.target ===                             }
         });
     }
 
@@ -1024,9 +999,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ESC key to close modals
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
-            if (!whiteboardModal.classList.contains('hidden')) {
-                whiteboardModal.classList.add('hidden');
-            } else if (!fullPageView.classList.contains('hidden')) {
+            if (!                            } else if (!fullPageView.classList.contains('hidden')) {
                 fullPageView.classList.add('hidden');
                 document.body.style.overflow = 'auto';
             } else if (!feedbackModal.classList.contains('hidden')) {
@@ -1037,39 +1010,71 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Library Grid with Modal, Full Page and Whiteboard - Complete Version
-document.addEventListener('DOMContentLoaded', function() {
-    // Check if library elements exist
-    if (!document.getElementById('libraryGrid')) return;
-
-    // Elements
-    const libraryCards = document.querySelectorAll('.library-card');
-    const libraryModal = document.getElementById('libraryModal');
-    const closeLibraryModalBtn = document.getElementById('closeLibraryModalBtn');
-    const libraryModalTitle = document.getElementById('libraryModalTitle');
-    const libraryModalContent = document.getElementById('libraryModalContent');
-    const openLibraryFullPageBtn = document.getElementById('openLibraryFullPageBtn');
-    const openLibraryWhiteboardBtn = document.getElementById('openLibraryWhiteboardBtn');
+// Library Grid - Complete Data for All 10 Cards
+const libraryData = {
+    '1': {
+        title: 'Danh Sách Công Cụ AI Hiện Tại',
+        content: `
+<div class="space-y-6">
+    <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-600">
+        <h4 class="font-bold text-blue-900 mb-4 text-xl">🖼️ Công Cụ Tạo Ảnh</h4>
+        <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+                <span class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 text-sm">1</span>
+                <div><strong>Google Nano Banana Pro</strong> - 4K+, chi tiết vật liệu cao, phù hợp Virtual Staging</div>
+            </li>
+            <li class="flex items-start">
+                <span class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 text-sm">2</span>
+                <div><strong>Zimage</strong> - Tối ưu bất động sản, nhanh, đa dạng style</div>
+            </li>
+            <li class="flex items-start">
+                <span class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 text-sm">3</span>
+                <div><strong>Flux</strong> - Sáng tạo, nghệ thuật, kiểm soát tốt</div>
+            </li>
+            <li class="flex items-start">
+                <span class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 text-sm">4</span>
+                <div><strong>Seedream</strong> - Chuyên nội thất, artistic style</div>
+            </li>
+        </ul>
+    </div>
     
-    const libraryFullPageView = document.getElementById('libraryFullPageView');
-    const libraryFullPageTitle = document.getElementById('libraryFullPageTitle');
-    const libraryFullPageContent = document.getElementById('libraryFullPageContent');
-    const closeLibraryFullPageBtn = document.getElementById('closeLibraryFullPageBtn');
-    const libraryFullPageWhiteboardBtn = document.getElementById('libraryFullPageWhiteboardBtn');
-    
-    const whiteboardModal = document.getElementById('whiteboardModal');
+    <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-600">
+        <h4 class="font-bold text-green-900 mb-4 text-xl">🎬 Công Cụ Tạo Video</h4>
+        <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start">
+                <span class="bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 text-sm">1</span>
+                <div><strong>Veo 3.1</strong> - Chân thực, mượt mà, tốt cho Day-to-Night</div>
+            </li>
+            <li class="flex items-start">
+                <span class="bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 text-sm">2</span>
+                <div><strong>Seedance 1.5 Pro</strong> - Hiệu ứng đặc biệt, creative effects</div>
+            </li>
+            <li class="flex items-start">
+                <span class="bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 text-sm">3</span>
+                <div><strong>Kling 2.6</strong> - Motion Control tuyệt vời, Real Estate Tour</div>
+            </li>
+            <li class="flex items-start">
+                <span class="bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 text-sm">4</span>
+                <div><strong>Kling O1</strong> - Chỉnh sửa video, fix lỗi vật lý</div>
+            </li>
+        </ul>
+    </div>
+</div>
+`
+    },
+    '2': {
+        title: '🏠 Virtual Staging - Google Nano Banana Pro',
+        content: `
+<div class="space-y-6">
+    <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-600">
+        <h4 class="font-bold text-blue-900 mb-3 text-xl">🛠️ Công Cụ Chính</h4>
+        <p class="text-gray-700 text-lg"><strong>Google Nano Banana Pro</strong></p>
+        <p class="text-gray-600 text-sm mt-2">Chất lượng cao, chi tiết tốt, phù hợp cho Virtual Staging và Interior Design</p>
+    </div>
 
-    let currentLibraryId = null;
-
-    // Library data - Full content for main cards
-    const libraryData = {
-        '1': {
-            title: 'Danh Sách Công Cụ AI Hiện Tại',
-            content: `<div class="space-y-6"><div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-600"><h4 class="font-bold text-blue-900 mb-3 text-xl">🛠️ Công Cụ Tạo Ảnh</h4><div class="overflow-x-auto"><table class="w-full text-sm border-collapse"><thead><tr class="bg-blue-100"><th class="border border-blue-300 px-3 py-2 text-left">Công Cụ</th><th class="border border-blue-300 px-3 py-2 text-left">Điểm Mạnh</th><th class="border border-blue-300 px-3 py-2 text-left">Dùng Cho</th></tr></thead><tbody><tr class="bg-white"><td class="border border-blue-300 px-3 py-2"><strong>Google Nano Banana Pro</strong></td><td class="border border-blue-300 px-3 py-2">Chất lượng cao, chi tiết tốt</td><td class="border border-blue-300 px-3 py-2">Virtual Staging, Interior Design</td></tr><tr class="bg-blue-50"><td class="border border-blue-300 px-3 py-2"><strong>Zimage</strong></td><td class="border border-blue-300 px-3 py-2">Nhanh, đa dạng style</td><td class="border border-blue-300 px-3 py-2">Concept art, Marketing</td></tr></tbody></table></div></div><div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-600"><h4 class="font-bold text-green-900 mb-3 text-xl">🎬 Công Cụ Tạo Video</h4><div class="overflow-x-auto"><table class="w-full text-sm border-collapse"><thead><tr class="bg-green-100"><th class="border border-green-300 px-3 py-2 text-left">Công Cụ</th><th class="border border-green-300 px-3 py-2 text-left">Điểm Mạnh</th></tr></thead><tbody><tr class="bg-white"><td class="border border-green-300 px-3 py-2"><strong>Veo 3.1</strong></td><td class="border border-green-300 px-3 py-2">Chuyển đổi tự nhiên, ánh sáng tốt</td></tr><tr class="bg-green-50"><td class="border border-green-300 px-3 py-2"><strong>Kling 2.6</strong></td><td class="border border-green-300 px-3 py-2">Motion Control tuyệt vời</td></tr></tbody></table></div></div></div>`
-        },
-        '2': {
-            title: '🏠 Virtual Staging - Google Nano Banana Pro',
-            content: `<div class="space-y-6"><div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-600"><h4 class="font-bold text-blue-900 mb-3 text-xl">🛠️ Công Cụ Chính</h4><p class="text-gray-700 text-lg"><strong>Google Nano Banana Pro</strong></p><p class="text-gray-600 text-sm mt-2">Chất lượng cao, chi tiết tốt, phù hợp cho Virtual Staging và Interior Design</p></div><div class="bg-white p-6 rounded-lg border shadow-sm"><h4 class="font-bold text-gray-800 mb-3 text-lg">📝 Prompt Tối Ưu</h4><pre class="bg-gray-100 p-4 rounded overflow-x-auto text-sm font-mono border border-blue-200">Ultra-realistic interior design of an empty living room, adding [STYLE] style furniture:
+    <div class="bg-white p-6 rounded-lg border shadow-sm">
+        <h4 class="font-bold text-gray-800 mb-3 text-lg">📝 Prompt Tối Ưu</h4>
+        <pre class="bg-gray-100 p-4 rounded overflow-x-auto text-sm font-mono border border-blue-200">Ultra-realistic interior design of an empty [ROOM_TYPE], adding [STYLE] style furniture:
 - Main furniture: [FURNITURE_LIST]
 - Flooring: [FLOOR_MATERIAL] with [LIGHTING_TYPE] lighting
 - Wall color: [WALL_COLOR]
@@ -1077,7 +1082,13 @@ document.addEventListener('DOMContentLoaded', function() {
 - Lighting: Soft daylight from large windows, warm accent lighting
 - Camera angle: [ANGLE_DESCRIPTION]
 - Resolution: 8K, architectural photography, photorealistic
-- Mood: [MOOD_DESCRIPTION]</pre></div><div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-600"><h4 class="font-bold text-green-900 mb-3 text-lg">✅ Ví Dụ Cụ Thể</h4><pre class="bg-white p-4 rounded overflow-x-auto text-sm font-mono border border-green-200">Ultra-realistic interior design of an empty living room, adding Scandinavian style furniture:
+- Mood: [MOOD_DESCRIPTION]</pre>
+    </div>
+
+    <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-600">
+        <h4 class="font-bold text-green-900 mb-3 text-lg">✅ Ví Dụ Cụ Thể</h4>
+        <p class="text-gray-700 mb-3">Trang trí phòng khách theo phong cách Scandinavian:</p>
+        <pre class="bg-white p-4 rounded overflow-x-auto text-sm font-mono border border-green-200">Ultra-realistic interior design of an empty living room, adding Scandinavian style furniture:
 - Main furniture: Light oak wood sofa, minimalist coffee table, floor lamp
 - Flooring: Light oak wood with soft warm lighting
 - Wall color: Soft white with one accent wall in sage green
@@ -1085,100 +1096,374 @@ document.addEventListener('DOMContentLoaded', function() {
 - Lighting: Soft daylight from large windows, warm accent lighting
 - Camera angle: Wide-angle from living room entrance
 - Resolution: 8K, architectural photography, photorealistic
-- Mood: Cozy, modern, minimalist</pre></div></div>`
-        },
-        '3': {
-            title: '🌅 Day-to-Night - Veo 3.1 & Kling 2.6',
-            content: `<div class="space-y-6"><div class="bg-orange-50 p-6 rounded-lg border-l-4 border-orange-600"><h4 class="font-bold text-orange-900 mb-3 text-xl">🛠️ Công Cụ</h4><p class="text-gray-700"><strong>Veo 3.1:</strong> Chuyển đổi ánh sáng tự nhiên, smooth transition</p><p class="text-gray-700 mt-2"><strong>Kling 2.6:</strong> Motion control tốt, camera movement</p></div><div class="bg-white p-6 rounded-lg border shadow-sm"><h4 class="font-bold text-gray-800 mb-3 text-lg">📝 Prompt cho Veo 3.1</h4><pre class="bg-gray-100 p-4 rounded overflow-x-auto text-sm font-mono border border-orange-200">Transform this daytime real estate exterior to nighttime scene:
-- Lighting: Warm interior lights glowing through windows
-- Sky: Deep blue twilight with subtle stars
-- Landscape: Soft garden lights, pathway illumination
-- Ambiance: Cozy, inviting, luxury evening atmosphere
-- Camera: Static, smooth transition from day to night
-- Duration: 5-10 seconds
-- Quality: 4K, cinematic, photorealistic</pre></div><div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-600"><h4 class="font-bold text-blue-900 mb-3 text-lg">📝 Prompt cho Kling 2.6</h4><pre class="bg-white p-4 rounded overflow-x-auto text-sm font-mono border border-blue-200">Day to night transformation of modern house exterior:
-- Start: Bright daylight, blue sky
-- End: Evening twilight, warm interior lights
-- Motion: Slow camera pan from left to right
-- Lighting transition: Gradual, natural
-- Special effects: Light rays, lens flare
-- Duration: 8-12 seconds</pre></div></div>`
-        },
-        '4': {
-            title: '🎬 Real Estate Tour - Kling 2.6',
-            content: `<div class="space-y-6"><div class="bg-purple-50 p-6 rounded-lg border-l-4 border-purple-600"><h4 class="font-bold text-purple-900 mb-3 text-xl">🛠️ Công Cụ Chính</h4><p class="text-gray-700 text-lg"><strong>Kling 2.6 Motion Control</strong></p><p class="text-gray-600 text-sm mt-2">Tuyệt vời cho camera movement, smooth motion, cinematic shots</p></div><div class="bg-white p-6 rounded-lg border shadow-sm"><h4 class="font-bold text-gray-800 mb-3 text-lg">📝 Prompt Tối Ưu</h4><pre class="bg-gray-100 p-4 rounded overflow-x-auto text-sm font-mono border border-purple-200">Cinematic real estate video tour of [PROPERTY_TYPE]:
-- Camera movement: [MOVEMENT_TYPE] (dolly forward, pan, orbit)
-- Start point: [START_LOCATION]
-- End point: [END_LOCATION]
-- Speed: Slow, smooth, professional
-- Lighting: Natural daylight, soft shadows
-- Focus: Architecture details, space flow
-- Duration: 10-15 seconds
-- Quality: 4K, cinematic, stabilized</pre></div><div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-600"><h4 class="font-bold text-green-900 mb-3 text-lg">✅ Ví Dụ</h4><pre class="bg-white p-4 rounded overflow-x-auto text-sm font-mono border border-green-200">Cinematic real estate video tour of modern living room:
-- Camera movement: Dolly forward with slight pan right
-- Start point: Living room entrance
-- End point: Floor-to-ceiling windows with city view
-- Speed: Slow, smooth, professional
-- Lighting: Natural daylight, soft shadows
-- Focus: Architecture details, space flow
-- Duration: 12 seconds
-- Quality: 4K, cinematic, stabilized</pre></div></div>`
-        },
-        '5': {
-            title: '🛍️ Product Showcase - Seedance 1.5 Pro',
-            content: `<div class="space-y-6"><div class="bg-pink-50 p-6 rounded-lg border-l-4 border-pink-600"><h4 class="font-bold text-pink-900 mb-3 text-xl">🛠️ Công Cụ Chính</h4><p class="text-gray-700 text-lg"><strong>Seedance 1.5 Pro</strong></p><p class="text-gray-600 text-sm mt-2">Hiệu ứng đặc biệt, creative effects, product animation</p></div><div class="bg-white p-6 rounded-lg border shadow-sm"><h4 class="font-bold text-gray-800 mb-3 text-lg">📝 Prompt Tối Ưu</h4><pre class="bg-gray-100 p-4 rounded overflow-x-auto text-sm font-mono border border-pink-200">Product showcase video for [PRODUCT_NAME]:
+- Mood: Cozy, modern, minimalist</pre>
+    </div>
+</div>
+`
+    },
+    '3': {
+        title: '🌅 Day-to-Night - Veo 3.1 & Kling 2.6',
+        content: `
+<div class="space-y-6">
+    <div class="bg-orange-50 p-6 rounded-lg border-l-4 border-orange-600">
+        <h4 class="font-bold text-orange-900 mb-3 text-xl">🛠️ Công Cụ</h4>
+        <p class="text-gray-700 mb-2"><strong>Veo 3.1:</strong> Chuyển đổi ánh sáng tự nhiên, smooth transition</p>
+        <p class="text-gray-700"><strong>Kling 2.6:</strong> Motion control tốt, camera movement (nếu cần)</p>
+    </div>
+
+    <div class="bg-white p-6 rounded-lg border shadow-sm">
+        <h4 class="font-bold text-gray-800 mb-3 text-lg">📝 Prompt Tối Ưu</h4>
+        <pre class="bg-gray-100 p-4 rounded overflow-x-auto text-sm font-mono border border-orange-200">Cinematic transition video of [LOCATION]:
+- Start: [MORNING_DESCRIPTION] with bright sunlight
+- Middle: [AFTERNOON_DESCRIPTION] with golden hour lighting
+- End: [NIGHT_DESCRIPTION] with interior lights turning on
+- Camera movement: [CAMERA_MOVEMENT]
+- Duration: 30 seconds
+- Resolution: 4K, cinematic, realistic</pre>
+    </div>
+
+    <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-600">
+        <h4 class="font-bold text-green-900 mb-3 text-lg">✅ Ví Dụ Cụ Thể</h4>
+        <p class="text-gray-700 mb-3">Video chuyển đổi từ ngày sang đêm của tòa nhà cao cấp:</p>
+        <pre class="bg-white p-4 rounded overflow-x-auto text-sm font-mono border border-green-200">Cinematic transition video of modern luxury building:
+- Start: Bright morning with blue sky, natural sunlight
+- Middle: Golden hour afternoon, warm orange glow
+- End: Evening twilight with interior lights glowing warmly
+- Camera movement: Static, smooth time-lapse effect
+- Duration: 30 seconds
+- Resolution: 4K, cinematic, realistic</pre>
+    </div>
+</div>
+`
+    },
+    '4': {
+        title: '🎬 Real Estate Tour - Kling 2.6',
+        content: `
+<div class="space-y-6">
+    <div class="bg-purple-50 p-6 rounded-lg border-l-4 border-purple-600">
+        <h4 class="font-bold text-purple-900 mb-3 text-xl">🛠️ Công Cụ Chính</h4>
+        <p class="text-gray-700 text-lg"><strong>Kling 2.6 Motion Control</strong></p>
+        <p class="text-gray-600 text-sm mt-2">Tuyệt vời cho camera movement, smooth motion, cinematic shots</p>
+    </div>
+
+    <div class="bg-white p-6 rounded-lg border shadow-sm">
+        <h4 class="font-bold text-gray-800 mb-3 text-lg">📝 Prompt Tối Ưu</h4>
+        <pre class="bg-gray-100 p-4 rounded overflow-x-auto text-sm font-mono border border-purple-200">Smooth gimbal walkthrough of [PROPERTY_TYPE]:
+- Start position: [START_LOCATION]
+- Path: [MOVEMENT_DESCRIPTION]
+- End position: [END_LOCATION]
+- Motion control: [SPEED] speed, [DIRECTION] movement
+- Highlights: [KEY_FEATURES]
+- Duration: 45 seconds
+- Resolution: 4K, smooth motion</pre>
+    </div>
+
+    <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-600">
+        <h4 class="font-bold text-green-900 mb-3 text-lg">✅ Ví Dụ Cụ Thể</h4>
+        <p class="text-gray-700 mb-3">Tour căn hộ hiện đại:</p>
+        <pre class="bg-white p-4 rounded overflow-x-auto text-sm font-mono border border-green-200">Smooth gimbal walkthrough of modern apartment:
+- Start position: Main entrance door
+- Path: Through living room, kitchen area, bedroom hallway
+- End position: Master bedroom with city view
+- Motion control: Slow speed, forward and pan right movement
+- Highlights: Open floor plan, modern kitchen, floor-to-ceiling windows
+- Duration: 45 seconds
+- Resolution: 4K, smooth motion</pre>
+    </div>
+</div>
+`
+    },
+    '5': {
+        title: '🛍️ Product Showcase - Seedance 1.5 Pro',
+        content: `
+<div class="space-y-6">
+    <div class="bg-pink-50 p-6 rounded-lg border-l-4 border-pink-600">
+        <h4 class="font-bold text-pink-900 mb-3 text-xl">🛠️ Công Cụ Chính</h4>
+        <p class="text-gray-700 text-lg"><strong>Seedance 1.5 Pro</strong></p>
+        <p class="text-gray-600 text-sm mt-2">Hiệu ứng đặc biệt, creative effects, product animation</p>
+    </div>
+
+    <div class="bg-white p-6 rounded-lg border shadow-sm">
+        <h4 class="font-bold text-gray-800 mb-3 text-lg">📝 Prompt Tối Ưu</h4>
+        <pre class="bg-gray-100 p-4 rounded overflow-x-auto text-sm font-mono border border-pink-200">Professional product showcase video of [PRODUCT]:
 - Product: [PRODUCT_DESCRIPTION]
-- Animation: [ANIMATION_TYPE] (rotation, zoom, reveal)
 - Background: [BACKGROUND_STYLE]
-- Lighting: Studio lighting, dramatic highlights
+- Camera movement: [CAMERA_MOVEMENT]
+- Lighting: [LIGHTING_SETUP]
 - Effects: [SPECIAL_EFFECTS]
-- Duration: 5-8 seconds
-- Quality: 4K, commercial grade</pre></div></div>`
-        },
-        '6': {
-            title: '🔧 Kling O1 - Video Editing',
-            content: `<div class="space-y-6"><div class="bg-teal-50 p-6 rounded-lg border-l-4 border-teal-600"><h4 class="font-bold text-teal-900 mb-3 text-xl">🛠️ Khi Nào Dùng Kling O1?</h4><ul class="space-y-2 text-gray-700"><li>1. <strong>Sửa lỗi vật lý:</strong> Vật thể biến mất, xuất hiện lỗi</li><li>2. <strong>Thêm chi tiết:</strong> Tăng độ sắc nét, thêm texture</li><li>3. <strong>Điều chỉnh ánh sáng:</strong> Fix exposure, color grading</li><li>4. <strong>Xóa/Thêm đối tượng:</strong> Remove unwanted elements</li></ul></div><div class="bg-white p-6 rounded-lg border shadow-sm"><h4 class="font-bold text-gray-800 mb-3 text-lg">📝 Prompt cho Kling O1</h4><pre class="bg-gray-100 p-4 rounded overflow-x-auto text-sm font-mono border border-teal-200">Edit this video to:
-1. [PROBLEM_TO_FIX]
-2. [ENHANCEMENT_NEEDED]
-3. [ADDITIONAL_CHANGES]
+- Duration: 30-45 seconds
+- Style: Professional, modern, cinematic</pre>
+    </div>
+
+    <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-600">
+        <h4 class="font-bold text-green-900 mb-3 text-lg">✅ Ví Dụ Cụ Thể</h4>
+        <p class="text-gray-700 mb-3">Video trình bày ghế sofa hàng hiệu:</p>
+        <pre class="bg-white p-4 rounded overflow-x-auto text-sm font-mono border border-green-200">Professional product showcase video of luxury sofa:
+- Product: Modern grey velvet sofa with gold legs
+- Background: Minimalist white studio with soft shadows
+- Camera movement: 360-degree rotation, slow zoom in
+- Lighting: Studio lighting, dramatic highlights, soft fill light
+- Effects: Particle clouds, lens flare, depth of field
+- Duration: 30 seconds
+- Style: Professional, modern, cinematic</pre>
+    </div>
+</div>
+`
+    },
+    '6': {
+        title: '🔧 Kling O1 - Video Editing',
+        content: `
+<div class="space-y-6">
+    <div class="bg-teal-50 p-6 rounded-lg border-l-4 border-teal-600">
+        <h4 class="font-bold text-teal-900 mb-3 text-xl">🛠️ Khi Nào Dùng Kling O1?</h4>
+        <ul class="space-y-3 text-gray-700">
+            <li class="flex items-start">
+                <span class="bg-teal-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 text-sm">1</span>
+                <div><strong>Sửa lỗi vật lý:</strong> Vật thể biến mất, xuất hiện lỗi, chuyển động không tự nhiên</div>
+            </li>
+            <li class="flex items-start">
+                <span class="bg-teal-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 text-sm">2</span>
+                <div><strong>Thêm chi tiết:</strong> Tăng độ sắc nét, thêm texture, enhance quality</div>
+            </li>
+            <li class="flex items-start">
+                <span class="bg-teal-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 text-sm">3</span>
+                <div><strong>Điều chỉnh ánh sáng:</strong> Fix exposure, color grading, lighting adjustment</div>
+            </li>
+            <li class="flex items-start">
+                <span class="bg-teal-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0 text-sm">4</span>
+                <div><strong>Xóa/Thêm đối tượng:</strong> Remove unwanted elements, add new objects</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="bg-white p-6 rounded-lg border shadow-sm">
+        <h4 class="font-bold text-gray-800 mb-3 text-lg">📝 Prompt cho Kling O1</h4>
+        <pre class="bg-gray-100 p-4 rounded overflow-x-auto text-sm font-mono border border-teal-200">Edit this video to:
+1. [PROBLEM_TO_FIX] - Describe the issue
+2. [ENHANCEMENT_NEEDED] - What to improve
+3. [ADDITIONAL_CHANGES] - Other modifications
 
 Maintain: Original style, lighting, camera angle
-Quality: 4K, preserve original resolution</pre></div></div>`
-        },
-        '7': {
-            title: '⚖️ Bảng So Sánh Công Cụ',
-            content: `<div class="space-y-6"><div class="bg-yellow-50 p-6 rounded-lg border-l-4 border-yellow-600"><h4 class="font-bold text-yellow-900 mb-3 text-xl">🎯 Khi Nào Dùng Công Cụ Nào?</h4><table class="w-full text-sm border-collapse mt-4"><thead><tr class="bg-yellow-100"><th class="border border-yellow-300 px-3 py-2 text-left">Tình Huống</th><th class="border border-yellow-300 px-3 py-2 text-left">Công Cụ</th><th class="border border-yellow-300 px-3 py-2 text-left">Lý Do</th></tr></thead><tbody><tr class="bg-white"><td class="border border-yellow-300 px-3 py-2">Trang trí nội thất</td><td class="border border-yellow-300 px-3 py-2"><strong>Google Nano Banana Pro</strong></td><td class="border border-yellow-300 px-3 py-2">Chất lượng cao nhất</td></tr><tr class="bg-yellow-50"><td class="border border-yellow-300 px-3 py-2">Chuyển ngày sang đêm</td><td class="border border-yellow-300 px-3 py-2"><strong>Veo 3.1</strong></td><td class="border border-yellow-300 px-3 py-2">Ánh sáng tự nhiên</td></tr><tr class="bg-white"><td class="border border-yellow-300 px-3 py-2">Video tour</td><td class="border border-yellow-300 px-3 py-2"><strong>Kling 2.6</strong></td><td class="border border-yellow-300 px-3 py-2">Motion control tốt</td></tr><tr class="bg-yellow-50"><td class="border border-yellow-300 px-3 py-2">Sửa lỗi video</td><td class="border border-yellow-300 px-3 py-2"><strong>Kling O1</strong></td><td class="border border-yellow-300 px-3 py-2">Chỉnh sửa tự động</td></tr></tbody></table></div></div>`
-        },
-        '8': {
-            title: '📋 Quy Trình 5 Bước',
-            content: `<div class="space-y-6"><div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-600"><h4 class="font-bold text-blue-900 mb-3 text-xl">📝 Quy Trình Thực Hiện</h4><div class="space-y-4 mt-4"><div class="flex items-start bg-white p-4 rounded-lg shadow-sm"><span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">1</span><div><h5 class="font-bold text-gray-800 mb-1">Nhận Feedback từ Sale</h5><p class="text-sm text-gray-600">Đọc kỹ yêu cầu, xác định dịch vụ cần làm</p></div></div><div class="flex items-start bg-white p-4 rounded-lg shadow-sm"><span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">2</span><div><h5 class="font-bold text-gray-800 mb-1">Chọn Công Cụ Phù Hợp</h5><p class="text-sm text-gray-600">Dựa vào bảng so sánh, chọn tool tối ưu</p></div></div><div class="flex items-start bg-white p-4 rounded-lg shadow-sm"><span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">3</span><div><h5 class="font-bold text-gray-800 mb-1">Tạo Prompt Chi Tiết</h5><p class="text-sm text-gray-600">Dùng template, điền thông tin cụ thể</p></div></div><div class="flex items-start bg-white p-4 rounded-lg shadow-sm"><span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">4</span><div><h5 class="font-bold text-gray-800 mb-1">Generate & Review</h5><p class="text-sm text-gray-600">Chạy AI, kiểm tra kết quả, adjust nếu cần</p></div></div><div class="flex items-start bg-white p-4 rounded-lg shadow-sm"><span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0 font-bold">5</span><div><h5 class="font-bold text-gray-800 mb-1">Lưu Kết Quả</h5><p class="text-sm text-gray-600">Save file, update Google Sheet, gửi Sale</p></div></div></div></div></div>`
-        },
-        '9': {
-            title: '🧠 System Prompt cho AI Assistant',
-            content: `<div class="space-y-6"><div class="bg-purple-50 p-6 rounded-lg border-l-4 border-purple-600"><h4 class="font-bold text-purple-900 mb-3 text-xl">🤖 System Prompt Chung</h4><p class="text-gray-700 mb-3">Dùng cho ChatGPT/Claude/Gemini để tự động tạo prompt:</p><pre class="bg-white p-4 rounded overflow-x-auto text-sm font-mono border border-purple-200">Bạn là chuyên gia AI Video tại Fotober. Nhiệm vụ:
+Quality: 4K, preserve original resolution</pre>
+    </div>
+</div>
+`
+    },
+    '7': {
+        title: '⚖️ Bảng So Sánh Công Cụ',
+        content: `
+<div class="space-y-6">
+    <div class="bg-yellow-50 p-6 rounded-lg border-l-4 border-yellow-600">
+        <h4 class="font-bold text-yellow-900 mb-4 text-xl">🎯 Khi Nào Dùng Công Cụ Nào?</h4>
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm border-collapse">
+                <thead>
+                    <tr class="bg-yellow-100">
+                        <th class="border border-yellow-300 px-4 py-3 text-left">Tình Huống</th>
+                        <th class="border border-yellow-300 px-4 py-3 text-left">Công Cụ Nên Dùng</th>
+                        <th class="border border-yellow-300 px-4 py-3 text-left">Lý Do</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="bg-white">
+                        <td class="border border-yellow-300 px-4 py-3">Trang trí nội thất ảo</td>
+                        <td class="border border-yellow-300 px-4 py-3"><strong class="text-blue-700">Google Nano Banana Pro</strong></td>
+                        <td class="border border-yellow-300 px-4 py-3">Chất lượng cao nhất, chi tiết vật liệu tốt</td>
+                    </tr>
+                    <tr class="bg-yellow-50">
+                        <td class="border border-yellow-300 px-4 py-3">Chuyển ngày sang đêm</td>
+                        <td class="border border-yellow-300 px-4 py-3"><strong class="text-orange-700">Veo 3.1</strong></td>
+                        <td class="border border-yellow-300 px-4 py-3">Ánh sáng tự nhiên, transition mượt</td>
+                    </tr>
+                    <tr class="bg-white">
+                        <td class="border border-yellow-300 px-4 py-3">Video tour bất động sản</td>
+                        <td class="border border-yellow-300 px-4 py-3"><strong class="text-purple-700">Kling 2.6</strong></td>
+                        <td class="border border-yellow-300 px-4 py-3">Motion Control tuyệt vời</td>
+                    </tr>
+                    <tr class="bg-yellow-50">
+                        <td class="border border-yellow-300 px-4 py-3">Product showcase</td>
+                        <td class="border border-yellow-300 px-4 py-3"><strong class="text-pink-700">Seedance 1.5 Pro</strong></td>
+                        <td class="border border-yellow-300 px-4 py-3">Hiệu ứng đặc biệt, creative</td>
+                    </tr>
+                    <tr class="bg-white">
+                        <td class="border border-yellow-300 px-4 py-3">Sửa lỗi video</td>
+                        <td class="border border-yellow-300 px-4 py-3"><strong class="text-teal-700">Kling O1</strong></td>
+                        <td class="border border-yellow-300 px-4 py-3">Chỉnh sửa tự động, fix lỗi</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+`
+    },
+    '8': {
+        title: '📋 Quy Trình 5 Bước',
+        content: `
+<div class="space-y-6">
+    <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-600">
+        <h4 class="font-bold text-blue-900 mb-4 text-xl">📝 Quy Trình Thực Hiện</h4>
+        <div class="space-y-4">
+            <div class="flex items-start bg-white p-4 rounded-lg shadow-sm">
+                <span class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0 font-bold text-lg">1</span>
+                <div>
+                    <h5 class="font-bold text-gray-800 mb-2">Nhận Feedback từ Sale</h5>
+                    <p class="text-sm text-gray-600">Đọc kỹ yêu cầu, xác định dịch vụ cần làm (Virtual Staging, Day-to-Night, Tour, Product Showcase)</p>
+                </div>
+            </div>
+            
+            <div class="flex items-start bg-white p-4 rounded-lg shadow-sm">
+                <span class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0 font-bold text-lg">2</span>
+                <div>
+                    <h5 class="font-bold text-gray-800 mb-2">Chọn Công Cụ Phù Hợp</h5>
+                    <p class="text-sm text-gray-600">Dựa vào bảng so sánh, chọn tool tối ưu cho tình huống cụ thể</p>
+                </div>
+            </div>
+            
+            <div class="flex items-start bg-white p-4 rounded-lg shadow-sm">
+                <span class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0 font-bold text-lg">3</span>
+                <div>
+                    <h5 class="font-bold text-gray-800 mb-2">Tạo Prompt Chi Tiết</h5>
+                    <p class="text-sm text-gray-600">Dùng template có sẵn, điền thông tin cụ thể từ feedback</p>
+                </div>
+            </div>
+            
+            <div class="flex items-start bg-white p-4 rounded-lg shadow-sm">
+                <span class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0 font-bold text-lg">4</span>
+                <div>
+                    <h5 class="font-bold text-gray-800 mb-2">Generate & Review</h5>
+                    <p class="text-sm text-gray-600">Chạy AI, kiểm tra kết quả, adjust prompt nếu cần thiết</p>
+                </div>
+            </div>
+            
+            <div class="flex items-start bg-white p-4 rounded-lg shadow-sm">
+                <span class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0 font-bold text-lg">5</span>
+                <div>
+                    <h5 class="font-bold text-gray-800 mb-2">Lưu Kết Quả</h5>
+                    <p class="text-sm text-gray-600">Save file, update Google Sheet, gửi cho Sale/khách hàng</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+`
+    },
+    '9': {
+        title: '🧠 System Prompt cho AI Assistant',
+        content: `
+<div class="space-y-6">
+    <div class="bg-purple-50 p-6 rounded-lg border-l-4 border-purple-600">
+        <h4 class="font-bold text-purple-900 mb-3 text-xl">🤖 System Prompt Chung</h4>
+        <p class="text-gray-700 mb-4"><strong>Mục đích:</strong> Giúp AI tạo Prompt tối ưu dựa trên feedback từ Sale</p>
+        <p class="text-gray-700 mb-3">Dùng cho ChatGPT/Claude/Gemini:</p>
+        <pre class="bg-white p-4 rounded overflow-x-auto text-sm font-mono border border-purple-200">Bạn là chuyên gia R&D AI tại Fotober. Bạn có kiến thức sâu về:
+- Các công cụ AI: Google Nano Banana Pro, Veo 3.1, Kling 2.6, Seedance 1.5 Pro, CapCut, After Effect
+- Các dịch vụ: Virtual Staging, Day-to-Night, Real Estate Tour, Product Showcase
+- Kỹ thuật Prompt Engineering
 
-1. Nhận feedback từ Sale về yêu cầu khách hàng
-2. Xác định dịch vụ: Virtual Staging, Day-to-Night, Real Estate Tour, Product Showcase
-3. Chọn công cụ AI phù hợp
-4. Tạo Prompt chi tiết, tối ưu cho công cụ đó
-5. Đảm bảo Prompt rõ ràng, dễ hiểu, có cấu trúc
+Nhiệm vụ của bạn:
+1. Nhận feedback từ Sale hoặc yêu cầu từ khách hàng
+2. Phân tích yêu cầu và xác định công cụ AI phù hợp nhất
+3. Viết Prompt chi tiết, tối ưu cho từng công cụ
+4. Giải thích lý do chọn công cụ đó
+5. Cung cấp các lựa chọn thay thế nếu cần
 
 Format output:
 Dịch vụ: [SERVICE_NAME]
 Công cụ: [TOOL_NAME]
+Lý do: [REASONING]
 Prompt:
-[OPTIMIZED_PROMPT]</pre></div></div>`
-        },
-        '10': {
-            title: '📝 Ghi Chú Quan Trọng',
-            content: `<div class="space-y-6"><div class="bg-red-50 p-6 rounded-lg border-l-4 border-red-600"><h4 class="font-bold text-red-900 mb-3 text-xl">⚠️ 5 Điểm Cần Lưu Ý</h4><div class="space-y-3 mt-4"><div class="bg-white p-4 rounded-lg shadow-sm"><h5 class="font-bold text-gray-800 mb-2">1. Luôn Test Prompt Trước</h5><p class="text-sm text-gray-600">Chạy thử với sample nhỏ trước khi làm full project</p></div><div class="bg-white p-4 rounded-lg shadow-sm"><h5 class="font-bold text-gray-800 mb-2">2. Lưu Prompt Tốt</h5><p class="text-sm text-gray-600">Save các prompt hiệu quả vào Google Sheet để reuse</p></div><div class="bg-white p-4 rounded-lg shadow-sm"><h5 class="font-bold text-gray-800 mb-2">3. Kiểm Tra Chất Lượng</h5><p class="text-sm text-gray-600">Review kỹ output trước khi gửi khách, có checklist</p></div><div class="bg-white p-4 rounded-lg shadow-sm"><h5 class="font-bold text-gray-800 mb-2">4. Cập Nhật Thường Xuyên</h5><p class="text-sm text-gray-600">Công cụ AI update liên tục, theo dõi changelog</p></div><div class="bg-white p-4 rounded-lg shadow-sm"><h5 class="font-bold text-gray-800 mb-2">5. Feedback Loop</h5><p class="text-sm text-gray-600">Học từ lỗi, cải thiện prompt dựa trên feedback</p></div></div></div><div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-600 mt-6"><h4 class="font-bold text-blue-900 mb-3">🔗 Liên Kết Hữu Ích</h4><div class="space-y-2"><a href="https://www.notion.so/2f8da80a59b381f38419ed695b275ca8" target="_blank" class="block text-blue-600 hover:underline"><i class="fas fa-external-link-alt mr-2"></i>Notion Hub - Tài liệu đầy đủ</a><a href="https://docs.google.com/spreadsheets/d/1ulrICF3uoc0p8fsJFYqMMNZ-yraZF-z6w303uYaCmmo" target="_blank" class="block text-green-600 hover:underline"><i class="fas fa-table mr-2"></i>Google Sheet - Prompt Library</a></div></div></div>`
-        }
-    };
+[OPTIMIZED_PROMPT]</pre>
+    </div>
+</div>
+`
+    },
+    '10': {
+        title: '📝 Ghi Chú Quan Trọng',
+        content: `
+<div class="space-y-6">
+    <div class="bg-red-50 p-6 rounded-lg border-l-4 border-red-600">
+        <h4 class="font-bold text-red-900 mb-4 text-xl">⚠️ 5 Điểm Cần Lưu Ý</h4>
+        <div class="space-y-3">
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
+                    <span class="bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">1</span>
+                    Luôn Test Prompt Trước
+                </h5>
+                <p class="text-sm text-gray-600 ml-8">Chạy thử với sample nhỏ trước khi làm full project để tránh lãng phí credit</p>
+            </div>
+            
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
+                    <span class="bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">2</span>
+                    Lưu Prompt Tốt
+                </h5>
+                <p class="text-sm text-gray-600 ml-8">Save các prompt hiệu quả vào Google Sheet để reuse cho các job tương tự</p>
+            </div>
+            
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
+                    <span class="bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">3</span>
+                    Kiểm Tra Chất Lượng
+                </h5>
+                <p class="text-sm text-gray-600 ml-8">Review kỹ output trước khi gửi khách, có checklist quality control</p>
+            </div>
+            
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
+                    <span class="bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">4</span>
+                    Cập Nhật Thường Xuyên
+                </h5>
+                <p class="text-sm text-gray-600 ml-8">Công cụ AI update liên tục, theo dõi changelog và test tính năng mới</p>
+            </div>
+            
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+                <h5 class="font-bold text-gray-800 mb-2 flex items-center">
+                    <span class="bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-2 text-sm">5</span>
+                    Feedback Loop
+                </h5>
+                <p class="text-sm text-gray-600 ml-8">Học từ lỗi, cải thiện prompt dựa trên feedback từ khách hàng và Sale</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-600">
+        <h4 class="font-bold text-blue-900 mb-3 text-lg">🔗 Liên Kết Hữu Ích</h4>
+        <div class="space-y-2">
+            <a href="https://www.notion.so/2f8da80a59b381f38419ed695b275ca8" target="_blank" class="block text-blue-600 hover:underline text-sm">
+                <i class="fas fa-external-link-alt mr-2"></i>Notion Hub - Tài liệu đầy đủ
+            </a>
+            <a href="https://docs.google.com/spreadsheets/d/1ulrICF3uoc0p8fsJFYqMMNZ-yraZF-z6w303uYaCmmo" target="_blank" class="block text-green-600 hover:underline text-sm">
+                <i class="fas fa-table mr-2"></i>Google Sheet - Prompt Library
+            </a>
+        </div>
+    </div>
+</div>
+`
+    }
+};
+
+// Library Grid Event Handlers
+document.addEventListener('DOMContentLoaded', function() {
+    if (!document.getElementById('libraryGrid')) return;
+
+    const libraryCards = document.querySelectorAll('.library-card');
+    const libraryModal = document.getElementById('libraryModal');
+    const closeLibraryModalBtn = document.getElementById('closeLibraryModalBtn');
+    const libraryModalTitle = document.getElementById('libraryModalTitle');
+    const libraryModalContent = document.getElementById('libraryModalContent');
+    const openLibraryFullPageBtn = document.getElementById('openLibraryFullPageBtn');
+    
+    const libraryFullPageView = document.getElementById('libraryFullPageView');
+    const libraryFullPageTitle = document.getElementById('libraryFullPageTitle');
+    const libraryFullPageContent = document.getElementById('libraryFullPageContent');
+    const closeLibraryFullPageBtn = document.getElementById('closeLibraryFullPageBtn');
+
+    let currentLibraryId = null;
 
     // Open modal when clicking on library card
     libraryCards.forEach(card => {
         card.addEventListener('click', function(e) {
-            // Check if click is on expand button
             if (e.target.closest('.expand-btn')) {
                 const libraryId = this.getAttribute('data-library-id');
                 openLibraryFullPage(libraryId);
@@ -1245,20 +1530,6 @@ Prompt:
         });
     }
 
-    // Open Whiteboard from modal
-    if (openLibraryWhiteboardBtn) {
-        openLibraryWhiteboardBtn.addEventListener('click', function() {
-            whiteboardModal.classList.remove('hidden');
-        });
-    }
-
-    // Open Whiteboard from full page
-    if (libraryFullPageWhiteboardBtn) {
-        libraryFullPageWhiteboardBtn.addEventListener('click', function() {
-            whiteboardModal.classList.remove('hidden');
-        });
-    }
-
     // Sort library
     const sortLibraryBtn = document.getElementById('sortLibraryBtn');
     const libraryGrid = document.getElementById('libraryGrid');
@@ -1283,7 +1554,7 @@ Prompt:
         });
     }
 
-    // ESC key to close (shared with feedback)
+    // ESC key to close
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
             if (!libraryFullPageView.classList.contains('hidden')) {
