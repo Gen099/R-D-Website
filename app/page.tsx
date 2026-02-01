@@ -72,11 +72,6 @@ export default function HomePage() {
                     <p>Top 10 ranking, SWOT analysis, feature comparison</p>
                 </Link>
 
-                <Link href="/job-description" className={styles.moduleCard}>
-                    <div className={styles.moduleIcon}>💼</div>
-                    <h3>Mô tả Công việc</h3>
-                    <p>R&D Specialist - Prompt Engineering</p>
-                </Link>
 
                 <Link href="/operations" className={styles.moduleCard}>
                     <div className={styles.moduleIcon}>⚙️</div>

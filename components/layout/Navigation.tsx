@@ -10,7 +10,7 @@ const navItems = [
     { href: '/ai-problems', label: 'Bài toán AI Agent', icon: '🤖' },
     { href: '/effects', label: 'Danh mục Hiệu ứng', icon: '✨' },
     { href: '/competition', label: 'Phân tích Cạnh tranh', icon: '🎯' },
-    { href: '/job-description', label: 'Mô tả Công việc', icon: '💼' },
+    { href: '/work-plan', label: 'Kế hoạch & Tiến độ', icon: '📋' },
     { href: '/operations', label: 'Quy trình Vận hành', icon: '⚙️' },
     { href: '/platform', label: 'AI Platform Design', icon: '🏗️' },
     { href: '/resources', label: 'Tài nguyên', icon: '📚' },

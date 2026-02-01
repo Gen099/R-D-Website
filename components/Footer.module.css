@@ -8,10 +8,10 @@
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 40px 20px;
+    padding: 24px 16px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
 }
 
 /* Brand Section */
@@ -22,33 +22,33 @@
 }
 
 .brand {
-    font-size: 1.5em;
+    font-size: 1.25em;
     font-weight: 700;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     color: #fff;
 }
 
 .tagline {
-    font-size: 0.9em;
+    font-size: 0.8em;
     color: #64b5f6;
     font-weight: 600;
-    margin-bottom: 4px;
+    margin-bottom: 3px;
 }
 
 .description {
-    font-size: 0.85em;
-    line-height: 1.6;
+    font-size: 0.8em;
+    line-height: 1.5;
     color: #b0b0b0;
 }
 
 /* Section Title */
 .sectionTitle {
-    font-size: 1.1em;
+    font-size: 0.95em;
     font-weight: 600;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
     color: #fff;
     border-bottom: 2px solid #0f3460;
-    padding-bottom: 8px;
+    padding-bottom: 6px;
 }
 
 /* Links */
@@ -64,7 +64,7 @@
 .links li a {
     color: #b0b0b0;
     text-decoration: none;
-    font-size: 0.9em;
+    font-size: 0.8em;
     transition: all 0.2s;
     display: inline-block;
 }
@@ -76,13 +76,13 @@
 
 /* Version Info */
 .version {
-    margin-top: 16px;
-    padding-top: 12px;
+    margin-top: 12px;
+    padding-top: 8px;
     border-top: 1px solid #2a2a3e;
-    font-size: 0.75em;
+    font-size: 0.7em;
     color: #808080;
     display: flex;
-    gap: 8px;
+    gap: 6px;
 }
 
 /* Bottom Bar */
