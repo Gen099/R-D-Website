@@ -1,0 +1,127 @@
+{
+    "overview": {
+        "totalJobs": 22,
+        "errorJobs": 18,
+        "noErrorJobs": 4,
+        "lateJobs": 6,
+        "period": "Tháng 1/2026"
+    },
+    "errorTypes": [
+        {
+            "name": "Hiểu sai yêu cầu",
+            "percentage": 35,
+            "count": 8
+        },
+        {
+            "name": "Kỹ thuật AI",
+            "percentage": 27,
+            "count": 6
+        },
+        {
+            "name": "Tiến độ",
+            "percentage": 22,
+            "count": 5
+        },
+        {
+            "name": "Thẩm mỹ",
+            "percentage": 16,
+            "count": 4
+        }
+    ],
+    "requirementErrors": [
+        {
+            "jobCode": "TADEC31004",
+            "requirement": "Hiện trạng → mùa xuân",
+            "actual": "Tuyết → mùa xuân",
+            "issue": "Không đọc context \"we don't get snow\""
+        },
+        {
+            "jobCode": "HTJAN15008Rev",
+            "requirement": "\"Preparing dinner\" có người",
+            "actual": "Chỉ có bàn + đồ ăn",
+            "issue": "Bỏ qua động từ hành động"
+        },
+        {
+            "jobCode": "DUJAN04005",
+            "requirement": "Nước chảy từ vòi phun",
+            "actual": "Nước xuất hiện ngẫu nhiên",
+            "issue": "Không quan sát cấu trúc fountain"
+        },
+        {
+            "jobCode": "QUJAN25001",
+            "requirement": "2 AI: living + dining",
+            "actual": "Chỉ làm 1, làm sai phòng",
+            "issue": "Thiếu checklist deliverables"
+        },
+        {
+            "jobCode": "QUJAN19003",
+            "requirement": "AI dựng nhà + timelapse",
+            "actual": "Không làm phần dựng nhà",
+            "issue": "Bỏ sót yêu cầu chính"
+        }
+    ],
+    "technicalErrors": [
+        {
+            "jobCode": "NHJAN13010",
+            "error": "Đàn ông mặc bikini thay vì quần bơi",
+            "severity": "high"
+        },
+        {
+            "jobCode": "LIJAN07001",
+            "error": "Quân cờ nhảy đánh nhau, không theo luật",
+            "severity": "high"
+        },
+        {
+            "jobCode": "HTJAN07002rev2",
+            "error": "Mặt người biến dạng",
+            "severity": "high"
+        },
+        {
+            "jobCode": "CHDEC11004",
+            "error": "Agent đóng băng, clip vỡ",
+            "severity": "high"
+        },
+        {
+            "jobCode": "TLNOV14022rev4",
+            "error": "Tuần lộc tách đàn, đứng sai vị trí",
+            "severity": "medium"
+        },
+        {
+            "jobCode": "CHJAN24002",
+            "error": "Viền trắng quanh agent bay",
+            "severity": "medium"
+        }
+    ],
+    "goals": [
+        {
+            "name": "Lỗi hiểu sai yêu cầu",
+            "current": 35,
+            "target": 10
+        },
+        {
+            "name": "Lỗi kỹ thuật AI",
+            "current": 27,
+            "target": 15
+        },
+        {
+            "name": "Trễ deadline",
+            "current": 27,
+            "target": 10
+        },
+        {
+            "name": "Lỗi thẩm mỹ",
+            "current": 16,
+            "target": 5
+        }
+    ],
+    "qcChecklist": [
+        "Đủ số lượng output theo yêu cầu?",
+        "Đúng nội dung yêu cầu?",
+        "Không có watermark/logo công cụ?",
+        "Mặt người không bị biến dạng?",
+        "Chuyển động tự nhiên, không giật?",
+        "Không có viền trắng/artifacts?",
+        "Độ phân giải đúng yêu cầu?",
+        "Xem lại toàn bộ video từ đầu đến cuối?"
+    ]
+}

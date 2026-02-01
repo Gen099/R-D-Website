@@ -1,0 +1,656 @@
+{
+    "packages": [
+        {
+            "id": "basic-editing",
+            "name": "Basic Editing",
+            "nameVi": "Biên tập cơ bản",
+            "price": "$27/video (≤1 min) + $10/min",
+            "conditions": "Dưới 50 clip, 15 phút RAW, hoặc <15GB",
+            "revisions": 3,
+            "features": [
+                "Culling and arrange footage",
+                "Cut & trim",
+                "Lens Distortion Correction",
+                "Brightness & contrast adjustment",
+                "Color grading and balancing",
+                "Brand & Unbranded versions",
+                "Up to 1 minute in length",
+                "Straighten video",
+                "Adjust video speed",
+                "Address adding",
+                "Add Intro/Outro",
+                "Video stabilization",
+                "Sound Effect",
+                "Denoise Footage",
+                "Music matched to editing",
+                "Speed ramp effects"
+            ]
+        },
+        {
+            "id": "standard-editing",
+            "name": "Standard Editing",
+            "nameVi": "Biên tập tiêu chuẩn",
+            "price": "$35/video (≤1 min) + $15/min",
+            "conditions": "Tối đa 50 clip, 15 phút RAW, hoặc <15GB",
+            "revisions": 3,
+            "features": "Tương tự Basic Editing với độ phức tạp cao hơn"
+        }
+    ],
+    "surcharges": [
+        {
+            "condition": "15-30GB",
+            "fee": "$15"
+        },
+        {
+            "condition": "30-45GB",
+            "fee": "$30"
+        },
+        {
+            "condition": "45GB+",
+            "fee": "$45"
+        },
+        {
+            "condition": "4K input/output",
+            "fee": "$10 (if <15GB)"
+        },
+        {
+            "condition": ">70 footage",
+            "fee": "$10"
+        }
+    ],
+    "categories": [
+        {
+            "id": "motion-graphics",
+            "name": "Motion Graphics",
+            "nameVi": "Đồ họa chuyển động",
+            "description": "Animated graphics and overlays",
+            "effects": [
+                {
+                    "id": "call-out",
+                    "name": "Call-out",
+                    "nameVi": "Gọi chú",
+                    "price": "$10-15/footage",
+                    "complexity": "medium",
+                    "description": "Đánh dấu và gọi tên các điểm đặc biệt trong video",
+                    "footageRequirements": [
+                        "Footage drone hoặc góc rộng",
+                        "Ảnh tham chiếu chỉ rõ vị trí"
+                    ],
+                    "sampleLink": "https://www.dropbox.com/scl/fi/kitafs00jemf6ffkmoh7r/Call-out.mp4"
+                },
+                {
+                    "id": "sidebar",
+                    "name": "Sidebar",
+                    "nameVi": "Thanh bên",
+                    "price": "$10-15/footage",
+                    "complexity": "medium",
+                    "description": "Thanh thông tin hiển thị bên cạnh video",
+                    "footageRequirements": [
+                        "Thông tin cần đặt trên sidebar"
+                    ],
+                    "sampleLink": "https://www.dropbox.com/scl/fi/4ctyt8heiliydplruit3f/Side-Bar.mov"
+                },
+                {
+                    "id": "outline",
+                    "name": "Outline/Borderline",
+                    "nameVi": "Đường viền",
+                    "price": "$10/footage hoặc $15 (4-5 cái)/footage đầu",
+                    "complexity": "medium",
+                    "description": "Vẽ đường viền động quanh bất động sản",
+                    "footageRequirements": [
+                        "Footage drone",
+                        "Ảnh tham chiếu chỉ vị trí"
+                    ],
+                    "sampleLink": "https://www.dropbox.com/scl/fi/lv7d7hg8albo4tbvs6ym8/Outline-Call-out.mp4"
+                },
+                {
+                    "id": "3d-text",
+                    "name": "3D Text",
+                    "nameVi": "Chữ 3D",
+                    "price": "Tính theo combo với Roto",
+                    "complexity": "medium-high",
+                    "description": "Chữ nổi 3 chiều xuất hiện trong không gian video",
+                    "sampleLink": "https://www.dropbox.com/scl/fi/b290993g8lex3z2zj2faf/3D-text.mp4"
+                },
+                {
+                    "id": "animated-icons",
+                    "name": "Animated Icons",
+                    "nameVi": "Biểu tượng động",
+                    "price": "Miễn phí 3 icon cơ bản (bed/bath/sq)",
+                    "complexity": "low",
+                    "description": "Icon động hiển thị thông tin",
+                    "sampleLink": "https://www.dropbox.com/scl/fi/56wssl3y3r5c79efkdkgh/Animated-Icon.mp4"
+                }
+            ]
+        },
+        {
+            "id": "effects",
+            "name": "Effects",
+            "nameVi": "Hiệu ứng đặc biệt",
+            "description": "Special visual effects",
+            "effects": [
+                {
+                    "id": "drop-object",
+                    "name": "Drop/Falling Object Effect",
+                    "nameVi": "Hiệu ứng vật rơi",
+                    "price": "$20-25/effect",
+                    "complexity": "medium",
+                    "description": "Ngôi nhà hoặc vật thể rơi xuống từ trên cao",
+                    "footageRequirements": [
+                        "Footage góc rộng chụp toàn bộ ngôi nhà",
+                        "Có thể chụp background riêng"
+                    ],
+                    "sampleLink": "https://www.dropbox.com/scl/fi/o3hgs72wzebusxyvbfmps/Drop-house-effect-Day-to-night-transitions.mp4",
+                    "footageSampleLink": "https://www.dropbox.com/scl/fo/18whu9vth6lovlzgq4l3q/ADyPqr9bPweOF3S2WZacxOs"
+                },
+                {
+                    "id": "drop-object-advance",
+                    "name": "Drop/Falling Object Effect (Advance)",
+                    "nameVi": "Hiệu ứng vật rơi nâng cao",
+                    "price": "Cao hơn cơ bản",
+                    "complexity": "high",
+                    "description": "Phiên bản nâng cao với chi tiết phức tạp hơn",
+                    "sampleLink": "https://www.dropbox.com/scl/fi/t2b61e97k5jt9s8ftzmgx/drop-house-special.mov"
+                },
+                {
+                    "id": "layer-build-simple",
+                    "name": "Layer Build Effect (3 layers or fewer)",
+                    "nameVi": "Hiệu ứng xây dựng lớp (3 lớp trở xuống)",
+                    "price": "Chưa công bố",
+                    "complexity": "medium",
+                    "description": "Ngôi nhà được xây dựng từng phần từ dưới lên",
+                    "footageRequirements": [
+                        "Footage góc rộng toàn bộ nhà",
+                        "Có thể cần background riêng"
+                    ],
+                    "sampleLink": "https://www.dropbox.com/scl/fi/g1dlb7v8h4w3acp1fu3jx/cut-out-2.mov"
+                },
+                {
+                    "id": "layer-build-complex",
+                    "name": "Layer Build Effect (4-7 layers)",
+                    "nameVi": "Hiệu ứng xây dựng lớp (4-7 lớp)",
+                    "price": "Chưa công bố",
+                    "complexity": "high",
+                    "description": "Xây dựng lớp phức tạp với nhiều chi tiết",
+                    "sampleLink": "https://www.dropbox.com/scl/fi/o8micidwzbxva1ejejv3e/Layer-build-house-effect.mov"
+                },
+                {
+                    "id": "google-earth",
+                    "name": "Google Earth Effect",
+                    "nameVi": "Hiệu ứng Google Earth",
+                    "price": "Tùy chỉnh",
+                    "complexity": "high",
+                    "description": "Zoom từ vũ trụ xuống vị trí bất động sản",
+                    "footageRequirements": [
+                        "Tọa độ chính xác"
+                    ],
+                    "sampleLink": "https://www.dropbox.com/scl/fi/fabnc19w4p4x1em8jr73e/Google-Earth-Effect.mp4"
+                },
+                {
+                    "id": "glow-swipe",
+                    "name": "Glow Swipe",
+                    "nameVi": "Hiệu ứng quét sáng",
+                    "price": "Chưa công bố",
+                    "complexity": "low",
+                    "description": "Ánh sáng quét qua bề mặt",
+                    "sampleLink": "https://www.dropbox.com/scl/fi/b4miviho4442096vxwnu2/glow-swipe.mov"
+                },
+                {
+                    "id": "roto",
+                    "name": "Roto (Isolate object)",
+                    "nameVi": "Tách vật thể",
+                    "price": "$10/footage",
+                    "complexity": "medium",
+                    "description": "Tách vật thể hoặc người ra khỏi video footage",
+                    "sampleLink": "https://www.dropbox.com/scl/fi/ch1chklqeg6yxrnzssg4z/roto.mov"
+                },
+                {
+                    "id": "roto-3d-text",
+                    "name": "Roto + 3D Text",
+                    "nameVi": "Tách vật thể + Chữ 3D",
+                    "price": "$15 cơ bản + $5/text từ câu 3",
+                    "complexity": "medium-high",
+                    "description": "Kết hợp rotoscope với chữ 3D",
+                    "sampleLink": "https://www.dropbox.com/scl/fo/10smld6f4x1iamyxich0l/AJIdahGUOySIzcwtFTq7zAA"
+                },
+                {
+                    "id": "forward-effect",
+                    "name": "Forward Effect",
+                    "nameVi": "Hiệu ứng tiến về phía trước",
+                    "price": "Chưa xác nhận",
+                    "complexity": "high",
+                    "description": "Intro với nhiều speed ramp liên tiếp",
+                    "sampleLink": "https://www.dropbox.com/scl/fi/ootijmstqygszhjxgn6gw/forward-effect.mov"
+                },
+                {
+                    "id": "sky-replacement",
+                    "name": "Sky Replacement",
+                    "nameVi": "Thay trời",
+                    "price": "$15/footage",
+                    "complexity": "medium",
+                    "description": "Thay thế bầu trời trong video",
+                    "footageRequirements": [
+                        "Cần kiểm tra footage trước"
+                    ],
+                    "sampleLink": "https://www.dropbox.com/scl/fi/m9war3uig02whgfxlpbjb/e.mp4"
+                },
+                {
+                    "id": "display-frame",
+                    "name": "Display Frame Effect",
+                    "nameVi": "Hiệu ứng khung hiển thị",
+                    "price": "Tùy yêu cầu",
+                    "complexity": "high",
+                    "description": "Khung hiển thị xuất hiện trong không gian",
+                    "footageRequirements": [
+                        "Transition: 2 footage (có/không agent)",
+                        "Teleport: 4 footage (2 địa điểm x 2 versions)"
+                    ],
+                    "sampleLink": "https://www.dropbox.com/scl/fi/35ahbah19qp9rzf67ouya/Glow-Frame-Effect.mov",
+                    "footageSampleLink": "https://www.dropbox.com/scl/fo/17iyhgnl34a830sppnu8d/ACJn3UYp4kskGsPxiBEEmnE"
+                },
+                {
+                    "id": "timelapse",
+                    "name": "Time-lapse Effect",
+                    "nameVi": "Hiệu ứng tua nhanh thời gian",
+                    "price": "$20-25/effect",
+                    "complexity": "medium",
+                    "description": "Tua nhanh thời gian, bầu trời thay đổi"
+                }
+            ]
+        },
+        {
+            "id": "transitions",
+            "name": "Transitions",
+            "nameVi": "Chuyển cảnh",
+            "description": "Scene transitions and effects",
+            "effects": [
+                {
+                    "id": "split-scene",
+                    "name": "Split Scene Transition",
+                    "nameVi": "Chuyển cảnh chia đôi",
+                    "price": "Chưa công bố",
+                    "complexity": "medium",
+                    "description": "Chia đôi màn hình với chuyển động xoay",
+                    "footageRequirements": [
+                        "Footage ngoài trời",
+                        "Camera xoay chụp bầu trời",
+                        "Footage dài hơn 7 giây"
+                    ],
+                    "sampleLink": "https://www.dropbox.com/scl/fi/uhrvmvcydh18kys5vbnjr/Split-Scene-Transition.mov",
+                    "footageSampleLink": "https://www.dropbox.com/scl/fo/9cofqrw2r1aduweqcilce/AAAliTtFhL4ggD6u4yeRLcM"
+                },
+                {
+                    "id": "person-disappear",
+                    "name": "Person Disappear",
+                    "nameVi": "Người biến mất",
+                    "price": "Chưa công bố",
+                    "complexity": "medium",
+                    "description": "Người biến mất khỏi khung hình",
+                    "footageRequirements": [
+                        "2 footage: có/không agent cùng góc"
+                    ],
+                    "sampleLink": "https://www.dropbox.com/scl/fi/ez40p4414nqtcw63eun7f/Person-Disappear.mp4",
+                    "footageSampleLink": "https://www.dropbox.com/scl/fo/u0yx4pkap9mcqfgp9dhn5/ADhfP87ssUGSZVzaMB6Fuo8"
+                },
+                {
+                    "id": "day-to-night",
+                    "name": "Day to Night Transition",
+                    "nameVi": "Chuyển ngày sang đêm",
+                    "price": "Miễn phí 1-2; $5 (3-4); $10 (5-6)",
+                    "complexity": "medium",
+                    "description": "Chuyển từ ban ngày sang ban đêm",
+                    "footageRequirements": [
+                        "2 footage: ngày/đêm cùng góc"
+                    ],
+                    "sampleLink": "https://www.dropbox.com/scl/fi/o3hgs72wzebusxyvbfmps/Drop-house-effect-Day-to-night-transitions.mp4",
+                    "footageSampleLink": "https://www.dropbox.com/scl/fo/xjytouwnuqx4fgg72yu53/AMHKFA_53Yh1NVOoj2mg39I"
+                },
+                {
+                    "id": "masking-transition",
+                    "name": "Masking Transition",
+                    "nameVi": "Chuyển cảnh che phủ",
+                    "price": "Chưa công bố",
+                    "complexity": "medium",
+                    "description": "Dùng vật thể làm cổng chuyển cảnh",
+                    "footageRequirements": [
+                        "Dolly zoom vào gương/cửa sổ/cửa ra vào",
+                        "Vật thể hình vuông/tròn/chữ nhật"
+                    ],
+                    "sampleLink": "https://www.dropbox.com/scl/fi/o8micidwzbxva1ejejv3e/Layer-build-house-effect.mov",
+                    "footageSampleLink": "https://www.dropbox.com/scl/fo/t5p26os8rnsdoqbs599zh/AC24du2Zr9mZC2Emy8nfFOY"
+                },
+                {
+                    "id": "cutout-simple",
+                    "name": "Cut-out Transitions (2-3 layers)",
+                    "nameVi": "Chuyển cảnh cắt lớp (2-3 lớp)",
+                    "price": "Chưa công bố",
+                    "complexity": "medium",
+                    "description": "Cắt và tách các lớp tạo chiều sâu"
+                },
+                {
+                    "id": "cutout-complex",
+                    "name": "Cut-out Transitions (4-6 layers)",
+                    "nameVi": "Chuyển cảnh cắt lớp (4-6 lớp)",
+                    "price": "Chưa công bố",
+                    "complexity": "high",
+                    "description": "Cắt lớp phức tạp với nhiều layer",
+                    "sampleLink": "https://www.dropbox.com/scl/fi/w7c0zysv3g8jmx4pzbarb/cut-out-more-layer.mov"
+                },
+                {
+                    "id": "continuous-revert-simple",
+                    "name": "Continuous Revert (4 times or fewer)",
+                    "nameVi": "Đảo ngược liên tục (4 lần trở xuống)",
+                    "price": "Chưa xác nhận",
+                    "complexity": "high",
+                    "description": "Video chạy ngược liên tục qua nhiều cảnh",
+                    "sampleLink": "https://www.dropbox.com/scl/fi/hnca2l9ypw5lq2nxiv97j/continuous-revrse-toi-da-4-c-nh-o-ng-c.mov"
+                },
+                {
+                    "id": "continuous-revert-complex",
+                    "name": "Continuous Revert (4-8 times)",
+                    "nameVi": "Đảo ngược liên tục (4-8 lần)",
+                    "price": "Chưa xác nhận",
+                    "complexity": "high",
+                    "description": "Đảo ngược phức tạp với nhiều cảnh"
+                }
+            ]
+        },
+        {
+            "id": "audio-text",
+            "name": "Audio & Text",
+            "nameVi": "Âm thanh & Chữ",
+            "description": "Audio and text services",
+            "effects": [
+                {
+                    "id": "voiceover-standard",
+                    "name": "Standard Voice-over",
+                    "nameVi": "Lồng tiếng tiêu chuẩn",
+                    "price": "Thông báo khi có yêu cầu",
+                    "complexity": "medium"
+                },
+                {
+                    "id": "voiceover-intro-outro",
+                    "name": "Voice-over at Intro & Outro",
+                    "nameVi": "Lồng tiếng Intro & Outro",
+                    "price": "Chưa công bố",
+                    "complexity": "medium"
+                },
+                {
+                    "id": "animated-text",
+                    "name": "Animated Text",
+                    "nameVi": "Chữ động",
+                    "price": "Miễn phí 1-2; $1.5/text từ cái thứ 3",
+                    "complexity": "low",
+                    "description": "Chữ có animation",
+                    "sampleLink": "https://www.instagram.com/reel/Cx82nXAgybH/"
+                },
+                {
+                    "id": "subtext",
+                    "name": "Subtext (animated text)",
+                    "nameVi": "Phụ đề động",
+                    "price": "Chưa công bố",
+                    "complexity": "low",
+                    "sampleLink": "https://www.instagram.com/reel/Cx82nXAgybH/"
+                },
+                {
+                    "id": "caption",
+                    "name": "Caption (normal text)",
+                    "nameVi": "Chú thích thường",
+                    "price": "Miễn phí nếu ngắn",
+                    "complexity": "low"
+                }
+            ]
+        },
+        {
+            "id": "technical",
+            "name": "Technical Services",
+            "nameVi": "Dịch vụ kỹ thuật",
+            "description": "Technical processing services",
+            "effects": [
+                {
+                    "id": "gyroflow",
+                    "name": "Advanced Stabilization - Gyroflow",
+                    "nameVi": "Chống rung nâng cao (FPV)",
+                    "price": "$10/clip",
+                    "complexity": "medium",
+                    "description": "Chống rung cho footage FPV"
+                },
+                {
+                    "id": "blur",
+                    "name": "Blur",
+                    "nameVi": "Làm mờ",
+                    "price": "$5/item",
+                    "complexity": "low",
+                    "description": "Làm mờ biển số, đồ vật, tranh",
+                    "note": "Không track được nếu footage quá rung; Chỉ làm mờ, không xóa"
+                }
+            ]
+        },
+        {
+            "id": "ai-effects",
+            "name": "AI Effects",
+            "nameVi": "Hiệu ứng AI",
+            "description": "AI-generated effects (require team approval)",
+            "note": "Các footage từ AI generate sẽ không giống nhau 100%",
+            "workflow": [
+                "Khách gửi sample AI effect muốn tạo",
+                "Team video review và xác nhận khả năng thực hiện",
+                "Nếu đồng ý → Tiến hành sản xuất"
+            ],
+            "sampleLinks": [
+                "https://www.dropbox.com/scl/fi/lls65nx4z3u5weu9z7n1n/sample_4_thf4.mp4",
+                "https://www.dropbox.com/scl/fi/o5xf4s8e6hhh69cyxsvrg/sample-_1_thf4.mp4"
+            ],
+            "effects": [
+                {
+                    "id": "ai-season-change",
+                    "name": "Season Change (4 seasons)",
+                    "nameVi": "Chuyển đổi 4 mùa",
+                    "price": "Check với team",
+                    "complexity": "high",
+                    "errorRate": 67,
+                    "note": "Tỷ lệ lỗi cao - cần check context kỹ"
+                },
+                {
+                    "id": "ai-day-sunset",
+                    "name": "Day to Sunset Transition (AI)",
+                    "nameVi": "Chuyển ngày sang hoàng hôn",
+                    "price": "Check với team",
+                    "complexity": "high",
+                    "errorRate": 33
+                },
+                {
+                    "id": "ai-sky-animated",
+                    "name": "AI Sky Replacement (animated)",
+                    "nameVi": "Thay trời xanh đẹp (AI động)",
+                    "price": "Check với team",
+                    "complexity": "high",
+                    "errorRate": 33,
+                    "note": "Tránh video tĩnh - cần thêm cloud movement"
+                },
+                {
+                    "id": "ai-water-fountain",
+                    "name": "Water/Fountain Animation",
+                    "nameVi": "Tạo nước/đài phun",
+                    "price": "Check với team",
+                    "complexity": "high",
+                    "errorRate": 100,
+                    "note": "Lỗi cao - vật lý nước khó control"
+                },
+                {
+                    "id": "ai-lifestyle-cooking",
+                    "name": "Lifestyle - Preparing Dinner",
+                    "nameVi": "Người chuẩn bị bữa tối",
+                    "price": "Check với team",
+                    "complexity": "high",
+                    "errorRate": 71,
+                    "note": "Lỗi cao - mặt biến dạng, hành vi không phù hợp"
+                },
+                {
+                    "id": "ai-lifestyle-reading",
+                    "name": "Lifestyle - Reading in Bed",
+                    "nameVi": "Người đọc sách trên giường",
+                    "price": "Check với team",
+                    "complexity": "high",
+                    "errorRate": 71
+                },
+                {
+                    "id": "ai-lifestyle-kids",
+                    "name": "Lifestyle - Kids Playing",
+                    "nameVi": "Trẻ em chơi trên giường",
+                    "price": "Check với team",
+                    "complexity": "high",
+                    "errorRate": 71
+                },
+                {
+                    "id": "ai-lifestyle-gym",
+                    "name": "Lifestyle - Exercise",
+                    "nameVi": "Người tập gym",
+                    "price": "Check với team",
+                    "complexity": "high",
+                    "errorRate": 71
+                },
+                {
+                    "id": "ai-vehicle",
+                    "name": "Vehicle Animation",
+                    "nameVi": "Xe chạy vào driveway",
+                    "price": "Check với team",
+                    "complexity": "high",
+                    "errorRate": 100,
+                    "note": "Lỗi cao - vật lý xe khó control"
+                },
+                {
+                    "id": "ai-lifestyle-waving",
+                    "name": "Lifestyle - Waving",
+                    "nameVi": "Người vẫy tay",
+                    "price": "Check với team",
+                    "complexity": "high",
+                    "errorRate": 71
+                },
+                {
+                    "id": "ai-lifestyle-basketball",
+                    "name": "Lifestyle - Basketball",
+                    "nameVi": "Người chơi bóng rổ",
+                    "price": "Check với team",
+                    "complexity": "high",
+                    "errorRate": 71
+                },
+                {
+                    "id": "ai-agent-pool",
+                    "name": "Agent Action - Pool",
+                    "nameVi": "Agent ngã xuống bể bơi",
+                    "price": "Check với team",
+                    "complexity": "high",
+                    "errorRate": 100,
+                    "note": "Lỗi cao - viền cắt, đóng băng"
+                },
+                {
+                    "id": "ai-santa-reindeer",
+                    "name": "Creative - Santa Reindeer",
+                    "nameVi": "Tuần lộc ông già Noel bay",
+                    "price": "Check với team",
+                    "complexity": "high",
+                    "errorRate": 100,
+                    "note": "Lỗi cao - chuyển động nhóm sai"
+                },
+                {
+                    "id": "ai-santa-car",
+                    "name": "Creative - Santa with Car",
+                    "nameVi": "Ông già Noel đẩy xe",
+                    "price": "Check với team",
+                    "complexity": "high",
+                    "errorRate": 100
+                },
+                {
+                    "id": "ai-gift-reveal",
+                    "name": "Creative - Gift Box Reveal",
+                    "nameVi": "Hộp quà mở ra ngôi nhà",
+                    "price": "Check với team",
+                    "complexity": "high",
+                    "errorRate": 100
+                },
+                {
+                    "id": "ai-chess",
+                    "name": "Object Animation - Chess",
+                    "nameVi": "Quân cờ di chuyển",
+                    "price": "Check với team",
+                    "complexity": "high",
+                    "errorRate": 100,
+                    "note": "Lỗi cao - logic chuyển động sai"
+                },
+                {
+                    "id": "ai-family-watching",
+                    "name": "Lifestyle - Family Watching",
+                    "nameVi": "Gia đình xem phim",
+                    "price": "Check với team",
+                    "complexity": "high",
+                    "errorRate": 71
+                },
+                {
+                    "id": "ai-cooking-group",
+                    "name": "Lifestyle - Cooking Group",
+                    "nameVi": "Nhóm bạn nấu ăn",
+                    "price": "Check với team",
+                    "complexity": "high",
+                    "errorRate": 71
+                },
+                {
+                    "id": "ai-bubble-bath",
+                    "name": "Bathroom Animation",
+                    "nameVi": "Bubble bath + hơi nước",
+                    "price": "Check với team",
+                    "complexity": "high",
+                    "errorRate": 71
+                },
+                {
+                    "id": "ai-fire-pit",
+                    "name": "Day-Night with Fire",
+                    "nameVi": "Fire pit ngày sang đêm",
+                    "price": "Check với team",
+                    "complexity": "high",
+                    "errorRate": 33
+                },
+                {
+                    "id": "ai-bbq",
+                    "name": "Lifestyle - BBQ",
+                    "nameVi": "BBQ nướng đồ ăn",
+                    "price": "Check với team",
+                    "complexity": "high",
+                    "errorRate": 71
+                },
+                {
+                    "id": "ai-agent-teleport",
+                    "name": "Agent Teleport",
+                    "nameVi": "Agent nhảy/búng tay chuyển cảnh",
+                    "price": "Check với team",
+                    "complexity": "high",
+                    "errorRate": 100
+                },
+                {
+                    "id": "ai-furniture-animation",
+                    "name": "Furniture Animation",
+                    "nameVi": "Nội thất pop-in/slide-in",
+                    "price": "Check với team",
+                    "complexity": "high",
+                    "errorRate": 33
+                },
+                {
+                    "id": "ai-construction",
+                    "name": "Construction Animation",
+                    "nameVi": "AI dựng nhà trên đất trống",
+                    "price": "Check với team",
+                    "complexity": "high",
+                    "errorRate": 100
+                },
+                {
+                    "id": "ai-night-timelapse",
+                    "name": "Night Sky Timelapse",
+                    "nameVi": "Timelapse đêm với sao",
+                    "price": "Check với team",
+                    "complexity": "high",
+                    "errorRate": 100
+                }
+            ]
+        }
+    ]
+}
