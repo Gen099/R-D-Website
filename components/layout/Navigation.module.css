@@ -1,0 +1,127 @@
+.nav {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: var(--sidebar-width);
+    background: linear-gradient(180deg, hsl(220, 90%, 56%) 0%, hsl(220, 90%, 46%) 100%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-lg);
+    z-index: 100;
+    overflow-y: auto;
+}
+
+.header {
+    padding: var(--space-6);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-size: var(--text-2xl);
+    font-weight: var(--weight-bold);
+    margin-bottom: var(--space-2);
+}
+
+.logoIcon {
+    font-size: var(--text-3xl);
+}
+
+.subtitle {
+    font-size: var(--text-sm);
+    opacity: 0.9;
+    font-weight: var(--weight-normal);
+}
+
+.navList {
+    flex: 1;
+    list-style: none;
+    padding: var(--space-4) 0;
+}
+
+.navLink {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-6);
+    color: white;
+    text-decoration: none;
+    transition: all var(--transition-fast);
+    border-left: 3px solid transparent;
+}
+
+.navLink:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-left-color: white;
+}
+
+.navLink.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-left-color: white;
+    font-weight: var(--weight-semibold);
+}
+
+.icon {
+    font-size: var(--text-xl);
+    width: 24px;
+    text-align: center;
+}
+
+.label {
+    font-size: var(--text-base);
+}
+
+.footer {
+    padding: var(--space-6);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    font-size: var(--text-sm);
+    opacity: 0.8;
+}
+
+.version {
+    margin-bottom: var(--space-2);
+    font-weight: var(--weight-medium);
+}
+
+.copyright {
+    font-size: var(--text-xs);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .nav {
+        width: 100%;
+        position: relative;
+        height: auto;
+    }
+
+    .navList {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-2);
+        padding: var(--space-4);
+    }
+
+    .navLink {
+        flex-direction: column;
+        padding: var(--space-3);
+        text-align: center;
+        border-left: none;
+        border-bottom: 2px solid transparent;
+    }
+
+    .navLink:hover,
+    .navLink.active {
+        border-left: none;
+        border-bottom-color: white;
+    }
+
+    .label {
+        font-size: var(--text-xs);
+    }
+}
