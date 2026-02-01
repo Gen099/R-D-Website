@@ -6,8 +6,8 @@ import styles from './page.module.css'
 export default function CalendarPage() {
     const [showInstructions, setShowInstructions] = useState(false)
 
-    // Default embed - User can replace this with their own calendar
-    const defaultCalendarSrc = "https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Asia%2FHo_Chi_Minh&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=1&showCalendars=0&showTz=1&mode=WEEK"
+    // User's calendar with optimized view settings
+    const defaultCalendarSrc = "https://calendar.google.com/calendar/embed?src=sonbkdn95%40gmail.com&ctz=Asia%2FHo_Chi_Minh&wkst=1&bgcolor=%23ffffff&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=1&showCalendars=0"
 
     return (
         <div className={styles.container}>
