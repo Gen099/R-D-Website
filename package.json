@@ -21,9 +21,15 @@
     "git:log": "git log --oneline"
   },
   "dependencies": {
+    "@types/react": "^19.2.10",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.2",
     "hono": "^4.11.7",
     "js-yaml": "^4.1.1",
-    "openai": "^6.17.0"
+    "openai": "^6.17.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-router-dom": "^7.13.0"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250705.0",

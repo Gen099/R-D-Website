@@ -35,7 +35,6 @@ app.get('/', (c) => {
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
     <link href="/static/global-styles.css" rel="stylesheet">
-    <script src="/static/router.js" defer></script>
 </head>
 <body class="min-h-screen">
     <!-- Navigation -->
@@ -68,7 +67,7 @@ app.get('/', (c) => {
     </nav>
 
     <!-- Main Content -->
-    <div class="container mx-auto px-6 py-8 main-content">
+    <div class="container mx-auto px-6 py-8">
         <!-- Hero Section -->
         <div class="bg-white rounded-2xl shadow-2xl p-8 mb-8 card-hover">
             <div class="text-center">
@@ -423,7 +422,7 @@ app.get('/document/:id', (c) => {
     </nav>
 
     <!-- Main Content -->
-    <div class="container mx-auto px-6 py-8 main-content">
+    <div class="container mx-auto px-6 py-8">
         <div class="content-viewer">
             <div class="markdown-body">
                 <div class="text-center py-8">
@@ -494,7 +493,7 @@ app.get('/ai-tools', (c) => {
     </nav>
 
     <!-- Main Content -->
-    <div class="container mx-auto px-6 py-8 main-content">
+    <div class="container mx-auto px-6 py-8">
         <div class="bg-white rounded-2xl shadow-2xl p-8">
             <div class="text-center mb-8">
                 <i class="fas fa-robot text-6xl text-orange-500 mb-4"></i>
@@ -656,7 +655,7 @@ app.get('/analytics', (c) => {
     </nav>
 
     <!-- Main Content -->
-    <div class="container mx-auto px-6 py-8 main-content">
+    <div class="container mx-auto px-6 py-8">
         <!-- Page Header -->
         <div class="bg-white rounded-2xl shadow-2xl p-8 mb-8">
             <h2 class="text-3xl font-bold text-orange-600 mb-2">
@@ -964,7 +963,6 @@ app.get('/history', (c) => {
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
     <link href="/static/global-styles.css" rel="stylesheet">
-    <script src="/static/router.js" defer></script>
 </head>
 <body class="min-h-screen">
     <!-- Navigation -->
@@ -993,7 +991,7 @@ app.get('/history', (c) => {
     </nav>
 
     <!-- Main Content -->
-    <div class="container mx-auto px-6 py-8 main-content">
+    <div class="container mx-auto px-6 py-8">
         <!-- Page Header -->
         <div class="bg-white rounded-2xl shadow-2xl p-8 mb-8">
             <div class="flex items-center justify-between mb-6">
@@ -1238,7 +1236,6 @@ app.get('/documents', (c) => {
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
     <link href="/static/global-styles.css" rel="stylesheet">
-    <script src="/static/router.js" defer></script>
 </head>
 <body class="min-h-screen">
     <!-- Navigation -->
@@ -1267,7 +1264,7 @@ app.get('/documents', (c) => {
     </nav>
 
     <!-- Main Content -->
-    <div class="container mx-auto px-6 py-8 main-content">
+    <div class="container mx-auto px-6 py-8">
         <!-- Page Header -->
         <div class="bg-white rounded-2xl shadow-2xl p-8 mb-8">
             <div class="flex items-center justify-between mb-6">
@@ -1739,7 +1736,6 @@ app.get('/doc/:id', async (c) => {
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
     <link href="/static/global-styles.css" rel="stylesheet">
-    <script src="/static/router.js" defer></script>
 </head>
 <body class="min-h-screen">
     <!-- Navigation -->
@@ -1766,7 +1762,7 @@ app.get('/doc/:id', async (c) => {
     </nav>
 
     <!-- Main Content -->
-    <div class="container mx-auto px-6 py-8 main-content">
+    <div class="container mx-auto px-6 py-8">
         <!-- Document Header -->
         <div class="bg-white rounded-2xl shadow-2xl p-8 mb-6">
             <div class="flex items-start justify-between mb-4">
