@@ -3,39 +3,13 @@
 import { useState, useEffect } from 'react'
 import styles from './page.module.css'
 
-interface ErrorGroup {
-    name: string
-    count: number
-    percentage: number
-    color: string
-}
-
-interface FeedbackData {
-    overview: {
-        totalJobs: number
-        dataSource: string
-        period: string
-        errorGroups: {
-            A: ErrorGroup
-            B: ErrorGroup
-            C: ErrorGroup
-            D: ErrorGroup
-        }
-    }
-    errorRateByEffect: Array<{
-        effect: string
-        totalJobs: number
-        errors: number
-        errorRate: number
-    }>
-}
-
 export default function FeedbackPage() {
-    const [data, setData] = useState<FeedbackData | null>(null)
+    const [data, setData] = useState<any>(null)
+    const [activeTab, setActiveTab] = useState(0)
 
     useEffect(() => {
         fetch('/data/feedback.json')
-            .then(res => res.json())
+            .then((res) => res.json())
             .then(setData)
     }, [])
 
@@ -43,159 +17,227 @@ export default function FeedbackPage() {
         return <div className={styles.loading}>Loading...</div>
     }
 
-    const { overview, errorRateByEffect } = data
+    const { overview, errorTypes, requirementErrors, technicalErrors, goals, qcChecklist } = data
 
     return (
         <div className={styles.container}>
-            <header className={styles.header}>
-                <h1>📈 Phân tích Feedback và Lỗi</h1>
-                <p className={styles.subtitle}>
-                    Nguồn: {overview.dataSource} | Thời điểm: {overview.period}
-                </p>
-            </header>
-
-            {/* Overview Metrics */}
-            <section className={styles.section}>
-                <h2>Tổng quan</h2>
-                <div className={styles.metricsGrid}>
-                    <div className={styles.metricCard}>
-                        <div className={styles.metricValue}>{overview.totalJobs}</div>
-                        <div className={styles.metricLabel}>Tổng số jobs</div>
-                    </div>
-                    <div className={styles.metricCard}>
-                        <div className={styles.metricValue}>4</div>
-                        <div className={styles.metricLabel}>Nhóm lỗi</div>
-                    </div>
-                    <div className={styles.metricCard}>
-                        <div className={styles.metricValue}>100%</div>
-                        <div className={styles.metricLabel}>Có feedback</div>
-                    </div>
+            {/* Tab Navigation */}
+            <div className={styles.tabContainer}>
+                <div className={styles.tabNav}>
+                    <button
+                        className={`${styles.tabButton} ${activeTab === 0 ? styles.active : ''}`}
+                        onClick={() => setActiveTab(0)}
+                    >
+                        Phân Tích Lỗi
+                    </button>
+                    <button
+                        className={`${styles.tabButton} ${activeTab === 1 ? styles.active : ''}`}
+                        onClick={() => setActiveTab(1)}
+                    >
+                        Hướng Dẫn Prompt
+                    </button>
                 </div>
-            </section>
+            </div>
 
-            {/* Error Distribution */}
-            <section className={styles.section}>
-                <h2>Phân bố lỗi theo nhóm</h2>
-                <div className={styles.errorGroups}>
-                    {Object.entries(overview.errorGroups).map(([key, group]) => (
-                        <div key={key} className={styles.errorGroup}>
-                            <div className={styles.errorHeader}>
-                                <span className={styles.errorBadge} style={{ backgroundColor: group.color }}>
-                                    Nhóm {key}
-                                </span>
-                                <span className={styles.errorPercentage}>{group.percentage}%</span>
-                            </div>
-                            <h3>{group.name}</h3>
-                            <div className={styles.errorBar}>
-                                <div
-                                    className={styles.errorBarFill}
-                                    style={{
-                                        width: `${group.percentage}%`,
-                                        backgroundColor: group.color
-                                    }}
-                                />
-                            </div>
-                            <p className={styles.errorCount}>{group.count} cases</p>
+            {/* Tab 1: Error Analysis */}
+            {activeTab === 0 && (
+                <div className={styles.tabContent}>
+                    <div className={styles.header}>
+                        <h1>📈 Phân Tích Lỗi AI Video</h1>
+                        <p>Dashboard tổng hợp chất lượng dự án - {overview.period}</p>
+                    </div>
+
+                    {/* Stats Overview */}
+                    <div className={styles.statsGrid}>
+                        <div className={styles.statCard}>
+                            <div className={styles.statLabel}>Tổng dự án</div>
+                            <div className={styles.statNumber}>{overview.totalJobs}</div>
                         </div>
-                    ))}
-                </div>
-            </section>
+                        <div className={styles.statCard}>
+                            <div className={styles.statLabel}>Có lỗi</div>
+                            <div className={styles.statNumber} style={{ color: '#d32f2f' }}>
+                                {overview.errorJobs}
+                            </div>
+                            <div className={styles.statPercentage}>
+                                {Math.round((overview.errorJobs / overview.totalJobs) * 100)}%
+                            </div>
+                        </div>
+                        <div className={styles.statCard}>
+                            <div className={styles.statLabel}>Không lỗi</div>
+                            <div className={styles.statNumber} style={{ color: '#388e3c' }}>
+                                {overview.noErrorJobs}
+                            </div>
+                            <div className={styles.statPercentage}>
+                                {Math.round((overview.noErrorJobs / overview.totalJobs) * 100)}%
+                            </div>
+                        </div>
+                        <div className={styles.statCard}>
+                            <div className={styles.statLabel}>Trễ deadline</div>
+                            <div className={styles.statNumber} style={{ color: '#f57c00' }}>
+                                {overview.lateJobs}
+                            </div>
+                            <div className={styles.statPercentage}>
+                                {Math.round((overview.lateJobs / overview.totalJobs) * 100)}%
+                            </div>
+                        </div>
+                    </div>
 
-            {/* Error Rate by Effect */}
-            <section className={styles.section}>
-                <h2>Tỷ lệ lỗi theo loại hiệu ứng</h2>
-                <div className={styles.tableWrapper}>
-                    <table className={styles.table}>
-                        <thead>
-                            <tr>
-                                <th>Loại hiệu ứng</th>
-                                <th>Tổng jobs</th>
-                                <th>Số lỗi</th>
-                                <th>Tỷ lệ lỗi</th>
-                                <th>Đánh giá</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {errorRateByEffect.map((item, index) => (
-                                <tr key={index}>
-                                    <td className={styles.effectName}>{item.effect}</td>
-                                    <td>{item.totalJobs}</td>
-                                    <td>{item.errors}</td>
-                                    <td>
-                                        <span className={`${styles.badge} ${item.errorRate >= 75 ? styles.badgeError :
-                                                item.errorRate >= 50 ? styles.badgeWarning :
-                                                    styles.badgeSuccess
-                                            }`}>
-                                            {item.errorRate}%
-                                        </span>
-                                    </td>
-                                    <td>
-                                        {item.errorRate === 100 ? '❌ Không nên nhận' :
-                                            item.errorRate >= 75 ? '⚠️ Rủi ro cao' :
-                                                item.errorRate >= 50 ? '⚡ Cần cẩn thận' :
-                                                    '✅ Ổn định'}
-                                    </td>
-                                </tr>
+                    {/* Error Types */}
+                    <div className={styles.section}>
+                        <h2>Phân bố loại lỗi</h2>
+                        <div className={styles.errorTypesGrid}>
+                            {errorTypes.map((type: any, index: number) => (
+                                <div key={index} className={styles.errorTypeCard}>
+                                    <h3>{type.name}</h3>
+                                    <div className={styles.errorTypeNumber}>{type.percentage}%</div>
+                                    <div className={styles.errorTypeCount}>{type.count} jobs</div>
+                                    <div className={styles.progressBar}>
+                                        <div
+                                            className={styles.progressFill}
+                                            style={{
+                                                width: `${type.percentage}%`,
+                                                background: '#1976d2',
+                                            }}
+                                        />
+                                    </div>
+                                </div>
                             ))}
-                        </tbody>
-                    </table>
-                </div>
-            </section>
+                        </div>
+                    </div>
 
-            {/* Root Cause Analysis */}
-            <section className={styles.section}>
-                <h2>Root Cause Analysis</h2>
-                <div className={styles.rootCauseGrid}>
-                    <div className={styles.rootCauseCard}>
-                        <h3>⚙️ PROCESS</h3>
-                        <p>Thiếu xác nhận brief; Thiếu QC checklist; Không có multi-take policy</p>
+                    {/* Requirement Errors Table */}
+                    <div className={styles.section}>
+                        <h2>Lỗi hiểu sai yêu cầu - Top cases</h2>
+                        <div className={styles.tableWrapper}>
+                            <table className={styles.table}>
+                                <thead>
+                                    <tr>
+                                        <th>Mã Job</th>
+                                        <th>Yêu cầu</th>
+                                        <th>Thực tế làm</th>
+                                        <th>Vấn đề</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {requirementErrors.map((error: any, index: number) => (
+                                        <tr key={index}>
+                                            <td>
+                                                <strong>{error.jobCode}</strong>
+                                            </td>
+                                            <td>{error.requirement}</td>
+                                            <td>{error.actual}</td>
+                                            <td>{error.issue}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div className={styles.rootCauseCard}>
-                        <h3>👥 PEOPLE</h3>
-                        <p>Thiếu domain knowledge; Thiếu training về AI tools</p>
-                    </div>
-                    <div className={styles.rootCauseCard}>
-                        <h3>🔧 TOOLS</h3>
-                        <p>AI hallucination; Giới hạn của công nghệ hiện tại</p>
-                    </div>
-                    <div className={styles.rootCauseCard}>
-                        <h3>📥 INPUT</h3>
-                        <p>Brief không rõ ràng; Reference không đầy đủ</p>
-                    </div>
-                    <div className={styles.rootCauseCard}>
-                        <h3>📤 OUTPUT</h3>
-                        <p>QC không nghiêm ngặt; Không có tiêu chuẩn rõ ràng</p>
-                    </div>
-                </div>
-            </section>
 
-            {/* Action Items */}
-            <section className={styles.section}>
-                <h2>Hành động ưu tiên</h2>
-                <div className={styles.actionItems}>
-                    <div className={styles.actionItem}>
-                        <span className={styles.actionPriority}>🔴 Cao</span>
-                        <div>
-                            <strong>Brief Confirmation bắt buộc</strong>
-                            <p>Giảm 35% lỗi nhóm A</p>
+                    {/* Technical Errors Table */}
+                    <div className={styles.section}>
+                        <h2>Lỗi kỹ thuật AI</h2>
+                        <div className={styles.tableWrapper}>
+                            <table className={styles.table}>
+                                <thead>
+                                    <tr>
+                                        <th>Mã Job</th>
+                                        <th>Lỗi cụ thể</th>
+                                        <th>Mức độ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {technicalErrors.map((error: any, index: number) => (
+                                        <tr key={index}>
+                                            <td>
+                                                <strong>{error.jobCode}</strong>
+                                            </td>
+                                            <td>{error.error}</td>
+                                            <td>
+                                                <span
+                                                    className={`${styles.badge} ${error.severity === 'high' ? styles.badgeError : styles.badgeWarning
+                                                        }`}
+                                                >
+                                                    {error.severity === 'high' ? 'Nghiêm trọng' : 'Trung bình'}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                    <div className={styles.actionItem}>
-                        <span className={styles.actionPriority}>🟡 Trung bình</span>
-                        <div>
-                            <strong>Multi-take policy</strong>
-                            <p>Tạo 3-5 takes cho AI effects</p>
+
+                    {/* Goals */}
+                    <div className={styles.section}>
+                        <h2>Mục tiêu cải thiện (30 ngày)</h2>
+                        <div className={styles.goalsGrid}>
+                            {goals.map((goal: any, index: number) => (
+                                <div key={index} className={styles.goalCard}>
+                                    <div className={styles.goalTitle}>{goal.name}</div>
+                                    <div className={styles.goalBars}>
+                                        <div className={styles.goalBar}>
+                                            <span className={styles.barLabel}>Hiện tại</span>
+                                            <div className={styles.barFill}>
+                                                <div
+                                                    className={styles.barProgress}
+                                                    style={{
+                                                        width: `${goal.current}%`,
+                                                        background: '#d32f2f',
+                                                    }}
+                                                >
+                                                    {goal.current}%
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className={styles.goalBar}>
+                                            <span className={styles.barLabel}>Mục tiêu</span>
+                                            <div className={styles.barFill}>
+                                                <div
+                                                    className={styles.barProgress}
+                                                    style={{
+                                                        width: `${goal.target}%`,
+                                                        background: '#388e3c',
+                                                    }}
+                                                >
+                                                    {goal.target}%
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                     </div>
-                    <div className={styles.actionItem}>
-                        <span className={styles.actionPriority}>🟢 Thấp</span>
-                        <div>
-                            <strong>Prompt Library</strong>
-                            <p>Sử dụng template đã test</p>
+
+                    {/* QC Checklist */}
+                    <div className={styles.section}>
+                        <h2>Checklist QC trước gửi khách</h2>
+                        <div className={styles.checklist}>
+                            {qcChecklist.map((item: string, index: number) => (
+                                <div key={index} className={styles.checklistItem}>
+                                    {item}
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
-            </section>
+            )}
+
+            {/* Tab 2: Prompt Guide */}
+            {activeTab === 1 && (
+                <div className={styles.tabContent}>
+                    <div className={styles.header}>
+                        <h1>📝 Hướng Dẫn Tối Ưu Prompt & Fix Lỗi</h1>
+                        <p>Best practices và template prompt cho từng loại lỗi</p>
+                    </div>
+
+                    <div className={styles.guideSection}>
+                        <h2>Đang cập nhật...</h2>
+                        <p>Nội dung hướng dẫn prompt đang được bổ sung.</p>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }
