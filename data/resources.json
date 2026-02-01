@@ -1,0 +1,146 @@
+{
+    "categories": [
+        {
+            "id": "templates",
+            "name": "Templates",
+            "nameVi": "Mẫu Báo Cáo & Form",
+            "icon": "📝",
+            "description": "Các template chuẩn cho báo cáo và quy trình làm việc",
+            "resources": [
+                {
+                    "id": "template-feedback",
+                    "title": "Template R&D Feedback",
+                    "titleVi": "Mẫu Báo Cáo Feedback R&D",
+                    "description": "Template chuẩn để ghi nhận feedback từ các dự án R&D, phân tích lỗi và đề xuất cải tiến",
+                    "type": "template",
+                    "category": "reporting",
+                    "url": "https://www.notion.so/Template-R-D-Feedback-986d1e63adfd419ca95403fc4b48c5fc",
+                    "tags": [
+                        "feedback",
+                        "reporting",
+                        "analysis"
+                    ]
+                },
+                {
+                    "id": "template-weekly",
+                    "title": "Template Báo Cáo Tuần",
+                    "titleVi": "Mẫu Báo Cáo Tuần",
+                    "description": "Template báo cáo tiến độ công việc hàng tuần, tổng hợp thành tích và vấn đề cần giải quyết",
+                    "type": "template",
+                    "category": "reporting",
+                    "url": "https://www.notion.so/Template-B-o-C-o-Tu-n-086eb54258a24ba9a47d0dad4308d856",
+                    "tags": [
+                        "weekly",
+                        "reporting",
+                        "progress"
+                    ]
+                },
+                {
+                    "id": "template-monthly",
+                    "title": "Template Báo Cáo Tháng",
+                    "titleVi": "Mẫu Báo Cáo Tháng",
+                    "description": "Template báo cáo tổng kết tháng, phân tích KPI và kế hoạch tháng tiếp theo",
+                    "type": "template",
+                    "category": "reporting",
+                    "url": "https://www.notion.so/Template-B-o-C-o-Th-ng-6190ceac3daf46f5a00663dfacc0d4fe",
+                    "tags": [
+                        "monthly",
+                        "reporting",
+                        "kpi"
+                    ]
+                },
+                {
+                    "id": "workflow-creative",
+                    "title": "QUY TRÌNH SẢN XUẤT VIDEO CREATIVE",
+                    "titleVi": "Quy Trình Sản Xuất Video Creative",
+                    "description": "Quy trình chi tiết từ nhận brief đến delivery video creative, bao gồm các checkpoint và tiêu chuẩn chất lượng",
+                    "type": "workflow",
+                    "category": "process",
+                    "url": "https://www.notion.so/QUY-TR-NH-S-N-XU-T-VIDEO-CREATIVE-2f9da80a59b380ec98dcfc870f1ddbc7",
+                    "tags": [
+                        "workflow",
+                        "video",
+                        "creative",
+                        "production"
+                    ]
+                },
+                {
+                    "id": "form-brief",
+                    "title": "FORM BRIEF VIDEO CREATIVE",
+                    "titleVi": "Form Brief Video Creative",
+                    "description": "Form chuẩn để thu thập thông tin brief từ client, đảm bảo đầy đủ yêu cầu cho quá trình sản xuất",
+                    "type": "form",
+                    "category": "process",
+                    "url": "https://www.notion.so/FORM-BRIEF-VIDEO-CREATIVE-2fada80a59b380bfb4dce43c7e331d43",
+                    "tags": [
+                        "form",
+                        "brief",
+                        "client",
+                        "requirements"
+                    ]
+                },
+                {
+                    "id": "form-rubric",
+                    "title": "FORM RUBRIC CHẤM ĐIỂM VIDEO",
+                    "titleVi": "Form Rubric Chấm Điểm Video",
+                    "description": "Tiêu chí đánh giá chất lượng video theo các tiêu chuẩn kỹ thuật và sáng tạo",
+                    "type": "form",
+                    "category": "quality",
+                    "url": "https://www.notion.so/FORM-RUBRIC-CH-M-I-M-VIDEO-2fada80a59b380a1bf94e3f00cc8748d",
+                    "tags": [
+                        "form",
+                        "rubric",
+                        "quality",
+                        "evaluation"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "libraries",
+            "name": "Libraries",
+            "nameVi": "Thư Viện Tài Nguyên",
+            "icon": "📚",
+            "description": "Thư viện prompt và tài liệu tham khảo cho AI",
+            "resources": [
+                {
+                    "id": "prompt-video",
+                    "title": "Thư viện Prompt AI Video",
+                    "titleVi": "Thư Viện Prompt AI Video",
+                    "description": "Bộ sưu tập prompt được tối ưu cho các công cụ AI tạo video: Runway, Pika, Kling, Luma, etc.",
+                    "type": "library",
+                    "category": "prompts",
+                    "url": "https://www.notion.so/Th-vi-n-Prompt-AI-Video-8e2aa4e47bfb45deb6dea2a6b4de139f",
+                    "tags": [
+                        "prompts",
+                        "ai",
+                        "video",
+                        "runway",
+                        "pika"
+                    ]
+                },
+                {
+                    "id": "prompt-image",
+                    "title": "Thư viện Prompt AI Image",
+                    "titleVi": "Thư Viện Prompt AI Image",
+                    "description": "Bộ sưu tập prompt cho các công cụ AI tạo ảnh: Midjourney, DALL-E, Stable Diffusion, Flux, etc.",
+                    "type": "library",
+                    "category": "prompts",
+                    "url": "https://www.notion.so/Th-vi-n-Prompt-AI-Image-542e7a0a4dc24f6493d544baec62a5b9",
+                    "tags": [
+                        "prompts",
+                        "ai",
+                        "image",
+                        "midjourney",
+                        "dalle"
+                    ]
+                }
+            ]
+        }
+    ],
+    "metadata": {
+        "lastUpdated": "2026-02-01",
+        "totalResources": 8,
+        "version": "1.0"
+    }
+}
