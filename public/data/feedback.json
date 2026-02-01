@@ -28,6 +28,28 @@
             "count": 4
         }
     ],
+    "errorCategories": [
+        {
+            "name": "Hiểu sai yêu cầu",
+            "count": 6
+        },
+        {
+            "name": "Kỹ thuật AI",
+            "count": 6
+        },
+        {
+            "name": "Thẩm mỹ",
+            "count": 5
+        },
+        {
+            "name": "Tiến độ",
+            "count": 6
+        },
+        {
+            "name": "Từ chối",
+            "count": 6
+        }
+    ],
     "requirementErrors": [
         {
             "jobCode": "TADEC31004",
@@ -123,5 +145,149 @@
         "Không có viền trắng/artifacts?",
         "Độ phân giải đúng yêu cầu?",
         "Xem lại toàn bộ video từ đầu đến cuối?"
+    ],
+    "tools": [
+        {
+            "name": "Nano Banana Pro",
+            "function": "Image-to-Video, hiệu ứng chuyển cảnh"
+        },
+        {
+            "name": "Veo 3.1",
+            "function": "Video generation, chất lượng cao"
+        },
+        {
+            "name": "Kling 2.6 Pro",
+            "function": "Motion control, người chuyển động"
+        },
+        {
+            "name": "KlingO1 Edit",
+            "function": "Chỉnh sửa video, thêm/bớt element"
+        }
+    ],
+    "promptGuide": [
+        {
+            "id": "error-1",
+            "title": "Chuyển động nhóm đối tượng sai",
+            "case": "TLNOV14022rev4 - Tuần lộc tách đàn, đứng sai vị trí",
+            "badPrompt": "Santa's reindeer flying over the rooftop with sleigh",
+            "goodPrompt": "[SCENE]\nSanta Claus riding a sleigh pulled by a team of reindeer \nflying across the night sky above a snow-covered rooftop.\n\n[MOTION CONSTRAINTS]\n- All reindeer MUST maintain V-formation throughout\n- Reindeer spacing: consistent 1-meter gap between each\n- Movement direction: unified left-to-right trajectory\n- No individual reindeer breaks away from formation\n- Sleigh follows directly behind the lead reindeer\n\n[CAMERA]\nFixed wide shot, no movement, no shake.\n\n[NEGATIVE]\nAvoid: reindeer separating, reindeer behind sleigh, \nbroken formation, erratic individual movement.",
+            "tool": "Kling 2.6 Pro",
+            "workflow": "Kling 2.6 Pro (motion control) → KlingO1 Edit (fix nếu còn lệch nhẹ)"
+        },
+        {
+            "id": "error-2",
+            "title": "Trang phục sai ngữ cảnh",
+            "case": "NHJAN13010 - Đàn ông mặc bikini thay vì quần bơi",
+            "badPrompt": "Man swimming in the pool wearing swimwear",
+            "goodPrompt": "[SUBJECT]\nAdult Caucasian man, athletic build, standing by poolside.\n\n[CLOTHING - EXPLICIT]\nWearing: men's knee-length swim trunks / board shorts\nColor: solid navy blue or black\nStyle: casual beach/pool appropriate for adult male\n\n[ABSOLUTE RESTRICTIONS]\nNOT wearing: bikini, speedo, brief-style swimwear, \nwomen's swimwear, revealing clothing.\n\n[ACTION]\nNatural relaxed pose, one hand on hip, slight smile.\n\n[CAMERA]\nMedium shot, fixed angle, eye level.",
+            "tool": "Kling 2.6 Pro",
+            "workflow": "Chỉ định CỤ THỂ loại trang phục + Mô tả màu sắc, kiểu dáng + Nêu rõ giới tính phù hợp + Thêm negative prompt loại trừ"
+        },
+        {
+            "id": "error-3",
+            "title": "Hành vi người không phù hợp",
+            "case": "MNJAN2001 - Người trong bếp cử chỉ gợi cảm",
+            "goodPrompt": "[SCENE]\nModern open-concept kitchen, daytime, warm lighting.\n\n[SUBJECTS]\n- Person A: Woman, 35-40 years old, standing at counter\n- Person B: Man, 35-40 years old, standing near stove\n\n[ACTIONS - SPECIFIC]\nPerson A: chopping vegetables on cutting board, \neyes focused on hands, slight smile.\n\nPerson B: stirring pot with wooden spoon, \noccasionally glancing at Person A with friendly expression.\n\n[BODY LANGUAGE CONSTRAINTS]\n- Maintain 2-feet distance between subjects\n- No physical contact\n- Hands occupied with cooking tasks\n- Posture: upright, casual, task-focused\n- Eye contact: brief, friendly, not prolonged\n\n[MOOD]\nFamily-friendly, casual cooking session, \nwholesome domestic atmosphere.\n\n[NEGATIVE]\nAvoid: romantic gestures, suggestive poses, \nlingering eye contact, physical touching, \nleaning toward each other intimately.",
+            "tool": "Veo 3.1"
+        },
+        {
+            "id": "error-4",
+            "title": "Logic chuyển động vật thể sai",
+            "case": "LIJAN07001 - Quân cờ nhảy đánh nhau thay vì đi theo luật",
+            "goodPrompt": "[SCENE]\nOverhead view of wooden chessboard with ongoing game.\n\n[CHESS MOVEMENT SEQUENCE - EXPLICIT]\nMove 1: White pawn E2 slides forward to E4 (2 squares)\n        Duration: 1.5 seconds, Pause: 1 second\n        \nMove 2: Black pawn D7 slides forward to D5 (2 squares)\n        Duration: 1.5 seconds, Pause: 1 second\n        \nMove 3: White bishop F1 slides diagonally to B5\n        Duration: 2 seconds\n\n[MOVEMENT RULES]\n- ONE piece moves at a time, others completely still\n- Pieces SLIDE smoothly along board surface\n- No jumping (except knights)\n- No floating or lifting off board\n- No piece disappears or duplicates\n\n[NEGATIVE]\nAvoid: pieces fighting, pieces jumping randomly,\nmultiple pieces moving simultaneously.",
+            "tool": "Nano Banana Pro"
+        },
+        {
+            "id": "error-5",
+            "title": "Nguồn nước xuất hiện sai vị trí",
+            "case": "DUJAN04005 - Nước chảy ngẫu nhiên, không từ vòi phun",
+            "goodPrompt": "[SCENE]\nStone fountain barrel/basin in garden setting, \ncurrently empty, daylight.\n\n[WATER SOURCE - EXPLICIT]\nWater emerges ONLY from the fountain spout/nozzle \nat the TOP CENTER of the barrel structure.\n\n[WATER BEHAVIOR]\n- Water streams downward from spout\n- Falls naturally into basin below\n- Creates realistic splash on impact\n- Ripples spread outward from impact point\n- Water level gradually rises in basin\n\n[PHYSICS CONSTRAINTS]\n- Water obeys gravity: flows DOWN only\n- No water appearing from sides of barrel\n- No water materializing mid-air\n- Flow rate: steady, moderate stream\n\n[NEGATIVE]\nAvoid: water from nowhere, water from walls,\nfloating water, reverse gravity, dry spout.",
+            "tool": "Veo 3.1"
+        },
+        {
+            "id": "error-6",
+            "title": "Chuyển mùa sai context",
+            "case": "TADEC31004 - Làm tuyết→xuân thay vì hiện trạng→xuân",
+            "goodPrompt": "[STARTING STATE]\nCurrent condition of the house exterior:\n- Dry grass, brownish-yellow lawn\n- Bare trees with no leaves\n- Overcast sky\n- NO SNOW (this location does not have snow)\n\n[ENDING STATE]\nSpring transformation:\n- Lush green grass covering lawn\n- Trees full of fresh green leaves\n- Flowers blooming across garden\n- Blue sky with soft clouds\n\n[CRITICAL CONSTRAINT]\n- START with current DRY condition\n- DO NOT add snow at any point\n- This is a warm climate location\n\n[NEGATIVE]\nAvoid: snow, ice, frost, winter elements.",
+            "tool": "Nano Banana Pro",
+            "workflow": "Context Checklist: Khách hàng ở vùng khí hậu nào? Có tuyết không? Mùa hiện tại trong ảnh là gì? Mùa mục tiêu là gì?"
+        },
+        {
+            "id": "error-7",
+            "title": "Mặt người biến dạng",
+            "case": "HTJAN07002rev2 - Deformed faces",
+            "goodPrompt": "[SUBJECT FACE PROTECTION]\n- Maintain consistent facial structure throughout\n- Eyes: symmetrical, natural blink rate\n- Mouth: natural movement, no morphing\n- Skin texture: consistent, no artifacts\n- Face proportions: stable, no warping\n\n[MOTION LIMITS FOR FACES]\n- Head rotation: maximum 30 degrees\n- No rapid head movements\n- Subtle expressions only\n\n[NEGATIVE]\nAvoid: face melting, asymmetrical features,\nextra limbs, distorted proportions.",
+            "tool": "Kling 2.6 Pro",
+            "workflow": "Kling 2.6 Pro với face protection → Review từng 1-2 giây → KlingO1 Edit fix local nếu lỗi nhẹ → Re-generate segment nếu lỗi nặng"
+        },
+        {
+            "id": "error-8",
+            "title": "Video tĩnh, thiếu chuyển động",
+            "case": "THJAN20030Rev - Trời xanh như ảnh tĩnh zoom vào",
+            "goodPrompt": "[SKY REPLACEMENT]\nTransform overcast sky to vibrant blue sky.\n\n[SKY DYNAMICS - ESSENTIAL]\n- Soft white clouds drifting slowly left-to-right\n- Cloud shadows moving gently across landscape\n- Birds flying in distant background (2-3 birds)\n\n[ENVIRONMENTAL RESPONSE]\n- Tree leaves rustling slightly in breeze\n- Grass blades swaying gently\n- Soft shadows shifting on ground\n\n[CAMERA]\nFixed position, NO zoom, NO dolly.\nOnly environmental elements move.\n\n[NEGATIVE]\nAvoid: static sky, frozen clouds, \nno environmental movement, Ken Burns effect only.",
+            "tool": "Veo 3.1",
+            "workflow": "Anti-Static Rule: Thêm cloud movement + leaf/grass rustle + shadow shift + distant birds. KHÔNG chỉ zoom vào ảnh tĩnh."
+        }
+    ],
+    "toolSelection": [
+        {
+            "errorType": "Chuyển động nhóm sai",
+            "mainTool": "Kling 2.6 Pro",
+            "supportTool": "KlingO1 Edit"
+        },
+        {
+            "errorType": "Mặt người biến dạng",
+            "mainTool": "Kling 2.6 Pro",
+            "supportTool": "KlingO1 Edit"
+        },
+        {
+            "errorType": "Trang phục sai",
+            "mainTool": "Kling 2.6 Pro",
+            "supportTool": "Veo 3.1"
+        },
+        {
+            "errorType": "Logic vật lý sai",
+            "mainTool": "Veo 3.1",
+            "supportTool": "KlingO1 Edit"
+        },
+        {
+            "errorType": "Nước/lửa/khói",
+            "mainTool": "Veo 3.1",
+            "supportTool": "Nano Banana Pro"
+        },
+        {
+            "errorType": "Object movement",
+            "mainTool": "Nano Banana Pro",
+            "supportTool": "KlingO1 Edit"
+        },
+        {
+            "errorType": "Chuyển cảnh/transition",
+            "mainTool": "Nano Banana Pro",
+            "supportTool": "Veo 3.1"
+        },
+        {
+            "errorType": "Thêm người realistic",
+            "mainTool": "Kling 2.6 Pro",
+            "supportTool": "Veo 3.1"
+        }
+    ],
+    "preGenerateChecklist": [
+        "Đọc brief 2 lần, highlight từ khóa hành động",
+        "Xác định context địa lý/thời tiết",
+        "Liệt kê TẤT CẢ deliverables cần làm",
+        "Chọn công cụ phù hợp loại effect",
+        "Viết prompt theo template chuẩn",
+        "Thêm negative prompt đầy đủ",
+        "Mô tả hành động ĐỘNG TỪ cụ thể",
+        "Chỉ định giới hạn vật lý/logic"
+    ],
+    "postGenerateChecklist": [
+        "Xem video từ đầu đến cuối (không skip)",
+        "Kiểm tra mặt người từng segment",
+        "Kiểm tra logic chuyển động",
+        "Xác nhận không có watermark/logo",
+        "Đếm lại số lượng output",
+        "So sánh với brief gốc lần cuối",
+        "Test playback trên device khác"
     ]
 }
