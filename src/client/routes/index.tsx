@@ -1,6 +1,5 @@
 import React from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Home } from '../components/pages/Home';
+import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 import { Documents } from '../components/pages/Documents';
 import { DocumentView } from '../components/pages/DocumentView';
 import { AITools } from '../components/pages/AITools';
@@ -10,7 +9,7 @@ import { History } from '../components/pages/History';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Home />,
+    element: <Navigate to="/documents" replace />,
   },
   {
     path: '/documents',
