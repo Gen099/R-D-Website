@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Routing Test</title>
+    <style>
+        body { font-family: Arial; padding: 40px; max-width: 800px; margin: 0 auto; }
+        .url { background: #000; color: #0f0; padding: 20px; margin: 20px 0; font-family: monospace; font-size: 18px; }
+        a { display: inline-block; padding: 15px 30px; margin: 10px; background: #007bff; color: white; text-decoration: none; border-radius: 5px; }
+        a:hover { background: #0056b3; }
+        .log { background: #f0f0f0; padding: 15px; margin: 20px 0; border-left: 4px solid #007bff; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Routing Test</h1>
+    <div class="url" id="url"></div>
+    
+    <div>
+        <a href="/" id="link1">Home (/)</a>
+        <a href="/documents" id="link2">Documents</a>
+        <a href="/analytics" id="link3">Analytics</a>
+    </div>
+    
+    <div class="log" id="log"></div>
+    
+    <script>
+        function log(msg) {
+            const d = new Date();
+            document.getElementById('log').innerHTML += `[${d.toLocaleTimeString()}] ${msg}<br>`;
+        }
+        
+        function updateURL() {
+            document.getElementById('url').textContent = 'Current URL: ' + window.location.href;
+        }
+        
+        // Intercept clicks
+        document.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const path = link.getAttribute('href');
+                log('🔄 Navigating to: ' + path);
+                history.pushState({}, '', path);
+                updateURL();
+                log('✅ URL changed to: ' + window.location.pathname);
+            });
+        });
+        
+        // Handle back/forward
+        window.addEventListener('popstate', () => {
+            log('⬅️ Browser back/forward');
+            updateURL();
+        });
+        
+        updateURL();
+        log('✅ Test page loaded');
+    </script>
+</body>
+</html>
