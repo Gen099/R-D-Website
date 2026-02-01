@@ -69,16 +69,28 @@ export default function Footer() {
                     </ul>
                 </div>
 
-                {/* Contact & Info */}
+                {/* Contact & Social */}
                 <div className={styles.section}>
-                    <h4 className={styles.sectionTitle}>Contact</h4>
+                    <h4 className={styles.sectionTitle}>Contact & Social</h4>
                     <ul className={styles.links}>
                         <li>
-                            <a href="mailto:contact@fotober.com">📧 contact@fotober.com</a>
+                            <a href="https://www.facebook.com/soncgvn/" target="_blank" rel="noopener noreferrer">
+                                📘 Facebook
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://zalo.me/0868689912" target="_blank" rel="noopener noreferrer">
+                                💬 Zalo: 0868689912
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/in/sonpham07/" target="_blank" rel="noopener noreferrer">
+                                💼 LinkedIn
+                            </a>
                         </li>
                         <li>
                             <a href="https://github.com/Gen099/R-D-Website" target="_blank" rel="noopener noreferrer">
-                                💻 GitHub Repository
+                                💻 GitHub
                             </a>
                         </li>
                     </ul>

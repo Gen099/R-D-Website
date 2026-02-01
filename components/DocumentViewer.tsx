@@ -47,11 +47,6 @@ export default function DocumentViewer({ url, type, title, onClose }: DocumentVi
                 }
                 // Otherwise use Google Docs viewer
                 return `https://docs.google.com/viewer?url=${encodeURIComponent(url)}&embedded=true`
-            case 'notion':
-                // Notion cannot be embedded, open in new tab
-                window.open(url, '_blank')
-                onClose()
-                return ''
             default:
                 return url
         }
@@ -70,10 +65,6 @@ export default function DocumentViewer({ url, type, title, onClose }: DocumentVi
 
     const renderViewer = () => {
         const viewerUrl = getViewerUrl()
-
-        if (viewerType === 'notion') {
-            return null // Already handled in getViewerUrl
-        }
 
         if (viewerType === 'image') {
             return (
@@ -107,7 +98,7 @@ export default function DocumentViewer({ url, type, title, onClose }: DocumentVi
             )
         }
 
-        // PDF, DOCX, Excel - use iframe
+        // PDF, DOCX, Excel, Notion - use iframe
         return (
             <iframe
                 src={viewerUrl}
