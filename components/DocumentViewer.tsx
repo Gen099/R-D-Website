@@ -31,24 +31,59 @@ export default function DocumentViewer({ url, type, title, onClose }: DocumentVi
         if (lower.match(/\.(docx?|odt)$/)) return 'docx'
         if (lower.match(/\.(xlsx?|xls|csv)$/)) return 'excel'
         if (lower.includes('notion.so')) return 'notion'
+        // Detect cloud storage links
+        if (lower.includes('drive.google.com')) return 'auto'
+        if (lower.includes('dropbox.com')) return 'auto'
+        if (lower.includes('onedrive.live.com')) return 'auto'
         return 'pdf' // default
     }
 
+    const convertCloudUrl = (url: string): string => {
+        // Google Drive: Convert sharing link to direct link
+        if (url.includes('drive.google.com')) {
+            const fileIdMatch =
+                url.match(/\/file\/d\/([^\/]+)/) || url.match(/id=([^&]+)/) || url.match(/\/d\/([^\/]+)/)
+            if (fileIdMatch) {
+                const fileId = fileIdMatch[1]
+                return `https://drive.google.com/uc?export=view&id=${fileId}`
+            }
+        }
+
+        // Dropbox: Convert to direct link
+        if (url.includes('dropbox.com')) {
+            if (url.includes('dl=0')) {
+                return url.replace('dl=0', 'dl=1')
+            }
+            if (url.includes('www.dropbox.com')) {
+                return url.replace('www.dropbox.com', 'dl.dropboxusercontent.com')
+            }
+        }
+
+        // OneDrive: Convert to embed URL
+        if (url.includes('onedrive.live.com') || url.includes('1drv.ms')) {
+            return url.replace('/view.aspx', '/embed').replace('?', '?embed=')
+        }
+
+        return url
+    }
+
     const getViewerUrl = () => {
+        const convertedUrl = convertCloudUrl(url)
+
         switch (viewerType) {
             case 'pdf':
             case 'docx':
-                // Google Docs Viewer
-                return `https://docs.google.com/viewer?url=${encodeURIComponent(url)}&embedded=true`
+                return `https://docs.google.com/viewer?url=${encodeURIComponent(convertedUrl)}&embedded=true`
             case 'excel':
-                // For Excel, try Google Sheets viewer if it's a Google Sheets link
-                if (url.includes('docs.google.com/spreadsheets')) {
-                    return url.replace('/edit', '/preview')
+                if (convertedUrl.includes('docs.google.com/spreadsheets')) {
+                    return convertedUrl.replace('/edit', '/preview')
                 }
-                // Otherwise use Google Docs viewer
-                return `https://docs.google.com/viewer?url=${encodeURIComponent(url)}&embedded=true`
+                return `https://docs.google.com/viewer?url=${encodeURIComponent(convertedUrl)}&embedded=true`
+            case 'image':
+            case 'video':
+                return convertedUrl
             default:
-                return url
+                return convertedUrl
         }
     }
 
@@ -69,7 +104,7 @@ export default function DocumentViewer({ url, type, title, onClose }: DocumentVi
         if (viewerType === 'image') {
             return (
                 <img
-                    src={url}
+                    src={viewerUrl}
                     alt={title || 'Document'}
                     className={styles.image}
                     onLoad={() => setLoading(false)}
@@ -84,7 +119,7 @@ export default function DocumentViewer({ url, type, title, onClose }: DocumentVi
         if (viewerType === 'video') {
             return (
                 <video
-                    src={url}
+                    src={viewerUrl}
                     controls
                     className={styles.video}
                     onLoadedData={() => setLoading(false)}
