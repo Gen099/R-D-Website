@@ -1,6 +1,7 @@
 {
-  "cleanUrls": true,
+  "buildCommand": "npm run build",
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/static/(.*)", "destination": "/public/static/$1" },
+    { "source": "/(.*)", "destination": "/api" }
   ]
 }
