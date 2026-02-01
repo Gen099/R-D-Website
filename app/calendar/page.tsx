@@ -32,25 +32,25 @@ export default function CalendarPage() {
 
                     <div className={styles.steps}>
                         <div className={styles.step}>
-                            <strong>Bước 1:</strong> Mở <a href="https://calendar.google.com" target="_blank" rel="noopener noreferrer">Google Calendar</a>
+                            <strong>Bước 1:</strong> Mở <a href="https://calendar.google.com" target="_blank" rel="noopener noreferrer">Google Calendar</a> trên máy tính.
                         </div>
                         <div className={styles.step}>
-                            <strong>Bước 2:</strong> Click vào ⚙️ Settings (góc trên bên phải)
+                            <strong>Bước 2:</strong> Click biểu tượng ⚙️ <strong>Settings</strong> (góc trên bên phải) &gt; chọn <strong>Settings</strong>.
                         </div>
                         <div className={styles.step}>
-                            <strong>Bước 3:</strong> Chọn calendar bạn muốn embed (bên trái sidebar)
+                            <strong>Bước 3:</strong> ⚠️ <strong>QUAN TRỌNG:</strong> Nhìn cột bên trái, tìm mục "Settings for my calendars". <strong>Click vào TÊN LỊCH</strong> bạn muốn embed (ví dụ: "Lịch cá nhân").
                         </div>
                         <div className={styles.step}>
-                            <strong>Bước 4:</strong> Scroll xuống phần <strong>"Integrate calendar"</strong>
+                            <strong>Bước 4:</strong> Sau khi click tên lịch, màn hình bên phải sẽ đổi. Scroll xuống gần cuối tìm mục <strong>"Integrate calendar"</strong>.
                         </div>
                         <div className={styles.step}>
-                            <strong>Bước 5:</strong> Click <strong>"Customize"</strong> để chỉnh view, màu sắc
+                            <strong>Bước 5:</strong> Click <strong>"Customize"</strong> để chỉnh màu sắc, bỏ title.
                         </div>
                         <div className={styles.step}>
-                            <strong>Bước 6:</strong> Copy <strong>iframe code</strong>
+                            <strong>Bước 6:</strong> Copy đoạn mã trong ô <strong>Embed code</strong>.
                         </div>
                         <div className={styles.step}>
-                            <strong>Bước 7:</strong> Gửi link trong iframe cho tôi để update vào code
+                            <strong>Bước 7:</strong> Gửi đoạn mã đó cho tôi.
                         </div>
                     </div>
 
