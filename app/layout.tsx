@@ -1,28 +1,32 @@
-import type { Metadata } from "next";
-import "./globals.css";
+import './globals.css'
+import type { Metadata } from 'next'
+import Navigation from '@/components/layout/Navigation'
 
 export const metadata: Metadata = {
-    title: "Fotober R&D Intelligence Hub",
-    description: "Fotober R&D AI Video Intelligence Platform - Knowledge Base & Analytics Hub",
-};
+    title: 'Fotober R&D - AI Video Intelligence Platform',
+    description: 'R&D Specialist platform for AI Video research, prompt engineering, and quality analysis',
+}
 
 export default function RootLayout({
     children,
-}: Readonly<{
-    children: React.ReactNode;
-}>) {
+}: {
+    children: React.ReactNode
+}) {
     return (
         <html lang="vi">
             <head>
-                <script src="https://cdn.tailwindcss.com"></script>
-                <link
-                    href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"
-                    rel="stylesheet"
-                />
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+                <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
             </head>
-            <body className="min-h-screen">
-                {children}
+            <body>
+                <div className="app-layout">
+                    <Navigation />
+                    <main className="main-content">
+                        {children}
+                    </main>
+                </div>
             </body>
         </html>
-    );
+    )
 }

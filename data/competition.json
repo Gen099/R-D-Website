@@ -1,0 +1,305 @@
+{
+    "vietnam": [
+        {
+            "name": "Esoft",
+            "founded": "~2000",
+            "employees": "1000+",
+            "turnaround": "24-36h",
+            "headquarters": "Denmark",
+            "highlights": "Enterprise, ISO certified, Denmark HQ",
+            "certifications": [
+                "ISO 9001:2015",
+                "ISO 27001:2022"
+            ]
+        },
+        {
+            "name": "Imagtor",
+            "founded": "2016",
+            "employees": "N/A",
+            "turnaround": "12-24h",
+            "headquarters": "Vietnam",
+            "highlights": "40% nhân viên là người khuyết tật, 60% nữ",
+            "certifications": []
+        },
+        {
+            "name": "Fotober",
+            "founded": "2016",
+            "employees": "150+",
+            "turnaround": "12-24h",
+            "headquarters": "Vietnam",
+            "highlights": "Video editing specialty, AI capabilities",
+            "certifications": []
+        },
+        {
+            "name": "Beatcolor",
+            "founded": "2016",
+            "employees": "100+",
+            "turnaround": "18-24h",
+            "headquarters": "Vietnam",
+            "highlights": "Cloud-based DAM",
+            "certifications": []
+        },
+        {
+            "name": "Beepec",
+            "founded": "2017",
+            "employees": "100+",
+            "turnaround": "24-36h",
+            "headquarters": "Vietnam",
+            "highlights": "Budget-friendly",
+            "certifications": []
+        }
+    ],
+    "global": [
+        {
+            "name": "Esoft",
+            "headquarters": "Denmark",
+            "turnaround": "24-36h",
+            "highlights": "20+ năm, AI + human hybrid, ISO certified"
+        },
+        {
+            "name": "BoxBrownie",
+            "headquarters": "Australia",
+            "turnaround": "24h",
+            "highlights": "Transparent pricing, free trial, broad services"
+        },
+        {
+            "name": "PhotoUp",
+            "headquarters": "USA",
+            "turnaround": "24h",
+            "highlights": "Credit-based system, simple platform"
+        },
+        {
+            "name": "Phixer",
+            "headquarters": "USA",
+            "turnaround": "12h",
+            "highlights": "Fast, AI-powered website builder"
+        },
+        {
+            "name": "Pixlmob",
+            "headquarters": "USA",
+            "turnaround": "N/A",
+            "highlights": "Marketplace model, flexible"
+        }
+    ],
+    "featureComparison": {
+        "features": [
+            "Photo Editing",
+            "Video Editing",
+            "Virtual Staging",
+            "3D Floor Plan",
+            "AI Effects",
+            "API Integration",
+            "ISO Certified",
+            "Dedicated PM",
+            "Free Trial"
+        ],
+        "companies": {
+            "Fotober": [
+                true,
+                true,
+                true,
+                true,
+                "developing",
+                "limited",
+                false,
+                true,
+                true
+            ],
+            "Esoft": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+            ],
+            "BoxBrownie": [
+                true,
+                true,
+                true,
+                true,
+                "limited",
+                true,
+                false,
+                false,
+                true
+            ],
+            "Phixer": [
+                true,
+                true,
+                true,
+                false,
+                true,
+                true,
+                false,
+                false,
+                true
+            ],
+            "PhotoUp": [
+                true,
+                "limited",
+                true,
+                false,
+                false,
+                false,
+                false,
+                false,
+                true
+            ]
+        }
+    },
+    "top10Ranking": [
+        {
+            "rank": 1,
+            "company": "PicsMatic",
+            "founded": 1999,
+            "turnaround": "12-24h",
+            "notableClients": [
+                "VistaBee",
+                "Debbies Villas",
+                "Kruger"
+            ],
+            "certifications": [
+                "ISO 9001:2015",
+                "ISO 27001:2022"
+            ]
+        },
+        {
+            "rank": 2,
+            "company": "PhotoUp",
+            "founded": 2012,
+            "turnaround": "24h",
+            "notableClients": [],
+            "certifications": [
+                "ISO 27001:2022"
+            ]
+        },
+        {
+            "rank": 3,
+            "company": "Phixer",
+            "founded": 2007,
+            "turnaround": "12h",
+            "notableClients": [
+                "Compass",
+                "Opendoor",
+                "HD Estates"
+            ],
+            "certifications": []
+        },
+        {
+            "rank": 4,
+            "company": "PhotozWorld",
+            "founded": 2003,
+            "turnaround": "24h",
+            "notableClients": [],
+            "certifications": [
+                "ISO 27001:2022"
+            ]
+        },
+        {
+            "rank": 5,
+            "company": "SunTec India",
+            "founded": 1999,
+            "turnaround": "12-24h",
+            "notableClients": [
+                "Honda",
+                "Dentsu",
+                "Jaquar"
+            ],
+            "certifications": [
+                "ISO 9001:2015",
+                "ISO 27001:2022"
+            ]
+        },
+        {
+            "rank": 6,
+            "company": "BoxBrownie",
+            "founded": 2015,
+            "turnaround": "24h",
+            "notableClients": [
+                "Century 21",
+                "CBRE",
+                "Engel & Volkers"
+            ],
+            "certifications": []
+        },
+        {
+            "rank": 7,
+            "company": "BEEPEC",
+            "founded": 2017,
+            "turnaround": "12h",
+            "notableClients": [
+                "Focus Media",
+                "Shoot 2 Sell",
+                "Silver Picture"
+            ],
+            "certifications": []
+        },
+        {
+            "rank": 8,
+            "company": "Zenith Clipping",
+            "founded": 2010,
+            "turnaround": "12-24h",
+            "notableClients": [
+                "Amazon",
+                "IKEA",
+                "Estee Lauder"
+            ],
+            "certifications": []
+        },
+        {
+            "rank": 9,
+            "company": "Picsera",
+            "founded": 2014,
+            "turnaround": "2-5 ngày",
+            "notableClients": [
+                "Mardel",
+                "Chewy",
+                "Select Blinds"
+            ],
+            "certifications": []
+        },
+        {
+            "rank": 10,
+            "company": "Fotober",
+            "founded": 2016,
+            "turnaround": "12-24h",
+            "notableClients": [
+                "Compass",
+                "Ray White",
+                "Raine & Horne"
+            ],
+            "certifications": []
+        }
+    ],
+    "swotAnalysis": {
+        "strengths": [
+            "Video editing specialty",
+            "Giá cạnh tranh",
+            "Turnaround nhanh 12-24h",
+            "Portfolio đầy đủ",
+            "AI capabilities đang phát triển",
+            "Marketing mạnh",
+            "Quy mô 20k ảnh/ngày"
+        ],
+        "weaknesses": [
+            "Chưa có ISO certification",
+            "QC chưa nhất quán (35% lỗi hiểu brief)",
+            "API/integration hạn chế",
+            "Domain knowledge về AI effects còn yếu"
+        ],
+        "opportunities": [
+            "AI video là 'blue ocean' trong ngành",
+            "Nhu cầu Agent video tăng",
+            "Thị trường US/EU tăng trưởng"
+        ],
+        "threats": [
+            "Esoft cạnh tranh toàn diện với ecosystem mạnh",
+            "Áp lực giá từ đối thủ ngân sách thấp",
+            "Công nghệ AI thay đổi nhanh"
+        ]
+    }
+}

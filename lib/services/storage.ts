@@ -97,7 +97,7 @@ export class StorageService {
         ${log.input_text}, ${log.output_text},
         ${JSON.stringify(log.effects_detected || [])}, 
         ${JSON.stringify(log.errors_detected || [])},
-        ${log.suggestions || []}, ${log.token_usage},
+        ${JSON.stringify(log.suggestions || [])}, ${log.token_usage},
         ${log.processing_time_ms}, ${log.status}, 
         ${log.error_message || null}, ${log.created_by}
       )

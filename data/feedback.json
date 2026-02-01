@@ -1,0 +1,225 @@
+{
+    "overview": {
+        "totalJobs": 23,
+        "dataSource": "[Video] Feedback AI.xlsx",
+        "period": "Tháng 1/2026",
+        "errorGroups": {
+            "A": {
+                "name": "Hiểu sai yêu cầu/Brief",
+                "count": 8,
+                "percentage": 35,
+                "color": "#EF4444"
+            },
+            "B": {
+                "name": "Chất lượng AI output kém",
+                "count": 6,
+                "percentage": 26,
+                "color": "#F59E0B"
+            },
+            "C": {
+                "name": "Trễ deadline",
+                "count": 5,
+                "percentage": 22,
+                "color": "#3B82F6"
+            },
+            "D": {
+                "name": "Vật lý/Logic không hợp lý",
+                "count": 4,
+                "percentage": 17,
+                "color": "#8B5CF6"
+            }
+        }
+    },
+    "errorGroupA": [
+        {
+            "jobCode": "TADEC31004",
+            "issue": "Không đọc kỹ brief",
+            "feedback": "Làm sai yêu cầu khách"
+        },
+        {
+            "jobCode": "QUJAN25001",
+            "issue": "Không xác nhận khi ambiguous",
+            "feedback": "Hiểu sai ý khách"
+        },
+        {
+            "jobCode": "HTJAN15008Rev",
+            "issue": "Thiếu xác nhận",
+            "feedback": "Output không đúng mong đợi"
+        },
+        {
+            "jobCode": "CAJAN21001rev7",
+            "issue": "Brief phức tạp không được clarify",
+            "feedback": "Thiếu flow mượt mà"
+        },
+        {
+            "jobCode": "LIJAN27002",
+            "issue": "Bỏ sót chi tiết",
+            "feedback": "Thiếu elements"
+        },
+        {
+            "jobCode": "QUJAN16003",
+            "issue": "Hiểu sai context",
+            "feedback": "Logic không hợp lý"
+        },
+        {
+            "jobCode": "MNJAN2001",
+            "issue": "Không check reference",
+            "feedback": "Khác style mong đợi"
+        },
+        {
+            "jobCode": "CHJAN24002",
+            "issue": "Assumptions sai",
+            "feedback": "Kết quả không match"
+        }
+    ],
+    "errorGroupB": [
+        {
+            "jobCode": "THJAN20030Rev",
+            "issue": "AI hallucination",
+            "detail": "Vật thể biến dạng"
+        },
+        {
+            "jobCode": "HTJAN07002rev2",
+            "issue": "Lip-sync không khớp",
+            "detail": "Miệng không đồng bộ với audio"
+        },
+        {
+            "jobCode": "MNJAN2001",
+            "issue": "QC kém",
+            "detail": "Không phát hiện lỗi trước delivery"
+        },
+        {
+            "jobCode": "HTJAN26003",
+            "issue": "Edge artifacts",
+            "detail": "Viền cắt ghép thấy rõ"
+        },
+        {
+            "jobCode": "NHJAN13010",
+            "issue": "Motion không tự nhiên",
+            "detail": "Chuyển động giật"
+        },
+        {
+            "jobCode": "QUJAN21008",
+            "issue": "Chất lượng thấp",
+            "detail": "Độ phân giải không đạt"
+        }
+    ],
+    "errorGroupC": [
+        {
+            "jobCode": "HTJAN22005",
+            "issue": "Capacity overload",
+            "detail": "9 hiệu ứng trên 15, chậm 9 giờ"
+        },
+        {
+            "jobCode": "QUJAN21008",
+            "issue": "Estimation sai",
+            "detail": "Thực tế mất 2h14p, dự kiến ít hơn"
+        },
+        {
+            "jobCode": "HTJAN07002rev2",
+            "issue": "Re-work nhiều lần",
+            "detail": "Phải làm lại nhiều revision"
+        },
+        {
+            "jobCode": "LIJAN07001",
+            "issue": "Quy trình chậm",
+            "detail": "Phản hồi không kịp thời"
+        },
+        {
+            "jobCode": "TADEC31004",
+            "issue": "Planning yếu",
+            "detail": "Không tính toán đủ thời gian"
+        }
+    ],
+    "errorGroupD": [
+        {
+            "jobCode": "TLNOV14022rev4",
+            "issue": "Vật lý sai",
+            "detail": "Chuyển động không theo quy luật"
+        },
+        {
+            "jobCode": "QUJAN16003",
+            "issue": "Context không match",
+            "detail": "Bối cảnh không phù hợp"
+        },
+        {
+            "jobCode": "LIJAN07001",
+            "issue": "Logic scene sai",
+            "detail": "Thứ tự cảnh không hợp lý"
+        },
+        {
+            "jobCode": "NHJAN13010",
+            "issue": "Proportion sai",
+            "detail": "Tỷ lệ người/vật không đúng"
+        }
+    ],
+    "errorRateByEffect": [
+        {
+            "effect": "Day-to-Night",
+            "totalJobs": 3,
+            "errors": 1,
+            "errorRate": 33
+        },
+        {
+            "effect": "Sky Replacement",
+            "totalJobs": 2,
+            "errors": 1,
+            "errorRate": 50
+        },
+        {
+            "effect": "Season Change",
+            "totalJobs": 4,
+            "errors": 3,
+            "errorRate": 75
+        },
+        {
+            "effect": "Weather Effects",
+            "totalJobs": 3,
+            "errors": 2,
+            "errorRate": 67
+        },
+        {
+            "effect": "Lifestyle/People",
+            "totalJobs": 7,
+            "errors": 5,
+            "errorRate": 71
+        },
+        {
+            "effect": "Object Animation",
+            "totalJobs": 2,
+            "errors": 2,
+            "errorRate": 100
+        },
+        {
+            "effect": "Creative/Fantasy",
+            "totalJobs": 1,
+            "errors": 1,
+            "errorRate": 100
+        },
+        {
+            "effect": "Agent Composite",
+            "totalJobs": 1,
+            "errors": 1,
+            "errorRate": 100
+        }
+    ],
+    "rejectedJobs": [
+        "TLNOV14022rev4",
+        "QUJAN16003",
+        "MNJAN2001",
+        "HTJAN07002rev2",
+        "LIJAN07001"
+    ],
+    "recognizedJobs": [
+        "NHJAN13010",
+        "CHJAN24002",
+        "HTJAN26003"
+    ],
+    "rootCauseAnalysis": {
+        "process": "Thiếu xác nhận brief; Thiếu QC checklist; Không có multi-take policy",
+        "people": "Thiếu domain knowledge; Thiếu training về AI tools",
+        "tools": "AI hallucination; Giới hạn của công nghệ hiện tại",
+        "input": "Brief không rõ ràng; Reference không đầy đủ",
+        "output": "QC không nghiêm ngặt; Không có tiêu chuẩn rõ ràng"
+    }
+}

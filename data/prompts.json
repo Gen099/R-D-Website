@@ -1,0 +1,191 @@
+{
+    "templates": [
+        {
+            "id": "DNT-001",
+            "category": "Transition",
+            "effectType": "Day-to-Night",
+            "tool": "Kling AI / Runway Gen-3",
+            "version": "1.0",
+            "promptTemplate": "[PROPERTY_TYPE] exterior transitioning from bright afternoon to dramatic twilight, warm interior lights gradually illuminating windows, [STYLE] photography style, smooth time-lapse effect over [DURATION] seconds, sky changing from blue to orange-pink-purple gradient, shadows lengthening naturally, 4K resolution, photorealistic, cinematic color grading.",
+            "variables": {
+                "PROPERTY_TYPE": [
+                    "luxury home",
+                    "modern villa",
+                    "apartment building",
+                    "commercial property"
+                ],
+                "STYLE": [
+                    "professional real estate",
+                    "cinematic",
+                    "documentary"
+                ],
+                "DURATION": "5-10 seconds"
+            },
+            "negativePrompt": "Sudden jumps, flickering lights, unnatural color shifts, blurry, low quality",
+            "successRate": 67,
+            "notes": "Cần footage ban ngày chất lượng cao, ánh sáng đều",
+            "lastUpdated": "2026-01-29"
+        },
+        {
+            "id": "LFS-001",
+            "category": "Lifestyle",
+            "effectType": "Single Person Activity",
+            "tool": "Kling AI",
+            "version": "1.0",
+            "promptTemplate": "[PERSON_DESCRIPTION] in [ROOM_TYPE], [ACTION], natural movement, realistic proportions, [LIGHTING] lighting, [CAMERA_ANGLE] shot, photorealistic, 4K, smooth motion over [DURATION] seconds.",
+            "variables": {
+                "PERSON_DESCRIPTION": [
+                    "young professional woman",
+                    "middle-aged man",
+                    "couple"
+                ],
+                "ROOM_TYPE": [
+                    "modern living room",
+                    "luxury kitchen",
+                    "cozy bedroom"
+                ],
+                "ACTION": [
+                    "reading on sofa",
+                    "cooking",
+                    "having coffee"
+                ],
+                "LIGHTING": [
+                    "soft natural",
+                    "warm evening",
+                    "bright morning"
+                ],
+                "CAMERA_ANGLE": [
+                    "medium",
+                    "wide",
+                    "close-up"
+                ],
+                "DURATION": "5-10 seconds"
+            },
+            "negativePrompt": "Distorted face, extra limbs, unnatural poses, blurry, unrealistic proportions",
+            "successRate": 29,
+            "notes": "Lifestyle với người có tỷ lệ lỗi cao, cần QC kỹ",
+            "lastUpdated": "2026-01-29"
+        },
+        {
+            "id": "FPI-001",
+            "category": "Object Animation",
+            "effectType": "Furniture Appearing",
+            "tool": "Runway Gen-3",
+            "version": "1.0",
+            "promptTemplate": "Empty [ROOM_TYPE] with [FURNITURE_ITEM] elegantly appearing, [ANIMATION_STYLE] animation, [LIGHTING] lighting maintained throughout, seamless integration with environment, photorealistic rendering, 4K resolution, [DURATION] seconds.",
+            "variables": {
+                "ROOM_TYPE": [
+                    "living room",
+                    "bedroom",
+                    "dining room"
+                ],
+                "FURNITURE_ITEM": [
+                    "modern sofa",
+                    "dining table set",
+                    "bed with bedding"
+                ],
+                "ANIMATION_STYLE": [
+                    "fade-in",
+                    "scale-up",
+                    "slide-in"
+                ],
+                "LIGHTING": [
+                    "natural daylight",
+                    "warm ambient",
+                    "studio"
+                ],
+                "DURATION": "3-5 seconds"
+            },
+            "negativePrompt": "Sudden pop, unrealistic shadows, floating objects, scale mismatch",
+            "successRate": null,
+            "notes": "Object animation có độ khó cao, cần thử nghiệm thêm",
+            "lastUpdated": "2026-01-29"
+        },
+        {
+            "id": "SKY-001",
+            "category": "Environment",
+            "effectType": "Sky Replacement",
+            "tool": "Kling AI",
+            "version": "1.0",
+            "promptTemplate": "[PROPERTY_TYPE] with [SKY_TYPE] sky, [TIME_OF_DAY] lighting, natural color grading, seamless sky integration, [WEATHER] conditions, photorealistic, 4K resolution.",
+            "variables": {
+                "PROPERTY_TYPE": [
+                    "residential property",
+                    "commercial building",
+                    "landscape"
+                ],
+                "SKY_TYPE": [
+                    "dramatic clouds",
+                    "clear blue",
+                    "sunset",
+                    "partly cloudy"
+                ],
+                "TIME_OF_DAY": [
+                    "golden hour",
+                    "midday",
+                    "twilight"
+                ],
+                "WEATHER": [
+                    "clear",
+                    "slightly overcast",
+                    "dramatic"
+                ]
+            },
+            "negativePrompt": "Unnatural sky blend, color mismatch, visible edges, unrealistic lighting",
+            "successRate": 50,
+            "notes": "Cần footage gốc có chất lượng tốt",
+            "lastUpdated": "2026-01-29"
+        },
+        {
+            "id": "AGT-001",
+            "category": "Agent Video",
+            "effectType": "Agent Composite",
+            "tool": "Kling AI + Composite",
+            "version": "1.0",
+            "promptTemplate": "Professional real estate agent [AGENT_NAME], [AGE_GENDER], wearing [OUTFIT], [DEMEANOR] demeanor, [ACTION] in [LOCATION], [CAMERA_MOVEMENT], 4K resolution, photorealistic, natural lighting, direct eye contact when speaking.",
+            "variables": {
+                "AGENT_NAME": "Steven",
+                "AGE_GENDER": [
+                    "male, 40s",
+                    "female, 30s"
+                ],
+                "OUTFIT": [
+                    "navy suit with light blue shirt",
+                    "professional blazer"
+                ],
+                "DEMEANOR": [
+                    "confident and welcoming",
+                    "friendly and professional"
+                ],
+                "ACTION": [
+                    "gesturing",
+                    "walking",
+                    "presenting"
+                ],
+                "LOCATION": [
+                    "luxury home entrance",
+                    "modern kitchen",
+                    "living area"
+                ],
+                "CAMERA_MOVEMENT": [
+                    "medium shot",
+                    "slight push-in",
+                    "static"
+                ]
+            },
+            "negativePrompt": "Face distortion, unnatural movements, lighting mismatch, visible edges",
+            "successRate": 0,
+            "notes": "Đang trong giai đoạn R&D, chưa production-ready",
+            "lastUpdated": "2026-01-29"
+        }
+    ],
+    "masterPromptStructure": "[SUBJECT] + [ACTION] + [ENVIRONMENT] + [CAMERA] + [STYLE]",
+    "bestPractices": [
+        "Luôn specify độ phân giải (4K, 1080p)",
+        "Thêm 'photorealistic' cho real estate content",
+        "Sử dụng negative prompts để tránh lỗi phổ biến",
+        "Test 3-5 variations cho mỗi prompt",
+        "Ghi nhận success rate để cải thiện",
+        "Chuẩn bị input footage chất lượng cao"
+    ]
+}

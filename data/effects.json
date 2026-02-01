@@ -1,0 +1,272 @@
+{
+    "motionGraphics": [
+        {
+            "id": "mg-1",
+            "name": "Call-out",
+            "description": "Chú thích nổi bật",
+            "price": "$10-$15/footage",
+            "sampleLink": "https://www.dropbox.com/scl/fi/kitafs00jemf6ffkmoh7r/Call-out.mp4"
+        },
+        {
+            "id": "mg-2",
+            "name": "Sidebar",
+            "description": "Thanh bên thông tin",
+            "price": "$10-$15/footage",
+            "sampleLink": ""
+        },
+        {
+            "id": "mg-3",
+            "name": "Outline",
+            "description": "Viền nổi bật",
+            "price": "$10-$15/footage",
+            "sampleLink": ""
+        },
+        {
+            "id": "mg-4",
+            "name": "3D Text",
+            "description": "Chữ 3D",
+            "price": "$10-$15/footage",
+            "sampleLink": ""
+        },
+        {
+            "id": "mg-5",
+            "name": "Animated Icons",
+            "description": "Icon động",
+            "price": "Miễn phí 3 icons cơ bản",
+            "sampleLink": ""
+        }
+    ],
+    "specialEffects": [
+        {
+            "id": "se-1",
+            "name": "Drop/Falling Object",
+            "description": "Vật thể rơi xuống",
+            "price": "$20-$25/fragment",
+            "complexity": "Cao",
+            "tier": 3
+        },
+        {
+            "id": "se-2",
+            "name": "Layer Build",
+            "description": "Xây dựng từng lớp",
+            "price": "$20-$25/fragment",
+            "complexity": "Cao",
+            "tier": 3
+        },
+        {
+            "id": "se-3",
+            "name": "Google Earth Zoom",
+            "description": "Zoom từ vệ tinh",
+            "price": "$20-$25/fragment",
+            "complexity": "Trung bình",
+            "tier": 2
+        },
+        {
+            "id": "se-4",
+            "name": "Glow Swipe",
+            "description": "Ánh sáng quét qua",
+            "price": "$10-$15",
+            "complexity": "Thấp",
+            "tier": 1
+        },
+        {
+            "id": "se-5",
+            "name": "Roto (Rotoscoping)",
+            "description": "Cắt ghép thủ công",
+            "price": "$10/item",
+            "complexity": "Cao",
+            "tier": 3
+        },
+        {
+            "id": "se-6",
+            "name": "Forward",
+            "description": "Chuyển động tiến",
+            "price": "$10-$15",
+            "complexity": "Thấp",
+            "tier": 1
+        },
+        {
+            "id": "se-7",
+            "name": "Sky Replacement",
+            "description": "Thay đổi bầu trời",
+            "price": "$15/footage",
+            "complexity": "Trung bình",
+            "tier": 2
+        },
+        {
+            "id": "se-8",
+            "name": "Display Frame",
+            "description": "Khung trình bày",
+            "price": "$10-$15",
+            "complexity": "Thấp",
+            "tier": 1
+        },
+        {
+            "id": "se-9",
+            "name": "Time-lapse",
+            "description": "Tua nhanh video",
+            "price": "$15-$20",
+            "complexity": "Trung bình",
+            "tier": 2
+        },
+        {
+            "id": "se-10",
+            "name": "AI Effect",
+            "description": "Hiệu ứng tạo bởi AI",
+            "price": "Check với team",
+            "complexity": "Biến đổi",
+            "tier": 0
+        },
+        {
+            "id": "se-11",
+            "name": "Split Scene",
+            "description": "Chia màn hình",
+            "price": "$10-$15",
+            "complexity": "Trung bình",
+            "tier": 2
+        },
+        {
+            "id": "se-12",
+            "name": "Person Disappear",
+            "description": "Xóa người khỏi cảnh",
+            "price": "$15-$20",
+            "complexity": "Cao",
+            "tier": 3
+        },
+        {
+            "id": "se-13",
+            "name": "Masking Transition",
+            "description": "Chuyển cảnh bằng mask",
+            "price": "$10-$15",
+            "complexity": "Trung bình",
+            "tier": 2
+        }
+    ],
+    "transitions": [
+        {
+            "id": "tr-1",
+            "name": "Day to Night",
+            "description": "Chuyển từ ban ngày sang ban đêm",
+            "price": "Miễn phí 1-2; $5 cho 3-4; $10 cho 5-6; +$5/cặp thêm"
+        },
+        {
+            "id": "tr-2",
+            "name": "Morph Cut",
+            "description": "Biến đổi mượt mà giữa 2 cảnh",
+            "price": "$5-$10/transition"
+        },
+        {
+            "id": "tr-3",
+            "name": "Light Leak",
+            "description": "Hiệu ứng ánh sáng rò",
+            "price": "$5/transition"
+        },
+        {
+            "id": "tr-4",
+            "name": "Dolly Zoom",
+            "description": "Zoom dolly",
+            "price": "$10/transition"
+        },
+        {
+            "id": "tr-5",
+            "name": "Whip Pan",
+            "description": "Quay camera nhanh",
+            "price": "$5/transition"
+        },
+        {
+            "id": "tr-6",
+            "name": "Door/Window Push",
+            "description": "Chuyển qua cửa",
+            "price": "$10/transition"
+        },
+        {
+            "id": "tr-7",
+            "name": "Object Match Cut",
+            "description": "Cắt ghép theo vật thể",
+            "price": "$10-$15/transition"
+        },
+        {
+            "id": "tr-8",
+            "name": "Color Wipe",
+            "description": "Chuyển cảnh bằng màu",
+            "price": "$5/transition"
+        }
+    ],
+    "audioText": [
+        {
+            "id": "at-1",
+            "category": "Audio",
+            "name": "Standard Voice-over",
+            "description": "Thuyết minh tiêu chuẩn",
+            "price": "Theo báo giá"
+        },
+        {
+            "id": "at-2",
+            "category": "Audio",
+            "name": "Intro/Outro Music",
+            "description": "Nhạc mở đầu/kết thúc",
+            "price": "Theo báo giá"
+        },
+        {
+            "id": "at-3",
+            "category": "Text",
+            "name": "Animated Text",
+            "description": "Chữ động",
+            "price": "$5-$10/item"
+        },
+        {
+            "id": "at-4",
+            "category": "Text",
+            "name": "Subtext",
+            "description": "Phụ đề",
+            "price": "$5/item"
+        },
+        {
+            "id": "at-5",
+            "category": "Text",
+            "name": "Caption",
+            "description": "Chú thích",
+            "price": "$3-$5/item"
+        }
+    ],
+    "technicalServices": [
+        {
+            "id": "ts-1",
+            "name": "Advanced Stabilization - Gyroflow",
+            "description": "Ổn định nâng cao",
+            "price": "$10/clip"
+        },
+        {
+            "id": "ts-2",
+            "name": "Blur",
+            "description": "Làm mờ",
+            "price": "$5/item"
+        }
+    ],
+    "aiEffectsPricing": [
+        {
+            "tier": 1,
+            "level": "Simple",
+            "price": "$15-$25/effect",
+            "includes": "Lên đến 3 lần sửa"
+        },
+        {
+            "tier": 2,
+            "level": "Standard",
+            "price": "$30-$50/effect",
+            "includes": "Lên đến 3 lần sửa"
+        },
+        {
+            "tier": 3,
+            "level": "Complex",
+            "price": "$60-$100/effect",
+            "includes": "Lên đến 3 lần sửa"
+        },
+        {
+            "tier": 4,
+            "level": "Premium/Custom",
+            "price": "Báo giá riêng",
+            "includes": "Theo thỏa thuận"
+        }
+    ]
+}
