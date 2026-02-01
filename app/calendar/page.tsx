@@ -24,9 +24,8 @@ export default function CalendarPage() {
     const [selectedDate, setSelectedDate] = useState<Date | null>(null)
     const [activeTab, setActiveTab] = useState<'todo' | 'timesheet' | 'diary' | 'meeting'>('todo')
 
-    // Notes data from API
+    // Notes data from localStorage
     const [notes, setNotes] = useState<{ [key: string]: DayNotes }>({})
-    const [loading, setLoading] = useState(false)
 
     // Current editing values
     const [todoText, setTodoText] = useState('')
@@ -39,20 +38,13 @@ export default function CalendarPage() {
     const [meetingEnd, setMeetingEnd] = useState('')
     const [meetingContent, setMeetingContent] = useState('')
 
-    // Load notes from API on mount
+    // Load notes from localStorage on mount
     useEffect(() => {
-        loadNotes()
-    }, [])
-
-    const loadNotes = async () => {
-        try {
-            const response = await fetch('/api/calendar')
-            const data = await response.json()
-            setNotes(data)
-        } catch (error) {
-            console.error('Failed to load notes:', error)
+        const savedNotes = localStorage.getItem('calendar-notes')
+        if (savedNotes) {
+            setNotes(JSON.parse(savedNotes))
         }
-    }
+    }, [])
 
     // Load note data when date changes
     useEffect(() => {
@@ -121,10 +113,9 @@ export default function CalendarPage() {
         return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
     }
 
-    const saveNotes = async () => {
+    const saveNotes = () => {
         if (!selectedDate) return
 
-        setLoading(true)
         const dateKey = getDateKey(selectedDate)
         const dayNote: DayNotes = {
             todo: todoText,
@@ -147,27 +138,21 @@ export default function CalendarPage() {
             [dateKey]: dayNote
         }
 
-        try {
-            const response = await fetch('/api/calendar', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(updatedNotes)
-            })
+        setNotes(updatedNotes)
+        localStorage.setItem('calendar-notes', JSON.stringify(updatedNotes))
+        alert('✅ Đã lưu thành công!')
+    }
 
-            if (response.ok) {
-                setNotes(updatedNotes)
-                alert('✅ Đã lưu thành công!')
-            } else {
-                alert('❌ Lỗi khi lưu dữ liệu')
-            }
-        } catch (error) {
-            alert('❌ Lỗi kết nối')
-            console.error('Save error:', error)
-        } finally {
-            setLoading(false)
-        }
+    const exportData = () => {
+        const dataStr = JSON.stringify(notes, null, 2)
+        const blob = new Blob([dataStr], { type: 'application/json' })
+        const url = URL.createObjectURL(blob)
+        const a = document.createElement('a')
+        a.href = url
+        a.download = `calendar-backup-${new Date().toISOString().split('T')[0]}.json`
+        a.click()
+        URL.revokeObjectURL(url)
+        alert('✅ Đã tải file backup!')
     }
 
     const selectedDateKey = selectedDate ? getDateKey(selectedDate) : null
@@ -176,8 +161,15 @@ export default function CalendarPage() {
     return (
         <div className={styles.container}>
             <header className={styles.header}>
-                <h1>📅 Lịch Làm Việc</h1>
-                <p className={styles.subtitle}>Âm Lịch & Dương Lịch • Todo • Chấm công • Nhật ký • Họp • ☁️ Cloud Sync</p>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div>
+                        <h1>📅 Lịch Làm Việc</h1>
+                        <p className={styles.subtitle}>Âm Lịch & Dương Lịch • Todo • Chấm công • Nhật ký • Họp</p>
+                    </div>
+                    <button onClick={exportData} className={styles.exportBtn}>
+                        💾 Sao lưu dữ liệu
+                    </button>
+                </div>
             </header>
 
             <div className={styles.calendarLayout}>
@@ -371,13 +363,7 @@ export default function CalendarPage() {
                                     </div>
                                 )}
 
-                                <button
-                                    className={styles.saveBtn}
-                                    onClick={saveNotes}
-                                    disabled={loading}
-                                >
-                                    {loading ? '⏳ Đang lưu...' : '💾 Lưu'}
-                                </button>
+                                <button className={styles.saveBtn} onClick={saveNotes}>💾 Lưu</button>
                             </div>
                         </>
                     )}
