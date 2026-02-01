@@ -23,8 +23,13 @@ app.use('/static/*', serveStatic({ root: './public' }))
 // API ROUTES
 // ============================================
 
-// Home - main dashboard
+// Home - redirect to documents
 app.get('/', (c) => {
+  return c.redirect('/documents')
+})
+
+// Old home page (removed)
+app.get('/old-home-removed', (c) => {
   return c.html(`
 <!DOCTYPE html>
 <html lang="vi">
