@@ -1,117 +1,191 @@
-# Fotober R&D Intelligence Hub - Next.js
+# Fotober R&D Specialist Website
 
-**Next.js 15 App Router** version deployed on **Vercel** with **Vercel Postgres** database.
+Website quản lý và trình bày thông tin R&D Specialist cho Fotober AI Video.
 
-## 🚀 Quick Start
+## 🚀 Features
 
-### Prerequisites
-- Node.js 18+ 
-- npm or yarn
-- Vercel account
+- ✅ **9 Modules hoàn chỉnh:** Dashboard, Feedback Analysis, AI Problems, Effects Catalog, Competition, Job Description, Operations, Platform, Resources
+- ✅ **Responsive Design:** Mobile, tablet, desktop
+- ✅ **Design System:** CSS Variables, consistent styling
+- ✅ **Data Visualization:** Tables, cards, progress bars, metrics
+- ✅ **Navigation:** Fixed sidebar với active states
 
-### Installation
+## 📦 Tech Stack
+
+- **Framework:** Next.js 15 (App Router)
+- **UI:** React 18 + TypeScript
+- **Styling:** CSS Modules + CSS Variables
+- **Data:** JSON files (static)
+- **Deployment:** Vercel
+
+## 🛠️ Installation
 
 ```bash
+# Clone repository
+git clone https://github.com/YOUR_USERNAME/FotoberRnD.git
+cd FotoberRnD
+
 # Install dependencies
 npm install
 
-# Setup environment variables
-# Copy .env.local and fill in your Vercel Postgres credentials
-# Or link with Vercel project: vercel link && vercel env pull
-
 # Run development server
 npm run dev
-
-# Open http://localhost:3000
 ```
 
-### Deployment to Vercel
-
-```bash
-# Install Vercel CLI
-npm install -g vercel
-
-# Login
-vercel login
-
-# Deploy
-vercel
-
-# Deploy to production
-vercel --prod
-```
-
-After deployment:
-1. Go to Vercel Dashboard → Storage → Create Postgres Database
-2. Connect database to your project
-3. Run the SQL schema from `lib/db/schema.sql` in the Vercel Postgres Query editor
+Open [http://localhost:3000](http://localhost:3000)
 
 ## 📁 Project Structure
 
 ```
-├── app/                    # Next.js App Router
-│   ├── api/               # API Routes
-│   ├── documents/         # Documents page
-│   ├── document/[id]/     # Document detail
-│   ├── analytics/         # Analytics page
-│   └── history/           # History page
+FotoberRnD/
+├── app/                    # Next.js App Router pages
+│   ├── page.tsx           # Dashboard
+│   ├── feedback/          # Feedback Analysis
+│   ├── ai-problems/       # AI Problems
+│   ├── effects/           # Effects Catalog
+│   ├── competition/       # Competition Analysis
+│   ├── job-description/   # Job Description
+│   ├── operations/        # Operations Manual
+│   ├── platform/          # Platform Design
+│   └── resources/         # Resources Library
 ├── components/            # React components
-├── lib/                   # Libraries & utilities
-│   ├── api/              # API client
-│   ├── db/               # Database connection
-│   └── services/         # Business logic
+│   └── layout/           # Layout components
+├── data/                 # JSON data files
+│   ├── feedback.json
+│   ├── effects.json
+│   ├── prompts.json
+│   └── competition.json
 └── public/               # Static assets
 ```
 
-## 🛠️ Tech Stack
+## 📊 Modules
 
-- **Framework**: Next.js 15 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **Database**: Vercel Postgres
-- **Deployment**: Vercel
-- **UI**: React 19
+### 1. Dashboard
+- Key metrics overview
+- Module navigation
+- Quick insights
 
-## 📖 Features
+### 2. Feedback Analysis
+- Error tracking (Groups A/B/C/D)
+- Root cause analysis
+- Action items
 
-- ✅ Document management (CRUD)
-- ✅ Document viewer with iframe embed
-- ✅ Statistics dashboard
-- ✅ Category filtering
-- ✅ Responsive design
-- ✅ PostgreSQL database
-- ⏳ Analytics (coming soon)
-- ⏳ History tracking (coming soon)
+### 3. AI Problems
+- Agent Replacement workflow
+- Image-to-Video workflow
+- Prompt examples
+
+### 4. Effects Catalog
+- Motion Graphics
+- Special Effects
+- Transitions
+- AI Pricing Tiers
+
+### 5. Competition
+- Vietnam & Global competitors
+- Feature comparison
+- Top 10 ranking
+- SWOT analysis
+
+### 6. Job Description
+- R&D Specialist role
+- Responsibilities
+- Deliverables
+- Tools
+
+### 7. Operations
+- Workflow (6 steps)
+- QC Checklist (3 levels)
+- Metrics tracking
+- Scoring system
+
+### 8. Platform
+- System architecture
+- API endpoints
+- Development roadmap
+- Tech stack
+
+### 9. Resources
+- AI Video tools
+- Image generation tools
+- Learning resources
+- Internal documents
+
+## 🎨 Design System
+
+### Colors
+- **Primary:** Blue (`hsl(220, 90%, 56%)`)
+- **Error Groups:** Red, Orange, Blue, Purple
+- **Semantic:** Success, Warning, Error, Info
+
+### Typography
+- **Font:** Inter (Google Fonts)
+- **Sizes:** xs (0.75rem) → 4xl (2.25rem)
+
+### Spacing
+- **Scale:** 1 (0.25rem) → 20 (5rem)
+
+## 📝 Data Files
+
+All data stored in `/data` directory as JSON:
+- `feedback.json` - 23 jobs, 4 error groups
+- `effects.json` - Motion graphics, special effects, pricing
+- `prompts.json` - 5 prompt templates
+- `competition.json` - Competitors, SWOT analysis
+
+## 🚀 Deployment
+
+### Vercel (Recommended)
+
+```bash
+# Install Vercel CLI
+npm i -g vercel
+
+# Deploy
+vercel
+
+# Production
+vercel --prod
+```
+
+### Manual Build
+
+```bash
+npm run build
+npm start
+```
+
+## 📖 Documentation
+
+- **Quick Start:** See `QUICK_START_RND.md`
+- **Walkthrough:** See artifacts in `.gemini/antigravity/brain/`
 
 ## 🔧 Development
 
 ```bash
-# Development
+# Run dev server
 npm run dev
 
-# Build
+# Build for production
 npm run build
 
 # Start production server
 npm start
 
-# Lint
+# Lint code
 npm run lint
 ```
 
-## 📝 Environment Variables
-
-Required environment variables (auto-provided by Vercel):
-- `POSTGRES_URL` - Postgres connection string
-- `POSTGRES_PRISMA_URL` - Postgres pooling URL
-- `POSTGRES_URL_NON_POOLING` - Direct connection URL
-
 ## 📄 License
 
-© 2026 Fotober Media Company Limited. All rights reserved.
+Private - Fotober Internal Use Only
 
-## 🤝 Contact
+## 👥 Author
 
-- Website: fotober.com
-- Email: info@fotober.com
-- WhatsApp: +84 942 110 297
+R&D Specialist - Fotober AI Video
+
+---
+
+**Version:** 2.0  
+**Last Updated:** 01/02/2026  
+**Status:** ✅ Production Ready

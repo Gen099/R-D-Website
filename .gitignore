@@ -1,47 +1,56 @@
-# prod
-dist/
-.next/
-out/
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dev
-.yarn/
-!.yarn/releases
-.vscode/*
-!.vscode/launch.json
-!.vscode/*.code-snippets
-.idea/workspace.xml
-.idea/usage.statistics.xml
-.idea/shelf
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+.yarn/install-state.gz
 
-# deps
-node_modules/
-.wrangler
+# testing
+/coverage
 
-# env
-.env
-.env.local
-.env.production
-.dev.vars
+# next.js
+/.next/
+/out/
 
-# logs
-logs/
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+# production
+/build
 
 # misc
 .DS_Store
-.dev.vars
+*.pem
 
-# Next.js
-.next/
-out/
-build/
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env*.local
+.env
+
+# vercel
 .vercel
 
-# TypeScript
+# typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Logs
+logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
