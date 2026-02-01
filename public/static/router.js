@@ -23,6 +23,7 @@ class Router {
   navigate(path) {
     if (path === this.currentPath) return;
     
+    console.log('🔄 Navigating to:', path);
     window.history.pushState({}, '', path);
     this.currentPath = path;
     this.loadPage(path);
@@ -87,7 +88,11 @@ class Router {
 
 // Initialize router when DOM is ready
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => new Router());
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('✅ Router initialized');
+    new Router();
+  });
 } else {
+  console.log('✅ Router initialized');
   new Router();
 }
