@@ -1,0 +1,265 @@
+.container {
+    padding: var(--space-8);
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.header {
+    margin-bottom: var(--space-8);
+}
+
+.header h1 {
+    font-size: var(--text-4xl);
+    margin-bottom: var(--space-2);
+}
+
+.subtitle {
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+}
+
+.section {
+    margin-bottom: var(--space-12);
+}
+
+.section h2 {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-3);
+    border-bottom: 2px solid var(--color-border);
+}
+
+/* Architecture */
+.architectureGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-6);
+}
+
+.archCard {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    transition: all var(--transition-base);
+}
+
+.archCard:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+}
+
+.archIcon {
+    font-size: var(--text-4xl);
+    margin-bottom: var(--space-4);
+}
+
+.archCard h3 {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-4);
+    color: var(--color-primary);
+}
+
+.archCard ul {
+    list-style: none;
+    padding: 0;
+}
+
+.archCard li {
+    padding: var(--space-2) 0;
+    font-size: var(--text-sm);
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.archCard li:last-child {
+    border-bottom: none;
+}
+
+/* Modules */
+.modulesGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-4);
+}
+
+.moduleCard {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    position: relative;
+}
+
+.moduleCard h3 {
+    font-size: var(--text-base);
+    margin-bottom: var(--space-2);
+}
+
+.moduleCard p {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-3);
+}
+
+.statusBadge {
+    display: inline-block;
+    padding: var(--space-1) var(--space-3);
+    color: white;
+    border-radius: var(--radius-full);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+}
+
+/* Table */
+.tableWrapper {
+    overflow-x: auto;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+}
+
+.table th {
+    background: var(--color-border-light);
+    padding: var(--space-4);
+    text-align: left;
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-sm);
+    border-bottom: 2px solid var(--color-border);
+}
+
+.table td {
+    padding: var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+    font-size: var(--text-sm);
+}
+
+.table code {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    background: var(--color-border-light);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-sm);
+}
+
+.methodBadge {
+    display: inline-block;
+    padding: var(--space-1) var(--space-2);
+    background: var(--color-info);
+    color: white;
+    border-radius: var(--radius-sm);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    font-family: var(--font-mono);
+}
+
+.statusDot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: var(--space-2);
+}
+
+/* Roadmap */
+.roadmap {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+}
+
+.phase {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.phaseHeader {
+    padding: var(--space-5);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.phaseHeader h3 {
+    font-size: var(--text-lg);
+    margin: 0;
+}
+
+.phaseStatus {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+}
+
+.phaseContent {
+    padding: var(--space-5);
+}
+
+.phaseContent ul {
+    list-style: none;
+    padding: 0;
+}
+
+.phaseContent li {
+    padding: var(--space-2) 0;
+    font-size: var(--text-sm);
+    line-height: 1.6;
+}
+
+/* Tech Stack */
+.techStack {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-6);
+}
+
+.techCategory {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+}
+
+.techCategory h3 {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-4);
+    color: var(--color-primary);
+}
+
+.techBadges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+
+.techBadge {
+    padding: var(--space-2) var(--space-4);
+    background: var(--color-primary-light);
+    color: white;
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: var(--space-4);
+    }
+
+    .header h1 {
+        font-size: var(--text-3xl);
+    }
+
+    .architectureGrid,
+    .modulesGrid,
+    .techStack {
+        grid-template-columns: 1fr;
+    }
+}
