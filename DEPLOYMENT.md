@@ -1,264 +1,272 @@
-# 🚀 Deployment Guide - Fotober R&D Intelligence Hub
+# Deployment Guide - Next.js on Vercel
 
-## ✅ GitHub Repository
-- **URL**: https://github.com/Gen099/FotoberRnD
-- **Branch**: main
-- **Status**: ✅ All code pushed successfully
+## Prerequisites
 
----
+- Node.js 18 or later
+- npm or yarn
+- Vercel account (free tier is fine)
+- Git repository (optional but recommended)
 
-## 🌐 Deploy to Cloudflare Pages (via Dashboard)
+## Step-by-Step Deployment
 
-### Step 1: Login Cloudflare
-1. Truy cập: https://dash.cloudflare.com
-2. Login với tài khoản Cloudflare
+### 1. Install Dependencies
 
-### Step 2: Create Pages Project
-1. Sidebar → **Pages** → **Create a project**
-2. Click **Connect to Git**
-3. Authorize GitHub (if not already)
-4. Select repository: **Gen099/FotoberRnD**
+**Important**: Due to PowerShell execution policy on Windows, you may need to use Command Prompt or enable scripts.
 
-### Step 3: Configure Build Settings
-```
-Project name: fotober-rd-hub
-Production branch: main
-Framework preset: None
-Build command: npm run build
-Build output directory: dist
-Root directory: /
+**Option A: Using Command Prompt (cmd.exe)**
+```cmd
+npm install
 ```
 
-### Step 4: Environment Variables (REQUIRED!)
-Add these two variables:
-
-**Variable 1:**
-```
-Name: OPENAI_API_KEY
-Value: [Your GenSpark API key from .dev.vars file]
+**Option B: Enable PowerShell Scripts (Run PowerShell as Administrator)**
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+npm install
 ```
 
-**Variable 2:**
-```
-Name: OPENAI_BASE_URL  
-Value: https://www.genspark.ai/api/llm_proxy/v1
-```
-
-**How to get OPENAI_API_KEY:**
-- Check `/home/user/webapp/.dev.vars` file in sandbox
-- Or get from GenSpark API Keys settings
-
-### Step 5: Deploy!
-1. Click **Save and Deploy**
-2. Wait ~2-3 minutes for build
-3. You'll receive URL: `https://fotober-rd-hub.pages.dev`
-
-### Step 6: Verify Deployment
-Test these URLs:
-- Homepage: `https://fotober-rd-hub.pages.dev/`
-- Analytics: `https://fotober-rd-hub.pages.dev/analytics`
-- AI Tools: `https://fotober-rd-hub.pages.dev/ai-tools`
-
----
-
-## 🗄️ D1 Database Setup (Optional but Recommended)
-
-**Note:** Website works without D1. D1 only enables AI usage logging.
-
-### Method 1: Via Cloudflare Dashboard (Recommended)
-
-#### 1. Create Database
-1. Sidebar → **D1** → **Create database**
-2. Database name: `fotober-rd-hub-db`
-3. Location: Automatic
-4. Click **Create**
-5. **Copy Database ID** (you'll need this)
-
-#### 2. Run Migration
-1. Click on database → **Console** tab
-2. Open file: `/home/user/webapp/migrations/0001_initial_schema.sql`
-3. Copy entire SQL content
-4. Paste into Console
-5. Click **Execute**
-6. Verify: You should see 5 tables created
-
-#### 3. Bind to Pages
-1. Go to **Pages** → **fotober-rd-hub** → **Settings** → **Functions**
-2. Scroll to **D1 database bindings**
-3. Click **Add binding**
-4. Settings:
-   ```
-   Variable name: DB
-   D1 database: fotober-rd-hub-db
-   ```
-5. Click **Save**
-
-#### 4. Redeploy
-1. Go to **Deployments** tab
-2. Find latest deployment
-3. Click **"..."** → **Retry deployment**
-4. Wait for redeploy to complete
-
-### Method 2: Via CLI (if you have working Cloudflare API token)
+### 2. Install Vercel CLI
 
 ```bash
-cd /home/user/webapp
-
-# Create database
-npx wrangler d1 create fotober-rd-hub-db
-
-# Copy database_id from output
-
-# Update wrangler.jsonc:
-# Add to d1_databases array with the database_id
-
-# Run migrations
-npx wrangler d1 migrations apply fotober-rd-hub-db --remote
+npm install -g vercel
 ```
 
----
+### 3. Login to Vercel
 
-## 📝 Deployment Checklist
+```bash
+vercel login
+```
 
-### Before Deployment
-- [x] Code complete and tested
-- [x] GitHub repository created and pushed
-- [ ] Cloudflare account ready
-- [ ] GitHub authorized in Cloudflare
-- [ ] OPENAI_API_KEY ready to paste
+Follow the prompts to authenticate with your Vercel account.
 
-### During Deployment
-- [ ] Connected to Gen099/FotoberRnD repository
-- [ ] Build command: `npm run build`
-- [ ] Output directory: `dist`
-- [ ] Added OPENAI_API_KEY environment variable
-- [ ] Added OPENAI_BASE_URL environment variable
-- [ ] Deployment successful
+### 4. Deploy to Vercel
 
-### After Pages Deploy
-- [ ] Verified homepage loads
-- [ ] Tested /analytics page
-- [ ] Tested /ai-tools page
-- [ ] Verified AI analysis works
+```bash
+# Deploy to preview
+vercel
 
-### D1 Database (Optional)
-- [ ] Created D1 database
-- [ ] Ran migration SQL
-- [ ] Bound D1 to Pages project
-- [ ] Redeployed Pages
-- [ ] Verified no errors
+# Follow the prompts:
+# - Set up and deploy? Yes
+# - Which scope? (Select your account)
+# - Link to existing project? No
+# - Project name? fotober-rd-hub (or your preferred name)
+# - Directory? ./ (current directory)
+# - Override settings? No
+```
 
----
+This will deploy your app to a preview URL (e.g., `fotober-rd-hub-xxx.vercel.app`).
 
-## 🔧 Troubleshooting
+### 5. Create Vercel Postgres Database
+
+1. Go to [Vercel Dashboard](https://vercel.com/dashboard)
+2. Select your project
+3. Go to **Storage** tab
+4. Click **Create Database**
+5. Select **Postgres**
+6. Choose a name (e.g., `fotober-rd-db`)
+7. Select region (choose closest to your users)
+8. Click **Create**
+
+The database will be automatically connected to your project and environment variables will be added.
+
+### 6. Initialize Database Schema
+
+1. In Vercel Dashboard → Storage → Your Postgres Database
+2. Click on **Query** tab
+3. Copy the entire content from `lib/db/schema.sql`
+4. Paste into the query editor
+5. Click **Run Query**
+
+This will create all necessary tables and indexes.
+
+### 7. Deploy to Production
+
+```bash
+vercel --prod
+```
+
+Your app is now live at `fotober-rd-hub.vercel.app` (or your custom domain).
+
+## Verifying Deployment
+
+### Test the Application
+
+1. Visit your production URL
+2. Navigate to `/documents`
+3. Try creating a new document
+4. View document details
+5. Test delete functionality
+
+### Test API Endpoints
+
+```bash
+# Replace with your actual URL
+export VERCEL_URL="https://fotober-rd-hub.vercel.app"
+
+# Health check
+curl $VERCEL_URL/api/health
+
+# Get documents
+curl $VERCEL_URL/api/documents
+
+# Get statistics
+curl $VERCEL_URL/api/analysis/statistics
+```
+
+## Local Development with Vercel Postgres
+
+To develop locally with the Vercel Postgres database:
+
+### 1. Link Local Project
+
+```bash
+vercel link
+```
+
+### 2. Pull Environment Variables
+
+```bash
+vercel env pull .env.local
+```
+
+This will download all environment variables (including `POSTGRES_URL`) to `.env.local`.
+
+### 3. Run Development Server
+
+```bash
+npm run dev
+```
+
+Your local app will now connect to the Vercel Postgres database.
+
+## Custom Domain (Optional)
+
+1. Go to Vercel Dashboard → Your Project → Settings → Domains
+2. Add your custom domain
+3. Follow DNS configuration instructions
+4. Wait for DNS propagation (usually 5-10 minutes)
+
+## Environment Variables
+
+Vercel automatically provides these when you connect Postgres:
+
+- `POSTGRES_URL` - Main connection string
+- `POSTGRES_PRISMA_URL` - For Prisma (with connection pooling)
+- `POSTGRES_URL_NO_SSL` - Without SSL
+- `POSTGRES_URL_NON_POOLING` - Direct connection
+- `POSTGRES_USER` - Database user
+- `POSTGRES_HOST` - Database host
+- `POSTGRES_PASSWORD` - Database password
+- `POSTGRES_DATABASE` - Database name
+
+## Troubleshooting
 
 ### Build Fails
-- Check build logs in Cloudflare Pages
-- Verify build command is `npm run build`
-- Verify output directory is `dist`
-- Try redeploying (usually fixes it)
 
-### AI Tools Not Working
-- Verify OPENAI_API_KEY is set correctly
-- Verify OPENAI_BASE_URL is set correctly
-- Check browser console for errors
-- Try with different AI provider (Gemini is default)
+```bash
+# Clear cache and rebuild
+rm -rf .next
+npm run build
+```
 
-### D1 Database Issues
-- Verify binding variable name is exactly `DB`
-- Verify migration SQL executed without errors
-- Check Pages Functions logs
-- Redeploy after binding changes
+### Database Connection Error
 
-### Environment Variables Not Applied
-- Go to Settings → Environment variables
-- Verify both variables are present
-- If missing, add them and redeploy
-- Environment variables need redeploy to take effect
+1. Check Vercel Dashboard → Storage → Postgres → Settings
+2. Verify database is running
+3. Check environment variables in Vercel Dashboard → Settings → Environment Variables
+
+### PowerShell Script Error
+
+```powershell
+# Run PowerShell as Administrator
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+### Port Already in Use (Local Dev)
+
+```bash
+# Kill process on port 3000
+# Windows:
+netstat -ano | findstr :3000
+taskkill /PID <PID> /F
+
+# Or use different port
+npm run dev -- -p 3001
+```
+
+## Monitoring & Logs
+
+### View Deployment Logs
+
+1. Vercel Dashboard → Your Project → Deployments
+2. Click on a deployment
+3. View **Build Logs** and **Function Logs**
+
+### View Database Logs
+
+1. Vercel Dashboard → Storage → Your Postgres Database
+2. Click on **Logs** tab
+
+## Updating Your App
+
+```bash
+# Make changes to your code
+git add .
+git commit -m "Your changes"
+git push
+
+# Or deploy directly
+vercel --prod
+```
+
+Vercel will automatically deploy on every push to your main branch if connected to Git.
+
+## Performance Optimization
+
+### Enable Edge Runtime (Optional)
+
+For faster response times, you can enable Edge Runtime for API routes:
+
+```typescript
+// app/api/documents/route.ts
+export const runtime = 'edge';
+```
+
+### Add Caching
+
+```typescript
+// app/documents/page.tsx
+export const revalidate = 60; // Revalidate every 60 seconds
+```
+
+## Security Best Practices
+
+1. **Never commit `.env.local`** - Already in `.gitignore`
+2. **Use environment variables** for all secrets
+3. **Enable HTTPS** - Automatic on Vercel
+4. **Add rate limiting** - Consider Vercel Edge Middleware
+5. **Validate inputs** - Already implemented in API routes
+
+## Next Steps
+
+1. ✅ Deploy to Vercel
+2. ✅ Setup Postgres database
+3. ✅ Initialize schema
+4. ⏳ Add sample data
+5. ⏳ Implement Analytics page
+6. ⏳ Implement History page
+7. ⏳ Add authentication (NextAuth.js)
+8. ⏳ Setup custom domain
+9. ⏳ Configure CI/CD with GitHub Actions
+
+## Support
+
+If you encounter any issues:
+
+1. Check [Vercel Documentation](https://vercel.com/docs)
+2. Check [Next.js Documentation](https://nextjs.org/docs)
+3. Check [Vercel Postgres Documentation](https://vercel.com/docs/storage/vercel-postgres)
+4. Contact Fotober support: info@fotober.com
 
 ---
 
-## 🌟 Post-Deployment
-
-### Custom Domain (Optional)
-1. Pages → fotober-rd-hub → **Custom domains**
-2. Click **Set up a custom domain**
-3. Enter your domain (e.g., `rd.fotober.com`)
-4. Follow DNS configuration instructions
-5. Wait for SSL certificate (usually ~5 minutes)
-
-### Analytics
-- Cloudflare provides built-in analytics
-- View in Pages → fotober-rd-hub → **Analytics**
-- See page views, bandwidth, errors, etc.
-
-### Monitoring
-- Set up alerts in Cloudflare
-- Monitor error rates
-- Track performance metrics
-
----
-
-## 📊 What You Get
-
-### Production URLs
-- **Primary**: `https://fotober-rd-hub.pages.dev`
-- **Branch**: `https://main.fotober-rd-hub.pages.dev`
-- **Custom**: `https://your-domain.com` (if configured)
-
-### Features Available
-✅ Homepage with stats dashboard  
-✅ Analytics page with 4 charts  
-✅ AI Tools with 4 analysis types  
-✅ Multi-AI provider support (Gemini, GLM, OpenAI, Claude)  
-✅ Document management foundation  
-✅ Responsive design  
-✅ SSL certificate (automatic)  
-✅ Global CDN (automatic)  
-✅ Automatic deployments (on git push)  
-
-### Performance
-- **Global Edge Network**: Deployed to 300+ cities
-- **Fast Response**: <100ms globally
-- **SSL/TLS**: Automatic HTTPS
-- **DDoS Protection**: Included
-- **Unlimited Bandwidth**: On free plan
-
----
-
-## 🎯 Success Metrics
-
-After deployment, verify:
-- [ ] Homepage loads in <2 seconds
-- [ ] All navigation links work
-- [ ] AI Tools can analyze text
-- [ ] Charts render correctly
-- [ ] Mobile responsive works
-- [ ] No console errors
-
----
-
-## 📞 Support
-
-If you encounter issues:
-1. Check Cloudflare Pages build logs
-2. Check browser console for errors
-3. Verify environment variables are set
-4. Try redeploying
-5. Check GitHub repository is up to date
-
----
-
-## 🎉 Congratulations!
-
-Once deployed, you'll have:
-- ✅ Production-ready web application
-- ✅ AI-powered analysis tools
-- ✅ Beautiful UI with orange gradient theme
-- ✅ Global CDN distribution
-- ✅ Automatic HTTPS
-- ✅ Continuous deployment (git push = auto deploy)
-
-**Estimated Total Time:** 10-15 minutes
-
-**You're live! 🚀**
+**Happy Deploying! 🚀**
