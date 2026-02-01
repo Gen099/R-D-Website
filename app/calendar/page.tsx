@@ -1,15 +1,81 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styles from './page.module.css'
+
+interface DayNotes {
+    todo: string
+    timesheet: {
+        timeIn: string
+        timeOut: string
+        notes: string
+    }
+    diary: string
+    meeting: {
+        title: string
+        timeStart: string
+        timeEnd: string
+        content: string
+    }
+}
 
 export default function CalendarPage() {
     const [currentDate, setCurrentDate] = useState(new Date())
     const [selectedDate, setSelectedDate] = useState<Date | null>(null)
     const [activeTab, setActiveTab] = useState<'todo' | 'timesheet' | 'diary' | 'meeting'>('todo')
 
-    // Notes data structure
-    const [notes, setNotes] = useState<{ [key: string]: any }>({})
+    // Notes data from localStorage
+    const [notes, setNotes] = useState<{ [key: string]: DayNotes }>({})
+
+    // Current editing values
+    const [todoText, setTodoText] = useState('')
+    const [timeIn, setTimeIn] = useState('')
+    const [timeOut, setTimeOut] = useState('')
+    const [timesheetNotes, setTimesheetNotes] = useState('')
+    const [diaryText, setDiaryText] = useState('')
+    const [meetingTitle, setMeetingTitle] = useState('')
+    const [meetingStart, setMeetingStart] = useState('')
+    const [meetingEnd, setMeetingEnd] = useState('')
+    const [meetingContent, setMeetingContent] = useState('')
+
+    // Load notes from localStorage on mount
+    useEffect(() => {
+        const savedNotes = localStorage.getItem('calendar-notes')
+        if (savedNotes) {
+            setNotes(JSON.parse(savedNotes))
+        }
+    }, [])
+
+    // Load note data when date changes
+    useEffect(() => {
+        if (selectedDate) {
+            const dateKey = getDateKey(selectedDate)
+            const dayNote = notes[dateKey]
+
+            if (dayNote) {
+                setTodoText(dayNote.todo || '')
+                setTimeIn(dayNote.timesheet?.timeIn || '')
+                setTimeOut(dayNote.timesheet?.timeOut || '')
+                setTimesheetNotes(dayNote.timesheet?.notes || '')
+                setDiaryText(dayNote.diary || '')
+                setMeetingTitle(dayNote.meeting?.title || '')
+                setMeetingStart(dayNote.meeting?.timeStart || '')
+                setMeetingEnd(dayNote.meeting?.timeEnd || '')
+                setMeetingContent(dayNote.meeting?.content || '')
+            } else {
+                // Reset if no data
+                setTodoText('')
+                setTimeIn('')
+                setTimeOut('')
+                setTimesheetNotes('')
+                setDiaryText('')
+                setMeetingTitle('')
+                setMeetingStart('')
+                setMeetingEnd('')
+                setMeetingContent('')
+            }
+        }
+    }, [selectedDate, notes])
 
     // Calendar logic
     const year = currentDate.getFullYear()
@@ -45,6 +111,36 @@ export default function CalendarPage() {
 
     const getDateKey = (date: Date) => {
         return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+    }
+
+    const saveNotes = () => {
+        if (!selectedDate) return
+
+        const dateKey = getDateKey(selectedDate)
+        const dayNote: DayNotes = {
+            todo: todoText,
+            timesheet: {
+                timeIn,
+                timeOut,
+                notes: timesheetNotes
+            },
+            diary: diaryText,
+            meeting: {
+                title: meetingTitle,
+                timeStart: meetingStart,
+                timeEnd: meetingEnd,
+                content: meetingContent
+            }
+        }
+
+        const updatedNotes = {
+            ...notes,
+            [dateKey]: dayNote
+        }
+
+        setNotes(updatedNotes)
+        localStorage.setItem('calendar-notes', JSON.stringify(updatedNotes))
+        alert('✅ Đã lưu thành công!')
     }
 
     const selectedDateKey = selectedDate ? getDateKey(selectedDate) : null
@@ -83,6 +179,12 @@ export default function CalendarPage() {
                                 const isToday = dateKey === todayKey
                                 const isSelected = selectedDate && dateKey === selectedDateKey
                                 const lunarDay = getLunarDate(date)
+                                const hasNote = notes[dateKey] && (
+                                    notes[dateKey].todo ||
+                                    notes[dateKey].diary ||
+                                    notes[dateKey].timesheet?.notes ||
+                                    notes[dateKey].meeting?.title
+                                )
 
                                 return (
                                     <div
@@ -92,7 +194,7 @@ export default function CalendarPage() {
                                     >
                                         <div className={styles.solarDay}>{day}</div>
                                         <div className={styles.lunarDay}>{lunarDay}</div>
-                                        {notes[dateKey] && <div className={styles.hasNotes}>•</div>}
+                                        {hasNote && <div className={styles.hasNotes}>•</div>}
                                     </div>
                                 )
                             })}
@@ -150,6 +252,8 @@ export default function CalendarPage() {
                                             className={styles.textarea}
                                             placeholder="- [ ] Task 1&#10;- [ ] Task 2&#10;- [x] Completed task"
                                             rows={10}
+                                            value={todoText}
+                                            onChange={(e) => setTodoText(e.target.value)}
                                         ></textarea>
                                     </div>
                                 )}
@@ -159,16 +263,30 @@ export default function CalendarPage() {
                                         <h4>Chấm công</h4>
                                         <div className={styles.timeInputs}>
                                             <label>
-                                                Giờ vào: <input type="time" className={styles.timeInput} />
+                                                Giờ vào:
+                                                <input
+                                                    type="time"
+                                                    className={styles.timeInput}
+                                                    value={timeIn}
+                                                    onChange={(e) => setTimeIn(e.target.value)}
+                                                />
                                             </label>
                                             <label>
-                                                Giờ ra: <input type="time" className={styles.timeInput} />
+                                                Giờ ra:
+                                                <input
+                                                    type="time"
+                                                    className={styles.timeInput}
+                                                    value={timeOut}
+                                                    onChange={(e) => setTimeOut(e.target.value)}
+                                                />
                                             </label>
                                         </div>
                                         <textarea
                                             className={styles.textarea}
                                             placeholder="Ghi chú công việc trong ngày..."
                                             rows={6}
+                                            value={timesheetNotes}
+                                            onChange={(e) => setTimesheetNotes(e.target.value)}
                                         ></textarea>
                                     </div>
                                 )}
@@ -180,6 +298,8 @@ export default function CalendarPage() {
                                             className={styles.textarea}
                                             placeholder="Viết nhật ký công việc..."
                                             rows={10}
+                                            value={diaryText}
+                                            onChange={(e) => setDiaryText(e.target.value)}
                                         ></textarea>
                                     </div>
                                 )}
@@ -191,24 +311,40 @@ export default function CalendarPage() {
                                             type="text"
                                             className={styles.input}
                                             placeholder="Tiêu đề cuộc họp"
+                                            value={meetingTitle}
+                                            onChange={(e) => setMeetingTitle(e.target.value)}
                                         />
                                         <div className={styles.timeInputs}>
                                             <label>
-                                                Giờ bắt đầu: <input type="time" className={styles.timeInput} />
+                                                Giờ bắt đầu:
+                                                <input
+                                                    type="time"
+                                                    className={styles.timeInput}
+                                                    value={meetingStart}
+                                                    onChange={(e) => setMeetingStart(e.target.value)}
+                                                />
                                             </label>
                                             <label>
-                                                Giờ kết thúc: <input type="time" className={styles.timeInput} />
+                                                Giờ kết thúc:
+                                                <input
+                                                    type="time"
+                                                    className={styles.timeInput}
+                                                    value={meetingEnd}
+                                                    onChange={(e) => setMeetingEnd(e.target.value)}
+                                                />
                                             </label>
                                         </div>
                                         <textarea
                                             className={styles.textarea}
                                             placeholder="Nội dung cuộc họp, người tham gia..."
                                             rows={6}
+                                            value={meetingContent}
+                                            onChange={(e) => setMeetingContent(e.target.value)}
                                         ></textarea>
                                     </div>
                                 )}
 
-                                <button className={styles.saveBtn}>💾 Lưu</button>
+                                <button className={styles.saveBtn} onClick={saveNotes}>💾 Lưu</button>
                             </div>
                         </>
                     )}
