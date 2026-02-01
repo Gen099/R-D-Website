@@ -1,0 +1,264 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.modal {
+    background: white;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 1200px;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid #e0e0e0;
+    background: #fafafa;
+    border-radius: 8px 8px 0 0;
+}
+
+.title {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.type {
+    font-size: 0.7em;
+    background: #e3f2fd;
+    color: #1565c0;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.actionButton {
+    padding: 8px 12px;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85em;
+    transition: all 0.2s;
+    text-decoration: none;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.actionButton:hover {
+    background: #f5f5f5;
+    border-color: #ccc;
+}
+
+.closeButton {
+    padding: 8px 12px;
+    background: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: bold;
+    transition: all 0.2s;
+    line-height: 1;
+}
+
+.closeButton:hover {
+    background: #d32f2f;
+}
+
+/* Content */
+.content {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    background: #fafafa;
+    border-radius: 0 0 8px 8px;
+}
+
+/* Image Viewer */
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #000;
+}
+
+/* Video Viewer */
+.video {
+    width: 100%;
+    height: 100%;
+    background: #000;
+}
+
+/* Iframe Viewer */
+.iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: white;
+}
+
+/* Loading State */
+.loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #666;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #1976d2;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 16px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loading p {
+    font-size: 0.9em;
+    margin-top: 12px;
+}
+
+/* Error State */
+.error {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #666;
+    max-width: 400px;
+}
+
+.errorIcon {
+    font-size: 4rem;
+    margin-bottom: 16px;
+}
+
+.error h3 {
+    font-size: 1.3em;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.error p {
+    font-size: 0.9em;
+    margin-bottom: 20px;
+    color: #666;
+}
+
+.errorLink {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #1976d2;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.errorLink:hover {
+    background: #1565c0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .overlay {
+        padding: 0;
+    }
+
+    .modal {
+        max-width: 100%;
+        height: 100vh;
+        border-radius: 0;
+    }
+
+    .header {
+        border-radius: 0;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .title {
+        font-size: 0.95em;
+        flex: 1 1 100%;
+    }
+
+    .actions {
+        flex: 1 1 100%;
+        justify-content: flex-end;
+    }
+
+    .actionButton {
+        font-size: 0.75em;
+        padding: 6px 10px;
+    }
+}

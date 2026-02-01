@@ -2,12 +2,17 @@
 
 import { useState, useEffect } from 'react'
 import styles from './page.module.css'
+import DocumentViewer from '@/components/DocumentViewer'
 
 export default function ResourcesPage() {
     const [data, setData] = useState<any>(null)
     const [activeCategory, setActiveCategory] = useState('all')
     const [searchTerm, setSearchTerm] = useState('')
     const [selectedType, setSelectedType] = useState('all')
+    const [viewerOpen, setViewerOpen] = useState(false)
+    const [viewerUrl, setViewerUrl] = useState('')
+    const [viewerTitle, setViewerTitle] = useState('')
+
 
     useEffect(() => {
         fetch('/data/resources.json')
@@ -163,14 +168,26 @@ export default function ResourcesPage() {
                                 ))}
                             </div>
 
-                            <a
-                                href={resource.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className={styles.openButton}
-                            >
-                                📖 Mở trong Notion →
-                            </a>
+                            <div className={styles.cardActions}>
+                                <button
+                                    onClick={() => {
+                                        setViewerUrl(resource.url)
+                                        setViewerTitle(resource.titleVi)
+                                        setViewerOpen(true)
+                                    }}
+                                    className={styles.previewButton}
+                                >
+                                    👁️ Preview
+                                </button>
+                                <a
+                                    href={resource.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className={styles.openButton}
+                                >
+                                    📖 Mở trong Notion →
+                                </a>
+                            </div>
                         </div>
                     ))
                 ) : (
@@ -216,6 +233,17 @@ export default function ResourcesPage() {
                     💡 Tất cả tài liệu được lưu trữ trên Notion. Click vào từng tài liệu để xem chi tiết.
                 </p>
             </div>
+
+            {/* Document Viewer Modal */}
+            {viewerOpen && (
+                <DocumentViewer
+                    url={viewerUrl}
+                    type="notion"
+                    title={viewerTitle}
+                    onClose={() => setViewerOpen(false)}
+                />
+            )}
         </div>
     )
 }
+
