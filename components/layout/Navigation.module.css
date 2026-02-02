@@ -92,6 +92,49 @@
     font-size: var(--text-xs);
 }
 
+/* Toggle Button */
+.toggleBtn {
+    position: fixed;
+    top: 20px;
+    left: calc(var(--sidebar-width) - 20px);
+    background: var(--color-primary);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1001;
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.toggleBtn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.toggleBtn:active {
+    transform: scale(0.95);
+}
+
+/* Collapsed State */
+.nav {
+    transition: transform 0.3s ease;
+}
+
+.nav.collapsed {
+    transform: translateX(calc(-1 * var(--sidebar-width)));
+}
+
+.nav.collapsed .toggleBtn {
+    left: -20px;
+}
+
 /* Mobile */
 @media (max-width: 768px) {
     .nav {

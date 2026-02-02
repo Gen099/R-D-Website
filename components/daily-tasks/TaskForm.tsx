@@ -25,10 +25,20 @@ export default function TaskForm({ task, onClose, onSubmit }: TaskFormProps) {
 
     const [collaboratorInput, setCollaboratorInput] = useState('')
     const [tagInput, setTagInput] = useState('')
+    const [isSubmitting, setIsSubmitting] = useState(false)
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
-        onSubmit(formData)
+        if (isSubmitting) return
+
+        setIsSubmitting(true)
+        try {
+            await onSubmit(formData)
+        } catch (error) {
+            console.error('Error submitting form:', error)
+        } finally {
+            setIsSubmitting(false)
+        }
     }
 
     const addCollaborator = () => {
@@ -213,11 +223,11 @@ export default function TaskForm({ task, onClose, onSubmit }: TaskFormProps) {
 
                     {/* Actions */}
                     <div className={styles.actions}>
-                        <button type="button" onClick={onClose} className={styles.cancelBtn}>
+                        <button type="button" onClick={onClose} className={styles.cancelBtn} disabled={isSubmitting}>
                             Cancel
                         </button>
-                        <button type="submit" className={styles.submitBtn}>
-                            {task ? 'Update Task' : 'Create Task'}
+                        <button type="submit" className={styles.submitBtn} disabled={isSubmitting}>
+                            {isSubmitting ? 'Saving...' : (task ? 'Update Task' : 'Create Task')}
                         </button>
                     </div>
                 </form>

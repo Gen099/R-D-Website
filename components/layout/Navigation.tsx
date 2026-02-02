@@ -2,6 +2,8 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import ThemeToggle from '../ThemeToggle'
+import { useSidebar } from '@/lib/hooks/useSidebar'
 import styles from './Navigation.module.css'
 
 const navItems = [
@@ -20,9 +22,19 @@ const navItems = [
 
 export default function Navigation() {
     const pathname = usePathname()
+    const { collapsed, toggle, mounted } = useSidebar()
 
     return (
-        <nav className={styles.nav}>
+        <nav className={`${styles.nav} ${collapsed && mounted ? styles.collapsed : ''}`}>
+            {/* Toggle Button */}
+            <button
+                onClick={toggle}
+                className={styles.toggleBtn}
+                title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+            >
+                {collapsed ? '☰' : '✕'}
+            </button>
+
             <div className={styles.header}>
                 <h1 className={styles.logo}>
                     <span className={styles.logoIcon}>🎬</span>
@@ -46,7 +58,8 @@ export default function Navigation() {
             </ul>
 
             <div className={styles.footer}>
-                <p className={styles.version}>v2.0.0</p>
+                <ThemeToggle />
+                <p className={styles.version}>v2.1.0</p>
                 <p className={styles.copyright}>© 2026 Fotober</p>
             </div>
         </nav>
