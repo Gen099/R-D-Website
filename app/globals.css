@@ -21,8 +21,10 @@
     --color-border: hsl(0, 0%, 90%);
     --color-border-light: hsl(0, 0%, 95%);
     --color-text: hsl(0, 0%, 13%);
-    --color-text-muted: hsl(0, 0%, 45%);
-    --color-text-light: hsl(0, 0%, 60%);
+    --color-text-muted: hsl(0, 0%, 30%);
+    /* Was 45% - now darker for better contrast */
+    --color-text-light: hsl(0, 0%, 45%);
+    /* Was 60% - now darker */
 
     /* Error Groups */
     --color-error-a: hsl(0, 84%, 60%);
