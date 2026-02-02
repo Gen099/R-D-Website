@@ -1,0 +1,65 @@
+/* Responsive Template - Apply to all remaining pages */
+
+/* Tablet (1024px) */
+@media (max-width: 1024px) {
+    .container {
+        padding: 20px;
+    }
+
+    /* Grid cards: 4 col → 2 col */
+    .grid,
+    .statsGrid,
+    .resourceGrid,
+    .cardGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile (768px) */
+@media (max-width: 768px) {
+    .container {
+        padding: 16px 12px;
+    }
+
+    .header h1 {
+        font-size: 1.5em;
+    }
+
+    /* Grid cards: 2 col → 1 col */
+    .grid,
+    .statsGrid,
+    .resourceGrid,
+    .cardGrid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Buttons full width */
+    button,
+    .btn,
+    .button {
+        width: 100%;
+    }
+
+    /* Stack flex containers */
+    .flex,
+    .row {
+        flex-direction: column;
+    }
+}
+
+/* Small Mobile (480px) */
+@media (max-width: 480px) {
+    .container {
+        padding: 12px 8px;
+    }
+
+    .header h1 {
+        font-size: 1.3em;
+    }
+
+    /* Further reduce spacing */
+    .card,
+    .section {
+        padding: 14px;
+    }
+}

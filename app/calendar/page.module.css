@@ -309,9 +309,30 @@
 }
 
 /* Responsive */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .container {
+        padding: 20px;
+    }
+
+    .eventsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .calendarFrame {
+        height: 600px;
+    }
+}
+
+/* Mobile */
 @media (max-width: 768px) {
     .container {
-        padding: 16px;
+        padding: 16px 12px;
+    }
+
+    .header {
+        padding: 20px;
     }
 
     .header h1 {
@@ -321,6 +342,18 @@
     .headerContent {
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    .headerActions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .authBtn,
+    .createBtn,
+    .instructionBtn {
+        width: 100%;
+        text-align: center;
     }
 
     .calendarFrame {
@@ -333,5 +366,41 @@
 
     .link {
         text-align: center;
+        width: 100%;
+    }
+
+    .eventsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .instructionsPanel,
+    .loginPrompt {
+        padding: 20px;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .container {
+        padding: 12px 8px;
+    }
+
+    .header {
+        padding: 16px;
+    }
+
+    .header h1 {
+        font-size: 1.3em;
+    }
+
+    .calendarFrame {
+        height: 400px;
+    }
+
+    .step,
+    .note,
+    .benefits {
+        padding: 12px;
+        font-size: 0.9em;
     }
 }
