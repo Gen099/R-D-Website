@@ -143,6 +143,11 @@
         height: auto;
     }
 
+    .toggleBtn {
+        display: none;
+        /* Hide toggle on mobile */
+    }
+
     .navList {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
