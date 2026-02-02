@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import styles from './page.module.css'
 import type { DailyTask, DailySummary } from '@/types/daily-tasks'
+import { getTasks, saveTask, deleteTask } from '@/lib/taskStorage'
 
 // Dynamic import to fix client-side errors
 const TaskForm = dynamic(
@@ -22,18 +23,13 @@ export default function DailyTasksPage() {
         loadTasks()
     }, [currentDate])
 
-    const loadTasks = async () => {
+    const loadTasks = () => {
         setLoading(true)
         try {
-            const response = await fetch(`/api/daily-tasks?date=${currentDate}`)
-            if (!response.ok) {
-                throw new Error('Failed to fetch tasks')
-            }
-            const data = await response.json()
+            const data = getTasks(currentDate)
             setSummary(data)
         } catch (error) {
             console.error('Failed to load tasks:', error)
-            // Set empty summary on error
             setSummary({
                 date: currentDate,
                 tasks: [],
@@ -51,27 +47,15 @@ export default function DailyTasksPage() {
 
     const handleSaveTask = async (taskData: any) => {
         try {
-            const response = await fetch('/api/daily-tasks', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    date: currentDate,
-                    task: editingTask ? { ...taskData, id: editingTask.id } : taskData
-                })
-            })
-
-            if (!response.ok) {
-                throw new Error('Failed to save task')
-            }
-
-            // Reload tasks and close form
-            await loadTasks()
+            const taskToSave = editingTask ? { ...taskData, id: editingTask.id } : taskData
+            const updatedSummary = saveTask(currentDate, taskToSave)
+            setSummary(updatedSummary)
             setShowTaskForm(false)
             setEditingTask(null)
         } catch (error) {
             console.error('Failed to save task:', error)
             alert('Lỗi khi lưu task. Vui lòng thử lại.')
-            throw error // Re-throw so TaskForm knows it failed
+            throw error
         }
     }
 
@@ -79,15 +63,11 @@ export default function DailyTasksPage() {
         if (!confirm('Xóa task này?')) return
 
         try {
-            const response = await fetch(`/api/daily-tasks?date=${currentDate}&taskId=${taskId}`, {
-                method: 'DELETE'
-            })
-
-            if (response.ok) {
-                await loadTasks()
-            }
+            const updatedSummary = deleteTask(currentDate, taskId)
+            setSummary(updatedSummary)
         } catch (error) {
             console.error('Failed to delete task:', error)
+            alert('Lỗi khi xóa task')
         }
     }
 
