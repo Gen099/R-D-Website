@@ -71,6 +71,83 @@ export default function DailyTasksPage() {
         }
     }
 
+    const generatePDF = () => {
+        if (!summary || summary.tasks.length === 0) {
+            alert('Không có task nào để export!')
+            return
+        }
+
+        try {
+            // Create a simple HTML-based PDF
+            const printWindow = window.open('', '', 'height=800,width=600')
+            if (!printWindow) {
+                alert('Vui lòng cho phép popup để download PDF')
+                return
+            }
+
+            const html = `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Daily Tasks - ${formatDate(currentDate)}</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; padding: 20px; }
+                        h1 { color: #4285f4; border-bottom: 3px solid #4285f4; padding-bottom: 10px; }
+                        .summary { background: #f5f5f5; padding: 15px; margin: 20px 0; border-radius: 8px; }
+                        .summary-item { display: inline-block; margin-right: 30px; }
+                        .task { border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 8px; }
+                        .task-header { font-weight: bold; font-size: 1.1em; color: #333; margin-bottom: 10px; }
+                        .task-time { color: #666; }
+                        .task-description { margin: 10px 0; }
+                        .status { display: inline-block; padding: 4px 12px; border-radius: 12px; font-size: 0.9em; }
+                        .status.completed { background: #e8f5e9; color: #2e7d32; }
+                        .status.in-progress { background: #fff3e0; color: #e65100; }
+                        .status.pending { background: #e3f2fd; color: #1565c0; }
+                    </style>
+                </head>
+                <body>
+                    <h1>📋 Daily Tasks Report</h1>
+                    <p><strong>Ngày:</strong> ${formatDate(currentDate)}</p>
+                    
+                    <div class="summary">
+                        <div class="summary-item"><strong>Tổng tasks:</strong> ${summary.totalTasks}</div>
+                        <div class="summary-item"><strong>Hoàn thành:</strong> ${summary.completedTasks}</div>
+                        <div class="summary-item"><strong>Tổng thời gian:</strong> ${formatDuration(summary.totalDuration)}</div>
+                        <div class="summary-item"><strong>Hiệu suất:</strong> ${summary.productivity}%</div>
+                    </div>
+
+                    <h2>Chi tiết Tasks</h2>
+                    ${summary.tasks.map(task => `
+                        <div class="task">
+                            <div class="task-header">
+                                ${task.title}
+                                <span class="status ${task.status}">${task.status}</span>
+                            </div>
+                            <div class="task-time">
+                                ⏰ ${task.startTime} - ${task.endTime} (${formatDuration(task.duration)})
+                            </div>
+                            ${task.description ? `<div class="task-description">📝 ${task.description}</div>` : ''}
+                            ${task.result ? `<div class="task-description">✅ ${task.result}</div>` : ''}
+                            ${task.collaborators.length > 0 ? `<div>👥 ${task.collaborators.join(', ')}</div>` : ''}
+                        </div>
+                    `).join('')}
+
+                    <script>
+                        window.print()
+                        setTimeout(() => window.close(), 100)
+                    </script>
+                </body>
+                </html>
+            `
+
+            printWindow.document.write(html)
+            printWindow.document.close()
+        } catch (error) {
+            console.error('PDF generation error:', error)
+            alert('Lỗi khi tạo PDF')
+        }
+    }
+
     const changeDate = (days: number) => {
         const newDate = new Date(currentDate)
         newDate.setDate(newDate.getDate() + days)
@@ -182,7 +259,7 @@ export default function DailyTasksPage() {
                 >
                     ➕ New Task
                 </button>
-                <button className={styles.pdfBtn}>
+                <button onClick={generatePDF} className={styles.pdfBtn}>
                     📄 Generate PDF
                 </button>
             </div>
