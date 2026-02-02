@@ -12,6 +12,7 @@ const navItems = [
     { href: '/competition', label: 'Phân tích Cạnh tranh', icon: '🎯' },
     { href: '/work-plan', label: 'Kế hoạch & Tiến độ', icon: '📋' },
     { href: '/calendar', label: 'Lịch Làm việc', icon: '📅' },
+    { href: '/daily-tasks', label: 'Daily Task Manager', icon: '✅' },
     { href: '/operations', label: 'Quy trình Vận hành', icon: '⚙️' },
     { href: '/platform', label: 'AI Platform Design', icon: '🏗️' },
     { href: '/resources', label: 'Tài nguyên', icon: '📚' },

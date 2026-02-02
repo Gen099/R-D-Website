@@ -194,18 +194,6 @@ export default function CalendarPage() {
                 </div>
             )}
 
-            <div className={styles.quickLinks}>
-                <a href="https://calendar.google.com" target="_blank" rel="noopener noreferrer" className={styles.link}>
-                    🔗 Mở Google Calendar
-                </a>
-                <a href="https://calendar.google.com/calendar/u/0/r/settings" target="_blank" rel="noopener noreferrer" className={styles.link}>
-                    ⚙️ Calendar Settings
-                </a>
-                <a href="https://support.google.com/calendar/answer/41207" target="_blank" rel="noopener noreferrer" className={styles.link}>
-                    📚 Hướng dẫn embed
-                </a>
-            </div>
-
             {showEventForm && (
                 <EventForm
                     onClose={() => setShowEventForm(false)}
