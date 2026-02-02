@@ -1,9 +1,15 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import dynamic from 'next/dynamic'
 import styles from './page.module.css'
-import TaskForm from '@/components/daily-tasks/TaskForm'
-import { DailyTask, DailySummary } from '@/types/daily-tasks'
+import type { DailyTask, DailySummary } from '@/types/daily-tasks'
+
+// Dynamic import to fix client-side errors
+const TaskForm = dynamic(
+    () => import('@/components/daily-tasks/TaskForm'),
+    { ssr: false }
+)
 
 export default function DailyTasksPage() {
     const [currentDate, setCurrentDate] = useState(new Date().toISOString().split('T')[0])
@@ -20,10 +26,24 @@ export default function DailyTasksPage() {
         setLoading(true)
         try {
             const response = await fetch(`/api/daily-tasks?date=${currentDate}`)
+            if (!response.ok) {
+                throw new Error('Failed to fetch tasks')
+            }
             const data = await response.json()
             setSummary(data)
         } catch (error) {
             console.error('Failed to load tasks:', error)
+            // Set empty summary on error
+            setSummary({
+                date: currentDate,
+                tasks: [],
+                totalDuration: 0,
+                completedTasks: 0,
+                totalTasks: 0,
+                collaborators: [],
+                categoryBreakdown: {},
+                productivity: 0,
+            })
         } finally {
             setLoading(false)
         }
