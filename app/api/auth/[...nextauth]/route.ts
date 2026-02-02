@@ -30,6 +30,10 @@ export const authOptions: NextAuthOptions = {
             return session
         },
     },
+    pages: {
+        signIn: '/calendar',
+        error: '/calendar',
+    },
     secret: process.env.NEXTAUTH_SECRET,
 }
 
