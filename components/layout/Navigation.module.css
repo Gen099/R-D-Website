@@ -92,34 +92,40 @@
     font-size: var(--text-xs);
 }
 
-/* Toggle Button */
-.toggleBtn {
-    position: fixed;
-    top: 20px;
-    left: calc(var(--sidebar-width) - 20px);
-    background: var(--color-primary);
-    color: white;
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+/* Edge Toggle Strip */
+.edgeToggle {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 20px;
+    background: rgba(66, 133, 244, 0.1);
     cursor: pointer;
-    z-index: 1001;
-    font-size: 1.2em;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
+    border-left: 2px solid rgba(66, 133, 244, 0.2);
+    z-index: 10;
 }
 
-.toggleBtn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+.edgeToggle:hover {
+    background: rgba(66, 133, 244, 0.2);
+    border-left-color: rgba(66, 133, 244, 0.4);
+    width: 25px;
 }
 
-.toggleBtn:active {
-    transform: scale(0.95);
+.edgeIndicator {
+    color: var(--color-primary);
+    font-size: 1.2em;
+    font-weight: bold;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+    user-select: none;
+}
+
+.edgeToggle:hover .edgeIndicator {
+    opacity: 1;
 }
 
 /* Collapsed State */
@@ -128,11 +134,13 @@
 }
 
 .nav.collapsed {
-    transform: translateX(calc(-1 * var(--sidebar-width)));
+    transform: translateX(calc(-1 * var(--sidebar-width) + 20px));
+    /* Keep edge visible */
 }
 
-.nav.collapsed .toggleBtn {
-    left: -20px;
+.nav.collapsed .edgeIndicator {
+    opacity: 1;
+    /* Always visible when collapsed */
 }
 
 /* Mobile */

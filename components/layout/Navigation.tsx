@@ -26,14 +26,16 @@ export default function Navigation() {
 
     return (
         <nav className={`${styles.nav} ${collapsed && mounted ? styles.collapsed : ''}`}>
-            {/* Toggle Button */}
-            <button
+            {/* Clickable Edge Strip */}
+            <div
+                className={styles.edgeToggle}
                 onClick={toggle}
-                className={styles.toggleBtn}
-                title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+                title={collapsed ? 'Mở sidebar' : 'Thu gọn sidebar'}
             >
-                {collapsed ? '☰' : '✕'}
-            </button>
+                <div className={styles.edgeIndicator}>
+                    {collapsed ? '»' : '«'}
+                </div>
+            </div>
 
             <div className={styles.header}>
                 <h1 className={styles.logo}>
@@ -59,7 +61,7 @@ export default function Navigation() {
 
             <div className={styles.footer}>
                 <ThemeToggle />
-                <p className={styles.version}>v2.1.0</p>
+                <p className={styles.version}>v2.2.0</p>
                 <p className={styles.copyright}>© 2026 Fotober</p>
             </div>
         </nav>

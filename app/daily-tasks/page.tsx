@@ -60,14 +60,18 @@ export default function DailyTasksPage() {
                 })
             })
 
-            if (response.ok) {
-                await loadTasks()
-                setShowTaskForm(false)
-                setEditingTask(null)
+            if (!response.ok) {
+                throw new Error('Failed to save task')
             }
+
+            // Reload tasks and close form
+            await loadTasks()
+            setShowTaskForm(false)
+            setEditingTask(null)
         } catch (error) {
             console.error('Failed to save task:', error)
-            alert('Lỗi khi lưu task')
+            alert('Lỗi khi lưu task. Vui lòng thử lại.')
+            throw error // Re-throw so TaskForm knows it failed
         }
     }
 
