@@ -356,40 +356,276 @@
     transform: translateY(-2px);
 }
 
-/* Responsive */
+/* Responsive - Tablet (Portrait) */
+@media (max-width: 1024px) {
+    .container {
+        padding: 20px;
+    }
+
+    .summaryCards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .taskCard {
+        gap: 12px;
+    }
+
+    .header h1 {
+        font-size: 2.2em;
+    }
+}
+
+/* Responsive - Mobile (Landscape & Portrait) */
 @media (max-width: 768px) {
     .container {
-        padding: 16px;
+        padding: 16px 12px;
     }
 
     .header h1 {
         font-size: 1.8em;
     }
 
+    .subtitle {
+        font-size: 0.9em;
+    }
+
+    /* Date Navigation */
     .dateNav {
         flex-direction: column;
         gap: 12px;
+        padding: 12px;
+    }
+
+    .navBtn {
+        width: 100%;
+        padding: 12px;
+        font-size: 0.95em;
     }
 
     .currentDate {
         flex-direction: column;
+        gap: 8px;
+        text-align: center;
+        width: 100%;
+    }
+
+    .dateLabel {
+        font-size: 1em;
+    }
+
+    .todayBtn {
+        padding: 8px 20px;
+    }
+
+    /* Summary Cards - 2 columns on mobile */
+    .summaryCards {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .card {
+        padding: 14px 12px;
+        gap: 10px;
+        flex-direction: column;
         text-align: center;
     }
 
-    .summaryCards {
-        grid-template-columns: 1fr 1fr;
+    .cardIcon {
+        font-size: 1.8em;
     }
 
+    .cardValue {
+        font-size: 1.5em;
+    }
+
+    .cardLabel {
+        font-size: 0.8em;
+    }
+
+    /* Actions */
+    .actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .addBtn,
+    .pdfBtn {
+        width: 100%;
+        padding: 14px;
+        font-size: 0.95em;
+    }
+
+    /* Timeline */
+    .timeline {
+        padding: 16px 12px;
+    }
+
+    .timeline h2 {
+        font-size: 1.3em;
+    }
+
+    /* Task Cards */
     .taskCard {
         grid-template-columns: 1fr;
         gap: 12px;
+        padding: 14px 12px;
     }
 
     .taskTime {
         min-width: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .duration {
+        display: inline;
+        margin-top: 0;
+        margin-left: 8px;
+    }
+
+    .taskHeader {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .taskHeader h3 {
+        font-size: 1em;
+        width: 100%;
+    }
+
+    .statusBadge {
+        font-size: 0.7em;
+        padding: 3px 10px;
     }
 
     .taskActions {
         justify-content: flex-end;
+        padding-top: 8px;
+        border-top: 1px solid #e0e0e0;
+    }
+
+    .editBtn,
+    .deleteBtn {
+        font-size: 1.4em;
+        padding: 10px;
+    }
+
+    /* Empty State */
+    .emptyState {
+        padding: 40px 16px;
+    }
+
+    .emptyIcon {
+        font-size: 3em;
+    }
+
+    .addFirstBtn {
+        width: 100%;
+        padding: 14px;
+    }
+}
+
+/* Responsive - Small Mobile */
+@media (max-width: 480px) {
+    .container {
+        padding: 12px 8px;
+    }
+
+    .header h1 {
+        font-size: 1.5em;
+    }
+
+    /* Summary Cards - Stack vertically on very small screens */
+    .summaryCards {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .card {
+        flex-direction: row;
+        text-align: left;
+    }
+
+    .cardIcon {
+        font-size: 2em;
+    }
+
+    .cardValue {
+        font-size: 1.6em;
+    }
+
+    /* Date Navigation */
+    .dateLabel {
+        font-size: 0.9em;
+    }
+
+    .navBtn {
+        font-size: 0.85em;
+        padding: 10px;
+    }
+
+    /* Task Cards */
+    .taskCard {
+        padding: 12px 10px;
+    }
+
+    .taskTime {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    .duration {
+        margin-left: 0;
+    }
+
+    .taskHeader h3 {
+        font-size: 0.95em;
+    }
+
+    .description,
+    .collaborators,
+    .result {
+        font-size: 0.85em;
+    }
+
+    .tags {
+        gap: 6px;
+    }
+
+    .tag {
+        font-size: 0.75em;
+        padding: 3px 8px;
+    }
+}
+
+/* Landscape Mode for Mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .summaryCards {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .card {
+        flex-direction: row;
+        padding: 10px;
+    }
+
+    .cardIcon {
+        font-size: 1.5em;
+    }
+
+    .cardValue {
+        font-size: 1.3em;
+    }
+
+    .dateNav {
+        flex-direction: row;
+    }
+
+    .currentDate {
+        flex-direction: row;
     }
 }
