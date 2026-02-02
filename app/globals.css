@@ -352,16 +352,71 @@ tr:hover {
     }
 }
 
-/* Responsive */
+/* Responsive Breakpoints */
+
+/* Tablet (Portrait) */
+@media (max-width: 1024px) {
+    :root {
+        --text-4xl: 2.125rem;
+        --text-3xl: 1.75rem;
+        --text-2xl: 1.375rem;
+        --space-16: 3rem;
+        --space-20: 4rem;
+    }
+
+    .container {
+        padding: 0 var(--space-5);
+    }
+}
+
+/* Mobile (Landscape & Portrait) */
 @media (max-width: 768px) {
     :root {
         --sidebar-width: 0;
         --text-4xl: 2rem;
         --text-3xl: 1.5rem;
+        --text-2xl: 1.25rem;
+        --text-xl: 1.125rem;
+        --space-12: 2rem;
+        --space-16: 2.5rem;
+        --space-20: 3rem;
     }
 
     .container {
         padding: 0 var(--space-4);
+    }
+
+    /* Utility: Full width on mobile */
+    .mobile-full-width {
+        width: 100% !important;
+    }
+
+    /* Utility: Stack flex containers */
+    .mobile-stack {
+        flex-direction: column !important;
+    }
+
+    /* Utility: Hide on mobile */
+    .mobile-hide {
+        display: none !important;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    :root {
+        --text-4xl: 1.75rem;
+        --text-3xl: 1.375rem;
+        --text-2xl: 1.125rem;
+        --text-xl: 1rem;
+        --text-lg: 1rem;
+        --space-8: 1.5rem;
+        --space-10: 2rem;
+        --space-12: 1.75rem;
+    }
+
+    .container {
+        padding: 0 var(--space-3);
     }
 }
 

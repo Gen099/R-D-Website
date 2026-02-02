@@ -577,18 +577,52 @@
 }
 
 /* Responsive */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .container {
+        padding: 20px;
+    }
+
+    .taskGrid,
+    .workflowGrid,
+    .resourceGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dataGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .metricsGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Mobile */
 @media (max-width: 768px) {
     .container {
-        padding: 16px;
+        padding: 16px 12px;
+    }
+
+    .header {
+        padding: 20px;
     }
 
     .header h1 {
         font-size: 1.5em;
     }
 
+    .headerTop {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
     .headerInfo {
         flex-direction: column;
         gap: 8px;
+        width: 100%;
     }
 
     .twoCol {
@@ -606,6 +640,11 @@
         padding: 12px;
     }
 
+    .phaseLabels {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
     .process {
         flex-direction: column;
     }
@@ -614,11 +653,79 @@
         transform: rotate(90deg);
     }
 
-    .taskGrid {
+    .processStep {
+        width: 100%;
+    }
+
+    .taskGrid,
+    .workflowGrid,
+    .resourceGrid {
         grid-template-columns: 1fr;
     }
 
     .dataGrid {
         grid-template-columns: 1fr;
+    }
+
+    .metricsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .library {
+        grid-template-columns: 1fr;
+    }
+
+    .barLabel {
+        min-width: auto;
+        font-size: 0.75em;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .container {
+        padding: 12px 8px;
+    }
+
+    .header {
+        padding: 16px;
+    }
+
+    .header h1 {
+        font-size: 1.3em;
+    }
+
+    .badge {
+        font-size: 0.8em;
+        padding: 4px 12px;
+    }
+
+    .metricsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .metric {
+        padding: 16px;
+    }
+
+    .metricValue {
+        font-size: 1.8em;
+    }
+
+    .phaseCard {
+        padding: 16px;
+    }
+
+    .taskItem,
+    .workflowItem {
+        padding: 14px;
+    }
+
+    .section {
+        padding: 16px;
+    }
+
+    .section h2 {
+        font-size: 1.2em;
     }
 }

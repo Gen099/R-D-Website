@@ -160,6 +160,23 @@
 }
 
 /* Responsive */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .dashboard {
+        padding: var(--space-6);
+    }
+
+    .metricsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .modulesGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile */
 @media (max-width: 768px) {
     .dashboard {
         padding: var(--space-4);
@@ -169,11 +186,67 @@
         font-size: var(--text-3xl);
     }
 
+    .subtitle {
+        font-size: var(--text-base);
+    }
+
     .metricsGrid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-4);
+    }
+
+    .metricCard {
+        padding: var(--space-4);
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .metricIcon {
+        font-size: var(--text-3xl);
+    }
+
+    .metricValue {
+        font-size: var(--text-2xl);
     }
 
     .modulesGrid {
         grid-template-columns: 1fr;
+        gap: var(--space-4);
+    }
+
+    .moduleCard {
+        padding: var(--space-5);
+    }
+
+    .quickInsights {
+        padding: var(--space-5);
+    }
+
+    .quickInsights h2 {
+        font-size: var(--text-xl);
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .dashboard {
+        padding: var(--space-3);
+    }
+
+    .header h1 {
+        font-size: var(--text-2xl);
+    }
+
+    .metricsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .metricCard {
+        flex-direction: row;
+        text-align: left;
+    }
+
+    .metricIcon {
+        font-size: var(--text-2xl);
     }
 }
