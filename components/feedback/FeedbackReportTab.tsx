@@ -168,6 +168,7 @@ export default function FeedbackReportTab() {
                                                     <MediaPreview
                                                         url={job.inputUrl}
                                                         type={getMediaType(job.inputUrl)}
+                                                        images={job.inputImages}
                                                         alt={`Input for ${job.code}`}
                                                     />
                                                     <a href={job.inputUrl} target="_blank" rel="noopener noreferrer" className={styles.externalLink}>

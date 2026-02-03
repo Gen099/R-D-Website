@@ -3,20 +3,27 @@
 import { useState } from 'react'
 import styles from './MediaPreview.module.css'
 import { getDropboxDirectUrl, getInstagramEmbedUrl } from '@/lib/utils/mediaUtils'
+import ImageCarousel from './ImageCarousel'
 
 interface MediaPreviewProps {
     url: string
     type: 'image' | 'video' | 'instagram' | 'folder' | 'unknown'
+    images?: string[]  // Array of image URLs for folders/galleries
     alt?: string
     className?: string
 }
 
-export default function MediaPreview({ url, type, alt, className }: MediaPreviewProps) {
+export default function MediaPreview({ url, type, images, alt, className }: MediaPreviewProps) {
     const [imageError, setImageError] = useState(false)
     const [videoError, setVideoError] = useState(false)
     const [loading, setLoading] = useState(true)
 
     if (!url) return null
+
+    // If images array provided, show carousel instead of folder icon
+    if (images && images.length > 0) {
+        return <ImageCarousel images={images} alt={alt} />
+    }
 
     if (type === 'folder') {
         return (
