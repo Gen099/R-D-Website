@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import styles from './FeedbackReport.module.css'
+import MediaPreview from './MediaPreview'
+import { getMediaType } from '@/lib/utils/mediaUtils'
 
 export default function FeedbackReportTab() {
     const [viewMode, setViewMode] = useState<'formatted' | 'sheet'>('formatted')
@@ -163,16 +165,26 @@ export default function FeedbackReportTab() {
                                             {job.inputUrl && (
                                                 <div className={styles.detailRow}>
                                                     <strong>📥 Input:</strong>
-                                                    <a href={job.inputUrl} target="_blank" rel="noopener noreferrer">
-                                                        Xem input files
+                                                    <MediaPreview
+                                                        url={job.inputUrl}
+                                                        type={getMediaType(job.inputUrl)}
+                                                        alt={`Input for ${job.code}`}
+                                                    />
+                                                    <a href={job.inputUrl} target="_blank" rel="noopener noreferrer" className={styles.externalLink}>
+                                                        🔗 Mở trong Dropbox
                                                     </a>
                                                 </div>
                                             )}
                                             {job.outputUrl && (
                                                 <div className={styles.detailRow}>
                                                     <strong>📤 Output:</strong>
-                                                    <a href={job.outputUrl} target="_blank" rel="noopener noreferrer">
-                                                        Xem output
+                                                    <MediaPreview
+                                                        url={job.outputUrl}
+                                                        type={getMediaType(job.outputUrl)}
+                                                        alt={`Output for ${job.code}`}
+                                                    />
+                                                    <a href={job.outputUrl} target="_blank" rel="noopener noreferrer" className={styles.externalLink}>
+                                                        🔗 Xem trong Dropbox
                                                     </a>
                                                 </div>
                                             )}
@@ -205,8 +217,13 @@ export default function FeedbackReportTab() {
                                             {job.sampleUrl && (
                                                 <div className={styles.detailRow}>
                                                     <strong>🔗 Sample:</strong>
-                                                    <a href={job.sampleUrl} target="_blank" rel="noopener noreferrer">
-                                                        Xem sample tham khảo
+                                                    <MediaPreview
+                                                        url={job.sampleUrl}
+                                                        type="instagram"
+                                                        alt="Sample reference"
+                                                    />
+                                                    <a href={job.sampleUrl} target="_blank" rel="noopener noreferrer" className={styles.externalLink}>
+                                                        🔗 Xem trong Instagram
                                                     </a>
                                                 </div>
                                             )}
