@@ -57,7 +57,15 @@
 .tabContent {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 30px 20px;
+}
+
+/* Google Sheets Container */
+.sheetContainer {
+    width: 100%;
+    margin: 20px 0;
+    overflow: hidden;
+    border-radius: 12px;
 }
 
 /* Header */

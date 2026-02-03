@@ -145,6 +145,12 @@ export default function FeedbackPage() {
                         >
                             Hướng Dẫn Prompt
                         </button>
+                        <button
+                            className={`${styles.tabButton} ${activeTab === 2 ? styles.active : ''}`}
+                            onClick={() => setActiveTab(2)}
+                        >
+                            GGsheet
+                        </button>
                     </div>
                 </div>
 
@@ -456,6 +462,44 @@ export default function FeedbackPage() {
                         </div>
                     </div>
                 )}
+
+                {/* Tab 3: GGsheet - Embedded Spreadsheet */}
+                {activeTab === 2 && (
+                    <div className={styles.tabContent}>
+                        <div className={styles.header}>
+                            <h1>📊 Báo Cáo Feedback AI Video - Google Sheets</h1>
+                            <p>Xem trực tiếp bảng tính chi tiết phản hồi từ khách hàng</p>
+                        </div>
+
+                        <div className={styles.sheetContainer}>
+                            <iframe
+                                src="https://docs.google.com/spreadsheets/d/1ulrICF3uoc0p8fsJFYqMMNZ-yraZF-z6w303uYaCmmo/preview?widget=true&headers=false"
+                                style={{
+                                    width: '100%',
+                                    height: 'calc(100vh - 200px)',
+                                    border: 'none',
+                                    borderRadius: '12px',
+                                    boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+                                }}
+                                title="Feedback Report Google Sheet"
+                            />
+                        </div>
+
+                        <div className={styles.footer} style={{ marginTop: '20px' }}>
+                            <p>
+                                <a
+                                    href="https://docs.google.com/spreadsheets/d/1ulrICF3uoc0p8fsJFYqMMNZ-yraZF-z6w303uYaCmmo/edit?gid=0#gid=0"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    style={{ color: '#4285f4', textDecoration: 'none' }}
+                                >
+                                    🔗 Mở trong Google Sheets
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                )}
+
             </div>
         </>
     )
