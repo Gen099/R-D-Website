@@ -47,11 +47,6 @@
             "errorType": "Chất lượng AI",
             "person": "",
             "inputUrl": "https://www.dropbox.com/scl/fo/cniq4l2jhuf9wfdbvxiug/ABUFwFNHfYrPOLvWIWB0WQ4?rlkey=41t1e6teuc2mvgf88h2mgoucu&dl=1",
-            "inputImages": [
-                "https://www.dropbox.com/scl/fi/abc123/input1.jpg?rlkey=sample1&dl=0",
-                "https://www.dropbox.com/scl/fi/def456/input2.jpg?rlkey=sample2&dl=0",
-                "https://www.dropbox.com/scl/fi/ghi789/input3.jpg?rlkey=sample3&dl=0"
-            ],
             "outputUrl": "https://www.dropbox.com/scl/fi/leh7g96adkvmp03agauz1/TLNOV14022rev4.mp4?rlkey=9fvcko85jnstyrbtfdn66culp&dl=0",
             "feedback": "Why does one of the reindeer move away from the others so that it's behind the sleigh? Can that please be corrected? It looks out of place."
         },
@@ -96,14 +91,6 @@
             "note": "Không đạt chất lượng, như ảnh tĩnh rồi zoom vào",
             "errorType": "Chất lượng AI",
             "inputUrl": "https://www.dropbox.com/scl/fo/k53k4rr7ew5js1ts6tt7l/AEIJxv2wTLou1Im8BBKVB7o?rlkey=0g8c4rsna7c0lkoezn2ovd7hx&dl=1",
-            "inputImages": [
-                "https://www.dropbox.com/scl/fi/img1/photo1.jpg?rlkey=sample4&dl=0",
-                "https://www.dropbox.com/scl/fi/img2/photo2.jpg?rlkey=sample5&dl=0",
-                "https://www.dropbox.com/scl/fi/img3/photo3.jpg?rlkey=sample6&dl=0",
-                "https://www.dropbox.com/scl/fi/img4/photo4.jpg?rlkey=sample7&dl=0",
-                "https://www.dropbox.com/scl/fi/img5/photo5.jpg?rlkey=sample8&dl=0",
-                "https://www.dropbox.com/scl/fi/img6/photo6.jpg?rlkey=sample9&dl=0"
-            ],
             "outputUrl": "https://www.dropbox.com/scl/fo/4620rg7zdsgn127xg2e4j/AMEEPfiilfxqRVeDv20oumA?rlkey=4vas5uymc60tqk152dsi1vonu&dl=0",
             "feedback": "AI thay trời xanh đẹp (mấy ai trời đang ở dạng tĩnh, khách muốn kiểu thực tế hơn). Làm như cái ảnh xong ycau tính phí khách mới?"
         },
