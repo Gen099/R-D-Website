@@ -34,16 +34,23 @@ export default function MediaPreview({ url, type, images, alt, className }: Medi
         // Check cache first
         const cached = getCachedFolderContents(url)
         if (cached) {
+            console.log('📦 Using cached folder contents:', url)
             setFolderImages(cached)
             return
         }
 
+        console.log('🔄 Fetching folder contents:', url)
         setFetchingFolder(true)
         setFolderError(null)
 
         try {
-            const response = await fetch(`/api/dropbox/folder?url=${encodeURIComponent(url)}`)
+            const apiUrl = `/api/dropbox/folder?url=${encodeURIComponent(url)}`
+            console.log('📡 API call:', apiUrl)
+
+            const response = await fetch(apiUrl)
             const data = await response.json()
+
+            console.log('📥 API response:', { status: response.status, data })
 
             if (!response.ok) {
                 throw new Error(data.error || 'Failed to fetch folder contents')
@@ -54,13 +61,15 @@ export default function MediaPreview({ url, type, images, alt, className }: Medi
                     .filter((f: any) => f.type === 'image')
                     .map((f: any) => f.url)
 
+                console.log(`✅ Found ${imageUrls.length} images in folder`)
                 setFolderImages(imageUrls)
                 cacheFolderContents(url, imageUrls)
             } else {
+                console.warn('⚠️ No images found in folder')
                 setFolderError('No images found in folder')
             }
         } catch (error: any) {
-            console.error('Failed to fetch folder contents:', error)
+            console.error('❌ Failed to fetch folder contents:', error)
             setFolderError(error.message)
         } finally {
             setFetchingFolder(false)

@@ -41,6 +41,20 @@ export function isDropboxFolder(url: string): boolean {
 }
 
 /**
+ * Check if URL is a Google Drive folder
+ */
+export function isGoogleDriveFolder(url: string): boolean {
+    return url.includes('drive.google.com/drive/folders')
+}
+
+/**
+ * Check if URL is a Google Drive file
+ */
+export function isGoogleDriveUrl(url: string): boolean {
+    return url.includes('drive.google.com')
+}
+
+/**
  * Get Instagram embed URL from post/reel URL
  * Converts: instagram.com/reel/ABC123/ -> instagram.com/p/ABC123/embed/
  */
@@ -72,7 +86,7 @@ export function isInstagramUrl(url: string): boolean {
  */
 export function getMediaType(url: string): 'image' | 'video' | 'instagram' | 'folder' | 'unknown' {
     if (isInstagramUrl(url)) return 'instagram'
-    if (isDropboxFolder(url)) return 'folder'
+    if (isDropboxFolder(url) || isGoogleDriveFolder(url)) return 'folder'
     if (isImageUrl(url)) return 'image'
     if (isVideoUrl(url)) return 'video'
     return 'unknown'
