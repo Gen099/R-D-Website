@@ -1,0 +1,334 @@
+{
+    "overview": {
+        "totalJobs": 24,
+        "confirmed": 12,
+        "rejected": 6,
+        "noted": 3,
+        "period": "Dec 2025 - Jan 2026"
+    },
+    "errorDistribution": [
+        {
+            "type": "Chất lượng AI kém",
+            "count": 9,
+            "percentage": 38,
+            "color": "#ef5350"
+        },
+        {
+            "type": "Hiểu sai yêu cầu",
+            "count": 6,
+            "percentage": 25,
+            "color": "#ff9800"
+        },
+        {
+            "type": "Trễ deadline",
+            "count": 5,
+            "percentage": 21,
+            "color": "#ffa726"
+        },
+        {
+            "type": "Kỹ thuật phức tạp",
+            "count": 2,
+            "percentage": 8,
+            "color": "#42a5f5"
+        },
+        {
+            "type": "Không có lỗi",
+            "count": 2,
+            "percentage": 8,
+            "color": "#66bb6a"
+        }
+    ],
+    "jobs": [
+        {
+            "id": 1,
+            "code": "TLNOV14022rev4",
+            "effect": "Tuần lộc ông già Noel bay trên mái nhà",
+            "status": "confirmed",
+            "errorType": "Chất lượng AI",
+            "person": "",
+            "inputUrl": "https://www.dropbox.com/scl/fo/cniq4l2jhuf9wfdbvxiug/ABUFwFNHfYrPOLvWIWB0WQ4?rlkey=41t1e6teuc2mvgf88h2mgoucu&dl=1",
+            "outputUrl": "https://www.dropbox.com/scl/fi/leh7g96adkvmp03agauz1/TLNOV14022rev4.mp4?rlkey=9fvcko85jnstyrbtfdn66culp&dl=0",
+            "feedback": "Why does one of the reindeer move away from the others so that it's behind the sleigh? Can that please be corrected? It looks out of place."
+        },
+        {
+            "id": 2,
+            "code": "TADEC31004",
+            "effect": "AI 4 mùa",
+            "person": "Trang",
+            "errorType": "Hiểu sai yêu cầu",
+            "inputUrl": "https://www.dropbox.com/scl/fo/65xh5pk32ov01bk541pa1/AEjCDsU4HSwJGgazVHN9ZFY?rlkey=qicc5qz8q5a4ysmvostw7audk&dl=1",
+            "outputUrl": "https://www.dropbox.com/scl/fi/xm3hrq0acgcn1hwkezy79/TADEC31004.mp4?rlkey=psagvqh9gss6tz9gr79ru8qt4&dl=0",
+            "feedback": "For the AI transition, we don't get snow here so as stated we were wanting it to go from its current condition into the spring look.. Not the snow into spring",
+            "promptImageUrl": "https://gemini.google.com/share/7093a83f46ac",
+            "promptVideo": "Create a seamless cinematic image-to-video transition starting from Image 1 (cold winter) to Image 2 (luxurious spring atmosphere). The camera remains fixed in position... Snow and cold tones gently fade away. The sky becomes brighter with soft cloud time-lapse hyperlapse motion. Grass smoothly changes from pale winter brown to vibrant green."
+        },
+        {
+            "id": 3,
+            "code": "DUJAN04005",
+            "effect": "Tạo nước bên trong cái bể nước",
+            "person": "Hoài",
+            "errorType": "Hiểu sai yêu cầu",
+            "inputUrl": "https://www.dropbox.com/scl/fo/67xzml9bnzctxlswhte9i/AFb3qguqBYXGxF2P4Fvucqo?rlkey=6cdngcpwderr8nw3lndjsvqbu&dl=1",
+            "outputUrl": "https://www.dropbox.com/scl/fi/0pyitx4rup935kxaxn1iy/DUJAN04005.mp4?rlkey=dvg11lcxs7w8x0qma4fon8fk2&dl=0",
+            "feedback": "Even here - that's pretty clear at the top of the barrel or whatever it is. I don't want to be difficult - But I'm not going to pay for it, when it is clear. If I was creating that - I would use the actual fountain pieces vs. randomness out of the side. It's a fountain - you can see that's where the water should come from - I didn't know that would need to be indicated when it's obvious in the video? Where exactly is the water coming from now? Just randomly out of nowhere?",
+            "promptImageUrl": "https://gemini.google.com/share/ad8717c07dd7",
+            "promptVideo": "Create a realistic, cinematic video from the provided image of an empty water tank. The tank gradually fills with clear water, rising smoothly and continuously from the bottom upward..."
+        },
+        {
+            "id": 4,
+            "code": "HTJAN15008Rev",
+            "effect": "AI characters preparing dinner (0:15)",
+            "errorType": "Hiểu sai yêu cầu",
+            "inputUrl": "https://www.dropbox.com/scl/fo/xm9k0mr4y4pqjqltow5xx/ANXgR7aFuGuuA29SZmiKt94?rlkey=vdiof00ngsui4ikmo6ol6pika&dl=1",
+            "outputUrl": "https://www.dropbox.com/scl/fi/wgpftnq7226yov8ettklu/HTJAN15008Rev.mp4?rlkey=hbznhs5aqoqnn7b74cart93m4&dl=0",
+            "feedback": "Khách ghi là preparing dinner mà. Chuẩn bị thì phải có người chứ, nó là động từ rồi còn đâu. Nếu chỉ cần bàn ăn với đồ ăn thì đã viết là dinner with food rồi"
+        },
+        {
+            "id": 5,
+            "code": "THJAN20030Rev",
+            "effect": "Đổi tất cả 6 ảnh thành trời xanh đẹp",
+            "status": "confirmed",
+            "note": "Không đạt chất lượng, như ảnh tĩnh rồi zoom vào",
+            "errorType": "Chất lượng AI",
+            "inputUrl": "https://www.dropbox.com/scl/fo/k53k4rr7ew5js1ts6tt7l/AEIJxv2wTLou1Im8BBKVB7o?rlkey=0g8c4rsna7c0lkoezn2ovd7hx&dl=1",
+            "outputUrl": "https://www.dropbox.com/scl/fo/4620rg7zdsgn127xg2e4j/AMEEPfiilfxqRVeDv20oumA?rlkey=4vas5uymc60tqk152dsi1vonu&dl=0",
+            "feedback": "AI thay trời xanh đẹp (mấy ai trời đang ở dạng tĩnh, khách muốn kiểu thực tế hơn). Làm như cái ảnh xong ycau tính phí khách mới?"
+        },
+        {
+            "id": 6,
+            "code": "QUJAN16003",
+            "effect": "AI agent ngã xuống bể bơi, nước tung toé, ren 4K",
+            "person": "Trang",
+            "status": "confirmed",
+            "note": "Từ chối - Output 1 hơi vô duyên nhưng Output 2 OK",
+            "errorType": "Chất lượng AI",
+            "inputUrl": "https://www.dropbox.com/scl/fi/g1ojxpz1wypq38bv1ofc2/AI-agent-ng-xu-ng-b-b-i.jpg?rlkey=41rqzwr0p2r9iskk371jzgaws&dl=1",
+            "outputUrl": "https://www.dropbox.com/scl/fo/znnr3sb7l37z1lwe5hi5s/AGHtQNcJ4wqoQD-iG8p1eYA?rlkey=iw3k2t7yzaow7nbzedp4gbrqm&dl=0",
+            "feedback": "Trông nó hơi vô duyên",
+            "promptVideo": "Using the 'building explosion' effect. Create a cinematic transformation where the house suddenly bursts apart into flying debris and dust... Camera is completely fixed — no movement, no pan, no zoom. No camera shake. No screen flicker or flashing."
+        },
+        {
+            "id": 7,
+            "code": "TADEC04003Rev2",
+            "effect": "Chuyển cảnh AI từ ban ngày sang hoàng hôn cho mặt tiền",
+            "person": "Mai Anh",
+            "status": "confirmed",
+            "errorType": "Kỹ thuật phức tạp",
+            "inputUrl": "https://www.dropbox.com/scl/fo/kw4vrsig3dqefiyvomhtj/ACvvBHgCfP22o3LqFvF7nf0?rlkey=tjjtvo7e5h1t2jo5ko4dpg3fk&dl=1",
+            "outputUrl": "https://www.dropbox.com/scl/fi/tigqc34z0fusceqzg5fyt/TADEC04003Rev2.mp4?rlkey=7ud3xpuhow1x8epuhd3ehedue&dl=0",
+            "feedback": "The transition was very short.. it didn't get to the sunset part can you upload the whole video transition. Mình muốn order một clip dài khoảng 5s show căn nhà từ bình minh đến hoàng hôn."
+        },
+        {
+            "id": 8,
+            "code": "NHJAN13010",
+            "effect": "Nhiều cảnh: A03 mùa hè, A10 người đọc sách, A11 trẻ em chơi, A15-A22 các cảnh sinh hoạt",
+            "person": "Trang",
+            "status": "confirmed",
+            "errorType": "Chất lượng AI",
+            "inputUrl": "https://www.dropbox.com/scl/fo/alijlctnv8ogaben7qu3d/ALSwQAggHoIsTGMMasS3tUk?rlkey=f8cb5nvux42996jcsushqcsxm&dl=1",
+            "outputUrl": "https://www.dropbox.com/scl/fo/xiofzi74dvbg98abbp62e/AKFxvMUJQEqBNUcGsHA7JN0?rlkey=lhlx2zcxcr4vbboowzvchfdhc&dl=0",
+            "feedback": "Output A17 đàn ông mặc bikini",
+            "note": "Từ chối - Quần bơi, không phải bikini"
+        },
+        {
+            "id": 9,
+            "code": "LIDEC10001",
+            "effect": "Santa mang Range Rover đen - 3 cảnh: giữ xe trên mái, đẩy vào ống khói, xe chui qua ống khói",
+            "person": "Mai Anh",
+            "status": "confirmed",
+            "errorType": "Kỹ thuật phức tạp",
+            "sampleUrl": "https://www.instagram.com/reel/DRwGrcwDF25/",
+            "outputUrl": "https://www.dropbox.com/scl/fi/bjvb5jfws9n0h0vo00shf/y-t-ng-kh-i.mp4?rlkey=3o95zvygxsfzpsi5el15czulm&dl=0",
+            "feedback": "Ông già Noel đẩy rơi ô tô xuống đất, không vào được mái nhà như yêu cầu. Xe ô tô sai yêu cầu, kích cỡ và chính tả. Sửa nhiều lần không đạt yêu cầu"
+        },
+        {
+            "id": 10,
+            "code": "LIJAN07001",
+            "effect": "Quân cờ vua di chuyển theo quy luật thực tế",
+            "person": "Trang",
+            "errorType": "Hiểu sai yêu cầu",
+            "inputUrl": "https://www.dropbox.com/scl/fo/moy1rr6ih4gf1wuk09xfq/ANQBccNgJ_192f9XmxpIn6s?rlkey=fbsrj7j70uj1bkoxf56vaqkj2&dl=1",
+            "outputUrl": "https://www.dropbox.com/scl/fi/grd27p8m3wxwb04ml5gm3/LIJAN07001.mp4?rlkey=sd5euwhzcorljnu52ov52q32b&dl=0",
+            "feedback": "Bàn cờ nhảy lên đánh nhau. Please move the pieces like a real game of chess, one piece at a time (around 4-5 different moves) and have the pieces on the screen all the way to end.",
+            "promptImageUrl": "https://gemini.google.com/share/d008d267c7bd",
+            "promptVideo": "Create a realistic and stable video from the provided image. Only the existing chess pieces already present on the chessboard are allowed to move. Do NOT add, remove, duplicate, or generate any new chess pieces. Chess piece movement follows a clear turn-based sequence: First, exactly one black chess piece moves to a new position. Then, exactly one piece of the other color moves."
+        },
+        {
+            "id": 11,
+            "code": "HTDEC18019",
+            "effect": "Hộp quà mở ra ngôi nhà - Christmas effect, xuất 4K",
+            "person": "Hoài",
+            "status": "confirmed",
+            "errorType": "Không có lỗi",
+            "sampleUrl": "https://www.instagram.com/p/DSH7k9tCpnd/",
+            "inputUrl": "https://www.dropbox.com/scl/fo/mvocxfb109de7gugp3o7b/AN5TdzvvKRWaXdzhhA7CQCg?rlkey=0zodass5s63x4w6enpz6f72mn&dl=1",
+            "outputUrl": "https://www.dropbox.com/scl/fi/tahnb6s1bptknkkz6clex/HTDEC18019.mp4?rlkey=htnychu3mumigt2uvkxo8x4wf&dl=0"
+        },
+        {
+            "id": 12,
+            "code": "HTJAN22005",
+            "effect": "15 effect đa dạng: sinh hoạt gia đình, day→night, staging",
+            "person": "Trang",
+            "errorType": "Trễ deadline",
+            "inputUrl": "https://drive.google.com/drive/folders/1zpylYvwL3OdTeapJEcs5n_FvCOlVZmzQ",
+            "outputUrl": "https://www.dropbox.com/scl/fo/png5d7o096flmnbyb86ip/ABYfn1FLZCNftBmTQ_MKohs?rlkey=oc5vtag97u6myt3x5t2bsmylh&dl=0",
+            "feedback": "Trễ 9 tiếng. 2h sáng GN báo: edit order AI muộn mà 15ef, e vừa hỏi AI bảo bên đấy mới làm được 9ef",
+            "details": "15 scenes: 0:20 Front yard friends, 0:45 Kitchen cooking, 0:58 Living room day→night, 1:05 Asian family, 1:15 Dining room, 1:28 Home office, 1:41 Master bedroom, 1:52 Bathroom bubble bath, 2:17 Hot tub day→night, 2:25 Fire pit, 2:42 BBQ, 2:57 Gym, 3:13-3:32 Guest bedrooms"
+        },
+        {
+            "id": 13,
+            "code": "CHJAN24002",
+            "effect": "3 AI 3 phòng khác nhau - agent búng tay: movie theater, bar/sports, kids room",
+            "note": "Từ chối - Agent là do edit roto vào chứ không phải AI ren",
+            "errorType": "Chất lượng AI",
+            "inputUrl": "https://www.dropbox.com/scl/fo/7d6acqjog38z1vm5ak2rp/AI9SgUFasa5fBniG4uAKdrM?rlkey=t2xmxhquowkyzbhth3lqw1t8k&dl=1",
+            "outputUrl": "https://www.dropbox.com/scl/fo/f5wnj62x2xel3sifk62hu/AMo9pRjMEKBywZ0Cjz3l0Ng?rlkey=s2atgypm312dhc2iwb9fj9fop&dl=0",
+            "feedback": "Agent bay lơ lửng trong phòng, quanh agent hiện rõ vết cắt trắng xóa"
+        },
+        {
+            "id": 14,
+            "code": "CHDEC11004",
+            "effect": "2 AI edit: front yard seasons change",
+            "errorType": "Chất lượng AI",
+            "outputUrl": "https://www.dropbox.com/scl/fi/58gvgztk3tqy54s7twhsm/RivaRidge.mp4?rlkey=owxntrs76n82k1onlqsw8pg5a&dl=0",
+            "feedback": "Tìm mãi mới ra, agent đóng băng trong khung hình, AI không thể hoạt hình hơn, cả cảnh đầu trước nhà và cuối ở bể bơi. Chất lượng clip AI thấp, bị vỡ"
+        },
+        {
+            "id": 15,
+            "code": "MNJAN2001",
+            "effect": "Thêm người tự nhiên trong bếp và phòng khách, sinh hoạt bình thường",
+            "status": "confirmed",
+            "note": "Người bị fake + logo Gemini",
+            "errorType": "Chất lượng AI",
+            "inputUrl": "https://drive.google.com/drive/folders/1U0fa_YhaiI2vN6hEXKG7fmL5-NC9F-4O",
+            "outputUrl": "https://www.dropbox.com/scl/fi/vdhm6a6khs3jdjlsic1z4/598-CR-304.mp4?rlkey=p4lqlbpu8977xatoilk6uce3s&dl=0",
+            "feedback": "0:28 - They look like they are fixing to go to the bedroom next. Người fake. 1:39 - Logo Gemini"
+        },
+        {
+            "id": 16,
+            "code": "QUJAN21008",
+            "effect": "AI Staging (Spanish Style Home)",
+            "note": "Từ chối - 13h17 order DL 2 tiếng, 15h31 trả là khá đúng DL rồi, trễ 5 tiếng là do edit",
+            "errorType": "Trễ deadline",
+            "inputUrl": "https://www.dropbox.com/scl/fo/jawtea4g6o7bpteky7lwd/AONkC5ja-bAa43MZHKK4oL4?rlkey=i9tgvoibv9ud3eh284pw7kqy2&dl=1",
+            "outputUrl": "https://www.dropbox.com/scl/fi/3xw8o5ccc3plybogptvqn/QUJAN21008.mp4?rlkey=uxc6mxkfff7iohhux6y78t348&dl=0",
+            "feedback": "Trễ 5 tiếng"
+        },
+        {
+            "id": 17,
+            "code": "QUJAN19003",
+            "effect": "Dựng nhà luxury barndominium + timelapse đêm sao trên đất trống",
+            "status": "confirmed",
+            "errorType": "Hiểu sai yêu cầu",
+            "sampleUrl": "https://www.instagram.com/p/DSdGo4Tjwff/",
+            "inputUrl": "https://www.dropbox.com/scl/fo/oxvkefp0fajgg9a0oub05/AKb71XirjmSdSV_zF8O_qJ8?rlkey=6ycrt2fyfuje4b64quymfu32w&dl=1",
+            "outputUrl": "https://www.dropbox.com/scl/fi/bsh3pxizyj6kv24kv6k2g/QUJAN19003.mp4?rlkey=h3ra6bqykqxwpx3hafntfr9dz&dl=0",
+            "feedback": "Không làm AI dựng nhà"
+        },
+        {
+            "id": 18,
+            "code": "QUJAN19003Rev2",
+            "effect": "AI effect dựng nhà + day to night",
+            "status": "confirmed",
+            "errorType": "Trễ deadline",
+            "inputUrl": "https://www.dropbox.com/scl/fo/7v6xgj4gheh466n0jr8jv/AFXhnkFtGPhF6jC7O4woJ_w?rlkey=rqswxlqfv5tjqd9q7f4kxwjhb&dl=1",
+            "outputUrl": "https://www.dropbox.com/scl/fi/19irl99nlibksqrehxozf/QUJAN19003Rev2.mp4?rlkey=ppizgpcxnsgejzsptlva3ctee&dl=0",
+            "feedback": "Làm AI effect dựng nhà rồi thì lại làm lỗi AI day to night (trong khi code QUJAN19003 phần AI day to night đã đẹp rồi). Làm rất lâu, DL 5h nhưng 10h đêm mới trả."
+        },
+        {
+            "id": 19,
+            "code": "HTJAN07002rev2",
+            "effect": "Update living room AI - sửa mặt người bị biến dạng",
+            "note": "AI trễ DL đã phản hồi và xử lý luôn khi nhận được thông tin của sale",
+            "errorType": "Trễ deadline",
+            "inputUrl": "https://www.dropbox.com/scl/fo/00mtde91xzobkw0ywc9hi/AL2i_fqsWBOBSRcXWqgJ8jg?rlkey=wgfk8zjaqytwqulvy6jx4ubyq&dl=1",
+            "outputUrl": "https://www.dropbox.com/scl/fo/jrem0hdy1d4fvzi0fsjao/AAnQ9OaTZgB-sTL7SP-JHp0?rlkey=b63m8tm0sdfl6z4rnicgq2uk9&dl=0",
+            "feedback": "Trễ 4 tiếng"
+        },
+        {
+            "id": 20,
+            "code": "HTJAN26003",
+            "effect": "12 effect đa dạng: gia đình, phòng tắm, day→night, staging",
+            "note": "Từ chối - Edit tự làm AI",
+            "errorType": "Trễ deadline",
+            "inputUrl": "https://drive.google.com/drive/folders/1unnK5qIW3kTRPe5voiU9ojEpw4uB-hVy",
+            "outputUrl": "https://www.dropbox.com/scl/fo/slfa203eom7ma8p22taeg/AFBUyE9gdnh7OgpdMhcypzY?rlkey=tgqvqhb5fvob8gxk7rnel9rdd&dl=0",
+            "feedback": "GN bảo edit tự làm AI. Trễ hơn 3 tiếng",
+            "details": "12 scenes: 0:18 Family gathering, 0:31 Guest bathroom, 0:41 Bathroom steam, 0:45 Kids bedroom, 0:58 Guest bedroom, 1:07 Great room, 1:21 Home office, 1:34 Shower, 1:47 Master bedroom, 1:57 Day→night transition, 2:25 Multi-gen family, 2:36 Front patio"
+        },
+        {
+            "id": 21,
+            "code": "QUJAN25001",
+            "effect": "Virtual staged furniture popping: living room + dining room",
+            "errorType": "Hiểu sai yêu cầu",
+            "inputUrl": "https://www.dropbox.com/scl/fo/3pxc44yoa48dhmmrxc5do/AIB_cBYpSVEAmFZ9einYNIs?rlkey=vqng9rppiqwhmv0ifkuvutt4j&dl=1",
+            "outputUrl": "https://www.dropbox.com/scl/fo/x49kdvlshlqeppfeaujh4/ALGIv9jtHSVWXhil_Yjivz8?rlkey=lzy3sjx0n0zs94bzqyoesv5zp&dl=0",
+            "feedback": "Order 2 AI living và dining room. Nhưng chỉ làm 1 và làm sai (dining nhưng làm living)"
+        },
+        {
+            "id": 22,
+            "code": "CAJAN21001rev7",
+            "effect": "5 AI virtual staging + photo transitions",
+            "errorType": "Chất lượng AI",
+            "inputUrl": "https://www.dropbox.com/scl/fo/3hojfeu31n7bzyl8dskt9/AHBEq8ljggbppv2qcPk1tkY?rlkey=wuaekwxkzwysahsbu9032oway&dl=1",
+            "outputUrl": "https://www.dropbox.com/scl/fo/2g681dzffpb9eeu6361qm/AEqWoET1UgLB1F7eLrkOGQY?rlkey=2a4hq62twz25yr2vzt105btaf&dl=0",
+            "sampleUrl": "https://www.youtube.com/watch?v=xBL66Trekxg",
+            "sampleUrl2": "https://www.linkedin.com/posts/barnessuisse_barnes-barnessuisse-immobilier-activity-7419015870661689344-TKdE/",
+            "feedback": "I want to be transparent and share my overall feedback. Unfortunately, the experience has been quite frustrating. I paid for this test primarily to evaluate the potential of the solution, but I must say that I am not satisfied with the result. While there is clearly a lot of potential, I feel that the AI tool currently being used is not yet mature enough for the level of narrative control, visual coherence, and refinement that I am looking for. In addition, I noticed inconsistencies in the visual storytelling, particularly in the flow of movements and transitions, despite multiple detailed explanations and references.",
+            "details": "5 AI virtual staging furniture (photos 4, 5, 8, 9, 10) - Luxurious alpine furniture. Photo transitions: 3→4 left, 5→6 right, 6→7 right to corridor 8, 10→11 to exterior"
+        }
+    ],
+    "samples": [
+        {
+            "title": "Sample 1",
+            "url": "https://www.instagram.com/reel/DSwK_ZNCETu/"
+        },
+        {
+            "title": "Sample 2",
+            "url": "https://www.instagram.com/reel/DSAbatijSMP/"
+        },
+        {
+            "title": "Sample 3",
+            "url": "https://www.instagram.com/reel/DTvLS4NjO-S/"
+        },
+        {
+            "title": "Sample 4",
+            "url": "https://www.instagram.com/reel/DTfMBpyCJgJ/"
+        }
+    ],
+    "personStats": [
+        {
+            "person": "Trang",
+            "count": 6,
+            "jobs": [
+                "TADEC31004",
+                "QUJAN16003",
+                "NHJAN13010",
+                "LIJAN07001",
+                "HTJAN22005",
+                "NHJAN13010"
+            ]
+        },
+        {
+            "person": "Hoài",
+            "count": 2,
+            "jobs": [
+                "DUJAN04005",
+                "HTDEC18019"
+            ]
+        },
+        {
+            "person": "Mai Anh",
+            "count": 2,
+            "jobs": [
+                "TADEC04003Rev2",
+                "LIDEC10001"
+            ]
+        },
+        {
+            "person": "Không xác định",
+            "count": 14,
+            "jobs": []
+        }
+    ]
+}
