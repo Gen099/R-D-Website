@@ -32,9 +32,7 @@ export default function FeedbackReportTab() {
     }
 
     const filteredJobs = reportData.jobs.filter((job: any) => {
-        const matchesFilter = filterType === '
-
-all' || job.errorType === filterType
+        const matchesFilter = filterType === 'all' || job.errorType === filterType
         const matchesSearch = job.code.toLowerCase().includes(searchTerm.toLowerCase()) ||
             job.effect.toLowerCase().includes(searchTerm.toLowerCase())
         return matchesFilter && matchesSearch
