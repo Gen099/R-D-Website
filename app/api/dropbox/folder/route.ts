@@ -21,14 +21,23 @@ export async function GET(request: NextRequest) {
     const accessToken = process.env.DROPBOX_ACCESS_TOKEN
 
     if (!accessToken) {
+        console.error('❌ DROPBOX_ACCESS_TOKEN not found in environment')
         return NextResponse.json(
-            { error: 'Dropbox API token not configured. Add DROPBOX_ACCESS_TOKEN to environment variables.' },
+            {
+                error: 'Dropbox API token not configured',
+                details: 'Please add DROPBOX_ACCESS_TOKEN to .env.local and restart server',
+                help: 'See DROPBOX_API_SETUP.md for instructions'
+            },
             { status: 500 }
         )
     }
 
+    console.log('🔑 Using Dropbox token:', accessToken.substring(0, 10) + '...')
+    console.log('📁 Fetching folder:', sharedLink)
+
     try {
         // Step 1: Get shared link metadata
+        console.log('📡 Calling Dropbox API: get_shared_link_metadata')
         const metadataResponse = await fetch(
             'https://api.dropboxapi.com/2/sharing/get_shared_link_metadata',
             {
@@ -41,15 +50,29 @@ export async function GET(request: NextRequest) {
             }
         )
 
+        const metadataText = await metadataResponse.text()
+        console.log('📥 Metadata response:', metadataResponse.status, metadataText.substring(0, 200))
+
         if (!metadataResponse.ok) {
-            const error = await metadataResponse.json()
+            let errorMessage = 'Failed to get folder metadata'
+            try {
+                const error = JSON.parse(metadataText)
+                errorMessage = error.error_summary || errorMessage
+                console.error('❌ Dropbox API error:', error)
+            } catch {
+                errorMessage = metadataText
+            }
             return NextResponse.json(
-                { error: error.error_summary || 'Failed to get folder metadata' },
+                {
+                    error: errorMessage,
+                    status: metadataResponse.status,
+                    help: 'Check if: 1) Token is valid, 2) Folder link is correct, 3) Permissions are enabled'
+                },
                 { status: metadataResponse.status }
             )
         }
 
-        const metadata = await metadataResponse.json()
+        const metadata = JSON.parse(metadataText)
 
         // Step 2: List folder contents
         const listResponse = await fetch(
