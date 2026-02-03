@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import styles from './MediaPreview.module.css'
-import { getDropboxDirectUrl, getInstagramEmbedUrl } from '@/lib/utils/mediaUtils'
+import { getDropboxDirectUrl, getInstagramEmbedUrl, getDropboxWebViewUrl } from '@/lib/utils/mediaUtils'
 import ImageCarousel from './ImageCarousel'
 
 interface MediaPreviewProps {
@@ -147,7 +147,7 @@ export default function MediaPreview({ url, type, images, alt, className }: Medi
             return (
                 <div className={`${styles.errorState} ${className || ''}`}>
                     <span>❌ Không thể load image</span>
-                    <a href={url} target="_blank" rel="noopener noreferrer">
+                    <a href={getDropboxWebViewUrl(url)} target="_blank" rel="noopener noreferrer">
                         Mở trong Dropbox
                     </a>
                 </div>

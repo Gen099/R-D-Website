@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import styles from './FeedbackReport.module.css'
 import MediaPreview from './MediaPreview'
-import { getMediaType } from '@/lib/utils/mediaUtils'
+import { getMediaType, getDropboxWebViewUrl } from '@/lib/utils/mediaUtils'
 
 export default function FeedbackReportTab() {
     const [viewMode, setViewMode] = useState<'formatted' | 'sheet'>('formatted')
@@ -171,7 +171,7 @@ export default function FeedbackReportTab() {
                                                         images={job.inputImages}
                                                         alt={`Input for ${job.code}`}
                                                     />
-                                                    <a href={job.inputUrl} target="_blank" rel="noopener noreferrer" className={styles.externalLink}>
+                                                    <a href={getDropboxWebViewUrl(job.inputUrl)} target="_blank" rel="noopener noreferrer" className={styles.externalLink}>
                                                         🔗 Mở trong Dropbox
                                                     </a>
                                                 </div>
@@ -184,7 +184,7 @@ export default function FeedbackReportTab() {
                                                         type={getMediaType(job.outputUrl)}
                                                         alt={`Output for ${job.code}`}
                                                     />
-                                                    <a href={job.outputUrl} target="_blank" rel="noopener noreferrer" className={styles.externalLink}>
+                                                    <a href={getDropboxWebViewUrl(job.outputUrl)} target="_blank" rel="noopener noreferrer" className={styles.externalLink}>
                                                         🔗 Xem trong Dropbox
                                                     </a>
                                                 </div>
@@ -198,7 +198,7 @@ export default function FeedbackReportTab() {
                                             {job.promptImageUrl && (
                                                 <div className={styles.detailRow}>
                                                     <strong>🖼️ Prompt ảnh:</strong>
-                                                    <a href={job.promptImageUrl} target="_blank" rel="noopener noreferrer">
+                                                    <a href={getDropboxWebViewUrl(job.promptImageUrl)} target="_blank" rel="noopener noreferrer">
                                                         Xem prompt
                                                     </a>
                                                 </div>

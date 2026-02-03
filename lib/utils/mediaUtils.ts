@@ -91,3 +91,18 @@ export function getMediaType(url: string): 'image' | 'video' | 'instagram' | 'fo
     if (isVideoUrl(url)) return 'video'
     return 'unknown'
 }
+
+/**
+ * Convert Dropbox URL to web preview (not download)
+ * Changes ?dl=1 to ?dl=0 for browser preview
+ */
+export function getDropboxWebViewUrl(url: string): string {
+    if (!url) return ''
+
+    // Replace dl=1 with dl=0 to prevent auto-download
+    return url
+        .replace('?dl=1', '?dl=0')
+        .replace('&dl=1', '&dl=0')
+        .replace('?raw=1', '?dl=0')
+}
+
