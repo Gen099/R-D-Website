@@ -10,7 +10,7 @@ export default function AIVideoEffectsDatabase() {
             padding: 0
         }}>
             <iframe
-                src="/ai-video-effects-readonly.html"
+                src="/ai-video-effects-v2.html"
                 style={{
                     width: '100%',
                     height: '100vh',
