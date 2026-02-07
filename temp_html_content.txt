@@ -1,0 +1,1224 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Video Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #fafafa;
+            color: #1a1a1a;
+            line-height: 1.4;
+        }
+
+        /* Tab Navigation */
+        .tab-container {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .tab-nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 2px;
+            padding: 8px 20px 0;
+        }
+
+        .tab-button {
+            padding: 10px 20px;
+            background: #f5f5f5;
+            border: 1px solid #e0e0e0;
+            border-bottom: none;
+            border-radius: 8px 8px 0 0;
+            cursor: pointer;
+            font-size: 0.85em;
+            font-weight: 500;
+            color: #666;
+            transition: all 0.2s;
+        }
+
+        .tab-button:hover {
+            background: #eee;
+            color: #333;
+        }
+
+        .tab-button.active {
+            background: white;
+            color: #1a1a1a;
+            border-bottom: 2px solid white;
+            font-weight: 600;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 20px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Dashboard Styles */
+        .header {
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .header h1 {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+
+        .header p {
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            padding: 16px;
+            border-radius: 6px;
+        }
+
+        .stat-label {
+            font-size: 0.75em;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .stat-number {
+            font-size: 1.8em;
+            font-weight: 600;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .stat-percentage {
+            font-size: 0.85em;
+            color: #888;
+        }
+
+        .chart-container {
+            background: white;
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .chart-title {
+            font-size: 1em;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .error-table {
+            background: white;
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85em;
+        }
+
+        th {
+            background: #f5f5f5;
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #666;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        tbody tr:hover {
+            background: #fafafa;
+        }
+
+        td:first-child {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .severity-high {
+            color: #d32f2f;
+            font-weight: 600;
+        }
+
+        .severity-medium {
+            color: #f57c00;
+            font-weight: 600;
+        }
+
+        .checklist {
+            background: white;
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .checklist-item {
+            padding: 10px;
+            margin: 6px 0;
+            display: flex;
+            align-items: center;
+            font-size: 0.9em;
+        }
+
+        .checklist-item::before {
+            content: "â–¡";
+            margin-right: 10px;
+            color: #999;
+        }
+
+        .goal-comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .goal-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            padding: 16px;
+            border-radius: 6px;
+        }
+
+        .goal-title {
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .goal-bars {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .goal-bar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .bar-label {
+            width: 60px;
+            font-size: 0.75em;
+            color: #666;
+        }
+
+        .bar-fill {
+            flex: 1;
+            height: 20px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .bar-progress {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 0.7em;
+        }
+
+        canvas {
+            max-height: 250px !important;
+        }
+
+        /* Guide Styles */
+        .guide-section {
+            background: white;
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .guide-section h2 {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #1a1a1a;
+        }
+
+        .guide-section h3 {
+            font-size: 1em;
+            font-weight: 600;
+            margin: 16px 0 8px;
+            color: #333;
+        }
+
+        .guide-section h4 {
+            font-size: 0.9em;
+            font-weight: 600;
+            margin: 12px 0 6px;
+            color: #555;
+        }
+
+        .guide-section p {
+            font-size: 0.9em;
+            line-height: 1.6;
+            color: #444;
+            margin-bottom: 10px;
+        }
+
+        .code-block {
+            background: #f5f5f5;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            padding: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8em;
+            line-height: 1.5;
+            margin: 10px 0;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+
+        .label-bad {
+            display: inline-block;
+            background: #ffebee;
+            color: #c62828;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.75em;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        .label-good {
+            display: inline-block;
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.75em;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        .label-tool {
+            display: inline-block;
+            background: #e3f2fd;
+            color: #1565c0;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.75em;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        .workflow-box {
+            background: #f9f9f9;
+            border-left: 3px solid #1976d2;
+            padding: 12px;
+            margin: 10px 0;
+            font-size: 0.85em;
+        }
+
+        .tool-table {
+            width: 100%;
+            margin: 15px 0;
+        }
+
+        .tool-table th {
+            background: #f5f5f5;
+            padding: 8px;
+            font-size: 0.75em;
+        }
+
+        .tool-table td {
+            padding: 8px;
+            font-size: 0.8em;
+        }
+
+        ul {
+            margin: 10px 0 10px 20px;
+            font-size: 0.85em;
+            line-height: 1.6;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8em;
+            color: #999;
+        }
+
+        @media (max-width: 768px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+            
+            .tab-nav {
+                padding: 8px 10px 0;
+            }
+            
+            .tab-button {
+                padding: 8px 12px;
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Tab Navigation -->
+    <div class="tab-container">
+        <div class="tab-nav">
+            <button class="tab-button active" onclick="switchTab(0)">PhÃ¢n TÃ­ch Lá»—i</button>
+            <button class="tab-button" onclick="switchTab(1)">HÆ°á»›ng Dáº«n Prompt</button>
+        </div>
+    </div>
+
+    <!-- Tab 1: Error Analysis Dashboard -->
+    <div class="tab-content active">
+        <div class="container">
+            <div class="header">
+                <h1>PhÃ¢n TÃ­ch Lá»—i AI Video</h1>
+                <p>Dashboard tá»•ng há»£p cháº¥t lÆ°á»£ng dá»± Ã¡n</p>
+            </div>
+
+            <!-- Stats Overview -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Tá»•ng dá»± Ã¡n</div>
+                    <div class="stat-number" style="color: #333;">22</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">CÃ³ lá»—i</div>
+                    <div class="stat-number" style="color: #d32f2f;">18</div>
+                    <div class="stat-percentage">82%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">KhÃ´ng lá»—i</div>
+                    <div class="stat-number" style="color: #388e3c;">4</div>
+                    <div class="stat-percentage">18%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Trá»… deadline</div>
+                    <div class="stat-number" style="color: #f57c00;">6</div>
+                    <div class="stat-percentage">27%</div>
+                </div>
+            </div>
+
+            <!-- Charts Row -->
+            <div class="two-col">
+                <div class="chart-container">
+                    <h2 class="chart-title">PhÃ¢n bá»‘ loáº¡i lá»—i</h2>
+                    <canvas id="errorTypeChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h2 class="chart-title">Tá»· lá»‡ dá»± Ã¡n</h2>
+                    <canvas id="projectStatusChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Error Categories -->
+            <div class="chart-container">
+                <h2 class="chart-title">Chi tiáº¿t lá»—i theo nhÃ³m</h2>
+                <canvas id="errorCategoryChart"></canvas>
+            </div>
+
+            <!-- Error Details Table -->
+            <div class="error-table">
+                <h2 class="chart-title">Lá»—i hiá»ƒu sai yÃªu cáº§u - Top cases</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>MÃ£ Job</th>
+                            <th>YÃªu cáº§u</th>
+                            <th>Thá»±c táº¿ lÃ m</th>
+                            <th>Váº¥n Ä‘á»</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>TADEC31004</strong></td>
+                            <td>Hiá»‡n tráº¡ng â†’ mÃ¹a xuÃ¢n</td>
+                            <td>Tuyáº¿t â†’ mÃ¹a xuÃ¢n</td>
+                            <td>KhÃ´ng Ä‘á»c context "we don't get snow"</td>
+                        </tr>
+                        <tr>
+                            <td><strong>HTJAN15008Rev</strong></td>
+                            <td>"Preparing dinner" cÃ³ ngÆ°á»i</td>
+                            <td>Chá»‰ cÃ³ bÃ n + Ä‘á»“ Äƒn</td>
+                            <td>Bá» qua Ä‘á»™ng tá»« hÃ nh Ä‘á»™ng</td>
+                        </tr>
+                        <tr>
+                            <td><strong>DUJAN04005</strong></td>
+                            <td>NÆ°á»›c cháº£y tá»« vÃ²i phun</td>
+                            <td>NÆ°á»›c xuáº¥t hiá»‡n ngáº«u nhiÃªn</td>
+                            <td>KhÃ´ng quan sÃ¡t cáº¥u trÃºc fountain</td>
+                        </tr>
+                        <tr>
+                            <td><strong>QUJAN25001</strong></td>
+                            <td>2 AI: living + dining</td>
+                            <td>Chá»‰ lÃ m 1, lÃ m sai phÃ²ng</td>
+                            <td>Thiáº¿u checklist deliverables</td>
+                        </tr>
+                        <tr>
+                            <td><strong>QUJAN19003</strong></td>
+                            <td>AI dá»±ng nhÃ  + timelapse</td>
+                            <td>KhÃ´ng lÃ m pháº§n dá»±ng nhÃ </td>
+                            <td>Bá» sÃ³t yÃªu cáº§u chÃ­nh</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Technical Errors -->
+            <div class="error-table">
+                <h2 class="chart-title">Lá»—i ká»¹ thuáº­t AI</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>MÃ£ Job</th>
+                            <th>Lá»—i cá»¥ thá»ƒ</th>
+                            <th>Má»©c Ä‘á»™</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>NHJAN13010</strong></td>
+                            <td>ÄÃ n Ã´ng máº·c bikini thay vÃ¬ quáº§n bÆ¡i</td>
+                            <td class="severity-high">NghiÃªm trá»ng</td>
+                        </tr>
+                        <tr>
+                            <td><strong>LIJAN07001</strong></td>
+                            <td>QuÃ¢n cá» nháº£y Ä‘Ã¡nh nhau, khÃ´ng theo luáº­t</td>
+                            <td class="severity-high">NghiÃªm trá»ng</td>
+                        </tr>
+                        <tr>
+                            <td><strong>HTJAN07002rev2</strong></td>
+                            <td>Máº·t ngÆ°á»i biáº¿n dáº¡ng</td>
+                            <td class="severity-high">NghiÃªm trá»ng</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CHDEC11004</strong></td>
+                            <td>Agent Ä‘Ã³ng bÄƒng, clip vá»¡</td>
+                            <td class="severity-high">NghiÃªm trá»ng</td>
+                        </tr>
+                        <tr>
+                            <td><strong>TLNOV14022rev4</strong></td>
+                            <td>Tuáº§n lá»™c tÃ¡ch Ä‘Ã n, Ä‘á»©ng sai vá»‹ trÃ­</td>
+                            <td class="severity-medium">Trung bÃ¬nh</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CHJAN24002</strong></td>
+                            <td>Viá»n tráº¯ng quanh agent bay</td>
+                            <td class="severity-medium">Trung bÃ¬nh</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Goals Comparison -->
+            <div class="chart-container">
+                <h2 class="chart-title">Má»¥c tiÃªu cáº£i thiá»‡n (30 ngÃ y)</h2>
+                <div class="goal-comparison">
+                    <div class="goal-card">
+                        <div class="goal-title">Lá»—i hiá»ƒu sai yÃªu cáº§u</div>
+                        <div class="goal-bars">
+                            <div class="goal-bar">
+                                <span class="bar-label">Hiá»‡n táº¡i</span>
+                                <div class="bar-fill">
+                                    <div class="bar-progress" style="width: 35%; background: #d32f2f;">35%</div>
+                                </div>
+                            </div>
+                            <div class="goal-bar">
+                                <span class="bar-label">Má»¥c tiÃªu</span>
+                                <div class="bar-fill">
+                                    <div class="bar-progress" style="width: 10%; background: #388e3c;">10%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="goal-card">
+                        <div class="goal-title">Lá»—i ká»¹ thuáº­t AI</div>
+                        <div class="goal-bars">
+                            <div class="goal-bar">
+                                <span class="bar-label">Hiá»‡n táº¡i</span>
+                                <div class="bar-fill">
+                                    <div class="bar-progress" style="width: 27%; background: #d32f2f;">27%</div>
+                                </div>
+                            </div>
+                            <div class="goal-bar">
+                                <span class="bar-label">Má»¥c tiÃªu</span>
+                                <div class="bar-fill">
+                                    <div class="bar-progress" style="width: 15%; background: #388e3c;">15%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="goal-card">
+                        <div class="goal-title">Trá»… deadline</div>
+                        <div class="goal-bars">
+                            <div class="goal-bar">
+                                <span class="bar-label">Hiá»‡n táº¡i</span>
+                                <div class="bar-fill">
+                                    <div class="bar-progress" style="width: 27%; background: #d32f2f;">27%</div>
+                                </div>
+                            </div>
+                            <div class="goal-bar">
+                                <span class="bar-label">Má»¥c tiÃªu</span>
+                                <div class="bar-fill">
+                                    <div class="bar-progress" style="width: 10%; background: #388e3c;">10%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="goal-card">
+                        <div class="goal-title">Lá»—i tháº©m má»¹</div>
+                        <div class="goal-bars">
+                            <div class="goal-bar">
+                                <span class="bar-label">Hiá»‡n táº¡i</span>
+                                <div class="bar-fill">
+                                    <div class="bar-progress" style="width: 16%; background: #f57c00;">16%</div>
+                                </div>
+                            </div>
+                            <div class="goal-bar">
+                                <span class="bar-label">Má»¥c tiÃªu</span>
+                                <div class="bar-fill">
+                                    <div class="bar-progress" style="width: 5%; background: #388e3c;">5%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QC Checklist -->
+            <div class="checklist">
+                <h2 class="chart-title">Checklist QC trÆ°á»›c gá»­i khÃ¡ch</h2>
+                <div class="checklist-item">Äá»§ sá»‘ lÆ°á»£ng output theo yÃªu cáº§u?</div>
+                <div class="checklist-item">ÄÃºng ná»™i dung yÃªu cáº§u?</div>
+                <div class="checklist-item">KhÃ´ng cÃ³ watermark/logo cÃ´ng cá»¥?</div>
+                <div class="checklist-item">Máº·t ngÆ°á»i khÃ´ng bá»‹ biáº¿n dáº¡ng?</div>
+                <div class="checklist-item">Chuyá»ƒn Ä‘á»™ng tá»± nhiÃªn, khÃ´ng giáº­t?</div>
+                <div class="checklist-item">KhÃ´ng cÃ³ viá»n tráº¯ng/artifacts?</div>
+                <div class="checklist-item">Äá»™ phÃ¢n giáº£i Ä‘Ãºng yÃªu cáº§u?</div>
+                <div class="checklist-item">Xem láº¡i toÃ n bá»™ video tá»« Ä‘áº§u Ä‘áº¿n cuá»‘i?</div>
+            </div>
+
+            <div class="footer">
+                <p>Cáº­p nháº­t: ThÃ¡ng 1, 2026</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab 2: Prompt Guide -->
+    <div class="tab-content">
+        <div class="container">
+            <div class="header">
+                <h1>HÆ°á»›ng Dáº«n Tá»‘i Æ¯u Prompt & Fix Lá»—i</h1>
+                <p>Best practices vÃ  template prompt cho tá»«ng loáº¡i lá»—i</p>
+            </div>
+
+            <!-- Tools Overview -->
+            <div class="guide-section">
+                <h2>CÃ´ng cá»¥ kháº£ dá»¥ng</h2>
+                <table class="tool-table">
+                    <thead>
+                        <tr>
+                            <th>CÃ´ng cá»¥</th>
+                            <th>Chá»©c nÄƒng chÃ­nh</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Nano Banana Pro</strong></td>
+                            <td>Image-to-Video, hiá»‡u á»©ng chuyá»ƒn cáº£nh</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Veo 3.1</strong></td>
+                            <td>Video generation, cháº¥t lÆ°á»£ng cao</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Kling 2.6 Pro</strong></td>
+                            <td>Motion control, ngÆ°á»i chuyá»ƒn Ä‘á»™ng</td>
+                        </tr>
+                        <tr>
+                            <td><strong>KlingO1 Edit</strong></td>
+                            <td>Chá»‰nh sá»­a video, thÃªm/bá»›t element</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Error Type 1 -->
+            <div class="guide-section">
+                <h2>Lá»—i 1: Chuyá»ƒn Ä‘á»™ng nhÃ³m Ä‘á»‘i tÆ°á»£ng sai</h2>
+                <p><strong>Case:</strong> TLNOV14022rev4 - Tuáº§n lá»™c tÃ¡ch Ä‘Ã n, Ä‘á»©ng sai vá»‹ trÃ­</p>
+                
+                <h4><span class="label-bad">Prompt sai</span></h4>
+                <div class="code-block">Santa's reindeer flying over the rooftop with sleigh</div>
+                
+                <h4><span class="label-good">Prompt tá»‘i Æ°u</span> <span class="label-tool">Kling 2.6 Pro</span></h4>
+                <div class="code-block">[SCENE]
+Santa Claus riding a sleigh pulled by a team of reindeer 
+flying across the night sky above a snow-covered rooftop.
+
+[MOTION CONSTRAINTS]
+- All reindeer MUST maintain V-formation throughout
+- Reindeer spacing: consistent 1-meter gap between each
+- Movement direction: unified left-to-right trajectory
+- No individual reindeer breaks away from formation
+- Sleigh follows directly behind the lead reindeer
+
+[CAMERA]
+Fixed wide shot, no movement, no shake.
+
+[NEGATIVE]
+Avoid: reindeer separating, reindeer behind sleigh, 
+broken formation, erratic individual movement.</div>
+
+                <div class="workflow-box">
+                    <strong>Workflow:</strong> Kling 2.6 Pro (motion control) â†’ KlingO1 Edit (fix náº¿u cÃ²n lá»‡ch nháº¹)
+                </div>
+            </div>
+
+            <!-- Error Type 2 -->
+            <div class="guide-section">
+                <h2>Lá»—i 2: Trang phá»¥c sai ngá»¯ cáº£nh</h2>
+                <p><strong>Case:</strong> NHJAN13010 - ÄÃ n Ã´ng máº·c bikini thay vÃ¬ quáº§n bÆ¡i</p>
+                
+                <h4><span class="label-bad">Prompt sai</span></h4>
+                <div class="code-block">Man swimming in the pool wearing swimwear</div>
+                
+                <h4><span class="label-good">Prompt tá»‘i Æ°u</span> <span class="label-tool">Kling 2.6 Pro</span></h4>
+                <div class="code-block">[SUBJECT]
+Adult Caucasian man, athletic build, standing by poolside.
+
+[CLOTHING - EXPLICIT]
+Wearing: men's knee-length swim trunks / board shorts
+Color: solid navy blue or black
+Style: casual beach/pool appropriate for adult male
+
+[ABSOLUTE RESTRICTIONS]
+NOT wearing: bikini, speedo, brief-style swimwear, 
+women's swimwear, revealing clothing.
+
+[ACTION]
+Natural relaxed pose, one hand on hip, slight smile.
+
+[CAMERA]
+Medium shot, fixed angle, eye level.</div>
+
+                <div class="workflow-box">
+                    <strong>NguyÃªn táº¯c:</strong> Chá»‰ Ä‘á»‹nh Cá»¤ THá»‚ loáº¡i trang phá»¥c + MÃ´ táº£ mÃ u sáº¯c, kiá»ƒu dÃ¡ng + NÃªu rÃµ giá»›i tÃ­nh phÃ¹ há»£p + ThÃªm negative prompt loáº¡i trá»«
+                </div>
+            </div>
+
+            <!-- Error Type 3 -->
+            <div class="guide-section">
+                <h2>Lá»—i 3: HÃ nh vi ngÆ°á»i khÃ´ng phÃ¹ há»£p</h2>
+                <p><strong>Case:</strong> MNJAN2001 - NgÆ°á»i trong báº¿p cá»­ chá»‰ gá»£i cáº£m</p>
+                
+                <h4><span class="label-good">Prompt tá»‘i Æ°u</span> <span class="label-tool">Veo 3.1</span></h4>
+                <div class="code-block">[SCENE]
+Modern open-concept kitchen, daytime, warm lighting.
+
+[SUBJECTS]
+- Person A: Woman, 35-40 years old, standing at counter
+- Person B: Man, 35-40 years old, standing near stove
+
+[ACTIONS - SPECIFIC]
+Person A: chopping vegetables on cutting board, 
+eyes focused on hands, slight smile.
+
+Person B: stirring pot with wooden spoon, 
+occasionally glancing at Person A with friendly expression.
+
+[BODY LANGUAGE CONSTRAINTS]
+- Maintain 2-feet distance between subjects
+- No physical contact
+- Hands occupied with cooking tasks
+- Posture: upright, casual, task-focused
+- Eye contact: brief, friendly, not prolonged
+
+[MOOD]
+Family-friendly, casual cooking session, 
+wholesome domestic atmosphere.
+
+[NEGATIVE]
+Avoid: romantic gestures, suggestive poses, 
+lingering eye contact, physical touching, 
+leaning toward each other intimately.</div>
+            </div>
+
+            <!-- Error Type 4 -->
+            <div class="guide-section">
+                <h2>Lá»—i 4: Logic chuyá»ƒn Ä‘á»™ng váº­t thá»ƒ sai</h2>
+                <p><strong>Case:</strong> LIJAN07001 - QuÃ¢n cá» nháº£y Ä‘Ã¡nh nhau thay vÃ¬ Ä‘i theo luáº­t</p>
+                
+                <h4><span class="label-good">Prompt tá»‘i Æ°u</span> <span class="label-tool">Nano Banana Pro</span></h4>
+                <div class="code-block">[SCENE]
+Overhead view of wooden chessboard with ongoing game.
+
+[CHESS MOVEMENT SEQUENCE - EXPLICIT]
+Move 1: White pawn E2 slides forward to E4 (2 squares)
+        Duration: 1.5 seconds, Pause: 1 second
+        
+Move 2: Black pawn D7 slides forward to D5 (2 squares)
+        Duration: 1.5 seconds, Pause: 1 second
+        
+Move 3: White bishop F1 slides diagonally to B5
+        Duration: 2 seconds
+
+[MOVEMENT RULES]
+- ONE piece moves at a time, others completely still
+- Pieces SLIDE smoothly along board surface
+- No jumping (except knights)
+- No floating or lifting off board
+- No piece disappears or duplicates
+
+[NEGATIVE]
+Avoid: pieces fighting, pieces jumping randomly,
+multiple pieces moving simultaneously.</div>
+            </div>
+
+            <!-- Error Type 5 -->
+            <div class="guide-section">
+                <h2>Lá»—i 5: Nguá»“n nÆ°á»›c xuáº¥t hiá»‡n sai vá»‹ trÃ­</h2>
+                <p><strong>Case:</strong> DUJAN04005 - NÆ°á»›c cháº£y ngáº«u nhiÃªn, khÃ´ng tá»« vÃ²i phun</p>
+                
+                <h4><span class="label-good">Prompt tá»‘i Æ°u</span> <span class="label-tool">Veo 3.1</span></h4>
+                <div class="code-block">[SCENE]
+Stone fountain barrel/basin in garden setting, 
+currently empty, daylight.
+
+[WATER SOURCE - EXPLICIT]
+Water emerges ONLY from the fountain spout/nozzle 
+at the TOP CENTER of the barrel structure.
+
+[WATER BEHAVIOR]
+- Water streams downward from spout
+- Falls naturally into basin below
+- Creates realistic splash on impact
+- Ripples spread outward from impact point
+- Water level gradually rises in basin
+
+[PHYSICS CONSTRAINTS]
+- Water obeys gravity: flows DOWN only
+- No water appearing from sides of barrel
+- No water materializing mid-air
+- Flow rate: steady, moderate stream
+
+[NEGATIVE]
+Avoid: water from nowhere, water from walls,
+floating water, reverse gravity, dry spout.</div>
+            </div>
+
+            <!-- Error Type 6 -->
+            <div class="guide-section">
+                <h2>Lá»—i 6: Chuyá»ƒn mÃ¹a sai context</h2>
+                <p><strong>Case:</strong> TADEC31004 - LÃ m tuyáº¿tâ†’xuÃ¢n thay vÃ¬ hiá»‡n tráº¡ngâ†’xuÃ¢n</p>
+                
+                <h4><span class="label-good">Prompt tá»‘i Æ°u</span> <span class="label-tool">Nano Banana Pro</span></h4>
+                <div class="code-block">[STARTING STATE]
+Current condition of the house exterior:
+- Dry grass, brownish-yellow lawn
+- Bare trees with no leaves
+- Overcast sky
+- NO SNOW (this location does not have snow)
+
+[ENDING STATE]
+Spring transformation:
+- Lush green grass covering lawn
+- Trees full of fresh green leaves
+- Flowers blooming across garden
+- Blue sky with soft clouds
+
+[CRITICAL CONSTRAINT]
+- START with current DRY condition
+- DO NOT add snow at any point
+- This is a warm climate location
+
+[NEGATIVE]
+Avoid: snow, ice, frost, winter elements.</div>
+
+                <div class="workflow-box">
+                    <strong>Context Checklist:</strong> KhÃ¡ch hÃ ng á»Ÿ vÃ¹ng khÃ­ háº­u nÃ o? CÃ³ tuyáº¿t khÃ´ng? MÃ¹a hiá»‡n táº¡i trong áº£nh lÃ  gÃ¬? MÃ¹a má»¥c tiÃªu lÃ  gÃ¬?
+                </div>
+            </div>
+
+            <!-- Error Type 7 -->
+            <div class="guide-section">
+                <h2>Lá»—i 7: Máº·t ngÆ°á»i biáº¿n dáº¡ng</h2>
+                <p><strong>Case:</strong> HTJAN07002rev2 - Deformed faces</p>
+                
+                <h4><span class="label-good">Prompt chá»‘ng lá»—i máº·t</span> <span class="label-tool">Kling 2.6 Pro</span></h4>
+                <div class="code-block">[SUBJECT FACE PROTECTION]
+- Maintain consistent facial structure throughout
+- Eyes: symmetrical, natural blink rate
+- Mouth: natural movement, no morphing
+- Skin texture: consistent, no artifacts
+- Face proportions: stable, no warping
+
+[MOTION LIMITS FOR FACES]
+- Head rotation: maximum 30 degrees
+- No rapid head movements
+- Subtle expressions only
+
+[NEGATIVE]
+Avoid: face melting, asymmetrical features,
+extra limbs, distorted proportions.</div>
+
+                <div class="workflow-box">
+                    <strong>Workflow:</strong> Kling 2.6 Pro vá»›i face protection â†’ Review tá»«ng 1-2 giÃ¢y â†’ KlingO1 Edit fix local náº¿u lá»—i nháº¹ â†’ Re-generate segment náº¿u lá»—i náº·ng
+                </div>
+            </div>
+
+            <!-- Error Type 8 -->
+            <div class="guide-section">
+                <h2>Lá»—i 8: Video tÄ©nh, thiáº¿u chuyá»ƒn Ä‘á»™ng</h2>
+                <p><strong>Case:</strong> THJAN20030Rev - Trá»i xanh nhÆ° áº£nh tÄ©nh zoom vÃ o</p>
+                
+                <h4><span class="label-good">Prompt tá»‘i Æ°u</span> <span class="label-tool">Veo 3.1</span></h4>
+                <div class="code-block">[SKY REPLACEMENT]
+Transform overcast sky to vibrant blue sky.
+
+[SKY DYNAMICS - ESSENTIAL]
+- Soft white clouds drifting slowly left-to-right
+- Cloud shadows moving gently across landscape
+- Birds flying in distant background (2-3 birds)
+
+[ENVIRONMENTAL RESPONSE]
+- Tree leaves rustling slightly in breeze
+- Grass blades swaying gently
+- Soft shadows shifting on ground
+
+[CAMERA]
+Fixed position, NO zoom, NO dolly.
+Only environmental elements move.
+
+[NEGATIVE]
+Avoid: static sky, frozen clouds, 
+no environmental movement, Ken Burns effect only.</div>
+
+                <div class="workflow-box">
+                    <strong>Anti-Static Rule:</strong> ThÃªm cloud movement + leaf/grass rustle + shadow shift + distant birds. KHÃ”NG chá»‰ zoom vÃ o áº£nh tÄ©nh.
+                </div>
+            </div>
+
+            <!-- Master Template -->
+            <div class="guide-section">
+                <h2>Master Prompt Template</h2>
+                <div class="code-block">[SCENE DESCRIPTION]
+â†’ Bá»‘i cáº£nh, thá»i gian, Ã¡nh sÃ¡ng
+
+[SUBJECTS]
+â†’ NgÆ°á»i/váº­t, Ä‘áº·c Ä‘iá»ƒm cá»¥ thá»ƒ, vá»‹ trÃ­
+
+[ACTIONS/MOTION]
+â†’ HÃ nh Ä‘á»™ng CHI TIáº¾T, timing, sequence
+
+[CONSTRAINTS]
+â†’ Giá»›i háº¡n váº­t lÃ½, logic, pháº£i tuÃ¢n thá»§
+
+[CAMERA]
+â†’ GÃ³c quay, movement, stability
+
+[NEGATIVE PROMPT]
+â†’ Nhá»¯ng gÃ¬ KHÃ”NG ÄÆ¯á»¢C xuáº¥t hiá»‡n</div>
+            </div>
+
+            <!-- Tool Selection -->
+            <div class="guide-section">
+                <h2>Chá»n cÃ´ng cá»¥ theo loáº¡i lá»—i</h2>
+                <table class="tool-table">
+                    <thead>
+                        <tr>
+                            <th>Loáº¡i lá»—i</th>
+                            <th>CÃ´ng cá»¥ chÃ­nh</th>
+                            <th>CÃ´ng cá»¥ há»— trá»£</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Chuyá»ƒn Ä‘á»™ng nhÃ³m sai</td>
+                            <td>Kling 2.6 Pro</td>
+                            <td>KlingO1 Edit</td>
+                        </tr>
+                        <tr>
+                            <td>Máº·t ngÆ°á»i biáº¿n dáº¡ng</td>
+                            <td>Kling 2.6 Pro</td>
+                            <td>KlingO1 Edit</td>
+                        </tr>
+                        <tr>
+                            <td>Trang phá»¥c sai</td>
+                            <td>Kling 2.6 Pro</td>
+                            <td>Veo 3.1</td>
+                        </tr>
+                        <tr>
+                            <td>Logic váº­t lÃ½ sai</td>
+                            <td>Veo 3.1</td>
+                            <td>KlingO1 Edit</td>
+                        </tr>
+                        <tr>
+                            <td>NÆ°á»›c/lá»­a/khÃ³i</td>
+                            <td>Veo 3.1</td>
+                            <td>Nano Banana Pro</td>
+                        </tr>
+                        <tr>
+                            <td>Object movement</td>
+                            <td>Nano Banana Pro</td>
+                            <td>KlingO1 Edit</td>
+                        </tr>
+                        <tr>
+                            <td>Chuyá»ƒn cáº£nh/transition</td>
+                            <td>Nano Banana Pro</td>
+                            <td>Veo 3.1</td>
+                        </tr>
+                        <tr>
+                            <td>ThÃªm ngÆ°á»i realistic</td>
+                            <td>Kling 2.6 Pro</td>
+                            <td>Veo 3.1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Checklists -->
+            <div class="checklist">
+                <h2 class="chart-title">Checklist trÆ°á»›c khi generate</h2>
+                <div class="checklist-item">Äá»c brief 2 láº§n, highlight tá»« khÃ³a hÃ nh Ä‘á»™ng</div>
+                <div class="checklist-item">XÃ¡c Ä‘á»‹nh context Ä‘á»‹a lÃ½/thá»i tiáº¿t</div>
+                <div class="checklist-item">Liá»‡t kÃª Táº¤T Cáº¢ deliverables cáº§n lÃ m</div>
+                <div class="checklist-item">Chá»n cÃ´ng cá»¥ phÃ¹ há»£p loáº¡i effect</div>
+                <div class="checklist-item">Viáº¿t prompt theo template chuáº©n</div>
+                <div class="checklist-item">ThÃªm negative prompt Ä‘áº§y Ä‘á»§</div>
+                <div class="checklist-item">MÃ´ táº£ hÃ nh Ä‘á»™ng Äá»˜NG Tá»ª cá»¥ thá»ƒ</div>
+                <div class="checklist-item">Chá»‰ Ä‘á»‹nh giá»›i háº¡n váº­t lÃ½/logic</div>
+            </div>
+
+            <div class="checklist">
+                <h2 class="chart-title">Checklist sau khi generate</h2>
+                <div class="checklist-item">Xem video tá»« Ä‘áº§u Ä‘áº¿n cuá»‘i (khÃ´ng skip)</div>
+                <div class="checklist-item">Kiá»ƒm tra máº·t ngÆ°á»i tá»«ng segment</div>
+                <div class="checklist-item">Kiá»ƒm tra logic chuyá»ƒn Ä‘á»™ng</div>
+                <div class="checklist-item">XÃ¡c nháº­n khÃ´ng cÃ³ watermark/logo</div>
+                <div class="checklist-item">Äáº¿m láº¡i sá»‘ lÆ°á»£ng output</div>
+                <div class="checklist-item">So sÃ¡nh vá»›i brief gá»‘c láº§n cuá»‘i</div>
+                <div class="checklist-item">Test playback trÃªn device khÃ¡c</div>
+            </div>
+
+            <div class="footer">
+                <p>Template version 1.0 â€¢ Cáº­p nháº­t: 31/01/2026</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching
+        function switchTab(tabIndex) {
+            const buttons = document.querySelectorAll('.tab-button');
+            const contents = document.querySelectorAll('.tab-content');
+            
+            buttons.forEach((btn, idx) => {
+                if (idx === tabIndex) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            contents.forEach((content, idx) => {
+                if (idx === tabIndex) {
+                    content.classList.add('active');
+                } else {
+                    content.classList.remove('active');
+                }
+            });
+        }
+
+        // Chart.js global defaults
+        Chart.defaults.color = '#666';
+        Chart.defaults.borderColor = '#e0e0e0';
+
+        // Error Type Distribution Chart
+        const errorTypeCtx = document.getElementById('errorTypeChart').getContext('2d');
+        new Chart(errorTypeCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Hiá»ƒu sai yÃªu cáº§u', 'Ká»¹ thuáº­t AI', 'Tiáº¿n Ä‘á»™', 'Tháº©m má»¹'],
+                datasets: [{
+                    label: 'Tá»· lá»‡ %',
+                    data: [35, 27, 22, 16],
+                    backgroundColor: '#1976d2',
+                    borderColor: '#1565c0',
+                    borderWidth: 1,
+                    borderRadius: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 40,
+                        grid: {
+                            color: '#f0f0f0'
+                        },
+                        ticks: {
+                            font: { size: 11 },
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            font: { size: 11 }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Project Status Pie Chart
+        const projectStatusCtx = document.getElementById('projectStatusChart').getContext('2d');
+        new Chart(projectStatusCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['CÃ³ lá»—i (82%)', 'KhÃ´ng lá»—i (18%)'],
+                datasets: [{
+                    data: [18, 4],
+                    backgroundColor: ['#d32f2f', '#388e3c'],
+                    borderColor: ['#c62828', '#2e7d32'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 12,
+                            font: { size: 11 }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Error Category Bar Chart
+        const errorCategoryCtx = document.getElementById('errorCategoryChart').getContext('2d');
+        new Chart(errorCategoryCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Hiá»ƒu sai yÃªu cáº§u', 'Ká»¹ thuáº­t AI', 'Tháº©m má»¹', 'Tiáº¿n Ä‘á»™', 'Tá»« chá»‘i'],
+                datasets: [{
+                    label: 'Sá»‘ lÆ°á»£ng job',
+                    data: [6, 6, 5, 6, 6],
+                    backgroundColor: '#1976d2',
+                    borderColor: '#1565c0',
+                    borderWidth: 1,
+                    borderRadius: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                indexAxis: 'y',
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 8,
+                        grid: {
+                            color: '#f0f0f0'
+                        },
+                        ticks: {
+                            font: { size: 11 }
+                        }
+                    },
+                    y: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            font: { size: 11 }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
