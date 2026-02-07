@@ -709,19 +709,6 @@
             <button class="nav-tab" onclick="showSection('resource')">📚 Resource</button>
         </div>
 
-        <!-- Excel Download Button -->
-        <div
-            style="background: rgba(255, 255, 255, 0.95); border-radius: 15px; padding: 15px; margin-bottom: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
-            <a href="/data/feedback-ai.xlsx" target="_blank" style="text-decoration: none;">
-                <button
-                    style="padding: 12px 24px; border: none; border-radius: 10px; cursor: pointer; font-weight: 600; background: linear-gradient(135deg, #10b981, #059669); color: white; transition: all 0.3s ease; display: flex; align-items: center; gap: 8px;"
-                    onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 30px rgba(16, 185, 129, 0.4)'"
-                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-                    📊 Xem Input/Output Excel (Sheet 3)
-                </button>
-            </a>
-        </div>
-
 
         <!-- Section 1: Overview -->
         <div id="overview" class="section active">
@@ -1329,8 +1316,7 @@
 
         <!-- Section 11: Resource -->
         <div id="resource" class="section">
-            <iframe src="/resource.html"
-                style="width: 100%; height: calc(100vh - 200px); border: none; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.1);"
+            <iframe src="/resource.html" style="width: 100%; height: calc(100vh - 100px); border: none;"
                 title="Resource Database"></iframe>
         </div>
     </div>
