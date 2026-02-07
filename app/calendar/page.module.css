@@ -404,3 +404,127 @@
         font-size: 0.9em;
     }
 }
+
+/* Main Tabs */
+.mainTabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    background: white;
+    padding: 8px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mainTabButton {
+    flex: 1;
+    padding: 12px 24px;
+    border: none;
+    background: transparent;
+    color: #666;
+    font-weight: 600;
+    font-size: 1em;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mainTabButton:hover {
+    background: #f8f9fa;
+    color: #4285f4;
+}
+
+.mainTabButton.active {
+    background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
+}
+
+/* Tab Content */
+.tabContent {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Month Selector */
+.monthSelector {
+    background: white;
+    padding: 16px 24px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.monthSelector label {
+    font-weight: 600;
+    color: #333;
+}
+
+.monthDropdown {
+    padding: 10px 16px;
+    border: 2px solid #4285f4;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 600;
+    color: #4285f4;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.monthDropdown:hover {
+    background: #f8f9fa;
+}
+
+.monthDropdown:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.2);
+}
+
+/* Plan Wrapper */
+.planWrapper {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.planFrame {
+    width: 100%;
+    height: 800px;
+    border: none;
+    border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+    .mainTabs {
+        flex-direction: column;
+    }
+
+    .monthSelector {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .monthDropdown {
+        width: 100%;
+    }
+
+    .planFrame {
+        height: 600px;
+    }
+}
