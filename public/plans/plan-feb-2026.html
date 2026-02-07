@@ -520,15 +520,16 @@
             
             <div class="holiday-banner">
                 <h2>🧧 CHÚC MỪNG NĂM MỚI 🧧</h2>
-                <p style="font-size: 1.5em; margin-bottom: 20px;">🐍 Năm Ất Tỵ 2025 🐍</p>
-                <p>Tuần nghỉ Tết Âm lịch - Không có công việc được lên lịch</p>
+                <p style="font-size: 1.5em; margin-bottom: 20px;">🐴 Năm Bính Ngọ 2026 🐴</p>
+                <p>Mùng 1 Tết: 17/02/2026</p>
+                <p style="margin-top: 10px;">Tuần nghỉ Tết Âm lịch - Không có công việc được lên lịch</p>
                 <div style="margin-top: 30px; font-size: 3em;">
                     🎆 🏮 🧧 🎊 🎉 🏮 🎆
                 </div>
             </div>
         </div>
 
-        <!-- Week 4 Feb - Training & AI Agent Phase 2 (MOVED FROM WEEK 3) -->
+        <!-- Week 4 Feb - Training & AI Agent Phase 2 -->
         <div class="card">
             <div class="card-header">
                 <div class="card-title">
@@ -604,7 +605,7 @@
             </div>
         </div>
 
-        <!-- Week 1 March - AI Agent Phase 3 & Validation (MOVED FROM WEEK 4) -->
+        <!-- Week 1 March - AI Agent Phase 3 & Validation -->
         <div class="card">
             <div class="card-header">
                 <div class="card-title">
@@ -797,7 +798,7 @@
                     </div>
                     <div style="margin-bottom: 15px;">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                            <span>Tuần 3 (17-23/02): 🧧 NGHỈ TẾT ÂM LỊCH</span>
+                            <span>Tuần 3 (17-23/02): 🧧 NGHỈ TẾT ÂM LỊCH (Bính Ngọ 2026)</span>
                             <span style="color: #fbbf24;">N/A</span>
                         </div>
                         <div class="progress-bar" style="height: 15px;">
@@ -827,8 +828,6 @@
         </div>
     </div>
 
-    <div class="toast-container" id="toastContainer"></div>
-
     <script>
         function updateWeekProgress(week) {
             const weekNum = week.replace('week', '');
@@ -846,7 +845,6 @@
         }
 
         function updateOverallProgress() {
-            // Only count weeks 1, 2, 4, 5 (skip week 3 - Tet holiday)
             const allCheckboxes = document.querySelectorAll(
                 '#w1t1, #w1t2, #w1t3, #w1t4, #w1t5, #w1t6, ' +
                 '#w2t1, #w2t2, #w2t3, #w2t4, #w2t5, #w2t6, ' +
@@ -861,16 +859,15 @@
             document.getElementById('tasksCompleted').textContent = `${checked}/${total}`;
             
             const today = new Date();
-            const endDate = new Date(2026, 2, 9); // March 9, 2026
+            const endDate = new Date(2026, 2, 9);
             const daysLeft = Math.ceil((endDate - today) / (1000 * 60 * 60 * 24));
             
-            // Calculate working weeks left (excluding Tet week)
             let weeksLeft = 0;
-            if (today < new Date(2026, 1, 9)) weeksLeft = 4; // Before Week 1 ends
-            else if (today < new Date(2026, 1, 16)) weeksLeft = 3; // During Week 2
-            else if (today < new Date(2026, 1, 23)) weeksLeft = 2; // During Tet (Week 3)
-            else if (today < new Date(2026, 1, 28)) weeksLeft = 2; // During Week 4
-            else if (today < new Date(2026, 2, 9)) weeksLeft = 1; // During Week 1 March
+            if (today < new Date(2026, 1, 9)) weeksLeft = 4;
+            else if (today < new Date(2026, 1, 16)) weeksLeft = 3;
+            else if (today < new Date(2026, 1, 23)) weeksLeft = 2;
+            else if (today < new Date(2026, 1, 28)) weeksLeft = 2;
+            else if (today < new Date(2026, 2, 9)) weeksLeft = 1;
             else weeksLeft = 0;
             
             document.getElementById('daysRemaining').textContent = daysLeft > 0 ? daysLeft : 0;
@@ -884,7 +881,7 @@
             const weeks = [
                 { name: 'Tuần 1', dates: '03-09/02', color: '#ec4899', label: 'Analysis' },
                 { name: 'Tuần 2', dates: '10-16/02', color: '#6366f1', label: 'Foundation' },
-                { name: 'Tuần 3', dates: '17-23/02', color: '#fbbf24', label: '🧧 TẾT', isHoliday: true },
+                { name: 'Tuần 3', dates: '17-23/02', color: '#fbbf24', label: '🧧 TẾT BÍNH NGỌ', isHoliday: true },
                 { name: 'Tuần 4', dates: '24-28/02', color: '#f59e0b', label: 'Training' },
                 { name: 'T1/T3', dates: '03-09/03', color: '#ef4444', label: 'Validation' }
             ];
