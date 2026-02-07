@@ -158,17 +158,40 @@ export default function FeedbackPage() {
                 {/* Tab 1: AI Video Effects Database */}
                 {activeTab === 0 && (
                     <div className={styles.tabContent}>
-                        <iframe
-                            src="/ai-video-effects.html"
-                            style={{
-                                width: '100%',
-                                height: 'calc(100vh - 200px)',
-                                border: 'none',
-                                borderRadius: '20px',
-                                background: 'white'
-                            }}
-                            title="AI Video Effects Database"
-                        />
+                        <div style={{
+                            background: 'white',
+                            borderRadius: '20px',
+                            padding: '60px 40px',
+                            textAlign: 'center',
+                            boxShadow: '0 10px 40px rgba(0,0,0,0.1)'
+                        }}>
+                            <h2 style={{ fontSize: '2em', marginBottom: '20px', color: '#1e293b' }}>
+                                🎬 AI Video Effects Database v2.0
+                            </h2>
+                            <p style={{ fontSize: '1.1em', color: '#64748b', marginBottom: '30px' }}>
+                                Công cụ & Quy trình
+                            </p>
+                            <a
+                                href="/ai-video-effects.html"
+                                target="_blank"
+                                style={{
+                                    display: 'inline-block',
+                                    background: 'linear-gradient(135deg, #6366f1, #4f46e5)',
+                                    color: 'white',
+                                    padding: '15px 40px',
+                                    borderRadius: '10px',
+                                    textDecoration: 'none',
+                                    fontSize: '1.1em',
+                                    fontWeight: 600,
+                                    boxShadow: '0 10px 30px rgba(99, 102, 241, 0.4)',
+                                    transition: 'transform 0.3s ease'
+                                }}
+                                onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
+                                onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+                            >
+                                Mở AI Video Effects Database →
+                            </a>
+                        </div>
                     </div>
                 )}
 
