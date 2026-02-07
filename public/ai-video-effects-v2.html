@@ -706,7 +706,19 @@
             <button class="nav-tab" onclick="showSection('decision')">🌳 Decision Tree</button>
             <button class="nav-tab" onclick="showSection('capacity')">⏱️ Capacity</button>
             <button class="nav-tab" onclick="showSection('training')">🎓 Training</button>
-            <button class="nav-tab" onclick="showSection('resource')">📚 Resource</button>
+        </div>
+
+        <!-- Resource Link -->
+        <div
+            style="background: rgba(255, 255, 255, 0.95); border-radius: 15px; padding: 15px; margin-bottom: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); display: flex; justify-content: center;">
+            <a href="/resource.html" target="_blank" style="text-decoration: none; width: 100%;">
+                <button
+                    style="width: 100%; padding: 15px 30px; border: none; border-radius: 10px; cursor: pointer; font-weight: 600; background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; font-size: 1.1em; transition: all 0.3s ease;"
+                    onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 30px rgba(99, 102, 241, 0.4)'"
+                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                    📚 Resource - Full Database
+                </button>
+            </a>
         </div>
 
 
@@ -1313,13 +1325,11 @@
                 </div>
             </div>
         </div>
-
-        <!-- Section 11: Resource -->
-        <div id="resource" class="section">
-            <iframe src="/resource.html" style="width: 100%; height: calc(100vh - 100px); border: none;"
-                title="Resource Database"></iframe>
-        </div>
     </div>
+
+    <a href="/resource.html" class="standalone-link-button" target="_blank">
+        <i class="fas fa-database"></i> Resource Database
+    </a>
 
     <script>
         // ============== DATA ==============
