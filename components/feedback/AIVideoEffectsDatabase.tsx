@@ -5,10 +5,12 @@ export default function AIVideoEffectsDatabase() {
         <div style={{
             width: '100%',
             minHeight: '100vh',
-            background: '#fafafa'
+            background: '#fafafa',
+            margin: '-20px',
+            padding: 0
         }}>
             <iframe
-                src="/ai-video-dashboard.html"
+                src="/ai-video-effects-full.html"
                 style={{
                     width: '100%',
                     height: '100vh',
