@@ -138,7 +138,7 @@ export default function FeedbackPage() {
                             className={`${styles.tabButton} ${activeTab === 0 ? styles.active : ''}`}
                             onClick={() => setActiveTab(0)}
                         >
-                            Phân Tích Lỗi
+                            AI Video Effects Database
                         </button>
                         <button
                             className={`${styles.tabButton} ${activeTab === 1 ? styles.active : ''}`}
@@ -155,176 +155,20 @@ export default function FeedbackPage() {
                     </div>
                 </div>
 
-                {/* Tab 1: Error Analysis */}
+                {/* Tab 1: AI Video Effects Database */}
                 {activeTab === 0 && (
                     <div className={styles.tabContent}>
-                        <div className={styles.header}>
-                            <h1>📈 Phân Tích Lỗi AI Video</h1>
-                            <p>Dashboard tổng hợp chất lượng dự án - {overview.period}</p>
-                        </div>
-
-                        {/* Stats Overview */}
-                        <div className={styles.statsGrid}>
-                            <div className={styles.statCard}>
-                                <div className={styles.statLabel}>Tổng dự án</div>
-                                <div className={styles.statNumber} style={{ color: '#333' }}>
-                                    {overview.totalJobs}
-                                </div>
-                            </div>
-                            <div className={styles.statCard}>
-                                <div className={styles.statLabel}>Có lỗi</div>
-                                <div className={styles.statNumber} style={{ color: '#d32f2f' }}>
-                                    {overview.errorJobs}
-                                </div>
-                                <div className={styles.statPercentage}>
-                                    {Math.round((overview.errorJobs / overview.totalJobs) * 100)}%
-                                </div>
-                            </div>
-                            <div className={styles.statCard}>
-                                <div className={styles.statLabel}>Không lỗi</div>
-                                <div className={styles.statNumber} style={{ color: '#388e3c' }}>
-                                    {overview.noErrorJobs}
-                                </div>
-                                <div className={styles.statPercentage}>
-                                    {Math.round((overview.noErrorJobs / overview.totalJobs) * 100)}%
-                                </div>
-                            </div>
-                            <div className={styles.statCard}>
-                                <div className={styles.statLabel}>Trễ deadline</div>
-                                <div className={styles.statNumber} style={{ color: '#f57c00' }}>
-                                    {overview.lateJobs}
-                                </div>
-                                <div className={styles.statPercentage}>
-                                    {Math.round((overview.lateJobs / overview.totalJobs) * 100)}%
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Charts Row */}
-                        <div className={styles.twoCol}>
-                            <div className={styles.chartContainer}>
-                                <h2 className={styles.chartTitle}>Phân bố loại lỗi</h2>
-                                <canvas id="errorTypeChart"></canvas>
-                            </div>
-                            <div className={styles.chartContainer}>
-                                <h2 className={styles.chartTitle}>Tỷ lệ dự án</h2>
-                                <canvas id="projectStatusChart"></canvas>
-                            </div>
-                        </div>
-
-                        {/* Error Categories */}
-                        <div className={styles.chartContainer}>
-                            <h2 className={styles.chartTitle}>Chi tiết lỗi theo nhóm</h2>
-                            <canvas id="errorCategoryChart"></canvas>
-                        </div>
-
-                        {/* Requirement Errors Table */}
-                        <div className={styles.errorTable}>
-                            <h2 className={styles.chartTitle}>Lỗi hiểu sai yêu cầu - Top cases</h2>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Mã Job</th>
-                                        <th>Yêu cầu</th>
-                                        <th>Thực tế làm</th>
-                                        <th>Vấn đề</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {requirementErrors.map((error: any, i: number) => (
-                                        <tr key={i}>
-                                            <td>
-                                                <strong>{error.jobCode}</strong>
-                                            </td>
-                                            <td>{error.requirement}</td>
-                                            <td>{error.actual}</td>
-                                            <td>{error.issue}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-
-                        {/* Technical Errors Table */}
-                        <div className={styles.errorTable}>
-                            <h2 className={styles.chartTitle}>Lỗi kỹ thuật AI</h2>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Mã Job</th>
-                                        <th>Lỗi cụ thể</th>
-                                        <th>Mức độ</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {technicalErrors.map((error: any, i: number) => (
-                                        <tr key={i}>
-                                            <td>
-                                                <strong>{error.jobCode}</strong>
-                                            </td>
-                                            <td>{error.error}</td>
-                                            <td
-                                                className={
-                                                    error.severity === 'high' ? styles.severityHigh : styles.severityMedium
-                                                }
-                                            >
-                                                {error.severity === 'high' ? 'Nghiêm trọng' : 'Trung bình'}
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-
-                        {/* Goals Comparison */}
-                        <div className={styles.chartContainer}>
-                            <h2 className={styles.chartTitle}>Mục tiêu cải thiện (30 ngày)</h2>
-                            <div className={styles.goalComparison}>
-                                {goals.map((goal: any, i: number) => (
-                                    <div key={i} className={styles.goalCard}>
-                                        <div className={styles.goalTitle}>{goal.name}</div>
-                                        <div className={styles.goalBars}>
-                                            <div className={styles.goalBar}>
-                                                <span className={styles.barLabel}>Hiện tại</span>
-                                                <div className={styles.barFill}>
-                                                    <div
-                                                        className={styles.barProgress}
-                                                        style={{ width: `${goal.current}%`, background: '#d32f2f' }}
-                                                    >
-                                                        {goal.current}%
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className={styles.goalBar}>
-                                                <span className={styles.barLabel}>Mục tiêu</span>
-                                                <div className={styles.barFill}>
-                                                    <div
-                                                        className={styles.barProgress}
-                                                        style={{ width: `${goal.target}%`, background: '#388e3c' }}
-                                                    >
-                                                        {goal.target}%
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* QC Checklist */}
-                        <div className={styles.checklist}>
-                            <h2 className={styles.chartTitle}>Checklist QC trước gửi khách</h2>
-                            {qcChecklist.map((item: string, i: number) => (
-                                <div key={i} className={styles.checklistItem}>
-                                    {item}
-                                </div>
-                            ))}
-                        </div>
-
-                        <div className={styles.footer}>
-                            <p>Cập nhật: {overview.period}</p>
-                        </div>
+                        <iframe
+                            src="/feedback/ai-video-effects.html"
+                            style={{
+                                width: '100%',
+                                height: 'calc(100vh - 200px)',
+                                border: 'none',
+                                borderRadius: '20px',
+                                background: 'white'
+                            }}
+                            title="AI Video Effects Database"
+                        />
                     </div>
                 )}
 
