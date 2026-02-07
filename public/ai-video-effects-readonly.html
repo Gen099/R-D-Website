@@ -218,7 +218,7 @@
         }
 
         .checklist-item::before {
-            content: "â–¡";
+            content: "□";
             margin-right: 10px;
             color: #999;
         }
@@ -422,8 +422,8 @@
     <!-- Tab Navigation -->
     <div class="tab-container">
         <div class="tab-nav">
-            <button class="tab-button active" >PhÃ¢n TÃ­ch Lá»—i</button>
-            <button class="tab-button" >HÆ°á»›ng Dáº«n Prompt</button>
+            <button class="tab-button active" >Phân Tích Lỗi</button>
+            <button class="tab-button" >Hướng Dẫn Prompt</button>
         </div>
     </div>
 
@@ -431,28 +431,28 @@
     <div class="tab-content active">
         <div class="container">
             <div class="header">
-                <h1>PhÃ¢n TÃ­ch Lá»—i AI Video</h1>
-                <p>Dashboard tá»•ng há»£p cháº¥t lÆ°á»£ng dá»± Ã¡n</p>
+                <h1>Phân Tích Lỗi AI Video</h1>
+                <p>Dashboard tổng hợp chất lượng dự án</p>
             </div>
 
             <!-- Stats Overview -->
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="stat-label">Tá»•ng dá»± Ã¡n</div>
+                    <div class="stat-label">Tổng dự án</div>
                     <div class="stat-number" style="color: #333;">22</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-label">CÃ³ lá»—i</div>
+                    <div class="stat-label">Có lỗi</div>
                     <div class="stat-number" style="color: #d32f2f;">18</div>
                     <div class="stat-percentage">82%</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-label">KhÃ´ng lá»—i</div>
+                    <div class="stat-label">Không lỗi</div>
                     <div class="stat-number" style="color: #388e3c;">4</div>
                     <div class="stat-percentage">18%</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-label">Trá»… deadline</div>
+                    <div class="stat-label">Trễ deadline</div>
                     <div class="stat-number" style="color: #f57c00;">6</div>
                     <div class="stat-percentage">27%</div>
                 </div>
@@ -461,63 +461,63 @@
             <!-- Charts Row -->
             <div class="two-col">
                 <div class="chart-container">
-                    <h2 class="chart-title">PhÃ¢n bá»‘ loáº¡i lá»—i</h2>
+                    <h2 class="chart-title">Phân bố loại lỗi</h2>
                     <canvas id="errorTypeChart"></canvas>
                 </div>
                 <div class="chart-container">
-                    <h2 class="chart-title">Tá»· lá»‡ dá»± Ã¡n</h2>
+                    <h2 class="chart-title">Tỷ lệ dự án</h2>
                     <canvas id="projectStatusChart"></canvas>
                 </div>
             </div>
 
             <!-- Error Categories -->
             <div class="chart-container">
-                <h2 class="chart-title">Chi tiáº¿t lá»—i theo nhÃ³m</h2>
+                <h2 class="chart-title">Chi tiết lỗi theo nhóm</h2>
                 <canvas id="errorCategoryChart"></canvas>
             </div>
 
             <!-- Error Details Table -->
             <div class="error-table">
-                <h2 class="chart-title">Lá»—i hiá»ƒu sai yÃªu cáº§u - Top cases</h2>
+                <h2 class="chart-title">Lỗi hiểu sai yêu cầu - Top cases</h2>
                 <table>
                     <thead>
                         <tr>
-                            <th>MÃ£ Job</th>
-                            <th>YÃªu cáº§u</th>
-                            <th>Thá»±c táº¿ lÃ m</th>
-                            <th>Váº¥n Ä‘á»</th>
+                            <th>Mã Job</th>
+                            <th>Yêu cầu</th>
+                            <th>Thực tế làm</th>
+                            <th>Vấn đề</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td><strong>TADEC31004</strong></td>
-                            <td>Hiá»‡n tráº¡ng â†’ mÃ¹a xuÃ¢n</td>
-                            <td>Tuyáº¿t â†’ mÃ¹a xuÃ¢n</td>
-                            <td>KhÃ´ng Ä‘á»c context "we don't get snow"</td>
+                            <td>Hiện trạng → mùa xuân</td>
+                            <td>Tuyết → mùa xuân</td>
+                            <td>Không đọc context "we don't get snow"</td>
                         </tr>
                         <tr>
                             <td><strong>HTJAN15008Rev</strong></td>
-                            <td>"Preparing dinner" cÃ³ ngÆ°á»i</td>
-                            <td>Chá»‰ cÃ³ bÃ n + Ä‘á»“ Äƒn</td>
-                            <td>Bá» qua Ä‘á»™ng tá»« hÃ nh Ä‘á»™ng</td>
+                            <td>"Preparing dinner" có người</td>
+                            <td>Chỉ có bàn + đồ ăn</td>
+                            <td>Bỏ qua động từ hành động</td>
                         </tr>
                         <tr>
                             <td><strong>DUJAN04005</strong></td>
-                            <td>NÆ°á»›c cháº£y tá»« vÃ²i phun</td>
-                            <td>NÆ°á»›c xuáº¥t hiá»‡n ngáº«u nhiÃªn</td>
-                            <td>KhÃ´ng quan sÃ¡t cáº¥u trÃºc fountain</td>
+                            <td>Nước chảy từ vòi phun</td>
+                            <td>Nước xuất hiện ngẫu nhiên</td>
+                            <td>Không quan sát cấu trúc fountain</td>
                         </tr>
                         <tr>
                             <td><strong>QUJAN25001</strong></td>
                             <td>2 AI: living + dining</td>
-                            <td>Chá»‰ lÃ m 1, lÃ m sai phÃ²ng</td>
-                            <td>Thiáº¿u checklist deliverables</td>
+                            <td>Chỉ làm 1, làm sai phòng</td>
+                            <td>Thiếu checklist deliverables</td>
                         </tr>
                         <tr>
                             <td><strong>QUJAN19003</strong></td>
-                            <td>AI dá»±ng nhÃ  + timelapse</td>
-                            <td>KhÃ´ng lÃ m pháº§n dá»±ng nhÃ </td>
-                            <td>Bá» sÃ³t yÃªu cáº§u chÃ­nh</td>
+                            <td>AI dựng nhà + timelapse</td>
+                            <td>Không làm phần dựng nhà</td>
+                            <td>Bỏ sót yêu cầu chính</td>
                         </tr>
                     </tbody>
                 </table>
@@ -525,45 +525,45 @@
 
             <!-- Technical Errors -->
             <div class="error-table">
-                <h2 class="chart-title">Lá»—i ká»¹ thuáº­t AI</h2>
+                <h2 class="chart-title">Lỗi kỹ thuật AI</h2>
                 <table>
                     <thead>
                         <tr>
-                            <th>MÃ£ Job</th>
-                            <th>Lá»—i cá»¥ thá»ƒ</th>
-                            <th>Má»©c Ä‘á»™</th>
+                            <th>Mã Job</th>
+                            <th>Lỗi cụ thể</th>
+                            <th>Mức độ</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td><strong>NHJAN13010</strong></td>
-                            <td>ÄÃ n Ã´ng máº·c bikini thay vÃ¬ quáº§n bÆ¡i</td>
-                            <td class="severity-high">NghiÃªm trá»ng</td>
+                            <td>Đàn ông mặc bikini thay vì quần bơi</td>
+                            <td class="severity-high">Nghiêm trọng</td>
                         </tr>
                         <tr>
                             <td><strong>LIJAN07001</strong></td>
-                            <td>QuÃ¢n cá» nháº£y Ä‘Ã¡nh nhau, khÃ´ng theo luáº­t</td>
-                            <td class="severity-high">NghiÃªm trá»ng</td>
+                            <td>Quân cờ nhảy đánh nhau, không theo luật</td>
+                            <td class="severity-high">Nghiêm trọng</td>
                         </tr>
                         <tr>
                             <td><strong>HTJAN07002rev2</strong></td>
-                            <td>Máº·t ngÆ°á»i biáº¿n dáº¡ng</td>
-                            <td class="severity-high">NghiÃªm trá»ng</td>
+                            <td>Mặt người biến dạng</td>
+                            <td class="severity-high">Nghiêm trọng</td>
                         </tr>
                         <tr>
                             <td><strong>CHDEC11004</strong></td>
-                            <td>Agent Ä‘Ã³ng bÄƒng, clip vá»¡</td>
-                            <td class="severity-high">NghiÃªm trá»ng</td>
+                            <td>Agent đóng băng, clip vỡ</td>
+                            <td class="severity-high">Nghiêm trọng</td>
                         </tr>
                         <tr>
                             <td><strong>TLNOV14022rev4</strong></td>
-                            <td>Tuáº§n lá»™c tÃ¡ch Ä‘Ã n, Ä‘á»©ng sai vá»‹ trÃ­</td>
-                            <td class="severity-medium">Trung bÃ¬nh</td>
+                            <td>Tuần lộc tách đàn, đứng sai vị trí</td>
+                            <td class="severity-medium">Trung bình</td>
                         </tr>
                         <tr>
                             <td><strong>CHJAN24002</strong></td>
-                            <td>Viá»n tráº¯ng quanh agent bay</td>
-                            <td class="severity-medium">Trung bÃ¬nh</td>
+                            <td>Viền trắng quanh agent bay</td>
+                            <td class="severity-medium">Trung bình</td>
                         </tr>
                     </tbody>
                 </table>
@@ -571,19 +571,19 @@
 
             <!-- Goals Comparison -->
             <div class="chart-container">
-                <h2 class="chart-title">Má»¥c tiÃªu cáº£i thiá»‡n (30 ngÃ y)</h2>
+                <h2 class="chart-title">Mục tiêu cải thiện (30 ngày)</h2>
                 <div class="goal-comparison">
                     <div class="goal-card">
-                        <div class="goal-title">Lá»—i hiá»ƒu sai yÃªu cáº§u</div>
+                        <div class="goal-title">Lỗi hiểu sai yêu cầu</div>
                         <div class="goal-bars">
                             <div class="goal-bar">
-                                <span class="bar-label">Hiá»‡n táº¡i</span>
+                                <span class="bar-label">Hiện tại</span>
                                 <div class="bar-fill">
                                     <div class="bar-progress" style="width: 35%; background: #d32f2f;">35%</div>
                                 </div>
                             </div>
                             <div class="goal-bar">
-                                <span class="bar-label">Má»¥c tiÃªu</span>
+                                <span class="bar-label">Mục tiêu</span>
                                 <div class="bar-fill">
                                     <div class="bar-progress" style="width: 10%; background: #388e3c;">10%</div>
                                 </div>
@@ -592,16 +592,16 @@
                     </div>
                     
                     <div class="goal-card">
-                        <div class="goal-title">Lá»—i ká»¹ thuáº­t AI</div>
+                        <div class="goal-title">Lỗi kỹ thuật AI</div>
                         <div class="goal-bars">
                             <div class="goal-bar">
-                                <span class="bar-label">Hiá»‡n táº¡i</span>
+                                <span class="bar-label">Hiện tại</span>
                                 <div class="bar-fill">
                                     <div class="bar-progress" style="width: 27%; background: #d32f2f;">27%</div>
                                 </div>
                             </div>
                             <div class="goal-bar">
-                                <span class="bar-label">Má»¥c tiÃªu</span>
+                                <span class="bar-label">Mục tiêu</span>
                                 <div class="bar-fill">
                                     <div class="bar-progress" style="width: 15%; background: #388e3c;">15%</div>
                                 </div>
@@ -610,16 +610,16 @@
                     </div>
                     
                     <div class="goal-card">
-                        <div class="goal-title">Trá»… deadline</div>
+                        <div class="goal-title">Trễ deadline</div>
                         <div class="goal-bars">
                             <div class="goal-bar">
-                                <span class="bar-label">Hiá»‡n táº¡i</span>
+                                <span class="bar-label">Hiện tại</span>
                                 <div class="bar-fill">
                                     <div class="bar-progress" style="width: 27%; background: #d32f2f;">27%</div>
                                 </div>
                             </div>
                             <div class="goal-bar">
-                                <span class="bar-label">Má»¥c tiÃªu</span>
+                                <span class="bar-label">Mục tiêu</span>
                                 <div class="bar-fill">
                                     <div class="bar-progress" style="width: 10%; background: #388e3c;">10%</div>
                                 </div>
@@ -628,16 +628,16 @@
                     </div>
                     
                     <div class="goal-card">
-                        <div class="goal-title">Lá»—i tháº©m má»¹</div>
+                        <div class="goal-title">Lỗi thẩm mỹ</div>
                         <div class="goal-bars">
                             <div class="goal-bar">
-                                <span class="bar-label">Hiá»‡n táº¡i</span>
+                                <span class="bar-label">Hiện tại</span>
                                 <div class="bar-fill">
                                     <div class="bar-progress" style="width: 16%; background: #f57c00;">16%</div>
                                 </div>
                             </div>
                             <div class="goal-bar">
-                                <span class="bar-label">Má»¥c tiÃªu</span>
+                                <span class="bar-label">Mục tiêu</span>
                                 <div class="bar-fill">
                                     <div class="bar-progress" style="width: 5%; background: #388e3c;">5%</div>
                                 </div>
@@ -649,19 +649,19 @@
 
             <!-- QC Checklist -->
             <div class="checklist">
-                <h2 class="chart-title">Checklist QC trÆ°á»›c gá»­i khÃ¡ch</h2>
-                <div class="checklist-item">Äá»§ sá»‘ lÆ°á»£ng output theo yÃªu cáº§u?</div>
-                <div class="checklist-item">ÄÃºng ná»™i dung yÃªu cáº§u?</div>
-                <div class="checklist-item">KhÃ´ng cÃ³ watermark/logo cÃ´ng cá»¥?</div>
-                <div class="checklist-item">Máº·t ngÆ°á»i khÃ´ng bá»‹ biáº¿n dáº¡ng?</div>
-                <div class="checklist-item">Chuyá»ƒn Ä‘á»™ng tá»± nhiÃªn, khÃ´ng giáº­t?</div>
-                <div class="checklist-item">KhÃ´ng cÃ³ viá»n tráº¯ng/artifacts?</div>
-                <div class="checklist-item">Äá»™ phÃ¢n giáº£i Ä‘Ãºng yÃªu cáº§u?</div>
-                <div class="checklist-item">Xem láº¡i toÃ n bá»™ video tá»« Ä‘áº§u Ä‘áº¿n cuá»‘i?</div>
+                <h2 class="chart-title">Checklist QC trước gửi khách</h2>
+                <div class="checklist-item">Đủ số lượng output theo yêu cầu?</div>
+                <div class="checklist-item">Đúng nội dung yêu cầu?</div>
+                <div class="checklist-item">Không có watermark/logo công cụ?</div>
+                <div class="checklist-item">Mặt người không bị biến dạng?</div>
+                <div class="checklist-item">Chuyển động tự nhiên, không giật?</div>
+                <div class="checklist-item">Không có viền trắng/artifacts?</div>
+                <div class="checklist-item">Độ phân giải đúng yêu cầu?</div>
+                <div class="checklist-item">Xem lại toàn bộ video từ đầu đến cuối?</div>
             </div>
 
             <div class="footer">
-                <p>Cáº­p nháº­t: ThÃ¡ng 1, 2026</p>
+                <p>Cập nhật: Tháng 1, 2026</p>
             </div>
         </div>
     </div>
@@ -670,36 +670,36 @@
     <div class="tab-content">
         <div class="container">
             <div class="header">
-                <h1>HÆ°á»›ng Dáº«n Tá»‘i Æ¯u Prompt & Fix Lá»—i</h1>
-                <p>Best practices vÃ  template prompt cho tá»«ng loáº¡i lá»—i</p>
+                <h1>Hướng Dẫn Tối Ưu Prompt & Fix Lỗi</h1>
+                <p>Best practices và template prompt cho từng loại lỗi</p>
             </div>
 
             <!-- Tools Overview -->
             <div class="guide-section">
-                <h2>CÃ´ng cá»¥ kháº£ dá»¥ng</h2>
+                <h2>Công cụ khả dụng</h2>
                 <table class="tool-table">
                     <thead>
                         <tr>
-                            <th>CÃ´ng cá»¥</th>
-                            <th>Chá»©c nÄƒng chÃ­nh</th>
+                            <th>Công cụ</th>
+                            <th>Chức năng chính</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td><strong>Nano Banana Pro</strong></td>
-                            <td>Image-to-Video, hiá»‡u á»©ng chuyá»ƒn cáº£nh</td>
+                            <td>Image-to-Video, hiệu ứng chuyển cảnh</td>
                         </tr>
                         <tr>
                             <td><strong>Veo 3.1</strong></td>
-                            <td>Video generation, cháº¥t lÆ°á»£ng cao</td>
+                            <td>Video generation, chất lượng cao</td>
                         </tr>
                         <tr>
                             <td><strong>Kling 2.6 Pro</strong></td>
-                            <td>Motion control, ngÆ°á»i chuyá»ƒn Ä‘á»™ng</td>
+                            <td>Motion control, người chuyển động</td>
                         </tr>
                         <tr>
                             <td><strong>KlingO1 Edit</strong></td>
-                            <td>Chá»‰nh sá»­a video, thÃªm/bá»›t element</td>
+                            <td>Chỉnh sửa video, thêm/bớt element</td>
                         </tr>
                     </tbody>
                 </table>
@@ -707,13 +707,13 @@
 
             <!-- Error Type 1 -->
             <div class="guide-section">
-                <h2>Lá»—i 1: Chuyá»ƒn Ä‘á»™ng nhÃ³m Ä‘á»‘i tÆ°á»£ng sai</h2>
-                <p><strong>Case:</strong> TLNOV14022rev4 - Tuáº§n lá»™c tÃ¡ch Ä‘Ã n, Ä‘á»©ng sai vá»‹ trÃ­</p>
+                <h2>Lỗi 1: Chuyển động nhóm đối tượng sai</h2>
+                <p><strong>Case:</strong> TLNOV14022rev4 - Tuần lộc tách đàn, đứng sai vị trí</p>
                 
                 <h4><span class="label-bad">Prompt sai</span></h4>
                 <div class="code-block">Santa's reindeer flying over the rooftop with sleigh</div>
                 
-                <h4><span class="label-good">Prompt tá»‘i Æ°u</span> <span class="label-tool">Kling 2.6 Pro</span></h4>
+                <h4><span class="label-good">Prompt tối ưu</span> <span class="label-tool">Kling 2.6 Pro</span></h4>
                 <div class="code-block">[SCENE]
 Santa Claus riding a sleigh pulled by a team of reindeer 
 flying across the night sky above a snow-covered rooftop.
@@ -733,19 +733,19 @@ Avoid: reindeer separating, reindeer behind sleigh,
 broken formation, erratic individual movement.</div>
 
                 <div class="workflow-box">
-                    <strong>Workflow:</strong> Kling 2.6 Pro (motion control) â†’ KlingO1 Edit (fix náº¿u cÃ²n lá»‡ch nháº¹)
+                    <strong>Workflow:</strong> Kling 2.6 Pro (motion control) → KlingO1 Edit (fix nếu còn lệch nhẹ)
                 </div>
             </div>
 
             <!-- Error Type 2 -->
             <div class="guide-section">
-                <h2>Lá»—i 2: Trang phá»¥c sai ngá»¯ cáº£nh</h2>
-                <p><strong>Case:</strong> NHJAN13010 - ÄÃ n Ã´ng máº·c bikini thay vÃ¬ quáº§n bÆ¡i</p>
+                <h2>Lỗi 2: Trang phục sai ngữ cảnh</h2>
+                <p><strong>Case:</strong> NHJAN13010 - Đàn ông mặc bikini thay vì quần bơi</p>
                 
                 <h4><span class="label-bad">Prompt sai</span></h4>
                 <div class="code-block">Man swimming in the pool wearing swimwear</div>
                 
-                <h4><span class="label-good">Prompt tá»‘i Æ°u</span> <span class="label-tool">Kling 2.6 Pro</span></h4>
+                <h4><span class="label-good">Prompt tối ưu</span> <span class="label-tool">Kling 2.6 Pro</span></h4>
                 <div class="code-block">[SUBJECT]
 Adult Caucasian man, athletic build, standing by poolside.
 
@@ -765,16 +765,16 @@ Natural relaxed pose, one hand on hip, slight smile.
 Medium shot, fixed angle, eye level.</div>
 
                 <div class="workflow-box">
-                    <strong>NguyÃªn táº¯c:</strong> Chá»‰ Ä‘á»‹nh Cá»¤ THá»‚ loáº¡i trang phá»¥c + MÃ´ táº£ mÃ u sáº¯c, kiá»ƒu dÃ¡ng + NÃªu rÃµ giá»›i tÃ­nh phÃ¹ há»£p + ThÃªm negative prompt loáº¡i trá»«
+                    <strong>Nguyên tắc:</strong> Chỉ định CỤ THỂ loại trang phục + Mô tả màu sắc, kiểu dáng + Nêu rõ giới tính phù hợp + Thêm negative prompt loại trừ
                 </div>
             </div>
 
             <!-- Error Type 3 -->
             <div class="guide-section">
-                <h2>Lá»—i 3: HÃ nh vi ngÆ°á»i khÃ´ng phÃ¹ há»£p</h2>
-                <p><strong>Case:</strong> MNJAN2001 - NgÆ°á»i trong báº¿p cá»­ chá»‰ gá»£i cáº£m</p>
+                <h2>Lỗi 3: Hành vi người không phù hợp</h2>
+                <p><strong>Case:</strong> MNJAN2001 - Người trong bếp cử chỉ gợi cảm</p>
                 
-                <h4><span class="label-good">Prompt tá»‘i Æ°u</span> <span class="label-tool">Veo 3.1</span></h4>
+                <h4><span class="label-good">Prompt tối ưu</span> <span class="label-tool">Veo 3.1</span></h4>
                 <div class="code-block">[SCENE]
 Modern open-concept kitchen, daytime, warm lighting.
 
@@ -808,10 +808,10 @@ leaning toward each other intimately.</div>
 
             <!-- Error Type 4 -->
             <div class="guide-section">
-                <h2>Lá»—i 4: Logic chuyá»ƒn Ä‘á»™ng váº­t thá»ƒ sai</h2>
-                <p><strong>Case:</strong> LIJAN07001 - QuÃ¢n cá» nháº£y Ä‘Ã¡nh nhau thay vÃ¬ Ä‘i theo luáº­t</p>
+                <h2>Lỗi 4: Logic chuyển động vật thể sai</h2>
+                <p><strong>Case:</strong> LIJAN07001 - Quân cờ nhảy đánh nhau thay vì đi theo luật</p>
                 
-                <h4><span class="label-good">Prompt tá»‘i Æ°u</span> <span class="label-tool">Nano Banana Pro</span></h4>
+                <h4><span class="label-good">Prompt tối ưu</span> <span class="label-tool">Nano Banana Pro</span></h4>
                 <div class="code-block">[SCENE]
 Overhead view of wooden chessboard with ongoing game.
 
@@ -839,10 +839,10 @@ multiple pieces moving simultaneously.</div>
 
             <!-- Error Type 5 -->
             <div class="guide-section">
-                <h2>Lá»—i 5: Nguá»“n nÆ°á»›c xuáº¥t hiá»‡n sai vá»‹ trÃ­</h2>
-                <p><strong>Case:</strong> DUJAN04005 - NÆ°á»›c cháº£y ngáº«u nhiÃªn, khÃ´ng tá»« vÃ²i phun</p>
+                <h2>Lỗi 5: Nguồn nước xuất hiện sai vị trí</h2>
+                <p><strong>Case:</strong> DUJAN04005 - Nước chảy ngẫu nhiên, không từ vòi phun</p>
                 
-                <h4><span class="label-good">Prompt tá»‘i Æ°u</span> <span class="label-tool">Veo 3.1</span></h4>
+                <h4><span class="label-good">Prompt tối ưu</span> <span class="label-tool">Veo 3.1</span></h4>
                 <div class="code-block">[SCENE]
 Stone fountain barrel/basin in garden setting, 
 currently empty, daylight.
@@ -871,10 +871,10 @@ floating water, reverse gravity, dry spout.</div>
 
             <!-- Error Type 6 -->
             <div class="guide-section">
-                <h2>Lá»—i 6: Chuyá»ƒn mÃ¹a sai context</h2>
-                <p><strong>Case:</strong> TADEC31004 - LÃ m tuyáº¿tâ†’xuÃ¢n thay vÃ¬ hiá»‡n tráº¡ngâ†’xuÃ¢n</p>
+                <h2>Lỗi 6: Chuyển mùa sai context</h2>
+                <p><strong>Case:</strong> TADEC31004 - Làm tuyết→xuân thay vì hiện trạng→xuân</p>
                 
-                <h4><span class="label-good">Prompt tá»‘i Æ°u</span> <span class="label-tool">Nano Banana Pro</span></h4>
+                <h4><span class="label-good">Prompt tối ưu</span> <span class="label-tool">Nano Banana Pro</span></h4>
                 <div class="code-block">[STARTING STATE]
 Current condition of the house exterior:
 - Dry grass, brownish-yellow lawn
@@ -898,16 +898,16 @@ Spring transformation:
 Avoid: snow, ice, frost, winter elements.</div>
 
                 <div class="workflow-box">
-                    <strong>Context Checklist:</strong> KhÃ¡ch hÃ ng á»Ÿ vÃ¹ng khÃ­ háº­u nÃ o? CÃ³ tuyáº¿t khÃ´ng? MÃ¹a hiá»‡n táº¡i trong áº£nh lÃ  gÃ¬? MÃ¹a má»¥c tiÃªu lÃ  gÃ¬?
+                    <strong>Context Checklist:</strong> Khách hàng ở vùng khí hậu nào? Có tuyết không? Mùa hiện tại trong ảnh là gì? Mùa mục tiêu là gì?
                 </div>
             </div>
 
             <!-- Error Type 7 -->
             <div class="guide-section">
-                <h2>Lá»—i 7: Máº·t ngÆ°á»i biáº¿n dáº¡ng</h2>
+                <h2>Lỗi 7: Mặt người biến dạng</h2>
                 <p><strong>Case:</strong> HTJAN07002rev2 - Deformed faces</p>
                 
-                <h4><span class="label-good">Prompt chá»‘ng lá»—i máº·t</span> <span class="label-tool">Kling 2.6 Pro</span></h4>
+                <h4><span class="label-good">Prompt chống lỗi mặt</span> <span class="label-tool">Kling 2.6 Pro</span></h4>
                 <div class="code-block">[SUBJECT FACE PROTECTION]
 - Maintain consistent facial structure throughout
 - Eyes: symmetrical, natural blink rate
@@ -925,16 +925,16 @@ Avoid: face melting, asymmetrical features,
 extra limbs, distorted proportions.</div>
 
                 <div class="workflow-box">
-                    <strong>Workflow:</strong> Kling 2.6 Pro vá»›i face protection â†’ Review tá»«ng 1-2 giÃ¢y â†’ KlingO1 Edit fix local náº¿u lá»—i nháº¹ â†’ Re-generate segment náº¿u lá»—i náº·ng
+                    <strong>Workflow:</strong> Kling 2.6 Pro với face protection → Review từng 1-2 giây → KlingO1 Edit fix local nếu lỗi nhẹ → Re-generate segment nếu lỗi nặng
                 </div>
             </div>
 
             <!-- Error Type 8 -->
             <div class="guide-section">
-                <h2>Lá»—i 8: Video tÄ©nh, thiáº¿u chuyá»ƒn Ä‘á»™ng</h2>
-                <p><strong>Case:</strong> THJAN20030Rev - Trá»i xanh nhÆ° áº£nh tÄ©nh zoom vÃ o</p>
+                <h2>Lỗi 8: Video tĩnh, thiếu chuyển động</h2>
+                <p><strong>Case:</strong> THJAN20030Rev - Trời xanh như ảnh tĩnh zoom vào</p>
                 
-                <h4><span class="label-good">Prompt tá»‘i Æ°u</span> <span class="label-tool">Veo 3.1</span></h4>
+                <h4><span class="label-good">Prompt tối ưu</span> <span class="label-tool">Veo 3.1</span></h4>
                 <div class="code-block">[SKY REPLACEMENT]
 Transform overcast sky to vibrant blue sky.
 
@@ -957,7 +957,7 @@ Avoid: static sky, frozen clouds,
 no environmental movement, Ken Burns effect only.</div>
 
                 <div class="workflow-box">
-                    <strong>Anti-Static Rule:</strong> ThÃªm cloud movement + leaf/grass rustle + shadow shift + distant birds. KHÃ”NG chá»‰ zoom vÃ o áº£nh tÄ©nh.
+                    <strong>Anti-Static Rule:</strong> Thêm cloud movement + leaf/grass rustle + shadow shift + distant birds. KHÔNG chỉ zoom vào ảnh tĩnh.
                 </div>
             </div>
 
@@ -965,58 +965,58 @@ no environmental movement, Ken Burns effect only.</div>
             <div class="guide-section">
                 <h2>Master Prompt Template</h2>
                 <div class="code-block">[SCENE DESCRIPTION]
-â†’ Bá»‘i cáº£nh, thá»i gian, Ã¡nh sÃ¡ng
+→ Bối cảnh, thời gian, ánh sáng
 
 [SUBJECTS]
-â†’ NgÆ°á»i/váº­t, Ä‘áº·c Ä‘iá»ƒm cá»¥ thá»ƒ, vá»‹ trÃ­
+→ Người/vật, đặc điểm cụ thể, vị trí
 
 [ACTIONS/MOTION]
-â†’ HÃ nh Ä‘á»™ng CHI TIáº¾T, timing, sequence
+→ Hành động CHI TIẾT, timing, sequence
 
 [CONSTRAINTS]
-â†’ Giá»›i háº¡n váº­t lÃ½, logic, pháº£i tuÃ¢n thá»§
+→ Giới hạn vật lý, logic, phải tuân thủ
 
 [CAMERA]
-â†’ GÃ³c quay, movement, stability
+→ Góc quay, movement, stability
 
 [NEGATIVE PROMPT]
-â†’ Nhá»¯ng gÃ¬ KHÃ”NG ÄÆ¯á»¢C xuáº¥t hiá»‡n</div>
+→ Những gì KHÔNG ĐƯỢC xuất hiện</div>
             </div>
 
             <!-- Tool Selection -->
             <div class="guide-section">
-                <h2>Chá»n cÃ´ng cá»¥ theo loáº¡i lá»—i</h2>
+                <h2>Chọn công cụ theo loại lỗi</h2>
                 <table class="tool-table">
                     <thead>
                         <tr>
-                            <th>Loáº¡i lá»—i</th>
-                            <th>CÃ´ng cá»¥ chÃ­nh</th>
-                            <th>CÃ´ng cá»¥ há»— trá»£</th>
+                            <th>Loại lỗi</th>
+                            <th>Công cụ chính</th>
+                            <th>Công cụ hỗ trợ</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Chuyá»ƒn Ä‘á»™ng nhÃ³m sai</td>
+                            <td>Chuyển động nhóm sai</td>
                             <td>Kling 2.6 Pro</td>
                             <td>KlingO1 Edit</td>
                         </tr>
                         <tr>
-                            <td>Máº·t ngÆ°á»i biáº¿n dáº¡ng</td>
+                            <td>Mặt người biến dạng</td>
                             <td>Kling 2.6 Pro</td>
                             <td>KlingO1 Edit</td>
                         </tr>
                         <tr>
-                            <td>Trang phá»¥c sai</td>
+                            <td>Trang phục sai</td>
                             <td>Kling 2.6 Pro</td>
                             <td>Veo 3.1</td>
                         </tr>
                         <tr>
-                            <td>Logic váº­t lÃ½ sai</td>
+                            <td>Logic vật lý sai</td>
                             <td>Veo 3.1</td>
                             <td>KlingO1 Edit</td>
                         </tr>
                         <tr>
-                            <td>NÆ°á»›c/lá»­a/khÃ³i</td>
+                            <td>Nước/lửa/khói</td>
                             <td>Veo 3.1</td>
                             <td>Nano Banana Pro</td>
                         </tr>
@@ -1026,12 +1026,12 @@ no environmental movement, Ken Burns effect only.</div>
                             <td>KlingO1 Edit</td>
                         </tr>
                         <tr>
-                            <td>Chuyá»ƒn cáº£nh/transition</td>
+                            <td>Chuyển cảnh/transition</td>
                             <td>Nano Banana Pro</td>
                             <td>Veo 3.1</td>
                         </tr>
                         <tr>
-                            <td>ThÃªm ngÆ°á»i realistic</td>
+                            <td>Thêm người realistic</td>
                             <td>Kling 2.6 Pro</td>
                             <td>Veo 3.1</td>
                         </tr>
@@ -1041,30 +1041,30 @@ no environmental movement, Ken Burns effect only.</div>
 
             <!-- Checklists -->
             <div class="checklist">
-                <h2 class="chart-title">Checklist trÆ°á»›c khi generate</h2>
-                <div class="checklist-item">Äá»c brief 2 láº§n, highlight tá»« khÃ³a hÃ nh Ä‘á»™ng</div>
-                <div class="checklist-item">XÃ¡c Ä‘á»‹nh context Ä‘á»‹a lÃ½/thá»i tiáº¿t</div>
-                <div class="checklist-item">Liá»‡t kÃª Táº¤T Cáº¢ deliverables cáº§n lÃ m</div>
-                <div class="checklist-item">Chá»n cÃ´ng cá»¥ phÃ¹ há»£p loáº¡i effect</div>
-                <div class="checklist-item">Viáº¿t prompt theo template chuáº©n</div>
-                <div class="checklist-item">ThÃªm negative prompt Ä‘áº§y Ä‘á»§</div>
-                <div class="checklist-item">MÃ´ táº£ hÃ nh Ä‘á»™ng Äá»˜NG Tá»ª cá»¥ thá»ƒ</div>
-                <div class="checklist-item">Chá»‰ Ä‘á»‹nh giá»›i háº¡n váº­t lÃ½/logic</div>
+                <h2 class="chart-title">Checklist trước khi generate</h2>
+                <div class="checklist-item">Đọc brief 2 lần, highlight từ khóa hành động</div>
+                <div class="checklist-item">Xác định context địa lý/thời tiết</div>
+                <div class="checklist-item">Liệt kê TẤT CẢ deliverables cần làm</div>
+                <div class="checklist-item">Chọn công cụ phù hợp loại effect</div>
+                <div class="checklist-item">Viết prompt theo template chuẩn</div>
+                <div class="checklist-item">Thêm negative prompt đầy đủ</div>
+                <div class="checklist-item">Mô tả hành động ĐỘNG TỪ cụ thể</div>
+                <div class="checklist-item">Chỉ định giới hạn vật lý/logic</div>
             </div>
 
             <div class="checklist">
                 <h2 class="chart-title">Checklist sau khi generate</h2>
-                <div class="checklist-item">Xem video tá»« Ä‘áº§u Ä‘áº¿n cuá»‘i (khÃ´ng skip)</div>
-                <div class="checklist-item">Kiá»ƒm tra máº·t ngÆ°á»i tá»«ng segment</div>
-                <div class="checklist-item">Kiá»ƒm tra logic chuyá»ƒn Ä‘á»™ng</div>
-                <div class="checklist-item">XÃ¡c nháº­n khÃ´ng cÃ³ watermark/logo</div>
-                <div class="checklist-item">Äáº¿m láº¡i sá»‘ lÆ°á»£ng output</div>
-                <div class="checklist-item">So sÃ¡nh vá»›i brief gá»‘c láº§n cuá»‘i</div>
-                <div class="checklist-item">Test playback trÃªn device khÃ¡c</div>
+                <div class="checklist-item">Xem video từ đầu đến cuối (không skip)</div>
+                <div class="checklist-item">Kiểm tra mặt người từng segment</div>
+                <div class="checklist-item">Kiểm tra logic chuyển động</div>
+                <div class="checklist-item">Xác nhận không có watermark/logo</div>
+                <div class="checklist-item">Đếm lại số lượng output</div>
+                <div class="checklist-item">So sánh với brief gốc lần cuối</div>
+                <div class="checklist-item">Test playback trên device khác</div>
             </div>
 
             <div class="footer">
-                <p>Template version 1.0 â€¢ Cáº­p nháº­t: 31/01/2026</p>
+                <p>Template version 1.0 • Cập nhật: 31/01/2026</p>
             </div>
         </div>
     </div>
@@ -1101,9 +1101,9 @@ no environmental movement, Ken Burns effect only.</div>
         new Chart(errorTypeCtx, {
             type: 'bar',
             data: {
-                labels: ['Hiá»ƒu sai yÃªu cáº§u', 'Ká»¹ thuáº­t AI', 'Tiáº¿n Ä‘á»™', 'Tháº©m má»¹'],
+                labels: ['Hiểu sai yêu cầu', 'Kỹ thuật AI', 'Tiến độ', 'Thẩm mỹ'],
                 datasets: [{
-                    label: 'Tá»· lá»‡ %',
+                    label: 'Tỷ lệ %',
                     data: [35, 27, 22, 16],
                     backgroundColor: '#1976d2',
                     borderColor: '#1565c0',
@@ -1150,7 +1150,7 @@ no environmental movement, Ken Burns effect only.</div>
         new Chart(projectStatusCtx, {
             type: 'doughnut',
             data: {
-                labels: ['CÃ³ lá»—i (82%)', 'KhÃ´ng lá»—i (18%)'],
+                labels: ['Có lỗi (82%)', 'Không lỗi (18%)'],
                 datasets: [{
                     data: [18, 4],
                     backgroundColor: ['#d32f2f', '#388e3c'],
@@ -1178,9 +1178,9 @@ no environmental movement, Ken Burns effect only.</div>
         new Chart(errorCategoryCtx, {
             type: 'bar',
             data: {
-                labels: ['Hiá»ƒu sai yÃªu cáº§u', 'Ká»¹ thuáº­t AI', 'Tháº©m má»¹', 'Tiáº¿n Ä‘á»™', 'Tá»« chá»‘i'],
+                labels: ['Hiểu sai yêu cầu', 'Kỹ thuật AI', 'Thẩm mỹ', 'Tiến độ', 'Từ chối'],
                 datasets: [{
-                    label: 'Sá»‘ lÆ°á»£ng job',
+                    label: 'Số lượng job',
                     data: [6, 6, 5, 6, 6],
                     backgroundColor: '#1976d2',
                     borderColor: '#1565c0',
