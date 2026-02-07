@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Video Effects Database v2.0 - Editable</title>
+    <title>AI Video Effects Database v2.0</title>
     <style>
         * {
             margin: 0;
@@ -35,54 +35,6 @@
         .container {
             max-width: 1600px;
             margin: 0 auto;
-        }
-
-        /* Editable indicator */
-        [contenteditable="true"] {
-            position: relative;
-            border: 1px dashed transparent;
-            transition: all 0.3s ease;
-        }
-
-        [contenteditable="true"]:hover {
-            border-color: var(--primary);
-            background: rgba(99, 102, 241, 0.05);
-        }
-
-        [contenteditable="true"]:focus {
-            outline: 2px solid var(--primary);
-            background: white;
-            border-color: var(--primary);
-        }
-
-        /* Auto-save indicator */
-        .auto-save-indicator {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--secondary);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 10px;
-            display: none;
-            z-index: 1002;
-            animation: slideInRight 0.3s ease;
-        }
-
-        .auto-save-indicator.show {
-            display: block;
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(100px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
         }
 
         /* Header */
@@ -129,55 +81,6 @@
             margin-top: 10px;
         }
 
-        .header-controls {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, var(--secondary), #059669);
-            color: white;
-        }
-
-        .btn-success:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
-        }
-
-        .btn-warning {
-            background: linear-gradient(135deg, var(--warning), #d97706);
-            color: white;
-        }
-
-        .btn-danger {
-            background: linear-gradient(135deg, var(--danger), #dc2626);
-            color: white;
-        }
-
         /* Navigation Tabs */
         .nav-tabs {
             display: flex;
@@ -210,12 +113,6 @@
         .nav-tab.active {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
-        }
-
-        .nav-tab[contenteditable="true"]:focus {
-            outline: 2px solid var(--warning);
-            background: white;
-            color: var(--dark);
         }
 
         /* Sections */
@@ -267,14 +164,6 @@
             align-items: center;
             gap: 10px;
             flex-wrap: wrap;
-        }
-
-        .card-title .badge {
-            font-size: 0.6em;
-            padding: 4px 12px;
-            border-radius: 15px;
-            background: var(--primary);
-            color: white;
         }
 
         /* Grid Layouts */
@@ -374,26 +263,6 @@
             background: var(--light);
         }
 
-        /* Editable cells */
-        .editable {
-            cursor: pointer;
-            position: relative;
-            padding: 8px 12px;
-            border-radius: 5px;
-            transition: background 0.3s ease;
-            display: inline-block;
-            min-width: 50px;
-        }
-
-        .editable:hover {
-            background: #e0e7ff;
-        }
-
-        .editable:focus {
-            outline: 2px solid var(--primary);
-            background: white;
-        }
-
         /* Complexity badges */
         .complexity {
             padding: 5px 12px;
@@ -436,6 +305,151 @@
             transition: width 0.5s ease;
         }
 
+        /* Workflow Diagram */
+        .workflow-container {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            border-radius: 15px;
+            padding: 30px;
+            color: white;
+            overflow-x: auto;
+        }
+
+        .workflow-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            min-width: 800px;
+        }
+
+        .workflow-step {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            flex: 1;
+            transition: all 0.3s ease;
+        }
+
+        .workflow-step:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .workflow-step .step-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .workflow-step .step-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .workflow-step .step-desc {
+            font-size: 0.85em;
+            opacity: 0.8;
+        }
+
+        .workflow-arrow {
+            font-size: 1.5em;
+            color: var(--secondary);
+        }
+
+        /* Stack Diagram */
+        .stack-layer {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 5px solid var(--primary);
+        }
+
+        .stack-layer:nth-child(2) {
+            border-left-color: var(--secondary);
+        }
+
+        .stack-layer:nth-child(3) {
+            border-left-color: var(--warning);
+        }
+
+        .stack-layer:nth-child(4) {
+            border-left-color: var(--danger);
+        }
+
+        .stack-layer:nth-child(5) {
+            border-left-color: #8b5cf6;
+        }
+
+        .layer-title {
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .tool-grid {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .tool-item {
+            background: var(--light);
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .tool-item:hover {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Assistant Cards */
+        .assistant-card {
+            background: linear-gradient(135deg, white, var(--light));
+            border-radius: 15px;
+            padding: 20px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .assistant-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.2);
+        }
+
+        .assistant-name {
+            font-weight: 700;
+            color: var(--dark);
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .assistant-purpose {
+            color: var(--gray);
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .assistant-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: var(--light);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            color: var(--gray);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .header h1 {
@@ -456,16 +470,41 @@
                 width: 100%;
                 text-align: center;
             }
+
+            .workflow-diagram {
+                flex-direction: column;
+            }
+
+            .workflow-arrow {
+                transform: rotate(90deg);
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .nav-tabs {
+                display: none !important;
+            }
+
+            .section {
+                display: block !important;
+                page-break-after: always;
+            }
+
+            .card {
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
         }
     </style>
 </head>
 
 <body>
-    <!-- Auto-save indicator -->
-    <div class="auto-save-indicator" id="autoSaveIndicator">
-        ✓ Đã tự động lưu
-    </div>
-
     <div class="container">
         <!-- Header -->
         <div class="header">
@@ -477,10 +516,515 @@
             <p class="header-subtitle">Công cụ & Quy trình</p>
         </div>
 
-        <!-- Content will be loaded here -->
-        <iframe src="https://r-d-website-kappa.vercel.app/feedback"
-            style="width: 100%; height: 100vh; border: none; border-radius: 20px; background: white;"></iframe>
+        <!-- Navigation -->
+        <div class="nav-tabs" id="navTabs">
+            <button class="nav-tab active" onclick="showSection(0)">📊 Tổng quan</button>
+            <button class="nav-tab" onclick="showSection(1)">🛠️ Công cụ</button>
+            <button class="nav-tab" onclick="showSection(2)">🤖 AI Assistants</button>
+            <button class="nav-tab" onclick="showSection(3)">🔄 Quy trình</button>
+            <button class="nav-tab" onclick="showSection(4)">📋 SOP Chi tiết</button>
+        </div>
+
+        <!-- Section 1: Overview -->
+        <div id="overview" class="section active">
+            <!-- Stats Summary -->
+            <div class="grid-4" style="margin-bottom: 25px;">
+                <div class="stat-card">
+                    <div class="stat-number">163</div>
+                    <div class="stat-label">Tổng Records</div>
+                </div>
+                <div class="stat-card green">
+                    <div class="stat-number">9</div>
+                    <div class="stat-label">Loại hiệu ứng</div>
+                </div>
+                <div class="stat-card orange">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Công cụ AI</div>
+                </div>
+                <div class="stat-card blue">
+                    <div class="stat-number">35</div>
+                    <div class="stat-label">Phút/Job TB</div>
+                </div>
+            </div>
+
+            <!-- Effects Table -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        📊 Thống kê số lượng theo loại hiệu ứng
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Loại hiệu ứng</th>
+                                <th>Số lượng records</th>
+                                <th>Tỷ lệ %</th>
+                                <th>Độ phức tạp</th>
+                                <th>Biểu đồ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Mặc định</td>
+                                <td>42</td>
+                                <td>25.8%</td>
+                                <td><span class="complexity high">Cao</span></td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 25.8%; background: #6366f1;"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Thêm nội thất</td>
+                                <td>26</td>
+                                <td>16%</td>
+                                <td><span class="complexity medium">Trung bình</span></td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 16%; background: #10b981;"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>4 mùa (Seasonal)</td>
+                                <td>38</td>
+                                <td>23.3%</td>
+                                <td><span class="complexity high">Cao</span></td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 23.3%; background: #f59e0b;"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>D2N (Day to Night)</td>
+                                <td>14</td>
+                                <td>8.6%</td>
+                                <td><span class="complexity medium">Trung bình</span></td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 8.6%; background: #ef4444;"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>Trang trí Noel</td>
+                                <td>10</td>
+                                <td>6.1%</td>
+                                <td><span class="complexity medium">Trung bình</span></td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 6.1%; background: #8b5cf6;"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>Thêm người</td>
+                                <td>28</td>
+                                <td>17.2%</td>
+                                <td><span class="complexity very-high">Rất cao</span></td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 17.2%; background: #3b82f6;"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>Nổ (Explosion)</td>
+                                <td>11</td>
+                                <td>6.7%</td>
+                                <td><span class="complexity high">Cao</span></td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 6.7%; background: #ec4899;"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>Thắp lửa</td>
+                                <td>16</td>
+                                <td>9.8%</td>
+                                <td><span class="complexity low">Thấp</span></td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 9.8%; background: #14b8a6;"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td>Dựng ảnh theo phần</td>
+                                <td>17</td>
+                                <td>10.4%</td>
+                                <td><span class="complexity very-high">Rất cao</span></td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 10.4%; background: #f97316;"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Tools -->
+        <div id="tools" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        🛠️ Hệ sinh thái công cụ hiện tại vs đề xuất mở rộng
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Công cụ hiện tại</th>
+                                <th>Vai trò</th>
+                                <th>Công cụ đề xuất</th>
+                                <th>Mô tả</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Nền tảng tích hợp Higgsfield</td>
+                                <td>Video generation chính</td>
+                                <td style="font-weight: 600; color: var(--primary);">Picsart Flow</td>
+                                <td>Nền tảng tích hợp các công cụ tạo ảnh và video</td>
+                            </tr>
+                            <tr>
+                                <td>Nền tảng tích hợp Envato</td>
+                                <td>Video generation</td>
+                                <td style="font-weight: 600; color: var(--primary);">Picsart Flow</td>
+                                <td>Nền tảng tích hợp các công cụ tạo ảnh và video</td>
+                            </tr>
+                            <tr>
+                                <td>Gemini</td>
+                                <td>Tạo ảnh input</td>
+                                <td style="font-weight: 600; color: var(--primary);">Nano Banana Pro</td>
+                                <td>Sử dụng trong Picsart Flow hoặc WeavyAI, FreePik AI</td>
+                            </tr>
+                            <tr>
+                                <td>-</td>
+                                <td>-</td>
+                                <td style="font-weight: 600; color: var(--primary);">Weavy</td>
+                                <td>Nền tảng tích hợp các công cụ tạo ảnh và video</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Automation Stack -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        🏗️ Quy trình chuẩn hóa tạo Video AI
+                    </div>
+                </div>
+                <div>
+                    <div class="stack-layer">
+                        <div class="layer-title">LAYER 1: AI Assistants (Prompt Generation)</div>
+                        <div class="tool-grid">
+                            <div class="tool-item">Gems (Google)</div>
+                            <div class="tool-item">CustomGPT (OpenAI)</div>
+                        </div>
+                    </div>
+                    <div class="stack-layer">
+                        <div class="layer-title">LAYER 2: Image Generation</div>
+                        <div class="tool-grid">
+                            <div class="tool-item">Meta AI</div>
+                            <div class="tool-item">Nano Banana Pro</div>
+                            <div class="tool-item">Flux</div>
+                        </div>
+                    </div>
+                    <div class="stack-layer">
+                        <div class="layer-title">LAYER 3: Video Generation</div>
+                        <div class="tool-grid">
+                            <div class="tool-item">Veo3.1</div>
+                            <div class="tool-item">Kling 2.6 Pro</div>
+                            <div class="tool-item">KlingO1 Edit</div>
+                        </div>
+                    </div>
+                    <div class="stack-layer">
+                        <div class="layer-title">LAYER 4: Post-processing & Workflow</div>
+                        <div class="tool-grid">
+                            <div class="tool-item">Picsart Flow</div>
+                            <div class="tool-item">Weavy</div>
+                            <div class="tool-item">ImagineArt</div>
+                            <div class="tool-item">Flora</div>
+                        </div>
+                    </div>
+                    <div class="stack-layer">
+                        <div class="layer-title">LAYER 5: Project Management & Delivery</div>
+                        <div class="tool-grid">
+                            <div class="tool-item">Notion</div>
+                            <div class="tool-item">Google Drive</div>
+                            <div class="tool-item">Dropbox</div>
+                            <div class="tool-item">Google Sheet</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tools by Function -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        ⚙️ Công cụ chi tiết theo chức năng
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Chức năng</th>
+                                <th>Công cụ chính</th>
+                                <th>Công cụ backup</th>
+                                <th>Ưu điểm</th>
+                                <th>Nhược điểm</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Phân tích yêu cầu</td>
+                                <td>Google Gems/Custom GPT</td>
+                                <td>ClaudeAI</td>
+                                <td>Context dài</td>
+                                <td>Cần gói Plus</td>
+                            </tr>
+                            <tr>
+                                <td>Tạo prompt chuẩn</td>
+                                <td>Google Gems/Custom GPT</td>
+                                <td>ClaudeAI</td>
+                                <td>Tùy biến cao</td>
+                                <td>Cần gói Plus</td>
+                            </tr>
+                            <tr>
+                                <td>Ảnh kiến trúc</td>
+                                <td>Midjourney v7/Nano Banana Pro</td>
+                                <td>Leonardo AI</td>
+                                <td>Chất lượng cao</td>
+                                <td>Cần mua trả phí</td>
+                            </tr>
+                            <tr>
+                                <td>Ảnh nội thất</td>
+                                <td>Nano Banana Pro</td>
+                                <td>ChatGPT Image</td>
+                                <td>Consistency</td>
+                                <td>Cần mua trả phí</td>
+                            </tr>
+                            <tr>
+                                <td>Hiệu ứng chính</td>
+                                <td>Veo3.1, Kling2.6 Pro</td>
+                                <td>Runway ML</td>
+                                <td>Đa dạng effects</td>
+                                <td>Queue time</td>
+                            </tr>
+                            <tr>
+                                <td>Batch process</td>
+                                <td>Viết tool tự động hóa</td>
+                                <td></td>
+                                <td>Automation</td>
+                                <td>Mất thời gian viết tools</td>
+                            </tr>
+                            <tr>
+                                <td>Upscale</td>
+                                <td>Topaz AI</td>
+                                <td>Real-ESRGAN</td>
+                                <td>Chất lượng</td>
+                                <td>Cần máy cấu hình cao</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: AI Assistants -->
+        <div id="assistants" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        🤖 Ma trận Gems/CustomGPT theo loại hiệu ứng
+                    </div>
+                </div>
+                <div class="grid-3">
+                    <div class="assistant-card">
+                        <div class="assistant-name">HouseBuilder-GPT</div>
+                        <div class="assistant-purpose">Tạo prompt xây nhà</div>
+                        <div class="assistant-tags">
+                            <span class="tag">🎯 Mặc định</span>
+                            <span class="tag">📥 Ảnh đất trống + style nhà</span>
+                            <span class="tag">📤 Prompt + ảnh reference</span>
+                        </div>
+                    </div>
+                    <div class="assistant-card">
+                        <div class="assistant-name">StagingMaster-GPT</div>
+                        <div class="assistant-purpose">Virtual staging</div>
+                        <div class="assistant-tags">
+                            <span class="tag">🎯 Thêm nội thất</span>
+                            <span class="tag">📥 Ảnh phòng trống + style</span>
+                            <span class="tag">📤 Prompt staging</span>
+                        </div>
+                    </div>
+                    <div class="assistant-card">
+                        <div class="assistant-name">SeasonShift-GPT</div>
+                        <div class="assistant-purpose">Chuyển mùa</div>
+                        <div class="assistant-tags">
+                            <span class="tag">🎯 4 mùa</span>
+                            <span class="tag">📥 Ảnh gốc + mùa đích</span>
+                            <span class="tag">📤 Prompt + ảnh mùa đích</span>
+                        </div>
+                    </div>
+                    <div class="assistant-card">
+                        <div class="assistant-name">DayNight-GPT</div>
+                        <div class="assistant-purpose">Day to night</div>
+                        <div class="assistant-tags">
+                            <span class="tag">🎯 D2N</span>
+                            <span class="tag">📥 Ảnh ngày</span>
+                            <span class="tag">📤 Prompt + ảnh đêm</span>
+                        </div>
+                    </div>
+                    <div class="assistant-card">
+                        <div class="assistant-name">XmasDecor-GPT</div>
+                        <div class="assistant-purpose">Christmas effects</div>
+                        <div class="assistant-tags">
+                            <span class="tag">🎯 Trang trí Noel</span>
+                            <span class="tag">📥 Ảnh nhà + level decor</span>
+                            <span class="tag">📤 Prompt + ảnh decorated</span>
+                        </div>
+                    </div>
+                    <div class="assistant-card">
+                        <div class="assistant-name">LifeStyle-GPT</div>
+                        <div class="assistant-purpose">Add people</div>
+                        <div class="assistant-tags">
+                            <span class="tag">🎯 Thêm người</span>
+                            <span class="tag">📥 Ảnh không gian + scenario</span>
+                            <span class="tag">📤 Prompt + ảnh có người</span>
+                        </div>
+                    </div>
+                    <div class="assistant-card">
+                        <div class="assistant-name">Explosion-GPT</div>
+                        <div class="assistant-purpose">Building explosion</div>
+                        <div class="assistant-tags">
+                            <span class="tag">🎯 Nổ ảnh</span>
+                            <span class="tag">📥 Ảnh nhà + kiểu nổ</span>
+                            <span class="tag">📤 Prompt explosion</span>
+                        </div>
+                    </div>
+                    <div class="assistant-card">
+                        <div class="assistant-name">FireEffect-GPT</div>
+                        <div class="assistant-purpose">Fire effects</div>
+                        <div class="assistant-tags">
+                            <span class="tag">🎯 Thắp lửa</span>
+                            <span class="tag">📥 Ảnh lò sưởi/bếp</span>
+                            <span class="tag">📤 Prompt fire</span>
+                        </div>
+                    </div>
+                    <div class="assistant-card">
+                        <div class="assistant-name">Construction-GPT</div>
+                        <div class="assistant-purpose">Build timelapse</div>
+                        <div class="assistant-tags">
+                            <span class="tag">🎯 Dựng ảnh</span>
+                            <span class="tag">📥 Ảnh đất + ảnh hoàn thiện</span>
+                            <span class="tag">📤 Prompt construction</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Workflow -->
+        <div id="workflow" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        🔄 AI Video Production Workflow
+                    </div>
+                </div>
+                <div class="workflow-container">
+                    <div class="workflow-diagram">
+                        <div class="workflow-step">
+                            <div class="step-icon">📥</div>
+                            <div class="step-title">NHẬN JOB</div>
+                            <div class="step-desc">Check Input</div>
+                        </div>
+                        <div class="workflow-arrow">→</div>
+                        <div class="workflow-step">
+                            <div class="step-icon">🎯</div>
+                            <div class="step-title">PHÂN LOẠI</div>
+                            <div class="step-desc">Chọn Template</div>
+                        </div>
+                        <div class="workflow-arrow">→</div>
+                        <div class="workflow-step">
+                            <div class="step-icon">🖼️</div>
+                            <div class="step-title">TẠO ẢNH</div>
+                            <div class="step-desc">QC ảnh</div>
+                        </div>
+                        <div class="workflow-arrow">→</div>
+                        <div class="workflow-step">
+                            <div class="step-icon">🎬</div>
+                            <div class="step-title">TẠO VIDEO</div>
+                            <div class="step-desc">QC Video</div>
+                        </div>
+                        <div class="workflow-arrow">→</div>
+                        <div class="workflow-step">
+                            <div class="step-icon">✨</div>
+                            <div class="step-title">CHỈNH SỬA</div>
+                            <div class="step-desc">Xuất</div>
+                        </div>
+                        <div class="workflow-arrow">→</div>
+                        <div class="workflow-step">
+                            <div class="step-icon">✅</div>
+                            <div class="step-title">DELIVERY</div>
+                            <div class="step-desc">Feedback</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 5: SOP -->
+        <div id="sop" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        📋 Standard Operating Procedures
+                    </div>
+                </div>
+                <p style="padding: 20px; color: var(--gray);">Nội dung SOP chi tiết...</p>
+            </div>
+        </div>
     </div>
+
+    <script>
+        // Tab navigation
+        function showSection(index) {
+            const sections = document.querySelectorAll('.section');
+            const tabs = document.querySelectorAll('.nav-tab');
+
+            sections.forEach(section => section.classList.remove('active'));
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            sections[index].classList.add('active');
+            tabs[index].classList.add('active');
+        }
+    </script>
 </body>
 
 </html>
