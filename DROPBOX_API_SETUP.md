@@ -1,125 +1,194 @@
-# Dropbox API Setup Guide
+# Dropbox OAuth 2.0 Setup Guide (Updated)
 
-## 🔑 Getting Your API Token
+## 🆕 What Changed?
 
-Follow these steps to enable auto-preview for Dropbox folders:
-
-### 1. Create Dropbox App
-
-1. Go to https://www.dropbox.com/developers/apps
-2. Click **"Create app"**
-3. Choose:
-   - **API:** Scoped access
-   - **Access:** Full Dropbox
-   - **Name:** `FeedbackReportViewer` (or any name)
-4. Click **"Create app"**
-
-### 2. Set Permissions
-
-1. Go to **"Permissions"** tab
-2. Enable these permissions:
-   - ✅ `files.metadata.read` - Read file and folder metadata
-   - ✅ `files.content.read` - Read file content
-   - ✅ `sharing.read` - Read shared links
-3. Click **"Submit"** at bottom
-
-### 3. Generate Access Token
-
-1. Go to **"Settings"** tab
-2. Scroll down to **"Generated access token"** section
-3. Click **"Generate"** button
-4. Copy the token (starts with `sl.`)
-
-### 4. Add Token to Environment
-
-**For Local Development:**
-
-Create/edit `.env.local` file in project root:
-
-```bash
-DROPBOX_ACCESS_TOKEN=sl.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-```
-
-**For Vercel Deployment:**
-
-1. Go to Vercel dashboard → Your project
-2. Settings → Environment Variables
-3. Add new variable:
-   - **Name:** `DROPBOX_ACCESS_TOKEN`
-   - **Value:** `sl.xxxxxxx...` (your token)
-   - **Environment:** Production, Preview, Development
-4. Click **"Save"**
-5. Redeploy project for changes to take effect
-
-### 5. Restart Server
-
-**Local:**
-```bash
-# Stop current dev server (Ctrl+C)
-npm run dev
-```
-
-**Vercel:**
-- Automatic redeploy when env var added
+The old system used **short-lived access tokens** that expired every 4 hours. The new system uses **OAuth 2.0 with refresh tokens** that automatically renew, so you never have to manually update tokens again!
 
 ---
 
-## 🧪 Testing
+## 🔑 One-Time OAuth Setup
 
-1. Open feedback page: `/feedback`
-2. Go to **"GGsheet"** tab
-3. Expand any job with Dropbox folder input (e.g., Job #1)
-4. Should see:
-   - "⏳ Loading folder contents..." (briefly)
-   - Then carousel with all images from folder
+### Step 1: Update Your Dropbox App Settings
+
+1. Go to https://www.dropbox.com/developers/apps
+2. Select your existing app (or create a new one)
+3. Go to **Settings** tab
+4. Add **Redirect URI**:
+   ```
+   http://localhost:3000/api/auth/dropbox/callback
+   ```
+   For production, also add:
+   ```
+   https://your-domain.vercel.app/api/auth/dropbox/callback
+   ```
+5. Copy your **App key** and **App secret**
+
+### Step 2: Configure Environment Variables
+
+Update your `.env.local` file:
+
+```bash
+# Dropbox OAuth 2.0
+DROPBOX_APP_KEY=your_app_key_here
+DROPBOX_APP_SECRET=your_app_secret_here
+DROPBOX_REFRESH_TOKEN=  # Leave empty for now
+DROPBOX_REDIRECT_URI=http://localhost:3000/api/auth/dropbox/callback
+NEXT_PUBLIC_DROPBOX_APP_KEY=your_app_key_here  # Same as DROPBOX_APP_KEY
+```
+
+### Step 3: Run OAuth Flow
+
+1. Start your development server:
+   ```bash
+   npm run dev
+   ```
+
+2. Navigate to:
+   ```
+   http://localhost:3000/admin/dropbox-setup
+   ```
+
+3. Click **"Connect Dropbox"**
+
+4. Log in to Dropbox and authorize the app
+
+5. You'll be redirected to a page showing your **refresh token**
+
+6. Copy the refresh token and add it to `.env.local`:
+   ```bash
+   DROPBOX_REFRESH_TOKEN=your_refresh_token_here
+   ```
+
+7. Restart your dev server:
+   ```bash
+   # Stop server (Ctrl+C)
+   npm run dev
+   ```
+
+### Step 4: Verify It Works
+
+1. Go to `/feedback` page
+2. Open **GGsheet** tab
+3. Expand a job with Dropbox folder
+4. Should load without errors! ✅
+
+---
+
+## 🚀 Deploying to Vercel
+
+1. Go to Vercel Dashboard → Your Project → Settings → Environment Variables
+
+2. Add these variables for **Production**, **Preview**, and **Development**:
+   ```
+   DROPBOX_APP_KEY=your_app_key
+   DROPBOX_APP_SECRET=your_app_secret
+   DROPBOX_REFRESH_TOKEN=your_refresh_token
+   DROPBOX_REDIRECT_URI=https://your-domain.vercel.app/api/auth/dropbox/callback
+   NEXT_PUBLIC_DROPBOX_APP_KEY=your_app_key
+   ```
+
+3. Redeploy your project
+
+4. Visit `https://your-domain.vercel.app/admin/dropbox-setup` to verify connection status
+
+---
+
+## 🔧 How It Works
+
+```mermaid
+sequenceDiagram
+    participant App
+    participant AuthManager
+    participant Dropbox
+    
+    App->>AuthManager: Request folder contents
+    AuthManager->>AuthManager: Check if token valid
+    alt Token expired
+        AuthManager->>Dropbox: Refresh token request
+        Dropbox->>AuthManager: New access token
+    end
+    AuthManager->>Dropbox: API call with valid token
+    Dropbox->>App: Folder contents
+```
+
+**Key Features:**
+- ✅ Tokens automatically refresh when expired
+- ✅ No manual intervention needed
+- ✅ Works indefinitely (refresh tokens don't expire)
+- ✅ Automatic retry on 401 errors
 
 ---
 
 ## ⚠️ Troubleshooting
 
-### Error: "Dropbox API token not configured"
-- Token not in environment variables
-- Check `.env.local` exists and has correct token
-- Restart dev server after adding token
+### Error: "Dropbox OAuth not configured"
 
-### Error: "Failed to get folder metadata"
-- Shared link might be invalid
-- Check link is set to "Anyone with link can view"
-- Make sure link is for a folder, not file
+**Solution:** Make sure all environment variables are set:
+```bash
+DROPBOX_APP_KEY=...
+DROPBOX_APP_SECRET=...
+DROPBOX_REFRESH_TOKEN=...
+```
 
-### Error: "No images found in folder"
-- Folder contains no images/videos
-- Check folder has .jpg, .png, .mp4, etc.
+### Error: "Token refresh failed"
 
-### Images not loading
-- Temporary links expire after 4 hours
-- Folder contents are cached for 1 hour
-- Expand/collapse job card to re-fetch
+**Possible causes:**
+1. Refresh token is invalid or expired
+2. App secret is incorrect
+3. App was deleted/reset in Dropbox dashboard
+
+**Solution:** Re-run the OAuth flow at `/admin/dropbox-setup`
+
+### Redirect URI mismatch
+
+**Error:** `redirect_uri_mismatch`
+
+**Solution:** Make sure the redirect URI in your Dropbox app settings exactly matches:
+- Local: `http://localhost:3000/api/auth/dropbox/callback`
+- Production: `https://your-domain.vercel.app/api/auth/dropbox/callback`
+
+### Still seeing old token errors
+
+**Solution:** Clear the old `DROPBOX_ACCESS_TOKEN` from environment variables and restart server
 
 ---
 
 ## 🔒 Security Notes
 
-- ✅ Token is **read-only** (no write access)
-- ✅ Token stored server-side only (never in browser)
-- ✅ API route validates all requests
-- ✅ Cached data stored locally only
+- ✅ Refresh tokens are stored server-side only (never exposed to browser)
+- ✅ Access tokens are short-lived (4 hours) and auto-refresh
+- ✅ All API calls go through authentication manager
+- ✅ Automatic retry on authentication failures
 
 ---
 
-## 📊 API Rate Limits
+## 📊 Migration Checklist
 
-**Dropbox Free Tier:**
-- ~300 API requests per hour
-- Each folder preview = 2-3 requests
-
-**Mitigation:**
-- Folder contents cached for 1 hour (localStorage)
-- Only fetches when job card expanded
-- Shared cache across browser sessions
+- [ ] Update Dropbox app settings with redirect URI
+- [ ] Add OAuth credentials to `.env.local`
+- [ ] Run OAuth flow at `/admin/dropbox-setup`
+- [ ] Copy refresh token to `.env.local`
+- [ ] Restart dev server
+- [ ] Test folder loading on `/feedback` page
+- [ ] Update Vercel environment variables
+- [ ] Deploy to production
+- [ ] Verify production works
+- [ ] Remove old `DROPBOX_ACCESS_TOKEN` variable
 
 ---
 
-## ✅ Done!
+## ✅ Benefits Over Old System
 
-Once token is added, all Dropbox folders will auto-preview with carousel. No more manual link listing! 🎉
+| Old System | New System |
+|------------|------------|
+| ❌ Token expires every 4 hours | ✅ Never expires |
+| ❌ Manual token regeneration | ✅ Automatic refresh |
+| ❌ Frequent errors | ✅ Automatic retry |
+| ❌ Production downtime | ✅ Always available |
+| ❌ Manual intervention | ✅ Fully automated |
+
+---
+
+## 🎉 Done!
+
+Once setup is complete, you'll never have to worry about expired Dropbox tokens again!

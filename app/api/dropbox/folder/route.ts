@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { getDropboxAuth } from '@/lib/dropbox-auth'
 
 interface DropboxFile {
     name: string
@@ -18,32 +19,32 @@ export async function GET(request: NextRequest) {
         )
     }
 
-    const accessToken = process.env.DROPBOX_ACCESS_TOKEN
+    const auth = getDropboxAuth()
 
-    if (!accessToken) {
-        console.error('❌ DROPBOX_ACCESS_TOKEN not found in environment')
+    if (!auth.isConfigured()) {
+        const status = auth.getConfigStatus()
+        console.error('❌ Dropbox OAuth not fully configured:', status)
         return NextResponse.json(
             {
-                error: 'Dropbox API token not configured',
-                details: 'Please add DROPBOX_ACCESS_TOKEN to .env.local and restart server',
-                help: 'See DROPBOX_API_SETUP.md for instructions'
+                error: 'Dropbox OAuth not configured',
+                details: 'Please complete OAuth setup',
+                help: 'Visit /admin/dropbox-setup to connect your Dropbox account',
+                configStatus: status
             },
             { status: 500 }
         )
     }
 
-    console.log('🔑 Using Dropbox token:', accessToken.substring(0, 10) + '...')
     console.log('📁 Fetching folder:', sharedLink)
 
     try {
         // Step 1: Get shared link metadata
         console.log('📡 Calling Dropbox API: get_shared_link_metadata')
-        const metadataResponse = await fetch(
+        const metadataResponse = await auth.apiCall(
             'https://api.dropboxapi.com/2/sharing/get_shared_link_metadata',
             {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${accessToken}`,
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ url: sharedLink }),
@@ -75,12 +76,11 @@ export async function GET(request: NextRequest) {
         const metadata = JSON.parse(metadataText)
 
         // Step 2: List folder contents
-        const listResponse = await fetch(
+        const listResponse = await auth.apiCall(
             'https://api.dropboxapi.com/2/files/list_folder',
             {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${accessToken}`,
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
@@ -117,12 +117,11 @@ export async function GET(request: NextRequest) {
         const filesWithLinks: DropboxFile[] = await Promise.all(
             mediaFiles.map(async (file: any) => {
                 try {
-                    const linkResponse = await fetch(
+                    const linkResponse = await auth.apiCall(
                         'https://api.dropboxapi.com/2/files/get_temporary_link',
                         {
                             method: 'POST',
                             headers: {
-                                'Authorization': `Bearer ${accessToken}`,
                                 'Content-Type': 'application/json',
                             },
                             body: JSON.stringify({ path: file.path }),

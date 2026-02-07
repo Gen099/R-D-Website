@@ -159,7 +159,7 @@ export default function FeedbackPage() {
                 {activeTab === 0 && (
                     <div className={styles.tabContent}>
                         <iframe
-                            src="/feedback/ai-video-effects.html"
+                            src="/ai-video-effects.html"
                             style={{
                                 width: '100%',
                                 height: 'calc(100vh - 200px)',
