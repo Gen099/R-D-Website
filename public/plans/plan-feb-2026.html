@@ -35,51 +35,6 @@
             margin: 0 auto;
         }
 
-        [contenteditable="true"] {
-            position: relative;
-            border: 1px dashed transparent;
-            transition: all 0.3s ease;
-        }
-
-        [contenteditable="true"]:hover {
-            border-color: var(--primary);
-            background: rgba(99, 102, 241, 0.05);
-        }
-
-        [contenteditable="true"]:focus {
-            outline: 2px solid var(--primary);
-            background: white;
-            border-color: var(--primary);
-        }
-
-        .auto-save-indicator {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--secondary);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 10px;
-            display: none;
-            z-index: 1002;
-            animation: slideInRight 0.3s ease;
-        }
-
-        .auto-save-indicator.show {
-            display: block;
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(100px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
         .header {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
@@ -122,18 +77,6 @@
             align-items: center;
             gap: 8px;
             color: white;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, var(--secondary), #059669);
-        }
-
-        .btn-warning {
-            background: linear-gradient(135deg, var(--warning), #d97706);
         }
 
         .btn-danger {
@@ -217,6 +160,10 @@
             background: linear-gradient(135deg, #3b82f6, #1d4ed8);
         }
 
+        .stat-card.red {
+            background: linear-gradient(135deg, var(--danger), #dc2626);
+        }
+
         .stat-number {
             font-size: 2.5em;
             font-weight: 700;
@@ -272,6 +219,30 @@
             height: 100%;
             border-radius: 5px;
             transition: width 0.5s ease;
+        }
+
+        .holiday-card {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 3px dashed #f59e0b;
+            opacity: 0.9;
+        }
+
+        .holiday-banner {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .holiday-banner h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .holiday-banner p {
+            font-size: 1.2em;
+            opacity: 0.9;
         }
 
         .toast-container {
@@ -333,36 +304,19 @@
                 box-shadow: none;
                 border: 1px solid #ccc;
             }
-
-            .auto-save-indicator {
-                display: none !important;
-            }
         }
     </style>
 </head>
 <body>
-    <div class="auto-save-indicator" id="autoSaveIndicator">
-        ✓ Đã tự động lưu
-    </div>
-
     <div class="container">
         <!-- Header -->
         <div class="header">
             <h1>
                 <span>📅</span>
-                <span contenteditable="true" onblur="updateConfig('mainTitle', this.textContent)" id="mainTitle">Kế hoạch Tháng 2 & Tuần 1 Tháng 3/2026</span>
+                <span>Kế hoạch Tháng 2 & Tuần 1 Tháng 3/2026</span>
             </h1>
-            <p class="header-subtitle" contenteditable="true" onblur="updateConfig('subtitle', this.textContent)" id="subtitle">AI Video Production - System Prompts & AI Agents Development</p>
+            <p class="header-subtitle">AI Video Production - System Prompts & AI Agents Development</p>
             <div class="header-controls">
-                <button class="btn btn-primary" onclick="saveData()">
-                    💾 Lưu dữ liệu
-                </button>
-                <button class="btn btn-success" onclick="exportJSON()">
-                    📊 Xuất JSON
-                </button>
-                <button class="btn btn-warning" onclick="exportHTML()">
-                    📄 Xuất HTML
-                </button>
                 <button class="btn btn-danger" onclick="window.print()">
                     🖨️ In kế hoạch
                 </button>
@@ -373,14 +327,14 @@
         <div class="card">
             <div class="card-header">
                 <div class="card-title">
-                    <span contenteditable="true" onblur="updateConfig('overviewTitle', this.textContent)" id="overviewTitle">📊 TỔNG QUAN KẾ HOẠCH</span>
+                    📊 TỔNG QUAN KẾ HOẠCH
                 </div>
             </div>
             
             <div class="grid-4" style="margin-bottom: 25px;">
                 <div class="stat-card">
                     <div class="stat-number">5</div>
-                    <div class="stat-label">Tuần thực hiện</div>
+                    <div class="stat-label">Tuần (1 tuần nghỉ Tết)</div>
                 </div>
                 <div class="stat-card green">
                     <div class="stat-number">2</div>
@@ -390,9 +344,9 @@
                     <div class="stat-number">9</div>
                     <div class="stat-label">System Prompts</div>
                 </div>
-                <div class="stat-card blue">
-                    <div class="stat-number">3</div>
-                    <div class="stat-label">Thị trường mới</div>
+                <div class="stat-card red">
+                    <div class="stat-number">1</div>
+                    <div class="stat-label">Tuần nghỉ Tết Âm</div>
                 </div>
             </div>
 
@@ -403,11 +357,11 @@
             </div>
         </div>
 
-        <!-- Week 1 Feb - NEW: Analysis & Review -->
+        <!-- Week 1 Feb - Analysis & Review -->
         <div class="card">
             <div class="card-header">
                 <div class="card-title">
-                    <span contenteditable="true" onblur="updateWeek('week1', 'title', this.textContent)">📌 TUẦN 1 (03/02 - 09/02): Phân tích lỗi và Review cùng Team QC</span>
+                    📌 TUẦN 1 (03/02 - 09/02): Phân tích lỗi và Review cùng Team QC
                     <span class="badge" style="background: #ec4899;">🔍 Analysis & Review</span>
                 </div>
             </div>
@@ -418,27 +372,27 @@
                     <div class="checklist">
                         <div class="checklist-item">
                             <input type="checkbox" id="w1t1" onchange="updateWeekProgress('week1')">
-                            <span contenteditable="true" onblur="updateTask('week1', 0, this.textContent)">Thu thập và phân loại các lỗi thường gặp từ team QC</span>
+                            <span>Thu thập và phân loại các lỗi thường gặp từ team QC</span>
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w1t2" onchange="updateWeekProgress('week1')">
-                            <span contenteditable="true" onblur="updateTask('week1', 1, this.textContent)">Họp review chi tiết với QC về quy trình hiện tại</span>
+                            <span>Họp review chi tiết với QC về quy trình hiện tại</span>
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w1t3" onchange="updateWeekProgress('week1')">
-                            <span contenteditable="true" onblur="updateTask('week1', 2, this.textContent)">Xác định các điểm nghẽn (bottleneck) trong workflow</span>
+                            <span>Xác định các điểm nghẽn (bottleneck) trong workflow</span>
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w1t4" onchange="updateWeekProgress('week1')">
-                            <span contenteditable="true" onblur="updateTask('week1', 3, this.textContent)">Phân tích root cause cho từng loại lỗi</span>
+                            <span>Phân tích root cause cho từng loại lỗi</span>
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w1t5" onchange="updateWeekProgress('week1')">
-                            <span contenteditable="true" onblur="updateTask('week1', 4, this.textContent)">Lập danh sách cải tiến ưu tiên cho tháng 2</span>
+                            <span>Lập danh sách cải tiến ưu tiên cho tháng 2</span>
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w1t6" onchange="updateWeekProgress('week1')">
-                            <span contenteditable="true" onblur="updateTask('week1', 5, this.textContent)">Lên kế hoạch chi tiết cho tuần 2-4</span>
+                            <span>Lên kế hoạch chi tiết cho tuần 2 và sau Tết</span>
                         </div>
                     </div>
                 </div>
@@ -448,20 +402,20 @@
                     <div style="background: var(--light); padding: 20px; border-radius: 10px;">
                         <ul style="list-style: none; padding: 0;">
                             <li style="padding: 10px; border-bottom: 1px solid var(--border);">
-                                <strong contenteditable="true" onblur="updateDeliverable('week1', 0, 'title', this.textContent)">✅ Error Analysis Report</strong>
-                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;" contenteditable="true" onblur="updateDeliverable('week1', 0, 'desc', this.textContent)">Báo cáo phân tích lỗi theo từng loại Effect</div>
+                                <strong>✅ Error Analysis Report</strong>
+                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Báo cáo phân tích lỗi theo từng loại Effect</div>
                             </li>
                             <li style="padding: 10px; border-bottom: 1px solid var(--border);">
-                                <strong contenteditable="true" onblur="updateDeliverable('week1', 1, 'title', this.textContent)">✅ QC Feedback Summary</strong>
-                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;" contenteditable="true" onblur="updateDeliverable('week1', 1, 'desc', this.textContent)">Tổng hợp phản hồi từ team QC</div>
+                                <strong>✅ QC Feedback Summary</strong>
+                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Tổng hợp phản hồi từ team QC</div>
                             </li>
                             <li style="padding: 10px; border-bottom: 1px solid var(--border);">
-                                <strong contenteditable="true" onblur="updateDeliverable('week1', 2, 'title', this.textContent)">✅ Bottleneck Identification</strong>
-                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;" contenteditable="true" onblur="updateDeliverable('week1', 2, 'desc', this.textContent)">Danh sách các điểm nghẽn cần giải quyết</div>
+                                <strong>✅ Bottleneck Identification</strong>
+                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Danh sách các điểm nghẽn cần giải quyết</div>
                             </li>
                             <li style="padding: 10px;">
-                                <strong contenteditable="true" onblur="updateDeliverable('week1', 3, 'title', this.textContent)">✅ Improvement Action Plan</strong>
-                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;" contenteditable="true" onblur="updateDeliverable('week1', 3, 'desc', this.textContent)">Kế hoạch cải tiến chi tiết cho 3 tuần tiếp theo</div>
+                                <strong>✅ Improvement Action Plan</strong>
+                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Kế hoạch cải tiến chi tiết cho các tuần tiếp theo</div>
                             </li>
                         </ul>
                     </div>
@@ -483,7 +437,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="card-title">
-                    <span contenteditable="true" onblur="updateWeek('week2', 'title', this.textContent)">📌 TUẦN 2 (10/02 - 16/02): Foundation & Standardization</span>
+                    📌 TUẦN 2 (10/02 - 16/02): Foundation & Standardization
                     <span class="badge" style="background: var(--secondary);">Giai đoạn nền tảng</span>
                 </div>
             </div>
@@ -494,27 +448,27 @@
                     <div class="checklist">
                         <div class="checklist-item">
                             <input type="checkbox" id="w2t1" onchange="updateWeekProgress('week2')">
-                            <span contenteditable="true" onblur="updateTask('week2', 0, this.textContent)">Viết System Prompt cho 9 loại Effect</span>
+                            <span>Viết System Prompt cho 9 loại Effect</span>
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w2t2" onchange="updateWeekProgress('week2')">
-                            <span contenteditable="true" onblur="updateTask('week2', 1, this.textContent)">Test từng prompt với 3-5 mẫu khác nhau</span>
+                            <span>Test từng prompt với 3-5 mẫu khác nhau</span>
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w2t3" onchange="updateWeekProgress('week2')">
-                            <span contenteditable="true" onblur="updateTask('week2', 2, this.textContent)">Tạo video mẫu chuẩn cho mỗi Effect</span>
+                            <span>Tạo video mẫu chuẩn cho mỗi Effect</span>
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w2t4" onchange="updateWeekProgress('week2')">
-                            <span contenteditable="true" onblur="updateTask('week2', 3, this.textContent)">Chuẩn hóa quy trình và template</span>
+                            <span>Chuẩn hóa quy trình và template</span>
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w2t5" onchange="updateWeekProgress('week2')">
-                            <span contenteditable="true" onblur="updateTask('week2', 4, this.textContent)"><strong>AI Agent P1:</strong> Lên checklist công việc cụ thể</span>
+                            <span><strong>AI Agent P1:</strong> Lên checklist công việc cụ thể</span>
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w2t6" onchange="updateWeekProgress('week2')">
-                            <span contenteditable="true" onblur="updateTask('week2', 5, this.textContent)"><strong>AI Agent P1:</strong> Tạo data chuẩn đầu vào</span>
+                            <span><strong>AI Agent P1:</strong> Tạo data chuẩn đầu vào</span>
                         </div>
                     </div>
                 </div>
@@ -524,20 +478,20 @@
                     <div style="background: var(--light); padding: 20px; border-radius: 10px;">
                         <ul style="list-style: none; padding: 0;">
                             <li style="padding: 10px; border-bottom: 1px solid var(--border);">
-                                <strong contenteditable="true" onblur="updateDeliverable('week2', 0, 'title', this.textContent)">✅ 9 System Prompts</strong>
-                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;" contenteditable="true" onblur="updateDeliverable('week2', 0, 'desc', this.textContent)">Template chuẩn cho mỗi loại Effect với GPT/Gems</div>
+                                <strong>✅ 9 System Prompts</strong>
+                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Template chuẩn cho mỗi loại Effect với GPT/Gems</div>
                             </li>
                             <li style="padding: 10px; border-bottom: 1px solid var(--border);">
-                                <strong contenteditable="true" onblur="updateDeliverable('week2', 1, 'title', this.textContent)">✅ 9 Video mẫu</strong>
-                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;" contenteditable="true" onblur="updateDeliverable('week2', 1, 'desc', this.textContent)">Reference quality standard cho team</div>
+                                <strong>✅ 9 Video mẫu</strong>
+                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Reference quality standard cho team</div>
                             </li>
                             <li style="padding: 10px; border-bottom: 1px solid var(--border);">
-                                <strong contenteditable="true" onblur="updateDeliverable('week2', 2, 'title', this.textContent)">✅ SOP v2.0</strong>
-                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;" contenteditable="true" onblur="updateDeliverable('week2', 2, 'desc', this.textContent)">Quy trình chuẩn hóa chi tiết</div>
+                                <strong>✅ SOP v2.0</strong>
+                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Quy trình chuẩn hóa chi tiết</div>
                             </li>
                             <li style="padding: 10px;">
-                                <strong contenteditable="true" onblur="updateDeliverable('week2', 3, 'title', this.textContent)">✅ AI Agent Dataset</strong>
-                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;" contenteditable="true" onblur="updateDeliverable('week2', 3, 'desc', this.textContent)">Checklist + Input data structure</div>
+                                <strong>✅ AI Agent Dataset</strong>
+                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Checklist + Input data structure</div>
                             </li>
                         </ul>
                     </div>
@@ -555,11 +509,30 @@
             </div>
         </div>
 
-        <!-- Week 3 Feb - Training & AI Agent Phase 2 -->
+        <!-- Week 3 Feb - TẾT ÂM LỊCH -->
+        <div class="card holiday-card">
+            <div class="card-header">
+                <div class="card-title">
+                    🧧 TUẦN 3 (17/02 - 23/02): NGHỈ TẾT ÂM LỊCH
+                    <span class="badge" style="background: #dc2626;">🎊 Tết Nguyên Đán</span>
+                </div>
+            </div>
+            
+            <div class="holiday-banner">
+                <h2>🧧 CHÚC MỪNG NĂM MỚI 🧧</h2>
+                <p style="font-size: 1.5em; margin-bottom: 20px;">🐍 Năm Ất Tỵ 2025 🐍</p>
+                <p>Tuần nghỉ Tết Âm lịch - Không có công việc được lên lịch</p>
+                <div style="margin-top: 30px; font-size: 3em;">
+                    🎆 🏮 🧧 🎊 🎉 🏮 🎆
+                </div>
+            </div>
+        </div>
+
+        <!-- Week 4 Feb - Training & AI Agent Phase 2 (MOVED FROM WEEK 3) -->
         <div class="card">
             <div class="card-header">
                 <div class="card-title">
-                    <span contenteditable="true" onblur="updateWeek('week3', 'title', this.textContent)">📌 TUẦN 3 (17/02 - 23/02): Training & AI Agent Phase 2</span>
+                    📌 TUẦN 4 (24/02 - 28/02): Training & AI Agent Phase 2
                     <span class="badge" style="background: var(--primary);">Knowledge Transfer</span>
                 </div>
             </div>
@@ -569,104 +542,28 @@
                     <h4 style="margin-bottom: 15px; color: var(--primary);">🎯 Công việc chính:</h4>
                     <div class="checklist">
                         <div class="checklist-item">
-                            <input type="checkbox" id="w3t1" onchange="updateWeekProgress('week3')">
-                            <span contenteditable="true" onblur="updateTask('week3', 0, this.textContent)">Đào tạo QC về công cụ và quy trình</span>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" id="w3t2" onchange="updateWeekProgress('week3')">
-                            <span contenteditable="true" onblur="updateTask('week3', 1, this.textContent)">Bàn giao tài liệu SOP v2.0 cho QC</span>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" id="w3t3" onchange="updateWeekProgress('week3')">
-                            <span contenteditable="true" onblur="updateTask('week3', 2, this.textContent)"><strong>AI Agent P2:</strong> Thực hành test với data mẫu</span>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" id="w3t4" onchange="updateWeekProgress('week3')">
-                            <span contenteditable="true" onblur="updateTask('week3', 3, this.textContent)"><strong>AI Agent P2:</strong> Đánh giá tính khả thi</span>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" id="w3t5" onchange="updateWeekProgress('week3')">
-                            <span contenteditable="true" onblur="updateTask('week3', 4, this.textContent)">Nghiên cứu thị trường Creative - Phase 1</span>
-                        </div>
-                        <div class="checklist-item">
-                            <input type="checkbox" id="w3t6" onchange="updateWeekProgress('week3')">
-                            <span contenteditable="true" onblur="updateTask('week3', 5, this.textContent)">Thu thập và phân tích thể loại có thể AI hóa</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <h4 style="margin-bottom: 15px; color: var(--secondary);">📦 Deliverables:</h4>
-                    <div style="background: var(--light); padding: 20px; border-radius: 10px;">
-                        <ul style="list-style: none; padding: 0;">
-                            <li style="padding: 10px; border-bottom: 1px solid var(--border);">
-                                <strong contenteditable="true" onblur="updateDeliverable('week3', 0, 'title', this.textContent)">✅ Training Materials</strong>
-                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;" contenteditable="true" onblur="updateDeliverable('week3', 0, 'desc', this.textContent)">Slides + Video tutorials + Exercises</div>
-                            </li>
-                            <li style="padding: 10px; border-bottom: 1px solid var(--border);">
-                                <strong contenteditable="true" onblur="updateDeliverable('week3', 1, 'title', this.textContent)">✅ AI Agent Test Report</strong>
-                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;" contenteditable="true" onblur="updateDeliverable('week3', 1, 'desc', this.textContent)">Kết quả test, độ chính xác</div>
-                            </li>
-                            <li style="padding: 10px; border-bottom: 1px solid var(--border);">
-                                <strong contenteditable="true" onblur="updateDeliverable('week3', 2, 'title', this.textContent)">✅ Market Research Report P1</strong>
-                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;" contenteditable="true" onblur="updateDeliverable('week3', 2, 'desc', this.textContent)">10-15 thể loại creative tiềm năng</div>
-                            </li>
-                            <li style="padding: 10px;">
-                                <strong contenteditable="true" onblur="updateDeliverable('week3', 3, 'title', this.textContent)">✅ QC Certification</strong>
-                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;" contenteditable="true" onblur="updateDeliverable('week3', 3, 'desc', this.textContent)">QC staff đạt chuẩn sử dụng tools</div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div style="margin-top: 20px;">
-                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                    <strong>Tiến độ:</strong>
-                    <span id="week3Progress">0/6 (0%)</span>
-                </div>
-                <div class="progress-bar" style="height: 20px;">
-                    <div class="progress-fill" id="week3ProgressBar" style="width: 0%; background: linear-gradient(135deg, var(--secondary), #059669);"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Week 4 Feb - AI Agent Phase 4 & Finalization -->
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">
-                    <span contenteditable="true" onblur="updateWeek('week4', 'title', this.textContent)">📌 TUẦN 4 (24/02 - 28/02): AI Agent Phase 3 & Finalization</span>
-                    <span class="badge" style="background: var(--warning);">Validation</span>
-                </div>
-            </div>
-            
-            <div class="grid-2">
-                <div>
-                    <h4 style="margin-bottom: 15px; color: var(--primary);">🎯 Công việc chính:</h4>
-                    <div class="checklist">
-                        <div class="checklist-item">
                             <input type="checkbox" id="w4t1" onchange="updateWeekProgress('week4')">
-                            <span contenteditable="true" onblur="updateTask('week4', 0, this.textContent)"><strong>AI Agent P3:</strong> Nghiệm thu kết quả Agent 1</span>
+                            <span>Đào tạo QC về công cụ và quy trình</span>
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w4t2" onchange="updateWeekProgress('week4')">
-                            <span contenteditable="true" onblur="updateTask('week4', 1, this.textContent)"><strong>AI Agent P3:</strong> Nghiệm thu kết quả Agent 2</span>
+                            <span>Bàn giao tài liệu SOP v2.0 cho QC</span>
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w4t3" onchange="updateWeekProgress('week4')">
-                            <span contenteditable="true" onblur="updateTask('week4', 2, this.textContent)">Sửa đổi và tối ưu Agents theo feedback</span>
+                            <span><strong>AI Agent P2:</strong> Thực hành test với data mẫu</span>
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w4t4" onchange="updateWeekProgress('week4')">
-                            <span contenteditable="true" onblur="updateTask('week4', 3, this.textContent)">Nghiên cứu thị trường Creative - Phase 2</span>
+                            <span><strong>AI Agent P2:</strong> Đánh giá tính khả thi</span>
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w4t5" onchange="updateWeekProgress('week4')">
-                            <span contenteditable="true" onblur="updateTask('week4', 4, this.textContent)">Phân tích chi tiết 5-7 thể loại ưu tiên</span>
+                            <span>Nghiên cứu thị trường Creative - Phase 1</span>
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w4t6" onchange="updateWeekProgress('week4')">
-                            <span contenteditable="true" onblur="updateTask('week4', 5, this.textContent)">Tạo POC (Proof of Concept) cho 2-3 thể loại</span>
+                            <span>Thu thập và phân tích thể loại có thể AI hóa</span>
                         </div>
                     </div>
                 </div>
@@ -676,20 +573,20 @@
                     <div style="background: var(--light); padding: 20px; border-radius: 10px;">
                         <ul style="list-style: none; padding: 0;">
                             <li style="padding: 10px; border-bottom: 1px solid var(--border);">
-                                <strong contenteditable="true" onblur="updateDeliverable('week4', 0, 'title', this.textContent)">✅ AI Agent Test Results</strong>
-                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;" contenteditable="true" onblur="updateDeliverable('week4', 0, 'desc', this.textContent)">Accuracy report, error analysis</div>
+                                <strong>✅ Training Materials</strong>
+                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Slides + Video tutorials + Exercises</div>
                             </li>
                             <li style="padding: 10px; border-bottom: 1px solid var(--border);">
-                                <strong contenteditable="true" onblur="updateDeliverable('week4', 1, 'title', this.textContent)">✅ Optimized Agents v1.1</strong>
-                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;" contenteditable="true" onblur="updateDeliverable('week4', 1, 'desc', this.textContent)">Đã fix bugs và cải tiến</div>
+                                <strong>✅ AI Agent Test Report</strong>
+                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Kết quả test, độ chính xác</div>
                             </li>
                             <li style="padding: 10px; border-bottom: 1px solid var(--border);">
-                                <strong contenteditable="true" onblur="updateDeliverable('week4', 2, 'title', this.textContent)">✅ Market Research Report P2</strong>
-                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;" contenteditable="true" onblur="updateDeliverable('week4', 2, 'desc', this.textContent)">Chi tiết 5-7 thể loại + competitors</div>
+                                <strong>✅ Market Research Report P1</strong>
+                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">10-15 thể loại creative tiềm năng</div>
                             </li>
                             <li style="padding: 10px;">
-                                <strong contenteditable="true" onblur="updateDeliverable('week4', 3, 'title', this.textContent)">✅ POC Videos</strong>
-                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;" contenteditable="true" onblur="updateDeliverable('week4', 3, 'desc', this.textContent)">2-3 mẫu video thể loại mới</div>
+                                <strong>✅ QC Certification</strong>
+                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">QC staff đạt chuẩn sử dụng tools</div>
                             </li>
                         </ul>
                     </div>
@@ -707,12 +604,12 @@
             </div>
         </div>
 
-        <!-- Week 1 March - AI Agent Phase 4 & Market Expansion Launch -->
+        <!-- Week 1 March - AI Agent Phase 3 & Validation (MOVED FROM WEEK 4) -->
         <div class="card">
             <div class="card-header">
                 <div class="card-title">
-                    <span contenteditable="true" onblur="updateWeek('week5', 'title', this.textContent)">📌 TUẦN 1 THÁNG 3 (03/03 - 09/03): AI Agent Phase 4 & Production Launch</span>
-                    <span class="badge" style="background: var(--danger);">🚀 Production Ready</span>
+                    📌 TUẦN 1 THÁNG 3 (03/03 - 09/03): AI Agent Phase 3 & Validation
+                    <span class="badge" style="background: var(--danger);">🚀 Validation</span>
                 </div>
             </div>
             
@@ -722,27 +619,27 @@
                     <div class="checklist">
                         <div class="checklist-item">
                             <input type="checkbox" id="w5t1" onchange="updateWeekProgress('week5')">
-                            <span contenteditable="true" onblur="updateTask('week5', 0, this.textContent)"><strong>AI Agent P4:</strong> Tạo công thức chuẩn hóa Agent 1</span>
+                            <span><strong>AI Agent P3:</strong> Nghiệm thu kết quả Agent 1</span>
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w5t2" onchange="updateWeekProgress('week5')">
-                            <span contenteditable="true" onblur="updateTask('week5', 1, this.textContent)"><strong>AI Agent P4:</strong> Tạo công thức chuẩn hóa Agent 2</span>
+                            <span><strong>AI Agent P3:</strong> Nghiệm thu kết quả Agent 2</span>
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w5t3" onchange="updateWeekProgress('week5')">
-                            <span contenteditable="true" onblur="updateTask('week5', 2, this.textContent)">Document hoàn chỉnh Agent workflow</span>
+                            <span>Sửa đổi và tối ưu Agents theo feedback</span>
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w5t4" onchange="updateWeekProgress('week5')">
-                            <span contenteditable="true" onblur="updateTask('week5', 3, this.textContent)">Nghiên cứu thị trường Creative - Phase 3</span>
+                            <span>Nghiên cứu thị trường Creative - Phase 2</span>
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w5t5" onchange="updateWeekProgress('week5')">
-                            <span contenteditable="true" onblur="updateTask('week5', 4, this.textContent)">Finalize roadmap Q1 2026</span>
+                            <span>Phân tích chi tiết 5-7 thể loại ưu tiên</span>
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w5t6" onchange="updateWeekProgress('week5')">
-                            <span contenteditable="true" onblur="updateTask('week5', 5, this.textContent)">Monthly review & presentation</span>
+                            <span>Tạo POC (Proof of Concept) cho 2-3 thể loại</span>
                         </div>
                     </div>
                 </div>
@@ -752,20 +649,20 @@
                     <div style="background: var(--light); padding: 20px; border-radius: 10px;">
                         <ul style="list-style: none; padding: 0;">
                             <li style="padding: 10px; border-bottom: 1px solid var(--border);">
-                                <strong contenteditable="true" onblur="updateDeliverable('week5', 0, 'title', this.textContent)">✅ AI Agent Formula</strong>
-                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;" contenteditable="true" onblur="updateDeliverable('week5', 0, 'desc', this.textContent)">Công thức chuẩn + Code + API docs</div>
+                                <strong>✅ AI Agent Test Results</strong>
+                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Accuracy report, error analysis</div>
                             </li>
                             <li style="padding: 10px; border-bottom: 1px solid var(--border);">
-                                <strong contenteditable="true" onblur="updateDeliverable('week5', 1, 'title', this.textContent)">✅ Complete Documentation</strong>
-                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;" contenteditable="true" onblur="updateDeliverable('week5', 1, 'desc', this.textContent)">Agent architecture, usage guide</div>
+                                <strong>✅ Optimized Agents v1.1</strong>
+                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Đã fix bugs và cải tiến</div>
                             </li>
                             <li style="padding: 10px; border-bottom: 1px solid var(--border);">
-                                <strong contenteditable="true" onblur="updateDeliverable('week5', 2, 'title', this.textContent)">✅ Market Opportunity Report</strong>
-                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;" contenteditable="true" onblur="updateDeliverable('week5', 2, 'desc', this.textContent)">Top 3 thể loại triển khai Q1</div>
+                                <strong>✅ Market Research Report P2</strong>
+                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Chi tiết 5-7 thể loại + competitors</div>
                             </li>
                             <li style="padding: 10px;">
-                                <strong contenteditable="true" onblur="updateDeliverable('week5', 3, 'title', this.textContent)">✅ Q1 2026 Roadmap</strong>
-                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;" contenteditable="true" onblur="updateDeliverable('week5', 3, 'desc', this.textContent)">Strategic plan với timeline</div>
+                                <strong>✅ POC Videos</strong>
+                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">2-3 mẫu video thể loại mới</div>
                             </li>
                         </ul>
                     </div>
@@ -787,7 +684,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="card-title">
-                    <span contenteditable="true" onblur="updateConfig('agentTitle', this.textContent)" id="agentTitle">🤖 CHI TIẾT 2 AI AGENTS</span>
+                    🤖 CHI TIẾT 2 AI AGENTS
                 </div>
             </div>
             
@@ -798,7 +695,7 @@
                     
                     <div style="margin-bottom: 20px;">
                         <strong style="color: #0369a1;">📋 Mục tiêu:</strong>
-                        <p style="margin-top: 10px; color: #075985;" contenteditable="true" onblur="updateAgent('agent1', 'goal', this.textContent)">
+                        <p style="margin-top: 10px; color: #075985;">
                             Tự động tạo prompt chuẩn cho mỗi loại Effect dựa trên input requirements
                         </p>
                     </div>
@@ -806,17 +703,17 @@
                     <div style="margin-bottom: 20px;">
                         <strong style="color: #0369a1;">🔧 Chức năng:</strong>
                         <ul style="margin-top: 10px; color: #075985;">
-                            <li contenteditable="true" onblur="updateAgentFeature('agent1', 0, this.textContent)">Phân tích input image/video</li>
-                            <li contenteditable="true" onblur="updateAgentFeature('agent1', 1, this.textContent)">Xác định loại Effect phù hợp</li>
-                            <li contenteditable="true" onblur="updateAgentFeature('agent1', 2, this.textContent)">Generate prompt tiếng Việt + English</li>
-                            <li contenteditable="true" onblur="updateAgentFeature('agent1', 3, this.textContent)">Suggest camera motion</li>
-                            <li contenteditable="true" onblur="updateAgentFeature('agent1', 4, this.textContent)">Recommend tools</li>
+                            <li>Phân tích input image/video</li>
+                            <li>Xác định loại Effect phù hợp</li>
+                            <li>Generate prompt tiếng Việt + English</li>
+                            <li>Suggest camera motion</li>
+                            <li>Recommend tools</li>
                         </ul>
                     </div>
 
                     <div style="background: #0c4a6e; color: white; padding: 15px; border-radius: 10px; text-align: center;">
                         <strong>🎯 Target Accuracy: </strong>
-                        <span style="font-size: 1.5em; font-weight: 700;" contenteditable="true" onblur="updateAgent('agent1', 'target', this.textContent)">≥ 90%</span>
+                        <span style="font-size: 1.5em; font-weight: 700;">≥ 90%</span>
                     </div>
                 </div>
 
@@ -826,7 +723,7 @@
                     
                     <div style="margin-bottom: 20px;">
                         <strong style="color: #15803d;">📋 Mục tiêu:</strong>
-                        <p style="margin-top: 10px; color: #166534;" contenteditable="true" onblur="updateAgent('agent2', 'goal', this.textContent)">
+                        <p style="margin-top: 10px; color: #166534;">
                             Tự động QC và đánh giá chất lượng output (image + video)
                         </p>
                     </div>
@@ -834,17 +731,17 @@
                     <div style="margin-bottom: 20px;">
                         <strong style="color: #15803d;">🔧 Chức năng:</strong>
                         <ul style="margin-top: 10px; color: #166534;">
-                            <li contenteditable="true" onblur="updateAgentFeature('agent2', 0, this.textContent)">Check technical quality (flicker, blur, motion)</li>
-                            <li contenteditable="true" onblur="updateAgentFeature('agent2', 1, this.textContent)">Validate prompt compliance</li>
-                            <li contenteditable="true" onblur="updateAgentFeature('agent2', 2, this.textContent)">Detect common errors</li>
-                            <li contenteditable="true" onblur="updateAgentFeature('agent2', 3, this.textContent)">Generate quality report</li>
-                            <li contenteditable="true" onblur="updateAgentFeature('agent2', 4, this.textContent)">Suggest improvements</li>
+                            <li>Check technical quality (flicker, blur, motion)</li>
+                            <li>Validate prompt compliance</li>
+                            <li>Detect common errors</li>
+                            <li>Generate quality report</li>
+                            <li>Suggest improvements</li>
                         </ul>
                     </div>
 
                     <div style="background: #14532d; color: white; padding: 15px; border-radius: 10px; text-align: center;">
                         <strong>🎯 Target Accuracy: </strong>
-                        <span style="font-size: 1.5em; font-weight: 700;" contenteditable="true" onblur="updateAgent('agent2', 'target', this.textContent)">≥ 85%</span>
+                        <span style="font-size: 1.5em; font-weight: 700;">≥ 85%</span>
                     </div>
                 </div>
             </div>
@@ -854,7 +751,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="card-title">
-                    <span contenteditable="true" onblur="updateConfig('progressTitle', this.textContent)" id="progressTitle">📊 TIẾN ĐỘ TỔNG THỂ</span>
+                    📊 TIẾN ĐỘ TỔNG THỂ
                 </div>
             </div>
             
@@ -865,7 +762,7 @@
                         <div>Hoàn thành chung</div>
                     </div>
                     <div style="text-align: center;">
-                        <div style="font-size: 3em; font-weight: 700; color: #3b82f6;" id="tasksCompleted">0/30</div>
+                        <div style="font-size: 3em; font-weight: 700; color: #3b82f6;" id="tasksCompleted">0/24</div>
                         <div>Tasks completed</div>
                     </div>
                     <div style="text-align: center;">
@@ -874,7 +771,7 @@
                     </div>
                     <div style="text-align: center;">
                         <div style="font-size: 3em; font-weight: 700; color: var(--danger);" id="weeksRemaining">-</div>
-                        <div>Tuần còn lại</div>
+                        <div>Tuần làm việc còn lại</div>
                     </div>
                 </div>
 
@@ -900,16 +797,16 @@
                     </div>
                     <div style="margin-bottom: 15px;">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                            <span>Tuần 3 (17-23/02): Training</span>
-                            <span id="week3Percent">0%</span>
+                            <span>Tuần 3 (17-23/02): 🧧 NGHỈ TẾT ÂM LỊCH</span>
+                            <span style="color: #fbbf24;">N/A</span>
                         </div>
                         <div class="progress-bar" style="height: 15px;">
-                            <div class="progress-fill" id="week3OverallBar" style="width: 0%; background: var(--secondary);"></div>
+                            <div class="progress-fill" style="width: 100%; background: linear-gradient(135deg, #fbbf24, #f59e0b); opacity: 0.5;"></div>
                         </div>
                     </div>
                     <div style="margin-bottom: 15px;">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                            <span>Tuần 4 (24-28/02): Validation</span>
+                            <span>Tuần 4 (24-28/02): Training & AI Agent P2</span>
                             <span id="week4Percent">0%</span>
                         </div>
                         <div class="progress-bar" style="height: 15px;">
@@ -918,7 +815,7 @@
                     </div>
                     <div>
                         <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                            <span>Tuần 1/T3 (03-09/03): Production Launch</span>
+                            <span>Tuần 1/T3 (03-09/03): AI Agent P3 & Validation</span>
                             <span id="week5Percent">0%</span>
                         </div>
                         <div class="progress-bar" style="height: 15px;">
@@ -933,65 +830,6 @@
     <div class="toast-container" id="toastContainer"></div>
 
     <script>
-        let appData = {
-            config: {
-                mainTitle: 'Kế hoạch Tháng 2 & Tuần 1 Tháng 3/2026',
-                subtitle: 'AI Video Production - System Prompts & AI Agents Development'
-            },
-            weeks: {
-                week1: { title: '', tasks: [], deliverables: [] },
-                week2: { title: '', tasks: [], deliverables: [] },
-                week3: { title: '', tasks: [], deliverables: [] },
-                week4: { title: '', tasks: [], deliverables: [] },
-                week5: { title: '', tasks: [], deliverables: [] }
-            },
-            agents: {
-                agent1: { goal: '', features: [], target: '' },
-                agent2: { goal: '', features: [], target: '' }
-            }
-        };
-
-        let autoSaveTimeout;
-
-        function updateConfig(key, value) {
-            appData.config[key] = value;
-            autoSave();
-        }
-
-        function updateWeek(week, field, value) {
-            if (!appData.weeks[week]) appData.weeks[week] = {};
-            appData.weeks[week][field] = value;
-            autoSave();
-        }
-
-        function updateTask(week, index, value) {
-            if (!appData.weeks[week]) appData.weeks[week] = {};
-            if (!appData.weeks[week].tasks) appData.weeks[week].tasks = [];
-            appData.weeks[week].tasks[index] = value;
-            autoSave();
-        }
-
-        function updateDeliverable(week, index, field, value) {
-            if (!appData.weeks[week]) appData.weeks[week] = {};
-            if (!appData.weeks[week].deliverables) appData.weeks[week].deliverables = [];
-            if (!appData.weeks[week].deliverables[index]) appData.weeks[week].deliverables[index] = {};
-            appData.weeks[week].deliverables[index][field] = value;
-            autoSave();
-        }
-
-        function updateAgent(agent, field, value) {
-            if (!appData.agents[agent]) appData.agents[agent] = {};
-            appData.agents[agent][field] = value;
-            autoSave();
-        }
-
-        function updateAgentFeature(agent, index, value) {
-            if (!appData.agents[agent]) appData.agents[agent] = {};
-            if (!appData.agents[agent].features) appData.agents[agent].features = [];
-            appData.agents[agent].features[index] = value;
-            autoSave();
-        }
-
         function updateWeekProgress(week) {
             const weekNum = week.replace('week', '');
             const checkboxes = document.querySelectorAll(`#w${weekNum}t1, #w${weekNum}t2, #w${weekNum}t3, #w${weekNum}t4, #w${weekNum}t5, #w${weekNum}t6`);
@@ -1008,7 +846,13 @@
         }
 
         function updateOverallProgress() {
-            const allCheckboxes = document.querySelectorAll('[id^="w"][id$="t1"], [id^="w"][id$="t2"], [id^="w"][id$="t3"], [id^="w"][id$="t4"], [id^="w"][id$="t5"], [id^="w"][id$="t6"]');
+            // Only count weeks 1, 2, 4, 5 (skip week 3 - Tet holiday)
+            const allCheckboxes = document.querySelectorAll(
+                '#w1t1, #w1t2, #w1t3, #w1t4, #w1t5, #w1t6, ' +
+                '#w2t1, #w2t2, #w2t3, #w2t4, #w2t5, #w2t6, ' +
+                '#w4t1, #w4t2, #w4t3, #w4t4, #w4t5, #w4t6, ' +
+                '#w5t1, #w5t2, #w5t3, #w5t4, #w5t5, #w5t6'
+            );
             const checked = Array.from(allCheckboxes).filter(cb => cb.checked).length;
             const total = allCheckboxes.length;
             const percent = Math.round((checked / total) * 100);
@@ -1019,10 +863,18 @@
             const today = new Date();
             const endDate = new Date(2026, 2, 9); // March 9, 2026
             const daysLeft = Math.ceil((endDate - today) / (1000 * 60 * 60 * 24));
-            const weeksLeft = Math.ceil(daysLeft / 7);
+            
+            // Calculate working weeks left (excluding Tet week)
+            let weeksLeft = 0;
+            if (today < new Date(2026, 1, 9)) weeksLeft = 4; // Before Week 1 ends
+            else if (today < new Date(2026, 1, 16)) weeksLeft = 3; // During Week 2
+            else if (today < new Date(2026, 1, 23)) weeksLeft = 2; // During Tet (Week 3)
+            else if (today < new Date(2026, 1, 28)) weeksLeft = 2; // During Week 4
+            else if (today < new Date(2026, 2, 9)) weeksLeft = 1; // During Week 1 March
+            else weeksLeft = 0;
             
             document.getElementById('daysRemaining').textContent = daysLeft > 0 ? daysLeft : 0;
-            document.getElementById('weeksRemaining').textContent = weeksLeft > 0 ? weeksLeft : 0;
+            document.getElementById('weeksRemaining').textContent = weeksLeft;
         }
 
         function renderTimelineGantt() {
@@ -1030,107 +882,31 @@
             if (!container) return;
             
             const weeks = [
-                { name: 'Tuần 1', dates: '03-09/02', color: '#ec4899' },
-                { name: 'Tuần 2', dates: '10-16/02', color: '#6366f1' },
-                { name: 'Tuần 3', dates: '17-23/02', color: '#10b981' },
-                { name: 'Tuần 4', dates: '24-28/02', color: '#f59e0b' },
-                { name: 'T1/T3', dates: '03-09/03', color: '#ef4444' }
+                { name: 'Tuần 1', dates: '03-09/02', color: '#ec4899', label: 'Analysis' },
+                { name: 'Tuần 2', dates: '10-16/02', color: '#6366f1', label: 'Foundation' },
+                { name: 'Tuần 3', dates: '17-23/02', color: '#fbbf24', label: '🧧 TẾT', isHoliday: true },
+                { name: 'Tuần 4', dates: '24-28/02', color: '#f59e0b', label: 'Training' },
+                { name: 'T1/T3', dates: '03-09/03', color: '#ef4444', label: 'Validation' }
             ];
             
             container.innerHTML = weeks.map(week => `
-                <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <div style="display: flex; align-items: center; margin-bottom: 15px; ${week.isHoliday ? 'opacity: 0.7;' : ''}">
                     <div style="width: 100px; font-weight: 600;">${week.name}</div>
-                    <div style="flex: 1; background: rgba(255,255,255,0.1); height: 40px; border-radius: 10px; position: relative; overflow: hidden;">
-                        <div style="position: absolute; left: 0; top: 0; height: 100%; width: 20%; background: ${week.color}; display: flex; align-items: center; justify-content: center; font-weight: 600;">
-                            ${week.dates}
+                    <div style="flex: 1; background: rgba(255,255,255,0.1); height: 40px; border-radius: 10px; position: relative; overflow: hidden; ${week.isHoliday ? 'border: 2px dashed #fbbf24;' : ''}">
+                        <div style="position: absolute; left: 0; top: 0; height: 100%; width: 100%; background: ${week.color}; display: flex; align-items: center; justify-content: center; font-weight: 600; ${week.isHoliday ? 'background: repeating-linear-gradient(45deg, #fbbf24, #fbbf24 10px, #f59e0b 10px, #f59e0b 20px);' : ''}">
+                            ${week.dates} - ${week.label}
                         </div>
                     </div>
                 </div>
             `).join('');
         }
 
-        function autoSave() {
-            clearTimeout(autoSaveTimeout);
-            autoSaveTimeout = setTimeout(() => {
-                saveData(true);
-            }, 1000);
-        }
-
-        function showAutoSaveIndicator() {
-            const indicator = document.getElementById('autoSaveIndicator');
-            indicator.classList.add('show');
-            setTimeout(() => {
-                indicator.classList.remove('show');
-            }, 2000);
-        }
-
-        function showToast(message, type = 'success') {
-            const container = document.getElementById('toastContainer');
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-            toast.innerHTML = `${type === 'success' ? '✓' : '✗'} ${message}`;
-            container.appendChild(toast);
-            setTimeout(() => toast.remove(), 3000);
-        }
-
-        function saveData(isAutoSave = false) {
-            localStorage.setItem('planData', JSON.stringify(appData));
-            if (isAutoSave) {
-                showAutoSaveIndicator();
-            } else {
-                showToast('✓ Đã lưu dữ liệu!');
-            }
-        }
-
-        function loadData() {
-            const saved = localStorage.getItem('planData');
-            if (saved) {
-                try {
-                    appData = JSON.parse(saved);
-                } catch (e) {
-                    console.error('Error loading data:', e);
-                }
-            }
-        }
-
-        function exportJSON() {
-            const dataStr = JSON.stringify(appData, null, 2);
-            const blob = new Blob([dataStr], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'plan-feb-mar-2026.json';
-            a.click();
-            URL.revokeObjectURL(url);
-            showToast('✓ Đã xuất JSON!');
-        }
-
-        function exportHTML() {
-            const htmlContent = document.documentElement.outerHTML;
-            const blob = new Blob([htmlContent], { type: 'text/html' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'plan-feb-mar-2026.html';
-            a.click();
-            URL.revokeObjectURL(url);
-            showToast('✓ Đã xuất HTML!');
-        }
-
         function init() {
-            loadData();
             renderTimelineGantt();
             updateOverallProgress();
         }
 
         document.addEventListener('DOMContentLoaded', init);
-
-        document.addEventListener('keydown', function(e) {
-            if (e.ctrlKey && e.key === 's') {
-                e.preventDefault();
-                saveData();
-            }
-        });
     </script>
 </body>
 </html>
