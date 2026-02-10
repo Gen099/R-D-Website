@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,7 +41,7 @@
             border-radius: 20px;
             padding: 30px;
             margin-bottom: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
         }
 
         .header h1 {
@@ -93,7 +94,7 @@
             border-radius: 20px;
             padding: 25px;
             margin-bottom: 25px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
         }
 
         .card-header {
@@ -182,7 +183,8 @@
         }
 
         .checklist-item {
-            display: flex;
+            display: grid;
+            grid-template-columns: 22px 1fr 22px;
             align-items: center;
             gap: 12px;
             padding: 12px 0;
@@ -199,6 +201,19 @@
             cursor: pointer;
         }
 
+        .checklist-item .deadline-checkbox {
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+            accent-color: var(--danger);
+        }
+
+        .checklist-item.has-deadline {
+            background: linear-gradient(90deg, transparent, rgba(239, 68, 68, 0.05));
+            border-left: 3px solid var(--danger);
+            padding-left: 9px;
+        }
+
         .checklist-item span {
             flex: 1;
         }
@@ -206,6 +221,23 @@
         .checklist-item.checked span {
             text-decoration: line-through;
             color: var(--gray);
+        }
+
+        .checklist-header {
+            display: grid;
+            grid-template-columns: 22px 1fr 22px;
+            gap: 12px;
+            padding: 8px 0;
+            font-weight: 600;
+            font-size: 0.85em;
+            color: var(--gray);
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 5px;
+        }
+
+        .checklist-header .deadline-label {
+            text-align: center;
+            color: var(--danger);
         }
 
         .progress-bar {
@@ -274,6 +306,7 @@
                 opacity: 0;
                 transform: translateX(100px);
             }
+
             to {
                 opacity: 1;
                 transform: translateX(0);
@@ -285,7 +318,8 @@
                 font-size: 1.5em;
             }
 
-            .grid-2, .grid-4 {
+            .grid-2,
+            .grid-4 {
                 grid-template-columns: 1fr;
             }
         }
@@ -296,7 +330,8 @@
                 padding: 0;
             }
 
-            .header-controls, .btn {
+            .header-controls,
+            .btn {
                 display: none !important;
             }
 
@@ -307,6 +342,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <!-- Header -->
@@ -330,7 +366,7 @@
                     📊 TỔNG QUAN KẾ HOẠCH
                 </div>
             </div>
-            
+
             <div class="grid-4" style="margin-bottom: 25px;">
                 <div class="stat-card">
                     <div class="stat-number">5</div>
@@ -351,7 +387,8 @@
             </div>
 
             <!-- Timeline Overview -->
-            <div style="background: linear-gradient(135deg, #1e293b, #334155); border-radius: 15px; padding: 25px; color: white;">
+            <div
+                style="background: linear-gradient(135deg, #1e293b, #334155); border-radius: 15px; padding: 25px; color: white;">
                 <h3 style="margin-bottom: 20px;">🗓️ TIMELINE</h3>
                 <div id="timelineGantt"></div>
             </div>
@@ -365,34 +402,45 @@
                     <span class="badge" style="background: #ec4899;">🔍 Analysis & Review</span>
                 </div>
             </div>
-            
+
             <div class="grid-2">
                 <div>
                     <h4 style="margin-bottom: 15px; color: var(--primary);">🎯 Công việc chính:</h4>
                     <div class="checklist">
+                        <div class="checklist-header">
+                            <div>✅</div>
+                            <div>Công việc</div>
+                            <div class="deadline-label">📅</div>
+                        </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w1t1" onchange="updateWeekProgress('week1')">
                             <span>Thu thập và phân loại các lỗi thường gặp từ team QC</span>
+                            <input type="checkbox" class="deadline-checkbox" id="w1d1" onchange="toggleDeadline(this)">
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w1t2" onchange="updateWeekProgress('week1')">
                             <span>Họp review chi tiết với QC về quy trình hiện tại</span>
+                            <input type="checkbox" class="deadline-checkbox" id="w1d2" onchange="toggleDeadline(this)">
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w1t3" onchange="updateWeekProgress('week1')">
                             <span>Xác định các điểm nghẽn (bottleneck) trong workflow</span>
+                            <input type="checkbox" class="deadline-checkbox" id="w1d3" onchange="toggleDeadline(this)">
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w1t4" onchange="updateWeekProgress('week1')">
                             <span>Phân tích root cause cho từng loại lỗi</span>
+                            <input type="checkbox" class="deadline-checkbox" id="w1d4" onchange="toggleDeadline(this)">
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w1t5" onchange="updateWeekProgress('week1')">
                             <span>Lập danh sách cải tiến ưu tiên cho tháng 2</span>
+                            <input type="checkbox" class="deadline-checkbox" id="w1d5" onchange="toggleDeadline(this)">
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w1t6" onchange="updateWeekProgress('week1')">
                             <span>Lên kế hoạch chi tiết cho tuần 2 và sau Tết</span>
+                            <input type="checkbox" class="deadline-checkbox" id="w1d6" onchange="toggleDeadline(this)">
                         </div>
                     </div>
                 </div>
@@ -403,19 +451,23 @@
                         <ul style="list-style: none; padding: 0;">
                             <li style="padding: 10px; border-bottom: 1px solid var(--border);">
                                 <strong>✅ Error Analysis Report</strong>
-                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Báo cáo phân tích lỗi theo từng loại Effect</div>
+                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Báo cáo phân tích
+                                    lỗi theo từng loại Effect</div>
                             </li>
                             <li style="padding: 10px; border-bottom: 1px solid var(--border);">
                                 <strong>✅ QC Feedback Summary</strong>
-                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Tổng hợp phản hồi từ team QC</div>
+                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Tổng hợp phản hồi từ
+                                    team QC</div>
                             </li>
                             <li style="padding: 10px; border-bottom: 1px solid var(--border);">
                                 <strong>✅ Bottleneck Identification</strong>
-                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Danh sách các điểm nghẽn cần giải quyết</div>
+                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Danh sách các điểm
+                                    nghẽn cần giải quyết</div>
                             </li>
                             <li style="padding: 10px;">
                                 <strong>✅ Improvement Action Plan</strong>
-                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Kế hoạch cải tiến chi tiết cho các tuần tiếp theo</div>
+                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Kế hoạch cải tiến
+                                    chi tiết cho các tuần tiếp theo</div>
                             </li>
                         </ul>
                     </div>
@@ -428,7 +480,8 @@
                     <span id="week1Progress">0/6 (0%)</span>
                 </div>
                 <div class="progress-bar" style="height: 20px;">
-                    <div class="progress-fill" id="week1ProgressBar" style="width: 0%; background: linear-gradient(135deg, #ec4899, #db2777);"></div>
+                    <div class="progress-fill" id="week1ProgressBar"
+                        style="width: 0%; background: linear-gradient(135deg, #ec4899, #db2777);"></div>
                 </div>
             </div>
         </div>
@@ -441,34 +494,45 @@
                     <span class="badge" style="background: var(--secondary);">Giai đoạn nền tảng</span>
                 </div>
             </div>
-            
+
             <div class="grid-2">
                 <div>
                     <h4 style="margin-bottom: 15px; color: var(--primary);">🎯 Công việc chính:</h4>
                     <div class="checklist">
+                        <div class="checklist-header">
+                            <div>✅</div>
+                            <div>Công việc</div>
+                            <div class="deadline-label">📅</div>
+                        </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w2t1" onchange="updateWeekProgress('week2')">
                             <span>Viết System Prompt cho 9 loại Effect</span>
+                            <input type="checkbox" class="deadline-checkbox" id="w2d1" onchange="toggleDeadline(this)">
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w2t2" onchange="updateWeekProgress('week2')">
                             <span>Test từng prompt với 3-5 mẫu khác nhau</span>
+                            <input type="checkbox" class="deadline-checkbox" id="w2d2" onchange="toggleDeadline(this)">
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w2t3" onchange="updateWeekProgress('week2')">
                             <span>Tạo video mẫu chuẩn cho mỗi Effect</span>
+                            <input type="checkbox" class="deadline-checkbox" id="w2d3" onchange="toggleDeadline(this)">
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w2t4" onchange="updateWeekProgress('week2')">
                             <span>Chuẩn hóa quy trình và template</span>
+                            <input type="checkbox" class="deadline-checkbox" id="w2d4" onchange="toggleDeadline(this)">
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w2t5" onchange="updateWeekProgress('week2')">
                             <span><strong>AI Agent P1:</strong> Lên checklist công việc cụ thể</span>
+                            <input type="checkbox" class="deadline-checkbox" id="w2d5" onchange="toggleDeadline(this)">
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w2t6" onchange="updateWeekProgress('week2')">
                             <span><strong>AI Agent P1:</strong> Tạo data chuẩn đầu vào</span>
+                            <input type="checkbox" class="deadline-checkbox" id="w2d6" onchange="toggleDeadline(this)">
                         </div>
                     </div>
                 </div>
@@ -479,19 +543,23 @@
                         <ul style="list-style: none; padding: 0;">
                             <li style="padding: 10px; border-bottom: 1px solid var(--border);">
                                 <strong>✅ 9 System Prompts</strong>
-                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Template chuẩn cho mỗi loại Effect với GPT/Gems</div>
+                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Template chuẩn cho
+                                    mỗi loại Effect với GPT/Gems</div>
                             </li>
                             <li style="padding: 10px; border-bottom: 1px solid var(--border);">
                                 <strong>✅ 9 Video mẫu</strong>
-                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Reference quality standard cho team</div>
+                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Reference quality
+                                    standard cho team</div>
                             </li>
                             <li style="padding: 10px; border-bottom: 1px solid var(--border);">
                                 <strong>✅ SOP v2.0</strong>
-                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Quy trình chuẩn hóa chi tiết</div>
+                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Quy trình chuẩn hóa
+                                    chi tiết</div>
                             </li>
                             <li style="padding: 10px;">
                                 <strong>✅ AI Agent Dataset</strong>
-                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Checklist + Input data structure</div>
+                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Checklist + Input
+                                    data structure</div>
                             </li>
                         </ul>
                     </div>
@@ -504,7 +572,8 @@
                     <span id="week2Progress">0/6 (0%)</span>
                 </div>
                 <div class="progress-bar" style="height: 20px;">
-                    <div class="progress-fill" id="week2ProgressBar" style="width: 0%; background: linear-gradient(135deg, var(--primary), var(--secondary));"></div>
+                    <div class="progress-fill" id="week2ProgressBar"
+                        style="width: 0%; background: linear-gradient(135deg, var(--primary), var(--secondary));"></div>
                 </div>
             </div>
         </div>
@@ -517,7 +586,7 @@
                     <span class="badge" style="background: #dc2626;">🎊 Tết Nguyên Đán</span>
                 </div>
             </div>
-            
+
             <div class="holiday-banner">
                 <h2>🧧 CHÚC MỪNG NĂM MỚI 🧧</h2>
                 <p style="font-size: 1.5em; margin-bottom: 20px;">🐴 Năm Bính Ngọ 2026 🐴</p>
@@ -537,34 +606,45 @@
                     <span class="badge" style="background: var(--primary);">Knowledge Transfer</span>
                 </div>
             </div>
-            
+
             <div class="grid-2">
                 <div>
                     <h4 style="margin-bottom: 15px; color: var(--primary);">🎯 Công việc chính:</h4>
                     <div class="checklist">
+                        <div class="checklist-header">
+                            <div>✅</div>
+                            <div>Công việc</div>
+                            <div class="deadline-label">📅</div>
+                        </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w4t1" onchange="updateWeekProgress('week4')">
                             <span>Đào tạo QC về công cụ và quy trình</span>
+                            <input type="checkbox" class="deadline-checkbox" id="w4d1" onchange="toggleDeadline(this)">
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w4t2" onchange="updateWeekProgress('week4')">
                             <span>Bàn giao tài liệu SOP v2.0 cho QC</span>
+                            <input type="checkbox" class="deadline-checkbox" id="w4d2" onchange="toggleDeadline(this)">
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w4t3" onchange="updateWeekProgress('week4')">
                             <span><strong>AI Agent P2:</strong> Thực hành test với data mẫu</span>
+                            <input type="checkbox" class="deadline-checkbox" id="w4d3" onchange="toggleDeadline(this)">
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w4t4" onchange="updateWeekProgress('week4')">
                             <span><strong>AI Agent P2:</strong> Đánh giá tính khả thi</span>
+                            <input type="checkbox" class="deadline-checkbox" id="w4d4" onchange="toggleDeadline(this)">
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w4t5" onchange="updateWeekProgress('week4')">
                             <span>Nghiên cứu thị trường Creative - Phase 1</span>
+                            <input type="checkbox" class="deadline-checkbox" id="w4d5" onchange="toggleDeadline(this)">
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w4t6" onchange="updateWeekProgress('week4')">
                             <span>Thu thập và phân tích thể loại có thể AI hóa</span>
+                            <input type="checkbox" class="deadline-checkbox" id="w4d6" onchange="toggleDeadline(this)">
                         </div>
                     </div>
                 </div>
@@ -575,19 +655,23 @@
                         <ul style="list-style: none; padding: 0;">
                             <li style="padding: 10px; border-bottom: 1px solid var(--border);">
                                 <strong>✅ Training Materials</strong>
-                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Slides + Video tutorials + Exercises</div>
+                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Slides + Video
+                                    tutorials + Exercises</div>
                             </li>
                             <li style="padding: 10px; border-bottom: 1px solid var(--border);">
                                 <strong>✅ AI Agent Test Report</strong>
-                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Kết quả test, độ chính xác</div>
+                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Kết quả test, độ
+                                    chính xác</div>
                             </li>
                             <li style="padding: 10px; border-bottom: 1px solid var(--border);">
                                 <strong>✅ Market Research Report P1</strong>
-                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">10-15 thể loại creative tiềm năng</div>
+                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">10-15 thể loại
+                                    creative tiềm năng</div>
                             </li>
                             <li style="padding: 10px;">
                                 <strong>✅ QC Certification</strong>
-                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">QC staff đạt chuẩn sử dụng tools</div>
+                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">QC staff đạt chuẩn
+                                    sử dụng tools</div>
                             </li>
                         </ul>
                     </div>
@@ -600,7 +684,8 @@
                     <span id="week4Progress">0/6 (0%)</span>
                 </div>
                 <div class="progress-bar" style="height: 20px;">
-                    <div class="progress-fill" id="week4ProgressBar" style="width: 0%; background: linear-gradient(135deg, var(--warning), #d97706);"></div>
+                    <div class="progress-fill" id="week4ProgressBar"
+                        style="width: 0%; background: linear-gradient(135deg, var(--warning), #d97706);"></div>
                 </div>
             </div>
         </div>
@@ -613,34 +698,45 @@
                     <span class="badge" style="background: var(--danger);">🚀 Validation</span>
                 </div>
             </div>
-            
+
             <div class="grid-2">
                 <div>
                     <h4 style="margin-bottom: 15px; color: var(--primary);">🎯 Công việc chính:</h4>
                     <div class="checklist">
+                        <div class="checklist-header">
+                            <div>✅</div>
+                            <div>Công việc</div>
+                            <div class="deadline-label">📅</div>
+                        </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w5t1" onchange="updateWeekProgress('week5')">
                             <span><strong>AI Agent P3:</strong> Nghiệm thu kết quả Agent 1</span>
+                            <input type="checkbox" class="deadline-checkbox" id="w5d1" onchange="toggleDeadline(this)">
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w5t2" onchange="updateWeekProgress('week5')">
                             <span><strong>AI Agent P3:</strong> Nghiệm thu kết quả Agent 2</span>
+                            <input type="checkbox" class="deadline-checkbox" id="w5d2" onchange="toggleDeadline(this)">
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w5t3" onchange="updateWeekProgress('week5')">
                             <span>Sửa đổi và tối ưu Agents theo feedback</span>
+                            <input type="checkbox" class="deadline-checkbox" id="w5d3" onchange="toggleDeadline(this)">
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w5t4" onchange="updateWeekProgress('week5')">
                             <span>Nghiên cứu thị trường Creative - Phase 2</span>
+                            <input type="checkbox" class="deadline-checkbox" id="w5d4" onchange="toggleDeadline(this)">
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w5t5" onchange="updateWeekProgress('week5')">
                             <span>Phân tích chi tiết 5-7 thể loại ưu tiên</span>
+                            <input type="checkbox" class="deadline-checkbox" id="w5d5" onchange="toggleDeadline(this)">
                         </div>
                         <div class="checklist-item">
                             <input type="checkbox" id="w5t6" onchange="updateWeekProgress('week5')">
                             <span>Tạo POC (Proof of Concept) cho 2-3 thể loại</span>
+                            <input type="checkbox" class="deadline-checkbox" id="w5d6" onchange="toggleDeadline(this)">
                         </div>
                     </div>
                 </div>
@@ -651,19 +747,23 @@
                         <ul style="list-style: none; padding: 0;">
                             <li style="padding: 10px; border-bottom: 1px solid var(--border);">
                                 <strong>✅ AI Agent Test Results</strong>
-                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Accuracy report, error analysis</div>
+                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Accuracy report,
+                                    error analysis</div>
                             </li>
                             <li style="padding: 10px; border-bottom: 1px solid var(--border);">
                                 <strong>✅ Optimized Agents v1.1</strong>
-                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Đã fix bugs và cải tiến</div>
+                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Đã fix bugs và cải
+                                    tiến</div>
                             </li>
                             <li style="padding: 10px; border-bottom: 1px solid var(--border);">
                                 <strong>✅ Market Research Report P2</strong>
-                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Chi tiết 5-7 thể loại + competitors</div>
+                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">Chi tiết 5-7 thể
+                                    loại + competitors</div>
                             </li>
                             <li style="padding: 10px;">
                                 <strong>✅ POC Videos</strong>
-                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">2-3 mẫu video thể loại mới</div>
+                                <div style="color: var(--gray); font-size: 0.9em; margin-top: 5px;">2-3 mẫu video thể
+                                    loại mới</div>
                             </li>
                         </ul>
                     </div>
@@ -676,7 +776,8 @@
                     <span id="week5Progress">0/6 (0%)</span>
                 </div>
                 <div class="progress-bar" style="height: 20px;">
-                    <div class="progress-fill" id="week5ProgressBar" style="width: 0%; background: linear-gradient(135deg, var(--danger), #dc2626);"></div>
+                    <div class="progress-fill" id="week5ProgressBar"
+                        style="width: 0%; background: linear-gradient(135deg, var(--danger), #dc2626);"></div>
                 </div>
             </div>
         </div>
@@ -688,12 +789,13 @@
                     🤖 CHI TIẾT 2 AI AGENTS
                 </div>
             </div>
-            
+
             <div class="grid-2">
                 <!-- Agent 1 -->
-                <div style="background: linear-gradient(135deg, #e0f2fe, #bae6fd); padding: 25px; border-radius: 15px; border: 2px solid #0284c7;">
+                <div
+                    style="background: linear-gradient(135deg, #e0f2fe, #bae6fd); padding: 25px; border-radius: 15px; border: 2px solid #0284c7;">
                     <h3 style="color: #0c4a6e; margin-bottom: 20px;">🤖 AGENT 1: Prompt Generator</h3>
-                    
+
                     <div style="margin-bottom: 20px;">
                         <strong style="color: #0369a1;">📋 Mục tiêu:</strong>
                         <p style="margin-top: 10px; color: #075985;">
@@ -712,16 +814,18 @@
                         </ul>
                     </div>
 
-                    <div style="background: #0c4a6e; color: white; padding: 15px; border-radius: 10px; text-align: center;">
+                    <div
+                        style="background: #0c4a6e; color: white; padding: 15px; border-radius: 10px; text-align: center;">
                         <strong>🎯 Target Accuracy: </strong>
                         <span style="font-size: 1.5em; font-weight: 700;">≥ 90%</span>
                     </div>
                 </div>
 
                 <!-- Agent 2 -->
-                <div style="background: linear-gradient(135deg, #f0fdf4, #bbf7d0); padding: 25px; border-radius: 15px; border: 2px solid #16a34a;">
+                <div
+                    style="background: linear-gradient(135deg, #f0fdf4, #bbf7d0); padding: 25px; border-radius: 15px; border: 2px solid #16a34a;">
                     <h3 style="color: #14532d; margin-bottom: 20px;">🤖 AGENT 2: Quality Controller</h3>
-                    
+
                     <div style="margin-bottom: 20px;">
                         <strong style="color: #15803d;">📋 Mục tiêu:</strong>
                         <p style="margin-top: 10px; color: #166534;">
@@ -740,7 +844,8 @@
                         </ul>
                     </div>
 
-                    <div style="background: #14532d; color: white; padding: 15px; border-radius: 10px; text-align: center;">
+                    <div
+                        style="background: #14532d; color: white; padding: 15px; border-radius: 10px; text-align: center;">
                         <strong>🎯 Target Accuracy: </strong>
                         <span style="font-size: 1.5em; font-weight: 700;">≥ 85%</span>
                     </div>
@@ -755,11 +860,13 @@
                     📊 TIẾN ĐỘ TỔNG THỂ
                 </div>
             </div>
-            
-            <div style="background: linear-gradient(135deg, #1e293b, #334155); padding: 30px; border-radius: 15px; color: white;">
+
+            <div
+                style="background: linear-gradient(135deg, #1e293b, #334155); padding: 30px; border-radius: 15px; color: white;">
                 <div class="grid-4" style="margin-bottom: 30px;">
                     <div style="text-align: center;">
-                        <div style="font-size: 3em; font-weight: 700; color: var(--secondary);" id="overallCompletion">0%</div>
+                        <div style="font-size: 3em; font-weight: 700; color: var(--secondary);" id="overallCompletion">
+                            0%</div>
                         <div>Hoàn thành chung</div>
                     </div>
                     <div style="text-align: center;">
@@ -784,7 +891,8 @@
                             <span id="week1Percent">0%</span>
                         </div>
                         <div class="progress-bar" style="height: 15px;">
-                            <div class="progress-fill" id="week1OverallBar" style="width: 0%; background: #ec4899;"></div>
+                            <div class="progress-fill" id="week1OverallBar" style="width: 0%; background: #ec4899;">
+                            </div>
                         </div>
                     </div>
                     <div style="margin-bottom: 15px;">
@@ -793,7 +901,8 @@
                             <span id="week2Percent">0%</span>
                         </div>
                         <div class="progress-bar" style="height: 15px;">
-                            <div class="progress-fill" id="week2OverallBar" style="width: 0%; background: var(--primary);"></div>
+                            <div class="progress-fill" id="week2OverallBar"
+                                style="width: 0%; background: var(--primary);"></div>
                         </div>
                     </div>
                     <div style="margin-bottom: 15px;">
@@ -802,7 +911,9 @@
                             <span style="color: #fbbf24;">N/A</span>
                         </div>
                         <div class="progress-bar" style="height: 15px;">
-                            <div class="progress-fill" style="width: 100%; background: linear-gradient(135deg, #fbbf24, #f59e0b); opacity: 0.5;"></div>
+                            <div class="progress-fill"
+                                style="width: 100%; background: linear-gradient(135deg, #fbbf24, #f59e0b); opacity: 0.5;">
+                            </div>
                         </div>
                     </div>
                     <div style="margin-bottom: 15px;">
@@ -811,7 +922,8 @@
                             <span id="week4Percent">0%</span>
                         </div>
                         <div class="progress-bar" style="height: 15px;">
-                            <div class="progress-fill" id="week4OverallBar" style="width: 0%; background: var(--warning);"></div>
+                            <div class="progress-fill" id="week4OverallBar"
+                                style="width: 0%; background: var(--warning);"></div>
                         </div>
                     </div>
                     <div>
@@ -820,7 +932,8 @@
                             <span id="week5Percent">0%</span>
                         </div>
                         <div class="progress-bar" style="height: 15px;">
-                            <div class="progress-fill" id="week5OverallBar" style="width: 0%; background: var(--danger);"></div>
+                            <div class="progress-fill" id="week5OverallBar"
+                                style="width: 0%; background: var(--danger);"></div>
                         </div>
                     </div>
                 </div>
@@ -835,13 +948,22 @@
             const checked = Array.from(checkboxes).filter(cb => cb.checked).length;
             const total = checkboxes.length;
             const percent = Math.round((checked / total) * 100);
-            
+
             document.getElementById(`${week}Progress`).textContent = `${checked}/${total} (${percent}%)`;
             document.getElementById(`${week}ProgressBar`).style.width = `${percent}%`;
             document.getElementById(`${week}Percent`).textContent = `${percent}%`;
             document.getElementById(`${week}OverallBar`).style.width = `${percent}%`;
-            
+
             updateOverallProgress();
+        }
+
+        function toggleDeadline(checkbox) {
+            const item = checkbox.closest('.checklist-item');
+            if (checkbox.checked) {
+                item.classList.add('has-deadline');
+            } else {
+                item.classList.remove('has-deadline');
+            }
         }
 
         function updateOverallProgress() {
@@ -854,14 +976,14 @@
             const checked = Array.from(allCheckboxes).filter(cb => cb.checked).length;
             const total = allCheckboxes.length;
             const percent = Math.round((checked / total) * 100);
-            
+
             document.getElementById('overallCompletion').textContent = `${percent}%`;
             document.getElementById('tasksCompleted').textContent = `${checked}/${total}`;
-            
+
             const today = new Date();
             const endDate = new Date(2026, 2, 9);
             const daysLeft = Math.ceil((endDate - today) / (1000 * 60 * 60 * 24));
-            
+
             let weeksLeft = 0;
             if (today < new Date(2026, 1, 9)) weeksLeft = 4;
             else if (today < new Date(2026, 1, 16)) weeksLeft = 3;
@@ -869,7 +991,7 @@
             else if (today < new Date(2026, 1, 28)) weeksLeft = 2;
             else if (today < new Date(2026, 2, 9)) weeksLeft = 1;
             else weeksLeft = 0;
-            
+
             document.getElementById('daysRemaining').textContent = daysLeft > 0 ? daysLeft : 0;
             document.getElementById('weeksRemaining').textContent = weeksLeft;
         }
@@ -877,7 +999,7 @@
         function renderTimelineGantt() {
             const container = document.getElementById('timelineGantt');
             if (!container) return;
-            
+
             const weeks = [
                 { name: 'Tuần 1', dates: '03-09/02', color: '#ec4899', label: 'Analysis' },
                 { name: 'Tuần 2', dates: '10-16/02', color: '#6366f1', label: 'Foundation' },
@@ -885,7 +1007,7 @@
                 { name: 'Tuần 4', dates: '24-28/02', color: '#f59e0b', label: 'Training' },
                 { name: 'T1/T3', dates: '03-09/03', color: '#ef4444', label: 'Validation' }
             ];
-            
+
             container.innerHTML = weeks.map(week => `
                 <div style="display: flex; align-items: center; margin-bottom: 15px; ${week.isHoliday ? 'opacity: 0.7;' : ''}">
                     <div style="width: 100px; font-weight: 600;">${week.name}</div>
@@ -906,4 +1028,5 @@
         document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
+
 </html>
